@@ -1,0 +1,41 @@
+{
+    "textures": {
+        "particle": "jmc:blocks/red_mushroom_cake/side",
+        "bottom": "jmc:blocks/red_mushroom_cake/bottom",
+        "top": "jmc:blocks/red_mushroom_cake/top",
+        "side": "jmc:blocks/red_mushroom_cake/side",
+        "inside": "jmc:blocks/red_mushroom_cake/inner",
+        "mushroom": "minecraft:block/red_mushroom"
+    },
+    "elements": [
+        {   "from": [ 5, 0, 1 ],
+            "to": [ 15, 8, 15 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#inside" },
+                "east":  { "texture": "#side" }
+            }
+        },
+        {
+            "from": [ 8, 8, 0 ], 
+            "to": [ 8, 24, 16 ], 
+            "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": -45.0 },
+            "faces": {
+                "east": { "texture": "#mushroom", "uv": [ 0, 0, 16, 16 ] },
+                "west": { "texture": "#mushroom", "uv": [ 0, 0, 16, 16 ] }
+            }
+        },
+        {
+            "from": [ 8, 8, 0 ], 
+            "to": [ 8, 24, 16 ], 
+            "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45.0 },
+            "faces": {
+                "east": { "texture": "#mushroom", "uv": [ 0, 0, 16, 16 ] },
+                "west": { "texture": "#mushroom", "uv": [ 0, 0, 16, 16 ] }
+            }
+        }
+    ]
+}

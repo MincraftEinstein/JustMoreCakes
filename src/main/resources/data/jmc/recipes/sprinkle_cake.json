@@ -1,0 +1,64 @@
+{
+	"type": "minecraft:crafting_shaped",
+		
+	"pattern":
+	[
+		"iro",
+		"ycg",
+		"lbp"
+	],
+	
+	"key":
+	{
+		"i":
+		{
+			"tag": "forge:dyes/pink"
+		},
+		
+		"r":
+		{
+			"tag": "forge:dyes/red"
+		},
+		
+		"o":
+		{
+			"tag": "forge:dyes/orange"
+		},
+		
+		"y":
+		{
+			"tag": "forge:dyes/yellow"
+		},
+		
+		"g":
+		{
+			"tag": "forge:dyes/green"
+		},
+		
+		"l":
+		{
+			"tag": "forge:dyes/lime"
+		},
+		
+		"b":
+		{
+			"tag": "forge:dyes/blue"
+		},
+		
+		"p":
+		{
+			"tag": "forge:dyes/purple"
+		},
+		
+		"c":
+		{
+			"item": "minecraft:cake"
+		}
+	},
+	
+	"result":
+	{
+		"item": "jmc:sprinkle_cake",
+		"count": 1
+	}
+}

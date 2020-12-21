@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+		
+	"pattern":
+	[
+		"c",
+		"c",
+		"c"
+	],
+	
+	"key":
+	{
+		"c":
+		{
+			"item": "minecraft:cake"
+		}
+	},
+	
+	"result":
+	{
+		"item": "jmc:triple_decker_cake",
+		"count": 1
+	}
+}

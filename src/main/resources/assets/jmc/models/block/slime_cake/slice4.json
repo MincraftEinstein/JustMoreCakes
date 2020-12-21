@@ -1,0 +1,22 @@
+{
+    "textures": {
+        "particle": "jmc:blocks/slime_cake/side",
+        "bottom": "jmc:blocks/slime_cake/bottom",
+        "top": "jmc:blocks/slime_cake/top",
+        "side": "jmc:blocks/slime_cake/side",
+        "inside": "jmc:blocks/slime_cake/inner"
+    },
+    "elements": [
+        {   "from": [ 9, 0, 1 ],
+            "to": [ 15, 8, 15 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#inside" },
+                "east":  { "texture": "#side" }
+            }
+        }
+    ]
+}

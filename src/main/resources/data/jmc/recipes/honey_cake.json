@@ -1,0 +1,44 @@
+{
+	"type": "minecraft:crafting_shaped",
+		
+	"pattern":
+	[
+		"hch",
+		"ses",
+		"www"
+	],
+	
+	"key":
+	{
+		"h":
+		{
+			"item": "minecraft:honey_bottle"
+		},
+		
+		"c":
+		{
+			"item": "minecraft:honeycomb"
+		},
+		
+		"s":
+		{
+			"item": "minecraft:sugar"
+		},
+		
+		"e":
+		{
+			"item": "minecraft:egg"
+		},
+		
+		"w":
+		{
+			"item": "minecraft:wheat"
+		}
+	},
+	
+	"result":
+	{
+		"item": "jmc:honey_cake",
+		"count": 1
+	}
+}

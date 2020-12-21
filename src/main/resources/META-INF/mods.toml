@@ -1,0 +1,57 @@
+modLoader="javafml" #mandatory
+
+loaderVersion="[34,)" #mandatory
+
+license="All rights reserved"
+
+issueTrackerURL="http://my.issue.tracker/" #optional
+
+[[mods]] #mandatory
+
+modId="jmc" #mandatory
+
+version="2.0" #mandatory
+
+displayName="Just More Cake!" #mandatory
+
+updateJSONURL="http://myurl.me/" #optional
+
+displayURL="https://www.curseforge.com/minecraft/mc-mods/just-more-cakes" #optional
+
+logoFile="pack.png" #optional
+
+credits="Me the mod author" #optional
+
+authors="MincraftEinstein" #optional
+
+description='''
+A mod that adds 28 new cakes to Minecraft. Some with special properties,
+  some with no properties and some with useless properties.
+  Chocolate Cake, Triple Decker Cake, TNT Cake...
+'''
+
+[[dependencies.jmc]] #optional
+    # the modid of the dependency
+    modId="forge" #mandatory
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+    # The version range of the dependency
+    versionRange="[34,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
+
+[[dependencies.jmc]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.4]"
+    ordering="NONE"
+    side="BOTH"
+    
+[[dependencies.jmc]]
+    modId="einsteins_library"
+    mandatory=true
+    versionRange="[1.4,)"
+    ordering="NONE"
+    side="BOTH"

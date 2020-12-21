@@ -1,0 +1,41 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"group": "jmc:seed_cake",
+		
+	"pattern":
+	[
+		"ddd",
+		"ses",
+		"www"
+	],
+	
+	"key":
+	{
+		"d":
+		{
+			"tag": "forge:seeds"
+		},
+		
+		"s":
+		{
+			"item": "minecraft:sugar"
+		},
+		
+		"e":
+		{
+			"item": "minecraft:egg"
+		},
+		
+		"w":
+		{
+			"item": "minecraft:wheat"
+		}
+	},
+	
+	"result":
+	{
+		"item": "jmc:seed_cake",
+		"count": 1
+	}
+}

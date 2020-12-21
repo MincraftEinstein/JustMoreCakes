@@ -1,0 +1,39 @@
+{
+	"type": "minecraft:crafting_shaped",
+		
+	"pattern":
+	[
+		" m ",
+		"ses",
+		" w "
+	],
+	
+	"key":
+	{
+		"m":
+		{
+			"item": "minecraft:milk_bucket"
+		},
+		
+		"s":
+		{
+			"item": "minecraft:sugar"
+		},
+		
+		"e":
+		{
+			"item": "minecraft:egg"
+		},
+		
+		"w":
+		{
+			"item": "minecraft:wheat"
+		}
+	},
+	
+	"result":
+	{
+		"item": "jmc:cupcake",
+		"count": 3
+	}
+}

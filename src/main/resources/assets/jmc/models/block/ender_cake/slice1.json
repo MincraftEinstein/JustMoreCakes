@@ -1,0 +1,22 @@
+{
+    "textures": {
+        "particle": "jmc:blocks/ender_cake/side",
+        "bottom": "jmc:blocks/ender_cake/bottom",
+        "top": "jmc:blocks/ender_cake/top",
+        "side": "jmc:blocks/ender_cake/side",
+        "inside": "jmc:blocks/ender_cake/inner"
+    },
+    "elements": [
+        {   "from": [ 3, 0, 1 ],
+            "to": [ 15, 8, 15 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#inside" },
+                "east":  { "texture": "#side" }
+            }
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+	"type": "minecraft:crafting_shaped",
+		
+	"pattern":
+	[
+		"ttt",
+		"geg",
+		"www"
+	],
+	
+	"key":
+	{
+		"t":
+		{
+			"item": "minecraft:tnt"
+		},
+		
+		"g":
+		{
+			"item": "minecraft:gunpowder"
+		},
+		
+		"e":
+		{
+			"item": "minecraft:egg"
+		},
+		
+		"w":
+		{
+			"item": "minecraft:wheat"
+		}
+	},
+	
+	"result":
+	{
+		"item": "jmc:tnt_cake",
+		"count": 1
+	}
+}

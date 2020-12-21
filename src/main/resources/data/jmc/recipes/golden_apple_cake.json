@@ -1,0 +1,40 @@
+{
+	"type": "minecraft:crafting_shaped",
+		
+	"pattern":
+	[
+		"ggg",
+		"ses",
+		"www"
+	],
+	
+	"key":
+	{
+		"g":
+		{
+			"item": "minecraft:golden_apple",
+			"data": 0
+		},
+		
+		"s":
+		{
+			"item": "minecraft:sugar"
+		},
+		
+		"e":
+		{
+			"item": "minecraft:egg"
+		},
+		
+		"w":
+		{
+			"item": "minecraft:wheat"
+		}
+	},
+	
+	"result":
+	{
+		"item": "jmc:golden_apple_cake",
+		"count": 1
+	}
+}

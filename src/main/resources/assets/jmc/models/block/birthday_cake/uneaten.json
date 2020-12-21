@@ -1,0 +1,34 @@
+{
+    "textures": {
+        "particle": "jmc:blocks/birthday_cake/side",
+        "side": "jmc:blocks/birthday_cake/side",
+        "top": "jmc:blocks/birthday_cake/top",
+        "candle": "jmc:blocks/birthday_cake/candle_lit",
+        "bottom": "jmc:blocks/birthday_cake/bottom"
+    },
+    "elements": [
+        {
+            "from": [ 1, 0, 1 ], 
+            "to": [ 15, 8, 15 ], 
+            "faces": {
+                "north": { "texture": "#side", "uv": [ 1, 8, 15, 16 ] },
+                "east": { "texture": "#side", "uv": [ 1, 8, 15, 16 ] },
+                "south": { "texture": "#side", "uv": [ 1, 8, 15, 16 ] },
+                "west": { "texture": "#side", "uv": [ 1, 8, 15, 16 ] },
+                "up": { "texture": "#top", "uv": [ 1, 1, 15, 15 ] },
+                "down": { "texture": "#bottom", "uv": [ 1, 1, 15, 15 ], "cullface": "down" }
+            }
+        },
+        {
+            "from": [ 7, 8, 7 ], 
+            "to": [ 9, 14, 9 ], 
+            "faces": {
+                "north": { "texture": "#candle", "uv": [ 4, 6, 6, 12 ] },
+                "east": { "texture": "#candle", "uv": [ 6, 6, 8, 12 ] },
+                "south": { "texture": "#candle", "uv": [ 8, 6, 10, 12 ] },
+                "west": { "texture": "#candle", "uv": [ 10, 6, 12, 12 ] },
+                "up": { "texture": "#candle", "uv": [ 6, 4, 8, 6 ] }
+            }
+        }
+    ]
+}

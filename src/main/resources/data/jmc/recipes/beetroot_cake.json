@@ -1,0 +1,39 @@
+{
+	"type": "minecraft:crafting_shaped",
+		
+	"pattern":
+	[
+		"bbb",
+		"ses",
+		"www"
+	],
+	
+	"key":
+	{
+		"b":
+		{
+			"item": "minecraft:beetroot"
+		},
+		
+		"s":
+		{
+			"item": "minecraft:sugar"
+		},
+		
+		"e":
+		{
+			"item": "minecraft:egg"
+		},
+		
+		"w":
+		{
+			"item": "minecraft:wheat"
+		}
+	},
+	
+	"result":
+	{
+		"item": "jmc:beetroot_cake",
+		"count": 1
+	}
+}

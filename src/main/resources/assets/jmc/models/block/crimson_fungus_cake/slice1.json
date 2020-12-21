@@ -1,0 +1,41 @@
+{
+    "textures": {
+        "particle": "jmc:blocks/crimson_fungus_cake/side",
+        "bottom": "jmc:blocks/crimson_fungus_cake/bottom",
+        "top": "jmc:blocks/crimson_fungus_cake/top",
+        "side": "jmc:blocks/crimson_fungus_cake/side",
+        "inside": "jmc:blocks/crimson_fungus_cake/inner",
+        "mushroom": "minecraft:block/crimson_fungus"
+    },
+    "elements": [
+        {   "from": [ 3, 0, 1 ],
+            "to": [ 15, 8, 15 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#inside" },
+                "east":  { "texture": "#side" }
+            }
+        },
+        {
+            "from": [ 8, 8, 0 ], 
+            "to": [ 8, 24, 16 ], 
+            "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": -45.0 },
+            "faces": {
+                "east": { "texture": "#mushroom", "uv": [ 0, 0, 16, 16 ] },
+                "west": { "texture": "#mushroom", "uv": [ 0, 0, 16, 16 ] }
+            }
+        },
+        {
+            "from": [ 8, 8, 0 ], 
+            "to": [ 8, 24, 16 ], 
+            "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45.0 },
+            "faces": {
+                "east": { "texture": "#mushroom", "uv": [ 0, 0, 16, 16 ] },
+                "west": { "texture": "#mushroom", "uv": [ 0, 0, 16, 16 ] }
+            }
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+	"type": "minecraft:crafting_shaped",
+		
+	"pattern":
+	[
+		"gmr",
+		"ses",
+		"www"
+	],
+	
+	"key":
+	{
+		"g":
+		{
+			"tag": "forge:dyes/green"
+		},
+		
+		"m":
+		{
+			"item": "minecraft:milk_bucket"
+		},
+		
+		"r":
+		{
+			"tag": "forge:dyes/red"
+		},
+		
+		"s":
+		{
+			"item": "minecraft:sugar"
+		},
+		
+		"e":
+		{
+			"item": "minecraft:egg"
+		},
+		
+		"w":
+		{
+			"item": "minecraft:wheat"
+		}
+	},
+	
+	"result":
+	{
+		"item": "jmc:christmas_cake",
+		"count": 1
+	}
+}

@@ -1,0 +1,39 @@
+{
+	"type": "minecraft:crafting_shaped",
+		
+	"pattern":
+	[
+		"rrr",
+		"ses",
+		"www"
+	],
+	
+	"key":
+	{
+		"r":
+		{
+			"item": "minecraft:redstone"
+		},
+		
+		"s":
+		{
+			"item": "minecraft:sugar"
+		},
+		
+		"e":
+		{
+			"item": "minecraft:egg"
+		},
+		
+		"w":
+		{
+			"item": "minecraft:wheat"
+		}
+	},
+	
+	"result":
+	{
+		"item": "jmc:redstone_cake",
+		"count": 1
+	}
+}

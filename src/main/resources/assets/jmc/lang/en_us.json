@@ -1,0 +1,70 @@
+{
+	// ITEMS
+	"item.jmc.cheese": "Cheese",
+	"item.jmc.cupcake": "Cupcake",
+	
+	// BLOCKS
+	"block.jmc.chocolate_cake": "Chocolate Cake",
+	"block.jmc.carrot_cake": "Carrot Cake",
+	"block.jmc.pumpkin_cake": "Pumpkin Cake",
+	"block.jmc.melon_cake": "Melon Cake",
+	"block.jmc.apple_cake": "Apple Cake",
+	"block.jmc.poison_cake": "Poison Cake",
+	"block.jmc.cookie_cake": "Cookie Cake",
+	"block.jmc.tnt_cake": "TNT Cake",
+	"block.jmc.golden_apple_cake": "Golden Apple Cake",
+	"block.jmc.red_mushroom_cake": "Red Mushroom Cake",
+	"block.jmc.firey_cake": "Firey Cake",
+	"block.jmc.redstone_cake": "Redstone Cake",
+	"block.jmc.ender_cake": "Ender Cake",
+	"block.jmc.cheese_cake": "Cheese Cake",
+	"block.jmc.triple_decker_cake": "Triple Decker Cake",
+	"block.jmc.slime_cake": "Slime Cake",
+	"block.jmc.birthday_cake": "Birthday Cake",
+	"block.jmc.beetroot_cake": "Beetroot Cake",
+	"block.jmc.lava_cake": "Lava Cake",
+	"block.jmc.creeper_cake": "Creeper Cake",
+	"block.jmc.seed_cake": "Seed Cake",
+	"block.jmc.cupcake": "Cupcake",
+	"block.jmc.brown_mushroom_cake": "Brown Mushroom Cake",
+	"block.jmc.ice_cake": "Ice Cake",
+	"block.jmc.chorus_cake": "Chorus Cake",
+	"block.jmc.christmas_cake": "Christmas Cake",
+	"block.jmc.sprinkle_cake": "Sprinkle Cake",
+	"block.jmc.sweet_berry_cake": "Sweet Berry Cake",
+	"block.jmc.honey_cake": "Honey Cake",
+	"block.jmc.glowstone_cake": "Glowstone Cake",
+	"block.jmc.crimson_fungus_cake": "Crimson Fungus Cake",
+	"block.jmc.warped_fungus_cake": "Warped Fungus Cake",
+	"block.jmc.encasing_ice": "Encasing Ice",
+	
+	// ENTITIES
+	"entity.minecraft.villager.jmc.cake_baker": "Cake Baker",
+	
+	// POTIONS
+	"item.minecraft.potion.effect.bouncing":"Potion of Bouncing",
+	"item.minecraft.splash_potion.effect.bouncing":"Splash Potion of Bouncing",
+	"item.minecraft.lingering_potion.effect.bouncing":"Lingering Potion of Bouncing",
+	"item.minecraft.tipped_arrow.effect.bouncing":"Arrow of Bouncing",
+	"item.minecraft.potion.effect.long_bouncing":"Potion of Bouncing",
+	"item.minecraft.splash_potion.effect.long_bouncing":"Splash Potion of Bouncing",
+	"item.minecraft.lingering_potion.effect.long_bouncing":"Lingering Potion of Bouncing",
+	"item.minecraft.tipped_arrow.effect.long_bouncing":"Arrow of Bouncing",
+	"item.minecraft.potion.effect.freezing":"Potion of Freezing",
+	"item.minecraft.splash_potion.effect.freezing":"Splash Potion of Freezing",
+	"item.minecraft.lingering_potion.effect.freezing":"Lingering Potion of Freezing",
+	"item.minecraft.tipped_arrow.effect.freezcing":"Arrow of Freezing",
+	
+	// EFFECTS
+	"effect.jmc.bouncing": "Bouncing [W.I.P]",
+	"effect.jmc.freezing": "Freezing",
+	
+	// CREATIVE TAB
+	"itemGroup.jmc_tab": "Just More Cakes!",
+	
+	// ADVANCEMENTS
+	"advancements.husbandry.craft_cake.title": "Cake Is A Lie",
+	"advancements.husbandry.craft_cake.description": "Craft A Cake",
+	"advancements.husbandry.craft_all_cakes.title": "Num Num Num Num Num",
+	"advancements.husbandry.craft_all_cakes.description": "Craft All The Cakes In The Mod"
+}

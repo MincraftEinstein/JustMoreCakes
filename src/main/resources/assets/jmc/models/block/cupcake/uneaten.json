@@ -1,0 +1,91 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "jmc:blocks/cupcake",
+		"cupcake": "jmc:blocks/cupcake"
+	},
+	"elements": [
+		{
+			"name": "cup",
+			"from": [6, 0, 6],
+			"to": [10, 5, 10],
+			"faces": {
+				"north": {"uv": [0, 11, 4, 16], "texture": "#cupcake"},
+				"east": {"uv": [8, 11, 12, 16], "texture": "#cupcake"},
+				"south": {"uv": [0, 11, 4, 16], "texture": "#cupcake"},
+				"west": {"uv": [8, 11, 12, 16], "texture": "#cupcake"},
+				"up": {"uv": [3, 5, 7, 9], "texture": "#cupcake"},
+				"down": {"uv": [4, 12, 8, 16], "texture": "#cupcake"}
+			}
+		},
+		{
+			"name": "north_frosting",
+			"from": [6, 3, 5],
+			"to": [10, 4, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 11, 13]},
+			"faces": {
+				"north": {"uv": [0, 11, 4, 12], "texture": "#cupcake"},
+				"east": {"uv": [11, 11, 12, 12], "texture": "#cupcake"},
+				"south": {"uv": [12, 11, 16, 12], "texture": "#cupcake"},
+				"west": {"uv": [8, 11, 9, 12], "texture": "#cupcake"},
+				"up": {"uv": [9, 3, 13, 4], "texture": "#cupcake"},
+				"down": {"uv": [9, 3, 13, 4], "texture": "#cupcake"}
+			}
+		},
+		{
+			"name": "south_frosting",
+			"from": [6, 3, 10],
+			"to": [10, 4, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 11, 18]},
+			"faces": {
+				"north": {"uv": [12, 11, 16, 12], "texture": "#cupcake"},
+				"east": {"uv": [8, 11, 9, 12], "texture": "#cupcake"},
+				"south": {"uv": [0, 11, 4, 12], "texture": "#cupcake"},
+				"west": {"uv": [11, 11, 12, 12], "texture": "#cupcake"},
+				"up": {"uv": [9, 3, 13, 4], "texture": "#cupcake"},
+				"down": {"uv": [9, 3, 13, 4], "texture": "#cupcake"}
+			}
+		},
+		{
+			"name": "east_frosting",
+			"from": [10, 3, 6],
+			"to": [11, 4, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [18, 11, 14]},
+			"faces": {
+				"north": {"uv": [0, 11, 1, 12], "texture": "#cupcake"},
+				"east": {"uv": [8, 11, 12, 12], "texture": "#cupcake"},
+				"south": {"uv": [3, 11, 4, 12], "texture": "#cupcake"},
+				"west": {"uv": [12, 11, 16, 12], "texture": "#cupcake"},
+				"up": {"uv": [12, 5, 13, 9], "texture": "#cupcake"},
+				"down": {"uv": [10, 5, 11, 9], "texture": "#cupcake"}
+			}
+		},
+		{
+			"name": "west_frosting",
+			"from": [5, 3, 6],
+			"to": [6, 4, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, 11, 14]},
+			"faces": {
+				"north": {"uv": [3, 11, 4, 12], "texture": "#cupcake"},
+				"east": {"uv": [12, 11, 16, 12], "texture": "#cupcake"},
+				"south": {"uv": [0, 11, 1, 12], "texture": "#cupcake"},
+				"west": {"uv": [8, 11, 12, 12], "texture": "#cupcake"},
+				"up": {"uv": [8, 5, 9, 9], "texture": "#cupcake"},
+				"down": {"uv": [10, 5, 11, 9], "texture": "#cupcake"}
+			}
+		},
+		{
+			"name": "berry",
+			"from": [7, 5, 7],
+			"to": [9, 6, 9],
+			"faces": {
+				"north": {"uv": [2, 2, 4, 3], "texture": "#cupcake"},
+				"east": {"uv": [0, 2, 2, 3], "texture": "#cupcake"},
+				"south": {"uv": [6, 2, 8, 3], "texture": "#cupcake"},
+				"west": {"uv": [4, 2, 6, 3], "texture": "#cupcake"},
+				"up": {"uv": [2, 0, 4, 2], "texture": "#cupcake"},
+				"down": {"uv": [4, 0, 6, 2], "texture": "#cupcake"}
+			}
+		}
+	]
+}
