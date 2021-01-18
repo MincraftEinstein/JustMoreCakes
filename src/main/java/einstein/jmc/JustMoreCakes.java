@@ -59,8 +59,8 @@ public class JustMoreCakes
     private void doClientStuff(final FMLClientSetupEvent event) {
     	//Item.getIdFromItem(Items.CAKE = new BlockItem(Blocks.CAKE, (new Item.Properties()).maxStackSize(1).group(ItemGroup.FOOD)));
     	//Item.getIdFromItem(Items.CAKE.setMaxStackSize(64));	1.12.2 Version
-//    	Item.getIdFromItem(Items.CAKE);
-//    	Items.CAKE = new BlockItem(Blocks.CAKE, new Item.Properties().maxStackSize(0));
+    	//Item.getIdFromItem(Items.CAKE);
+    	//Items.CAKE = new BlockItem(Blocks.CAKE, new Item.Properties().maxStackSize(0));
     	DeferredWorkQueue.runLater(() -> {
     		ModPotions.registerPotionRecipes();
     	});

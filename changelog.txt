@@ -1,3 +1,141 @@
+Build: 1.16.5-36.0.0 - Fri Jan 15 19:42:24 GMT 2021
+	lex:
+		1.16.5 Initial Update.
+
+=========
+Build: 1.16.4-35.1.37 - Thu Jan 14 23:58:35 GMT 2021
+	lex:
+		Update Coremods, ASM, and include standalone Nashorn to load on J15.
+
+=========
+Build: 1.16.4-35.1.36 - Thu Jan 07 20:24:49 GMT 2021
+	ian.rehwinkel:
+		Added IWeatherParticleRenderHandler to allow a mod to take control over weather particles and sounds. (#7522)
+
+=========
+Build: 1.16.4-35.1.35 - Thu Jan 07 20:16:03 GMT 2021
+	Laughlan Coventry:
+		Allow Chunk loading Tickets to opt-into forcing chunk ticks. (#7525)
+
+=========
+Build: 1.16.4-35.1.34 - Thu Jan 07 20:10:18 GMT 2021
+	malte0811:
+		Fix crash when mods add goals to skeleton horses (MC-206338) (#7509)
+
+=========
+Build: 1.16.4-35.1.33 - Thu Jan 07 20:03:59 GMT 2021
+	diesieben07:
+		Set WM_CLASS and WM_INSTANCE_NAME for early progress window (#7534)
+
+=========
+Build: 1.16.4-35.1.32 - Wed Jan 06 03:17:35 GMT 2021
+	35673674+alcatrazEscapee:
+		Make UnboundedMapCodec more lenient in decoding dimensions. Fixes MC-197860 (#7527)
+
+=========
+Build: 1.16.4-35.1.31 - Tue Jan 05 19:59:52 GMT 2021
+	lex:
+		Prevent NPE and deprecated MissingMappings.getMappings function. Closes #6252
+
+	lex:
+		Fix FML's Config Sync packet not allowing same length filenames in encoder and decoder. Closes #7584
+
+=========
+Build: 1.16.4-35.1.29 - Sun Jan 03 11:02:59 GMT 2021
+	lex:
+		Fix entities not correctly being able to be ridden under water.
+
+=========
+Build: 1.16.4-35.1.28 - Mon Dec 28 21:56:51 GMT 2020
+	git:
+		Fix crash when beehive is broken by fake player (#7566)
+
+=========
+Build: 1.16.4-35.1.27 - Mon Dec 28 21:46:04 GMT 2020
+	35673674+alcatrazEscapee:
+		Add supplier variant to `AbstractBlock.Properties#lootFrom` (#7563)
+
+=========
+Build: 1.16.4-35.1.26 - Mon Dec 28 21:40:18 GMT 2020
+	diesieben07:
+		Fix missing serializers when deserializing global loot modifiers (#7561)
+
+	diesieben07:
+		Fix ModFileResourcePack.getAllResourceLocations ignoring resourceNamespace. (#7562)
+		
+		Fixes #7405
+
+=========
+Build: 1.16.4-35.1.24 - Mon Dec 28 21:34:39 GMT 2020
+	diesieben07:
+		Fix VanillaConnectionNetworkFilter sending out invalid entity properties packets without an entity ID (#7560)
+
+=========
+Build: 1.16.4-35.1.23 - Mon Dec 28 21:17:01 GMT 2020
+	richard:
+		Make shear interactions extend to subclasses (#7544)
+
+=========
+Build: 1.16.4-35.1.22 - Mon Dec 28 21:09:38 GMT 2020
+	sciwhiz12:
+		Add a SoundType subclass that uses suppliers (#7538)
+
+=========
+Build: 1.16.4-35.1.21 - Mon Dec 28 21:03:56 GMT 2020
+	sciwhiz12:
+		Fix compound ingredient in shapeless recipes (#7537) Fixes #7530
+
+=========
+Build: 1.16.4-35.1.20 - Mon Dec 28 20:19:04 GMT 2020
+	matthrewp:
+		Fix modded PointOfInterestType's not populating blockstate map when registered (#7503)
+
+	35673674+alcatrazEscapee:
+		Fix potential NPE in ForgeHooks.onItemPlaceIntoWorld when passing in null player. (#7505)
+
+=========
+Build: 1.16.4-35.1.18 - Mon Dec 28 20:13:15 GMT 2020
+	48399898+poopoodice:
+		Add new LivingConversionEvent to control mobs turning into other mobs. (#7386)
+
+=========
+Build: 1.16.4-35.1.17 - Mon Dec 28 20:01:42 GMT 2020
+	knightminer4:
+		Add ItemAttributeModifierEvent (#7484)
+
+=========
+Build: 1.16.4-35.1.16 - Mon Dec 28 19:54:38 GMT 2020
+	Bward7864:
+		Fix RightClickBlock ALLOW not being implemented (#7426)
+
+=========
+Build: 1.16.4-35.1.15 - Sat Dec 26 19:39:35 GMT 2020
+	lex:
+		Make mod data packs able to be disabled. It'll break things, but that's on you. Closes #6776
+
+	lex:
+		Quiet down errors related to modders not changing their update urls from the default.
+
+=========
+Build: 1.16.4-35.1.13 - Sat Dec 12 17:34:07 GMT 2020
+	tterrag:
+		Add generated resource tracking to ExistingFileHelper
+
+=========
+Build: 1.16.4-35.1.12 - Fri Dec 11 02:39:41 GMT 2020
+	tterrag:
+		Fix BlockStateProvider item models not knowing about block models
+		
+		Add tests for this case
+
+=========
+Build: 1.16.4-35.1.11 - Tue Dec 08 19:54:40 GMT 2020
+	richard:
+		Override invalidateCaps instead of remove for vanilla TE capability invalidation (#7536)
+		
+		Properly invalidate patched in vanilla TE caps in invalidateCaps instead of remove so that they get invalidated on chunk unload
+
+=========
 Build: 1.16.4-35.1.10 - Sat Dec 05 20:07:14 GMT 2020
 	richard:
 		Make TEs invalidate capabilities when the chunk they are in unloads (#7529)

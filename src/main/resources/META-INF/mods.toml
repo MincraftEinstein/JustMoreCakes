@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[34,)"
+loaderVersion="[36,)"
 license="All rights reserved"
 issueTrackerURL="http://my.issue.tracker/"
 
@@ -13,22 +13,20 @@ issueTrackerURL="http://my.issue.tracker/"
 	credits="Me the mod author"
 	authors="MincraftEinstein"
 	description='''
-A mod that adds 30+ new cakes to Minecraft. Some with special properties,
-  some with no properties and some with useless properties.
-  Chocolate Cake, Triple Decker Cake, TNT Cake...
+A mod that adds 30+ new cakes to Minecraft. Some with special properties, some with no properties and some with useless properties. Chocolate Cake, Triple Decker Cake, TNT Cake...
 '''
 
 [[dependencies.jmc]]
     modId="forge"
     mandatory=true
-    versionRange="[34,)"
+    versionRange="[36,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.jmc]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.4]"
+    versionRange="[1.16.5]"
     ordering="NONE"
     side="BOTH"
     
