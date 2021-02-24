@@ -14,6 +14,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IWorld;
@@ -43,12 +45,22 @@ public class EnderCakeBlock extends CakeBlockBase
     }
     
     private ActionResultType func_226911_a_(final IWorld p_226911_1_, final BlockPos p_226911_2_, final BlockState p_226911_3_, final PlayerEntity p_226911_4_) {
+    	final World world = p_226911_4_.world;
+    	final Random rand = new Random();
         if (!p_226911_4_.canEat(false)) {
             return ActionResultType.PASS;
         }
         p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
         p_226911_4_.getFoodStats().addStats(2, 0.1f);
         Actions.teleportRandomly(p_226911_4_, ModServerConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
+        p_226911_4_.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        if (world.isRemote) {
+        	if (ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
+                for(float f = 0; f < 2.5F; ++f) {
+                    world.addParticle(ParticleTypes.PORTAL, p_226911_4_.getPosXRandom(0.5D), p_226911_4_.getPosYRandom() - 0.25D, p_226911_4_.getPosZRandom(0.5D), (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
+                 }	
+        	}
+        }
         final int i = p_226911_3_.get(EnderCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(EnderCakeBlock.BITES, (i + 1)), 3);
