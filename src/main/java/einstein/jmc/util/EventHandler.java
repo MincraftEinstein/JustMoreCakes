@@ -10,13 +10,15 @@ import einstein.jmc.blocks.TripleDeckerCakeBlock;
 import einstein.jmc.init.ModPotions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -66,13 +68,13 @@ public class EventHandler {
 		          (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 		    }
 		}
-	
+
 	@SubscribeEvent
 	public void onEntityJump(final LivingJumpEvent event) {
 		if (event.getEntity() instanceof PlayerEntity) {
 			final PlayerEntity player = (PlayerEntity)event.getEntity();
-			if(player.isPotionActive(ModPotions.BOUNCING_EFFECT.get())) {
-				player.prevPosY = 0.800000011920929;
+			if (player.isPotionActive(ModPotions.BOUNCING_EFFECT.get())) {
+				player.addVelocity(0, 0.15F, 0);
 			}
 		}
 	}
@@ -80,50 +82,24 @@ public class EventHandler {
 	@SubscribeEvent
 	public void onEntityUpdate(final LivingUpdateEvent event) {
 		final World world = event.getEntity().getEntityWorld();
-		if (event.getEntityLiving().isPotionActive(ModPotions.BOUNCING_EFFECT.get())) {
-			final BlockPos topPlayer = new BlockPos(event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY() + 2.0, event.getEntityLiving().getPosX());
-			if (!world.getBlockState(topPlayer).getBlock().equals(Blocks.AIR) && !event.getEntityLiving().isSneaking()) {
-				event.getEntityLiving().prevPosY = 0.0F;
-				event.getEntityLiving().lastTickPosY = event.getEntityLiving().lastTickPosY;
-			}
-			if (event.getEntityLiving().collidedVertically && event.getEntityLiving().isOnGround()) {
-                double velX3;
-                if (this.random.nextInt(10) <= 5) {
-                    velX3 = this.random.nextDouble() * 0.25 - 0.25;
-                }
-                else {
-                    velX3 = this.random.nextDouble() * 0.25;
-                }
-                double velZ3;
-                if (this.random.nextInt(10) <= 5) {
-                    velZ3 = this.random.nextDouble() * 0.25 - 0.25;
-                }
-                else {
-                    velZ3 = this.random.nextDouble() * 0.25;
-                }
-                if (world.isRemote) {
-                    world.addParticle(ParticleTypes.ITEM_SLIME, event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY() + 0.4000000059604645, event.getEntityLiving().getPosZ(), velX3, 0.2, velZ3);
-                }
-                if (this.random.nextInt(10) <= 5) {
-                    velX3 = this.random.nextDouble() * 0.25 - 0.25;
-                }
-                else {
-                    velX3 = this.random.nextDouble() * 0.25;
-                }
-                if (world.isRemote) {
-                    world.addParticle(ParticleTypes.ITEM_SLIME, event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY() + 0.4000000059604645, event.getEntityLiving().getPosZ(), velZ3, 0.2, velZ3);
-                }
-                if (this.random.nextInt(10) <= 5) {
-                    velZ3 = this.random.nextDouble() * 0.25 - 0.25;
-                }
-                else {
-                    velZ3 = this.random.nextDouble() * 0.25;
-                }
-                if (world.isRemote) {
-                    world.addParticle(ParticleTypes.ITEM_SLIME, event.getEntityLiving().getPosX(), event.getEntityLiving().getPosY() + 0.4000000059604645, event.getEntityLiving().getPosZ(), velZ3, 0.2, velZ3);
-                }
-                event.getEntityLiving().playSound(SoundEvents.ENTITY_SLIME_SQUISH, 1.0F, 1.0F);
-                event.getEntityLiving().lastTickPosY = 0.5F;
+		final LivingEntity entity = event.getEntityLiving();
+		if (entity.isPotionActive(ModPotions.BOUNCING_EFFECT.get())) {
+			if (entity.collidedVertically && entity.isOnGround() && !entity.isSleeping()) {
+				float j = 0.65F;
+				if (entity.isPotionActive(Effects.JUMP_BOOST)) {
+			         j += 0.1F * (entity.getActivePotionEffect(Effects.JUMP_BOOST).getAmplifier() + 1);
+			    }
+				entity.addVelocity(0, j, 0);
+				entity.playSound(SoundEvents.ENTITY_SLIME_SQUISH, 1.0F, 1.0F);
+				if (world.isRemote) {
+		            for (int i = 0; i < 8; ++i) {
+						float f = random.nextFloat() * ((float)Math.PI * 2F);
+			            float f1 = random.nextFloat() * 0.5F + 0.5F;
+			            float f2 = MathHelper.sin(f) * 1 * 0.5F * f1;
+			            float f3 = MathHelper.cos(f) * 1 * 0.5F * f1;
+						world.addParticle(ParticleTypes.ITEM_SLIME, entity.getPosX() + f2, entity.getPosY(), entity.getPosZ() + f3, 0.0D, 0.0D, 0.0D);
+		            }
+				}
 			}
 		}
 	}
