@@ -16,6 +16,7 @@ import einstein.jmc.blocks.GoldenAppleCakeBlock;
 import einstein.jmc.blocks.IceCake;
 import einstein.jmc.blocks.LavaCakeBlock;
 import einstein.jmc.blocks.PoisonCakeBlock;
+import einstein.jmc.blocks.RedstoneCake;
 import einstein.jmc.blocks.SlimeCakeBlock;
 import einstein.jmc.blocks.TNTCakeBlock;
 import einstein.jmc.blocks.TripleDeckerCakeBlock;

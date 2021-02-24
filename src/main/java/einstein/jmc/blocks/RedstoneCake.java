@@ -1,4 +1,4 @@
-package einstein.jmc.init;
+package einstein.jmc.blocks;
 
 import java.util.Random;
 

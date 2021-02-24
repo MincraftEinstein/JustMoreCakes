@@ -83,5 +83,4 @@ public class ModConfigs {
 	public static void init() {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SERVERSPEC);
 	}
-	
 }
