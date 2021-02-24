@@ -2,6 +2,7 @@ package einstein.jmc.tileentity;
 
 import java.util.List;
 
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import einstein.jmc.init.ModTileEntityType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.MobEntity;
@@ -33,7 +34,7 @@ public class GlowstoneCakeTileEntity extends TileEntity {
 			final AxisAlignedBB aabb = new AxisAlignedBB(this.getPos().down()).grow(d0).expand(0.0F, this.world.getHeight(), 0.0F);
 			final List<MobEntity> mobList = this.world.getEntitiesWithinAABB(MobEntity.class, aabb);
 			for (final MobEntity mob : mobList) {
-				mob.addPotionEffect(new EffectInstance(Effects.GLOWING, 85, 0, true, true));
+				mob.addPotionEffect(new EffectInstance(Effects.GLOWING, ModServerConfigs.GLOWSTONE_CAKE_GLOWING_DUR.get(), 0, true, true));
 			}
 		}
 	}

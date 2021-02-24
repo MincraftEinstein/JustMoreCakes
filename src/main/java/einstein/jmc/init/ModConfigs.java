@@ -68,6 +68,8 @@ public class ModConfigs {
 		public static final ForgeConfigSpec.IntValue CHORUS_CAKE_LEVITATION_STRENGTH = registerPotionStrength("The strength of the levitation potion effect", "chorusCakeLevitationStrength", 1);
 		public static final ForgeConfigSpec.DoubleValue CHORUS_CAKE_TELEPORT_RADIUS = registerDoubleValues("The radius in which the player will be randomly teleported", "chorusCakeTeleportRadius", 10, 0, 10000);
 
+		public static final ForgeConfigSpec.IntValue GLOWSTONE_CAKE_GLOWING_DUR = registerPotionDur("The duration of the glowing potion effect", "glowstoneCakeGlowingDur", 85);
+		
 		private static final ForgeConfigSpec SERVERSPEC = SERVER_BUILDER.build();
 
 		public static IntValue registerPotionDur(final String comment, final String field, final int defaultInt) {
