@@ -94,6 +94,7 @@ public class ModConfigs {
 
 		public static final ForgeConfigSpec.BooleanValue REDSTONE_CAKE_PARTICLES = CLIENT_BUILDER/*.comment("")*/.define("redstoneCakeParticles", true);
 		public static final ForgeConfigSpec.BooleanValue ENDER_CAKE_PARTICLES = CLIENT_BUILDER.define("enderCakeParticles", true);
+		public static final ForgeConfigSpec.BooleanValue LAVA_CAKE_PARTICLES = CLIENT_BUILDER.define("lavaCakeParticles", true);
 		
 		private static final ForgeConfigSpec CLIENTSPEC = CLIENT_BUILDER.build();
 	}

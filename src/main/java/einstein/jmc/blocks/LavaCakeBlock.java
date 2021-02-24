@@ -1,6 +1,9 @@
 package einstein.jmc.blocks;
 
+import java.util.Random;
+
 import einstein.einsteins_library.blocks.CakeBlockBase;
+import einstein.jmc.init.ModConfigs.ModClientConfigs;
 import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -9,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
@@ -19,6 +23,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class LavaCakeBlock extends CakeBlockBase
 {
@@ -64,5 +70,17 @@ public class LavaCakeBlock extends CakeBlockBase
             entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0f);
         }
         super.onEntityWalk(worldIn, pos, entityIn);
+    }
+    
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    	if (ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
+        	if (rand.nextInt(10) == 0) {
+    	        double d0 = pos.getX() + rand.nextDouble();
+    	        double d1 = pos.getY() + 1.0D;
+    	        double d2 = pos.getZ() + rand.nextDouble();
+    	    	worldIn.addParticle(ParticleTypes.LAVA, d0, d1, d2, 0, 0, 0);
+        	}
+    	}
     }
 }
