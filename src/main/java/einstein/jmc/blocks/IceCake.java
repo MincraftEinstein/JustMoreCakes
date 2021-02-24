@@ -2,7 +2,7 @@ package einstein.jmc.blocks;
 
 import einstein.einsteins_library.blocks.CakeBlockBase;
 import einstein.jmc.effects.FreezingEffect;
-import einstein.jmc.init.ModConfigs;
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import einstein.jmc.init.ModPotions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -46,7 +46,7 @@ public class IceCake extends CakeBlockBase
         p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
         p_226911_4_.getFoodStats().addStats(2, 0.1f);
         p_226911_4_.extinguish();
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, ModConfigs.ICE_CAKE_NIGHT_VISION_DUR.get(), ModConfigs.ICE_CAKE_NIGHT_VISION_STRENGTH.get()));
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, ModServerConfigs.ICE_CAKE_NIGHT_VISION_DUR.get(), ModServerConfigs.ICE_CAKE_NIGHT_VISION_STRENGTH.get()));
         p_226911_4_.addPotionEffect(new EffectInstance(ModPotions.FREEZING_EFFECT.get()));
         FreezingEffect.freezeEntity(p_226911_4_);
         final int i = p_226911_3_.get(IceCake.BITES);

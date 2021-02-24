@@ -1,7 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.einsteins_library.blocks.CakeBlockBase;
-import einstein.jmc.init.ModConfigs;
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -43,9 +43,9 @@ public class GoldenAppleCakeBlock extends CakeBlockBase
         }
         p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
         p_226911_4_.getFoodStats().addStats(2, 0.1f);
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.REGENERATION, ModConfigs.GAPPLE_CAKE_REGEN_DUR.get(), ModConfigs.GAPPLE_CAKE_REGEN_STRENGTH.get()));
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.RESISTANCE, ModConfigs.GAPPLE_CAKE_RES_DUR.get(), ModConfigs.GAPPLE_CAKE_RES_STRENGTH.get()));
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.ABSORPTION, ModConfigs.GAPPLE_CAKE_ABSORPTION_DUR.get(), ModConfigs.GAPPLE_CAKE_ABSORPTION_STRENGTH.get()));
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.REGENERATION, ModServerConfigs.GAPPLE_CAKE_REGEN_DUR.get(), ModServerConfigs.GAPPLE_CAKE_REGEN_STRENGTH.get()));
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.RESISTANCE, ModServerConfigs.GAPPLE_CAKE_RES_DUR.get(), ModServerConfigs.GAPPLE_CAKE_RES_STRENGTH.get()));
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.ABSORPTION, ModServerConfigs.GAPPLE_CAKE_ABSORPTION_DUR.get(), ModServerConfigs.GAPPLE_CAKE_ABSORPTION_STRENGTH.get()));
         final int i = p_226911_3_.get(GoldenAppleCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(GoldenAppleCakeBlock.BITES, (i + 1)), 3);

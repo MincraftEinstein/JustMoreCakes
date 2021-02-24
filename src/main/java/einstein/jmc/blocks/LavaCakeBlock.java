@@ -1,7 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.einsteins_library.blocks.CakeBlockBase;
-import einstein.jmc.init.ModConfigs;
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -47,8 +47,8 @@ public class LavaCakeBlock extends CakeBlockBase
         }
         p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
         p_226911_4_.getFoodStats().addStats(2, 0.1f);
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.REGENERATION, ModConfigs.LAVA_CAKE_REGEN_DUR.get(), ModConfigs.LAVA_CAKE_REGEN_STRENGTH.get()));
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.STRENGTH, ModConfigs.LAVA_CAKE_STRENGTH_DUR.get(), ModConfigs.LAVA_CAKE_STRENGTH_STRENGTH.get()));
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.REGENERATION, ModServerConfigs.LAVA_CAKE_REGEN_DUR.get(), ModServerConfigs.LAVA_CAKE_REGEN_STRENGTH.get()));
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.STRENGTH, ModServerConfigs.LAVA_CAKE_STRENGTH_DUR.get(), ModServerConfigs.LAVA_CAKE_STRENGTH_STRENGTH.get()));
         final int i = p_226911_3_.get(LavaCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(LavaCakeBlock.BITES, (i + 1)), 3);

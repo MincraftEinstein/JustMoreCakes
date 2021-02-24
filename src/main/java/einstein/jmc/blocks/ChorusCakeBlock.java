@@ -2,7 +2,7 @@ package einstein.jmc.blocks;
 
 import einstein.einsteins_library.blocks.CakeBlockBase;
 import einstein.einsteins_library.util.Actions;
-import einstein.jmc.init.ModConfigs;
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -44,8 +44,8 @@ public class ChorusCakeBlock extends CakeBlockBase
         }
         p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
         p_226911_4_.getFoodStats().addStats(2, 0.1f);
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.LEVITATION, ModConfigs.CHORUS_CAKE_LEVITATION_DUR.get(), ModConfigs.CHORUS_CAKE_LEVITATION_STRENGTH.get()));
-        Actions.teleportRandomly(p_226911_4_, ModConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get());
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.LEVITATION, ModServerConfigs.CHORUS_CAKE_LEVITATION_DUR.get(), ModServerConfigs.CHORUS_CAKE_LEVITATION_STRENGTH.get()));
+        Actions.teleportRandomly(p_226911_4_, ModServerConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get());
         final int i = p_226911_3_.get(ChorusCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(ChorusCakeBlock.BITES, (i + 1)), 3);

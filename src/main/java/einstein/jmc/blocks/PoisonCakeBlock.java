@@ -1,7 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.einsteins_library.blocks.CakeBlockBase;
-import einstein.jmc.init.ModConfigs;
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -43,7 +43,7 @@ public class PoisonCakeBlock extends CakeBlockBase
         }
         p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
         p_226911_4_.getFoodStats().addStats(2, 0.1f);
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.POISON, ModConfigs.POISON_CAKE_POISON_DURATION.get(), ModConfigs.POISON_CAKE_POISON_STRENGTH.get()));
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.POISON, ModServerConfigs.POISON_CAKE_POISON_DURATION.get(), ModServerConfigs.POISON_CAKE_POISON_STRENGTH.get()));
         final int i = p_226911_3_.get(PoisonCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(PoisonCakeBlock.BITES, (i + 1)), 3);

@@ -4,7 +4,8 @@ import java.util.Random;
 
 import einstein.einsteins_library.blocks.CakeBlockBase;
 import einstein.einsteins_library.util.Actions;
-import einstein.jmc.init.ModConfigs;
+import einstein.jmc.init.ModConfigs.ModClientConfigs;
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -47,7 +48,7 @@ public class EnderCakeBlock extends CakeBlockBase
         }
         p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
         p_226911_4_.getFoodStats().addStats(2, 0.1f);
-        Actions.teleportRandomly(p_226911_4_, ModConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
+        Actions.teleportRandomly(p_226911_4_, ModServerConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
         final int i = p_226911_3_.get(EnderCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(EnderCakeBlock.BITES, (i + 1)), 3);
@@ -60,16 +61,18 @@ public class EnderCakeBlock extends CakeBlockBase
     
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-       for(int i = 0; i < 3; ++i) {
-          int j = rand.nextInt(2) * 2 - 1;
-          int k = rand.nextInt(2) * 2 - 1;
-          double d0 = pos.getX() + 0.5D + 0.25D * j;
-          double d1 = (pos.getY() + rand.nextFloat());
-          double d2 = pos.getZ() + 0.5D + 0.25D * k;
-          double d3 = (rand.nextFloat() * j);
-          double d4 = (rand.nextFloat() - 0.5D) * 0.125D;
-          double d5 = (rand.nextFloat() * k);
-          worldIn.addParticle(ParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
-       }
+    	if(ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
+	       for(int i = 0; i < 3; ++i) {
+	           int j = rand.nextInt(2) * 2 - 1;
+	           int k = rand.nextInt(2) * 2 - 1;
+	           double d0 = pos.getX() + 0.5D + 0.25D * j;
+	           double d1 = (pos.getY() + rand.nextFloat());
+	           double d2 = pos.getZ() + 0.5D + 0.25D * k;
+	           double d3 = (rand.nextFloat() * j);
+	           double d4 = (rand.nextFloat() - 0.5D) * 0.125D;
+	           double d5 = (rand.nextFloat() * k);
+	           worldIn.addParticle(ParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
+	        }
+    	}
     }
 }

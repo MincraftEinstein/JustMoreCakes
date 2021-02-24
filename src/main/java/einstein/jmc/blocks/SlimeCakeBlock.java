@@ -1,7 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.einsteins_library.blocks.CakeBlockBase;
-import einstein.jmc.init.ModConfigs;
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import einstein.jmc.init.ModPotions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -48,9 +48,9 @@ public class SlimeCakeBlock extends CakeBlockBase
         }
         p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
         p_226911_4_.getFoodStats().addStats(2, 0.1f);
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, ModConfigs.SLIME_CAKE_JUMP_BOOST_DUR.get(), ModConfigs.SLIME_CAKE_JUMP_BOOST_STRENGTH.get()));
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.RESISTANCE, ModConfigs.SLIME_CAKE_RES_DUR.get(), ModConfigs.SLIME_CAKE_RES_STRENGTH.get()));
-        p_226911_4_.addPotionEffect(new EffectInstance(ModPotions.BOUNCING_EFFECT.get(), ModConfigs.SLIME_CAKE_BOUNCING_DUR.get(), ModConfigs.SLIME_CAKE_BOUNCING_STRENGTH.get()));
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, ModServerConfigs.SLIME_CAKE_JUMP_BOOST_DUR.get(), ModServerConfigs.SLIME_CAKE_JUMP_BOOST_STRENGTH.get()));
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.RESISTANCE, ModServerConfigs.SLIME_CAKE_RES_DUR.get(), ModServerConfigs.SLIME_CAKE_RES_STRENGTH.get()));
+        p_226911_4_.addPotionEffect(new EffectInstance(ModPotions.BOUNCING_EFFECT.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_DUR.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_STRENGTH.get()));
         final int i = p_226911_3_.get(SlimeCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(SlimeCakeBlock.BITES, (i + 1)), 3);

@@ -1,7 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.einsteins_library.blocks.CakeBlockBase;
-import einstein.jmc.init.ModConfigs;
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -43,7 +43,7 @@ public class BeetrootCakeBlock extends CakeBlockBase
         }
         player.addStat(Stats.EAT_CAKE_SLICE);
         player.getFoodStats().addStats(2, 0.1f);
-        player.addPotionEffect(new EffectInstance(Effects.REGENERATION, ModConfigs.BEETROOT_CAKE_REGEN_DUR.get(), ModConfigs.BEETROOT_CAKE_REGEN_STRENGTH.get()));
+        player.addPotionEffect(new EffectInstance(Effects.REGENERATION, ModServerConfigs.BEETROOT_CAKE_REGEN_DUR.get(), ModServerConfigs.BEETROOT_CAKE_REGEN_STRENGTH.get()));
         final int i = state.get(BeetrootCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             world.setBlockState(pos, state.with(BeetrootCakeBlock.BITES, (i + 1)), 3);

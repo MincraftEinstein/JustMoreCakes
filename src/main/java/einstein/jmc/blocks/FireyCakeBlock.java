@@ -1,7 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.einsteins_library.blocks.CakeBlockBase;
-import einstein.jmc.init.ModConfigs;
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -43,8 +43,8 @@ public class FireyCakeBlock extends CakeBlockBase
         }
         p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
         p_226911_4_.getFoodStats().addStats(2, 0.1f);
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, ModConfigs.FIREY_CAKE_FIRE_RES_DUR.get(), ModConfigs.FIREY_CAKE_FIRE_RES_STRENGTH.get()));
-        p_226911_4_.setFire(ModConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
+        p_226911_4_.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, ModServerConfigs.FIREY_CAKE_FIRE_RES_DUR.get(), ModServerConfigs.FIREY_CAKE_FIRE_RES_STRENGTH.get()));
+        p_226911_4_.setFire(ModServerConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
         final int i = p_226911_3_.get(FireyCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(FireyCakeBlock.BITES, (i + 1)), 3);
