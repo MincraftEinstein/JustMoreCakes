@@ -1,5 +1,6 @@
 package einstein.jmc.blocks;
 
+import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import einstein.jmc.tileentity.TNTCakeTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -69,8 +70,7 @@ public class TNTCakeBlock extends ContainerBlock
         p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
         p_226911_4_.getFoodStats().addStats(2, 0.1f);
         World world = p_226911_4_.getEntityWorld();
-        TileEntity tileentity = world.getTileEntity(p_226911_2_);
-        ((TNTCakeTileEntity)tileentity).explode();
+        explode(world, p_226911_2_);
         final int i = p_226911_3_.get(TNTCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(TNTCakeBlock.BITES, (i + 1)), 3);
@@ -115,5 +115,27 @@ public class TNTCakeBlock extends ContainerBlock
 	public TileEntity createNewTileEntity(IBlockReader worldIn) {
 		return new TNTCakeTileEntity();
 	}
-    
+
+	@Override
+	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+		if(worldIn.isBlockPowered(pos)) {
+			if(ModServerConfigs.EFFECTED_BY_REDSTONE.get()) {
+				explode(worldIn, pos);	
+			}
+		}
+	}
+	
+	@Override
+	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+		if(worldIn.isBlockPowered(pos)) {
+			if(ModServerConfigs.EFFECTED_BY_REDSTONE.get()) {
+				explode(worldIn, pos);
+			}
+		}
+	}
+	
+	private void explode(World world, BlockPos pos) {
+        TileEntity tileentity = world.getTileEntity(pos);
+        ((TNTCakeTileEntity)tileentity).explode();
+	}
 }

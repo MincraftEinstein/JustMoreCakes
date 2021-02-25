@@ -25,6 +25,9 @@ public class ModConfigs {
 		public static final ForgeConfigSpec.IntValue POISON_CAKE_POISON_DURATION = registerPotionDur("The duration of the poison potion effect", "poisonCakePoisonDur", 300);
 		public static final ForgeConfigSpec.IntValue POISON_CAKE_POISON_STRENGTH = registerPotionDur("The strength of the poison potion effect", "poisonCakePoisonStrength", 1);
 
+		// TNT Cake
+		public static final ForgeConfigSpec.BooleanValue EFFECTED_BY_REDSTONE = SERVER_BUILDER.comment("Whether the TNT cake will explode when powered by Redstone").define("effectedByRedstone", false);
+		
 		// Golden Apple Cake
 		public static final ForgeConfigSpec.IntValue GAPPLE_CAKE_REGEN_DUR = registerPotionDur("The duration of the regeneration potion effect", "goldenAppleCakeRegenDur", 200);
 		public static final ForgeConfigSpec.IntValue GAPPLE_CAKE_REGEN_STRENGTH = registerPotionDur("The strength of the regeneration potion effect", "goldenAppleCakeRegenStrength", 1);
