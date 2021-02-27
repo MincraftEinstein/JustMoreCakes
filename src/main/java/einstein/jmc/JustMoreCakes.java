@@ -1,5 +1,9 @@
 package einstein.jmc;
 
+import java.util.function.Function;
+
+import javax.annotation.Nullable;
+
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModConfigs;
 import einstein.jmc.init.ModPotions;
@@ -11,16 +15,23 @@ import einstein.jmc.world.gen.village.RegisterPlainsBakery;
 import einstein.jmc.world.gen.village.RegisterSavannaBakery;
 import einstein.jmc.world.gen.village.RegisterSnowyBakery;
 import einstein.jmc.world.gen.village.RegisterTaigaBakery;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent.MissingMappings;
+import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
 @SuppressWarnings({"deprecation"})
 @Mod(JustMoreCakes.MODID)
@@ -65,6 +76,44 @@ public class JustMoreCakes
     		ModPotions.registerPotionRecipes();
     	});
     }
+    
+	@Nullable
+	private static Block missingBlock(String name) {
+		switch (name) {
+		case "cheese_cake":
+			return ModBlocks.CHEESECAKE;
+		}
+		return null;
+	}
+
+	@SubscribeEvent
+	void missingItems(final MissingMappings<Item> event) {
+		handleMissingMappings(event, MODID, name -> {
+			switch (name) {
+			case "cheese_cake":
+				return ModBlocks.CHEESECAKE.asItem();
+			}
+			IItemProvider block = missingBlock(name);
+			return block == null ? null : block.asItem();
+		});
+	}
+
+	@SubscribeEvent
+	void missingBlocks(final MissingMappings<Block> event) {
+		handleMissingMappings(event, MODID, JustMoreCakes::missingBlock);
+	}
+
+	public static <T extends IForgeRegistryEntry<T>> void handleMissingMappings(MissingMappings<T> event, String modID, Function<String, T> handler) {
+		for (Mapping<T> mapping : event.getAllMappings()) {
+			if (modID.equals(mapping.key.getNamespace())) {
+				@Nullable
+				T value = handler.apply(mapping.key.getPath());
+				if (value != null) {
+					mapping.remap(value);
+				}
+			}
+		}
+	}
     
     public static class JMCItemGroup extends ItemGroup
     {

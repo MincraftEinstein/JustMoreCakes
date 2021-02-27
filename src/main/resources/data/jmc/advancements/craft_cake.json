@@ -152,12 +152,12 @@
                 ]
             }
         },
-        "cheese_cake": {
+        "cheesecake": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "jmc:cheese_cake"
+                        "item": "jmc:cheesecake"
                     }
                 ]
             }
@@ -359,7 +359,7 @@
             "firey_cake",
             "redstone_cake",
             "ender_cake",
-            "cheese_cake",
+            "cheesecake",
             "triple_decker_cake",
             "slime_cake",
             "birthday_cake",

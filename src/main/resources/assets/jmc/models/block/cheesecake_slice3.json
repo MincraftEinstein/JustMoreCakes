@@ -1,19 +1,20 @@
 {
     "textures": {
-        "particle": "jmc:blocks/cheese_cake_side",
-        "bottom": "jmc:blocks/cheese_cake_bottom",
-        "top": "jmc:blocks/cheese_cake_top",
-        "side": "jmc:blocks/cheese_cake_side"
+        "particle": "jmc:blocks/cheesecake_side",
+        "bottom": "jmc:blocks/cheesecake_bottom",
+        "top": "jmc:blocks/cheesecake_top",
+        "side": "jmc:blocks/cheesecake_side",
+        "inside": "jmc:blocks/cheesecake_inner"
     },
     "elements": [
-        {   "from": [ 1, 0, 1 ],
+        {   "from": [ 7, 0, 1 ],
             "to": [ 15, 8, 15 ],
             "faces": {
                 "down":  { "texture": "#bottom", "cullface": "down" },
                 "up":    { "texture": "#top" },
                 "north": { "texture": "#side" },
                 "south": { "texture": "#side" },
-                "west":  { "texture": "#side" },
+                "west":  { "texture": "#inside" },
                 "east":  { "texture": "#side" }
             }
         }
