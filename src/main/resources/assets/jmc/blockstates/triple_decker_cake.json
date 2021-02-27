@@ -1,20 +1,20 @@
 {
     "variants": {
-        "bites=0": { "model": "jmc:block/triple_decker_cake/uneaten" },
-        "bites=1": { "model": "jmc:block/triple_decker_cake/slice1" },
-        "bites=2": { "model": "jmc:block/triple_decker_cake/slice2" },
-        "bites=3": { "model": "jmc:block/triple_decker_cake/slice3" },
-        "bites=4": { "model": "jmc:block/triple_decker_cake/slice4" },
-        "bites=5": { "model": "jmc:block/triple_decker_cake/slice5" },
-        "bites=6": { "model": "jmc:block/triple_decker_cake/slice6" },
-        "bites=7": { "model": "jmc:block/triple_decker_cake/slice7" },
-        "bites=8": { "model": "jmc:block/triple_decker_cake/slice8" },
-        "bites=9": { "model": "jmc:block/triple_decker_cake/slice9" },
-        "bites=10": { "model": "jmc:block/triple_decker_cake/slice10" },
-        "bites=11": { "model": "jmc:block/triple_decker_cake/slice11" },
-        "bites=12": { "model": "jmc:block/triple_decker_cake/slice12" },
-        "bites=13": { "model": "jmc:block/triple_decker_cake/slice13" },
-        "bites=14": { "model": "jmc:block/triple_decker_cake/slice14" },
-        "bites=15": { "model": "jmc:block/triple_decker_cake/slice15" }
+        "bites=0": { "model": "jmc:block/triple_decker_cake" },
+        "bites=1": { "model": "jmc:block/triple_decker_cake_slice1" },
+        "bites=2": { "model": "jmc:block/triple_decker_cake_slice2" },
+        "bites=3": { "model": "jmc:block/triple_decker_cake_slice3" },
+        "bites=4": { "model": "jmc:block/triple_decker_cake_slice4" },
+        "bites=5": { "model": "jmc:block/triple_decker_cake_slice5" },
+        "bites=6": { "model": "jmc:block/triple_decker_cake_slice6" },
+        "bites=7": { "model": "jmc:block/triple_decker_cake_slice7" },
+        "bites=8": { "model": "jmc:block/triple_decker_cake_slice8" },
+        "bites=9": { "model": "jmc:block/triple_decker_cake_slice9" },
+        "bites=10": { "model": "jmc:block/triple_decker_cake_slice10" },
+        "bites=11": { "model": "jmc:block/triple_decker_cake_slice11" },
+        "bites=12": { "model": "jmc:block/triple_decker_cake_slice12" },
+        "bites=13": { "model": "jmc:block/triple_decker_cake_slice13" },
+        "bites=14": { "model": "jmc:block/triple_decker_cake_slice14" },
+        "bites=15": { "model": "jmc:block/triple_decker_cake_slice15" }
     }
 }

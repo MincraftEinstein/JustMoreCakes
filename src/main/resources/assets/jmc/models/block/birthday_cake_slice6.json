@@ -1,0 +1,23 @@
+{
+    "textures": {
+        "particle": "jmc:blocks/birthday_cake_side",
+        "bottom": "jmc:blocks/birthday_cake_bottom",
+        "top": "jmc:blocks/birthday_cake_top",
+        "side": "jmc:blocks/birthday_cake_side",
+        "inside": "jmc:blocks/birthday_cake_inner"
+    },
+    "elements": [
+        {
+            "from": [ 1, 0, 1 ],
+            "to": [ 8, 8, 8 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#inside" },
+                "west":  { "texture": "#side" },
+                "east": { "texture": "#inside" }
+            }
+        }
+    ]
+}

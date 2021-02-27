@@ -1,0 +1,24 @@
+{
+    "textures": {
+    	"particle": "jmc:blocks/triple_decker_cake_lower_side",
+        "bottom": "jmc:blocks/triple_decker_cake_bottom",
+        "lower_side": "jmc:blocks/triple_decker_cake_lower_side",
+        "lower_top": "jmc:blocks/triple_decker_cake_lower_top",
+        "lower_inner": "jmc:blocks/triple_decker_cake_lower_inner"
+    },
+    "elements": [
+        {
+            "name": "lower_cake",
+            "from": [ 7, 0, 1 ], 
+            "to": [ 15, 8, 15 ], 
+            "faces": {
+                "north": { "texture": "#lower_side", "uv": [ 7, 8, 15, 16 ] },
+                "east": { "texture": "#lower_side", "uv": [ 1, 8, 15, 16 ] },
+                "south": { "texture": "#lower_side", "uv": [ 7, 8, 15, 16 ] },
+                "west": { "texture": "#lower_inner", "uv": [ 1, 8, 15, 16 ] },
+                "up": { "texture": "#lower_top", "uv": [ 7, 1, 15, 15 ] },
+                "down": { "texture": "#bottom", "uv": [ 1, 1, 15, 15 ] }
+            }
+        }
+    ]
+}

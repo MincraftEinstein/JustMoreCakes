@@ -1,0 +1,22 @@
+{
+    "textures": {
+        "particle": "jmc:blocks/pumpkin_cake_side",
+        "bottom": "jmc:blocks/pumpkin_cake_bottom",
+        "top": "jmc:blocks/pumpkin_cake_top",
+        "side": "jmc:blocks/pumpkin_cake_side",
+        "inside": "jmc:blocks/pumpkin_cake_inner"
+    },
+    "elements": [
+        {   "from": [ 3, 0, 1 ],
+            "to": [ 15, 8, 15 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#inside" },
+                "east":  { "texture": "#side" }
+            }
+        }
+    ]
+}
