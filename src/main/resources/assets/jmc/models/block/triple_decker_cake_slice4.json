@@ -41,7 +41,7 @@
             "from": [ 11, 15, 3 ], 
             "to": [ 13, 21, 13 ], 
             "faces": {
-                "north": { "texture": "#top_side", "uv": [ 11, 10, 13, 16 ] },
+                "north": { "texture": "#top_side", "uv": [ 3, 10, 5, 16 ] },
                 "east": { "texture": "#top_side", "uv": [ 3, 10, 13, 16 ] },
                 "south": { "texture": "#top_side", "uv": [ 11, 10, 13, 16 ] },
                 "west": { "texture": "#top_inner", "uv": [ 3, 10, 13, 16 ] },

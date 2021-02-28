@@ -1,9 +1,8 @@
 {
-	"credit": "Made with Blockbench",
 	"textures": {
+		"particle": "jmc:blocks/triple_decker_cake_lower_side",
 		"middle_side": "jmc:blocks/triple_decker_cake_middle_side",
 		"bottom": "jmc:blocks/triple_decker_cake_bottom",
-		"particle": "jmc:blocks/triple_decker_cake_lower_side",
 		"lower_side": "jmc:blocks/triple_decker_cake_lower_side",
 		"top": "jmc:blocks/triple_decker_cake_top",
 		"lower_top": "jmc:blocks/triple_decker_cake_lower_top",
@@ -13,39 +12,39 @@
 	"elements": [
 		{
 			"name": "lower_cake",
-			"from": [1, 0, 1],
-			"to": [15, 8, 15],
+			"from": [ 1, 0, 1 ],
+			"to": [ 15, 8, 15 ],
 			"faces": {
-				"north": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
-				"east": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
-				"south": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
-				"west": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
-				"up": {"uv": [1, 1, 15, 15], "texture": "#lower_top"},
-				"down": {"uv": [1, 1, 15, 15], "texture": "#bottom"}
+				"north": { "texture": "#lower_side", "uv": [ 1, 8, 15, 16 ] },
+				"east": { "texture": "#lower_side", "uv": [ 1, 8, 15, 16 ] },
+				"south": { "texture": "#lower_side", "uv": [ 1, 8, 15, 16 ] },
+				"west": { "texture": "#lower_side", "uv": [ 1, 8, 15, 16 ] },
+				"up": { "texture": "#lower_top", "uv": [ 1, 1, 15, 15 ] },
+				"down": { "texture": "#bottom", "uv": [ 1, 1, 15, 15 ] }
 			}
 		},
 		{
 			"name": "middle_cake",
-			"from": [2, 8, 2],
-			"to": [14, 15, 14],
+			"from": [ 2, 8, 2 ],
+			"to": [ 14, 15, 14 ],
 			"faces": {
-				"north": {"uv": [2, 9, 14, 16], "texture": "#middle_side"},
-				"east": {"uv": [2, 9, 14, 16], "texture": "#middle_side"},
-				"south": {"uv": [2, 9, 14, 16], "texture": "#middle_side"},
-				"west": {"uv": [2, 9, 14, 16], "texture": "#middle_side"},
-				"up": {"uv": [2, 2, 14, 14], "texture": "#middle_top"}
+				"north": { "texture": "#middle_side", "uv": [ 2, 9, 14, 16 ] },
+				"east": { "texture": "#middle_side", "uv": [ 2, 9, 14, 16 ] },
+				"south": { "texture": "#middle_side", "uv": [ 2, 9, 14, 16 ] },
+				"west": { "texture": "#middle_side", "uv": [ 2, 9, 14, 16 ] },
+				"up": { "texture": "#middle_top", "uv": [ 2, 2, 14, 14 ] }
 			}
 		},
 		{
 			"name": "top_cake",
-			"from": [3, 15, 3],
-			"to": [13, 21, 13],
+			"from": [ 3, 15, 3 ],
+			"to": [ 13, 21, 13 ],
 			"faces": {
-				"north": {"uv": [3, 10, 13, 16], "texture": "#top_side"},
-				"east": {"uv": [3, 10, 13, 16], "texture": "#top_side"},
-				"south": {"uv": [3, 10, 13, 16], "texture": "#top_side"},
-				"west": {"uv": [3, 10, 13, 16], "texture": "#top_side"},
-				"up": {"uv": [3, 3, 13, 13], "texture": "#top"}
+				"north": { "texture": "#top_side", "uv": [ 3, 10, 13, 16 ] },
+				"east": { "texture": "#top_side", "uv": [ 3, 10, 13, 16 ] },
+				"south": { "texture": "#top_side", "uv": [ 3, 10, 13, 16 ] },
+				"west": { "texture": "#top_side", "uv": [ 3, 10, 13, 16 ] },
+				"up": { "texture": "#top", "uv": [ 3, 3, 13, 13 ] }
 			}
 		}
 	]
