@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -26,22 +27,37 @@ public class TripleDeckerCakeBlock extends Block
 {
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 15);
     protected static final VoxelShape[] SHAPES = new VoxelShape[] { 
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 21.0, 15.0), //0
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 21.0, 15.0), //1
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 21.0, 15.0), //2
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 21.0, 15.0), //3
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 21.0, 15.0), //4
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0), //5
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0), //6
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0), //7
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0), //8
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0), //9
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0), //10
-    		Block.makeCuboidShape(4.0, 0.0, 1.0, 15.0, 8.0, 15.0), //11
-    		Block.makeCuboidShape(5.0, 0.0, 1.0, 15.0, 8.0, 15.0), //12
-    		Block.makeCuboidShape(7.0, 0.0, 1.0, 15.0, 8.0, 15.0), //13
-    		Block.makeCuboidShape(9.0, 0.0, 1.0, 15.0, 8.0, 15.0), //14
-    		Block.makeCuboidShape(11.0, 0.0, 1.0, 15.0, 8.0, 15.0) //15
+    		VoxelShapes.or(Block.makeCuboidShape(3, 15, 3, 13, 21, 13), //0 uneaten
+    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15),
+    				Block.makeCuboidShape(2, 8, 2, 14, 15, 14)),
+    		VoxelShapes.or(Block.makeCuboidShape(5, 15, 3, 13, 21, 13), //1
+    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15),
+					Block.makeCuboidShape(2, 8, 2, 14, 15, 14)),
+    		VoxelShapes.or(Block.makeCuboidShape(7, 15, 3, 13, 21, 13), //2
+    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15),
+					Block.makeCuboidShape(2, 8, 2, 14, 15, 14)),
+    		VoxelShapes.or(Block.makeCuboidShape(9, 15, 3, 13, 21, 13), //3
+    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15),
+    				Block.makeCuboidShape(2, 8, 2, 14, 15, 14)),
+    		VoxelShapes.or(Block.makeCuboidShape(11, 15, 3, 13, 21, 13), //4
+					Block.makeCuboidShape(1, 0, 1, 15, 8, 15),
+					Block.makeCuboidShape(2, 8, 2, 14, 15, 14)),
+    		VoxelShapes.or(Block.makeCuboidShape(2, 8, 2, 14, 15, 14), //5
+    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15)),
+    		VoxelShapes.or(Block.makeCuboidShape(4, 8, 2, 14, 15, 14), //6
+    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15)),
+    		VoxelShapes.or(Block.makeCuboidShape(6, 8, 2, 14, 15, 14), //7
+    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15)),
+    		VoxelShapes.or(Block.makeCuboidShape(8, 8, 2, 14, 15, 14), //8
+    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15)),
+    		VoxelShapes.or(Block.makeCuboidShape(10, 8, 2, 14, 15, 14), //9
+    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15)),
+    		Block.makeCuboidShape(1, 0, 1, 15, 8, 15), //10
+    		Block.makeCuboidShape(4, 0, 1, 15, 8, 15), //11
+    		Block.makeCuboidShape(5, 0, 1, 15, 8, 15), //12
+    		Block.makeCuboidShape(7, 0, 1, 15, 8, 15), //13
+    		Block.makeCuboidShape(9, 0, 1, 15, 8, 15), //14
+    		Block.makeCuboidShape(11, 0, 1, 15, 8, 15) //15
     };
     
     public TripleDeckerCakeBlock(final Block.Properties properties) {

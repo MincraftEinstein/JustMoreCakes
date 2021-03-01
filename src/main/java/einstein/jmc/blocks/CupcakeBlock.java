@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -26,9 +27,18 @@ import net.minecraft.world.World;
 public class CupcakeBlock extends Block
 {
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 1);
-    protected static final VoxelShape[] SHAPES = new VoxelShape[] { 
-    		Block.makeCuboidShape(5.0, 0.0, 5.0, 11.0, 6.0, 11.0), 
-    		Block.makeCuboidShape(8.0, 0.0, 5.0, 11.0, 6.0, 11.0) 
+    protected static final VoxelShape[] SHAPES = new VoxelShape[] {
+    		VoxelShapes.or(Block.makeCuboidShape(7, 5, 7, 9, 6, 9), //0 uneaten
+    				Block.makeCuboidShape(6, 0, 6, 10, 5, 10),
+    				Block.makeCuboidShape(6, 3, 5, 10, 4, 6),
+    				Block.makeCuboidShape(6, 3, 10, 10, 4, 11),
+    				Block.makeCuboidShape(10, 3, 6, 11, 4, 10),
+    				Block.makeCuboidShape(5, 3, 6, 6, 4, 10)),
+    		VoxelShapes.or(Block.makeCuboidShape(8, 5, 7, 9, 6, 9), //1
+    				Block.makeCuboidShape(8, 0, 6, 10, 5, 10),
+    				Block.makeCuboidShape(8, 3, 5, 10, 4, 6),
+    				Block.makeCuboidShape(8, 3, 10, 10, 4, 11),
+    				Block.makeCuboidShape(10, 3, 6, 11, 4, 10))
     };
     
     public CupcakeBlock(final Block.Properties properties) {

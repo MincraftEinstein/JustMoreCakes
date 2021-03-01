@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -31,15 +32,42 @@ public class BirthdayCakeBlock extends Block
 {
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 8);
     protected static final VoxelShape[] SHAPES = new VoxelShape[] { 
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0), 
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0), 
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0), 
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0), 
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0), 
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 8.0, 8.0, 15.0), 
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 8.0, 8.0, 15.0), 
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 8.0, 8.0, 8.0), 
-    		Block.makeCuboidShape(1.0, 0.0, 1.0, 8.0, 8.0, 8.0) 
+    		Block.makeCuboidShape(1, 0, 1, 15, 8, 15), //0 uneaten
+    		Block.makeCuboidShape(1, 0, 1, 15, 8, 15), //1
+    		VoxelShapes.or(Block.makeCuboidShape(14, 0, 1, 15, 8, 2), //2
+					Block.makeCuboidShape(1, 0, 1, 8, 8, 15),
+					Block.makeCuboidShape(8, 0, 7, 15, 8, 15),
+					Block.makeCuboidShape(11, 0, 4, 15, 8, 7),
+					Block.makeCuboidShape(9, 0, 6, 11, 8, 7),
+					Block.makeCuboidShape(13, 0, 2, 15, 8, 4),
+					Block.makeCuboidShape(10, 0, 5, 11, 8, 6),
+					Block.makeCuboidShape(12, 0, 3, 13, 8, 4)),
+    		VoxelShapes.or(Block.makeCuboidShape(1, 0, 1, 8, 8, 15), //3
+    				Block.makeCuboidShape(8, 0, 8, 15, 8, 15)),
+    		VoxelShapes.or(Block.makeCuboidShape(14, 0, 14, 15, 8, 15), //4
+					Block.makeCuboidShape(1, 0, 1, 8, 8, 15),
+					Block.makeCuboidShape(8, 0, 11, 12, 8, 15),
+					Block.makeCuboidShape(12, 0, 13, 14, 8, 15),
+					Block.makeCuboidShape(8, 0, 9, 10, 8, 11),
+					Block.makeCuboidShape(8, 0, 8, 9, 8, 9),
+					Block.makeCuboidShape(10, 0, 10, 11, 8, 11),
+					Block.makeCuboidShape(12, 0, 12, 13, 8, 13)),
+    		Block.makeCuboidShape(1, 0, 1, 8, 8, 15), //5
+    		VoxelShapes.or(Block.makeCuboidShape(5, 0, 10, 6, 8, 11), //6
+					Block.makeCuboidShape(1, 0, 1, 8, 8, 9),
+					Block.makeCuboidShape(1, 0, 9, 5, 8, 12),
+					Block.makeCuboidShape(1, 0, 12, 3, 8, 14),
+					Block.makeCuboidShape(5, 0, 9, 7, 8, 10),
+					Block.makeCuboidShape(1, 0, 14, 2, 8, 15),
+					Block.makeCuboidShape(3, 0, 12, 4, 8, 13)),
+    		Block.makeCuboidShape(1.0, 0.0, 1.0, 8.0, 8.0, 8.0), //7
+    		VoxelShapes.or(Block.makeCuboidShape(7, 0, 7, 8, 8, 8), //8
+					Block.makeCuboidShape(4, 0, 1, 8, 8, 5),
+					Block.makeCuboidShape(2, 0, 1, 4, 8, 3),
+					Block.makeCuboidShape(6, 0, 5, 8, 8, 7),
+					Block.makeCuboidShape(1, 0, 1, 2, 8, 2),
+					Block.makeCuboidShape(3, 0, 3, 4, 8, 4),
+					Block.makeCuboidShape(5, 0, 5, 6, 8, 6))
     };
     
     public BirthdayCakeBlock(final Block.Properties properties) {
