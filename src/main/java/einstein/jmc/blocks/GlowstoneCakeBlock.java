@@ -52,34 +52,34 @@ public class GlowstoneCakeBlock extends ContainerBlock
         return false;
     }
     
-    public ActionResultType onBlockActivated(final BlockState p_225533_1_, final World p_225533_2_, final BlockPos p_225533_3_, final PlayerEntity p_225533_4_, final Hand p_225533_5_, final BlockRayTraceResult p_225533_6_) {
-        if (p_225533_2_.isRemote) {
-            final ItemStack itemstack = p_225533_4_.getHeldItem(p_225533_5_);
-            if (this.func_226911_a_(p_225533_2_, p_225533_3_, p_225533_1_, p_225533_4_) == ActionResultType.SUCCESS) {
+    public ActionResultType onBlockActivated(final BlockState state, final World worldIn, final BlockPos pos, final PlayerEntity player, final Hand handIn, final BlockRayTraceResult hit) {
+        if (worldIn.isRemote) {
+            final ItemStack itemstack = player.getHeldItem(handIn);
+            if (this.eatSlice(worldIn, pos, state, player) == ActionResultType.SUCCESS) {
                 return ActionResultType.SUCCESS;
             }
             if (itemstack.isEmpty()) {
                 return ActionResultType.CONSUME;
             }
         }
-        return this.func_226911_a_(p_225533_2_, p_225533_3_, p_225533_1_, p_225533_4_);
+        return this.eatSlice(worldIn, pos, state, player);
     }
     
-    private ActionResultType func_226911_a_(final IWorld p_226911_1_, final BlockPos p_226911_2_, final BlockState p_226911_3_, final PlayerEntity p_226911_4_) {
-        if (!p_226911_4_.canEat(false)) {
+    private ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
+        if (!playerIn.canEat(false)) {
             return ActionResultType.PASS;
         }
-        p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
-        p_226911_4_.getFoodStats().addStats(2, 0.1F);
-        World world = p_226911_4_.getEntityWorld();
-        TileEntity tileentity = world.getTileEntity(p_226911_2_);
+        playerIn.addStat(Stats.EAT_CAKE_SLICE);
+        playerIn.getFoodStats().addStats(2, 0.1F);
+        World world = playerIn.getEntityWorld();
+        TileEntity tileentity = world.getTileEntity(pos);
         ((GlowstoneCakeTileEntity)tileentity).setGlowing();
-        final int i = p_226911_3_.get(GlowstoneCakeBlock.BITES);
+        final int i = state.get(GlowstoneCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
-            p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(GlowstoneCakeBlock.BITES, (i + 1)), 3);
+            worldIn.setBlockState(pos, state.with(GlowstoneCakeBlock.BITES, (i + 1)), 3);
         }
         else {
-            p_226911_1_.removeBlock(p_226911_2_, false);
+            worldIn.removeBlock(pos, false);
         }
         return ActionResultType.SUCCESS;
     }

@@ -31,42 +31,42 @@ public class EnderCakeBlock extends CakeBlockBase
     }
     
     @Override
-    public ActionResultType onBlockActivated(final BlockState p_225533_1_, final World p_225533_2_, final BlockPos p_225533_3_, final PlayerEntity p_225533_4_, final Hand p_225533_5_, final BlockRayTraceResult p_225533_6_) {
-        if (p_225533_2_.isRemote) {
-            final ItemStack itemstack = p_225533_4_.getHeldItem(p_225533_5_);
-            if (this.func_226911_a_(p_225533_2_, p_225533_3_, p_225533_1_, p_225533_4_) == ActionResultType.SUCCESS) {
+    public ActionResultType onBlockActivated(final BlockState state, final World worldIn, final BlockPos pos, final PlayerEntity player, final Hand handIn, final BlockRayTraceResult hit) {
+        if (worldIn.isRemote) {
+            final ItemStack itemstack = player.getHeldItem(handIn);
+            if (this.eatSlice(worldIn, pos, state, player) == ActionResultType.SUCCESS) {
                 return ActionResultType.SUCCESS;
             }
             if (itemstack.isEmpty()) {
                 return ActionResultType.CONSUME;
             }
         }
-        return this.func_226911_a_(p_225533_2_, p_225533_3_, p_225533_1_, p_225533_4_);
+        return this.eatSlice(worldIn, pos, state, player);
     }
     
-    private ActionResultType func_226911_a_(final IWorld p_226911_1_, final BlockPos p_226911_2_, final BlockState p_226911_3_, final PlayerEntity p_226911_4_) {
-    	final World world = p_226911_4_.world;
+    private ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
+    	final World world = playerIn.world;
     	final Random rand = new Random();
-        if (!p_226911_4_.canEat(false)) {
+        if (!playerIn.canEat(false)) {
             return ActionResultType.PASS;
         }
-        p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
-        p_226911_4_.getFoodStats().addStats(2, 0.1f);
-        Actions.teleportRandomly(p_226911_4_, ModServerConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
-        p_226911_4_.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        playerIn.addStat(Stats.EAT_CAKE_SLICE);
+        playerIn.getFoodStats().addStats(2, 0.1f);
+        Actions.teleportRandomly(playerIn, ModServerConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
+        playerIn.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
         if (world.isRemote) {
         	if (ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
                 for(float f = 0; f < 2.5F; ++f) {
-                    world.addParticle(ParticleTypes.PORTAL, p_226911_4_.getPosXRandom(0.5D), p_226911_4_.getPosYRandom() - 0.25D, p_226911_4_.getPosZRandom(0.5D), (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
+                    world.addParticle(ParticleTypes.PORTAL, playerIn.getPosXRandom(0.5D), playerIn.getPosYRandom() - 0.25D, playerIn.getPosZRandom(0.5D), (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
                  }	
         	}
         }
-        final int i = p_226911_3_.get(EnderCakeBlock.BITES);
+        final int i = state.get(EnderCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
-            p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(EnderCakeBlock.BITES, (i + 1)), 3);
+            worldIn.setBlockState(pos, state.with(EnderCakeBlock.BITES, (i + 1)), 3);
         }
         else {
-            p_226911_1_.removeBlock(p_226911_2_, false);
+            worldIn.removeBlock(pos, false);
         }
         return ActionResultType.SUCCESS;
     }

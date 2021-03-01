@@ -29,34 +29,34 @@ public class SlimeCakeBlock extends CakeBlockBase
     }
     
     @Override
-    public ActionResultType onBlockActivated(final BlockState p_225533_1_, final World p_225533_2_, final BlockPos p_225533_3_, final PlayerEntity p_225533_4_, final Hand p_225533_5_, final BlockRayTraceResult p_225533_6_) {
-        if (p_225533_2_.isRemote) {
-            final ItemStack itemstack = p_225533_4_.getHeldItem(p_225533_5_);
-            if (this.func_226911_a_(p_225533_2_, p_225533_3_, p_225533_1_, p_225533_4_) == ActionResultType.SUCCESS) {
+    public ActionResultType onBlockActivated(final BlockState state, final World worldIn, final BlockPos pos, final PlayerEntity player, final Hand handIn, final BlockRayTraceResult hit) {
+        if (worldIn.isRemote) {
+            final ItemStack itemstack = player.getHeldItem(handIn);
+            if (this.eatSlice(worldIn, pos, state, player) == ActionResultType.SUCCESS) {
                 return ActionResultType.SUCCESS;
             }
             if (itemstack.isEmpty()) {
                 return ActionResultType.CONSUME;
             }
         }
-        return this.func_226911_a_(p_225533_2_, p_225533_3_, p_225533_1_, p_225533_4_);
+        return this.eatSlice(worldIn, pos, state, player);
     }
     
-    private ActionResultType func_226911_a_(final IWorld p_226911_1_, final BlockPos p_226911_2_, final BlockState p_226911_3_, final PlayerEntity p_226911_4_) {
-        if (!p_226911_4_.canEat(false)) {
+    private ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
+        if (!playerIn.canEat(false)) {
             return ActionResultType.PASS;
         }
-        p_226911_4_.addStat(Stats.EAT_CAKE_SLICE);
-        p_226911_4_.getFoodStats().addStats(2, 0.1f);
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, ModServerConfigs.SLIME_CAKE_JUMP_BOOST_DUR.get(), ModServerConfigs.SLIME_CAKE_JUMP_BOOST_STRENGTH.get()));
-        p_226911_4_.addPotionEffect(new EffectInstance(Effects.RESISTANCE, ModServerConfigs.SLIME_CAKE_RES_DUR.get(), ModServerConfigs.SLIME_CAKE_RES_STRENGTH.get()));
-        p_226911_4_.addPotionEffect(new EffectInstance(ModPotions.BOUNCING_EFFECT.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_DUR.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_STRENGTH.get()));
-        final int i = p_226911_3_.get(SlimeCakeBlock.BITES);
+        playerIn.addStat(Stats.EAT_CAKE_SLICE);
+        playerIn.getFoodStats().addStats(2, 0.1f);
+        playerIn.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, ModServerConfigs.SLIME_CAKE_JUMP_BOOST_DUR.get(), ModServerConfigs.SLIME_CAKE_JUMP_BOOST_STRENGTH.get()));
+        playerIn.addPotionEffect(new EffectInstance(Effects.RESISTANCE, ModServerConfigs.SLIME_CAKE_RES_DUR.get(), ModServerConfigs.SLIME_CAKE_RES_STRENGTH.get()));
+        playerIn.addPotionEffect(new EffectInstance(ModPotions.BOUNCING_EFFECT.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_DUR.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_STRENGTH.get()));
+        final int i = state.get(SlimeCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
-            p_226911_1_.setBlockState(p_226911_2_, p_226911_3_.with(SlimeCakeBlock.BITES, (i + 1)), 3);
+            worldIn.setBlockState(pos, state.with(SlimeCakeBlock.BITES, (i + 1)), 3);
         }
         else {
-            p_226911_1_.removeBlock(p_226911_2_, false);
+            worldIn.removeBlock(pos, false);
         }
         return ActionResultType.SUCCESS;
     }
@@ -75,15 +75,15 @@ public class SlimeCakeBlock extends CakeBlockBase
             super.onLanded(worldIn, entityIn);
         }
         else {
-            this.func_226946_a_(entityIn);
+            this.bounceEntity(entityIn);
         }
     }
     
-    private void func_226946_a_(final Entity p_226946_1_) {
-        final Vector3d vec3d = p_226946_1_.getMotion();
-        if (vec3d.y < 0.0) {
-            final double d0 = (p_226946_1_ instanceof LivingEntity) ? 1.0 : 0.8;
-            p_226946_1_.setMotion(vec3d.x, -vec3d.y * d0, vec3d.z);
+    private void bounceEntity(final Entity entityIn) {
+        final Vector3d vector3d = entityIn.getMotion();
+        if (vector3d.y < 0.0) {
+            final double d0 = (entityIn instanceof LivingEntity) ? 1.0 : 0.8;
+            entityIn.setMotion(vector3d.x, -vector3d.y * d0, vector3d.z);
         }
     }
     
