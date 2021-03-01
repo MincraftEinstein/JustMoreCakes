@@ -15,6 +15,8 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -97,12 +99,17 @@ public class BirthdayCakeBlock extends Block
     }
     
     private ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
-        if (!playerIn.canEat(false)) {
-            return ActionResultType.PASS;
-        }
-        playerIn.addStat(Stats.EAT_CAKE_SLICE);
-        playerIn.getFoodStats().addStats(2, 0.1f);
-        final int i = state.get(BirthdayCakeBlock.BITES);
+    	final int i = state.get(BirthdayCakeBlock.BITES);
+    	if (i != 0) {
+            if (!playerIn.canEat(false)) {
+                return ActionResultType.PASS;
+            }
+            playerIn.addStat(Stats.EAT_CAKE_SLICE);
+            playerIn.getFoodStats().addStats(2, 0.1f);
+    	}
+    	else if (i == 0) {
+    		worldIn.playSound(playerIn, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.1F, 1.0F);
+    	}
         if (i < 8) { // Number must be same as BITES
             worldIn.setBlockState(pos, state.with(BirthdayCakeBlock.BITES, (i + 1)), 3);
         }
@@ -117,10 +124,10 @@ public class BirthdayCakeBlock extends Block
         final int i = stateIn.get(BirthdayCakeBlock.BITES);
         if (i < 1) {
             final double d0 = pos.getX() + 0.5;
-            final double d2 = pos.getY() + 0.95;
-            final double d3 = pos.getZ() + 0.5;
-            worldIn.addParticle(ParticleTypes.SMOKE, d0, d2, d3, 0, 0, 0);
-            worldIn.addParticle(ParticleTypes.FLAME, d0, d2, d3, 0, 0, 0);
+            final double d1 = pos.getY() + 0.95;
+            final double d2 = pos.getZ() + 0.5;
+            worldIn.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0, 0, 0);
+            worldIn.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0, 0, 0);
         }
     }
     
