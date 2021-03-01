@@ -21,6 +21,7 @@ import einstein.jmc.blocks.SlimeCakeBlock;
 import einstein.jmc.blocks.TNTCakeBlock;
 import einstein.jmc.blocks.TripleDeckerCakeBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -46,7 +47,14 @@ public class ModBlocks
     public static final Block TRIPLE_DECKER_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "triple_decker_cake", new TripleDeckerCakeBlock(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F)), JMCItemGroup.instance);
     public static final Block SLIME_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "slime_cake", new SlimeCakeBlock(Block.Properties.create(Material.CAKE).sound(SoundType.SLIME).hardnessAndResistance(0.5F)), JMCItemGroup.instance);
     public static final Block BIRTHDAY_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "birthday_cake", new BirthdayCakeBlock(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F).setLightLevel((state) -> {
-        return 9;
+    	final BlockState blockState = state;
+    	final int i = blockState.get(BirthdayCakeBlock.BITES);
+    	if (i < 1) {
+    		return 9;
+    	}
+    	else {
+    		return 0;
+    	}
     })), JMCItemGroup.instance);
     public static final Block BEETROOT_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "beetroot_cake", new BeetrootCakeBlock(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F)), JMCItemGroup.instance);
     public static final Block LAVA_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "lava_cake", new LavaCakeBlock(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F).setLightLevel((state) -> {
@@ -63,7 +71,7 @@ public class ModBlocks
     public static final Block SWEET_BERRY_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "sweet_berry_cake", new CakeBlockBase(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F)), JMCItemGroup.instance);
     public static final Block HONEY_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "honey_cake", new CakeBlockBase(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F)), JMCItemGroup.instance);
     public static final Block GLOWSTONE_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "glowstone_cake", new GlowstoneCakeBlock(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F).setLightLevel((state) -> {
-        return 12;
+    	return 12;
     })), JMCItemGroup.instance);
     public static final Block CRIMSON_FUNGUS_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "crimson_fungus_cake", new CakeBlockBase(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F)), JMCItemGroup.instance);
     public static final Block WARPED_FUNGUS_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "warped_fungus_cake", new CakeBlockBase(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F)), JMCItemGroup.instance);
