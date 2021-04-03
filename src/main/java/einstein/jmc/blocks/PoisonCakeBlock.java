@@ -43,7 +43,7 @@ public class PoisonCakeBlock extends CakeBlockBase
         }
         playerIn.addStat(Stats.EAT_CAKE_SLICE);
         playerIn.getFoodStats().addStats(2, 0.1f);
-        playerIn.addPotionEffect(new EffectInstance(Effects.POISON, ModServerConfigs.POISON_CAKE_POISON_DURATION.get(), ModServerConfigs.POISON_CAKE_POISON_STRENGTH.get()));
+        playerIn.addPotionEffect(new EffectInstance(Effects.POISON, ModServerConfigs.POISON_CAKE_POISON_DUR.get(), ModServerConfigs.POISON_CAKE_POISON_STRENGTH.get()));
         final int i = state.get(PoisonCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             worldIn.setBlockState(pos, state.with(PoisonCakeBlock.BITES, (i + 1)), 3);
