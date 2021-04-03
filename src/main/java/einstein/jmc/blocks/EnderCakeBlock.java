@@ -45,8 +45,6 @@ public class EnderCakeBlock extends CakeBlockBase
     }
     
     private ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
-    	final World world = playerIn.world;
-    	final Random rand = new Random();
         if (!playerIn.canEat(false)) {
             return ActionResultType.PASS;
         }
@@ -54,13 +52,6 @@ public class EnderCakeBlock extends CakeBlockBase
         playerIn.getFoodStats().addStats(2, 0.1F);
         Actions.teleportRandomly(playerIn, ModServerConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
         playerIn.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-        if (world.isRemote) {
-        	if (ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
-                for(float f = 0; f < 2.5F; ++f) {
-                    world.addParticle(ParticleTypes.PORTAL, playerIn.getPosXRandom(0.5D), playerIn.getPosYRandom() - 0.25D, playerIn.getPosZRandom(0.5D), (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
-                 }	
-        	}
-        }
         final int i = state.get(EnderCakeBlock.BITES);
         if (i < 6) { // Number must be same as BITES
             worldIn.setBlockState(pos, state.with(EnderCakeBlock.BITES, (i + 1)), 3);
