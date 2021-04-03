@@ -11,7 +11,7 @@ import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
 import net.minecraft.world.gen.feature.jigsaw.LegacySingleJigsawPiece;
-import net.minecraft.world.gen.feature.structure.PlainsVillagePools;
+import net.minecraft.world.gen.feature.structure.SavannaVillagePools;
 import net.minecraft.world.gen.feature.template.ProcessorLists;
 import net.minecraftforge.coremod.api.ASMAPI;
 
@@ -19,7 +19,7 @@ import net.minecraftforge.coremod.api.ASMAPI;
 public class RegisterSavannaBakery
 {
     public static void updatePools() {
-        PlainsVillagePools.init();
+        SavannaVillagePools.init();
         final JigsawPattern savannaPattern = WorldGenRegistries.JIGSAW_POOL.getOrDefault(new ResourceLocation("minecraft:village/savanna/houses"));
         if (savannaPattern == null) {
             return;

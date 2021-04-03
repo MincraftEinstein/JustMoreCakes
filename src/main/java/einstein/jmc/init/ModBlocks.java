@@ -8,9 +8,9 @@ import einstein.jmc.blocks.BeetrootCakeBlock;
 import einstein.jmc.blocks.BirthdayCakeBlock;
 import einstein.jmc.blocks.ChorusCakeBlock;
 import einstein.jmc.blocks.CupcakeBlock;
+import einstein.jmc.blocks.EncasingIceBlock;
 import einstein.jmc.blocks.EnderCakeBlock;
 import einstein.jmc.blocks.FireyCakeBlock;
-import einstein.jmc.blocks.EncasingIceBlock;
 import einstein.jmc.blocks.GlowstoneCakeBlock;
 import einstein.jmc.blocks.GoldenAppleCakeBlock;
 import einstein.jmc.blocks.IceCake;
@@ -25,9 +25,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-@Mod.EventBusSubscriber(modid = JustMoreCakes.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = JustMoreCakes.MODID, bus = Bus.MOD)
 public class ModBlocks
 {
     public static final Block CHOCOLATE_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "chocolate_cake", new CakeBlockBase(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F)), JMCItemGroup.instance);

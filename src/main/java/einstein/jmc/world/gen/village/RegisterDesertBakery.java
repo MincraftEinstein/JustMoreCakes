@@ -11,7 +11,7 @@ import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
 import net.minecraft.world.gen.feature.jigsaw.LegacySingleJigsawPiece;
-import net.minecraft.world.gen.feature.structure.PlainsVillagePools;
+import net.minecraft.world.gen.feature.structure.DesertVillagePools;
 import net.minecraft.world.gen.feature.template.ProcessorLists;
 import net.minecraftforge.coremod.api.ASMAPI;
 
@@ -19,7 +19,7 @@ import net.minecraftforge.coremod.api.ASMAPI;
 public class RegisterDesertBakery
 {
     public static void updatePools() {
-        PlainsVillagePools.init();
+        DesertVillagePools.init();
         final JigsawPattern desertPattern = WorldGenRegistries.JIGSAW_POOL.getOrDefault(new ResourceLocation("minecraft:village/desert/houses"));
         if (desertPattern == null) {
             return;

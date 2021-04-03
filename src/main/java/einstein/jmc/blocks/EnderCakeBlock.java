@@ -51,7 +51,7 @@ public class EnderCakeBlock extends CakeBlockBase
             return ActionResultType.PASS;
         }
         playerIn.addStat(Stats.EAT_CAKE_SLICE);
-        playerIn.getFoodStats().addStats(2, 0.1f);
+        playerIn.getFoodStats().addStats(2, 0.1F);
         Actions.teleportRandomly(playerIn, ModServerConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
         playerIn.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
         if (world.isRemote) {
@@ -73,7 +73,7 @@ public class EnderCakeBlock extends CakeBlockBase
     
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-    	if(ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
+    	if (ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
 	       for(int i = 0; i < 3; ++i) {
 	           int j = rand.nextInt(2) * 2 - 1;
 	           int k = rand.nextInt(2) * 2 - 1;

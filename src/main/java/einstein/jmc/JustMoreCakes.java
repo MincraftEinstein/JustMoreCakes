@@ -27,7 +27,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -35,7 +34,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 @SuppressWarnings({"deprecation"})
 @Mod(JustMoreCakes.MODID)
-@EventBusSubscriber(modid = JustMoreCakes.MODID)
 public class JustMoreCakes
 {
     public static final String MODID = "jmc";
@@ -114,7 +112,7 @@ public class JustMoreCakes
 			}
 		}
 	}
-    
+	
     public static class JMCItemGroup extends ItemGroup
     {
         public static final JMCItemGroup instance = new JMCItemGroup(ItemGroup.GROUPS.length, "jmc_tab");

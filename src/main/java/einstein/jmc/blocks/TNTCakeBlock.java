@@ -68,7 +68,7 @@ public class TNTCakeBlock extends ContainerBlock
             return ActionResultType.PASS;
         }
         playerIn.addStat(Stats.EAT_CAKE_SLICE);
-        playerIn.getFoodStats().addStats(2, 0.1f);
+        playerIn.getFoodStats().addStats(2, 0.1F);
         World world = playerIn.getEntityWorld();
         explode(world, pos);
         final int i = state.get(TNTCakeBlock.BITES);

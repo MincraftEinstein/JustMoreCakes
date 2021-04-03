@@ -23,7 +23,7 @@ public class ModVillagerTrades {
         final List<ITrade> journeyman = event.getTrades().get(3);
         final List<ITrade> expert = event.getTrades().get(4);
         final List<ITrade> master = event.getTrades().get(5);
-		if(event.getType() == ModVillagers.CAKE_BAKER.get()) {
+		if (event.getType() == ModVillagers.CAKE_BAKER.get()) {
 			novice.add(new VillagerTradesUtils.EmeraldsForItemsTrade(Items.SUGAR, 4, 1, 16, 2));
 			novice.add(new VillagerTradesUtils.ItemsForEmeraldsTrade(Items.EGG, 1, 1, 8, 2));
 			apprentice.add(new VillagerTradesUtils.EmeraldsForItemsTrade(Items.WHEAT, 16, 3, 3, 5));

@@ -40,7 +40,7 @@ public class EventHandler {
 	    BlockState state = world.getBlockState(pos);
 	    Block block = state.getBlock();
 		
-		if(ModList.get().isLoaded("cakechomps")) {
+		if (ModList.get().isLoaded("cakechomps")) {
 		    if (!(block instanceof CakeBlockBase || block instanceof BirthdayCakeBlock || block instanceof CupcakeBlock || block instanceof GlowstoneCakeBlock || block instanceof TripleDeckerCakeBlock) || !player.canEat(false)) {
 		        return;
 		      }
