@@ -1,53 +1,36 @@
 package einstein.jmc.blocks;
 
-import einstein.einsteins_library.blocks.CakeBlockBase;
-import einstein.jmc.init.ModConfigs.ModServerConfigs;
 import einstein.jmc.init.ModPotions;
+import einstein.jmc.init.ModServerConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CakeBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class SlimeCakeBlock extends CakeBlockBase
+public class SlimeCakeBlock extends CakeBlock
 {
     public SlimeCakeBlock(final Block.Properties properties) {
         super(properties);
-        this.setDefaultState((this.stateContainer.getBaseState()).with(SlimeCakeBlock.BITES, 0));
     }
     
     @Override
-    public ActionResultType onBlockActivated(final BlockState state, final World worldIn, final BlockPos pos, final PlayerEntity player, final Hand handIn, final BlockRayTraceResult hit) {
-        if (worldIn.isRemote) {
-            final ItemStack itemstack = player.getHeldItem(handIn);
-            if (this.eatSlice(worldIn, pos, state, player) == ActionResultType.SUCCESS) {
-                return ActionResultType.SUCCESS;
-            }
-            if (itemstack.isEmpty()) {
-                return ActionResultType.CONSUME;
-            }
-        }
-        return this.eatSlice(worldIn, pos, state, player);
-    }
-    
-    private ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
+    public ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
         if (!playerIn.canEat(false)) {
             return ActionResultType.PASS;
         }
         playerIn.addStat(Stats.EAT_CAKE_SLICE);
-        playerIn.getFoodStats().addStats(2, 0.1f);
+        playerIn.getFoodStats().addStats(2, 0.1F);
         playerIn.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, ModServerConfigs.SLIME_CAKE_JUMP_BOOST_DUR.get(), ModServerConfigs.SLIME_CAKE_JUMP_BOOST_STRENGTH.get()));
         playerIn.addPotionEffect(new EffectInstance(Effects.RESISTANCE, ModServerConfigs.SLIME_CAKE_RES_DUR.get(), ModServerConfigs.SLIME_CAKE_RES_STRENGTH.get()));
         playerIn.addPotionEffect(new EffectInstance(ModPotions.BOUNCING_EFFECT.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_DUR.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_STRENGTH.get()));
@@ -66,7 +49,7 @@ public class SlimeCakeBlock extends CakeBlockBase
             super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
         }
         else {
-            entityIn.onLivingFall(fallDistance, 0.0f);
+            entityIn.onLivingFall(fallDistance, 0.0F);
         }
     }
     
@@ -81,7 +64,7 @@ public class SlimeCakeBlock extends CakeBlockBase
     
     private void bounceEntity(final Entity entityIn) {
         final Vector3d vector3d = entityIn.getMotion();
-        if (vector3d.y < 0.0) {
+        if (vector3d.y < 0.0F) {
             final double d0 = (entityIn instanceof LivingEntity) ? 1.0 : 0.8;
             entityIn.setMotion(vector3d.x, -vector3d.y * d0, vector3d.z);
         }

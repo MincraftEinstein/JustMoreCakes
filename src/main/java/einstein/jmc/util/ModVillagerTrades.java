@@ -11,9 +11,9 @@ import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
 import net.minecraft.item.Items;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = JustMoreCakes.MODID)
+@EventBusSubscriber(modid = JustMoreCakes.MODID)
 public class ModVillagerTrades {
 	
 	@SubscribeEvent

@@ -34,7 +34,6 @@ public class EncasingIceBlock extends BreakableBlock {
 		if (timeGoneBy(worldIn, 1)) {
 			worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
-
 	}
 
 	@Override
@@ -53,5 +52,4 @@ public class EncasingIceBlock extends BreakableBlock {
 			return true;
 		return world.getGameTime() % (ticks) == 0;
 	}
-
 }

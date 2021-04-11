@@ -74,7 +74,7 @@ public class BirthdayCakeBlock extends Block
     
     public BirthdayCakeBlock(final Block.Properties properties) {
         super(properties);
-        this.setDefaultState((this.stateContainer.getBaseState()).with(BirthdayCakeBlock.BITES, 0));
+        this.setDefaultState(this.stateContainer.getBaseState().with(BirthdayCakeBlock.BITES, 0));
     }
     
     public VoxelShape getShape(final BlockState state, final IBlockReader worldIn, final BlockPos pos, final ISelectionContext context) {
@@ -105,7 +105,7 @@ public class BirthdayCakeBlock extends Block
                 return ActionResultType.PASS;
             }
             playerIn.addStat(Stats.EAT_CAKE_SLICE);
-            playerIn.getFoodStats().addStats(2, 0.1f);
+            playerIn.getFoodStats().addStats(2, 0.1F);
     	}
     	else if (i == 0) {
     		worldIn.playSound(playerIn, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.1F, 1.0F);

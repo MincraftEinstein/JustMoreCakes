@@ -34,9 +34,9 @@ public class FreezingEffect extends InstantEffect {
 		final World world = entityLiving.getEntityWorld() ;
 		Block block = ModBlocks.ENCASING_ICE.getBlock();
 		final BlockState state = block.getDefaultState();
-		for (int x = (int) Math.floor(boundingBox.minX); x < (int) Math.ceil(boundingBox.maxX); x++) {
-			for (int y = (int) Math.floor(boundingBox.minY); y < (int) Math.ceil(boundingBox.maxY); y++) {
-				for (int z = (int) Math.floor(boundingBox.minZ); z < (int) Math.ceil(boundingBox.maxZ); z++) {
+		for (int x = (int) Math.floor(boundingBox.minX); x < Math.ceil(boundingBox.maxX); x++) {
+			for (int y = (int) Math.floor(boundingBox.minY); y < Math.ceil(boundingBox.maxY); y++) {
+				for (int z = (int) Math.floor(boundingBox.minZ); z < Math.ceil(boundingBox.maxZ); z++) {
 					BlockPos pos = new BlockPos(x, y, z);
 					if (entityLiving.getEntityWorld().isAirBlock(pos)) {
 	                     world.setBlockState(pos, state);

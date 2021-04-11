@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
@@ -33,7 +33,7 @@ public class EventHandler {
 	protected final Random random = new Random();
 
 	@SubscribeEvent
-	public void cakeEaten(PlayerInteractEvent.RightClickBlock event) {
+	public void cakeEaten(RightClickBlock event) {
 	    World world = event.getWorld();
 	    PlayerEntity player = event.getPlayer();
 	    BlockPos pos = event.getPos();
@@ -47,11 +47,11 @@ public class EventHandler {
 		      ItemStack stack = block.getPickBlock(state, null, world, pos, player);
 
 		      for (int i = 0; i < 16; ++i) {
-		        Vector3d vec3d = new Vector3d(((double) random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
+		        Vector3d vec3d = new Vector3d((random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
 		        vec3d = vec3d.rotatePitch(-player.rotationPitch * ((float) Math.PI / 180F));
 		        vec3d = vec3d.rotateYaw(-player.rotationYaw * ((float) Math.PI / 180F));
-		        double d0 = (double) (-random.nextFloat()) * 0.6D - 0.3D;
-		        Vector3d vec3d1 = new Vector3d(((double) random.nextFloat() - 0.5D) * 0.3D, d0, 0.6D);
+		        double d0 = (-random.nextFloat()) * 0.6D - 0.3D;
+		        Vector3d vec3d1 = new Vector3d((random.nextFloat() - 0.5D) * 0.3D, d0, 0.6D);
 		        vec3d1 = vec3d1.rotatePitch(-player.rotationPitch * ((float) Math.PI / 180F));
 		        vec3d1 = vec3d1.rotateYaw(-player.rotationYaw * ((float) Math.PI / 180F));
 		        vec3d1 = vec3d1.add(player.getPosX(), player.getPosYEye(), player.getPosZ());
@@ -64,8 +64,7 @@ public class EventHandler {
 		          world.addParticle(particle, vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y + 0.05D, vec3d.z);
 		        }
 		      }
-		      player.playSound(player.getEatSound(stack), 0.5F + 0.5F * (float) random.nextInt(2),
-		          (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+		      player.playSound(player.getEatSound(stack), 0.5F + 0.5F * random.nextInt(2), (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 		    }
 		}
 

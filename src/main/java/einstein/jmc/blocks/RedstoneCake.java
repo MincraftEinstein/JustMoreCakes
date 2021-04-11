@@ -2,9 +2,9 @@ package einstein.jmc.blocks;
 
 import java.util.Random;
 
-import einstein.einsteins_library.blocks.CakeBlockBase;
-import einstein.jmc.init.ModConfigs.ModClientConfigs;
+import einstein.jmc.init.ModClientConfigs;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CakeBlock;
 import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class RedstoneCake extends CakeBlockBase {
+public class RedstoneCake extends CakeBlock {
 
 	public RedstoneCake(Properties properties) {
 		super(properties);

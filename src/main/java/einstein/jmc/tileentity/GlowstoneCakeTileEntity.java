@@ -2,7 +2,7 @@ package einstein.jmc.tileentity;
 
 import java.util.List;
 
-import einstein.jmc.init.ModConfigs.ModServerConfigs;
+import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.init.ModTileEntityType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.MobEntity;

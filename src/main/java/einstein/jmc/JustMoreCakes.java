@@ -5,8 +5,9 @@ import java.util.function.Function;
 import javax.annotation.Nullable;
 
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.init.ModConfigs;
+import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.init.ModPotions;
+import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.init.ModTileEntityType;
 import einstein.jmc.init.ModVillagers;
 import einstein.jmc.util.EventHandler;
@@ -18,7 +19,6 @@ import einstein.jmc.world.gen.village.RegisterTaigaBakery;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
@@ -26,7 +26,9 @@ import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -37,6 +39,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 public class JustMoreCakes
 {
     public static final String MODID = "jmc";
+    public static final JMCItemGroup JMC_GROUP = new JMCItemGroup(ItemGroup.GROUPS.length, "jmc_tab");
     public static JustMoreCakes instance;
     
     public JustMoreCakes() {
@@ -51,7 +54,8 @@ public class JustMoreCakes
         JustMoreCakes.instance = this;
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new EventHandler());
-        ModConfigs.init();
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfigs.SERVERSPEC);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.CLIENTSPEC);
     }
     
 	private void setup(final FMLCommonSetupEvent event) {
@@ -66,10 +70,6 @@ public class JustMoreCakes
     }
 	
     private void doClientStuff(final FMLClientSetupEvent event) {
-    	//Item.getIdFromItem(Items.CAKE = new BlockItem(Blocks.CAKE, (new Item.Properties()).maxStackSize(1).group(ItemGroup.FOOD)));
-    	//Item.getIdFromItem(Items.CAKE.setMaxStackSize(64));	1.12.2 Version
-    	//Item.getIdFromItem(Items.CAKE);
-    	//Items.CAKE = new BlockItem(Blocks.CAKE, new Item.Properties().maxStackSize(0));
     	DeferredWorkQueue.runLater(() -> {
     		ModPotions.registerPotionRecipes();
     	});
@@ -113,16 +113,7 @@ public class JustMoreCakes
 		}
 	}
 	
-    public static class JMCItemGroup extends ItemGroup
-    {
-        public static final JMCItemGroup instance = new JMCItemGroup(ItemGroup.GROUPS.length, "jmc_tab");
-        
-        private JMCItemGroup(final int index, final String label) {
-            super(index, label);
         }
-        
-        public ItemStack createIcon() {
-            return new ItemStack(ModBlocks.CHOCOLATE_CAKE);
         }
     }
 }

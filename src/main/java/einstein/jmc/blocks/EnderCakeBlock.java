@@ -2,49 +2,32 @@ package einstein.jmc.blocks;
 
 import java.util.Random;
 
-import einstein.einsteins_library.blocks.CakeBlockBase;
 import einstein.einsteins_library.util.Actions;
-import einstein.jmc.init.ModConfigs.ModClientConfigs;
-import einstein.jmc.init.ModConfigs.ModServerConfigs;
+import einstein.jmc.init.ModClientConfigs;
+import einstein.jmc.init.ModServerConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CakeBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class EnderCakeBlock extends CakeBlockBase
+public class EnderCakeBlock extends CakeBlock
 {
     public EnderCakeBlock(final Block.Properties properties) {
         super(properties);
-        this.setDefaultState((this.stateContainer.getBaseState()).with(EnderCakeBlock.BITES, 0));
     }
     
     @Override
-    public ActionResultType onBlockActivated(final BlockState state, final World worldIn, final BlockPos pos, final PlayerEntity player, final Hand handIn, final BlockRayTraceResult hit) {
-        if (worldIn.isRemote) {
-            final ItemStack itemstack = player.getHeldItem(handIn);
-            if (this.eatSlice(worldIn, pos, state, player) == ActionResultType.SUCCESS) {
-                return ActionResultType.SUCCESS;
-            }
-            if (itemstack.isEmpty()) {
-                return ActionResultType.CONSUME;
-            }
-        }
-        return this.eatSlice(worldIn, pos, state, player);
-    }
-    
-    private ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
+    public ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
         if (!playerIn.canEat(false)) {
             return ActionResultType.PASS;
         }
@@ -65,7 +48,7 @@ public class EnderCakeBlock extends CakeBlockBase
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     	if (ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
-	       for(int i = 0; i < 3; ++i) {
+	       for (int i = 0; i < 3; ++i) {
 	           int j = rand.nextInt(2) * 2 - 1;
 	           int k = rand.nextInt(2) * 2 - 1;
 	           double d0 = pos.getX() + 0.5D + 0.25D * j;
