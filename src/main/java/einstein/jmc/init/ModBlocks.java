@@ -29,7 +29,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 @EventBusSubscriber(modid = JustMoreCakes.MODID, bus = Bus.MOD)
 public class ModBlocks
 {
-    public static final Block TRIPLE_DECKER_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "triple_decker_cake", new TripleDeckerCakeBlock(Block.Properties.create(Material.CAKE).sound(SoundType.CLOTH).hardnessAndResistance(0.5F)), JMCItemGroup.instance);
     public static final Block CHOCOLATE_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "chocolate_cake", new CakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
     public static final Block CARROT_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "carrot_cake", new CakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
     public static final Block PUMPKIN_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "pumpkin_cake", new CakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
@@ -44,6 +43,7 @@ public class ModBlocks
     public static final Block REDSTONE_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "redstone_cake", new RedstoneCake(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
     public static final Block ENDER_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "ender_cake", new EnderCakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
     public static final Block CHEESECAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "cheesecake", new CakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
+    public static final Block THREE_TIERED_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "three_tiered_cake", new ThreeTieredCakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
     public static final Block SLIME_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "slime_cake", new SlimeCakeBlock(Block.Properties.from(Blocks.CAKE).sound(SoundType.SLIME)), JustMoreCakes.JMC_GROUP);
     public static final Block BIRTHDAY_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "birthday_cake", new BirthdayCakeBlock(Block.Properties.from(Blocks.CAKE).setLightLevel((state) -> {
     	final int i = state.get(BirthdayCakeBlock.BITES);

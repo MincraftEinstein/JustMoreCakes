@@ -1,12 +1,12 @@
 {
     "textures": {
-    	"particle": "jmc:blocks/triple_decker_cake_lower_side",
-        "middle_side": "jmc:blocks/triple_decker_cake_middle_side",
-        "bottom": "jmc:blocks/triple_decker_cake_bottom",
-        "lower_side": "jmc:blocks/triple_decker_cake_lower_side",
-        "lower_top": "jmc:blocks/triple_decker_cake_lower_top",
-        "middle_top": "jmc:blocks/triple_decker_cake_middle_top",
-        "middle_inner": "jmc:blocks/triple_decker_cake_middle_inner"
+    	"particle": "jmc:blocks/three_tiered_cake_lower_side",
+        "middle_side": "jmc:blocks/three_tiered_cake_middle_side",
+        "bottom": "jmc:blocks/three_tiered_cake_bottom",
+        "lower_side": "jmc:blocks/three_tiered_cake_lower_side",
+        "lower_top": "jmc:blocks/three_tiered_cake_lower_top",
+        "middle_top": "jmc:blocks/three_tiered_cake_middle_top",
+        "middle_inner": "jmc:blocks/three_tiered_cake_middle_inner"
     },
     "elements": [
         {

@@ -2,7 +2,7 @@
 	"parent": "minecraft:recipes/root",
 	"rewards": {
 		"recipes": [
-			"jmc:triple_decker_cake"
+			"jmc:three_tiered_cake"
 		]
 	},
 	"criteria": {
@@ -19,7 +19,7 @@
 		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions": {
-				"recipe": "jmc:triple_decker_cake"
+				"recipe": "jmc:three_tiered_cake"
 			}
 		}
 	},

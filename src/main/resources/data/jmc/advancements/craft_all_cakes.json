@@ -163,12 +163,12 @@
                 ]
             }
         },
-        "triple_decker_cake": {
+        "three_tiered_cake": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "jmc:triple_decker_cake"
+                        "item": "jmc:three_tiered_cake"
                     }
                 ]
             }

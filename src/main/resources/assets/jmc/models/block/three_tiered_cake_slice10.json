@@ -1,9 +1,9 @@
 {
     "textures": {
-    	"particle": "jmc:blocks/triple_decker_cake_lower_side",
-        "bottom": "jmc:blocks/triple_decker_cake_bottom",
-        "lower_side": "jmc:blocks/triple_decker_cake_lower_side",
-        "lower_top": "jmc:blocks/triple_decker_cake_lower_top"
+    	"particle": "jmc:blocks/three_tiered_cake_lower_side",
+        "bottom": "jmc:blocks/three_tiered_cake_bottom",
+        "lower_side": "jmc:blocks/three_tiered_cake_lower_side",
+        "lower_top": "jmc:blocks/three_tiered_cake_lower_top"
     },
     "elements": [
         {

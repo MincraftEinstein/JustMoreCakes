@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "jmc:item/triple_decker_cake"
+        "layer0": "jmc:item/three_tiered_cake"
     }
 }

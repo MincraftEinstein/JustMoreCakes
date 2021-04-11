@@ -94,6 +94,8 @@ public class JustMoreCakes
 		switch (name) {
 		case "cheese_cake":
 			return ModBlocks.CHEESECAKE;
+		case "triple_decker_cake":
+			return ModBlocks.THREE_TIERED_CAKE;
 		}
 		return null;
 	}
@@ -104,6 +106,8 @@ public class JustMoreCakes
 			switch (name) {
 			case "cheese_cake":
 				return ModBlocks.CHEESECAKE.asItem();
+			case "triple_decker_cake":
+				return ModBlocks.THREE_TIERED_CAKE.asItem();
 			}
 			IItemProvider block = missingBlock(name);
 			return block == null ? null : block.asItem();

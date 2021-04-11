@@ -1,14 +1,11 @@
 {
     "textures": {
-    	"particle": "jmc:blocks/triple_decker_cake_lower_side",
-        "middle_side": "jmc:blocks/triple_decker_cake_middle_side",
-        "bottom": "jmc:blocks/triple_decker_cake_bottom",
-        "lower_side": "jmc:blocks/triple_decker_cake_lower_side",
-        "top": "jmc:blocks/triple_decker_cake_top",
-        "lower_top": "jmc:blocks/triple_decker_cake_lower_top",
-        "top_side": "jmc:blocks/triple_decker_cake_top_side",
-        "middle_top": "jmc:blocks/triple_decker_cake_middle_top",
-        "top_inner": "jmc:blocks/triple_decker_cake_top_inner"
+    	"particle": "jmc:blocks/three_tiered_cake_lower_side",
+        "middle_side": "jmc:blocks/three_tiered_cake_middle_side",
+        "bottom": "jmc:blocks/three_tiered_cake_bottom",
+        "lower_side": "jmc:blocks/three_tiered_cake_lower_side",
+        "lower_top": "jmc:blocks/three_tiered_cake_lower_top",
+        "middle_top": "jmc:blocks/three_tiered_cake_middle_top"
     },
     "elements": [
         {
@@ -34,18 +31,6 @@
                 "south": { "texture": "#middle_side", "uv": [ 2, 9, 14, 16 ] },
                 "west": { "texture": "#middle_side", "uv": [ 2, 9, 14, 16 ] },
                 "up": { "texture": "#middle_top", "uv": [ 2, 2, 14, 14 ] }
-            }
-        },
-        {
-            "name": "top_cake",
-            "from": [ 7, 15, 3 ], 
-            "to": [ 13, 21, 13 ], 
-            "faces": {
-                "north": { "texture": "#top_side", "uv": [ 3, 10, 9, 16 ] },
-                "east": { "texture": "#top_side", "uv": [ 3, 10, 13, 16 ] },
-                "south": { "texture": "#top_side", "uv": [ 7, 10, 13, 16 ] },
-                "west": { "texture": "#top_inner", "uv": [ 3, 10, 13, 16 ] },
-                "up": { "texture": "#top", "uv": [ 7, 3, 13, 13 ] }
             }
         }
     ]

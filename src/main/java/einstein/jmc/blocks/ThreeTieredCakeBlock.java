@@ -23,7 +23,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class TripleDeckerCakeBlock extends Block
+public class ThreeTieredCakeBlock extends Block
 {
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 15);
     protected static final VoxelShape[] SHAPES = new VoxelShape[] { 
@@ -60,13 +60,13 @@ public class TripleDeckerCakeBlock extends Block
     		Block.makeCuboidShape(11, 0, 1, 15, 8, 15) //15
     };
     
-    public TripleDeckerCakeBlock(final Block.Properties properties) {
+    public ThreeTieredCakeBlock(final Block.Properties properties) {
         super(properties);
-        this.setDefaultState((this.stateContainer.getBaseState()).with(TripleDeckerCakeBlock.BITES, 0));
+        this.setDefaultState(this.stateContainer.getBaseState().with(ThreeTieredCakeBlock.BITES, 0));
     }
     
     public VoxelShape getShape(final BlockState state, final IBlockReader worldIn, final BlockPos pos, final ISelectionContext context) {
-        return TripleDeckerCakeBlock.SHAPES[state.get(TripleDeckerCakeBlock.BITES)];
+        return ThreeTieredCakeBlock.SHAPES[state.get(ThreeTieredCakeBlock.BITES)];
     }
     
     public boolean isNormalCube(final BlockState state, final IBlockReader worldIn, final BlockPos pos) {
@@ -91,10 +91,10 @@ public class TripleDeckerCakeBlock extends Block
             return ActionResultType.PASS;
         }
         playerIn.addStat(Stats.EAT_CAKE_SLICE);
-        playerIn.getFoodStats().addStats(2, 0.1f);
-        final int i = state.get(TripleDeckerCakeBlock.BITES);
+        playerIn.getFoodStats().addStats(2, 0.1F);
+        final int i = state.get(ThreeTieredCakeBlock.BITES);
         if (i < 15) { // Number must be same as BITES
-            worldIn.setBlockState(pos, state.with(TripleDeckerCakeBlock.BITES, (i + 1)), 3);
+            worldIn.setBlockState(pos, state.with(ThreeTieredCakeBlock.BITES, (i + 1)), 3);
         }
         else {
             worldIn.removeBlock(pos, false);
@@ -116,7 +116,7 @@ public class TripleDeckerCakeBlock extends Block
     
     @Deprecated
     public int getComparatorInputOverride(final BlockState blockState, final World worldIn, final BlockPos pos) {
-        return (15 - blockState.get(TripleDeckerCakeBlock.BITES)) * 2;
+        return (15 - blockState.get(ThreeTieredCakeBlock.BITES)) * 2;
     }
     
     @Deprecated
@@ -127,5 +127,4 @@ public class TripleDeckerCakeBlock extends Block
     public boolean allowsMovement(final BlockState state, final IBlockReader worldIn, final BlockPos pos, final PathType type) {
         return false;
     }
-    
 }
