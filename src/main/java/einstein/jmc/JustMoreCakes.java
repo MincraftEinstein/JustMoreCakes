@@ -1,9 +1,15 @@
 package einstein.jmc;
 
+import java.lang.reflect.Field;
 import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import cpw.mods.modlauncher.api.INameMappingService.Domain;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.init.ModPotions;
@@ -19,6 +25,7 @@ import einstein.jmc.world.gen.village.RegisterTaigaBakery;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
@@ -28,19 +35,22 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-@SuppressWarnings({"deprecation"})
+@SuppressWarnings({ "deprecation" })
 @Mod(JustMoreCakes.MODID)
 public class JustMoreCakes
 {
     public static final String MODID = "jmc";
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final JMCItemGroup JMC_GROUP = new JMCItemGroup(ItemGroup.GROUPS.length, "jmc_tab");
     public static JustMoreCakes instance;
+    private Field maxItemStackSize;
     
     public JustMoreCakes() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -56,6 +66,10 @@ public class JustMoreCakes
         MinecraftForge.EVENT_BUS.register(new EventHandler());
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfigs.SERVERSPEC);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.CLIENTSPEC);
+        accessStackSize();
+        if (maxItemStackSize != null) {
+        	modEventBus.addListener(this::resizeCakeStack);
+        }
     }
     
 	private void setup(final FMLCommonSetupEvent event) {
@@ -113,7 +127,25 @@ public class JustMoreCakes
 		}
 	}
 	
+    private void accessStackSize() {
+        try {
+            final Field field = Item.class.getDeclaredField(ObfuscationReflectionHelper.remapName(Domain.FIELD, "field_77777_bU"));
+            field.setAccessible(true);
+            maxItemStackSize = field;
+            LOGGER.debug("Item.Properties.maxStackSize is now accessible");
         }
+        catch (Throwable t) {
+            LOGGER.catching(Level.WARN, t);
         }
     }
+    
+    private void resizeCakeStack(FMLCommonSetupEvent event) {
+		try {
+			maxItemStackSize.setInt(Items.CAKE, 64);
+			LOGGER.debug("Changed cake's max stack size to 64");
+		}
+		catch (Throwable t) {
+			LOGGER.catching(Level.WARN, t);
+		}
+	}
 }
