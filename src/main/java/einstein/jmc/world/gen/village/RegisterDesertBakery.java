@@ -24,7 +24,7 @@ public class RegisterDesertBakery
         if (desertPattern == null) {
             return;
         }
-        final Function<JigsawPattern.PlacementBehaviour, LegacySingleJigsawPiece> desert1 = JigsawPiece.func_242851_a("jmc:village/desert/houses/desert_bakery_1", ProcessorLists.field_244107_g);
+        final Function<JigsawPattern.PlacementBehaviour, LegacySingleJigsawPiece> desert1 = JigsawPiece.func_242851_a("jmc:village/desert/houses/desert_bakery_1", ProcessorLists.MOSSIFY_10_PERCENT);
         final JigsawPiece desertPiece1 = desert1.apply(JigsawPattern.PlacementBehaviour.RIGID);
         try {
             final String name = ASMAPI.mapField("field_214953_e");

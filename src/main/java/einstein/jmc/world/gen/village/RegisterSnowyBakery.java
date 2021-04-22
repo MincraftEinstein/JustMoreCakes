@@ -24,9 +24,9 @@ public class RegisterSnowyBakery
         if (snowyPattern == null) {
             return;
         }
-        final Function<JigsawPattern.PlacementBehaviour, LegacySingleJigsawPiece> snowy1 = JigsawPiece.func_242851_a("jmc:village/cake_bakery_snowy_1", ProcessorLists.field_244107_g);
+        final Function<JigsawPattern.PlacementBehaviour, LegacySingleJigsawPiece> snowy1 = JigsawPiece.func_242851_a("jmc:village/cake_bakery_snowy_1", ProcessorLists.MOSSIFY_10_PERCENT);
         final JigsawPiece snowyPiece1 = snowy1.apply(JigsawPattern.PlacementBehaviour.RIGID);
-        final Function<JigsawPattern.PlacementBehaviour, LegacySingleJigsawPiece> snowy2 = JigsawPiece.func_242851_a("jmc:village/cake_bakery_snowy_2", ProcessorLists.field_244107_g);
+        final Function<JigsawPattern.PlacementBehaviour, LegacySingleJigsawPiece> snowy2 = JigsawPiece.func_242851_a("jmc:village/cake_bakery_snowy_2", ProcessorLists.MOSSIFY_10_PERCENT);
         final JigsawPiece snowyPiece2 = snowy2.apply(JigsawPattern.PlacementBehaviour.RIGID);
         try {
             final String name = ASMAPI.mapField("field_214953_e");

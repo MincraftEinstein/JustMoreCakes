@@ -24,7 +24,7 @@ public class RegisterSavannaBakery
         if (savannaPattern == null) {
             return;
         }
-        final Function<JigsawPattern.PlacementBehaviour, LegacySingleJigsawPiece> savanna1 = JigsawPiece.func_242851_a("jmc:village/savanna/houses/savanna_bakery_1", ProcessorLists.field_244107_g);
+        final Function<JigsawPattern.PlacementBehaviour, LegacySingleJigsawPiece> savanna1 = JigsawPiece.func_242851_a("jmc:village/savanna/houses/savanna_bakery_1", ProcessorLists.MOSSIFY_10_PERCENT);
         final JigsawPiece savannaPiece1 = savanna1.apply(JigsawPattern.PlacementBehaviour.RIGID);
         try {
             final String name = ASMAPI.mapField("field_214953_e");

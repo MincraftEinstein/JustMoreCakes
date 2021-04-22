@@ -24,7 +24,7 @@ public class RegisterTaigaBakery
         if (taigaPattern == null) {
             return;
         }
-        final Function<JigsawPattern.PlacementBehaviour, LegacySingleJigsawPiece> taiga1 = JigsawPiece.func_242851_a("jmc:village/taiga/houses/taiga_bakery_1", ProcessorLists.field_244107_g);
+        final Function<JigsawPattern.PlacementBehaviour, LegacySingleJigsawPiece> taiga1 = JigsawPiece.func_242851_a("jmc:village/taiga/houses/taiga_bakery_1", ProcessorLists.MOSSIFY_10_PERCENT);
         final JigsawPiece taigaPiece1 = taiga1.apply(JigsawPattern.PlacementBehaviour.RIGID);
         try {
             final String name = ASMAPI.mapField("field_214953_e");
