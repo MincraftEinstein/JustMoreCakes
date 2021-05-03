@@ -117,7 +117,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-	implementation fg.deobf("curse.maven:einsteins-library:3171021")
+	implementation fg.deobf("curse.maven:einsteins-library:3296428")
 	implementation fg.deobf("curse.maven:jei:3245079")
 	implementation fg.deobf("curse.maven:catalogue:3258558")
 	//implementation fg.deobf("curse.maven:cake-chomps:3112111")

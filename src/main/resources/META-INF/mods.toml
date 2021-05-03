@@ -34,6 +34,6 @@ A mod that adds 30+ new cakes to Minecraft. Some with special properties, some w
 [[dependencies.jmc]]
     modId="einsteins_library"
     mandatory=true
-    versionRange="[1.4,)"
+    versionRange="[2.0,)"
     ordering="NONE"
     side="BOTH"

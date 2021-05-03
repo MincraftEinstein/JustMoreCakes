@@ -60,7 +60,7 @@ public class ModBlocks
     })), JustMoreCakes.JMC_GROUP);
     public static final Block CREEPER_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "creeper_cake", new CakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
     public static final Block SEED_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "seed_cake", new CakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
-    public static final Block CUPCAKE = RegistryHandler.registerBlockNoItem(JustMoreCakes.MODID, "cupcake", new CupcakeBlock(Block.Properties.from(Blocks.CAKE)));
+    public static final Block CUPCAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "cupcake", new CupcakeBlock(Block.Properties.from(Blocks.CAKE)));
     public static final Block BROWN_MUSHROOM_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "brown_mushroom_cake", new CakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
     public static final Block ICE_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "ice_cake", new IceCakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
     public static final Block CHORUS_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "chorus_cake", new ChorusCakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
@@ -73,6 +73,5 @@ public class ModBlocks
     })), JustMoreCakes.JMC_GROUP);
     public static final Block CRIMSON_FUNGUS_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "crimson_fungus_cake", new CakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
     public static final Block WARPED_FUNGUS_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "warped_fungus_cake", new CakeBlock(Block.Properties.from(Blocks.CAKE)), JustMoreCakes.JMC_GROUP);
-    public static final Block ENCASING_ICE = RegistryHandler.registerBlockNoItem(JustMoreCakes.MODID, "encasing_ice", new EncasingIceBlock(Block.Properties.create(Material.ICE).slipperiness(0.98F).tickRandomly().hardnessAndResistance(2.5F, 5.0F).sound(SoundType.GLASS).noDrops().notSolid().setAllowsSpawn(Blocks::neverAllowSpawn).setOpaque(Blocks::isntSolid).setSuffocates(Blocks::isntSolid).setBlocksVision(Blocks::isntSolid)));
-    
+    public static final Block ENCASING_ICE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "encasing_ice", new EncasingIceBlock(Block.Properties.create(Material.ICE).slipperiness(0.98F).tickRandomly().hardnessAndResistance(2.5F, 5.0F).sound(SoundType.GLASS).noDrops().notSolid().setAllowsSpawn(Blocks::neverAllowSpawn).setOpaque(Blocks::isntSolid).setSuffocates(Blocks::isntSolid).setBlocksVision(Blocks::isntSolid)));
 }
