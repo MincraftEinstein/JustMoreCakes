@@ -2,10 +2,9 @@ package einstein.jmc.util;
 
 import java.util.Random;
 
-import einstein.einsteins_library.blocks.CakeBlockBase;
 import einstein.jmc.blocks.BirthdayCakeBlock;
+import einstein.jmc.blocks.ContainerCakeBlock;
 import einstein.jmc.blocks.CupcakeBlock;
-import einstein.jmc.blocks.GlowstoneCakeBlock;
 import einstein.jmc.blocks.ThreeTieredCakeBlock;
 import einstein.jmc.init.ModPotions;
 import net.minecraft.block.Block;
@@ -41,7 +40,7 @@ public class EventHandler {
 	    Block block = state.getBlock();
 		
 		if (ModList.get().isLoaded("cakechomps")) {
-		    if (!(block instanceof CakeBlockBase || block instanceof BirthdayCakeBlock || block instanceof CupcakeBlock || block instanceof GlowstoneCakeBlock || block instanceof ThreeTieredCakeBlock) || !player.canEat(false)) {
+		    if (!(block instanceof BirthdayCakeBlock || block instanceof CupcakeBlock || block instanceof ContainerCakeBlock || block instanceof ThreeTieredCakeBlock) || !player.canEat(false)) {
 		        return;
 		      }
 		      ItemStack stack = block.getPickBlock(state, null, world, pos, player);
