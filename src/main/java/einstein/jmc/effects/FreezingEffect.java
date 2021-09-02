@@ -1,45 +1,47 @@
 package einstein.jmc.effects;
 
 import einstein.jmc.init.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.EffectType;
-import net.minecraft.potion.InstantEffect;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.effect.InstantenousMobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
-public class FreezingEffect extends InstantEffect {
-	
-	public FreezingEffect(EffectType type, int liquidColor) {
+public class FreezingEffect extends InstantenousMobEffect {
+
+	public FreezingEffect(MobEffectCategory type, int liquidColor) {
 		super(type, liquidColor);
 	}
-	
+
 	@Override
-	public boolean isReady(int duration, int amplifier) {
+	public boolean isDurationEffectTick(int duration, int amplifier) {
 		return true;
 	}
-	
+
 	@Override
-	public void affectEntity(Entity source, Entity indirectSource, LivingEntity entityLiving, int amplifier, double health) {
-		FreezingEffect.freezeEntity(entityLiving);
+	public void applyInstantenousEffect(Entity source, Entity indirectSource, LivingEntity entityLiving, int amplifier, double health) {
+		freezeEntity(entityLiving);	
 	}
 	
 	public static void freezeEntity(LivingEntity entityLiving) {
-		if (entityLiving instanceof PlayerEntity && (entityLiving).isSpectator()) return;
-		AxisAlignedBB boundingBox = entityLiving.getBoundingBox().grow(1);
-		final World world = entityLiving.getEntityWorld() ;
-		Block block = ModBlocks.ENCASING_ICE.getBlock();
-		final BlockState state = block.getDefaultState();
+		if (entityLiving instanceof Player && (entityLiving).isSpectator()) {
+			return;
+		}
+		AABB boundingBox = entityLiving.getBoundingBox().inflate(1);
+		final Level level = entityLiving.getCommandSenderWorld();
+		Block block = ModBlocks.ENCASING_ICE;
+		final BlockState state = block.defaultBlockState();
 		for (int x = (int) Math.floor(boundingBox.minX); x < Math.ceil(boundingBox.maxX); x++) {
 			for (int y = (int) Math.floor(boundingBox.minY); y < Math.ceil(boundingBox.maxY); y++) {
 				for (int z = (int) Math.floor(boundingBox.minZ); z < Math.ceil(boundingBox.maxZ); z++) {
 					BlockPos pos = new BlockPos(x, y, z);
-					if (entityLiving.getEntityWorld().isAirBlock(pos)) {
-	                     world.setBlockState(pos, state);
+					if (entityLiving.getCommandSenderWorld().isEmptyBlock(pos)) {
+						level.setBlockAndUpdate(pos, state);
 					}
 				}
 			}

@@ -2,80 +2,80 @@ package einstein.jmc.blocks;
 
 import einstein.jmc.init.ModPotions;
 import einstein.jmc.init.ModServerConfigs;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CakeBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.Vec3;
 
-public class SlimeCakeBlock extends CakeBlock
+public class SlimeCakeBlock extends BaseCakeBlock
 {
-    public SlimeCakeBlock(final Block.Properties properties) {
+    public SlimeCakeBlock(final BlockBehaviour.Properties properties) {
         super(properties);
     }
     
     @Override
-    public ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
-        if (!playerIn.canEat(false)) {
-            return ActionResultType.PASS;
+    public InteractionResult eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player) {
+        if (!player.canEat(false)) {
+            return InteractionResult.PASS;
         }
-        playerIn.addStat(Stats.EAT_CAKE_SLICE);
-        playerIn.getFoodStats().addStats(2, 0.1F);
-        playerIn.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, ModServerConfigs.SLIME_CAKE_JUMP_BOOST_DUR.get(), ModServerConfigs.SLIME_CAKE_JUMP_BOOST_STRENGTH.get()));
-        playerIn.addPotionEffect(new EffectInstance(Effects.RESISTANCE, ModServerConfigs.SLIME_CAKE_RES_DUR.get(), ModServerConfigs.SLIME_CAKE_RES_STRENGTH.get()));
-        playerIn.addPotionEffect(new EffectInstance(ModPotions.BOUNCING_EFFECT.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_DUR.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_STRENGTH.get()));
-        final int i = state.get(SlimeCakeBlock.BITES);
-        if (i < 6) { // Number must be same as BITES
-            worldIn.setBlockState(pos, state.with(SlimeCakeBlock.BITES, (i + 1)), 3);
-        }
-        else {
-            worldIn.removeBlock(pos, false);
-        }
-        return ActionResultType.SUCCESS;
-    }
+        player.awardStat(Stats.EAT_CAKE_SLICE);
+		player.getFoodData().eat(2, 0.1F);
+        player.addEffect(new MobEffectInstance(MobEffects.JUMP, ModServerConfigs.SLIME_CAKE_JUMP_BOOST_DUR.get(), ModServerConfigs.SLIME_CAKE_JUMP_BOOST_STRENGTH.get()));
+        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, ModServerConfigs.SLIME_CAKE_RES_DUR.get(), ModServerConfigs.SLIME_CAKE_RES_STRENGTH.get()));
+        player.addEffect(new MobEffectInstance(ModPotions.BOUNCING_EFFECT, ModServerConfigs.SLIME_CAKE_BOUNCING_DUR.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_STRENGTH.get()));
+        int i = state.getValue(BITES);
+        accessor.gameEvent(player, GameEvent.EAT, pos);
+		if (i < 6) { // Number must be same as BITES
+			accessor.setBlock(pos, state.setValue(BITES, Integer.valueOf(i + 1)), 3);
+		} else {
+			accessor.removeBlock(pos, false);
+			accessor.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
+		}
+		return InteractionResult.SUCCESS;
+	}
     
-    public void onFallenUpon(final World worldIn, final BlockPos pos, final Entity entityIn, final float fallDistance) {
-        if (entityIn.isSuppressingBounce()) {
-            super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
-        }
-        else {
-            entityIn.onLivingFall(fallDistance, 0.0F);
-        }
-    }
-    
-    public void onLanded(final IBlockReader worldIn, final Entity entityIn) {
-        if (entityIn.isSuppressingBounce()) {
-            super.onLanded(worldIn, entityIn);
-        }
-        else {
-            this.bounceEntity(entityIn);
-        }
-    }
-    
-    private void bounceEntity(final Entity entityIn) {
-        final Vector3d vector3d = entityIn.getMotion();
-        if (vector3d.y < 0.0F) {
-            final double d0 = (entityIn instanceof LivingEntity) ? 1.0 : 0.8;
-            entityIn.setMotion(vector3d.x, -vector3d.y * d0, vector3d.z);
-        }
-    }
-    
-    public void onEntityWalk(final World worldIn, final BlockPos pos, final Entity entityIn) {
-        final double d0 = Math.abs(entityIn.getMotion().y);
-        if (d0 < 0.1 && !entityIn.isSteppingCarefully()) {
-            final double d2 = 0.4 + d0 * 0.2;
-            entityIn.setMotion(entityIn.getMotion().mul(d2, 1.0, d2));
-        }
-        super.onEntityWalk(worldIn, pos, entityIn);
-    }
+	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float p_154571_) {
+		if (entity.isSuppressingBounce()) {
+			super.fallOn(level, state, pos, entity, p_154571_);
+		} else {
+			entity.causeFallDamage(p_154571_, 0.0F, DamageSource.FALL);
+		}
+	}
+	
+	public void updateEntityAfterFallOn(BlockGetter getter, Entity entity) {
+		if (entity.isSuppressingBounce()) {
+			super.updateEntityAfterFallOn(getter, entity);
+		} else {
+			this.bounceUp(entity);
+		}
+	}
+	
+	private void bounceUp(Entity entity) {
+		Vec3 vec3 = entity.getDeltaMovement();
+		if (vec3.y < 0.0D) {
+			double d0 = entity instanceof LivingEntity ? 1.0D : 0.8D;
+			entity.setDeltaMovement(vec3.x, -vec3.y * d0, vec3.z);
+		}
+	}
+	
+	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+		double d0 = Math.abs(entity.getDeltaMovement().y);
+		if (d0 < 0.1D && !entity.isSteppingCarefully()) {
+			double d1 = 0.4D + d0 * 0.2D;
+			entity.setDeltaMovement(entity.getDeltaMovement().multiply(d1, 1.0D, d1));
+		}
+		super.stepOn(level, pos, state, entity);
+	}
 }

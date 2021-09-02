@@ -1,130 +1,127 @@
 package einstein.jmc.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-@SuppressWarnings("deprecation")
 public class ThreeTieredCakeBlock extends Block
 {
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 15);
     protected static final VoxelShape[] SHAPES = new VoxelShape[] { 
-    		VoxelShapes.or(Block.makeCuboidShape(3, 15, 3, 13, 21, 13), //0 uneaten
-    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15),
-    				Block.makeCuboidShape(2, 8, 2, 14, 15, 14)),
-    		VoxelShapes.or(Block.makeCuboidShape(5, 15, 3, 13, 21, 13), //1
-    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15),
-					Block.makeCuboidShape(2, 8, 2, 14, 15, 14)),
-    		VoxelShapes.or(Block.makeCuboidShape(7, 15, 3, 13, 21, 13), //2
-    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15),
-					Block.makeCuboidShape(2, 8, 2, 14, 15, 14)),
-    		VoxelShapes.or(Block.makeCuboidShape(9, 15, 3, 13, 21, 13), //3
-    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15),
-    				Block.makeCuboidShape(2, 8, 2, 14, 15, 14)),
-    		VoxelShapes.or(Block.makeCuboidShape(11, 15, 3, 13, 21, 13), //4
-					Block.makeCuboidShape(1, 0, 1, 15, 8, 15),
-					Block.makeCuboidShape(2, 8, 2, 14, 15, 14)),
-    		VoxelShapes.or(Block.makeCuboidShape(2, 8, 2, 14, 15, 14), //5
-    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15)),
-    		VoxelShapes.or(Block.makeCuboidShape(4, 8, 2, 14, 15, 14), //6
-    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15)),
-    		VoxelShapes.or(Block.makeCuboidShape(6, 8, 2, 14, 15, 14), //7
-    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15)),
-    		VoxelShapes.or(Block.makeCuboidShape(8, 8, 2, 14, 15, 14), //8
-    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15)),
-    		VoxelShapes.or(Block.makeCuboidShape(10, 8, 2, 14, 15, 14), //9
-    				Block.makeCuboidShape(1, 0, 1, 15, 8, 15)),
-    		Block.makeCuboidShape(1, 0, 1, 15, 8, 15), //10
-    		Block.makeCuboidShape(4, 0, 1, 15, 8, 15), //11
-    		Block.makeCuboidShape(5, 0, 1, 15, 8, 15), //12
-    		Block.makeCuboidShape(7, 0, 1, 15, 8, 15), //13
-    		Block.makeCuboidShape(9, 0, 1, 15, 8, 15), //14
-    		Block.makeCuboidShape(11, 0, 1, 15, 8, 15) //15
+    		Shapes.or(Block.box(3, 15, 3, 13, 21, 13), //0 uneaten
+    				Block.box(1, 0, 1, 15, 8, 15),
+    				Block.box(2, 8, 2, 14, 15, 14)),
+    		Shapes.or(Block.box(5, 15, 3, 13, 21, 13), //1
+    				Block.box(1, 0, 1, 15, 8, 15),
+					Block.box(2, 8, 2, 14, 15, 14)),
+    		Shapes.or(Block.box(7, 15, 3, 13, 21, 13), //2
+    				Block.box(1, 0, 1, 15, 8, 15),
+					Block.box(2, 8, 2, 14, 15, 14)),
+    		Shapes.or(Block.box(9, 15, 3, 13, 21, 13), //3
+    				Block.box(1, 0, 1, 15, 8, 15),
+    				Block.box(2, 8, 2, 14, 15, 14)),
+    		Shapes.or(Block.box(11, 15, 3, 13, 21, 13), //4
+					Block.box(1, 0, 1, 15, 8, 15),
+					Block.box(2, 8, 2, 14, 15, 14)),
+    		Shapes.or(Block.box(2, 8, 2, 14, 15, 14), //5
+    				Block.box(1, 0, 1, 15, 8, 15)),
+    		Shapes.or(Block.box(4, 8, 2, 14, 15, 14), //6
+    				Block.box(1, 0, 1, 15, 8, 15)),
+    		Shapes.or(Block.box(6, 8, 2, 14, 15, 14), //7
+    				Block.box(1, 0, 1, 15, 8, 15)),
+    		Shapes.or(Block.box(8, 8, 2, 14, 15, 14), //8
+    				Block.box(1, 0, 1, 15, 8, 15)),
+    		Shapes.or(Block.box(10, 8, 2, 14, 15, 14), //9
+    				Block.box(1, 0, 1, 15, 8, 15)),
+    		Block.box(1, 0, 1, 15, 8, 15), //10
+    		Block.box(4, 0, 1, 15, 8, 15), //11
+    		Block.box(5, 0, 1, 15, 8, 15), //12
+    		Block.box(7, 0, 1, 15, 8, 15), //13
+    		Block.box(9, 0, 1, 15, 8, 15), //14
+    		Block.box(11, 0, 1, 15, 8, 15) //15
     };
     
     public ThreeTieredCakeBlock(final Block.Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(ThreeTieredCakeBlock.BITES, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(BITES, Integer.valueOf(0)));
     }
     
-    public VoxelShape getShape(final BlockState state, final IBlockReader worldIn, final BlockPos pos, final ISelectionContext context) {
-        return ThreeTieredCakeBlock.SHAPES[state.get(ThreeTieredCakeBlock.BITES)];
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+        return SHAPES[state.getValue(BITES)];
     }
     
-    public boolean isNormalCube(final BlockState state, final IBlockReader worldIn, final BlockPos pos) {
-        return false;
-    }
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+		ItemStack itemstack = player.getItemInHand(hand);
+		if (level.isClientSide) {
+			if (eat(level, pos, state, player).consumesAction()) {
+				return InteractionResult.SUCCESS;
+			}
+			
+			if (itemstack.isEmpty()) {
+				return InteractionResult.CONSUME;
+			}
+		}
+		return eat(level, pos, state, player);
+	}
     
-    public ActionResultType onBlockActivated(final BlockState state, final World worldIn, final BlockPos pos, final PlayerEntity player, final Hand handIn, final BlockRayTraceResult hit) {
-        if (worldIn.isRemote) {
-            final ItemStack itemstack = player.getHeldItem(handIn);
-            if (this.eatSlice(worldIn, pos, state, player) == ActionResultType.SUCCESS) {
-                return ActionResultType.SUCCESS;
-            }
-            if (itemstack.isEmpty()) {
-                return ActionResultType.CONSUME;
-            }
+    public InteractionResult eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player) {
+        if (!player.canEat(false)) {
+            return InteractionResult.PASS;
         }
-        return this.eatSlice(worldIn, pos, state, player);
-    }
+        player.awardStat(Stats.EAT_CAKE_SLICE);
+		player.getFoodData().eat(2, 0.1F);
+        int i = state.getValue(BITES);
+        accessor.gameEvent(player, GameEvent.EAT, pos);
+		if (i < 15) { // Number must be same as BITES
+			accessor.setBlock(pos, state.setValue(BITES, Integer.valueOf(i + 1)), 3);
+		} else {
+			accessor.removeBlock(pos, false);
+			accessor.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
+		}
+		return InteractionResult.SUCCESS;
+	}
     
-    private ActionResultType eatSlice(final IWorld worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn) {
-        if (!playerIn.canEat(false)) {
-            return ActionResultType.PASS;
-        }
-        playerIn.addStat(Stats.EAT_CAKE_SLICE);
-        playerIn.getFoodStats().addStats(2, 0.1F);
-        final int i = state.get(ThreeTieredCakeBlock.BITES);
-        if (i < 15) { // Number must be same as BITES
-            worldIn.setBlockState(pos, state.with(ThreeTieredCakeBlock.BITES, (i + 1)), 3);
-        }
-        else {
-            worldIn.removeBlock(pos, false);
-        }
-        return ActionResultType.SUCCESS;
-    }
+	@SuppressWarnings("deprecation")
+	public BlockState updateShape(BlockState state, Direction direction, BlockState p_51215_, LevelAccessor accessor, BlockPos pos, BlockPos p_51218_) {
+		return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, p_51215_, accessor, pos, p_51218_);
+	}
+	
+	public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {
+		return reader.getBlockState(pos.below()).getMaterial().isSolid();
+	}
     
-	public BlockState updatePostPlacement(final BlockState stateIn, final Direction facing, final BlockState facingState, final IWorld worldIn, final BlockPos currentPos, final BlockPos facingPos) {
-        return (facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos)) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-    }
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
+    	definition.add(BITES);
+	}
     
-    public boolean isValidPosition(final BlockState state, final IWorldReader worldIn, final BlockPos pos) {
-        return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
-    }
-    
-    protected void fillStateContainer(final StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(BITES);
-    }
-    
-    @Deprecated
-    public int getComparatorInputOverride(final BlockState blockState, final World worldIn, final BlockPos pos) {
-        return (15 - blockState.get(ThreeTieredCakeBlock.BITES)) * 2;
-    }
-    
-    @Deprecated
-    public boolean hasComparatorInputOverride(final BlockState state) {
-        return true;
-    }
-    
-    public boolean allowsMovement(final BlockState state, final IBlockReader worldIn, final BlockPos pos, final PathType type) {
-        return false;
-    }
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+		return (15 - state.getValue(BITES)) * 2;
+	}
+	
+	public boolean hasAnalogOutputSignal(BlockState state) {
+		return true;
+	}
+	
+	public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType computaion) {
+		return false;
+	}
 }

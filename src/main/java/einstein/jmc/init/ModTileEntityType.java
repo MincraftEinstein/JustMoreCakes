@@ -1,17 +1,16 @@
 package einstein.jmc.init;
 
+import einstein.einsteins_library.util.RegistryHandler;
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.tileentity.GlowstoneCakeTileEntity;
-import einstein.jmc.tileentity.TNTCakeTileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import einstein.jmc.blockentity.GlowstoneCakeBlockEntity;
+import einstein.jmc.blockentity.TNTCakeBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
+@EventBusSubscriber(modid = JustMoreCakes.MODID, bus = Bus.MOD)
 public class ModTileEntityType {
 
-	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, JustMoreCakes.MODID);
-
-	public static final RegistryObject<TileEntityType<GlowstoneCakeTileEntity>> GLOWSTONE_CAKE = TILE_ENTITY_TYPES.register("glowstone_cake", () -> TileEntityType.Builder.create(GlowstoneCakeTileEntity::new, ModBlocks.GLOWSTONE_CAKE).build(null));
-	public static final RegistryObject<TileEntityType<TNTCakeTileEntity>> TNT_CAKE = TILE_ENTITY_TYPES.register("tnt_cake", () -> TileEntityType.Builder.create(TNTCakeTileEntity::new, ModBlocks.TNT_CAKE).build(null));
+	public static final BlockEntityType<GlowstoneCakeBlockEntity> GLOWSTONE_CAKE = RegistryHandler.registerBlockEntity(JustMoreCakes.MODID, "glowstone_cake", BlockEntityType.Builder.of(GlowstoneCakeBlockEntity::new, ModBlocks.GLOWSTONE_CAKE));
+	public static final BlockEntityType<TNTCakeBlockEntity> TNT_CAKE = RegistryHandler.registerBlockEntity(JustMoreCakes.MODID, "tnt_cake", BlockEntityType.Builder.of(TNTCakeBlockEntity::new, ModBlocks.TNT_CAKE));
 }

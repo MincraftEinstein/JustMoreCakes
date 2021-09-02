@@ -1,11 +1,11 @@
 package einstein.jmc.effects;
 
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 
-public class BouncingEffect extends Effect {
+public class BouncingEffect extends MobEffect {
 
-	public BouncingEffect(EffectType type, int liquidColorIn) {
+	public BouncingEffect(MobEffectCategory type, int liquidColorIn) {
 		super(type, liquidColorIn);
 	}
 }

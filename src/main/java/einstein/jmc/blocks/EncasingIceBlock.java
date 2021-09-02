@@ -4,52 +4,52 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.BreakableBlock;
-import net.minecraft.block.material.PushReaction;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HalfTransparentBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.Vec3;
 
-public class EncasingIceBlock extends BreakableBlock {
+public class EncasingIceBlock extends HalfTransparentBlock {
 
-	public EncasingIceBlock(AbstractBlock.Properties properties) {
+	public EncasingIceBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 	}
 
 	@Override
-	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
 		return;
 	}
 
 	@Override
-	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if (timeGoneBy(worldIn, 1)) {
-			worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+		if (timeGoneBy(level, 1)) {
+			level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 		}
 	}
 
 	@Override
-	public PushReaction getPushReaction(BlockState state) {
+	public PushReaction getPistonPushReaction(BlockState state) {
 		return PushReaction.NORMAL;
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-		entityIn.setSprinting(false);
-		entityIn.setMotionMultiplier(state, new Vector3d(0.001D, 0.001D, 0.001D));
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+		entity.setSprinting(false);
+		entity.makeStuckInBlock(state, new Vec3(0.001D, 0.001D, 0.001D));
 	}
 
-	private static boolean timeGoneBy(World world, int ticks) {
+	private static boolean timeGoneBy(Level level, int ticks) {
 		if (ticks == 0)
 			return true;
-		return world.getGameTime() % (ticks) == 0;
+		return level.getGameTime() % (ticks) == 0;
 	}
 }
