@@ -56,15 +56,15 @@
 	"item.minecraft.tipped_arrow.effect.freezcing":"Arrow of Freezing",
 	
 	// EFFECTS
-	"effect.jmc.bouncing": "Bouncing [W.I.P]",
+	"effect.jmc.bouncing": "Bouncing",
 	"effect.jmc.freezing": "Freezing",
 	
 	// CREATIVE TAB
 	"itemGroup.jmc_tab": "Just More Cakes!",
 	
 	// ADVANCEMENTS
-	"advancements.husbandry.craft_cake.title": "Cake Is A Lie",
-	"advancements.husbandry.craft_cake.description": "Craft A Cake",
+	"advancements.husbandry.craft_cake.title": "Cake is a Lie",
+	"advancements.husbandry.craft_cake.description": "Craft a cake",
 	"advancements.husbandry.craft_all_cakes.title": "Num Num Num Num Num",
-	"advancements.husbandry.craft_all_cakes.description": "Craft All The Cakes In The Mod"
+	"advancements.husbandry.craft_all_cakes.description": "Craft all the cakes in the mod"
 }

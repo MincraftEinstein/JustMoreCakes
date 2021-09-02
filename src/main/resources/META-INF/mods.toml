@@ -5,17 +5,19 @@ license="All rights reserved"
 
 [[mods]]
 	modId="jmc"
-	version="3.0"
+	version="3.1"
 	displayName="Just More Cakes!"
 	#updateJSONURL="http://myurl.me/"
 	displayURL="https://www.curseforge.com/minecraft/mc-mods/just-more-cakes"
-	logoFile="pack.png"
+	logoFile="logo.png"
 	credits="Me the mod author"
 	authors="MincraftEinstein"
-	itemIcon="jmc:chocolate_cake" #Used by Catalogue
 	description='''
 A mod that adds 30+ new cakes to Minecraft. Some with special properties, some with no properties and some with useless properties. Chocolate Cake, Three Tiered Cake, TNT Cake...
 '''
+
+[modproperties.jmc]
+    catalogueItemIcon="jmc:chocolate_cake"
 
 [[dependencies.jmc]]
     modId="forge"
