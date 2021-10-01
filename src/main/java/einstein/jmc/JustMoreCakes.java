@@ -74,14 +74,14 @@ public class JustMoreCakes
 			ModPotions.registerPotionRecipes();
 		});
 	}
-    
+	
 	@Nullable
 	private static Block missingBlock(String name) {
 		switch (name) {
 		case "cheese_cake":
-			return ModBlocks.CHEESECAKE;
+			return ModBlocks.getBlock(ModBlocks.RL("cheesecake"));
 		case "triple_decker_cake":
-			return ModBlocks.THREE_TIERED_CAKE;
+			return ModBlocks.getBlock(ModBlocks.RL("three_tiered_cake"));
 		}
 		return null;
 	}
@@ -91,9 +91,9 @@ public class JustMoreCakes
 		handleMissingMappings(event, MODID, name -> {
 			switch (name) {
 			case "cheese_cake":
-				return ModBlocks.CHEESECAKE.asItem();
+				return ModBlocks.getBlock(ModBlocks.RL("cheesecake")).asItem();
 			case "triple_decker_cake":
-				return ModBlocks.THREE_TIERED_CAKE.asItem();
+				return ModBlocks.getBlock(ModBlocks.RL("three_tiered_cake")).asItem();
 			}
 			ItemLike block = missingBlock(name);
 			return block == null ? null : block.asItem();

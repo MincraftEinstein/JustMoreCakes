@@ -1,0 +1,89 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"middle_side": "jmc:blocks/three_tiered_cake_middle_side",
+		"bottom": "jmc:blocks/three_tiered_cake_bottom",
+		"particle": "jmc:blocks/three_tiered_cake_lower_side",
+		"lower_side": "jmc:blocks/three_tiered_cake_lower_side",
+		"top": "jmc:blocks/three_tiered_cake_top",
+		"lower_top": "jmc:blocks/three_tiered_cake_lower_top",
+		"top_side": "jmc:blocks/three_tiered_cake_top_side",
+		"middle_top": "jmc:blocks/three_tiered_cake_middle_top"
+	},
+	"elements": [
+		{
+			"name": "lower_cake",
+			"from": [1, 0, 1],
+			"to": [15, 8, 15],
+			"faces": {
+				"north": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
+				"east": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
+				"south": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
+				"west": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#lower_top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#bottom"}
+			}
+		},
+		{
+			"name": "middle_cake",
+			"from": [2, 8, 2],
+			"to": [14, 15, 14],
+			"faces": {
+				"north": {"uv": [2, 9, 14, 16], "texture": "#middle_side"},
+				"east": {"uv": [2, 9, 14, 16], "texture": "#middle_side"},
+				"south": {"uv": [2, 9, 14, 16], "texture": "#middle_side"},
+				"west": {"uv": [2, 9, 14, 16], "texture": "#middle_side"},
+				"up": {"uv": [2, 2, 14, 14], "texture": "#middle_top"}
+			}
+		},
+		{
+			"name": "top_cake",
+			"from": [3, 15, 3],
+			"to": [13, 21, 13],
+			"faces": {
+				"north": {"uv": [3, 10, 13, 16], "texture": "#top_side"},
+				"east": {"uv": [3, 10, 13, 16], "texture": "#top_side"},
+				"south": {"uv": [3, 10, 13, 16], "texture": "#top_side"},
+				"west": {"uv": [3, 10, 13, 16], "texture": "#top_side"},
+				"up": {"uv": [3, 3, 13, 13], "texture": "#top"}
+			}
+		},
+		{
+			"name": "candle",
+			"from": [7, 21, 7],
+			"to": [9, 27, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 13, 0]},
+			"color": 6,
+			"faces": {
+				"north": {"uv": [0, 8, 2, 14], "texture": "#missing"},
+				"east": {"uv": [0, 8, 2, 14], "texture": "#missing"},
+				"south": {"uv": [0, 8, 2, 14], "texture": "#missing"},
+				"west": {"uv": [0, 8, 2, 14], "texture": "#missing"},
+				"up": {"uv": [0, 6, 2, 8], "texture": "#missing"},
+				"down": {"uv": [0, 14, 2, 16], "texture": "#missing", "cullface": "down"}
+			}
+		},
+		{
+			"name": "candle_wick",
+			"from": [7.5, 27, 8],
+			"to": [8.5, 28, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 27, 8]},
+			"color": 1,
+			"faces": {
+				"north": {"uv": [0, 5, 1, 6], "texture": "#missing"},
+				"south": {"uv": [0, 5, 1, 6], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "candle_wick2",
+			"from": [7.5, 27, 8],
+			"to": [8.5, 28, 8],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 27, 8]},
+			"color": 3,
+			"faces": {
+				"north": {"uv": [0, 5, 1, 6], "texture": "#missing"},
+				"south": {"uv": [0, 5, 1, 6], "texture": "#missing"}
+			}
+		}
+	]
+}

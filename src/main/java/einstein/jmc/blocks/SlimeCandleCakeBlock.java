@@ -1,33 +1,21 @@
 package einstein.jmc.blocks;
 
-import einstein.jmc.init.ModPotions;
-import einstein.jmc.init.ModServerConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class SlimeCakeBlock extends BaseCakeBlock
+public class SlimeCandleCakeBlock extends BaseCandleCakeBlock
 {
-    public SlimeCakeBlock(final BlockBehaviour.Properties properties) {
-        super(properties);
+    public SlimeCandleCakeBlock(Block block, BlockBehaviour.Properties properties) {
+        super(block, properties);
     }
-    
-    @Override
-    public void eatActions(Player player) {
-		player.getFoodData().eat(2, 0.1F);
-        player.addEffect(new MobEffectInstance(MobEffects.JUMP, ModServerConfigs.SLIME_CAKE_JUMP_BOOST_DUR.get(), ModServerConfigs.SLIME_CAKE_JUMP_BOOST_STRENGTH.get()));
-        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, ModServerConfigs.SLIME_CAKE_RES_DUR.get(), ModServerConfigs.SLIME_CAKE_RES_STRENGTH.get()));
-        player.addEffect(new MobEffectInstance(ModPotions.BOUNCING_EFFECT, ModServerConfigs.SLIME_CAKE_BOUNCING_DUR.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_STRENGTH.get()));
-	}
     
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float p_154571_) {
 		if (entity.isSuppressingBounce()) {

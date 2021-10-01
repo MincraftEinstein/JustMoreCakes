@@ -31,7 +31,7 @@ public class ModVillagerTrades {
 			journeyman.add(new VillagerTradesUtils.ItemsForEmeraldsTrade(Blocks.CAKE, 5, 1, 4, 10));
 			expert.add(new VillagerTradesUtils.EmeraldsForItemsTrade(Items.MILK_BUCKET, 1, 2, 5, 15));
 			expert.add(new VillagerTradesUtils.ItemsForEmeraldsTrade(Items.MILK_BUCKET, 2, 1, 5, 15));
-			master.add(new VillagerTradesUtils.ItemsForEmeraldsTrade(ModBlocks.CREEPER_CAKE, 20, 1, 1, 25));
+			master.add(new VillagerTradesUtils.ItemsForEmeraldsTrade(ModBlocks.getBlock(ModBlocks.RL("creeper_cake")), 20, 1, 1, 25));
 		}
 	}
 }

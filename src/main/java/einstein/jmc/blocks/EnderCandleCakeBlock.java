@@ -2,30 +2,20 @@ package einstein.jmc.blocks;
 
 import java.util.Random;
 
-import einstein.einsteins_library.util.Actions;
 import einstein.jmc.init.ModClientConfigs;
-import einstein.jmc.init.ModServerConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class EnderCakeBlock extends BaseCakeBlock
-{
-    public EnderCakeBlock(final BlockBehaviour.Properties properties) {
-        super(properties);
-    }
-    
-	@Override
-	public void eatActions(Player player) {
-		player.getFoodData().eat(2, 0.1F);
-        Actions.teleportRandomly(player, ModServerConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
-        player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
+public class EnderCandleCakeBlock extends BaseCandleCakeBlock {
+
+	public EnderCandleCakeBlock(Block candle, BlockBehaviour.Properties properties) {
+		super(candle, properties);
 	}
 	
     @OnlyIn(Dist.CLIENT)

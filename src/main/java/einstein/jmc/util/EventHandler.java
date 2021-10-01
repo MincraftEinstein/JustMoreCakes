@@ -3,10 +3,12 @@ package einstein.jmc.util;
 import java.util.Random;
 
 import einstein.jmc.blocks.BirthdayCakeBlock;
+import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.blocks.BaseEntityCakeBlock;
 import einstein.jmc.blocks.CupcakeBlock;
 import einstein.jmc.blocks.ThreeTieredCakeBlock;
+import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModPotions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -22,11 +24,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 public class EventHandler {
 
@@ -101,5 +106,15 @@ public class EventHandler {
 				}
 			}
 		}
+	}
+	
+	@EventBusSubscriber(modid = JustMoreCakes.MODID, bus = Bus.MOD)
+	public static final class RegistryEvents {
+		
+		@SubscribeEvent
+	    public static void onBlocksRegistered(final RegistryEvent.Register<Block> event) {
+			JustMoreCakes.LOGGER.info("Registering cake blocks");
+			ModBlocks.init();
+		}	
 	}
 }

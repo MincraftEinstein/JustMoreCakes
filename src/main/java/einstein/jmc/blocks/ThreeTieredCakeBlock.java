@@ -1,11 +1,16 @@
 package einstein.jmc.blocks;
 
+import einstein.jmc.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -13,6 +18,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -71,6 +77,24 @@ public class ThreeTieredCakeBlock extends Block
     
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		ItemStack itemstack = player.getItemInHand(hand);
+		Item item = itemstack.getItem();
+		if (itemstack.is(ItemTags.CANDLES) && state.getValue(BITES) == 0) {
+			Block block = Block.byItem(item);
+			if (block instanceof CandleBlock) {
+				if (!player.isCreative()) {
+					itemstack.shrink(1);
+				}
+
+				level.playSound((Player) null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1.0F, 1.0F);
+				String candle = block.getRegistryName().getPath();
+				Block candleBlock = ModBlocks.getBlock(ModBlocks.RL(candle + "_three_tiered_cake"));
+				((ThreeTieredCandleCakeBlock) candleBlock).setOriginalCake(this);
+				level.setBlockAndUpdate(pos, candleBlock.defaultBlockState());
+				level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+				player.awardStat(Stats.ITEM_USED.get(item));
+				return InteractionResult.SUCCESS;
+			}
+		}
 		if (level.isClientSide) {
 			if (eat(level, pos, state, player).consumesAction()) {
 				return InteractionResult.SUCCESS;

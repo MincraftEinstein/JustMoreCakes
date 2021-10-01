@@ -8,15 +8,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class RedstoneCake extends CakeBlock {
+public class RedstoneCakeBlock extends BaseCakeBlock {
 
-	public RedstoneCake(BlockBehaviour.Properties properties) {
+	public RedstoneCakeBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 	}
 
