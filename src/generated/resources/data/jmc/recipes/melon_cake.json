@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "$~$",
+    "@@@"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:melon_slice"
+    },
+    "$": {
+      "item": "minecraft:sugar"
+    },
+    "~": {
+      "item": "minecraft:egg"
+    },
+    "@": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "result": {
+    "item": "jmc:melon_cake"
+  }
+}

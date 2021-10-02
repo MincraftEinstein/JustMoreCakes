@@ -17,53 +17,46 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 	
 	@Override
 	protected void registerStatesAndModels() {
-		cubeAll(ModBlocks.ENCASING_ICE);
+		simpleBlock(ModBlocks.ENCASING_ICE, models().getExistingFile(mcLoc("ice")));
 	}
 	
-	private void cakeBlock(Block block, boolean hasCross) {
+	private void cakeBlock(Block block) {
 		String name = block.getRegistryName().getPath();
 		String side = name + "_side";
 		String top = name + "_top";
 		String bottom = name + "_bottom";
 		String inside = name + "_inner";
-		String parent;
-		if (hasCross) {
-			parent = "template_cross_cake";
-		}
-		else {
-			parent = "template_cake";
-		}
 		getVariantBuilder(block)
-		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(0)).addModels(new ConfiguredModel(models().withExistingParent(name, modLoc(parent))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(0)).addModels(new ConfiguredModel(models().withExistingParent(name, modLoc("template_cake"))
 				.texture("side", side)
 				.texture("top", top)
 				.texture("bottom", bottom)))
-		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(1)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice1", modLoc(parent + "_slice1"))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(1)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice1", modLoc("template_cake_slice1"))
 				.texture("side", side)
 				.texture("top", top)
 				.texture("bottom", bottom)
 				.texture("inside", inside)))
-		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(2)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice2", modLoc(parent + "_slice2"))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(2)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice2", modLoc("template_cake_slice2"))
 				.texture("side", side)
 				.texture("top", top)
 				.texture("bottom", bottom)
 				.texture("inside", inside)))
-		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(3)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice3", modLoc(parent + "_slice3"))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(3)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice3", modLoc("template_cake_slice3"))
 				.texture("side", side)
 				.texture("top", top)
 				.texture("bottom", bottom)
 				.texture("inside", inside)))
-		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(4)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice4", modLoc(parent + "_slice4"))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(4)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice4", modLoc("template_cake_slice4"))
 				.texture("side", side)
 				.texture("top", top)
 				.texture("bottom", bottom)
 				.texture("inside", inside)))
-		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(5)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice5", modLoc(parent + "_slice5"))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(5)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice5", modLoc("template_cake_slice5"))
 				.texture("side", side)
 				.texture("top", top)
 				.texture("bottom", bottom)
 				.texture("inside", inside)))
-		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(6)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice6", modLoc(parent + "_slice6"))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(6)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice6", modLoc("template_cake_slice6"))
 				.texture("side", side)
 				.texture("top", top)
 				.texture("bottom", bottom)
@@ -73,6 +66,53 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 	private void candleCakeBlock(Block block) {
 		String name = block.getRegistryName().getPath();
 		simpleBlock(block, new ConfiguredModel(models().withExistingParent(name, "template_cake_with_candle")));
+	}
+	
+	private void crossCakeBlock(Block block, String cross) {
+		String name = block.getRegistryName().getPath();
+		String side = name + "_side";
+		String top = name + "_top";
+		String bottom = name + "_bottom";
+		String inside = name + "_inner";
+		getVariantBuilder(block)
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(0)).addModels(new ConfiguredModel(models().withExistingParent(name, modLoc("template_cake"))
+				.texture("side", side)
+				.texture("top", top)
+				.texture("bottom", bottom)
+				.texture("cross", cross)))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(1)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice1", modLoc("template_cake_slice1"))
+				.texture("side", side)
+				.texture("top", top)
+				.texture("bottom", bottom)
+				.texture("inside", inside)
+				.texture("cross", cross)))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(2)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice2", modLoc("template_cake_slice2"))
+				.texture("side", side)
+				.texture("top", top)
+				.texture("bottom", bottom)
+				.texture("inside", inside)
+				.texture("cross", cross)))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(3)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice3", modLoc("template_cake_slice3"))
+				.texture("side", side)
+				.texture("top", top)
+				.texture("bottom", bottom)
+				.texture("inside", inside)
+				.texture("cross", cross)))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(4)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice4", modLoc("template_cake_slice4"))
+				.texture("side", side)
+				.texture("top", top)
+				.texture("bottom", bottom)
+				.texture("inside", inside)))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(5)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice5", modLoc("template_cake_slice5"))
+				.texture("side", side)
+				.texture("top", top)
+				.texture("bottom", bottom)
+				.texture("inside", inside)))
+		.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(6)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice6", modLoc("template_cake_slice6"))
+				.texture("side", side)
+				.texture("top", top)
+				.texture("bottom", bottom)
+				.texture("inside", inside)));
 	}
 	
 	@Override
