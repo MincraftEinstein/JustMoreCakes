@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "$~$",
+    "@@@"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:lava_bucket"
+    },
+    "$": {
+      "item": "minecraft:sugar"
+    },
+    "~": {
+      "item": "minecraft:egg"
+    },
+    "@": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "result": {
+    "item": "jmc:lava_cake"
+  }
+}

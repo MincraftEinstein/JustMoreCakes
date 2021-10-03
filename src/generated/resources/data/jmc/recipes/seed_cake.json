@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "$~$",
+    "@@@"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:seeds"
+    },
+    "$": {
+      "item": "minecraft:sugar"
+    },
+    "~": {
+      "item": "minecraft:egg"
+    },
+    "@": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "result": {
+    "item": "jmc:seed_cake"
+  }
+}
