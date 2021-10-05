@@ -1,14 +1,14 @@
 {
     "textures": {
-    	"particle": "jmc:blocks/three_tiered_cake_lower_side",
-        "middle_side": "jmc:blocks/three_tiered_cake_middle_side",
-        "bottom": "jmc:blocks/three_tiered_cake_bottom",
-        "lower_side": "jmc:blocks/three_tiered_cake_lower_side",
-        "top": "jmc:blocks/three_tiered_cake_top",
-        "lower_top": "jmc:blocks/three_tiered_cake_lower_top",
-        "top_side": "jmc:blocks/three_tiered_cake_top_side",
-        "middle_top": "jmc:blocks/three_tiered_cake_middle_top",
-        "top_inner": "jmc:blocks/three_tiered_cake_top_inner"
+        "middle_side": "jmc:block/three_tiered_cake_middle_side",
+        "bottom": "jmc:block/three_tiered_cake_bottom",
+        "lower_side": "jmc:block/three_tiered_cake_lower_side",
+        "top": "jmc:block/three_tiered_cake_top",
+        "lower_top": "jmc:block/three_tiered_cake_lower_top",
+        "top_side": "jmc:block/three_tiered_cake_top_side",
+        "middle_top": "jmc:block/three_tiered_cake_middle_top",
+        "top_inner": "jmc:block/three_tiered_cake_top_inner",
+        "particle": "#lower_side"
     },
     "elements": [
         {

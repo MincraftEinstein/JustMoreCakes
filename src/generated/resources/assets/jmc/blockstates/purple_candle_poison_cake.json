@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/purple_candle_poison_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/purple_candle_poison_cake_lit"
+    }
+  }
+}

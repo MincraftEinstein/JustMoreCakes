@@ -83,7 +83,7 @@ public class ModBlocks
     public static void init() {
     	for (int i = 0; i < CakeTypes.values().length; i++) {
     		String type = CakeTypes.byId(i).getName();
-    		String name = "";
+    		String name;
     		if (type == "cheese") {
     			name = type + "cake";
     		}
@@ -162,7 +162,7 @@ public class ModBlocks
 		return new ResourceLocation(JustMoreCakes.MODID, string);
 	}
 	
-	protected static ResourceLocation MCRL(String string) {
+	public static ResourceLocation MCRL(String string) {
 		return new ResourceLocation("minecraft", string);
 	}
 }

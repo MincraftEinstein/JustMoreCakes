@@ -44,7 +44,7 @@ public class ThreeTieredCandleCakeBlock extends AbstractCandleBlock {
 			Block.box(2, 8, 2, 14, 15, 14),
 			Block.box(7, 21, 7, 9, 27, 9));
 	private static final Map<Block, ThreeTieredCandleCakeBlock> BY_CANDLE = Maps.newHashMap();
-	private static final Iterable<Vec3> PARTICLE_OFFSETS = ImmutableList.of(new Vec3(0.5D, 1.0D, 0.5D));
+	private static final Iterable<Vec3> PARTICLE_OFFSETS = ImmutableList.of(new Vec3(0.5D, 1.8125D, 0.5D));
 	protected ThreeTieredCakeBlock originalCake;
 
 	public ThreeTieredCandleCakeBlock(Block p_152859_, BlockBehaviour.Properties p_152860_) {

@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cross_cake_slice6",
+  "textures": {
+    "side": "jmc:block/crimson_fungus_cake_side",
+    "top": "jmc:block/crimson_fungus_cake_top",
+    "bottom": "jmc:block/crimson_fungus_cake_bottom",
+    "inside": "jmc:block/crimson_fungus_cake_inner"
+  }
+}

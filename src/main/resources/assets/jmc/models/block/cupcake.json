@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "jmc:blocks/cupcake",
-		"cupcake": "jmc:blocks/cupcake"
+		"particle": "jmc:block/cupcake",
+		"cupcake": "jmc:block/cupcake"
 	},
 	"elements": [
 		{

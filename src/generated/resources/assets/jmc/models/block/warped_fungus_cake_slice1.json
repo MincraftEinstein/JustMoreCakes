@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cake_slice1",
+  "textures": {
+    "side": "jmc:block/warped_fungus_cake_side",
+    "top": "jmc:block/warped_fungus_cake_top",
+    "bottom": "jmc:block/warped_fungus_cake_bottom",
+    "inside": "jmc:block/warped_fungus_cake_inner"
+  }
+}
