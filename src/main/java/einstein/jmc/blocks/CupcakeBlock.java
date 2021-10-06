@@ -95,8 +95,8 @@ public class CupcakeBlock extends Block
 		return reader.getBlockState(pos.below()).getMaterial().isSolid();
 	}
     
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
-    	definition.add(BITES);
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    	builder.add(BITES);
 	}
     
 	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
