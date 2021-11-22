@@ -151,8 +151,9 @@ dependencies {
     
     // Library
     implementation fg.deobf("curse.maven:einsteins-library-405744:3442335")
-    implementation fg.deobf("curse.maven:jei-238222:3438501")
-    implementation fg.deobf("curse.maven:catalogue-459701:3399552")
+    implementation fg.deobf("curse.maven:jei-238222:3527367")
+    implementation fg.deobf("curse.maven:catalogue-459701:3529459")
+    implementation fg.deobf("curse.maven:configured-457570:3529542")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
