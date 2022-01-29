@@ -39,13 +39,13 @@ public class EventHandler {
 		BlockPos pos = event.getPos();
 		BlockState state = level.getBlockState(pos);
 		Block block = state.getBlock();
-
+		
 		if (ModList.get().isLoaded("cakechomps")) {
 			if (!(block instanceof BirthdayCakeBlock || block instanceof CupcakeBlock || block instanceof BaseEntityCakeBlock || block instanceof ThreeTieredCakeBlock || block instanceof BaseCakeBlock) || !player.canEat(false)) {
 				return;
 			}
-			ItemStack stack = block.getPickBlock(state, null, level, pos, player);
-
+			ItemStack stack = block.getCloneItemStack(state, null, level, pos, player);
+			
 			for (int i = 0; i < 16; ++i) {
 				Vec3 vec3d = new Vec3((random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
 				vec3d = vec3d.xRot(-player.getXRot() * ((float) Math.PI / 180F));
@@ -56,7 +56,7 @@ public class EventHandler {
 				vec3d1 = vec3d1.yRot(-player.getYRot() * ((float) Math.PI / 180F));
 				vec3d1 = vec3d1.add(player.getX(), player.getEyeY(), player.getZ());
 				ItemParticleOption particle = new ItemParticleOption(ParticleTypes.ITEM, stack);
-
+				
 				if (player.level instanceof ServerLevel) {
 					ServerLevel serverWorld = (ServerLevel) player.level;
 					serverWorld.sendParticles(particle, vec3d1.x, vec3d1.y, vec3d1.z, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
