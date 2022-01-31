@@ -18,8 +18,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class LavaCandleCakeBlock extends BaseCandleCakeBlock {
 
-	public LavaCandleCakeBlock(Block candle, BlockBehaviour.Properties properties) {
-		super(candle, properties);
+	public LavaCandleCakeBlock(Block candle, BaseCakeBlock originalCake, BlockBehaviour.Properties properties) {
+		super(candle, originalCake, properties);
 	}
 	
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {

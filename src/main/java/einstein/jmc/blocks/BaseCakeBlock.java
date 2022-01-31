@@ -71,7 +71,6 @@ public class BaseCakeBlock extends Block {
 					level.playSound((Player) null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1.0F, 1.0F);
 					String candle = block.getRegistryName().getPath();
 					Block candleBlock = ModBlocks.getBlock(ModBlocks.RL(candle + "_" + name));
-					((BaseCandleCakeBlock) candleBlock).setOriginalCake(this);
 					level.setBlockAndUpdate(pos, candleBlock.defaultBlockState());
 					level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 					player.awardStat(Stats.ITEM_USED.get(item));

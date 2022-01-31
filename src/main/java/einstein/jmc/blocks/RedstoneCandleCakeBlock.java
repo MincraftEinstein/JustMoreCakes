@@ -16,8 +16,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class RedstoneCandleCakeBlock extends BaseCandleCakeBlock {
 
-	public RedstoneCandleCakeBlock(Block candle, BlockBehaviour.Properties properties) {
-		super(candle, properties);
+	public RedstoneCandleCakeBlock(Block candle, BaseCakeBlock originalCake, BlockBehaviour.Properties properties) {
+		super(candle, originalCake, properties);
 	}
 	
 	@Override

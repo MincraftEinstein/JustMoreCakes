@@ -13,8 +13,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class SlimeCandleCakeBlock extends BaseCandleCakeBlock
 {
-    public SlimeCandleCakeBlock(Block block, BlockBehaviour.Properties properties) {
-        super(block, properties);
+    public SlimeCandleCakeBlock(Block block, BaseCakeBlock originalCake, BlockBehaviour.Properties properties) {
+        super(block, originalCake, properties);
     }
     
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float p_154571_) {

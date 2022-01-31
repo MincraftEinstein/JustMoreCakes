@@ -2,7 +2,6 @@ package einstein.jmc.blocks;
 
 import com.google.common.collect.ImmutableList;
 
-import einstein.jmc.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -37,10 +36,11 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 	protected static final VoxelShape SHAPE = Shapes.or(
 			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
 			Block.box(7.0D, 8.0D, 7.0D, 9.0D, 14.0D, 9.0D));
-	protected BaseCakeBlock originalCake;
+	private BaseCakeBlock originalCake;
 
-	public BaseCandleCakeBlock(Block candle, BlockBehaviour.Properties properties) {
+	public BaseCandleCakeBlock(Block candle, BaseCakeBlock orignalCake, BlockBehaviour.Properties properties) {
 		super(properties);
+		this.originalCake = orignalCake;
 		this.registerDefaultState(this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)));
 	}
 	
@@ -52,10 +52,6 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 		return SHAPE;
 	}
 	
-	public void setOriginalCake(BaseCakeBlock cake) {
-		originalCake = cake;
-	}
-	
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		if (!itemstack.is(Items.FLINT_AND_STEEL) && !itemstack.is(Items.FIRE_CHARGE)) {
@@ -63,7 +59,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 				extinguish(player, state, level, pos);
 				return InteractionResult.sidedSuccess(level.isClientSide);
 			} else {
-				InteractionResult interactionresult = originalCake.eat(level, pos, ModBlocks.getBlock(ModBlocks.RL(originalCake.getRegistryName().getPath())).defaultBlockState(), player);
+				InteractionResult interactionresult = originalCake.eat(level, pos, originalCake.defaultBlockState(), player);
 				if (interactionresult.consumesAction()) {
 					dropResources(state, level, pos);
 				}
@@ -72,9 +68,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 		}
 		else {
 			level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-			Block candleBlock = this;
-			((BaseCandleCakeBlock) candleBlock).setOriginalCake(originalCake);
-			level.setBlock(pos, candleBlock.defaultBlockState().setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
+			level.setBlock(pos, defaultBlockState().setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
 			level.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
 			itemstack.hurtAndBreak(1, player, (p_41303_) -> {
 				p_41303_.broadcastBreakEvent(player.getUsedItemHand());

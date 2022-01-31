@@ -14,8 +14,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EnderCandleCakeBlock extends BaseCandleCakeBlock {
 
-	public EnderCandleCakeBlock(Block candle, BlockBehaviour.Properties properties) {
-		super(candle, properties);
+	public EnderCandleCakeBlock(Block candle, BaseCakeBlock originalCake, BlockBehaviour.Properties properties) {
+		super(candle, originalCake, properties);
 	}
 	
     @OnlyIn(Dist.CLIENT)

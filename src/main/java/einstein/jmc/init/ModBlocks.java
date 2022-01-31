@@ -69,57 +69,57 @@ public class ModBlocks
     		}
     		
 			if (type == "redstone") {
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new RedstoneCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)), JustMoreCakes.JMC_TAB);
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new RedstoneCandleCakeBlock(Blocks.CANDLE, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
+				BaseCakeBlock redstoneCake = RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new RedstoneCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)), JustMoreCakes.JMC_TAB);
+				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new RedstoneCandleCakeBlock(Blocks.CANDLE, redstoneCake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
 				for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 					String color = DyeColor.byId(i2).getName();
-					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new RedstoneCandleCakeBlock(getBlock(MCRL(color + "_candle")), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
+					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new RedstoneCandleCakeBlock(getBlock(MCRL(color + "_candle")), redstoneCake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
 				}
 			}
 			else if (type == "ender") {
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new EnderCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)), JustMoreCakes.JMC_TAB);
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new EnderCandleCakeBlock(Blocks.CANDLE, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
+				BaseCakeBlock enderCake = RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new EnderCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)), JustMoreCakes.JMC_TAB);
+				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new EnderCandleCakeBlock(Blocks.CANDLE, enderCake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
 				for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 					String color = DyeColor.byId(i2).getName();
-					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new EnderCandleCakeBlock(getBlock(MCRL(color + "_candle")), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
+					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new EnderCandleCakeBlock(getBlock(MCRL(color + "_candle")), enderCake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
 				}
 			}
 			else if (type == "lava") {
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new LavaCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).lightLevel((state) -> {
+				BaseCakeBlock lavaCake = RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new LavaCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).lightLevel((state) -> {
 					return 9;
 				})), JustMoreCakes.JMC_TAB);
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new LavaCandleCakeBlock(Blocks.CANDLE, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).lightLevel((state) -> {
+				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new LavaCandleCakeBlock(Blocks.CANDLE, lavaCake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).lightLevel((state) -> {
 					return 9;
 				})));
 				for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 					String color = DyeColor.byId(i2).getName();
-					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new LavaCandleCakeBlock(getBlock(MCRL(color + "_candle")), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).lightLevel((state) -> {
+					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new LavaCandleCakeBlock(getBlock(MCRL(color + "_candle")), lavaCake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).lightLevel((state) -> {
 						return 9;
 					})));
 				}
 			}
 			else if (type == "slime") {
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new SlimeCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).sound(SoundType.SLIME_BLOCK)), JustMoreCakes.JMC_TAB);
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new SlimeCandleCakeBlock(Blocks.CANDLE, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).sound(SoundType.SLIME_BLOCK)));
+				BaseCakeBlock slimeCake =  RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new SlimeCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).sound(SoundType.SLIME_BLOCK)), JustMoreCakes.JMC_TAB);
+				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new SlimeCandleCakeBlock(Blocks.CANDLE, slimeCake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).sound(SoundType.SLIME_BLOCK)));
 				for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 					String color = DyeColor.byId(i2).getName();
-					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new SlimeCandleCakeBlock(getBlock(MCRL(color + "_candle")), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).sound(SoundType.SLIME_BLOCK)));
+					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new SlimeCandleCakeBlock(getBlock(MCRL(color + "_candle")), slimeCake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).sound(SoundType.SLIME_BLOCK)));
 				}
 			}
 			else if (type == "three_tiered") {
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new ThreeTieredCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)), JustMoreCakes.JMC_TAB);
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new ThreeTieredCandleCakeBlock(Blocks.CANDLE, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
+				ThreeTieredCakeBlock threeTieredCake = RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new ThreeTieredCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)), JustMoreCakes.JMC_TAB);
+				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new ThreeTieredCandleCakeBlock(Blocks.CANDLE, threeTieredCake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
 				for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 					String color = DyeColor.byId(i2).getName();
-					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new ThreeTieredCandleCakeBlock(getBlock(MCRL(color + "_candle")), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
+					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new ThreeTieredCandleCakeBlock(getBlock(MCRL(color + "_candle")), threeTieredCake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
 				}
 			}
 			else {
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new BaseCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)), JustMoreCakes.JMC_TAB);
-				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new BaseCandleCakeBlock(Blocks.CANDLE, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
+				BaseCakeBlock cake = RegistryHandler.registerBlock(JustMoreCakes.MODID, name, new BaseCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)), JustMoreCakes.JMC_TAB);
+				RegistryHandler.registerBlock(JustMoreCakes.MODID, "candle_" + name, new BaseCandleCakeBlock(Blocks.CANDLE, cake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
 				for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 					String color = DyeColor.byId(i2).getName();
-					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new BaseCandleCakeBlock(getBlock(MCRL(color + "_candle")), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
+					RegistryHandler.registerBlock(JustMoreCakes.MODID, color + "_candle_" + name, new BaseCandleCakeBlock(getBlock(MCRL(color + "_candle")), cake, BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE)));
 				}
 			}
     	}
