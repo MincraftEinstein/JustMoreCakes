@@ -3,28 +3,37 @@ package einstein.jmc.util;
 import java.util.Random;
 
 import einstein.jmc.blocks.BaseCakeBlock;
+import einstein.jmc.blocks.BaseCandleCakeBlock;
 import einstein.jmc.blocks.BaseEntityCakeBlock;
 import einstein.jmc.blocks.BirthdayCakeBlock;
 import einstein.jmc.blocks.CupcakeBlock;
 import einstein.jmc.blocks.ThreeTieredCakeBlock;
+import einstein.jmc.blocks.ThreeTieredCandleCakeBlock;
 import einstein.jmc.init.ModPotions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
+import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
@@ -34,37 +43,85 @@ public class EventHandler {
 	
 	@SubscribeEvent
 	public void cakeEaten(RightClickBlock event) {
-		Level level = event.getWorld();
-		Player player = event.getPlayer();
-		BlockPos pos = event.getPos();
-		BlockState state = level.getBlockState(pos);
-		Block block = state.getBlock();
-		
 		if (ModList.get().isLoaded("cakechomps")) {
-			if (!(block instanceof BirthdayCakeBlock || block instanceof CupcakeBlock || block instanceof BaseEntityCakeBlock || block instanceof ThreeTieredCakeBlock || block instanceof BaseCakeBlock) || !player.canEat(false)) {
+			Level level = event.getWorld();
+			Player player = event.getPlayer();
+			BlockPos pos = event.getPos();
+			BlockHitResult rayTraceResult = event.getHitVec();
+			InteractionHand hand = event.getHand();
+			BlockState state = level.getBlockState(pos);
+			Block block = state.getBlock();
+			
+			if (!(block instanceof BirthdayCakeBlock || block instanceof CupcakeBlock
+					|| block instanceof BaseEntityCakeBlock || block instanceof ThreeTieredCakeBlock || block instanceof ThreeTieredCandleCakeBlock
+					|| block instanceof BaseCakeBlock || block instanceof BaseCandleCakeBlock) || !player.canEat(false)) {
 				return;
 			}
-			ItemStack stack = block.getCloneItemStack(state, null, level, pos, player);
 			
-			for (int i = 0; i < 16; ++i) {
-				Vec3 vec3d = new Vec3((random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
-				vec3d = vec3d.xRot(-player.getXRot() * ((float) Math.PI / 180F));
-				vec3d = vec3d.yRot(-player.getYRot() * ((float) Math.PI / 180F));
-				double d0 = (-random.nextFloat()) * 0.6D - 0.3D;
-				Vec3 vec3d1 = new Vec3((random.nextFloat() - 0.5D) * 0.3D, d0, 0.6D);
-				vec3d1 = vec3d1.xRot(-player.getXRot() * ((float) Math.PI / 180F));
-				vec3d1 = vec3d1.yRot(-player.getYRot() * ((float) Math.PI / 180F));
-				vec3d1 = vec3d1.add(player.getX(), player.getEyeY(), player.getZ());
-				ItemParticleOption particle = new ItemParticleOption(ParticleTypes.ITEM, stack);
-				
-				if (player.level instanceof ServerLevel) {
-					ServerLevel serverWorld = (ServerLevel) player.level;
-					serverWorld.sendParticles(particle, vec3d1.x, vec3d1.y, vec3d1.z, 1, vec3d.x, vec3d.y + 0.05D, vec3d.z, 0.0D);
-				} else {
-					level.addParticle(particle, vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y + 0.05D, vec3d.z);
+			UseOnContext useoncontext = new UseOnContext(player, hand, rayTraceResult);
+			ItemStack stack = player.getItemInHand(hand);
+			
+			if (event.getUseItem() != Result.DENY) {
+				InteractionResult result = stack.onItemUseFirst(useoncontext);
+
+				if (result != InteractionResult.PASS) {
+					return;
 				}
 			}
-			player.playSound(player.getEatingSound(stack), 0.5F + 0.5F * random.nextInt(2), (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+			
+			boolean flag = !player.getMainHandItem().isEmpty() || !player.getOffhandItem().isEmpty();
+			boolean flag1 = (player.isSecondaryUseActive() && flag)
+					&& !(player.getMainHandItem().doesSneakBypassUse(level, pos, player)
+							&& player.getOffhandItem().doesSneakBypassUse(level, pos, player));
+			
+			if ((event.getUseBlock() == Result.ALLOW || (event.getUseBlock() != Result.DENY && !flag1)) && flag2(player, block, state)) {
+				ItemStack blockStack = block.getCloneItemStack(state, null, level, pos, player);
+				
+				for (int i = 0; i < 16; ++i) {
+					Vec3 vec3 = new Vec3((random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
+					vec3 = vec3.xRot(-player.getXRot() * ((float) Math.PI / 180F));
+					vec3 = vec3.yRot(-player.getYRot() * ((float) Math.PI / 180F));
+					double d0 = (double) (-random.nextFloat()) * 0.6D - 0.3D;
+					Vec3 vec31 = new Vec3((random.nextFloat() - 0.5D) * 0.3D, d0, 0.6D);
+					vec31 = vec31.xRot(-player.getXRot() * ((float) Math.PI / 180F));
+					vec31 = vec31.yRot(-player.getYRot() * ((float) Math.PI / 180F));
+					vec31 = vec31.add(player.getX(), player.getEyeY(), player.getZ());
+					ParticleOptions particle = new ItemParticleOption(ParticleTypes.ITEM, blockStack);
+					
+					if (player.level instanceof ServerLevel serverWorld) {
+						serverWorld.sendParticles(particle, vec31.x, vec31.y, vec31.z, 1, vec3.x, vec3.y + 0.05D, vec3.z, 0.0D);
+					} else {
+						level.addParticle(particle, vec31.x, vec31.y, vec31.z, vec3.x, vec3.y + 0.05D, vec3.z);
+					}
+				}
+				player.playSound(player.getEatingSound(blockStack), 0.5F + 0.5F * random.nextInt(2), (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+			}
+		}
+	}
+	
+	private boolean flag2(Player player, Block block, BlockState state) {
+		String name = block.getRegistryName().getPath();
+		
+		if ((block instanceof BaseCakeBlock && 
+				(!name.contains("red_mushroom_cake") && !name.contains("brown_mushroom_cake") && !name.contains("chorus_cake") && !name.contains("crimson_fungus_cake"))) ||
+				block instanceof ThreeTieredCakeBlock || block instanceof BirthdayCakeBlock) {
+			if (state == block.defaultBlockState()) {
+				if ((block instanceof BirthdayCakeBlock)) {
+					return false;
+				}
+				else if (player.getMainHandItem().is(ItemTags.CANDLES)) {
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			return true;
 		}
 	}
 	
