@@ -24,6 +24,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -101,6 +102,7 @@ public class EventHandler {
 	
 	private boolean flag2(Player player, Block block, BlockState state) {
 		String name = block.getRegistryName().getPath();
+		ItemStack heldItem = player.getMainHandItem();
 		
 		if ((block instanceof BaseCakeBlock && 
 				(!name.contains("red_mushroom_cake") && !name.contains("brown_mushroom_cake") && !name.contains("chorus_cake") && !name.contains("crimson_fungus_cake"))) ||
@@ -109,7 +111,7 @@ public class EventHandler {
 				if ((block instanceof BirthdayCakeBlock)) {
 					return false;
 				}
-				else if (player.getMainHandItem().is(ItemTags.CANDLES)) {
+				else if (heldItem.is(ItemTags.CANDLES)) {
 					return false;
 				}
 				else {
@@ -121,7 +123,17 @@ public class EventHandler {
 			}
 		}
 		else {
-			return true;
+			if (block instanceof BaseCandleCakeBlock || block instanceof ThreeTieredCandleCakeBlock) {
+				if (heldItem.is(Items.FLINT_AND_STEEL) || heldItem.is(Items.FIRE_CHARGE)) {
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+			else {
+				return true;	
+			}
 		}
 	}
 	

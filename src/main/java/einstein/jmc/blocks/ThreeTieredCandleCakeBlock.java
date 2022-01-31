@@ -9,8 +9,12 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.FireChargeItem;
+import net.minecraft.world.item.FlintAndSteelItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -21,6 +25,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -68,14 +73,25 @@ public class ThreeTieredCandleCakeBlock extends AbstractCandleBlock {
 			}
 		}
 		else {
-			level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
-			level.setBlock(pos, originalCake.defaultBlockState().setValue(LIT, Boolean.valueOf(true)), 11);
-			level.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
-			itemstack.hurtAndBreak(1, player, (p_41303_) -> {
-				p_41303_.broadcastBreakEvent(player.getUsedItemHand());
-			});
+			if (state.getValue(LIT) == false) {
+				level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+				level.setBlock(pos, defaultBlockState().setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
+				level.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
+				itemstack.hurtAndBreak(1, player, (p_41303_) -> {
+					p_41303_.broadcastBreakEvent(player.getUsedItemHand());
+				});
 
-			return InteractionResult.sidedSuccess(level.isClientSide());
+				return InteractionResult.sidedSuccess(level.isClientSide());
+			}
+			else {
+				Item heldItem = player.getMainHandItem().getItem(); 
+				if (heldItem instanceof FlintAndSteelItem || heldItem instanceof FireChargeItem) {
+					return heldItem.useOn(new UseOnContext(player, hand, hitResult));
+				}
+				else {
+					return InteractionResult.PASS;
+				}
+			}
 		}
 	}
 	
