@@ -37,6 +37,7 @@
 	"block.jmc.crimson_fungus_cake": "Crimson Fungus Cake",
 	"block.jmc.warped_fungus_cake": "Warped Fungus Cake",
 	"block.jmc.encasing_ice": "Encasing Ice",
+	"block.jmc.cake_oven": "Cake Oven",
 	
 	// ENTITIES
 	"entity.minecraft.villager.jmc.cake_baker": "Cake Baker",
@@ -58,6 +59,9 @@
 	// EFFECTS
 	"effect.jmc.bouncing": "Bouncing",
 	"effect.jmc.freezing": "Freezing",
+	
+	// CONTAINERS
+	"container.jmc.cake_oven": "Cake Oven",
 	
 	// CREATIVE TAB
 	"itemGroup.jmc_tab": "Just More Cakes!",

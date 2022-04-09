@@ -106,6 +106,16 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('#', Items.MILK_BUCKET)
 			.unlockedBy("has_item", has(Items.MILK_BUCKET))
 			.save(consumer, ModItems.CHEESE.getRegistryName());
+		
+		ShapedRecipeBuilder.shaped(ModBlocks.CAKE_OVEN.asItem())
+			.pattern("###")
+			.pattern("#$#")
+			.pattern("~~~")
+			.define('#', Items.BRICK)
+			.define('$', Blocks.FURNACE)
+			.define('~', Blocks.SMOOTH_STONE)
+			.unlockedBy("has_item", has(Blocks.SMOOTH_STONE))
+			.save(consumer, ModBlocks.CAKE_OVEN.getRegistryName());
 	}
 	
 	public void cakeRecipe(Consumer<FinishedRecipe> consumer, ItemLike topping, ItemLike cake) {

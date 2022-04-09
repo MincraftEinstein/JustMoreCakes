@@ -1,7 +1,10 @@
 package einstein.jmc.client;
 
 import einstein.jmc.JustMoreCakes;
+import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.init.ModMenuTypes;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,5 +23,7 @@ public class DataHandler
     	ItemBlockRenderTypes.setRenderLayer(ModBlocks.CHORUS_CAKE, RenderType.cutout());
     	ItemBlockRenderTypes.setRenderLayer(ModBlocks.CRIMSON_FUNGUS_CAKE, RenderType.cutout());
     	ItemBlockRenderTypes.setRenderLayer(ModBlocks.ENCASING_ICE, RenderType.translucent());
+    	
+    	MenuScreens.register(ModMenuTypes.CAKE_OVEN, CakeOvenScreen::new);
     }
 }

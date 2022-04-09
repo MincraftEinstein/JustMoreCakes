@@ -1,0 +1,9 @@
+{
+	"parent": "minecraft:block/orientable_with_bottom",
+	"textures": {
+		"bottom": "jmc:block/cake_oven_bottom",
+		"top": "jmc:block/cake_oven_top",
+		"front": "jmc:block/cake_oven_front_on",
+		"side": "jmc:block/cake_oven_side"
+	}
+}

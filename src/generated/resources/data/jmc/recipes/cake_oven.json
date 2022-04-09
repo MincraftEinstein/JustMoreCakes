@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#$#",
+    "~~~"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:brick"
+    },
+    "$": {
+      "item": "minecraft:furnace"
+    },
+    "~": {
+      "item": "minecraft:smooth_stone"
+    }
+  },
+  "result": {
+    "item": "jmc:cake_oven"
+  }
+}

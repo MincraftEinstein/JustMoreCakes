@@ -48,6 +48,7 @@ public class ItemAssetsGenerator extends ItemModelProvider {
 		generatedItem(getObjectName(ModItems.CUPCAKE), modLoc("item/" + getObjectName(ModItems.CUPCAKE)));
 		generatedItem(getObjectName(ModItems.CHEESE), modLoc("item/" + getObjectName(ModItems.CHEESE)));
 		blockItemModel(Blocks.ICE, "encasing_ice");
+		blockItemModel(ModBlocks.CAKE_OVEN, "cake_oven");
 	}
 	
 	private void blockItemModel(Block block, String fileName) {

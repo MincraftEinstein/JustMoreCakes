@@ -22,6 +22,7 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 	@Override
 	protected void registerStatesAndModels() {
 		simpleBlock(ModBlocks.ENCASING_ICE, models().getExistingFile(mcLoc("ice")));
+		
 		for (int i = 0; i < CakeTypes.values().length; i++) {
 			String type = CakeTypes.byId(i).getName();
 			String name;

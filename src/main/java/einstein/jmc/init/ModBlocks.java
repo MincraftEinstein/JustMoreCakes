@@ -5,6 +5,7 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.blocks.BaseCandleCakeBlock;
 import einstein.jmc.blocks.BirthdayCakeBlock;
+import einstein.jmc.blocks.CakeOvenBlock;
 import einstein.jmc.blocks.ChorusCakeBlock;
 import einstein.jmc.blocks.CupcakeBlock;
 import einstein.jmc.blocks.EncasingIceBlock;
@@ -55,6 +56,7 @@ public class ModBlocks
     })), JustMoreCakes.JMC_TAB);
     public static final Block CRIMSON_FUNGUS_CAKE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "crimson_fungus_cake", new BaseCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)), JustMoreCakes.JMC_TAB);
     public static final Block ENCASING_ICE = RegistryHandler.registerBlock(JustMoreCakes.MODID, "encasing_ice", new EncasingIceBlock(BlockBehaviour.Properties.of(Material.ICE).friction(0.98F).randomTicks().strength(2.5F, 5.0F).sound(SoundType.GLASS).noDrops().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never)));
+    public static final Block CAKE_OVEN = RegistryHandler.registerBlock(JustMoreCakes.MODID, "cake_oven", new CakeOvenBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(Blocks.litBlockEmission(13))), JustMoreCakes.JMC_TAB);
     
     @SubscribeEvent
     public static void onBlocksRegistered(RegistryEvent.Register<Block> event) {

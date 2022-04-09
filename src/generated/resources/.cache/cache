@@ -1451,6 +1451,7 @@ aa8bda497a8b70aaebdfe04e3e6420eaaaf2127e assets/jmc/models/item/apple_cake.json
 bc602ef1de6e0bbf6beac335e29f3c9f963f415e assets/jmc/models/item/beetroot_cake.json
 4a3d49cc22b001b49bc5b156850e2a1257fabf15 assets/jmc/models/item/birthday_cake.json
 67e9cf8cb67924ab0cf2d5fc4555859e38b72665 assets/jmc/models/item/brown_mushroom_cake.json
+17e69cd107c35429284dec8a6afd54361835d51b assets/jmc/models/item/cake_oven.json
 438406e579424a7ad3c79200a7609c299b38d1a7 assets/jmc/models/item/carrot_cake.json
 074d9f5d79a5bfa22b7c7890085b496a1d9bd8bf assets/jmc/models/item/cheese.json
 63dc0706c83ec3027c676102f8151aa9135be215 assets/jmc/models/item/cheesecake.json
@@ -1486,6 +1487,7 @@ d22d113f48fffd6b40b8b85c2c15413d13f178bd data/forge/tags/items/cheese.json
 0bb0f63190ffc68e4655b0e4957d6bb3ba3806ff data/jmc/advancements/recipes/jmc_tab/beetroot_cake.json
 bcc67f54e6142fd6d55b2e6d181ea6bd7a78e587 data/jmc/advancements/recipes/jmc_tab/birthday_cake.json
 955e7b5c15397b071cf62671ee06578bfae57f1c data/jmc/advancements/recipes/jmc_tab/brown_mushroom_cake.json
+8e0fe60e31464dcd82166d19e3ac8436ce831df9 data/jmc/advancements/recipes/jmc_tab/cake_oven.json
 4f2bfac5f00d8658a907b2180414d96751faf0f8 data/jmc/advancements/recipes/jmc_tab/carrot_cake.json
 5adddb6a439c228fa2228b64cd206f69a5b529d5 data/jmc/advancements/recipes/jmc_tab/cheese.json
 50823669142d131a298202ed5d68c6b91e3fde12 data/jmc/advancements/recipes/jmc_tab/cheesecake.json
@@ -1587,6 +1589,7 @@ fe2a405471834433f0f2e5f2f62c9d6116c08a04 data/jmc/loot_tables/blocks/brown_candl
 fe2a405471834433f0f2e5f2f62c9d6116c08a04 data/jmc/loot_tables/blocks/brown_candle_sweet_berry_cake.json
 fe2a405471834433f0f2e5f2f62c9d6116c08a04 data/jmc/loot_tables/blocks/brown_candle_three_tiered_cake.json
 fe2a405471834433f0f2e5f2f62c9d6116c08a04 data/jmc/loot_tables/blocks/brown_candle_warped_fungus_cake.json
+d6e8af6a2f697317e00fb24402a1ad8b7e6cbc87 data/jmc/loot_tables/blocks/cake_oven.json
 bba76136fb31ef41151d2bdc9d3bb0a6bdb5fc85 data/jmc/loot_tables/blocks/candle_apple_cake.json
 bba76136fb31ef41151d2bdc9d3bb0a6bdb5fc85 data/jmc/loot_tables/blocks/candle_beetroot_cake.json
 bba76136fb31ef41151d2bdc9d3bb0a6bdb5fc85 data/jmc/loot_tables/blocks/candle_carrot_cake.json
@@ -1927,6 +1930,7 @@ fde120af1f7010360b9b795942a2d7c137f626eb data/jmc/recipes/apple_cake.json
 5c19311381eb7d9414b2f2d3e5256a640462071f data/jmc/recipes/beetroot_cake.json
 89f3930ffd551efb2204f2c132e7d958881ed212 data/jmc/recipes/birthday_cake.json
 fc68b1ae744559ff07b5896d662ef8daa471865f data/jmc/recipes/brown_mushroom_cake.json
+7be4808c356c01497db54c83538af490d669734a data/jmc/recipes/cake_oven.json
 72dd016ad98db6d2fd773373d896d121737b4a0f data/jmc/recipes/carrot_cake.json
 127bf52bc9c632da2968965d321ad55f7f3f315c data/jmc/recipes/cheese.json
 8b8852a54eb82d53d00c9cd5cff742ae4a28fe0d data/jmc/recipes/cheesecake.json
@@ -1956,3 +1960,4 @@ fa71b83e13f5a3d521fe5432c3867a16672d86eb data/jmc/recipes/slime_cake.json
 8e397e47a442b082d304ac6a12ae10cac09ca2c6 data/jmc/recipes/three_tiered_cake.json
 07e0fa965e3c504f066f9243dce16ee2e60d5e1e data/jmc/recipes/tnt_cake.json
 df39b5974fe89f0bfdb310167f68bb23a395b106 data/jmc/recipes/warped_fungus_cake.json
+ef9585e9c07e02be8a48efb01253612662d76575 data/minecraft/tags/blocks/mineable/pickaxe.json

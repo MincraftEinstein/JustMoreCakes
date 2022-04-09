@@ -3,7 +3,7 @@ package einstein.jmc.blockentity;
 import java.util.List;
 
 import einstein.jmc.init.ModServerConfigs;
-import einstein.jmc.init.ModTileEntityType;
+import einstein.jmc.init.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -16,7 +16,7 @@ import net.minecraft.world.phys.AABB;
 public class GlowstoneCakeBlockEntity extends BlockEntity {
 
 	public GlowstoneCakeBlockEntity(BlockPos pos, BlockState state) {
-		super(ModTileEntityType.GLOWSTONE_CAKE, pos, state);
+		super(ModBlockEntityTypes.GLOWSTONE_CAKE, pos, state);
 	}
 
 	@Override
