@@ -1,14 +1,18 @@
 package einstein.jmc.init;
 
-import einstein.einsteins_library.util.RegistryHandler;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.menu.CakeOvenMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.common.extensions.IForgeMenuType;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
-@EventBusSubscriber(modid = JustMoreCakes.MODID, bus = Bus.MOD)
 public class ModMenuTypes {
 
-	public static final MenuType<CakeOvenMenu> CAKE_OVEN = RegistryHandler.registerMenuType(JustMoreCakes.MODID, "cake_oven", CakeOvenMenu::new);	
+	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, JustMoreCakes.MODID);
+	
+	public static final RegistryObject<MenuType<CakeOvenMenu>> CAKE_OVEN = MENU_TYPES.register("cake_oven", () -> IForgeMenuType.create((id, inventory, data) -> {
+		return new CakeOvenMenu(id, inventory);
+	}));	
 }

@@ -84,7 +84,7 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModRecipes.CAKE_OVEN_SERIALIZER;
+		return ModRecipes.CAKE_OVEN_SERIALIZER.get();
 	}
 	
 	@Override

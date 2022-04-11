@@ -26,7 +26,7 @@ public class SlimeCakeBlock extends BaseCakeBlock
 		player.getFoodData().eat(2, 0.1F);
         player.addEffect(new MobEffectInstance(MobEffects.JUMP, ModServerConfigs.SLIME_CAKE_JUMP_BOOST_DUR.get(), ModServerConfigs.SLIME_CAKE_JUMP_BOOST_STRENGTH.get()));
         player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, ModServerConfigs.SLIME_CAKE_RES_DUR.get(), ModServerConfigs.SLIME_CAKE_RES_STRENGTH.get()));
-        player.addEffect(new MobEffectInstance(ModPotions.BOUNCING_EFFECT, ModServerConfigs.SLIME_CAKE_BOUNCING_DUR.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_STRENGTH.get()));
+        player.addEffect(new MobEffectInstance(ModPotions.BOUNCING_EFFECT.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_DUR.get(), ModServerConfigs.SLIME_CAKE_BOUNCING_STRENGTH.get()));
 	}
     
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float p_154571_) {

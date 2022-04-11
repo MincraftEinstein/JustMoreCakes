@@ -2,10 +2,9 @@ package einstein.jmc.blockentity;
 
 import java.util.List;
 
-import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.init.ModBlockEntityTypes;
+import einstein.jmc.init.ModServerConfigs;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
@@ -16,19 +15,9 @@ import net.minecraft.world.phys.AABB;
 public class GlowstoneCakeBlockEntity extends BlockEntity {
 
 	public GlowstoneCakeBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.GLOWSTONE_CAKE, pos, state);
+		super(ModBlockEntityTypes.GLOWSTONE_CAKE.get(), pos, state);
 	}
-
-	@Override
-	public CompoundTag save(CompoundTag compound) {
-		return super.save(compound);
-	}
-
-	@Override
-	public void load(CompoundTag compound) {
-		super.load(compound);
-	}
-
+	
 	public void setGlowing() {
 		if (!this.level.isClientSide) {
 			final double d0 = 10 + 10;

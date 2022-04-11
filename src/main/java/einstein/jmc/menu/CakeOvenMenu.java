@@ -26,7 +26,7 @@ public class CakeOvenMenu extends AbstractContainerMenu implements CakeOvenConst
 	}
 	
 	public CakeOvenMenu(int id, Inventory inventory, RecipeType<? extends CakeOvenRecipe> recipeType, Container container, ContainerData data) {
-		super(ModMenuTypes.CAKE_OVEN, id);
+		super(ModMenuTypes.CAKE_OVEN.get(), id);
 		this.recipeType = recipeType;
 		checkContainerSize(container, SLOT_COUNT);
 		checkContainerDataCount(data, DATA_COUNT);

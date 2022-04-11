@@ -52,7 +52,7 @@ public class CupcakeBlock extends Block
     }
     
     public ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
-    	return new ItemStack(ModItems.CUPCAKE);
+    	return new ItemStack(ModItems.CUPCAKE.get());
     }
     
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {

@@ -18,12 +18,12 @@ public class DataHandler
 {
     @SubscribeEvent
     public static void clientSetup(final FMLClientSetupEvent event) {
-    	ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_MUSHROOM_CAKE, RenderType.cutout());
-    	ItemBlockRenderTypes.setRenderLayer(ModBlocks.BROWN_MUSHROOM_CAKE, RenderType.cutout());
-    	ItemBlockRenderTypes.setRenderLayer(ModBlocks.CHORUS_CAKE, RenderType.cutout());
-    	ItemBlockRenderTypes.setRenderLayer(ModBlocks.CRIMSON_FUNGUS_CAKE, RenderType.cutout());
-    	ItemBlockRenderTypes.setRenderLayer(ModBlocks.ENCASING_ICE, RenderType.translucent());
+    	ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_MUSHROOM_CAKE.get(), RenderType.cutout());
+    	ItemBlockRenderTypes.setRenderLayer(ModBlocks.BROWN_MUSHROOM_CAKE.get(), RenderType.cutout());
+    	ItemBlockRenderTypes.setRenderLayer(ModBlocks.CHORUS_CAKE.get(), RenderType.cutout());
+    	ItemBlockRenderTypes.setRenderLayer(ModBlocks.CRIMSON_FUNGUS_CAKE.get(), RenderType.cutout());
+    	ItemBlockRenderTypes.setRenderLayer(ModBlocks.ENCASING_ICE.get(), RenderType.translucent());
     	
-    	MenuScreens.register(ModMenuTypes.CAKE_OVEN, CakeOvenScreen::new);
+    	MenuScreens.register(ModMenuTypes.CAKE_OVEN.get(), CakeOvenScreen::new);
     }
 }

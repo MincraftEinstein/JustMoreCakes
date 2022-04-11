@@ -5,7 +5,7 @@ license="All rights reserved"
 
 [[mods]]
 	modId="jmc"
-	version="3.1"
+	version="4.0"
 	displayName="Just More Cakes!"
 	#updateJSONURL="http://myurl.me/"
 	displayURL="https://www.curseforge.com/minecraft/mc-mods/just-more-cakes"
@@ -29,7 +29,7 @@ A mod that adds 30+ new cakes to Minecraft. Some with special properties, some w
 [[dependencies.jmc]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.1, 1.19]"
+    versionRange="[1.18, 1.19]"
     ordering="NONE"
     side="BOTH"
     

@@ -20,7 +20,7 @@ public class BlockLootTableGenerator extends BlockLoot {
 	
 	@Override
 	protected void addTables() {
-		dropSelf(ModBlocks.CAKE_OVEN);
+		dropSelf(ModBlocks.CAKE_OVEN.get());
 		for (int i = 0; i < candleCakes.size(); i++) {
 			Block block = candleCakes.get(i);
 			String name = block.getRegistryName().getPath();
@@ -38,7 +38,7 @@ public class BlockLootTableGenerator extends BlockLoot {
 	@Override
 	protected Iterable<Block> getKnownBlocks() {
 		List<Block> knownBlocks = new ArrayList<Block>(candleCakes);
-		knownBlocks.add(ModBlocks.CAKE_OVEN);
+		knownBlocks.add(ModBlocks.CAKE_OVEN.get());
 		return knownBlocks;
 	}
 }

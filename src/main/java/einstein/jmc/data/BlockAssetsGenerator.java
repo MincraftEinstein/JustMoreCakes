@@ -21,7 +21,7 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 	
 	@Override
 	protected void registerStatesAndModels() {
-		simpleBlock(ModBlocks.ENCASING_ICE, models().getExistingFile(mcLoc("ice")));
+		simpleBlock(ModBlocks.ENCASING_ICE.get(), models().getExistingFile(mcLoc("ice")));
 		
 		for (int i = 0; i < CakeTypes.values().length; i++) {
 			String type = CakeTypes.byId(i).getName();
@@ -79,11 +79,11 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 				}
 			}
 		}
-		cakeBlock(ModBlocks.GLOWSTONE_CAKE);
-		crossCakeBlock(ModBlocks.BROWN_MUSHROOM_CAKE, mcLoc("block/brown_mushroom"));
-		crossCakeBlock(ModBlocks.RED_MUSHROOM_CAKE, mcLoc("block/red_mushroom"));
-		crossCakeBlock(ModBlocks.CHORUS_CAKE, modLoc("block/chorus_cake_flower"));
-		crossCakeBlock(ModBlocks.CRIMSON_FUNGUS_CAKE, mcLoc("block/crimson_fungus"));
+		cakeBlock(ModBlocks.GLOWSTONE_CAKE.get());
+		crossCakeBlock(ModBlocks.BROWN_MUSHROOM_CAKE.get(), mcLoc("block/brown_mushroom"));
+		crossCakeBlock(ModBlocks.RED_MUSHROOM_CAKE.get(), mcLoc("block/red_mushroom"));
+		crossCakeBlock(ModBlocks.CHORUS_CAKE.get(), modLoc("block/chorus_cake_flower"));
+		crossCakeBlock(ModBlocks.CRIMSON_FUNGUS_CAKE.get(), mcLoc("block/crimson_fungus"));
 	}
 	
 	private void cakeBlock(Block block) {

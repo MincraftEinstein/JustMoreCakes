@@ -8,7 +8,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
@@ -34,8 +33,7 @@ public class FreezingEffect extends InstantenousMobEffect {
 		}
 		AABB boundingBox = entityLiving.getBoundingBox().inflate(1);
 		final Level level = entityLiving.getCommandSenderWorld();
-		Block block = ModBlocks.ENCASING_ICE;
-		final BlockState state = block.defaultBlockState();
+		final BlockState state = ModBlocks.ENCASING_ICE.get().defaultBlockState();
 		for (int x = (int) Math.floor(boundingBox.minX); x < Math.ceil(boundingBox.maxX); x++) {
 			for (int y = (int) Math.floor(boundingBox.minY); y < Math.ceil(boundingBox.maxY); y++) {
 				for (int z = (int) Math.floor(boundingBox.minZ); z < Math.ceil(boundingBox.maxZ); z++) {

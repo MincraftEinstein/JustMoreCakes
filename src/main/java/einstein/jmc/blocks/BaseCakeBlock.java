@@ -117,7 +117,7 @@ public class BaseCakeBlock extends Block {
 			else if (name.contains("ice_cake")) {
 		        player.clearFire();
 		        player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, ModServerConfigs.ICE_CAKE_NIGHT_VISION_DUR.get(), ModServerConfigs.ICE_CAKE_NIGHT_VISION_STRENGTH.get()));
-		        player.addEffect(new MobEffectInstance(ModPotions.FREEZING_EFFECT));
+		        player.addEffect(new MobEffectInstance(ModPotions.FREEZING_EFFECT.get()));
 		        FreezingEffect.freezeEntity(player);
 			}
 			int i = state.getValue(BITES); 

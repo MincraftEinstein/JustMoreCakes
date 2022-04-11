@@ -95,7 +95,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	};
 	
 	public CakeOvenBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.CAKE_OVEN, pos, state);
+		super(ModBlockEntityTypes.CAKE_OVEN.get(), pos, state);
 	}
 	
 	@Override

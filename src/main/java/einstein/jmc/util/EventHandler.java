@@ -141,7 +141,7 @@ public class EventHandler {
 	public void onEntityJump(final LivingJumpEvent event) {
 		if (event.getEntity() instanceof Player) {
 			final Player player = (Player)event.getEntity();
-			if (player.hasEffect(ModPotions.BOUNCING_EFFECT)) {
+			if (player.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
 				player.push(0, 0.15F, 0);
 			}
 		}
@@ -151,7 +151,7 @@ public class EventHandler {
 	public void onEntityUpdate(final LivingUpdateEvent event) {
 		final Level level = event.getEntity().getCommandSenderWorld();
 		final LivingEntity entity = event.getEntityLiving();
-		if (entity.hasEffect(ModPotions.BOUNCING_EFFECT)) {
+		if (entity.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
 			if (entity.verticalCollision && entity.isOnGround() && !entity.isSleeping()) {
 				float j = 0.65F;
 				if (entity.hasEffect(MobEffects.JUMP)) {

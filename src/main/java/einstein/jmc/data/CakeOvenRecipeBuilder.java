@@ -116,7 +116,7 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 		
 		@Override
 		public RecipeSerializer<?> getType() {
-			return ModRecipes.CAKE_OVEN_SERIALIZER;
+			return ModRecipes.CAKE_OVEN_SERIALIZER.get();
 		}
 		
 		@Nullable

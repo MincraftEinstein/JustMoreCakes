@@ -146,6 +146,6 @@ public class CakeOvenBlock extends BaseEntityBlock {
 	
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-		return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntityTypes.CAKE_OVEN, CakeOvenBlockEntity::serverTick);
+		return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntityTypes.CAKE_OVEN.get(), CakeOvenBlockEntity::serverTick);
 	}
 }

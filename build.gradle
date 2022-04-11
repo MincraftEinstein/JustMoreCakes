@@ -85,9 +85,9 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     implementation fg.deobf("curse.maven:einsteins-library-405744:3545865")
-    implementation fg.deobf("curse.maven:jei-238222:3599262")
-    implementation fg.deobf("curse.maven:catalogue-459701:3559402")
-    implementation fg.deobf("curse.maven:configured-457570:3559398")
+    implementation fg.deobf("curse.maven:jei-238222:3712464")
+    implementation fg.deobf("curse.maven:catalogue-459701:3721991")
+    implementation fg.deobf("curse.maven:configured-457570:3721946")
     implementation fg.deobf("curse.maven:cake-chomps-307943:3555957")
 }
 
