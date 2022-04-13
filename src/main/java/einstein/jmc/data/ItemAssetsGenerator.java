@@ -1,7 +1,6 @@
 package einstein.jmc.data;
 
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.init.CakeTypes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import net.minecraft.data.DataGenerator;
@@ -14,22 +13,16 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class ItemAssetsGenerator extends ItemModelProvider {
-
+	
 	public ItemAssetsGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
 		super(generator, JustMoreCakes.MODID, existingFileHelper);
 	}
 	
 	@Override
 	protected void registerModels() {
-		for (int i = 0; i < CakeTypes.values().length; i++) {
-			String name = CakeTypes.byId(i).getName();
-			if (name == "cheese") {
-				name += "cake";
-			}
-			else {
-				name += "_cake";
-			}
-			
+		for (int i = 0; i < ModDataGenerators.CAKE_TYPES.size(); i++) {
+			String name = ModDataGenerators.CAKE_TYPES.get(i);
+
 			if (name.contains("poison")) {
 				generatedItem(name, mcLoc("item/cake"));
 			}
@@ -37,6 +30,7 @@ public class ItemAssetsGenerator extends ItemModelProvider {
 				generatedItem(name, modLoc("item/" + name));
 			}
 		}
+		
 		generatedItem(getObjectName(ModBlocks.TNT_CAKE.get()), mcLoc("item/cake"));
 		generatedItem(getObjectName(ModBlocks.RED_MUSHROOM_CAKE.get()), modLoc("item/" + getObjectName(ModBlocks.RED_MUSHROOM_CAKE.get())));
 		generatedItem(getObjectName(ModBlocks.BROWN_MUSHROOM_CAKE.get()), modLoc("item/" + getObjectName(ModBlocks.BROWN_MUSHROOM_CAKE.get())));

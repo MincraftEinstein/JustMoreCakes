@@ -12,6 +12,6 @@ public class JMCTab extends CreativeModeTab
     
     @Override
     public ItemStack makeIcon() {
-    	return new ItemStack(ModBlocks.getBlock(ModBlocks.RL("chocolate_cake")));
+    	return new ItemStack(ModBlocks.CHOCOLATE_CAKE.get());
     }
 }

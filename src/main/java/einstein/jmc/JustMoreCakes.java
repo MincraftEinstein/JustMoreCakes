@@ -151,9 +151,9 @@ public class JustMoreCakes
 	private static Block missingBlock(String name) {
 		switch (name) {
 		case "cheese_cake":
-			return ModBlocks.getBlock(ModBlocks.RL("cheesecake"));
+			return ModBlocks.CHEESECAKE.get();
 		case "triple_decker_cake":
-			return ModBlocks.getBlock(ModBlocks.RL("three_tiered_cake"));
+			return ModBlocks.THREE_TIERED_CAKE.get();
 		}
 		return null;
 	}
@@ -163,10 +163,11 @@ public class JustMoreCakes
 		handleMissingMappings(event, MODID, name -> {
 			switch (name) {
 			case "cheese_cake":
-				return ModBlocks.getBlock(ModBlocks.RL("cheesecake")).asItem();
+				return ModBlocks.CHEESECAKE.get().asItem();
 			case "triple_decker_cake":
-				return ModBlocks.getBlock(ModBlocks.RL("three_tiered_cake")).asItem();
+				return ModBlocks.THREE_TIERED_CAKE.get().asItem();
 			}
+			
 			ItemLike block = missingBlock(name);
 			return block == null ? null : block.asItem();
 		});

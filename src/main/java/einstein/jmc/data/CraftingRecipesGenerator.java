@@ -23,36 +23,36 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 	
 	@Override
 	protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-		cakeRecipe(consumer, Items.APPLE, ModBlocks.getBlock(ModBlocks.RL("apple_cake")));
-		cakeRecipe(consumer, Items.BEETROOT, ModBlocks.getBlock(ModBlocks.RL("beetroot_cake")));
+		cakeRecipe(consumer, Items.APPLE, ModBlocks.APPLE_CAKE.get());
+		cakeRecipe(consumer, Items.BEETROOT, ModBlocks.BEETROOT_CAKE.get());
 		cakeRecipe(consumer, Items.MILK_BUCKET, Blocks.TORCH, ModBlocks.BIRTHDAY_CAKE.get());
 		cakeRecipe(consumer, Blocks.BROWN_MUSHROOM, ModBlocks.BROWN_MUSHROOM_CAKE.get());
-		cakeRecipe(consumer, Items.CARROT, ModBlocks.getBlock(ModBlocks.RL("carrot_cake")));
-		cakeRecipe(consumer, ItemTagsGenerator.CHEESE, ModBlocks.getBlock(ModBlocks.RL("cheesecake")));
-		cakeRecipe(consumer, Items.COCOA_BEANS, ModBlocks.getBlock(ModBlocks.RL("chocolate_cake")));
+		cakeRecipe(consumer, Items.CARROT, ModBlocks.CARROT_CAKE.get());
+		cakeRecipe(consumer, ItemTagsGenerator.CHEESE, ModBlocks.CHEESECAKE.get());
+		cakeRecipe(consumer, Items.COCOA_BEANS, ModBlocks.CHOCOLATE_CAKE.get());
 		cakeRecipe(consumer, Items.CHORUS_FRUIT, Items.POPPED_CHORUS_FRUIT, ModBlocks.CHORUS_CAKE.get());
-		cakeRecipe(consumer, Items.COOKIE, ModBlocks.getBlock(ModBlocks.RL("cookie_cake")));
-		cakeRecipe(consumer, Items.MILK_BUCKET, Blocks.CREEPER_HEAD, ModBlocks.getBlock(ModBlocks.RL("creeper_cake")));
+		cakeRecipe(consumer, Items.COOKIE, ModBlocks.COOKIE_CAKE.get());
+		cakeRecipe(consumer, Items.MILK_BUCKET, Blocks.CREEPER_HEAD, ModBlocks.CREEPER_CAKE.get());
 		cakeRecipe(consumer, Blocks.CRIMSON_FUNGUS, ModBlocks.CRIMSON_FUNGUS_CAKE.get());
-		blazeCakeRecipe(consumer, Items.ENDER_PEARL, ModBlocks.getBlock(ModBlocks.RL("ender_cake")));
-		blazeCakeRecipe(consumer, Items.MAGMA_CREAM, ModBlocks.getBlock(ModBlocks.RL("firey_cake")));
+		blazeCakeRecipe(consumer, Items.ENDER_PEARL, ModBlocks.ENDER_CAKE.get());
+		blazeCakeRecipe(consumer, Items.MAGMA_CREAM, ModBlocks.FIREY_CAKE.get());
 		cakeRecipe(consumer, Items.GLOWSTONE_DUST, ModBlocks.GLOWSTONE_CAKE.get());
-		cakeRecipe(consumer, Items.GOLDEN_APPLE, ModBlocks.getBlock(ModBlocks.RL("golden_apple_cake")));
-		cakeRecipe(consumer, Items.HONEY_BOTTLE, Items.HONEYCOMB, ModBlocks.getBlock(ModBlocks.RL("honey_cake")));
-		cakeRecipe(consumer, Blocks.ICE, ModBlocks.getBlock(ModBlocks.RL("ice_cake")));
-		cakeRecipe(consumer, Items.LAVA_BUCKET, ModBlocks.getBlock(ModBlocks.RL("lava_cake")));
-		cakeRecipe(consumer, Items.MELON_SLICE, ModBlocks.getBlock(ModBlocks.RL("melon_cake")));
-		cakeRecipe(consumer, Items.SPIDER_EYE, ModBlocks.getBlock(ModBlocks.RL("poison_cake")));
-		cakeRecipe(consumer, Blocks.PUMPKIN, ModBlocks.getBlock(ModBlocks.RL("pumpkin_cake")));
+		cakeRecipe(consumer, Items.GOLDEN_APPLE, ModBlocks.GOLDEN_APPLE_CAKE.get());
+		cakeRecipe(consumer, Items.HONEY_BOTTLE, Items.HONEYCOMB, ModBlocks.HONEY_CAKE.get());
+		cakeRecipe(consumer, Blocks.ICE, ModBlocks.ICE_CAKE.get());
+		cakeRecipe(consumer, Items.LAVA_BUCKET, ModBlocks.LAVA_CAKE.get());
+		cakeRecipe(consumer, Items.MELON_SLICE, ModBlocks.MELON_CAKE.get());
+		cakeRecipe(consumer, Items.SPIDER_EYE, ModBlocks.POISON_CAKE.get());
+		cakeRecipe(consumer, Blocks.PUMPKIN, ModBlocks.PUMPKIN_CAKE.get());
 		cakeRecipe(consumer, Blocks.RED_MUSHROOM, ModBlocks.RED_MUSHROOM_CAKE.get());
-		cakeRecipe(consumer, Items.REDSTONE, ModBlocks.getBlock(ModBlocks.RL("redstone_cake")));
-		cakeRecipe(consumer, Tags.Items.SEEDS, ModBlocks.getBlock(ModBlocks.RL("seed_cake")));
-		cakeRecipe(consumer, Tags.Items.SLIMEBALLS, ModBlocks.getBlock(ModBlocks.RL("slime_cake")));
-		cakeRecipe(consumer, Items.SWEET_BERRIES, ModBlocks.getBlock(ModBlocks.RL("sweet_berry_cake")));
+		cakeRecipe(consumer, Items.REDSTONE, ModBlocks.REDSTONE_CAKE.get());
+		cakeRecipe(consumer, Tags.Items.SEEDS, ModBlocks.SEED_CAKE.get());
+		cakeRecipe(consumer, Tags.Items.SLIMEBALLS, ModBlocks.SLIME_CAKE.get());
+		cakeRecipe(consumer, Items.SWEET_BERRIES, ModBlocks.SWEET_BERRY_CAKE.get());
 		cakeRecipe(consumer, Blocks.TNT, ModBlocks.TNT_CAKE.get());
-		cakeRecipe(consumer, Blocks.WARPED_FUNGUS, ModBlocks.getBlock(ModBlocks.RL("warped_fungus_cake")));
+		cakeRecipe(consumer, Blocks.WARPED_FUNGUS, ModBlocks.WARPED_FUNGUS_CAKE.get());
 		
-		ShapedRecipeBuilder.shaped(ModBlocks.getBlock(ModBlocks.RL("christmas_cake")))
+		ShapedRecipeBuilder.shaped(ModBlocks.CHIRSTMAS_CAKE.get())
 			.pattern("¡#¢")
 			.pattern("$~$")
 			.pattern(" @ ")
@@ -63,7 +63,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('¡', Tags.Items.DYES_GREEN)
 			.define('¢', Tags.Items.DYES_RED)
 			.unlockedBy("has_item", has(Items.EGG))
-			.save(consumer, ModBlocks.getBlock(ModBlocks.RL("christmas_cake")).getRegistryName());
+			.save(consumer, ModBlocks.CHIRSTMAS_CAKE.get().getRegistryName());
 		
 		ShapedRecipeBuilder.shaped(ModItems.CUPCAKE.get())
 			.pattern(" # ")
@@ -76,7 +76,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.unlockedBy("has_item", has(Items.EGG))
 			.save(consumer, ModItems.CUPCAKE.get().getRegistryName());
 		
-		ShapedRecipeBuilder.shaped(ModBlocks.getBlock(ModBlocks.RL("sprinkle_cake")))
+		ShapedRecipeBuilder.shaped(ModBlocks.SPRINKLE_CAKE.get())
 			.pattern("#$~")
 			.pattern("@-¡")
 			.pattern("¢£¤")
@@ -90,15 +90,15 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('£', Tags.Items.DYES_BLUE)
 			.define('¤', Tags.Items.DYES_PURPLE)
 			.unlockedBy("has_item", has(Blocks.CAKE))
-			.save(consumer, ModBlocks.getBlock(ModBlocks.RL("sprinkle_cake")).getRegistryName());
+			.save(consumer, ModBlocks.SPRINKLE_CAKE.get().getRegistryName());
 		
-		ShapedRecipeBuilder.shaped(ModBlocks.getBlock(ModBlocks.RL("three_tiered_cake")))
+		ShapedRecipeBuilder.shaped(ModBlocks.THREE_TIERED_CAKE.get())
 			.pattern("#")
 			.pattern("#")
 			.pattern("#")
 			.define('#', Items.CAKE)
 			.unlockedBy("has_item", has(Items.CAKE))
-			.save(consumer, ModBlocks.getBlock(ModBlocks.RL("three_tiered_cake")).getRegistryName());
+			.save(consumer, ModBlocks.THREE_TIERED_CAKE.get().getRegistryName());
 		
 		ShapedRecipeBuilder.shaped(ModItems.CHEESE.get(), 3)
 			.pattern("###")

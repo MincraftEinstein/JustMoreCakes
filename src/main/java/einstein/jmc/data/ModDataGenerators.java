@@ -1,5 +1,8 @@
 package einstein.jmc.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import einstein.jmc.JustMoreCakes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -11,6 +14,8 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 @EventBusSubscriber(modid = JustMoreCakes.MODID, bus = Bus.MOD)
 public class ModDataGenerators {
 
+	public static List<String> CAKE_TYPES = new ArrayList<>();
+	
 	@SubscribeEvent
 	public static void DataGenerator(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();

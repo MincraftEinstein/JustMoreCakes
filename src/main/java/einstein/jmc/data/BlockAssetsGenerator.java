@@ -3,7 +3,6 @@ package einstein.jmc.data;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.blocks.BaseCandleCakeBlock;
-import einstein.jmc.init.CakeTypes;
 import einstein.jmc.init.ModBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -23,20 +22,12 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 	protected void registerStatesAndModels() {
 		simpleBlock(ModBlocks.ENCASING_ICE.get(), models().getExistingFile(mcLoc("ice")));
 		
-		for (int i = 0; i < CakeTypes.values().length; i++) {
-			String type = CakeTypes.byId(i).getName();
-			String name;
-			if (type == "cheese") {
-				name = type + "cake";
-			}
-			else {
-				name = type + "_cake";
-			}
-			
+		for (int i = 0; i < ModDataGenerators.CAKE_TYPES.size(); i++) {
+			String name = ModDataGenerators.CAKE_TYPES.get(i);
 			Block cake = ModBlocks.getBlock(modLoc(name));
 			Block candleCake = ModBlocks.getBlock(modLoc("candle_" + name));
 			
-			if (type == "poison") {
+			if (name == "poison_cake") {
 				getVariantBuilder(cake)
 				.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(0)).addModels(new ConfiguredModel(models().withExistingParent(name, mcLoc("cake"))))
 				.partialState().with(BaseCakeBlock.BITES, Integer.valueOf(1)).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice1", mcLoc("cake_slice1"))))
@@ -55,7 +46,7 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 					.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(true)).addModels(new ConfiguredModel(models().withExistingParent(color + "_candle_" + name + "_lit", mcLoc(color + "_candle_cake"))));
 				}
 			}
-			else if (type == "three_tiered") {
+			else if (name == "three_tiered_cake") {
 				getVariantBuilder(candleCake)
 				.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(false)).addModels(new ConfiguredModel(models().withExistingParent("candle_" + name, modLoc("template_three_tiered_candle_cake"))
 						.texture("candle", mcLoc("block/" + "candle"))))
@@ -129,20 +120,20 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 				.texture("inside", inside)));
 	}
 	
-	private void candleCakeBlock(Block block, String color, String type) {
-		String name = block.getRegistryName().getPath();
-		type = "block/" + type;
+	private void candleCakeBlock(Block block, String color, String name) {
+		String fileName = color + "candle_" + name;
+		String path = "block/" + name;
 		getVariantBuilder(block)
-		.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(false)).addModels(new ConfiguredModel(models().withExistingParent(name, mcLoc("template_cake_with_candle"))
-				.texture("side", type + "_side")
-				.texture("top", type + "_top")
-				.texture("bottom", type + "_bottom")
+		.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(false)).addModels(new ConfiguredModel(models().withExistingParent(fileName, mcLoc("template_cake_with_candle"))
+				.texture("side", path + "_side")
+				.texture("top", path + "_top")
+				.texture("bottom", path + "_bottom")
 				.texture("candle", mcLoc("block/" + color + "candle"))
 				.texture("particle", "#side")))
-		.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(true)).addModels(new ConfiguredModel(models().withExistingParent(name + "_lit", mcLoc("template_cake_with_candle"))
-				.texture("side", type + "_side")
-				.texture("top", type + "_top")
-				.texture("bottom", type + "_bottom")
+		.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(true)).addModels(new ConfiguredModel(models().withExistingParent(fileName + "_lit", mcLoc("template_cake_with_candle"))
+				.texture("side", path + "_side")
+				.texture("top", path + "_top")
+				.texture("bottom", path + "_bottom")
 				.texture("candle", mcLoc("block/" + color + "candle_lit"))
 				.texture("particle", "#side")));
 	}
