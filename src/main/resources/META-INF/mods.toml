@@ -18,6 +18,7 @@ A mod that adds 30+ new cakes to Minecraft. Some with special properties, some w
 
 [modproperties.jmc]
     catalogueItemIcon="jmc:chocolate_cake"
+    configuredBackground="minecraft:textures/block/bricks.png"
 
 [[dependencies.jmc]]
     modId="forge"
