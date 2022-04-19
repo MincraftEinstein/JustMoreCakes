@@ -54,10 +54,10 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 	
 	@Override
 	public RecipeBuilder unlockedBy(String name, CriterionTriggerInstance trigger) {
-		this.advancement.addCriterion(name, trigger);
+		advancement.addCriterion(name, trigger);
 		return this;
 	}
-
+	
 	@Override
 	public RecipeBuilder group(String group) {
 		return this;
@@ -70,10 +70,17 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 
 	@Override
 	public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeId) {
+		ensureValid(recipeId);
 		advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId))
-		.requirements(RequirementsStrategy.OR);
+			.requirements(RequirementsStrategy.OR);
 		consumer.accept(new CakeOvenRecipeBuilder.Result(recipeId, ingredients, result, experience, cookingTime, advancement, new ResourceLocation(recipeId.getNamespace(),
-					"recipes/" + result.getItemCategory().getRecipeFolderName() + "/" + recipeId.getPath())));
+			"recipes/" + result.getItemCategory().getRecipeFolderName() + "/" + recipeId.getPath())));
+	}
+	
+	private void ensureValid(ResourceLocation recipeId) {
+		if (advancement.getCriteria().isEmpty()) {
+			throw new IllegalStateException("No way of obtaining recipe " + recipeId);
+		}
 	}
 	
 	public static class Result implements FinishedRecipe {
@@ -98,12 +105,12 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 		
 		@Override
 		public void serializeRecipeData(JsonObject json) {
-			JsonArray a = new JsonArray(INGREDIENT_SLOT_COUNT);
+			JsonArray jsonIngredients = new JsonArray(INGREDIENT_SLOT_COUNT);
 			
 			for (Ingredient ingredient : ingredients) {
-				a.add(ingredient.toJson());
+				jsonIngredients.add(ingredient.toJson());
 			}
-			json.add("ingredients", a);
+			json.add("ingredients", jsonIngredients);
 			json.addProperty("result", ForgeRegistries.ITEMS.getKey(result).toString());
 			json.addProperty("experience", experience);
 			json.addProperty("cookingtime", cookingTime);

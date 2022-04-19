@@ -64,7 +64,7 @@ public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> extends ForgeReg
     private static NonNullList<Ingredient> itemsFromJson(JsonArray array) {
         NonNullList<Ingredient> nonNullList = NonNullList.create();
 
-        for(int i = 0; i < array.size(); ++i) {
+        for (int i = 0; i < array.size(); ++i) {
            Ingredient ingredient = Ingredient.fromJson(array.get(i));
            if (!ingredient.isEmpty()) {
               nonNullList.add(ingredient);

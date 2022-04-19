@@ -29,9 +29,11 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeHolder;
+import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -47,7 +49,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, CakeOvenConstants {
+public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible, CakeOvenConstants {
 
 	private static final int DEFAULT_BURN_TIME = 200;
 	private NonNullList<ItemStack> items = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
@@ -411,5 +413,12 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	@Override
 	public boolean canTakeItemThroughFace(int slotIndex, ItemStack stack, Direction direction) {
 		return true;
+	}
+	
+	@Override
+	public void fillStackedContents(StackedContents contents) {
+		for (ItemStack itemstack : this.items) {
+			contents.accountStack(itemstack);
+		}
 	}
 }

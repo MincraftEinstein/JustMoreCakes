@@ -3,6 +3,7 @@ package einstein.jmc.item.crafting;
 import java.util.ArrayList;
 import java.util.List;
 
+import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.core.NonNullList;
@@ -95,6 +96,11 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 	@Override
 	public boolean isSpecial() {
 		return true;
+	}
+	
+	@Override
+	public ItemStack getToastSymbol() {
+		return new ItemStack(ModBlocks.CAKE_OVEN.get());
 	}
 	
 	public void consumeIngredients(Container container) {

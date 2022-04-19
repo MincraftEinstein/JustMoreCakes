@@ -1,0 +1,20 @@
+{
+  "type": "jmc:cake_baking",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:cocoa_beans"
+    }
+  ],
+  "result": "jmc:chocolate_cake",
+  "experience": 0.5,
+  "cookingtime": 200
+}

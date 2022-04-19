@@ -1,0 +1,20 @@
+{
+  "type": "jmc:cake_baking",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "result": "jmc:poison_cake",
+  "experience": 0.7,
+  "cookingtime": 250
+}
