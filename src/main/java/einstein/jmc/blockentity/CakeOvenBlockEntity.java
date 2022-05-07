@@ -51,7 +51,6 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible, CakeOvenConstants {
 
-	private static final int DEFAULT_BURN_TIME = 200;
 	private NonNullList<ItemStack> items = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
 	private LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
 	private int litTime;

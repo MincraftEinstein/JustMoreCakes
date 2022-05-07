@@ -63,6 +63,11 @@
 	// CONTAINERS
 	"container.jmc.cake_oven": "Cake Oven",
 	
+	// JEI
+	"gui.jei.jmc.category.cake_oven": "Cake Baking",
+	"gui.jei.jmc.category.cake_oven.experience": "%s XP",
+	"gui.jei.jmc.category.cake_oven.time.seconds": "%ss",
+	
 	// CREATIVE TAB
 	"itemGroup.jmc_tab": "Just More Cakes!",
 	
