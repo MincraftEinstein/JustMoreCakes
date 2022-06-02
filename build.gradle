@@ -7,9 +7,12 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
     }
 }
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+}
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
+
 
 version = "${mod_version}-${minecraft_version}"
 group = "einstein.${modid}"
@@ -17,7 +20,7 @@ archivesBaseName = "${modid}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
     mappings channel: 'official', version: "${minecraft_version}"
 
@@ -30,6 +33,8 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
 
             property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', archivesBaseName
 
             mods {
                 jmc {
@@ -44,6 +49,24 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
 
             property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', archivesBaseName
+
+            mods {
+                jmc {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        gameTestServer {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', archivesBaseName
 
             mods {
                 jmc {
@@ -85,8 +108,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     implementation fg.deobf("curse.maven:einsteins-library-405744:3545865")
-    implementation fg.deobf("curse.maven:jei-238222:3712464")
-    implementation fg.deobf("curse.maven:catalogue-459701:3721991")
+    implementation fg.deobf("curse.maven:jei-238222:3723913")
+    implementation fg.deobf("curse.maven:catalogue-459701:3803098")
     implementation fg.deobf("curse.maven:configured-457570:3721946")
     implementation fg.deobf("curse.maven:cake-chomps-307943:3555957")
 }
@@ -94,13 +117,13 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "JustMoreCakes",
-                "Specification-Vendor"    : "MincraftEinstein",
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : "JustMoreCakes",
-                "Implementation-Version"  : "${mod_version}",
-                "Implementation-Vendor"   : "MincraftEinstein",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Specification-Title" : "JustMoreCakes",
+                "Specification-Vendor" : "MincraftEinstein",
+                "Specification-Version" : "1",
+                "Implementation-Title" : "JustMoreCakes",
+                "Implementation-Version" : "${mod_version}",
+                "Implementation-Vendor" : "MinecraftEinstein",
+                "Implementation-Timestamp" : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
@@ -118,4 +141,8 @@ publishing {
             url "file://${project.projectDir}/mcmodsrepo"
         }
     }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
