@@ -1,5 +1,6 @@
 package einstein.jmc.data;
 
+import java.util.Collections;
 import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
@@ -45,10 +46,7 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 		}
 		
 		NonNullList<Ingredient> ingredientsList = NonNullList.create();
-		for (Ingredient ingredient : ingredients) {
-			ingredientsList.add(ingredient);
-		}
-		
+		Collections.addAll(ingredientsList, ingredients);
 		return new CakeOvenRecipeBuilder(ingredientsList, result, experience, cookingTime);
 	}
 	
@@ -110,10 +108,11 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 			for (Ingredient ingredient : ingredients) {
 				jsonIngredients.add(ingredient.toJson());
 			}
+			
 			json.add("ingredients", jsonIngredients);
 			json.addProperty("result", ForgeRegistries.ITEMS.getKey(result).toString());
 			json.addProperty("experience", experience);
-			json.addProperty("cookingtime", cookingTime);
+			json.addProperty("cookingTime", cookingTime);
 		}
 		
 		@Override
