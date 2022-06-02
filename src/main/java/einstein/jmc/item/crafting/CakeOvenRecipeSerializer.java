@@ -29,7 +29,7 @@ public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> extends ForgeReg
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public T fromJson(ResourceLocation id, JsonObject json) {
+	public T fromJson(ResourceLocation recipeId, JsonObject json) {
 		NonNullList<Ingredient> ingredients = itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
 		
 		if (ingredients.isEmpty()) {
@@ -39,25 +39,25 @@ public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> extends ForgeReg
 			throw new JsonParseException("Too many ingredients for cake oven recipe. The max is 4");
 		}
 		else {
-			if (!json.has("result")) {
+			String r = "result";
+			if (!json.has(r)) {
 				throw new JsonSyntaxException("Missing result, expected to find a string or object");
 			}
 			
 			ItemStack resultStack;
-			if (json.get("result").isJsonObject()) {
-				resultStack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+			if (json.get(r).isJsonObject()) {
+				resultStack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, r));
 			}
 			else {
-				String resultString = GsonHelper.getAsString(json, "result");
+				String resultString = GsonHelper.getAsString(json, r);
 				ResourceLocation resourceLocation = new ResourceLocation(resultString);
-				resultStack = new ItemStack(Registry.ITEM.getOptional(resourceLocation).orElseThrow(() -> {
-					return new IllegalStateException("Item: " + resultString + " does not exist");
-				}));
+				resultStack = new ItemStack(Registry.ITEM.getOptional(resourceLocation).orElseThrow(
+						() -> new IllegalStateException("Item: " + resultString + " does not exist")));
 			}
 			
 			float experience = GsonHelper.getAsFloat(json, "experience", 0);
 			int cookingTime = GsonHelper.getAsInt(json, "cookingTime", this.defaultCookingTime);
-			return factory.create(id, ingredients, resultStack, experience, cookingTime);
+			return factory.create(recipeId, ingredients, resultStack, experience, cookingTime);
 		}
 	}
 	
@@ -74,32 +74,30 @@ public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> extends ForgeReg
      }
 	
 	@Override
-	public T fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-		int size = buf.readVarInt();
-		NonNullList<Ingredient> ingredients = NonNullList.withSize(size, Ingredient.EMPTY);
+	public T fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buf) {
+		ItemStack resultStack = buf.readItem();
+		float experience = buf.readFloat();
+		int cookTime = buf.readVarInt();
+		int ingredientCount = buf.readByte();
+		NonNullList<Ingredient> ingredients = NonNullList.withSize(ingredientCount, Ingredient.EMPTY);
 		
-		for (int i = 0; i < ingredients.size(); ++i) {
+		for (int i = 0; i < ingredientCount; i++) {
 			ingredients.set(i, Ingredient.fromNetwork(buf));
 		}
 		
-		ItemStack resultStack = buf.readItem();
-		float experience = buf.readFloat();
-		int cookingTime = buf.readVarInt();
-		return factory.create(id, ingredients, resultStack, experience, cookingTime);
+		return factory.create(recipeId, ingredients, resultStack, experience, cookTime);
 	}
 	
 	@Override
 	public void toNetwork(FriendlyByteBuf buf, T recipe) {
-		for (Ingredient ingredient : recipe.ingredients) {
-			ingredient.toNetwork(buf);
-		}
 		buf.writeItem(recipe.result);
 		buf.writeFloat(recipe.experience);
 		buf.writeVarInt(recipe.cookingTime);
-		
+		buf.writeByte(recipe.ingredients.size());
+		recipe.ingredients.forEach(ingredient -> ingredient.toNetwork(buf));
 	}
 	
 	public interface CookieBaker<T extends CakeOvenRecipe> {
-		T create(ResourceLocation id, NonNullList<Ingredient> ingredients, ItemStack result, float experience, int cookingTime);
+		T create(ResourceLocation recipeId, NonNullList<Ingredient> ingredients, ItemStack result, float experience, int cookTime);
 	}
 }
