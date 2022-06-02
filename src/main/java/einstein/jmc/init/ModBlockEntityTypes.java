@@ -24,4 +24,3 @@ public class ModBlockEntityTypes {
 		return BLOCK_ENTITIES.register(name, blockEntity);
 	}
 }
-   

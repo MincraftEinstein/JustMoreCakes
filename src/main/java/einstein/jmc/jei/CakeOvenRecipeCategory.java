@@ -82,7 +82,7 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 	
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, CakeOvenRecipe recipe, IFocusGroup focuses) {
-		IRecipeSlotBuilder[] slots = { 
+		IRecipeSlotBuilder[] ingredientSlots = { 
 				builder.addSlot(RecipeIngredientRole.INPUT, /*X*/ 34, /*Y*/ 5), 
 				builder.addSlot(RecipeIngredientRole.INPUT, /*X*/ 52, /*Y*/ 5),
 				builder.addSlot(RecipeIngredientRole.INPUT, /*X*/ 34, /*Y*/ 23), 
@@ -90,7 +90,7 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 		};
 		
 		for (int i = 0; i < recipe.getIngredients().size(); i++) {
-			slots[i].addIngredients(recipe.getIngredients().get(i)); // Adds the ingredients for menu slot 'i' to JEI slot i
+			ingredientSlots[i].addIngredients(recipe.getIngredients().get(i)); // Adds the ingredients for menu slot 'i' to JEI slot i
 		}
 		
 		builder.addSlot(RecipeIngredientRole.OUTPUT, /*X*/ 112, /*Y*/ 14).addItemStack(recipe.getResultItem());

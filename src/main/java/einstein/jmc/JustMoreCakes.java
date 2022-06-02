@@ -196,8 +196,8 @@ public class JustMoreCakes
             field.setAccessible(true);
             maxItemStackSize = field;
         }
-        catch (Throwable t) {
-            LOGGER.catching(Level.WARN, t);
+        catch (Exception e) {
+            LOGGER.catching(Level.WARN, e);
         }
     }
     
@@ -205,8 +205,8 @@ public class JustMoreCakes
 		try {
 			maxItemStackSize.setInt(Items.CAKE, 64);
 		}
-		catch (Throwable t) {
-			LOGGER.catching(Level.WARN, t);
+		catch (Exception e) {
+			LOGGER.catching(Level.WARN, e);
 		}
 	}
 }

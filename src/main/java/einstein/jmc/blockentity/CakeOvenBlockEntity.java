@@ -10,7 +10,7 @@ import einstein.jmc.blocks.CakeOvenBlock;
 import einstein.jmc.init.ModBlockEntityTypes;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
-import einstein.jmc.menu.CakeOvenMenu;
+import einstein.jmc.menu.cakeoven.CakeOvenMenu;
 import einstein.jmc.util.CakeOvenConstants;
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -106,12 +106,12 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	
 	@Override
 	protected AbstractContainerMenu createMenu(int id, Inventory inventory) {
-		return new CakeOvenMenu(id, inventory, ModRecipes.CAKE_OVEN_RECIPE, this, dataAccess);
+		return new CakeOvenMenu(id, inventory, this, dataAccess);
 	}
 	
 	public static void serverTick(Level level, BlockPos pos, BlockState state, CakeOvenBlockEntity blockEntity) {
 		boolean flag = blockEntity.isLit();
-		boolean flag1 = false;
+		boolean flag2 = false;
 		if (blockEntity.isLit()) {	// Reduces lit time by 1 every tick
 			--blockEntity.litTime;
 		}
@@ -120,14 +120,14 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 		if (blockEntity.isLit() || !fuelStack.isEmpty() && (!blockEntity.items.get(INGREDIENT_SLOT_1).isEmpty() ||
 				!blockEntity.items.get(INGREDIENT_SLOT_2).isEmpty() || !blockEntity.items.get(INGREDIENT_SLOT_3).isEmpty() || !blockEntity.items.get(INGREDIENT_SLOT_4).isEmpty())) {
 			Recipe<?> recipe = level.getRecipeManager().getRecipeFor((RecipeType<CakeOvenRecipe>)ModRecipes.CAKE_OVEN_RECIPE, blockEntity, level).orElse(null);
-			int i = blockEntity.getMaxStackSize();
+			int stackSize = blockEntity.getMaxStackSize();
 			
 			// Controls the fuel progress and fuel items
-			if (!blockEntity.isLit() && blockEntity.hasResultSpace(recipe, blockEntity.items, i)) {
+			if (!blockEntity.isLit() && blockEntity.hasResultSpace(recipe, blockEntity.items, stackSize)) {
 				blockEntity.litTime = blockEntity.getBurnDuration(fuelStack);
 				blockEntity.litDuration = blockEntity.litTime;
 				if (blockEntity.isLit()) {
-					flag1 = true;
+					flag2 = true;
 					if (fuelStack.hasContainerItem()) {
 						blockEntity.items.set(FUEL_SLOT, fuelStack.getContainerItem());
 					}
@@ -141,12 +141,12 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 			}
 			
 			// Controls the burn progress and outputs the items
-			if (blockEntity.isLit() && blockEntity.hasResultSpace(recipe, blockEntity.items, i)) {
+			if (blockEntity.isLit() && blockEntity.hasResultSpace(recipe, blockEntity.items, stackSize)) {
 				++blockEntity.cookingProgress;
 				if (blockEntity.cookingProgress == blockEntity.cookingTotalTime) {
 					blockEntity.cookingProgress = 0;
 					blockEntity.cookingTotalTime = getTotalCookTime(level, blockEntity);
-					if (blockEntity.smeltRecipe(recipe, blockEntity.items, i)) {
+					if (blockEntity.smeltRecipe(recipe, blockEntity.items, stackSize)) {
 						blockEntity.setRecipeUsed(recipe);
 					}
 				}
@@ -157,19 +157,19 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 		}
 		
 		if (flag != blockEntity.isLit()) {
-			flag1 = true;
+			flag2 = true;
 			state = state.setValue(CakeOvenBlock.LIT, Boolean.valueOf(blockEntity.isLit()));
 			level.setBlock(pos, state, 3);
 		}
 		
-		if (flag1) {
+		if (flag2) {
 			setChanged(level, pos, state);
 		}
 	}
 	
 	private boolean hasResultSpace(Recipe<?> recipe, NonNullList<ItemStack> slotItems, int maxStackSize) {
 		if (recipe != null) {
-			ItemStack stack = ((CakeOvenRecipe) recipe).assemble(this);	
+			ItemStack stack = ((CakeOvenRecipe)recipe).assemble(this);	
 			if (stack.isEmpty()) {
 				return false;
 			}
@@ -197,7 +197,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	private boolean smeltRecipe(@Nullable Recipe<?> recipe, NonNullList<ItemStack> slotItems, int maxStackSize) {
 		if (recipe != null && hasResultSpace(recipe, slotItems, maxStackSize)) {
 			ItemStack resultStack = slotItems.get(RESULT_SLOT);
-			ItemStack stack = ((CakeOvenRecipe) recipe).assemble(this);
+			ItemStack stack = ((CakeOvenRecipe)recipe).assemble(this);
 			if (resultStack.isEmpty()) { // If the result slot is empty set the slot items to the recipe result
 				slotItems.set(RESULT_SLOT, stack.copy());
 			}
@@ -205,7 +205,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 				resultStack.grow(stack.getCount());
 			}
 			
-			((CakeOvenRecipe) recipe).consumeIngredients(this);
+			((CakeOvenRecipe)recipe).consumeIngredients(this);
 			return true;
 		}
 		else {
@@ -234,8 +234,8 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	}
 	
 	@Override
-	public ItemStack removeItem(int p_18942_, int p_18943_) {
-		return ContainerHelper.removeItem(items, p_18942_, p_18943_);
+	public ItemStack removeItem(int par0, int par1) {
+		return ContainerHelper.removeItem(items, par0, par1);
 	}
 	
 	@Override
@@ -306,6 +306,11 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 		cookingProgress = tag.getInt("CookTime");
 		cookingTotalTime = tag.getInt("CookTimeTotal");
 		litDuration = getBurnDuration(items.get(FUEL_SLOT));
+		CompoundTag usedRecipes = tag.getCompound("RecipesUsed");
+		
+		for (String recipe : usedRecipes.getAllKeys()) {
+			recipesUsed.put(new ResourceLocation(recipe), usedRecipes.getInt(recipe));
+		}
 	}
 	
 	@Override
@@ -315,6 +320,11 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 		tag.putInt("CookTime", cookingProgress);
 		tag.putInt("CookTimeTotal", cookingTotalTime);
 		ContainerHelper.saveAllItems(tag, items);
+		CompoundTag usedRecipes = new CompoundTag();
+		recipesUsed.forEach((id, par1) -> {
+			usedRecipes.putInt(id.toString(), par1);
+		});
+		tag.put("RecipesUsed", usedRecipes);
 	}
 	
 	protected int getBurnDuration(ItemStack stack) {
@@ -343,18 +353,18 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	}
 	
 	public void awardUsedRecipesAndPopExperience(ServerPlayer player) {
-		List<Recipe<?>> list = this.getRecipesToAwardAndPopExperience(player.getLevel(), player.position());
+		List<Recipe<?>> list = getRecipesToAwardAndPopExperience(player.getLevel(), player.position());
 		player.awardRecipes(list);
-		this.recipesUsed.clear();
+		recipesUsed.clear();
 	}
 
 	public List<Recipe<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 pos) {
 		List<Recipe<?>> list = Lists.newArrayList();
 
-		for (Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
+		for (Entry<ResourceLocation> entry : recipesUsed.object2IntEntrySet()) {
 			level.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> {
 				list.add(recipe);
-				AbstractFurnaceBlockEntity.createExperience(level, pos, entry.getIntValue(), ((CakeOvenRecipe) recipe).getExperience());
+				AbstractFurnaceBlockEntity.createExperience(level, pos, entry.getIntValue(), ((CakeOvenRecipe)recipe).getExperience());
 			});
 		}
 
@@ -416,8 +426,8 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	
 	@Override
 	public void fillStackedContents(StackedContents contents) {
-		for (ItemStack itemstack : this.items) {
-			contents.accountStack(itemstack);
+		for (ItemStack stack : items) {
+			contents.accountStack(stack);
 		}
 	}
 }

@@ -35,7 +35,7 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 	
 	@Override
 	public boolean matches(Container container, Level level) {
-		List<ItemStack> inputs = new ArrayList<>();
+		List<ItemStack> inputs = new ArrayList<ItemStack>();
 		int stackCount = 0;
 		
 		for (int i = 0; i < container.getContainerSize(); i++) {
@@ -105,15 +105,15 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 	
 	public void consumeIngredients(Container container) {
 		for (Ingredient ingredient : ingredients) {
-			for (int i2 = 0; i2 < container.getContainerSize(); i2++) {
-				if (i2 != RESULT_SLOT && i2 != FUEL_SLOT) {
-					ItemStack stack = container.getItem(i2);
+			for (int i = 0; i < container.getContainerSize(); i++) {
+				if (i != RESULT_SLOT && i != FUEL_SLOT) {
+					ItemStack stack = container.getItem(i);
 					if (!stack.isEmpty() && ingredient.test(stack)) {
 						
 						stack.shrink(1);
 						
 		                if (stack.isEmpty()) {
-		                    container.setItem(i2, ItemStack.EMPTY);
+		                    container.setItem(i, ItemStack.EMPTY);
 		                }
 					}
 				}

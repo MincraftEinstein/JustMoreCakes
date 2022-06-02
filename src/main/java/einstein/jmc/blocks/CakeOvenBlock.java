@@ -45,14 +45,14 @@ public class CakeOvenBlock extends BaseEntityBlock {
 	
 	public CakeOvenBlock(Properties properties) {
 		super(properties);
-		registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.valueOf(false)));
+		registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.valueOf(false)));
 	}
 	
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		if (level.isClientSide) {
 			return InteractionResult.SUCCESS;
 		} else {
-			this.openContainer(level, pos, player);
+			openContainer(level, pos, player);
 			return InteractionResult.CONSUME;
 		}
 	}
@@ -79,7 +79,7 @@ public class CakeOvenBlock extends BaseEntityBlock {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean bool) {
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean par4) {
 		if (!state.is(oldState.getBlock())) {
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if (blockEntity instanceof CakeOvenBlockEntity) {
@@ -89,7 +89,7 @@ public class CakeOvenBlock extends BaseEntityBlock {
 				}
 				level.updateNeighbourForOutputSignal(pos, this);
 			}
-			super.onRemove(state, level, pos, oldState, bool);
+			super.onRemove(state, level, pos, oldState, par4);
 		}
 	}
 	

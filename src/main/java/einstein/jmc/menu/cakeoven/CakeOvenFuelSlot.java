@@ -1,4 +1,4 @@
-package einstein.jmc.menu;
+package einstein.jmc.menu.cakeoven;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;

@@ -1,7 +1,7 @@
-package einstein.jmc.menu;
+package einstein.jmc.menu.cakeoven;
 
 import einstein.jmc.init.ModMenuTypes;
-import einstein.jmc.item.crafting.CakeOvenRecipe;
+import einstein.jmc.init.ModRecipes;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -12,22 +12,19 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.ForgeHooks;
 
 public class CakeOvenMenu extends AbstractContainerMenu implements CakeOvenConstants {
 
 	private Container container;
 	private ContainerData data;
-	private RecipeType<? extends CakeOvenRecipe> recipeType;
 	
 	public CakeOvenMenu(int id, Inventory inventory) {
-		this(id, inventory, null, new SimpleContainer(SLOT_COUNT), new SimpleContainerData(DATA_COUNT));
+		this(id, inventory, new SimpleContainer(SLOT_COUNT), new SimpleContainerData(DATA_COUNT));
 	}
 	
-	public CakeOvenMenu(int id, Inventory inventory, RecipeType<? extends CakeOvenRecipe> recipeType, Container container, ContainerData data) {
+	public CakeOvenMenu(int id, Inventory inventory, Container container, ContainerData data) {
 		super(ModMenuTypes.CAKE_OVEN.get(), id);
-		this.recipeType = recipeType;
 		checkContainerSize(container, SLOT_COUNT);
 		checkContainerDataCount(data, DATA_COUNT);
 		this.container = container;
@@ -120,21 +117,23 @@ public class CakeOvenMenu extends AbstractContainerMenu implements CakeOvenConst
 	}
 	
 	protected boolean isFuel(ItemStack stack) {
-		return ForgeHooks.getBurnTime(stack, this.recipeType) > 0;
+		return ForgeHooks.getBurnTime(stack, ModRecipes.CAKE_OVEN_RECIPE) > 0;
 	}
 	
 	public int getBurnProgress() {
-		int i = data.get(2);
-		int i2 = data.get(3);
-		return i2 != 0 && i != 0 ? i * 24 / i2 : 0;
+		int cookingProgress = data.get(2);
+		int cookingTotalTime = data.get(3);
+		// 																		 24 is the width of the progress arrow
+		return cookingTotalTime != 0 && cookingProgress != 0 ? cookingProgress * 24 / cookingTotalTime : 0;
 	}
 	
 	public int getLitProgress() {
-		int i = data.get(1);
-		if (i == 0) {
-			i = 200;
+		int litDuration = data.get(1);
+		if (litDuration == 0) {
+			litDuration = DEFAULT_BURN_TIME;
 		}
-		return data.get(0) * 13 / i;
+						  // 13 is the height of the burn flame - 1
+		return data.get(0) * 13 / litDuration;
 	}
 	
 	public boolean isLit() {

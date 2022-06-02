@@ -1,4 +1,4 @@
-package einstein.jmc.menu;
+package einstein.jmc.menu.cakeoven;
 
 import einstein.jmc.blockentity.CakeOvenBlockEntity;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,21 +26,21 @@ public class CakeOvenResultSlot extends Slot {
 	@Override
 	public ItemStack remove(int count /* I think this is the number of items in the slot */) {
 		if (hasItem()) {
-			removeCount += Math.min(count, this.getItem().getCount());
+			removeCount += Math.min(count, getItem().getCount());
 		}
 		return super.remove(count);
 	}
 	
 	@Override
 	public void onTake(Player player, ItemStack stack) {
-		this.checkTakeAchievements(stack);
+		checkTakeAchievements(stack);
 		super.onTake(player, stack);
 	}
 	
 	@Override
 	protected void onQuickCraft(ItemStack stack /* I think this is an ItemStack of the items in the slot */, int count/* I think this is the number of items in the slot */) {
 		removeCount += count;
-		this.checkTakeAchievements(stack);
+		checkTakeAchievements(stack);
 	}
 	
 	@Override

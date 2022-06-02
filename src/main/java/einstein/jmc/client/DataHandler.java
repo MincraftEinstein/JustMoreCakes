@@ -14,8 +14,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @EventBusSubscriber(modid = JustMoreCakes.MODID, bus = Bus.MOD, value = { Dist.CLIENT })
-public class DataHandler
-{
+public class DataHandler {
+	
     @SubscribeEvent
     public static void clientSetup(final FMLClientSetupEvent event) {
     	ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_MUSHROOM_CAKE.get(), RenderType.cutout());

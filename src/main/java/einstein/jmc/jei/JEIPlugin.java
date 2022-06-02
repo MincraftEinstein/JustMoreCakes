@@ -7,7 +7,7 @@ import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
-import einstein.jmc.menu.CakeOvenMenu;
+import einstein.jmc.menu.cakeoven.CakeOvenMenu;
 import einstein.jmc.util.CakeOvenConstants;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;

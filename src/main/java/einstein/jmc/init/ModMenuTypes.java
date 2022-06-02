@@ -1,7 +1,7 @@
 package einstein.jmc.init;
 
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.menu.CakeOvenMenu;
+import einstein.jmc.menu.cakeoven.CakeOvenMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.DeferredRegister;
