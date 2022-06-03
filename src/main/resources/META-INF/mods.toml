@@ -1,11 +1,11 @@
 modLoader="javafml"
-loaderVersion="[39,)"
+loaderVersion="[40,)"
 license="All rights reserved"
 #issueTrackerURL="http://my.issue.tracker/"
 
 [[mods]]
 	modId="jmc"
-	version="4.0"
+	version="4.1"
 	displayName="Just More Cakes!"
 	#updateJSONURL="http://myurl.me/"
 	displayURL="https://www.curseforge.com/minecraft/mc-mods/just-more-cakes"
@@ -23,14 +23,14 @@ A mod that adds 30+ new cakes to Minecraft. Some with special properties, some w
 [[dependencies.jmc]]
     modId="forge"
     mandatory=true
-    versionRange="[39,)"
+    versionRange="[40,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.jmc]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18, 1.19]"
+    versionRange="[1.18.2, 1.19]"
     ordering="NONE"
     side="BOTH"
     
