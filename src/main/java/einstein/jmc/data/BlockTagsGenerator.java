@@ -17,4 +17,9 @@ public class BlockTagsGenerator extends BlockTagsProvider {
 	protected void addTags() {
 		tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.CAKE_OVEN.get());
 	}
+	
+	@Override
+	public String getName() {
+		return "JustMoreCakes block tags";
+	}
 }

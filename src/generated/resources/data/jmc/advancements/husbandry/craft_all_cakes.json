@@ -1,0 +1,520 @@
+{
+  "parent": "jmc:husbandry/craft_cake",
+  "display": {
+    "icon": {
+      "item": "jmc:chocolate_cake"
+    },
+    "title": {
+      "translate": "advancements.husbandry.craft_all_cakes.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.craft_all_cakes.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "criteria": {
+    "cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:cake"
+            ]
+          }
+        ]
+      }
+    },
+    "apple_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:apple_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "beetroot_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:beetroot_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "birthday_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:birthday_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "brown_mushroom_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:brown_mushroom_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "carrot_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:carrot_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "cheesecake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:cheesecake"
+            ]
+          }
+        ]
+      }
+    },
+    "christmas_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:christmas_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "chocolate_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:chocolate_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "chorus_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:chorus_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "cookie_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:cookie_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "creeper_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:creeper_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "crimson_fungus_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:crimson_fungus_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "cupcake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:cupcake"
+            ]
+          }
+        ]
+      }
+    },
+    "ender_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:ender_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "firey_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:firey_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "glowstone_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:glowstone_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "golden_apple_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:golden_apple_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "honey_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:honey_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "ice_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:ice_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "lava_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:lava_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "melon_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:melon_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "poison_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:poison_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "pumpkin_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:pumpkin_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "red_mushroom_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:red_mushroom_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "redstone_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:redstone_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "seed_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:seed_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "slime_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:slime_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "sprinkle_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:sprinkle_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "sweet_berry_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:sweet_berry_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "three_tiered_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:three_tiered_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "tnt_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:tnt_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "warped_fungus_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:warped_fungus_cake"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cake"
+    ],
+    [
+      "apple_cake"
+    ],
+    [
+      "beetroot_cake"
+    ],
+    [
+      "birthday_cake"
+    ],
+    [
+      "brown_mushroom_cake"
+    ],
+    [
+      "carrot_cake"
+    ],
+    [
+      "cheesecake"
+    ],
+    [
+      "christmas_cake"
+    ],
+    [
+      "chocolate_cake"
+    ],
+    [
+      "chorus_cake"
+    ],
+    [
+      "cookie_cake"
+    ],
+    [
+      "creeper_cake"
+    ],
+    [
+      "crimson_fungus_cake"
+    ],
+    [
+      "cupcake"
+    ],
+    [
+      "ender_cake"
+    ],
+    [
+      "firey_cake"
+    ],
+    [
+      "glowstone_cake"
+    ],
+    [
+      "golden_apple_cake"
+    ],
+    [
+      "honey_cake"
+    ],
+    [
+      "ice_cake"
+    ],
+    [
+      "lava_cake"
+    ],
+    [
+      "melon_cake"
+    ],
+    [
+      "poison_cake"
+    ],
+    [
+      "pumpkin_cake"
+    ],
+    [
+      "red_mushroom_cake"
+    ],
+    [
+      "redstone_cake"
+    ],
+    [
+      "seed_cake"
+    ],
+    [
+      "slime_cake"
+    ],
+    [
+      "sprinkle_cake"
+    ],
+    [
+      "sweet_berry_cake"
+    ],
+    [
+      "three_tiered_cake"
+    ],
+    [
+      "tnt_cake"
+    ],
+    [
+      "warped_fungus_cake"
+    ]
+  ]
+}

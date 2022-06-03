@@ -36,6 +36,6 @@ public class ModLootTableProvider extends LootTableProvider {
 	
 	@Override
 	public String getName() {
-		return "CutAndColored loot tables";
+		return "JustMoreCakes loot tables";
 	}
 }

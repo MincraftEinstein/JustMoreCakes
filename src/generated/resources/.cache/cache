@@ -1483,6 +1483,8 @@ f58e127b8606f7952d3a58e6cb0e9c927ce1e07f assets/jmc/models/item/sprinkle_cake.js
 a7a1c7536b074af2d2fb1bb4e795cbd5ebed05d5 assets/jmc/models/item/tnt_cake.json
 2dc39f0cbd55f99d270c03ea246c4094a919740a assets/jmc/models/item/warped_fungus_cake.json
 d22d113f48fffd6b40b8b85c2c15413d13f178bd data/forge/tags/items/cheese.json
+e8fdfec1241853404f25bebc46429e719ebb5499 data/jmc/advancements/husbandry/craft_all_cakes.json
+95fa3d4f513b77ce368e9440f38ebbe9b34abfbc data/jmc/advancements/husbandry/craft_cake.json
 94e21ac3e27b41e4ecb360c2852ec7b92e112da3 data/jmc/advancements/recipes/food/cake_from_cake_oven.json
 974c274177171d5d7a41bc6d7dfc3603e2e322b6 data/jmc/advancements/recipes/jmc_tab/apple_cake.json
 67df48dd01573117c385112e8915acb8f29a4f52 data/jmc/advancements/recipes/jmc_tab/apple_cake_from_cake_oven.json

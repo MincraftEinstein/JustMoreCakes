@@ -23,4 +23,9 @@ public class ItemTagsGenerator extends ItemTagsProvider {
 	protected void addTags() {
 		tag(CHEESE).add(ModItems.CHEESE.get());
 	}
+	
+	@Override
+	public String getName() {
+		return "JustMoreCakes item tags";
+	}
 }

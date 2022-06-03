@@ -27,5 +27,6 @@ public class ModDataGenerators {
 		BlockTagsProvider blockTags = new BlockTagsGenerator(generator, event.getExistingFileHelper()); // Used for both item and block tags
 		generator.addProvider(blockTags);
 		generator.addProvider(new ItemTagsGenerator(generator, blockTags, event.getExistingFileHelper()));
+		generator.addProvider(new ModAdvancementsGenerator(generator, event.getExistingFileHelper()));
 	}
 }
