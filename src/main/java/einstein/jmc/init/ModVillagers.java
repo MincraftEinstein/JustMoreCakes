@@ -39,8 +39,8 @@ public class ModVillagers {
 			final List<VillagerTrades.ItemListing> expert = event.getTrades().get(4); // Emerald tier
 			final List<VillagerTrades.ItemListing> master = event.getTrades().get(5); // Diamond tier
 
-			novice.add(new ItemsForEmeralds(Items.WHEAT, 20, 1, 16, 2));
-			novice.add(new ItemsForEmeralds(Items.EGG, 5, 1, 16, 2));
+			novice.add(new EmeraldsForItems(Items.WHEAT, 20, 1, 16, 2));
+			novice.add(new EmeraldsForItems(Items.EGG, 5, 1, 16, 2));
 			novice.add(new ItemsForEmeralds(Items.SUGAR, 2, 4, 1));
 			novice.add(new ItemsForEmeralds(Items.MILK_BUCKET, 2, 1, 2));
 

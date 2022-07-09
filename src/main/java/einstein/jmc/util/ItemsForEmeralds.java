@@ -8,38 +8,39 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 
+// Variables are named from the prospective of the villager
 public class ItemsForEmeralds implements VillagerTrades.ItemListing {
 
-    private final ItemStack stack;
-    private final int stackSize;
-    private final int receivedSize;
-    private final int maxUses;
+    private final ItemStack givenStack;
+    private final int receivedCount;
+    private final int givenCount;
+    private final int maxTrades;
     private final int givenExp;
     private final float priceMultiplier;
 
-    public ItemsForEmeralds(final ItemLike item, final int stackSize, final int receivedSize, final int givenExp) {
-        this(new ItemStack(item), stackSize, receivedSize, 12, givenExp);
+    public ItemsForEmeralds(final ItemLike givenItem, final int receivedCount, final int givenCount, final int givenExp) {
+        this(new ItemStack(givenItem), receivedCount, givenCount, 12, givenExp);
     }
 
-    public ItemsForEmeralds(final ItemLike item, final int stackSize, final int receivedSize, final int maxUses, final int givenExp) {
-        this(new ItemStack(item), stackSize, receivedSize, maxUses, givenExp);
+    public ItemsForEmeralds(final ItemLike givenItem, final int receivedCount, final int givenCount, final int maxTrades, final int givenExp) {
+        this(new ItemStack(givenItem), receivedCount, givenCount, maxTrades, givenExp);
     }
 
-    public ItemsForEmeralds(final ItemStack stack, final int stackSize, final int receivedSize, final int maxUses, final int givenExp) {
-        this(stack, stackSize, receivedSize, maxUses, givenExp, 0.05F);
+    public ItemsForEmeralds(final ItemStack givenStack, final int receivedCount, final int givenCount, final int maxTrades, final int givenExp) {
+        this(givenStack, receivedCount, givenCount, maxTrades, givenExp, 0.05F);
     }
 
-    public ItemsForEmeralds(final ItemStack stack, final int stackSize, final int receivedSize, final int maxUses, final int givenExp, final float priceMultiplier) {
-        this.stack = stack;
-        this.stackSize = stackSize;
-        this.receivedSize = receivedSize;
-        this.maxUses = maxUses;
+    public ItemsForEmeralds(final ItemStack givenStack, final int receivedCount, final int givenCount, final int maxTrades, final int givenExp, final float priceMultiplier) {
+        this.givenStack = givenStack;
+        this.receivedCount = receivedCount;
+        this.givenCount = givenCount;
+        this.maxTrades = maxTrades;
         this.givenExp = givenExp;
         this.priceMultiplier = priceMultiplier;
     }
 
     @Override
     public MerchantOffer getOffer(final Entity entity, final RandomSource random) {
-        return new MerchantOffer(new ItemStack(Items.EMERALD, stackSize), new ItemStack(stack.getItem(), receivedSize), maxUses, givenExp, priceMultiplier);
+        return new MerchantOffer(new ItemStack(Items.EMERALD, receivedCount), new ItemStack(givenStack.getItem(), givenCount), maxTrades, givenExp, priceMultiplier);
     }
 }
