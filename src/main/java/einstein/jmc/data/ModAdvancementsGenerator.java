@@ -1,7 +1,5 @@
 package einstein.jmc.data;
 
-import java.util.function.Consumer;
-
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import net.minecraft.advancements.Advancement;
@@ -12,7 +10,7 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.advancements.AdvancementProvider;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -20,6 +18,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.function.Consumer;
 
 public class ModAdvancementsGenerator extends AdvancementProvider {
 
@@ -37,10 +37,10 @@ public class ModAdvancementsGenerator extends AdvancementProvider {
 	@Override
 	protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
 		Advancement craftCake = addCakes(Advancement.Builder.advancement().parent(new ResourceLocation("minecraft:husbandry/plant_seed")).requirements(RequirementsStrategy.OR)
-			.display(Blocks.CAKE.asItem(), traslatable("craft_cake.title"), traslatable("craft_cake.description"), (ResourceLocation)null, FrameType.TASK, true, true, false))
+			.display(Blocks.CAKE.asItem(), translatable("craft_cake.title"), translatable("craft_cake.description"), (ResourceLocation)null, FrameType.TASK, true, true, false))
 			.save(consumer, rl("husbandry/craft_cake"), fileHelper);
 		addCakes(Advancement.Builder.advancement().parent(craftCake))
-			.display(ModBlocks.CHOCOLATE_CAKE.get(), traslatable("craft_all_cakes.title"), traslatable("craft_all_cakes.description"), (ResourceLocation)null, FrameType.CHALLENGE, true, true, false)
+			.display(ModBlocks.CHOCOLATE_CAKE.get(), translatable("craft_all_cakes.title"), translatable("craft_all_cakes.description"), (ResourceLocation)null, FrameType.CHALLENGE, true, true, false)
 			.rewards(AdvancementRewards.Builder.experience(100)).save(consumer, rl("husbandry/craft_all_cakes"), fileHelper);
 	}
 	
@@ -53,8 +53,8 @@ public class ModAdvancementsGenerator extends AdvancementProvider {
 		return advancement;
 	}
 	
-	private TranslatableComponent traslatable(String str) {
-		return new TranslatableComponent("advancements.husbandry." + str);
+	private Component translatable(String str) {
+		return Component.translatable("advancements.husbandry." + str);
 	}
 	
 	private ResourceLocation rl(String path) {

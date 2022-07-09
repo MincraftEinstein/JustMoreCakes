@@ -1,11 +1,8 @@
 package einstein.jmc.blocks;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +14,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
+
+import javax.annotation.Nullable;
 
 public class EncasingIceBlock extends HalfTransparentBlock {
 
@@ -30,7 +29,7 @@ public class EncasingIceBlock extends HalfTransparentBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (timeGoneBy(level, 1)) {
 			level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 		}

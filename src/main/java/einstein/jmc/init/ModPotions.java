@@ -1,6 +1,5 @@
 package einstein.jmc.init;
 
-import einstein.einsteins_library.util.PropertyRegistry;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.effects.BouncingEffect;
 import einstein.jmc.effects.FreezingEffect;
@@ -9,6 +8,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,8 +27,8 @@ public class ModPotions {
 	public static final RegistryObject<Potion> FREEZING_POTION = POTIONS.register("freezing", () -> new Potion(new MobEffectInstance(FREEZING_EFFECT.get())));
 	
 	public static void registerPotionRecipes() {
-		PropertyRegistry.registerPotionRecipe(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.BOUNCING_POTION.get());
-		PropertyRegistry.registerPotionRecipe(ModPotions.BOUNCING_POTION.get(), Items.REDSTONE, ModPotions.LONG_BOUNCING_POTION.get());
-		PropertyRegistry.registerPotionRecipe(Potions.AWKWARD, Items.PACKED_ICE, ModPotions.FREEZING_POTION.get());
-	}	
+		PotionBrewing.addMix(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.BOUNCING_POTION.get());
+		PotionBrewing.addMix(ModPotions.BOUNCING_POTION.get(), Items.REDSTONE, ModPotions.LONG_BOUNCING_POTION.get());
+		PotionBrewing.addMix(Potions.AWKWARD, Items.PACKED_ICE, ModPotions.FREEZING_POTION.get());
+	}
 }

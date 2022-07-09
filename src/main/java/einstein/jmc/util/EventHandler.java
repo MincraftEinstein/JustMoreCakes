@@ -101,7 +101,7 @@ public class EventHandler {
 	}
 	
 	private boolean flag2(Player player, Block block, BlockState state) {
-		String name = block.getRegistryName().getPath();
+		String name = Util.getBlockRegistryName(block).getPath();
 		ItemStack heldItem = player.getMainHandItem();
 		
 		if ((block instanceof BaseCakeBlock && 

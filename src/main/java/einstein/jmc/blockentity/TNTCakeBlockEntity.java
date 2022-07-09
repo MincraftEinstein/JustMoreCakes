@@ -1,7 +1,7 @@
 package einstein.jmc.blockentity;
 
-import einstein.einsteins_library.util.Actions;
 import einstein.jmc.init.ModBlockEntityTypes;
+import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,6 +13,6 @@ public class TNTCakeBlockEntity extends BlockEntity {
 	}
 	
 	public void explode() {
-		Actions.createExplosion(getLevel(), getBlockPos(), 5);
+		Util.createExplosion(getLevel(), getBlockPos(), 5);
 	}
 }

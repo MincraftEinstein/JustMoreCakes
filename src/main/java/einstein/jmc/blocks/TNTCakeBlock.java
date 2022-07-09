@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-public class TNTCakeBlock extends BaseEntityCakeBlock
-{
+public class TNTCakeBlock extends BaseEntityCakeBlock {
+
     public TNTCakeBlock(final BlockBehaviour.Properties properties) {
         super(properties);
     }
@@ -41,19 +41,19 @@ public class TNTCakeBlock extends BaseEntityCakeBlock
 	}
     
 	@Override
-	public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-		if (worldIn.hasNeighborSignal(pos)) {
+	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos oldPos, boolean isMoving) {
+		if (level.hasNeighborSignal(pos)) {
 			if (ModServerConfigs.EFFECTED_BY_REDSTONE.get()) {
-				explode(worldIn, pos);
+				explode(level, pos);
 			}
 		}
 	}
 	
 	@Override
-	public void onPlace(BlockState state, Level worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
-		if (worldIn.hasNeighborSignal(pos)) {
+	public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+		if (level.hasNeighborSignal(pos)) {
 			if (ModServerConfigs.EFFECTED_BY_REDSTONE.get()) {
-				explode(worldIn, pos);
+				explode(level, pos);
 			}
 		}
 	}

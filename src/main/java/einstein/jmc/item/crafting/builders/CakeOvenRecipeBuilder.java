@@ -1,4 +1,4 @@
-package einstein.jmc.data;
+package einstein.jmc.item.crafting.builders;
 
 import java.util.Collections;
 import java.util.function.Consumer;

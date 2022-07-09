@@ -5,6 +5,7 @@ import java.util.Random;
 import einstein.jmc.init.ModClientConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -19,7 +20,7 @@ public class EnderCandleCakeBlock extends BaseCandleCakeBlock {
 	}
 	
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
     	if (ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
 	       for (int i = 0; i < 3; ++i) {
 	           int j = rand.nextInt(2) * 2 - 1;
@@ -30,7 +31,7 @@ public class EnderCandleCakeBlock extends BaseCandleCakeBlock {
 	           double d3 = (rand.nextFloat() * j);
 	           double d4 = (rand.nextFloat() - 0.5D) * 0.125D;
 	           double d5 = (rand.nextFloat() * k);
-	           worldIn.addParticle(ParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
+	           level.addParticle(ParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
 	        }
     	}
     }

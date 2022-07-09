@@ -12,7 +12,5 @@ public class ModMenuTypes {
 
 	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, JustMoreCakes.MODID);
 	
-	public static final RegistryObject<MenuType<CakeOvenMenu>> CAKE_OVEN = MENU_TYPES.register("cake_oven", () -> IForgeMenuType.create((id, inventory, data) -> {
-		return new CakeOvenMenu(id, inventory);
-	}));	
+	public static final RegistryObject<MenuType<CakeOvenMenu>> CAKE_OVEN = MENU_TYPES.register("cake_oven", () -> IForgeMenuType.create((id, inventory, data) -> new CakeOvenMenu(id, inventory)));
 }

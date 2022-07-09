@@ -32,6 +32,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public abstract class BaseEntityCakeBlock extends BaseEntityBlock {
+
 	public static final IntegerProperty BITES = BlockStateProperties.BITES;
 	protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[] {
 			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
@@ -48,8 +49,7 @@ public abstract class BaseEntityCakeBlock extends BaseEntityBlock {
 		this.registerDefaultState(this.stateDefinition.any().setValue(BITES, Integer.valueOf(0)));
 	}
 	
-	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos,
-			CollisionContext p_51225_) {
+	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext p_51225_) {
 		return SHAPE_BY_BITE[state.getValue(BITES)];
 	}
 	
@@ -68,7 +68,7 @@ public abstract class BaseEntityCakeBlock extends BaseEntityBlock {
 		
 		return eat(level, pos, state, player);
 	}
-	
+
 	public InteractionResult eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player) {
 		if (!player.canEat(false)) {
 			return InteractionResult.PASS;

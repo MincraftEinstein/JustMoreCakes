@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import einstein.jmc.JustMoreCakes;
+import einstein.jmc.tags.BlockTagsGenerator;
+import einstein.jmc.tags.ItemTagsGenerator;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,14 +21,18 @@ public class ModDataGenerators {
 	@SubscribeEvent
 	public static void DataGenerator(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
-		generator.addProvider(new CraftingRecipesGenerator(generator));
-		generator.addProvider(new CakeOvenRecipesGenerator(generator));
-		generator.addProvider(new ModLootTableProvider(generator));
-		generator.addProvider(new BlockAssetsGenerator(generator, event.getExistingFileHelper()));
-		generator.addProvider(new ItemAssetsGenerator(generator, event.getExistingFileHelper()));
+
+		// Server providers
+		generator.addProvider(event.includeServer(), new CraftingRecipesGenerator(generator));
+		generator.addProvider(event.includeServer(), new CakeOvenRecipesGenerator(generator));
 		BlockTagsProvider blockTags = new BlockTagsGenerator(generator, event.getExistingFileHelper()); // Used for both item and block tags
-		generator.addProvider(blockTags);
-		generator.addProvider(new ItemTagsGenerator(generator, blockTags, event.getExistingFileHelper()));
-		generator.addProvider(new ModAdvancementsGenerator(generator, event.getExistingFileHelper()));
+		generator.addProvider(event.includeServer(), blockTags);
+		generator.addProvider(event.includeServer(), new ItemTagsGenerator(generator, blockTags, event.getExistingFileHelper()));
+		generator.addProvider(event.includeServer(), new ModAdvancementsGenerator(generator, event.getExistingFileHelper()));
+		generator.addProvider(event.includeServer(), new ModLootTableProvider(generator));
+
+		// Client providers
+		generator.addProvider(event.includeClient(), new BlockAssetsGenerator(generator, event.getExistingFileHelper()));
+		generator.addProvider(event.includeClient(), new ItemAssetsGenerator(generator, event.getExistingFileHelper()));
 	}
 }

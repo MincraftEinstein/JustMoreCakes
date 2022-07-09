@@ -6,6 +6,7 @@ import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.init.ModServerConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -19,8 +20,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class LavaCakeBlock extends BaseCakeBlock
-{
+public class LavaCakeBlock extends BaseCakeBlock {
+
     public LavaCakeBlock(final BlockBehaviour.Properties properties) {
         super(properties);
     }
@@ -40,7 +41,7 @@ public class LavaCakeBlock extends BaseCakeBlock
     }
     
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random rand) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
     	if (ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
         	if (rand.nextInt(10) == 0) {
     	        double d0 = pos.getX() + rand.nextDouble();

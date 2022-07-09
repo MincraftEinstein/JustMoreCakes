@@ -4,6 +4,7 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.blocks.BaseCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.util.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
@@ -78,7 +79,7 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 	}
 	
 	private void cakeBlock(Block block) {
-		String name = block.getRegistryName().getPath();
+		String name = Util.getBlockRegistryName(block).getPath();
 		String side = "block/" + name + "_side";
 		String top = "block/" + name + "_top";
 		String bottom = "block/" + name + "_bottom";
@@ -139,7 +140,7 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 	}
 	
 	private void crossCakeBlock(Block block, ResourceLocation cross) {
-		String name = block.getRegistryName().getPath();
+		String name = Util.getBlockRegistryName(block).getPath();
 		String side = "block/" + name + "_side";
 		String top = "block/" + name + "_top";
 		String bottom = "block/" + name + "_bottom";

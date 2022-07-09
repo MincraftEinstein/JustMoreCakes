@@ -25,8 +25,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CupcakeBlock extends Block
-{
+public class CupcakeBlock extends Block {
+
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 1);
     protected static final VoxelShape[] SHAPES = new VoxelShape[] {
     		Shapes.or(Block.box(6, 0, 6, 10, 5, 10),

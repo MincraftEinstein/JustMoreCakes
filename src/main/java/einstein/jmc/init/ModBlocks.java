@@ -38,8 +38,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModBlocks
-{
+public class ModBlocks {
+
 	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, JustMoreCakes.MODID);
 	private static final BlockBehaviour.Properties CAKE = Properties.copy(Blocks.CAKE);
 	private static final BlockBehaviour.Properties CANDLE_CAKE = Properties.copy(Blocks.CANDLE_CAKE);
@@ -83,12 +83,10 @@ public class ModBlocks
     public static final RegistryObject<Block> SPRINKLE_CAKE = registerCandleCake("sprinkle_cake");
     public static final RegistryObject<Block> SWEET_BERRY_CAKE = registerCandleCake("sweet_berry_cake");
     public static final RegistryObject<Block> HONEY_CAKE = registerCandleCake("honey_cake");
-    public static final RegistryObject<Block> GLOWSTONE_CAKE = register("glowstone_cake", () -> new GlowstoneCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).lightLevel((state) -> {
-    	return 12;
-    })));
+    public static final RegistryObject<Block> GLOWSTONE_CAKE = register("glowstone_cake", () -> new GlowstoneCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).lightLevel((state) -> 12)));
     public static final RegistryObject<Block> CRIMSON_FUNGUS_CAKE = register("crimson_fungus_cake", () -> new BaseCakeBlock(CAKE));
     public static final RegistryObject<Block> WARPED_FUNGUS_CAKE = registerCandleCake("warped_fungus_cake");
-    public static final RegistryObject<Block> ENCASING_ICE = register("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of(Material.ICE).friction(0.98F).randomTicks().strength(2.5F, 5.0F).sound(SoundType.GLASS).noDrops().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never)));
+    public static final RegistryObject<Block> ENCASING_ICE = register("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of(Material.ICE).friction(0.98F).randomTicks().strength(2.5F, 5.0F).sound(SoundType.GLASS).noLootTable().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never)));
     public static final RegistryObject<Block> CAKE_OVEN = register("cake_oven", () -> new CakeOvenBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(Blocks.litBlockEmission(13))));
     
     public static void init(IEventBus modEventBus) {

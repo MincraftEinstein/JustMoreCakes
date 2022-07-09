@@ -8,6 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -30,8 +31,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BirthdayCakeBlock extends Block
-{
+public class BirthdayCakeBlock extends Block {
+
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 8);
     protected static final VoxelShape[] SHAPES = new VoxelShape[] { 
     		Block.box(1, 0, 1, 15, 8, 15), //0 uneaten lit
@@ -143,7 +144,7 @@ public class BirthdayCakeBlock extends Block
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random rand) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
         final int i = state.getValue(BirthdayCakeBlock.BITES);
         if (i < 1) {
             final double d0 = pos.getX() + 0.5;

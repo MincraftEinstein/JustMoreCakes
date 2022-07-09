@@ -4,7 +4,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
@@ -24,9 +23,9 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, CakeOvenConstants {
 
@@ -39,8 +38,8 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 	
 	public CakeOvenRecipeCategory(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(TEXTURE, /*ImageX*/ 0, /*ImageY*/ 0, /*Width*/ 133, /*Height*/ 44);
-		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModBlocks.CAKE_OVEN.get()));
-		title = new TranslatableComponent("gui.jei.jmc.category.cake_oven");
+		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.CAKE_OVEN.get()));
+		title = Component.translatable("gui.jei.jmc.category.cake_oven");
 		flame = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(TEXTURE, /*ImageX*/ 133, /*ImageY*/ 0, /*Width*/ 14, /*Height*/ 14), /*AnimationTime*/ 300, StartDirection.TOP, true);
 		cachedArrows = CacheBuilder.newBuilder().maximumSize(25L).build(new CacheLoader<Integer, IDrawableAnimated>() {
 			@Override
@@ -49,17 +48,12 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 			}
 		});
 	}
-	
+
 	@Override
-	public ResourceLocation getUid() {
+	public @Nullable ResourceLocation getRegistryName(CakeOvenRecipe recipe) {
 		return getRecipeType().getUid();
 	}
-	
-	@Override
-	public Class<? extends CakeOvenRecipe> getRecipeClass() {
-		return getRecipeType().getRecipeClass();
-	}
-	
+
 	@Override
 	public RecipeType<CakeOvenRecipe> getRecipeType() {
 		return JEIPlugin.CAKE_OVEN;
@@ -118,7 +112,7 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 	private void drawExperienceText(CakeOvenRecipe recipe, PoseStack stack, int y) {
 		float experience = recipe.getExperience();
 		if (experience > 0) {
-			TranslatableComponent experienceText = new TranslatableComponent("gui.jei.jmc.category.cake_oven.experience", Float.valueOf(experience));
+			Component experienceText = Component.translatable("gui.jei.jmc.category.cake_oven.experience", Float.valueOf(experience));
 			Font fontRenderer = Minecraft.getInstance().font;
 			fontRenderer.draw(stack, experienceText, /*X*/ (background.getWidth() - fontRenderer.width(experienceText) - /*Makes room for the shapeless icon*/13), y, -8355712);
 		}
@@ -129,7 +123,7 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 		int cookTime = recipe.getCookingTime();
 		if (cookTime > 0) {
 			int cookTimeSeconds = cookTime / 20; // Converts cook time in ticks to cook time in seconds
-			TranslatableComponent cookTimeText = new TranslatableComponent("gui.jei.jmc.category.cake_oven.time.seconds", Integer.valueOf(cookTimeSeconds));
+			Component cookTimeText = Component.translatable("gui.jei.jmc.category.cake_oven.time.seconds", Integer.valueOf(cookTimeSeconds));
 			Font fontRenderer = Minecraft.getInstance().font;
 			fontRenderer.draw(stack, cookTimeText, /*X*/ (background.getWidth() - fontRenderer.width(cookTimeText)), y, -8355712);
 		}

@@ -3,6 +3,7 @@ package einstein.jmc.data;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
+import einstein.jmc.util.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
@@ -31,23 +32,23 @@ public class ItemAssetsGenerator extends ItemModelProvider {
 			}
 		}
 		
-		generatedItem(getObjectName(ModBlocks.TNT_CAKE.get()), mcLoc("item/cake"));
-		generatedItem(getObjectName(ModBlocks.RED_MUSHROOM_CAKE.get()), modLoc("item/" + getObjectName(ModBlocks.RED_MUSHROOM_CAKE.get())));
-		generatedItem(getObjectName(ModBlocks.BROWN_MUSHROOM_CAKE.get()), modLoc("item/" + getObjectName(ModBlocks.BROWN_MUSHROOM_CAKE.get())));
-		generatedItem(getObjectName(ModBlocks.BIRTHDAY_CAKE.get()), modLoc("item/" + getObjectName(ModBlocks.BIRTHDAY_CAKE.get())));
-		generatedItem(getObjectName(ModBlocks.CUPCAKE.get()), modLoc("item/" + getObjectName(ModBlocks.CUPCAKE.get())));
-		generatedItem(getObjectName(ModBlocks.CHORUS_CAKE.get()), modLoc("item/" + getObjectName(ModBlocks.CHORUS_CAKE.get())));
-		generatedItem(getObjectName(ModBlocks.GLOWSTONE_CAKE.get()), modLoc("item/" + getObjectName(ModBlocks.GLOWSTONE_CAKE.get())));
-		generatedItem(getObjectName(ModBlocks.CRIMSON_FUNGUS_CAKE.get()), modLoc("item/" + getObjectName(ModBlocks.CRIMSON_FUNGUS_CAKE.get())));
-		generatedItem(getObjectName(ModItems.CUPCAKE.get()), modLoc("item/" + getObjectName(ModItems.CUPCAKE.get())));
-		generatedItem(getObjectName(ModItems.CHEESE.get()), modLoc("item/" + getObjectName(ModItems.CHEESE.get())));
+		generatedItem(getItemName(ModBlocks.TNT_CAKE.get()), mcLoc("item/cake"));
+		generatedItem(getItemName(ModBlocks.RED_MUSHROOM_CAKE.get()), modLoc("item/" + getItemName(ModBlocks.RED_MUSHROOM_CAKE.get())));
+		generatedItem(getItemName(ModBlocks.BROWN_MUSHROOM_CAKE.get()), modLoc("item/" + getItemName(ModBlocks.BROWN_MUSHROOM_CAKE.get())));
+		generatedItem(getItemName(ModBlocks.BIRTHDAY_CAKE.get()), modLoc("item/" + getItemName(ModBlocks.BIRTHDAY_CAKE.get())));
+		generatedItem(getItemName(ModBlocks.CUPCAKE.get()), modLoc("item/" + getItemName(ModBlocks.CUPCAKE.get())));
+		generatedItem(getItemName(ModBlocks.CHORUS_CAKE.get()), modLoc("item/" + getItemName(ModBlocks.CHORUS_CAKE.get())));
+		generatedItem(getItemName(ModBlocks.GLOWSTONE_CAKE.get()), modLoc("item/" + getItemName(ModBlocks.GLOWSTONE_CAKE.get())));
+		generatedItem(getItemName(ModBlocks.CRIMSON_FUNGUS_CAKE.get()), modLoc("item/" + getItemName(ModBlocks.CRIMSON_FUNGUS_CAKE.get())));
+		generatedItem(getItemName(ModItems.CUPCAKE.get()), modLoc("item/" + getItemName(ModItems.CUPCAKE.get())));
+		generatedItem(getItemName(ModItems.CHEESE.get()), modLoc("item/" + getItemName(ModItems.CHEESE.get())));
 		blockItemModel(Blocks.ICE, "encasing_ice");
 		blockItemModel(ModBlocks.CAKE_OVEN.get(), "cake_oven");
 	}
 	
 	private void blockItemModel(Block block, String fileName) {
-		String name = getObjectName(block);
-		String modid = block.getRegistryName().getNamespace();
+		String name = getItemName(block);
+		String modid = Util.getBlockRegistryName(block).getNamespace();
 		getBuilder(fileName).parent(getExistingFile(new ResourceLocation(modid, "block/" + name)));
 	}
 	
@@ -59,8 +60,8 @@ public class ItemAssetsGenerator extends ItemModelProvider {
 		return model;
 	}
 	
-	private String getObjectName(ItemLike object) {
-		return object.asItem().getRegistryName().getPath();
+	private String getItemName(ItemLike item) {
+		return Util.getItemRegistryName(item.asItem()).getPath();
 	}
 	
 	@Override

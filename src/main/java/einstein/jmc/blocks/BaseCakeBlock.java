@@ -4,6 +4,7 @@ import einstein.jmc.effects.FreezingEffect;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModPotions;
 import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -36,6 +37,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BaseCakeBlock extends Block {
+
 	public static final IntegerProperty BITES = BlockStateProperties.BITES;
 	protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[] {
 			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
@@ -59,7 +61,7 @@ public class BaseCakeBlock extends Block {
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		Item item = itemstack.getItem();
-		String name = getRegistryName().getPath();
+		String name = Util.getBlockRegistryName(asBlock()).getPath();
 		if (!name.contains("red_mushroom_cake") && !name.contains("brown_mushroom_cake") && !name.contains("chorus_cake") && !name.contains("crimson_fungus_cake")) {
 			if (itemstack.is(ItemTags.CANDLES) && state.getValue(BITES) == 0) {
 				Block block = Block.byItem(item);
@@ -69,7 +71,7 @@ public class BaseCakeBlock extends Block {
 					}
 
 					level.playSound((Player) null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1.0F, 1.0F);
-					String candle = block.getRegistryName().getPath();
+					String candle = Util.getBlockRegistryName(block).getPath();
 					Block candleBlock = ModBlocks.getBlock(ModBlocks.RL(candle + "_" + name));
 					level.setBlockAndUpdate(pos, candleBlock.defaultBlockState());
 					level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
@@ -98,7 +100,7 @@ public class BaseCakeBlock extends Block {
 		} else {
 			player.awardStat(Stats.EAT_CAKE_SLICE);
 			((BaseCakeBlock) state.getBlock()).eatActions(player);
-			String name = getRegistryName().getPath();
+			String name = Util.getBlockRegistryName(asBlock()).getPath();
 			if (name.contains("poison_cake")) {
 				player.addEffect(new MobEffectInstance(MobEffects.POISON, ModServerConfigs.POISON_CAKE_POISON_DUR.get(), ModServerConfigs.POISON_CAKE_POISON_STRENGTH.get()));
 			}

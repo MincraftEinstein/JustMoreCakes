@@ -1,11 +1,6 @@
 package einstein.jmc.blockentity;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
-
 import einstein.jmc.blocks.CakeOvenBlock;
 import einstein.jmc.init.ModBlockEntityTypes;
 import einstein.jmc.init.ModRecipes;
@@ -19,7 +14,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,7 +30,6 @@ import net.minecraft.world.inventory.RecipeHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
@@ -48,6 +41,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible, CakeOvenConstants {
 
@@ -101,7 +97,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	
 	@Override
 	protected Component getDefaultName() {
-		return new TranslatableComponent("container.jmc.cake_oven");
+		return Component.translatable("container.jmc.cake_oven");
 	}
 	
 	@Override
@@ -119,7 +115,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 		ItemStack fuelStack = blockEntity.items.get(FUEL_SLOT);
 		if (blockEntity.isLit() || !fuelStack.isEmpty() && (!blockEntity.items.get(INGREDIENT_SLOT_1).isEmpty() ||
 				!blockEntity.items.get(INGREDIENT_SLOT_2).isEmpty() || !blockEntity.items.get(INGREDIENT_SLOT_3).isEmpty() || !blockEntity.items.get(INGREDIENT_SLOT_4).isEmpty())) {
-			Recipe<?> recipe = level.getRecipeManager().getRecipeFor((RecipeType<CakeOvenRecipe>)ModRecipes.CAKE_OVEN_RECIPE, blockEntity, level).orElse(null);
+			Recipe<?> recipe = level.getRecipeManager().getRecipeFor(ModRecipes.CAKE_OVEN_RECIPE.get(), blockEntity, level).orElse(null);
 			int stackSize = blockEntity.getMaxStackSize();
 			
 			// Controls the fuel progress and fuel items
@@ -262,7 +258,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	}
 	
 	private static int getTotalCookTime(Level level, Container container) {
-		return level.getRecipeManager().getRecipeFor((RecipeType<CakeOvenRecipe>)ModRecipes.CAKE_OVEN_RECIPE, container, level).map(CakeOvenRecipe::getCookingTime).orElse(DEFAULT_BURN_TIME);
+		return level.getRecipeManager().getRecipeFor(ModRecipes.CAKE_OVEN_RECIPE.get(), container, level).map(CakeOvenRecipe::getCookingTime).orElse(DEFAULT_BURN_TIME);
 	}
 	
 	@Override
@@ -284,7 +280,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 			return true;
 		}
 		else {	// Else (most likely fuel slot), only items with a burn time can be placed
-			return ForgeHooks.getBurnTime(stack, ModRecipes.CAKE_OVEN_RECIPE) > 0;
+			return ForgeHooks.getBurnTime(stack, ModRecipes.CAKE_OVEN_RECIPE.get()) > 0;
 		}
 	}
 	
@@ -332,7 +328,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 			return 0;
 		}
 		else {
-			return ForgeHooks.getBurnTime(stack, ModRecipes.CAKE_OVEN_RECIPE);
+			return ForgeHooks.getBurnTime(stack, ModRecipes.CAKE_OVEN_RECIPE.get());
 		}
 	}
 	

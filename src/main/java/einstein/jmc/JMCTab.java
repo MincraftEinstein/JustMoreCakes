@@ -4,10 +4,10 @@ import einstein.jmc.init.ModBlocks;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
-public class JMCTab extends CreativeModeTab
-{
-    public JMCTab(final int index, final String label) {
-        super(index, label);
+public class JMCTab extends CreativeModeTab {
+
+    public JMCTab(final int index, final String name) {
+        super(index, name);
     }
     
     @Override

@@ -1,6 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -29,8 +30,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class ThreeTieredCakeBlock extends Block
-{
+public class ThreeTieredCakeBlock extends Block {
+
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 15);
     protected static final VoxelShape[] SHAPES = new VoxelShape[] { 
     		Shapes.or(Block.box(3, 15, 3, 13, 21, 13), //0 uneaten
@@ -68,7 +69,7 @@ public class ThreeTieredCakeBlock extends Block
     
     public ThreeTieredCakeBlock(final Block.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(BITES, Integer.valueOf(0)));
+        this.registerDefaultState(stateDefinition.any().setValue(BITES, Integer.valueOf(0)));
     }
     
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
@@ -85,8 +86,8 @@ public class ThreeTieredCakeBlock extends Block
 					itemstack.shrink(1);
 				}
 
-				level.playSound((Player) null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1.0F, 1.0F);
-				String candle = block.getRegistryName().getPath();
+				level.playSound(null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1, 1);
+				String candle = Util.getBlockRegistryName(block).getPath();
 				Block candleBlock = ModBlocks.getBlock(ModBlocks.RL(candle + "_three_tiered_cake"));
 				level.setBlockAndUpdate(pos, candleBlock.defaultBlockState());
 				level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
@@ -124,8 +125,8 @@ public class ThreeTieredCakeBlock extends Block
 	}
     
 	@SuppressWarnings("deprecation")
-	public BlockState updateShape(BlockState state, Direction direction, BlockState p_51215_, LevelAccessor accessor, BlockPos pos, BlockPos p_51218_) {
-		return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, p_51215_, accessor, pos, p_51218_);
+	public BlockState updateShape(BlockState state, Direction direction, BlockState oldState, LevelAccessor accessor, BlockPos pos, BlockPos oldPos) {
+		return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, oldState, accessor, pos, oldPos);
 	}
 	
 	public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {

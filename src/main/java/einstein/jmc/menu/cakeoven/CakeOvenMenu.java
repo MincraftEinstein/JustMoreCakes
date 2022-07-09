@@ -117,7 +117,7 @@ public class CakeOvenMenu extends AbstractContainerMenu implements CakeOvenConst
 	}
 	
 	protected boolean isFuel(ItemStack stack) {
-		return ForgeHooks.getBurnTime(stack, ModRecipes.CAKE_OVEN_RECIPE) > 0;
+		return ForgeHooks.getBurnTime(stack, ModRecipes.CAKE_OVEN_RECIPE.get()) > 0;
 	}
 	
 	public int getBurnProgress() {

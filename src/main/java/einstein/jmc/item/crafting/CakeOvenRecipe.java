@@ -90,7 +90,7 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 	
 	@Override
 	public RecipeType<?> getType() {
-		return ModRecipes.CAKE_OVEN_RECIPE;
+		return ModRecipes.CAKE_OVEN_RECIPE.get();
 	}
 	
 	@Override

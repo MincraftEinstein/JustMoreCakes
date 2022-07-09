@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
-
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
@@ -15,9 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<T>, CakeOvenConstants {
+public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> implements RecipeSerializer<T>, CakeOvenConstants {
 
 	private final int defaultCookingTime;
 	private final CookieBaker<T> factory;

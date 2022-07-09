@@ -36,6 +36,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ThreeTieredCandleCakeBlock extends AbstractCandleBlock {
+
 	public static final BooleanProperty LIT = AbstractCandleBlock.LIT;
 	protected static final VoxelShape SHAPE = Shapes.or(
 			Block.box(3, 15, 3, 13, 21, 13),
@@ -47,7 +48,7 @@ public class ThreeTieredCandleCakeBlock extends AbstractCandleBlock {
 	public ThreeTieredCandleCakeBlock(Block candle, ThreeTieredCakeBlock originalCake, BlockBehaviour.Properties properties) {
 		super(properties);
 		this.originalCake = originalCake;
-		this.registerDefaultState(this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)));
+		this.registerDefaultState(stateDefinition.any().setValue(LIT, Boolean.valueOf(false)));
 	}
 	
 	protected Iterable<Vec3> getParticleOffsets(BlockState state) {
@@ -74,11 +75,11 @@ public class ThreeTieredCandleCakeBlock extends AbstractCandleBlock {
 		}
 		else {
 			if (state.getValue(LIT) == false) {
-				level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+				level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1, level.getRandom().nextFloat() * 0.4F + 0.8F);
 				level.setBlock(pos, defaultBlockState().setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
 				level.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
-				itemstack.hurtAndBreak(1, player, (p_41303_) -> {
-					p_41303_.broadcastBreakEvent(player.getUsedItemHand());
+				itemstack.hurtAndBreak(1, player, (player1) -> {
+					player1.broadcastBreakEvent(player.getUsedItemHand());
 				});
 
 				return InteractionResult.sidedSuccess(level.isClientSide());
@@ -108,8 +109,8 @@ public class ThreeTieredCandleCakeBlock extends AbstractCandleBlock {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public BlockState updateShape(BlockState state, Direction direction, BlockState p_152900_, LevelAccessor accessor, BlockPos pos, BlockPos p_152903_) {
-		return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, p_152900_, accessor, pos, p_152903_);
+	public BlockState updateShape(BlockState state, Direction direction, BlockState oldState, LevelAccessor accessor, BlockPos pos, BlockPos oldPos) {
+		return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, oldState, accessor, pos, oldPos);
 	}
 	
 	public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {

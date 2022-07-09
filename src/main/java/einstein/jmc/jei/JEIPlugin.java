@@ -5,6 +5,7 @@ import java.util.Objects;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.init.ModMenuTypes;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
 import einstein.jmc.menu.cakeoven.CakeOvenMenu;
@@ -42,7 +43,7 @@ public class JEIPlugin implements IModPlugin {
 	@SuppressWarnings("resource")
 	public void registerRecipes(IRecipeRegistration registration) {
 		RecipeManager recipeManager = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
-		registration.addRecipes(CAKE_OVEN, recipeManager.getAllRecipesFor(ModRecipes.CAKE_OVEN_RECIPE));
+		registration.addRecipes(CAKE_OVEN, recipeManager.getAllRecipesFor(ModRecipes.CAKE_OVEN_RECIPE.get()));
 	}
 	
 	@Override
@@ -57,9 +58,9 @@ public class JEIPlugin implements IModPlugin {
 	
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-		registration.addRecipeTransferHandler(CakeOvenMenu.class, CAKE_OVEN, /*StartIndex*/ 0, /*SlotCount*/ CakeOvenConstants.INGREDIENT_SLOT_COUNT,
+		registration.addRecipeTransferHandler(CakeOvenMenu.class, ModMenuTypes.CAKE_OVEN.get(), CAKE_OVEN, /*StartIndex*/ 0, /*SlotCount*/ CakeOvenConstants.INGREDIENT_SLOT_COUNT,
 				/*InventoryStart*/ CakeOvenConstants.SLOT_COUNT, /*InventoryEnd*/ 36);
-		registration.addRecipeTransferHandler(CakeOvenMenu.class, RecipeTypes.FUELING, /*StartIndex*/ CakeOvenConstants.FUEL_SLOT, /*SlotCount*/ 1,
+		registration.addRecipeTransferHandler(CakeOvenMenu.class, ModMenuTypes.CAKE_OVEN.get(), RecipeTypes.FUELING, /*StartIndex*/ CakeOvenConstants.FUEL_SLOT, /*SlotCount*/ 1,
 				/*InventoryStart*/ CakeOvenConstants.SLOT_COUNT, /*InventoryEnd*/ 36);
 	}
 }

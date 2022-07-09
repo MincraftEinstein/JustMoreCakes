@@ -4,6 +4,8 @@ import java.util.function.Consumer;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.item.crafting.builders.CakeOvenRecipeBuilder;
+import einstein.jmc.util.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -45,7 +47,7 @@ public class CakeOvenRecipesGenerator extends RecipeProvider {
 	}
 	
 	private ResourceLocation location(ItemLike itemLike) {
-		return new ResourceLocation(JustMoreCakes.MODID, itemLike.asItem().getRegistryName().getPath() + "_from_cake_oven");
+		return new ResourceLocation(JustMoreCakes.MODID, Util.getItemRegistryName(itemLike.asItem()).getPath() + "_from_cake_oven");
 	}
 	
 	@Override

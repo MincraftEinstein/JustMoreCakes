@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-public class GlowstoneCakeBlock extends BaseEntityCakeBlock
-{
+public class GlowstoneCakeBlock extends BaseEntityCakeBlock {
+
     public GlowstoneCakeBlock(final BlockBehaviour.Properties properties) {
         super(properties);
     }

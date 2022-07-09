@@ -5,6 +5,7 @@ import java.util.Random;
 import einstein.jmc.init.ModClientConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,7 +31,7 @@ public class LavaCandleCakeBlock extends BaseCandleCakeBlock {
     }
     
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random rand) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
     	if (ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
         	if (rand.nextInt(10) == 0) {
     	        double d0 = pos.getX() + rand.nextDouble();

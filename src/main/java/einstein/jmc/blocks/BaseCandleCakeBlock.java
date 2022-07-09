@@ -36,15 +36,16 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BaseCandleCakeBlock extends AbstractCandleBlock {
+
 	public static final BooleanProperty LIT = AbstractCandleBlock.LIT;
 	protected static final VoxelShape SHAPE = Shapes.or(
 			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
 			Block.box(7.0D, 8.0D, 7.0D, 9.0D, 14.0D, 9.0D));
 	private BaseCakeBlock originalCake;
 
-	public BaseCandleCakeBlock(Block candle, BaseCakeBlock orignalCake, BlockBehaviour.Properties properties) {
+	public BaseCandleCakeBlock(Block candle, BaseCakeBlock originalCake, BlockBehaviour.Properties properties) {
 		super(properties);
-		this.originalCake = orignalCake;
+		this.originalCake = originalCake;
 		this.registerDefaultState(this.stateDefinition.any().setValue(LIT, Boolean.valueOf(false)));
 	}
 	
