@@ -1,27 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:chorus_fruit"
+    },
+    "$": {
+      "item": "minecraft:sugar"
+    },
+    "-": {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    "@": {
+      "item": "minecraft:wheat"
+    },
+    "~": {
+      "item": "minecraft:egg"
+    }
+  },
   "pattern": [
     "#-#",
     "$~$",
     "@@@"
   ],
-  "key": {
-    "#": {
-      "item": "minecraft:chorus_fruit"
-    },
-    "-": {
-      "item": "minecraft:popped_chorus_fruit"
-    },
-    "$": {
-      "item": "minecraft:sugar"
-    },
-    "~": {
-      "item": "minecraft:egg"
-    },
-    "@": {
-      "item": "minecraft:wheat"
-    }
-  },
   "result": {
     "item": "jmc:chorus_cake"
   }

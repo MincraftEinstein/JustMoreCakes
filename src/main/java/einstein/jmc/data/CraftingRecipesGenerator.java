@@ -58,15 +58,15 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 		cakeRecipe(consumer, Blocks.WARPED_FUNGUS, ModBlocks.WARPED_FUNGUS_CAKE);
 		
 		ShapedRecipeBuilder.shaped(ModBlocks.CHIRSTMAS_CAKE.get())
-			.pattern("�#�")
+			.pattern("?#!")
 			.pattern("$~$")
 			.pattern(" @ ")
 			.define('#', Items.MILK_BUCKET)
 			.define('$', Items.SUGAR)
 			.define('~', Items.EGG)
 			.define('@', Items.WHEAT)
-			.define('�', Tags.Items.DYES_GREEN)
-			.define('�', Tags.Items.DYES_RED)
+			.define('?', Tags.Items.DYES_GREEN)
+			.define('!', Tags.Items.DYES_RED)
 			.unlockedBy(h, has(Items.EGG))
 			.save(consumer, ModBlocks.CHIRSTMAS_CAKE.getId());
 		
@@ -83,17 +83,17 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 		
 		ShapedRecipeBuilder.shaped(ModBlocks.SPRINKLE_CAKE.get())
 			.pattern("#$~")
-			.pattern("@-�")
-			.pattern("���")
+			.pattern("@-?")
+			.pattern("!^&")
 			.define('#', Tags.Items.DYES_PINK)
 			.define('$', Tags.Items.DYES_RED)
 			.define('~', Tags.Items.DYES_ORANGE)
 			.define('@', Tags.Items.DYES_YELLOW)
 			.define('-', Items.CAKE)
-			.define('�', Tags.Items.DYES_GREEN)
-			.define('�', Tags.Items.DYES_LIME)
-			.define('�', Tags.Items.DYES_BLUE)
-			.define('�', Tags.Items.DYES_PURPLE)
+			.define('?', Tags.Items.DYES_GREEN)
+			.define('!', Tags.Items.DYES_LIME)
+			.define('^', Tags.Items.DYES_BLUE)
+			.define('&', Tags.Items.DYES_PURPLE)
 			.unlockedBy(h, has(Blocks.CAKE))
 			.save(consumer, ModBlocks.SPRINKLE_CAKE.getId());
 		

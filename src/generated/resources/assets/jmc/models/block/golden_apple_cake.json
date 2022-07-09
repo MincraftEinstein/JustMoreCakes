@@ -1,8 +1,8 @@
 {
   "parent": "jmc:block/template_cake",
   "textures": {
+    "bottom": "jmc:block/golden_apple_cake_bottom",
     "side": "jmc:block/golden_apple_cake_side",
-    "top": "jmc:block/golden_apple_cake_top",
-    "bottom": "jmc:block/golden_apple_cake_bottom"
+    "top": "jmc:block/golden_apple_cake_top"
   }
 }

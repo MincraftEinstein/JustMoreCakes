@@ -1,27 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:honey_bottle"
+    },
+    "$": {
+      "item": "minecraft:sugar"
+    },
+    "-": {
+      "item": "minecraft:honeycomb"
+    },
+    "@": {
+      "item": "minecraft:wheat"
+    },
+    "~": {
+      "item": "minecraft:egg"
+    }
+  },
   "pattern": [
     "#-#",
     "$~$",
     "@@@"
   ],
-  "key": {
-    "#": {
-      "item": "minecraft:honey_bottle"
-    },
-    "-": {
-      "item": "minecraft:honeycomb"
-    },
-    "$": {
-      "item": "minecraft:sugar"
-    },
-    "~": {
-      "item": "minecraft:egg"
-    },
-    "@": {
-      "item": "minecraft:wheat"
-    }
-  },
   "result": {
     "item": "jmc:honey_cake"
   }

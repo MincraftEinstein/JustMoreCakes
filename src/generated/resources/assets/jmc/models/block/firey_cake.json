@@ -1,8 +1,8 @@
 {
   "parent": "jmc:block/template_cake",
   "textures": {
+    "bottom": "jmc:block/firey_cake_bottom",
     "side": "jmc:block/firey_cake_side",
-    "top": "jmc:block/firey_cake_top",
-    "bottom": "jmc:block/firey_cake_bottom"
+    "top": "jmc:block/firey_cake_top"
   }
 }

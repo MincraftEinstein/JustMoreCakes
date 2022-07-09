@@ -1,10 +1,10 @@
 {
   "parent": "jmc:block/template_cross_cake_slice1",
   "textures": {
-    "side": "jmc:block/crimson_fungus_cake_side",
-    "top": "jmc:block/crimson_fungus_cake_top",
     "bottom": "jmc:block/crimson_fungus_cake_bottom",
+    "cross": "minecraft:block/crimson_fungus",
     "inside": "jmc:block/crimson_fungus_cake_inner",
-    "cross": "minecraft:block/crimson_fungus"
+    "side": "jmc:block/crimson_fungus_cake_side",
+    "top": "jmc:block/crimson_fungus_cake_top"
   }
 }

@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "$~$",
-    "@@@"
-  ],
   "key": {
     "#": {
       "item": "minecraft:glowstone_dust"
@@ -12,13 +7,18 @@
     "$": {
       "item": "minecraft:sugar"
     },
-    "~": {
-      "item": "minecraft:egg"
-    },
     "@": {
       "item": "minecraft:wheat"
+    },
+    "~": {
+      "item": "minecraft:egg"
     }
   },
+  "pattern": [
+    "###",
+    "$~$",
+    "@@@"
+  ],
   "result": {
     "item": "jmc:glowstone_cake"
   }

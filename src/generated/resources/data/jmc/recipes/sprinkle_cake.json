@@ -1,39 +1,39 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#$~",
-    "@-¡",
-    "¢£¤"
-  ],
   "key": {
+    "!": {
+      "tag": "forge:dyes/lime"
+    },
     "#": {
       "tag": "forge:dyes/pink"
     },
     "$": {
       "tag": "forge:dyes/red"
     },
-    "~": {
-      "tag": "forge:dyes/orange"
-    },
-    "@": {
-      "tag": "forge:dyes/yellow"
+    "&": {
+      "tag": "forge:dyes/purple"
     },
     "-": {
       "item": "minecraft:cake"
     },
-    "¡": {
+    "?": {
       "tag": "forge:dyes/green"
     },
-    "¢": {
-      "tag": "forge:dyes/lime"
+    "@": {
+      "tag": "forge:dyes/yellow"
     },
-    "£": {
+    "^": {
       "tag": "forge:dyes/blue"
     },
-    "¤": {
-      "tag": "forge:dyes/purple"
+    "~": {
+      "tag": "forge:dyes/orange"
     }
   },
+  "pattern": [
+    "#$~",
+    "@-?",
+    "!^&"
+  ],
   "result": {
     "item": "jmc:sprinkle_cake"
   }

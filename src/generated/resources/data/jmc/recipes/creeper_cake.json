@@ -1,27 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:milk_bucket"
+    },
+    "$": {
+      "item": "minecraft:sugar"
+    },
+    "-": {
+      "item": "minecraft:creeper_head"
+    },
+    "@": {
+      "item": "minecraft:wheat"
+    },
+    "~": {
+      "item": "minecraft:egg"
+    }
+  },
   "pattern": [
     "#-#",
     "$~$",
     "@@@"
   ],
-  "key": {
-    "#": {
-      "item": "minecraft:milk_bucket"
-    },
-    "-": {
-      "item": "minecraft:creeper_head"
-    },
-    "$": {
-      "item": "minecraft:sugar"
-    },
-    "~": {
-      "item": "minecraft:egg"
-    },
-    "@": {
-      "item": "minecraft:wheat"
-    }
-  },
   "result": {
     "item": "jmc:creeper_cake"
   }

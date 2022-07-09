@@ -1,30 +1,30 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "¡#¢",
-    "$~$",
-    " @ "
-  ],
   "key": {
+    "!": {
+      "tag": "forge:dyes/red"
+    },
     "#": {
       "item": "minecraft:milk_bucket"
     },
     "$": {
       "item": "minecraft:sugar"
     },
-    "~": {
-      "item": "minecraft:egg"
+    "?": {
+      "tag": "forge:dyes/green"
     },
     "@": {
       "item": "minecraft:wheat"
     },
-    "¡": {
-      "tag": "forge:dyes/green"
-    },
-    "¢": {
-      "tag": "forge:dyes/red"
+    "~": {
+      "item": "minecraft:egg"
     }
   },
+  "pattern": [
+    "?#!",
+    "$~$",
+    " @ "
+  ],
   "result": {
     "item": "jmc:christmas_cake"
   }

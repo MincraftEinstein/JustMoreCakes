@@ -1,5 +1,7 @@
 {
   "type": "jmc:cake_baking",
+  "cookingTime": 250,
+  "experience": 0.7,
   "ingredients": [
     {
       "item": "minecraft:wheat"
@@ -14,7 +16,5 @@
       "item": "minecraft:milk_bucket"
     }
   ],
-  "result": "jmc:poison_cake",
-  "experience": 0.7,
-  "cookingTime": 250
+  "result": "jmc:poison_cake"
 }

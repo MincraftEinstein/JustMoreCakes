@@ -1,5 +1,7 @@
 {
   "type": "jmc:cake_baking",
+  "cookingTime": 200,
+  "experience": 0.5,
   "ingredients": [
     {
       "item": "minecraft:milk_bucket"
@@ -14,7 +16,5 @@
       "item": "minecraft:egg"
     }
   ],
-  "result": "jmc:apple_cake",
-  "experience": 0.5,
-  "cookingTime": 200
+  "result": "jmc:apple_cake"
 }
