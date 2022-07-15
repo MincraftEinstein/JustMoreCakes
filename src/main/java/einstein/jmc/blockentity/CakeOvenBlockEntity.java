@@ -124,13 +124,13 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 				blockEntity.litDuration = blockEntity.litTime;
 				if (blockEntity.isLit()) {
 					flag2 = true;
-					if (fuelStack.hasContainerItem()) {
-						blockEntity.items.set(FUEL_SLOT, fuelStack.getContainerItem());
+					if (fuelStack.hasCraftingRemainingItem()) {
+						blockEntity.items.set(FUEL_SLOT, fuelStack.getCraftingRemainingItem());
 					}
 					else if (!fuelStack.isEmpty()) {
 						fuelStack.shrink(1);
 						if (fuelStack.isEmpty()) {
-							blockEntity.items.set(FUEL_SLOT, fuelStack.getContainerItem());
+							blockEntity.items.set(FUEL_SLOT, fuelStack.getCraftingRemainingItem());
 						}
 					}
 				}

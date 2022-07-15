@@ -1,14 +1,6 @@
 package einstein.jmc.util;
 
-import java.util.Random;
-
-import einstein.jmc.blocks.BaseCakeBlock;
-import einstein.jmc.blocks.BaseCandleCakeBlock;
-import einstein.jmc.blocks.BaseEntityCakeBlock;
-import einstein.jmc.blocks.BirthdayCakeBlock;
-import einstein.jmc.blocks.CupcakeBlock;
-import einstein.jmc.blocks.ThreeTieredCakeBlock;
-import einstein.jmc.blocks.ThreeTieredCandleCakeBlock;
+import einstein.jmc.blocks.*;
 import einstein.jmc.init.ModPotions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -31,22 +23,24 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
+
+import java.util.Random;
 
 public class EventHandler {
 
 	protected final Random random = new Random();
 	
 	@SubscribeEvent
-	public void cakeEaten(RightClickBlock event) {
+	void cakeEaten(RightClickBlock event) {
 		if (ModList.get().isLoaded("cakechomps")) {
-			Level level = event.getWorld();
-			Player player = event.getPlayer();
+			Level level = event.getLevel();
+			Player player = event.getEntity();
 			BlockPos pos = event.getPos();
 			BlockHitResult rayTraceResult = event.getHitVec();
 			InteractionHand hand = event.getHand();
@@ -138,7 +132,7 @@ public class EventHandler {
 	}
 	
 	@SubscribeEvent
-	public void onEntityJump(final LivingJumpEvent event) {
+	void onEntityJump(final LivingJumpEvent event) {
 		if (event.getEntity() instanceof Player) {
 			final Player player = (Player)event.getEntity();
 			if (player.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
@@ -148,9 +142,9 @@ public class EventHandler {
 	}
 	
 	@SubscribeEvent
-	public void onEntityUpdate(final LivingUpdateEvent event) {
+	void onEntityTick(final LivingEvent.LivingTickEvent event) {
 		final Level level = event.getEntity().getCommandSenderWorld();
-		final LivingEntity entity = event.getEntityLiving();
+		final LivingEntity entity = event.getEntity();
 		if (entity.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
 			if (entity.verticalCollision && entity.isOnGround() && !entity.isSleeping()) {
 				float j = 0.65F;

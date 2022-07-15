@@ -1,18 +1,18 @@
 package einstein.jmc.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.tags.BlockTagsGenerator;
 import einstein.jmc.tags.ItemTagsGenerator;
 import einstein.jmc.tags.POITagsGenerator;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EventBusSubscriber(modid = JustMoreCakes.MODID, bus = Bus.MOD)
 public class ModDataGenerators {
