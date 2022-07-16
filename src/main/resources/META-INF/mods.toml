@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="[41,)"
 license="All rights reserved"
-#issueTrackerURL="http://my.issue.tracker/"
+issueTrackerURL="https://github.com/MincraftEinstein/JustMoreCakes/issues"
 
 [[mods]]
 	modId="jmc"
@@ -13,7 +13,7 @@ license="All rights reserved"
 	credits="Me the mod author"
 	authors="MincraftEinstein"
 	description='''
-A mod that adds 30+ new cakes to Minecraft. Some with special properties, some with no properties and some with useless properties. Chocolate Cake, Three Tiered Cake, TNT Cake...
+A simple mod that adds 30+ new cakes to Minecraft
 '''
 
 [modproperties.jmc]
