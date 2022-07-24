@@ -82,27 +82,7 @@ public class JustMoreCakes {
         registerVillageBuilding("snowy", "bakery_2");
         registerVillageBuilding("taiga", "bakery_1");
         GiveGiftToHero.GIFTS.put(ModVillagers.CAKE_BAKER.get(), new ResourceLocation(MODID, "gameplay/hero_of_the_village/cake_baker_gift"));
-        resizeCakeStack();
-    }
-
-    void resizeCakeStack() {
-        Field maxItemStackSize = null;
-
-        try {
-            final Field field = Item.class.getDeclaredField(ObfuscationReflectionHelper.remapName(Domain.FIELD, "f_41478_"));
-            field.setAccessible(true);
-            maxItemStackSize = field;
-        } catch (Exception e) {
-            LOGGER.catching(Level.WARN, e);
-        }
-
-        if (maxItemStackSize != null) {
-            try {
-                maxItemStackSize.setInt(Items.CAKE, 64);
-            } catch (Exception e) {
-                LOGGER.catching(Level.WARN, e);
-            }
-        }
+        Items.CAKE.maxStackSize = 64;
     }
 
     @SuppressWarnings("unchecked")
