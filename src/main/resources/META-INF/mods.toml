@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/MincraftEinstein/JustMoreCakes/issues"
 
 [[mods]]
 	modId="jmc"
-	version="4.2"
+	version="4.3"
 	displayName="Just More Cakes!"
 	#updateJSONURL="http://myurl.me/"
 	displayURL="https://www.curseforge.com/minecraft/mc-mods/just-more-cakes"
