@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/ice"
+      "model": "jmc:block/encasing_ice"
     }
   }
 }
