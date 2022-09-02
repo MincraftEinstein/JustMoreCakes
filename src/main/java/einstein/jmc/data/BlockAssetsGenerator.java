@@ -16,7 +16,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 public class BlockAssetsGenerator extends BlockStateProvider {
 
 	public BlockAssetsGenerator(DataGenerator gen, ExistingFileHelper exFileHelper) {
-		super(gen, JustMoreCakes.MODID, exFileHelper);
+		super(gen, JustMoreCakes.MOD_ID, exFileHelper);
 	}
 	
 	@Override

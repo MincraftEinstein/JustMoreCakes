@@ -16,7 +16,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 public class ItemAssetsGenerator extends ItemModelProvider {
 	
 	public ItemAssetsGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, JustMoreCakes.MODID, existingFileHelper);
+		super(generator, JustMoreCakes.MOD_ID, existingFileHelper);
 	}
 	
 	@Override

@@ -27,11 +27,11 @@ import net.minecraft.world.item.crafting.RecipeManager;
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
 
-	public static final RecipeType<CakeOvenRecipe> CAKE_OVEN = RecipeType.create(JustMoreCakes.MODID, "cake_oven", CakeOvenRecipe.class);
+	public static final RecipeType<CakeOvenRecipe> CAKE_OVEN = RecipeType.create(JustMoreCakes.MOD_ID, "cake_oven", CakeOvenRecipe.class);
 	
 	@Override
 	public ResourceLocation getPluginUid() {
-		return new ResourceLocation(JustMoreCakes.MODID, "jei_plugin");
+		return new ResourceLocation(JustMoreCakes.MOD_ID, "jei_plugin");
 	}
 	
 	@Override

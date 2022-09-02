@@ -16,7 +16,7 @@ public class ItemTagsGenerator extends ItemTagsProvider {
 	public static final TagKey<Item> CHEESE = ItemTags.create(new ResourceLocation("forge", "cheese"));
 	
 	public ItemTagsGenerator(DataGenerator generator, BlockTagsProvider blockTags, ExistingFileHelper existingFileHelper) {
-		super(generator, blockTags, JustMoreCakes.MODID, existingFileHelper);
+		super(generator, blockTags, JustMoreCakes.MOD_ID, existingFileHelper);
 	}
 	
 	@Override

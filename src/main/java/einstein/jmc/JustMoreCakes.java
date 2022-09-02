@@ -1,20 +1,16 @@
 package einstein.jmc;
 
 import com.mojang.datafixers.util.Pair;
-import cpw.mods.modlauncher.api.INameMappingService.Domain;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.init.*;
 import einstein.jmc.util.EventHandler;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.behavior.GiveGiftToHero;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
@@ -30,24 +26,21 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.MissingMappingsEvent;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.function.Function;
 
-@Mod(JustMoreCakes.MODID)
+@Mod(JustMoreCakes.MOD_ID)
 public class JustMoreCakes {
 
-    public static final String MODID = "jmc";
+    public static final String MOD_ID = "jmc";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final JMCTab JMC_TAB = new JMCTab(CreativeModeTab.TABS.length, "jmc_tab");
 
@@ -81,7 +74,7 @@ public class JustMoreCakes {
         registerVillageBuilding("snowy", "bakery_1");
         registerVillageBuilding("snowy", "bakery_2");
         registerVillageBuilding("taiga", "bakery_1");
-        GiveGiftToHero.GIFTS.put(ModVillagers.CAKE_BAKER.get(), new ResourceLocation(MODID, "gameplay/hero_of_the_village/cake_baker_gift"));
+        GiveGiftToHero.GIFTS.put(ModVillagers.CAKE_BAKER.get(), new ResourceLocation(MOD_ID, "gameplay/hero_of_the_village/cake_baker_gift"));
         Items.CAKE.maxStackSize = 64;
     }
 
@@ -100,7 +93,7 @@ public class JustMoreCakes {
             return;
         }
 
-        final StructurePoolElement structure = StructurePoolElement.legacy(MODID + ":village/" + biome + "/houses/" + biome + "_" + name, ProcessorLists.MOSSIFY_10_PERCENT).apply(StructureTemplatePool.Projection.RIGID);
+        final StructurePoolElement structure = StructurePoolElement.legacy(MOD_ID + ":village/" + biome + "/houses/" + biome + "_" + name, ProcessorLists.MOSSIFY_10_PERCENT).apply(StructureTemplatePool.Projection.RIGID);
 
         try {
             final Field templatesField = StructureTemplatePool.class.getDeclaredField(ASMAPI.mapField("f_210560_"));
@@ -133,19 +126,17 @@ public class JustMoreCakes {
 
     @Nullable
     private Block missingBlock(String name) {
-        switch (name) {
-            case "cheese_cake":
-                return ModBlocks.CHEESECAKE.get();
-            case "triple_decker_cake":
-                return ModBlocks.THREE_TIERED_CAKE.get();
-        }
-        return null;
+        return switch (name) {
+            case "cheese_cake" -> ModBlocks.CHEESECAKE.get();
+            case "triple_decker_cake" -> ModBlocks.THREE_TIERED_CAKE.get();
+            default -> null;
+        };
     }
 
-    private <T> void handleMissingMappings(MissingMappingsEvent event, IForgeRegistry registry, Function<String, T> function) {
-        List<MissingMappingsEvent.Mapping<T>> mappings = event.getMappings(registry.getRegistryKey(), MODID);
+    private <T> void handleMissingMappings(MissingMappingsEvent event, IForgeRegistry<T> registry, Function<String, T> function) {
+        List<MissingMappingsEvent.Mapping<T>> mappings = event.getMappings(registry.getRegistryKey(), MOD_ID);
 
-        for (MissingMappingsEvent.Mapping mapping : mappings) {
+        for (MissingMappingsEvent.Mapping<T> mapping : mappings) {
             T value = function.apply(mapping.getKey().getPath());
             if (value != null) {
                 mapping.remap(value);

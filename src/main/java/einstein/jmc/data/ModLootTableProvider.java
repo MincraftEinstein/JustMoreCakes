@@ -13,6 +13,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -32,6 +33,7 @@ public class ModLootTableProvider extends LootTableProvider {
 	
 	@Override
 	protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationContext) {
+		map.forEach((loc, table) -> LootTables.validate(validationContext, loc, table));
 	}
 	
 	@Override

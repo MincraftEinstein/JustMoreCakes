@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, CakeOvenConstants {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(JustMoreCakes.MODID, "textures/gui/jei_cake_oven_gui.png"); // Image must be 256x256 px
+	private static final ResourceLocation TEXTURE = new ResourceLocation(JustMoreCakes.MOD_ID, "textures/gui/jei_cake_oven_gui.png"); // Image must be 256x256 px
 	private final IDrawable background;
 	private final IDrawable icon;
 	private final IDrawableAnimated flame;
@@ -97,7 +97,7 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 			cookTime = DEFAULT_BURN_TIME;
 		}
 		
-		return cachedArrows.getUnchecked(Integer.valueOf(cookTime));
+		return cachedArrows.getUnchecked(cookTime);
 	}
 	
 	@Override
@@ -108,7 +108,6 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 		drawCookTimeText(recipe, stack, /*Y*/ 37);
 	}
 	
-	@SuppressWarnings("resource")
 	private void drawExperienceText(CakeOvenRecipe recipe, PoseStack stack, int y) {
 		float experience = recipe.getExperience();
 		if (experience > 0) {
@@ -118,7 +117,6 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 		}
 	}
 	
-	@SuppressWarnings("resource")
 	private void drawCookTimeText(CakeOvenRecipe recipe, PoseStack stack, int y) {
 		int cookTime = recipe.getCookingTime();
 		if (cookTime > 0) {

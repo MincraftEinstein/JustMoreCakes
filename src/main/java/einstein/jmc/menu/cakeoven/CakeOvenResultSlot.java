@@ -46,8 +46,8 @@ public class CakeOvenResultSlot extends Slot {
 	@Override
 	protected void checkTakeAchievements(ItemStack stack/* I think this is an ItemStack of the items in the slot */) {
 		stack.onCraftedBy(player.level, player, removeCount);
-		if (player instanceof ServerPlayer && container instanceof CakeOvenBlockEntity) {
-			((CakeOvenBlockEntity)container).awardUsedRecipesAndPopExperience((ServerPlayer)player);
+		if (player instanceof ServerPlayer serverPlayer && container instanceof CakeOvenBlockEntity blockEntity) {
+			blockEntity.awardUsedRecipesAndPopExperience(serverPlayer);
 		}
 		removeCount = 0;
 		ForgeEventFactory.firePlayerSmeltedEvent(player, stack);

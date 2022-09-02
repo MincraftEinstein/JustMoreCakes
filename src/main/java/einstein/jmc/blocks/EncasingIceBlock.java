@@ -47,8 +47,9 @@ public class EncasingIceBlock extends HalfTransparentBlock {
 	}
 
 	private static boolean timeGoneBy(Level level, int ticks) {
-		if (ticks == 0)
+		if (ticks == 0) {
 			return true;
+		}
 		return level.getGameTime() % (ticks) == 0;
 	}
 }

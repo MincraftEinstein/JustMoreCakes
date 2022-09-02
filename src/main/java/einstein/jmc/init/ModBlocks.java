@@ -40,7 +40,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlocks {
 
-	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, JustMoreCakes.MODID);
+	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, JustMoreCakes.MOD_ID);
 	private static final BlockBehaviour.Properties CAKE = Properties.copy(Blocks.CAKE);
 	private static final BlockBehaviour.Properties CANDLE_CAKE = Properties.copy(Blocks.CANDLE_CAKE);
 	
@@ -164,7 +164,7 @@ public class ModBlocks {
 	}
 	
 	public static ResourceLocation RL(String string) {
-		return new ResourceLocation(JustMoreCakes.MODID, string);
+		return new ResourceLocation(JustMoreCakes.MOD_ID, string);
 	}
 	
 	public static ResourceLocation MCRL(String string) {

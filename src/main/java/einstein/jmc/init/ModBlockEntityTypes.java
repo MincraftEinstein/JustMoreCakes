@@ -14,7 +14,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockEntityTypes {
 
-	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, JustMoreCakes.MODID);
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, JustMoreCakes.MOD_ID);
 	
 	public static final RegistryObject<BlockEntityType<GlowstoneCakeBlockEntity>> GLOWSTONE_CAKE = register("glowstone_cake", () -> BlockEntityType.Builder.of(GlowstoneCakeBlockEntity::new, ModBlocks.GLOWSTONE_CAKE.get()).build(null));
 	public static final RegistryObject<BlockEntityType<TNTCakeBlockEntity>> TNT_CAKE = register("tnt_cake", () -> BlockEntityType.Builder.of(TNTCakeBlockEntity::new, ModBlocks.TNT_CAKE.get()).build(null));

@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class CakeOvenScreen extends AbstractContainerScreen<CakeOvenMenu> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(JustMoreCakes.MODID, "textures/gui/container/cake_oven.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(JustMoreCakes.MOD_ID, "textures/gui/container/cake_oven.png");
 	
 	public CakeOvenScreen(CakeOvenMenu menu, Inventory inventory, Component component) {
 		super(menu, inventory, component);

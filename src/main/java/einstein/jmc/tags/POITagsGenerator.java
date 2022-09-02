@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 public class POITagsGenerator extends PoiTypeTagsProvider {
 
     public POITagsGenerator(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generator, JustMoreCakes.MODID, existingFileHelper);
+        super(generator, JustMoreCakes.MOD_ID, existingFileHelper);
     }
 
     @Override

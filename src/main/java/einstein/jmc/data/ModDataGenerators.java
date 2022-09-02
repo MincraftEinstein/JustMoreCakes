@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid = JustMoreCakes.MODID, bus = Bus.MOD)
+@EventBusSubscriber(modid = JustMoreCakes.MOD_ID, bus = Bus.MOD)
 public class ModDataGenerators {
 
 	public static List<String> CAKE_TYPES = new ArrayList<>();

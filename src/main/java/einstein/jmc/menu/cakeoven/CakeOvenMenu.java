@@ -16,8 +16,8 @@ import net.minecraftforge.common.ForgeHooks;
 
 public class CakeOvenMenu extends AbstractContainerMenu implements CakeOvenConstants {
 
-	private Container container;
-	private ContainerData data;
+	private final Container container;
+	private final ContainerData data;
 	
 	public CakeOvenMenu(int id, Inventory inventory) {
 		this(id, inventory, new SimpleContainer(SLOT_COUNT), new SimpleContainerData(DATA_COUNT));

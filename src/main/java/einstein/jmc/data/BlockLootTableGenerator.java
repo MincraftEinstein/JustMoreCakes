@@ -14,7 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BlockLootTableGenerator extends BlockLoot {
 
 	private List<Block> candleCakes = new ArrayList<Block>(ForgeRegistries.BLOCKS.getValues().stream()
-			.filter((block) -> Util.getBlockRegistryName(block).getNamespace().equals(JustMoreCakes.MODID) &&
+			.filter((block) -> Util.getBlockRegistryName(block).getNamespace().equals(JustMoreCakes.MOD_ID) &&
 					Util.getBlockRegistryName(block).getPath().contains("candle"))
 			.collect(Collectors.toList()));
 	

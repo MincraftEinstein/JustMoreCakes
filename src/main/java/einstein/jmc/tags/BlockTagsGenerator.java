@@ -10,7 +10,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 public class BlockTagsGenerator extends BlockTagsProvider {
 
 	public BlockTagsGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, JustMoreCakes.MODID, existingFileHelper);
+		super(generator, JustMoreCakes.MOD_ID, existingFileHelper);
 	}
 
 	@Override

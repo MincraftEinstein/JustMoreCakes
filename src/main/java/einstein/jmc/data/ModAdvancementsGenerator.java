@@ -58,7 +58,7 @@ public class ModAdvancementsGenerator extends AdvancementProvider {
 	}
 	
 	private ResourceLocation rl(String path) {
-		return new ResourceLocation(JustMoreCakes.MODID, path);
+		return new ResourceLocation(JustMoreCakes.MOD_ID, path);
 	}
 	
 	@Override

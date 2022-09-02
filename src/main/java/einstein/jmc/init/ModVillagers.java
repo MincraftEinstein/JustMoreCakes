@@ -21,11 +21,11 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
-@EventBusSubscriber(modid = JustMoreCakes.MODID)
+@EventBusSubscriber(modid = JustMoreCakes.MOD_ID)
 public class ModVillagers {
 
-	public static final DeferredRegister<PoiType> POIS = DeferredRegister.create(ForgeRegistries.POI_TYPES, JustMoreCakes.MODID);
-	public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, JustMoreCakes.MODID);
+	public static final DeferredRegister<PoiType> POIS = DeferredRegister.create(ForgeRegistries.POI_TYPES, JustMoreCakes.MOD_ID);
+	public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, JustMoreCakes.MOD_ID);
 
 	public static final RegistryObject<PoiType> CAKE_BAKER_POI = POIS.register("cake_baker", () -> new PoiType(PoiTypes.getBlockStates(ModBlocks.CAKE_OVEN.get()), 1, 1));
 	public static final RegistryObject<VillagerProfession> CAKE_BAKER = PROFESSIONS.register("cake_baker", () -> new VillagerProfession("cake_baker", (holder) -> holder.is(CAKE_BAKER_POI.getId()), (holder) -> holder.is(CAKE_BAKER_POI.getId()), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_BUTCHER));

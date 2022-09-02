@@ -16,8 +16,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModPotions {
 	
-	public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, JustMoreCakes.MODID);
-	public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, JustMoreCakes.MODID);
+	public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, JustMoreCakes.MOD_ID);
+	public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, JustMoreCakes.MOD_ID);
 
 	public static final RegistryObject<MobEffect> BOUNCING_EFFECT = MOB_EFFECTS.register("bouncing", () -> new BouncingEffect(MobEffectCategory.NEUTRAL, 7056483));
 	public static final RegistryObject<MobEffect> FREEZING_EFFECT = MOB_EFFECTS.register("freezing", () -> new FreezingEffect(MobEffectCategory.NEUTRAL, 12114935));

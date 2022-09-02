@@ -133,8 +133,7 @@ public class EventHandler {
 	
 	@SubscribeEvent
 	void onEntityJump(final LivingJumpEvent event) {
-		if (event.getEntity() instanceof Player) {
-			final Player player = (Player)event.getEntity();
+		if (event.getEntity() instanceof Player player) {
 			if (player.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
 				player.push(0, 0.15F, 0);
 			}

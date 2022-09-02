@@ -37,8 +37,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
@@ -56,33 +56,21 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
 	private final ContainerData dataAccess = new ContainerData() {
 		public int get(int index) {
-			switch (index) {
-			case 0:
-				return CakeOvenBlockEntity.this.litTime;
-			case 1:
-				return CakeOvenBlockEntity.this.litDuration;
-			case 2:
-				return CakeOvenBlockEntity.this.cookingProgress;
-			case 3:
-				return CakeOvenBlockEntity.this.cookingTotalTime;
-			default:
-				return 0;
-			}
+			return switch (index) {
+				case 0 -> CakeOvenBlockEntity.this.litTime;
+				case 1 -> CakeOvenBlockEntity.this.litDuration;
+				case 2 -> CakeOvenBlockEntity.this.cookingProgress;
+				case 3 -> CakeOvenBlockEntity.this.cookingTotalTime;
+				default -> 0;
+			};
 		}
 		
 		public void set(int index, int value) {
 			switch (index) {
-			case 0:
-				CakeOvenBlockEntity.this.litTime = value;
-				break;
-			case 1:
-				CakeOvenBlockEntity.this.litDuration = value;
-				break;
-			case 2:
-				CakeOvenBlockEntity.this.cookingProgress = value;
-				break;
-			case 3:
-				CakeOvenBlockEntity.this.cookingTotalTime = value;
+				case 0 -> CakeOvenBlockEntity.this.litTime = value;
+				case 1 -> CakeOvenBlockEntity.this.litDuration = value;
+				case 2 -> CakeOvenBlockEntity.this.cookingProgress = value;
+				case 3 -> CakeOvenBlockEntity.this.cookingTotalTime = value;
 			}
 		}
 		
@@ -154,7 +142,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 		
 		if (flag != blockEntity.isLit()) {
 			flag2 = true;
-			state = state.setValue(CakeOvenBlock.LIT, Boolean.valueOf(blockEntity.isLit()));
+			state = state.setValue(CakeOvenBlock.LIT, blockEntity.isLit());
 			level.setBlock(pos, state, 3);
 		}
 		
@@ -369,7 +357,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 	
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction direction) {
-		if (!remove && direction != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+		if (!remove && direction != null && capability == ForgeCapabilities.ITEM_HANDLER) {
 			if (direction == Direction.UP) {
 				return handlers[0].cast();
 			}
@@ -382,12 +370,12 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Wor
 		}
 		return super.getCapability(capability, direction);
 	}
-	
+
 	@Override
 	public void invalidateCaps() {
 		super.invalidateCaps();
-		for (int i = 0; i < handlers.length; i++) {
-			handlers[i].invalidate();
+		for (LazyOptional<? extends IItemHandler> handler : handlers) {
+			handler.invalidate();
 		}
 	}
 	
