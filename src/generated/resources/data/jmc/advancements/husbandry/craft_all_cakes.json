@@ -193,6 +193,18 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "glow_berry_cake": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:glow_berry_cake"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "glowstone_cake": {
       "conditions": {
         "items": [
@@ -527,6 +539,9 @@
     ],
     [
       "red_velvet_cake"
+    ],
+    [
+      "glow_berry_cake"
     ]
   ],
   "rewards": {

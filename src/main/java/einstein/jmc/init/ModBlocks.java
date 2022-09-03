@@ -3,25 +3,7 @@ package einstein.jmc.init;
 import java.util.function.Supplier;
 
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.blocks.BaseCakeBlock;
-import einstein.jmc.blocks.BaseCandleCakeBlock;
-import einstein.jmc.blocks.BirthdayCakeBlock;
-import einstein.jmc.blocks.CakeOvenBlock;
-import einstein.jmc.blocks.ChorusCakeBlock;
-import einstein.jmc.blocks.CupcakeBlock;
-import einstein.jmc.blocks.EncasingIceBlock;
-import einstein.jmc.blocks.EnderCakeBlock;
-import einstein.jmc.blocks.EnderCandleCakeBlock;
-import einstein.jmc.blocks.GlowstoneCakeBlock;
-import einstein.jmc.blocks.LavaCakeBlock;
-import einstein.jmc.blocks.LavaCandleCakeBlock;
-import einstein.jmc.blocks.RedstoneCakeBlock;
-import einstein.jmc.blocks.RedstoneCandleCakeBlock;
-import einstein.jmc.blocks.SlimeCakeBlock;
-import einstein.jmc.blocks.SlimeCandleCakeBlock;
-import einstein.jmc.blocks.TNTCakeBlock;
-import einstein.jmc.blocks.ThreeTieredCakeBlock;
-import einstein.jmc.blocks.ThreeTieredCandleCakeBlock;
+import einstein.jmc.blocks.*;
 import einstein.jmc.data.ModDataGenerators;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -85,6 +67,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> CRIMSON_FUNGUS_CAKE = register("crimson_fungus_cake", () -> new BaseCakeBlock(CAKE));
     public static final RegistryObject<Block> WARPED_FUNGUS_CAKE = registerCandleCake("warped_fungus_cake");
 	public static final RegistryObject<Block> RED_VELVET_CAKE = registerCandleCake("red_velvet_cake");
+	public static final RegistryObject<Block> GLOW_BERRY_CAKE = registerCandleCake("glow_berry_cake");
 
     public static final RegistryObject<Block> ENCASING_ICE = register("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of(Material.ICE).friction(0.98F).randomTicks().strength(2.5F, 5.0F).sound(SoundType.GLASS).noLootTable().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never)));
     public static final RegistryObject<Block> CAKE_OVEN = register("cake_oven", () -> new CakeOvenBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(Blocks.litBlockEmission(13))));

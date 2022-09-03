@@ -1,9 +1,10 @@
-// 1.19.2	2022-09-02T15:30:20.5232945	JustMoreCakes cake oven recipes
+// 1.19.2	2022-09-03T17:44:11.2259249	JustMoreCakes cake oven recipes
 056fb9a656dc2c4c5428d570057e612ad14b6808 data/jmc/advancements/recipes/food/cake_from_cake_oven.json
 f68e22223d4e1922768e5ffd1c2c370467e716bf data/jmc/advancements/recipes/jmc_tab/apple_cake_from_cake_oven.json
 0facfda4aa9404c342e0e7fcfbe2f0681ce51a1c data/jmc/advancements/recipes/jmc_tab/carrot_cake_from_cake_oven.json
 27582ed47cf0961fb7b7792fcf0defc8d86d5b32 data/jmc/advancements/recipes/jmc_tab/cheesecake_from_cake_oven.json
 6a78bd86c8887cf2a10007ac91277192be6e8ed1 data/jmc/advancements/recipes/jmc_tab/chocolate_cake_from_cake_oven.json
+f105bb67d772f4161916f0708710ae91ef03e607 data/jmc/advancements/recipes/jmc_tab/glow_berry_cake_from_cake_oven.json
 dbeaa9466df49bc80449855ebee4c15be8684195 data/jmc/advancements/recipes/jmc_tab/honey_cake_from_cake_oven.json
 d74bd0aa76545bf651ced95b7e1b456b5fc5069b data/jmc/advancements/recipes/jmc_tab/poison_cake_from_cake_oven.json
 59fcbbb0d13858d2b43c8795f174ed7ea41d45c4 data/jmc/advancements/recipes/jmc_tab/pumpkin_cake_from_cake_oven.json
@@ -15,6 +16,7 @@ dd7fc5582f2b04a9960aeb21b18fc065e69c131c data/jmc/advancements/recipes/jmc_tab/r
 54dd010921016c728e1f94956deb3b612b6e5506 data/jmc/recipes/carrot_cake_from_cake_oven.json
 c7a5afb98dc102514f690388f2b39caf590a9e17 data/jmc/recipes/cheesecake_from_cake_oven.json
 09191f602d3b5526e9b71ef256a8883a8f137036 data/jmc/recipes/chocolate_cake_from_cake_oven.json
+db6587af9aeee0913f5e07c7e0da90765d66580b data/jmc/recipes/glow_berry_cake_from_cake_oven.json
 f7093996fd840da9e64b3739fdcd2008769c1e78 data/jmc/recipes/honey_cake_from_cake_oven.json
 71e6b46d0bd16cdabaf6011f426de290168e4d6b data/jmc/recipes/poison_cake_from_cake_oven.json
 5aaaf12b6ac93971143e4248c4b8dd43d5d77dc5 data/jmc/recipes/pumpkin_cake_from_cake_oven.json

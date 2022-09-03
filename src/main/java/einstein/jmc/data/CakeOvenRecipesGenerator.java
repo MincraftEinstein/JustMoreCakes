@@ -73,6 +73,10 @@ public class CakeOvenRecipesGenerator extends RecipeProvider {
 		CakeOvenRecipeBuilder.cakeBaking(ModBlocks.RED_VELVET_CAKE.get(), 0.8F, 300, Ingredient.of(Items.RED_DYE), Ingredient.of(Items.COCOA_BEANS), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.EGG))
 				.unlockedBy(has, has(Items.COCOA_BEANS))
 				.save(consumer, location(ModBlocks.RED_VELVET_CAKE));
+
+		CakeOvenRecipeBuilder.cakeBaking(ModBlocks.GLOW_BERRY_CAKE.get(), 0.5F, 350, Ingredient.of(Items.GLOW_BERRIES), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT))
+				.unlockedBy(has, has(Items.GLOW_BERRIES))
+				.save(consumer, location(ModBlocks.GLOW_BERRY_CAKE));
 	}
 	
 	private ResourceLocation location(RegistryObject<? extends ItemLike> item) {

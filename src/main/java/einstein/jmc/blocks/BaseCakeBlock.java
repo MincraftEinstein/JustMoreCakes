@@ -122,6 +122,10 @@ public class BaseCakeBlock extends Block {
 		        player.addEffect(new MobEffectInstance(ModPotions.FREEZING_EFFECT.get()));
 		        FreezingEffect.freezeEntity(player);
 			}
+			else if (name.contains("glow_berry_cake")) {
+				player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200));
+				player.addEffect(new MobEffectInstance(MobEffects.GLOWING, 1800));
+			}
 			int i = state.getValue(BITES); 
 			accessor.gameEvent(player, GameEvent.EAT, pos);
 			if (i < 6) { // Number must be same as BITES
