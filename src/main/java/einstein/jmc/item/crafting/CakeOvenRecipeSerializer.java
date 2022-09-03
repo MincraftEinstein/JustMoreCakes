@@ -18,9 +18,9 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> implements RecipeSerializer<T>, CakeOvenConstants {
 
 	private final int defaultCookingTime;
-	private final CookieBaker<T> factory;
+	private final CakeOvenFactory<T> factory;
 	
-	public CakeOvenRecipeSerializer(CookieBaker<T> factory, int defaultCooingTime) {
+	public CakeOvenRecipeSerializer(CakeOvenFactory<T> factory, int defaultCooingTime) {
 		this.defaultCookingTime = defaultCooingTime;
 		this.factory = factory;
 	}
@@ -95,7 +95,7 @@ public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> implements Recip
 		recipe.ingredients.forEach(ingredient -> ingredient.toNetwork(buf));
 	}
 	
-	public interface CookieBaker<T extends CakeOvenRecipe> {
+	public interface CakeOvenFactory<T extends CakeOvenRecipe> {
 		T create(ResourceLocation recipeId, NonNullList<Ingredient> ingredients, ItemStack result, float experience, int cookTime);
 	}
 }

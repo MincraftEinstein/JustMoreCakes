@@ -301,6 +301,18 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "red_velvet_cake": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:red_velvet_cake"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "redstone_cake": {
       "conditions": {
         "items": [
@@ -447,7 +459,8 @@
       "sweet_berry_cake",
       "three_tiered_cake",
       "tnt_cake",
-      "warped_fungus_cake"
+      "warped_fungus_cake",
+      "red_velvet_cake"
     ]
   ]
 }

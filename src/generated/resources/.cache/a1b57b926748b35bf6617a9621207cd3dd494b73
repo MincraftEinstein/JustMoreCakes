@@ -1,4 +1,4 @@
-// 1.19	2022-07-08T22:44:54.0098724	JustMoreCakes item assets
+// 1.19.2	2022-09-02T15:30:20.5163131	JustMoreCakes item assets
 e26168662503f6bf68944dc8a9698074be40a3c1 assets/jmc/models/item/apple_cake.json
 99f7f794c501eab38d68782e17e5dd37decfc434 assets/jmc/models/item/beetroot_cake.json
 05ad34f1148b69ca3397d05b3624d421e85785b6 assets/jmc/models/item/birthday_cake.json
@@ -27,6 +27,7 @@ e198da113e189c17b5d132573d5336779f5de277 assets/jmc/models/item/ender_cake.json
 64993de37ed58153c572d8fc3fa13d604893991c assets/jmc/models/item/pumpkin_cake.json
 220f9dcd25c4e1719dab728e08faeece017eee1e assets/jmc/models/item/redstone_cake.json
 a92040464d292bba41d553c3ffdddc15ce03aa77 assets/jmc/models/item/red_mushroom_cake.json
+daf74cfd63b73586df43b7ffcb47de3100374ccf assets/jmc/models/item/red_velvet_cake.json
 069ccce04dc7867a5371080bac482b5fe7f60f26 assets/jmc/models/item/seed_cake.json
 2f32c011b1b53c6dcb4c808d50c4a8407deca855 assets/jmc/models/item/slime_cake.json
 af4dbc0871d6d8e37f7df7b78015116c1f5936ea assets/jmc/models/item/sprinkle_cake.json
