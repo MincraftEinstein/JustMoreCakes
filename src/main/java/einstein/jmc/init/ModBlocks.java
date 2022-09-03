@@ -70,9 +70,7 @@ public class ModBlocks {
     	}
     })));
     public static final RegistryObject<Block> BEETROOT_CAKE = registerCandleCake("beetroot_cake");
-    public static final RegistryObject<Block> LAVA_CAKE = register("lava_cake", () -> new LavaCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).lightLevel((state) -> {
-		return 9;
-	})));
+    public static final RegistryObject<Block> LAVA_CAKE = register("lava_cake", () -> new LavaCakeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE).lightLevel((state) -> 9)));
     public static final RegistryObject<Block> CREEPER_CAKE = registerCandleCake("creeper_cake");
     public static final RegistryObject<Block> SEED_CAKE = registerCandleCake("seed_cake");
     public static final RegistryObject<Block> CUPCAKE = registerNoItem("cupcake", () -> new CupcakeBlock(CAKE));
@@ -98,39 +96,35 @@ public class ModBlocks {
 		registerNoItem("candle_redstone_cake", () -> new RedstoneCandleCakeBlock(Blocks.CANDLE, (BaseCakeBlock) REDSTONE_CAKE.get(), CANDLE_CAKE));
 		for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 			String color = DyeColor.byId(i2).getName();
-			registerNoItem(color + "_candle_redstone_cake", () -> new RedstoneCandleCakeBlock(getBlock(MCRL(color + "_candle")), (BaseCakeBlock) REDSTONE_CAKE.get(), CANDLE_CAKE));
+			registerNoItem(color + "_candle_redstone_cake", () -> new RedstoneCandleCakeBlock(getBlock(mcLoc(color + "_candle")), (BaseCakeBlock) REDSTONE_CAKE.get(), CANDLE_CAKE));
 		}
 		
 		ModDataGenerators.CAKE_TYPES.add("ender_cake");
 		registerNoItem("candle_ender_cake", () -> new EnderCandleCakeBlock(Blocks.CANDLE, (BaseCakeBlock) ENDER_CAKE.get(), CANDLE_CAKE));
 		for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 			String color = DyeColor.byId(i2).getName();
-			registerNoItem(color + "_candle_ender_cake", () -> new EnderCandleCakeBlock(getBlock(MCRL(color + "_candle")), (BaseCakeBlock) ENDER_CAKE.get(), CANDLE_CAKE));
+			registerNoItem(color + "_candle_ender_cake", () -> new EnderCandleCakeBlock(getBlock(mcLoc(color + "_candle")), (BaseCakeBlock) ENDER_CAKE.get(), CANDLE_CAKE));
 		}
 		
 		ModDataGenerators.CAKE_TYPES.add("three_tiered_cake");
 		registerNoItem("candle_three_tiered_cake", () -> new ThreeTieredCandleCakeBlock(Blocks.CANDLE, (ThreeTieredCakeBlock) THREE_TIERED_CAKE.get(), CANDLE_CAKE));
 		for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 			String color = DyeColor.byId(i2).getName();
-			registerNoItem(color + "_candle_three_tiered_cake", () -> new ThreeTieredCandleCakeBlock(getBlock(MCRL(color + "_candle")), (ThreeTieredCakeBlock) THREE_TIERED_CAKE.get(), CANDLE_CAKE));
+			registerNoItem(color + "_candle_three_tiered_cake", () -> new ThreeTieredCandleCakeBlock(getBlock(mcLoc(color + "_candle")), (ThreeTieredCakeBlock) THREE_TIERED_CAKE.get(), CANDLE_CAKE));
 		}
 		
 		ModDataGenerators.CAKE_TYPES.add("slime_cake");
 		registerNoItem("candle_slime_cake", () -> new SlimeCandleCakeBlock(Blocks.CANDLE, (BaseCakeBlock) SLIME_CAKE.get(), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).sound(SoundType.SLIME_BLOCK)));
 		for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 			String color = DyeColor.byId(i2).getName();
-			registerNoItem(color + "_candle_slime_cake", () -> new SlimeCandleCakeBlock(getBlock(MCRL(color + "_candle")), (BaseCakeBlock) SLIME_CAKE.get(), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).sound(SoundType.SLIME_BLOCK)));
+			registerNoItem(color + "_candle_slime_cake", () -> new SlimeCandleCakeBlock(getBlock(mcLoc(color + "_candle")), (BaseCakeBlock) SLIME_CAKE.get(), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).sound(SoundType.SLIME_BLOCK)));
 		}
 		
 		ModDataGenerators.CAKE_TYPES.add("lava_cake");
-		registerNoItem("candle_lava_cake", () -> new LavaCandleCakeBlock(Blocks.CANDLE, (BaseCakeBlock) LAVA_CAKE.get(), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).lightLevel((state) -> {
-			return 9;
-		})));
+		registerNoItem("candle_lava_cake", () -> new LavaCandleCakeBlock(Blocks.CANDLE, (BaseCakeBlock) LAVA_CAKE.get(), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).lightLevel((state) -> 9)));
 		for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 			String color = DyeColor.byId(i2).getName();
-			registerNoItem(color + "_candle_lava_cake", () -> new LavaCandleCakeBlock(getBlock(MCRL(color + "_candle")), (BaseCakeBlock) LAVA_CAKE.get(), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).lightLevel((state) -> {
-				return 9;
-			})));
+			registerNoItem(color + "_candle_lava_cake", () -> new LavaCandleCakeBlock(getBlock(mcLoc(color + "_candle")), (BaseCakeBlock) LAVA_CAKE.get(), BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE).lightLevel((state) -> 9)));
 		}
     }
     
@@ -149,7 +143,7 @@ public class ModBlocks {
 		registerNoItem("candle_" + name, () -> new BaseCandleCakeBlock(Blocks.CANDLE, (BaseCakeBlock) cake.get(), CANDLE_CAKE));
 		for (int i = 0; i < DyeColor.values().length; i++) {
 			String color = DyeColor.byId(i).getName();
-			registerNoItem(color + "_candle_" + name, () -> new BaseCandleCakeBlock(getBlock(MCRL(color + "_candle")), (BaseCakeBlock) cake.get(), CANDLE_CAKE));
+			registerNoItem(color + "_candle_" + name, () -> new BaseCandleCakeBlock(getBlock(mcLoc(color + "_candle")), (BaseCakeBlock) cake.get(), CANDLE_CAKE));
 		}
 		ModDataGenerators.CAKE_TYPES.add(name);
     	return cake;
@@ -165,11 +159,11 @@ public class ModBlocks {
 		}
 	}
 	
-	public static ResourceLocation RL(String string) {
+	public static ResourceLocation loc(String string) {
 		return new ResourceLocation(JustMoreCakes.MOD_ID, string);
 	}
 	
-	public static ResourceLocation MCRL(String string) {
+	public static ResourceLocation mcLoc(String string) {
 		return new ResourceLocation("minecraft", string);
 	}
 }

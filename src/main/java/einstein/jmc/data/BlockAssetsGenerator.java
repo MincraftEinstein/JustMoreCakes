@@ -42,7 +42,7 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 				.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(true)).addModels(new ConfiguredModel(models().withExistingParent("candle_" + name + "_lit", mcLoc("candle_cake_lit"))));
 				for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 					String color = DyeColor.byId(i2).getName();
-					getVariantBuilder(ModBlocks.getBlock(ModBlocks.RL(color + "_candle_" + name)))
+					getVariantBuilder(ModBlocks.getBlock(ModBlocks.loc(color + "_candle_" + name)))
 					.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(false)).addModels(new ConfiguredModel(models().withExistingParent(color + "_candle_" + name, mcLoc(color + "_candle_cake"))))
 					.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(true)).addModels(new ConfiguredModel(models().withExistingParent(color + "_candle_" + name + "_lit", mcLoc(color + "_candle_cake"))));
 				}
@@ -55,7 +55,7 @@ public class BlockAssetsGenerator extends BlockStateProvider {
 						.texture("candle", mcLoc("block/" + "candle_lit"))));
 				for (int i2 = 0; i2 < DyeColor.values().length; i2++) {
 					String color = DyeColor.byId(i2).getName();
-					getVariantBuilder(ModBlocks.getBlock(ModBlocks.RL(color + "_candle_" + name)))
+					getVariantBuilder(ModBlocks.getBlock(ModBlocks.loc(color + "_candle_" + name)))
 					.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(false)).addModels(new ConfiguredModel(models().withExistingParent(color + "_candle_" + name, modLoc("template_three_tiered_candle_cake"))
 							.texture("candle", mcLoc("block/" + color + "_candle"))))
 					.partialState().with(BaseCandleCakeBlock.LIT, Boolean.valueOf(true)).addModels(new ConfiguredModel(models().withExistingParent(color + "_candle_" + name + "_lit", modLoc("template_three_tiered_candle_cake"))

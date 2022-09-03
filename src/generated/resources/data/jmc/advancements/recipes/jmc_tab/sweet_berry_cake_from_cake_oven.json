@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "minecraft:egg"
+              "minecraft:sweet_berries"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jmc:cupcake_from_cake_oven"
+        "recipe": "jmc:sweet_berry_cake_from_cake_oven"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "jmc:cupcake_from_cake_oven"
+      "jmc:sweet_berry_cake_from_cake_oven"
     ]
   }
 }

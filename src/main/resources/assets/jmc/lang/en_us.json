@@ -1,9 +1,9 @@
 {
-	// ITEMS
+	"_comment": "Items",
 	"item.jmc.cheese": "Cheese",
 	"item.jmc.cupcake": "Cupcake",
 	
-	// BLOCKS
+	"_comment": "Blocks",
 	"block.jmc.chocolate_cake": "Chocolate Cake",
 	"block.jmc.carrot_cake": "Carrot Cake",
 	"block.jmc.pumpkin_cake": "Pumpkin Cake",
@@ -39,11 +39,12 @@
 	"block.jmc.red_velvet_cake": "Red Velvet Cake",
 	"block.jmc.encasing_ice": "Encasing Ice",
 	"block.jmc.cake_oven": "Cake Oven",
-	
-	// ENTITIES
+
+	"_comment": "Entities",
 	"entity.minecraft.villager.jmc.cake_baker": "Cake Baker",
+	"entity.minecraft.villager.cake_baker": "Cake Baker",
 	
-	// POTIONS
+	"_comment": "Potions",
 	"item.minecraft.potion.effect.bouncing":"Potion of Bouncing",
 	"item.minecraft.splash_potion.effect.bouncing":"Splash Potion of Bouncing",
 	"item.minecraft.lingering_potion.effect.bouncing":"Lingering Potion of Bouncing",
@@ -57,22 +58,22 @@
 	"item.minecraft.lingering_potion.effect.freezing":"Lingering Potion of Freezing",
 	"item.minecraft.tipped_arrow.effect.freezing":"Arrow of Freezing",
 	
-	// EFFECTS
+	"_comment": "Effects",
 	"effect.jmc.bouncing": "Bouncing",
 	"effect.jmc.freezing": "Freezing",
 	
-	// CONTAINERS
+	"_comment": "Containers",
 	"container.jmc.cake_oven": "Cake Oven",
 	
-	// JEI
+	"_comment": "JEI",
 	"gui.jei.jmc.category.cake_oven": "Cake Baking",
 	"gui.jei.jmc.category.cake_oven.experience": "%s XP",
 	"gui.jei.jmc.category.cake_oven.time.seconds": "%ss",
 	
-	// CREATIVE TAB
+	"_comment": "Creative Tabs",
 	"itemGroup.jmc_tab": "Just More Cakes!",
 	
-	// ADVANCEMENTS
+	"_comment": "Advancements",
 	"advancements.husbandry.craft_cake.title": "Cake is a Lie",
 	"advancements.husbandry.craft_cake.description": "Craft a cake",
 	"advancements.husbandry.craft_all_cakes.title": "Num Num Num Num Num",

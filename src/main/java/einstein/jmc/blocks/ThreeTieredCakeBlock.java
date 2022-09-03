@@ -88,7 +88,7 @@ public class ThreeTieredCakeBlock extends Block {
 
 				level.playSound(null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1, 1);
 				String candle = Util.getBlockRegistryName(block).getPath();
-				Block candleBlock = ModBlocks.getBlock(ModBlocks.RL(candle + "_three_tiered_cake"));
+				Block candleBlock = ModBlocks.getBlock(ModBlocks.loc(candle + "_three_tiered_cake"));
 				level.setBlockAndUpdate(pos, candleBlock.defaultBlockState());
 				level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 				player.awardStat(Stats.ITEM_USED.get(item));

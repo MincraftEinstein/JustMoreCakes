@@ -1,10 +1,10 @@
 {
   "type": "jmc:cake_baking",
-  "cookingTime": 300,
-  "experience": 0.5,
+  "cookingTime": 350,
+  "experience": 0.4,
   "ingredients": [
     {
-      "item": "minecraft:spider_eye"
+      "item": "minecraft:tnt"
     },
     {
       "item": "minecraft:wheat"
@@ -16,5 +16,5 @@
       "item": "minecraft:milk_bucket"
     }
   ],
-  "result": "jmc:poison_cake"
+  "result": "jmc:tnt_cake"
 }

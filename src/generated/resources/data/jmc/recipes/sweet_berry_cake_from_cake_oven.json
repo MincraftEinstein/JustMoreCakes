@@ -4,17 +4,17 @@
   "experience": 0.5,
   "ingredients": [
     {
-      "item": "minecraft:apple"
+      "item": "minecraft:sweet_berries"
     },
     {
-      "item": "minecraft:egg"
+      "item": "minecraft:wheat"
     },
     {
       "item": "minecraft:milk_bucket"
     },
     {
-      "item": "minecraft:wheat"
+      "item": "minecraft:sugar"
     }
   ],
-  "result": "jmc:apple_cake"
+  "result": "jmc:sweet_berry_cake"
 }

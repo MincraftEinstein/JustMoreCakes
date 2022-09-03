@@ -25,7 +25,7 @@ public class BlockLootTableGenerator extends BlockLoot {
 			Block block = candleCakes.get(i);
 			String name = Util.getBlockRegistryName(block).getPath();
 			String color = name.substring(0, name.indexOf("candle"));
-			add(block, createCandleCakeDrops(ModBlocks.getBlock(ModBlocks.MCRL(color + "candle"))));
+			add(block, createCandleCakeDrops(ModBlocks.getBlock(ModBlocks.mcLoc(color + "candle"))));
 		}
 	}
 	

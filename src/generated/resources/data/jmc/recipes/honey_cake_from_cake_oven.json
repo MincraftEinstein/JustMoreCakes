@@ -1,20 +1,20 @@
 {
   "type": "jmc:cake_baking",
-  "cookingTime": 200,
-  "experience": 0.5,
+  "cookingTime": 300,
+  "experience": 0.7,
   "ingredients": [
     {
-      "item": "minecraft:apple"
-    },
-    {
-      "item": "minecraft:egg"
+      "item": "minecraft:honey_bottle"
     },
     {
       "item": "minecraft:milk_bucket"
     },
     {
       "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:egg"
     }
   ],
-  "result": "jmc:apple_cake"
+  "result": "jmc:honey_cake"
 }

@@ -20,7 +20,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class CraftingRecipesGenerator extends RecipeProvider {
 
-	String h = "has_item";
+	private final String has = "has_item";
 	
 	public CraftingRecipesGenerator(DataGenerator generator) {
 		super(generator);
@@ -67,7 +67,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('@', Items.WHEAT)
 			.define('?', Tags.Items.DYES_GREEN)
 			.define('!', Tags.Items.DYES_RED)
-			.unlockedBy(h, has(Items.EGG))
+			.unlockedBy(has, has(Items.EGG))
 			.save(consumer, ModBlocks.CHIRSTMAS_CAKE.getId());
 		
 		ShapedRecipeBuilder.shaped(ModItems.CUPCAKE.get())
@@ -78,7 +78,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('$', Items.SUGAR)
 			.define('~', Items.EGG)
 			.define('@', Items.WHEAT)
-			.unlockedBy(h, has(Items.EGG))
+			.unlockedBy(has, has(Items.EGG))
 			.save(consumer, ModItems.CUPCAKE.getId());
 		
 		ShapedRecipeBuilder.shaped(ModBlocks.SPRINKLE_CAKE.get())
@@ -94,7 +94,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('!', Tags.Items.DYES_LIME)
 			.define('^', Tags.Items.DYES_BLUE)
 			.define('&', Tags.Items.DYES_PURPLE)
-			.unlockedBy(h, has(Blocks.CAKE))
+			.unlockedBy(has, has(Blocks.CAKE))
 			.save(consumer, ModBlocks.SPRINKLE_CAKE.getId());
 		
 		ShapedRecipeBuilder.shaped(ModBlocks.THREE_TIERED_CAKE.get())
@@ -102,14 +102,14 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.pattern("#")
 			.pattern("#")
 			.define('#', Items.CAKE)
-			.unlockedBy(h, has(Items.CAKE))
+			.unlockedBy(has, has(Items.CAKE))
 			.save(consumer, ModBlocks.THREE_TIERED_CAKE.getId());
 		
 		ShapedRecipeBuilder.shaped(ModItems.CHEESE.get(), 3)
 			.pattern("###")
 			.pattern("###")
 			.define('#', Items.MILK_BUCKET)
-			.unlockedBy(h, has(Items.MILK_BUCKET))
+			.unlockedBy(has, has(Items.MILK_BUCKET))
 			.save(consumer, ModItems.CHEESE.getId());
 		
 		ShapedRecipeBuilder.shaped(ModBlocks.CAKE_OVEN.get().asItem())
@@ -119,7 +119,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('#', Items.BRICK)
 			.define('$', Blocks.FURNACE)
 			.define('~', Blocks.SMOOTH_STONE)
-			.unlockedBy(h, has(Blocks.SMOOTH_STONE))
+			.unlockedBy(has, has(Blocks.SMOOTH_STONE))
 			.save(consumer, ModBlocks.CAKE_OVEN.getId());
 	}
 	
@@ -132,7 +132,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('$', Items.SUGAR)
 			.define('~', Items.EGG)
 			.define('@', Items.WHEAT)
-			.unlockedBy(h, has(Items.EGG))
+			.unlockedBy(has, has(Items.EGG))
 			.save(consumer, cake.getId());
 	}
 	
@@ -146,7 +146,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('$', Items.SUGAR)
 			.define('~', Items.EGG)
 			.define('@', Items.WHEAT)
-			.unlockedBy(h, has(Items.EGG))
+			.unlockedBy(has, has(Items.EGG))
 			.save(consumer, cake.getId());
 	}
 	
@@ -159,7 +159,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('$', Items.SUGAR)
 			.define('~', Items.EGG)
 			.define('@', Items.WHEAT)
-			.unlockedBy(h, has(Items.EGG))
+			.unlockedBy(has, has(Items.EGG))
 			.save(consumer, cake.getId());
 	}
 	
@@ -172,7 +172,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.define('$', Items.BLAZE_POWDER)
 			.define('~', Items.EGG)
 			.define('@', Items.WHEAT)
-			.unlockedBy(h, has(Items.EGG))
+			.unlockedBy(has, has(Items.EGG))
 			.save(consumer, cake.getId());
 	}
 	
