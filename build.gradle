@@ -4,9 +4,9 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-version = "${mod_v}-${mc_v}"
-group = "einstein.${modid}"
-archivesBaseName = "${modid}"
+version = "${mod_v}"
+group = "einstein.${mod_id}"
+archivesBaseName = "${mod_id}-${mc_v}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -24,7 +24,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', archivesBaseName
+            property 'forge.enabledGameTestNamespaces', "${mod_id}"
 
             mods {
                 jmc {
@@ -40,7 +40,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', archivesBaseName
+            property 'forge.enabledGameTestNamespaces', "${mod_id}"
 
             mods {
                 jmc {
@@ -56,7 +56,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', archivesBaseName
+            property 'forge.enabledGameTestNamespaces', "${mod_id}"
 
             mods {
                 jmc {
@@ -72,7 +72,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', archivesBaseName, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', "${mod_id}", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 jmc {
@@ -104,11 +104,10 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_v}-${forge_v}"
 
-//    implementation fg.deobf("curse.maven:einsteins-library-405744:3545865")
     implementation fg.deobf("curse.maven:jei-238222:3905244")
     implementation fg.deobf("curse.maven:catalogue-459701:3873264")
     implementation fg.deobf("curse.maven:configured-457570:3903908")
-//    implementation fg.deobf("curse.maven:cake-chomps-307943:3555957")
+    implementation fg.deobf("curse.maven:cake-chomps-307943:3930653")
 }
 
 jar {
@@ -124,6 +123,14 @@ jar {
         ])
     }
     excludes.add('einstein/cutandcolored/data')
+}
+
+processResources {
+    inputs.property("version", "${mod_v}")
+
+    filesMatching("META-INF/mods.toml") {
+        expand("version": "${mod_v}")
+    }
 }
 
 jar.finalizedBy('reobfJar')
