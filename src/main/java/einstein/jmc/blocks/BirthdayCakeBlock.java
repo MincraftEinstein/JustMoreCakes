@@ -1,40 +1,28 @@
 package einstein.jmc.blocks;
 
-import java.util.Random;
-
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BirthdayCakeBlock extends Block {
+public class BirthdayCakeBlock extends BaseCakeBlock {
 
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 8);
-    protected static final VoxelShape[] SHAPES = new VoxelShape[] { 
+    protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[] {
     		Block.box(1, 0, 1, 15, 8, 15), //0 uneaten lit
     		Block.box(1, 0, 1, 15, 8, 15), //1 uneaten unlit
     		Shapes.or(Block.box(14, 0, 1, 15, 8, 2),
@@ -73,85 +61,54 @@ public class BirthdayCakeBlock extends Block {
 					Block.box(5, 0, 5, 6, 8, 6))
     };
     
-    public BirthdayCakeBlock(final Block.Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(BITES, Integer.valueOf(0)));
+    public BirthdayCakeBlock(Properties properties) {
+        super(properties, false, 8);
     }
-    
-    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-        return SHAPES[state.getValue(BITES)];
-    }
-    
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-		ItemStack itemstack = player.getItemInHand(hand);
-		if (level.isClientSide) {
-			if (eat(level, pos, state, player).consumesAction()) {
-				return InteractionResult.SUCCESS;
-			}
-			
-			if (itemstack.isEmpty()) {
-				return InteractionResult.CONSUME;
-			}
-		}
-		return eat(level, pos, state, player);
+
+	@Override
+	public IntegerProperty getBites() {
+		return BITES;
 	}
-    
+
+	@Override
+	public VoxelShape[] getShapeByBite() {
+		return SHAPE_BY_BITE;
+	}
+
+	@Override
     public InteractionResult eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player) {
     	int i = state.getValue(BITES);
-    	if (i != 0) {
-	        if (!player.canEat(false)) {
+
+		if (i == 0) {
+			accessor.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.1F, 1);
+		}
+		else {
+			if (!player.canEat(false)) {
 	            return InteractionResult.PASS;
 	        }
 	        player.awardStat(Stats.EAT_CAKE_SLICE);
-			player.getFoodData().eat(2, 0.1F);
+			eatActions(player, pos, state);
 			accessor.gameEvent(player, GameEvent.EAT, pos);
-    	}
-    	else if (i == 0) {
-    		accessor.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.1F, 1.0F);
-    	}
-		if (i < 8) { // Number must be same as BITES
-			accessor.setBlock(pos, state.setValue(BITES, Integer.valueOf(i + 1)), 3);
+		}
+
+		if (i < getBiteCount()) {
+			accessor.setBlock(pos, state.setValue(BITES, i + 1), 3);
 		} else {
 			accessor.removeBlock(pos, false);
 			accessor.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
 		}
 		return InteractionResult.SUCCESS;
 	}
-    
-	@SuppressWarnings("deprecation")
-	public BlockState updateShape(BlockState state, Direction direction, BlockState p_51215_, LevelAccessor accessor, BlockPos pos, BlockPos p_51218_) {
-		return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, p_51215_, accessor, pos, p_51218_);
-	}
-	
-	public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {
-		return reader.getBlockState(pos.below()).getMaterial().isSolid();
-	}
-    
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-    	builder.add(BITES);
-	}
-    
-	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-		return (8 - state.getValue(BITES)) * 2;
-	}
-	
-	public boolean hasAnalogOutputSignal(BlockState state) {
-		return true;
-	}
-	
-	public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType computation) {
-		return false;
-	}
-	
+
 	@OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
-        final int i = state.getValue(BirthdayCakeBlock.BITES);
-        if (i < 1) {
-            final double d0 = pos.getX() + 0.5;
-            final double d1 = pos.getY() + 0.95;
-            final double d2 = pos.getZ() + 0.5;
-            level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0, 0, 0);
-            level.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0, 0, 0);
+	@Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(getBites()) == 0) {
+            double x = pos.getX() + 0.5F;
+            double y = pos.getY() + 0.95F;
+            double z = pos.getZ() + 0.5F;
+            level.addParticle(ParticleTypes.SMOKE, x, y, z, 0, 0, 0);
+            level.addParticle(ParticleTypes.FLAME, x, y, z, 0, 0, 0);
         }
     }
 }

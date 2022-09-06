@@ -25,7 +25,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CandleBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -40,37 +39,57 @@ public class BaseCakeBlock extends Block {
 
 	public static final IntegerProperty BITES = BlockStateProperties.BITES;
 	protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[] {
-			Block.box(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
-			Block.box(3.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
-			Block.box(5.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
-			Block.box(7.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
-			Block.box(9.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
-			Block.box(11.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D),
-			Block.box(13.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D)
+			Block.box(1, 0, 1, 15, 8, 15),
+			Block.box(3, 0, 1, 15, 8, 15),
+			Block.box(5, 0, 1, 15, 8, 15),
+			Block.box(7, 0, 1, 15, 8, 15),
+			Block.box(9, 0, 1, 15, 8, 15),
+			Block.box(11, 0, 1, 15, 8, 15),
+			Block.box(13, 0, 1, 15, 8, 15)
 	};
-	
-	public BaseCakeBlock(BlockBehaviour.Properties properties) {
+
+	private final boolean allowsCandles;
+	private int biteCount = 6;
+
+	public BaseCakeBlock(Properties properties) {
+		this(properties, true);
+	}
+
+	protected BaseCakeBlock(Properties properties, int biteCount) {
+		this(properties);
+		this.biteCount = biteCount;
+	}
+
+	protected BaseCakeBlock(Properties properties, boolean allowsCandles, int biteCount) {
+		this(properties, allowsCandles);
+		this.biteCount = biteCount;
+	}
+
+	public BaseCakeBlock(Properties properties, boolean allowsCandles) {
 		super(properties);
-		this.registerDefaultState(this.stateDefinition.any().setValue(BITES, Integer.valueOf(0)));
+		registerDefaultState(stateDefinition.any().setValue(getBites(), 0));
+		this.allowsCandles = allowsCandles;
 	}
-	
+
+	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-		return SHAPE_BY_BITE[state.getValue(BITES)];
+		return getShapeByBite()[state.getValue(getBites())];
 	}
-	
+
+	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		Item item = itemstack.getItem();
 		String name = Util.getBlockRegistryName(asBlock()).getPath();
-		if (!name.contains("red_mushroom_cake") && !name.contains("brown_mushroom_cake") && !name.contains("chorus_cake") && !name.contains("crimson_fungus_cake")) {
-			if (itemstack.is(ItemTags.CANDLES) && state.getValue(BITES) == 0) {
+		if (allowsCandles) {
+			if (itemstack.is(ItemTags.CANDLES) && state.getValue(getBites()) == 0) {
 				Block block = Block.byItem(item);
 				if (block instanceof CandleBlock) {
 					if (!player.isCreative()) {
 						itemstack.shrink(1);
 					}
 
-					level.playSound((Player) null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1.0F, 1.0F);
+					level.playSound(null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1, 1);
 					String candle = Util.getBlockRegistryName(block).getPath();
 					Block candleBlock = ModBlocks.getBlock(ModBlocks.loc(candle + "_" + name));
 					level.setBlockAndUpdate(pos, candleBlock.defaultBlockState());
@@ -93,13 +112,14 @@ public class BaseCakeBlock extends Block {
 		
 		return eat(level, pos, state, player);
 	}
-	
+
 	public InteractionResult eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player) {
 		if (!player.canEat(false)) {
 			return InteractionResult.PASS;
-		} else {
+		}
+		else {
 			player.awardStat(Stats.EAT_CAKE_SLICE);
-			((BaseCakeBlock) state.getBlock()).eatActions(player);
+			eatActions(player, pos, state);
 			String name = Util.getBlockRegistryName(asBlock()).getPath();
 			if (name.contains("poison_cake")) {
 				player.addEffect(new MobEffectInstance(MobEffects.POISON, ModServerConfigs.POISON_CAKE_POISON_DUR.get(), ModServerConfigs.POISON_CAKE_POISON_STRENGTH.get()));
@@ -126,44 +146,66 @@ public class BaseCakeBlock extends Block {
 				player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200));
 				player.addEffect(new MobEffectInstance(MobEffects.GLOWING, 1800));
 			}
-			int i = state.getValue(BITES); 
+
+			int i = state.getValue(getBites()); 
 			accessor.gameEvent(player, GameEvent.EAT, pos);
-			if (i < 6) { // Number must be same as BITES
-				accessor.setBlock(pos, state.setValue(BITES, Integer.valueOf(i + 1)), 3);
-			} else {
+
+			if (i < getBiteCount()) {
+				accessor.setBlock(pos, state.setValue(getBites(), i + 1), 3);
+			}
+			else {
 				accessor.removeBlock(pos, false);
 				accessor.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
 			}
+
 			return InteractionResult.SUCCESS;
 		}
 	}
-	
-	public void eatActions(Player player) {
+
+	public void eatActions(Player player, BlockPos pos, BlockState state) {
 		player.getFoodData().eat(2, 0.1F);
 	}
 	
 	@SuppressWarnings("deprecation")
-	public BlockState updateShape(BlockState state, Direction direction, BlockState p_51215_, LevelAccessor accessor, BlockPos pos, BlockPos p_51218_) {
-		return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, p_51215_, accessor, pos, p_51218_);
+	@Override
+	public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor accessor, BlockPos pos, BlockPos neighborPos) {
+		return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, accessor, pos, neighborPos);
 	}
-	
+
+	@Override
 	public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {
 		return reader.getBlockState(pos.below()).getMaterial().isSolid();
 	}
-	
+
+	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(BITES);
+		builder.add(getBites());
 	}
-	
+
+	@Override
 	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-		return (7 - state.getValue(BITES)) * 2;
+		return ((getBiteCount() + 1) - state.getValue(getBites())) * 2;
 	}
-	
+
+	@Override
 	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
-	
+
+	@Override
 	public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType computation) {
 		return false;
+	}
+
+	public IntegerProperty getBites() {
+		return BITES;
+	}
+
+	public VoxelShape[] getShapeByBite() {
+		return SHAPE_BY_BITE;
+	}
+
+	public int getBiteCount() {
+		return biteCount;
 	}
 }

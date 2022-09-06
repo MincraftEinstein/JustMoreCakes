@@ -3,64 +3,49 @@ package einstein.jmc.blocks;
 import einstein.jmc.blockentity.TNTCakeBlockEntity;
 import einstein.jmc.init.ModServerConfigs;
 import net.minecraft.core.BlockPos;
-import net.minecraft.stats.Stats;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 
 public class TNTCakeBlock extends BaseEntityCakeBlock {
 
-    public TNTCakeBlock(final BlockBehaviour.Properties properties) {
+    public TNTCakeBlock(Properties properties) {
         super(properties);
     }
-    
-    @Override
-    public InteractionResult eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player) {
-        if (!player.canEat(false)) {
-            return InteractionResult.PASS;
-        }
-        player.awardStat(Stats.EAT_CAKE_SLICE);
-		player.getFoodData().eat(2, 0.1F);
-		Level level = player.getCommandSenderWorld();
-		explode(level, pos);
-        int i = state.getValue(BITES);
-        accessor.gameEvent(player, GameEvent.EAT, pos);
-		if (i < 6) { // Number must be same as BITES
-			accessor.setBlock(pos, state.setValue(BITES, Integer.valueOf(i + 1)), 3);
-		} else {
-			accessor.removeBlock(pos, false);
-			accessor.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
-		}
-		return InteractionResult.SUCCESS;
+
+	@Override
+	public void eatActions(Player player, BlockPos pos, BlockState state) {
+		super.eatActions(player, pos, state);
+		explode(player.getCommandSenderWorld(), pos);
 	}
-    
+
 	@Override
 	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos oldPos, boolean isMoving) {
 		if (level.hasNeighborSignal(pos)) {
-			if (ModServerConfigs.EFFECTED_BY_REDSTONE.get()) {
-				explode(level, pos);
-			}
+			explodeIfAllowed(level, pos);
 		}
 	}
 	
 	@Override
 	public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
 		if (level.hasNeighborSignal(pos)) {
-			if (ModServerConfigs.EFFECTED_BY_REDSTONE.get()) {
-				explode(level, pos);
-			}
+			explodeIfAllowed(level, pos);
 		}
 	}
-	
-	private void explode(Level world, BlockPos pos) {
-		BlockEntity blockEntity = world.getBlockEntity(pos);
-		((TNTCakeBlockEntity) blockEntity).explode();
+
+	private void explodeIfAllowed(Level level, BlockPos pos) {
+		if (ModServerConfigs.EFFECTED_BY_REDSTONE.get()) {
+			explode(level, pos);
+		}
+	}
+
+	private void explode(Level level, BlockPos pos) {
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+		if (blockEntity instanceof TNTCakeBlockEntity tntCakeBlockEntity) {
+			tntCakeBlockEntity.explode();
+		}
 	}
     
 	@Override
