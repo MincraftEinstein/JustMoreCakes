@@ -3,22 +3,31 @@ package einstein.jmc;
 import com.mojang.datafixers.util.Pair;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.init.*;
-import einstein.jmc.util.EventHandler;
+import einstein.jmc.util.CakeChompsEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.GiveGiftToHero;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.coremod.api.ASMAPI;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -49,6 +58,7 @@ public class JustMoreCakes {
         modEventBus.register(this);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
+        modEventBus.addListener(this::onParallelDispatch);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.init(modEventBus);
         ModBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
@@ -59,9 +69,13 @@ public class JustMoreCakes {
         ModVillagers.PROFESSIONS.register(modEventBus);
         ModPotions.MOB_EFFECTS.register(modEventBus);
         ModPotions.POTIONS.register(modEventBus);
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new EventHandler());
         MinecraftForge.EVENT_BUS.addListener(this::missingMappings);
+        MinecraftForge.EVENT_BUS.addListener(this::onEntityJump);
+        MinecraftForge.EVENT_BUS.addListener(this::onEntityTick);
+        if (ModList.get().isLoaded("cakechomps")) {
+            MinecraftForge.EVENT_BUS.addListener(CakeChompsEvents::onCakeEaten);
+        }
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfigs.SERVERSPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.CLIENTSPEC);
     }
@@ -110,7 +124,6 @@ public class JustMoreCakes {
         }
     }
 
-    @SubscribeEvent
     void onParallelDispatch(final ParallelDispatchEvent event) {
         event.enqueueWork(ModPotions::registerPotionRecipes);
     }
@@ -143,6 +156,43 @@ public class JustMoreCakes {
             } else {
                 LOGGER.info("Failed to remap (" + mapping.getKey().toString() + ") of registry (" + registry.getRegistryName() + ")");
                 mapping.fail();
+            }
+        }
+    }
+
+    void onEntityJump(final LivingEvent.LivingJumpEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            if (player.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
+                player.push(0, 0.15F, 0);
+            }
+        }
+    }
+
+    void onEntityTick(final LivingEvent.LivingTickEvent event) {
+        Level level = event.getEntity().getCommandSenderWorld();
+        LivingEntity entity = event.getEntity();
+        RandomSource random = entity.getRandom();
+
+        if (entity.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
+            if (entity.verticalCollision && entity.isOnGround() && !entity.isSleeping()) {
+                float f0 = 0.65F;
+
+                if (entity.hasEffect(MobEffects.JUMP)) {
+                    f0 += 0.1F * (entity.getEffect(MobEffects.JUMP).getAmplifier() + 1);
+                }
+
+                entity.push(0, f0, 0);
+                entity.playSound(SoundEvents.SLIME_SQUISH, 1, 1);
+
+                if (level.isClientSide) {
+                    for (int i = 0; i < 8; ++i) {
+                        float f1 = random.nextFloat() * ((float)Math.PI * 2F);
+                        float f2 = random.nextFloat() * 0.5F + 0.5F;
+                        float f3 = Mth.sin(f1) * 1 * 0.5F * f2;
+                        float f4 = Mth.cos(f1) * 1 * 0.5F * f2;
+                        level.addParticle(ParticleTypes.ITEM_SLIME, entity.getX() + f3, entity.getY(), entity.getZ() + f4, 0, 0, 0);
+                    }
+                }
             }
         }
     }
