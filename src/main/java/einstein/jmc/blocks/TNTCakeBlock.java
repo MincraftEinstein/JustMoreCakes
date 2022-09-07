@@ -8,6 +8,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class TNTCakeBlock extends BaseEntityCakeBlock {
 
@@ -47,7 +48,8 @@ public class TNTCakeBlock extends BaseEntityCakeBlock {
 			tntCakeBlockEntity.explode();
 		}
 	}
-    
+
+	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new TNTCakeBlockEntity(pos, state);

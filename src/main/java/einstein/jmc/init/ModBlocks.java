@@ -1,6 +1,8 @@
 package einstein.jmc.init;
 
 import einstein.jmc.JustMoreCakes;
+import einstein.jmc.blockentity.GlowstoneCakeBlockEntity;
+import einstein.jmc.blockentity.TNTCakeBlockEntity;
 import einstein.jmc.blocks.*;
 import einstein.jmc.data.ModDataGenerators;
 import net.minecraft.resources.ResourceLocation;
@@ -105,6 +107,20 @@ public class ModBlocks {
 		for (int i = 0; i < DyeColor.values().length; i++) {
 			String color = DyeColor.byId(i).getName();
 			registerNoItem(color + "_candle_lava_cake", () -> new LavaCandleCakeBlock((BaseCakeBlock) LAVA_CAKE.get(), candleCakeProperties().lightLevel(state -> 9)));
+		}
+
+		ModDataGenerators.CAKE_TYPES.add("glowstone_cake");
+		registerNoItem("candle_glowstone_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) GLOWSTONE_CAKE.get(), candleCakeProperties().lightLevel(state -> 12), GlowstoneCakeBlockEntity::new));
+		for (int i = 0; i < DyeColor.values().length; i++) {
+			String color = DyeColor.byId(i).getName();
+			registerNoItem(color + "_candle_glowstone_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) GLOWSTONE_CAKE.get(), candleCakeProperties().lightLevel(state -> 12), GlowstoneCakeBlockEntity::new));
+		}
+
+		ModDataGenerators.CAKE_TYPES.add("tnt_cake");
+		registerNoItem("candle_tnt_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) TNT_CAKE.get(), candleCakeProperties(), TNTCakeBlockEntity::new));
+		for (int i = 0; i < DyeColor.values().length; i++) {
+			String color = DyeColor.byId(i).getName();
+			registerNoItem(color + "_candle_tnt_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) TNT_CAKE.get(), candleCakeProperties(), TNTCakeBlockEntity::new));
 		}
     }
 

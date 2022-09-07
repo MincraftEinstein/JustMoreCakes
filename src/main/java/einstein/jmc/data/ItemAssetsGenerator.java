@@ -24,7 +24,7 @@ public class ItemAssetsGenerator extends ItemModelProvider {
 		for (int i = 0; i < ModDataGenerators.CAKE_TYPES.size(); i++) {
 			String name = ModDataGenerators.CAKE_TYPES.get(i);
 
-			if (name.contains("poison")) {
+			if (name.equals("poison_cake") || name.equals("tnt_cake")) {
 				generatedItem(name, mcLoc("item/cake"));
 			}
 			else {

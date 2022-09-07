@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class GlowstoneCakeBlock extends BaseEntityCakeBlock {
 
@@ -20,6 +21,7 @@ public class GlowstoneCakeBlock extends BaseEntityCakeBlock {
         }
     }
 
+    @Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new GlowstoneCakeBlockEntity(pos, state);
