@@ -1,6 +1,9 @@
 package einstein.jmc.blocks;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -54,5 +57,10 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
 	@Override
 	public VoxelShape[] getShapeByBite() {
 		return SHAPE_BY_BITE;
+	}
+
+	@Override
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+		return ((getBiteCount() + 1) - state.getValue(getBites()));
 	}
 }
