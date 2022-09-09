@@ -49,7 +49,7 @@ public class SlimeCakeBlock extends BaseCakeBlock {
 	static void bounceUp(Entity entity) {
 		Vec3 vec3 = entity.getDeltaMovement();
 		if (vec3.y < 0) {
-			double d0 = entity instanceof LivingEntity ? 1 : 0.8D;
+			double d0 = entity instanceof LivingEntity ? 0.5 : 0.3D;
 			entity.setDeltaMovement(vec3.x, -vec3.y * d0, vec3.z);
 		}
 	}
