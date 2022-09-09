@@ -17,7 +17,7 @@ import java.util.List;
 @EventBusSubscriber(modid = JustMoreCakes.MOD_ID, bus = Bus.MOD)
 public class ModDataGenerators {
 
-	public static List<String> CAKE_TYPES = new ArrayList<>();
+	public static final List<String> CAKE_TYPES = new ArrayList<>();
 	
 	@SubscribeEvent
 	public static void DataGenerator(GatherDataEvent event) {

@@ -14,22 +14,21 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Consumer;
 
 public class ModAdvancementsGenerator extends AdvancementProvider {
 
-	private static final Block[] CAKES = { Blocks.CAKE, ModBlocks.APPLE_CAKE.get(), ModBlocks.BEETROOT_CAKE.get(), ModBlocks.BIRTHDAY_CAKE.get(), ModBlocks.BROWN_MUSHROOM_CAKE.get(),
-			ModBlocks.CARROT_CAKE.get(), ModBlocks.CHEESECAKE.get(), ModBlocks.CHIRSTMAS_CAKE.get(), ModBlocks.CHOCOLATE_CAKE.get(), ModBlocks.CHORUS_CAKE.get(), ModBlocks.COOKIE_CAKE.get(),
-			ModBlocks.CREEPER_CAKE.get(), ModBlocks.CRIMSON_FUNGUS_CAKE.get(), ModBlocks.CUPCAKE.get(), ModBlocks.ENDER_CAKE.get(), ModBlocks.FIREY_CAKE.get(), ModBlocks.GLOWSTONE_CAKE.get(),
-			ModBlocks.GOLDEN_APPLE_CAKE.get(), ModBlocks.HONEY_CAKE.get(), ModBlocks.ICE_CAKE.get(), ModBlocks.LAVA_CAKE.get(), ModBlocks.MELON_CAKE.get(), ModBlocks.POISON_CAKE.get(),
-			ModBlocks.PUMPKIN_CAKE.get(), ModBlocks.RED_MUSHROOM_CAKE.get(), ModBlocks.REDSTONE_CAKE.get(), ModBlocks.SEED_CAKE.get(), ModBlocks.SLIME_CAKE.get(), ModBlocks.SPRINKLE_CAKE.get(),
-			ModBlocks.SWEET_BERRY_CAKE.get(), ModBlocks.THREE_TIERED_CAKE.get(), ModBlocks.TNT_CAKE.get(), ModBlocks.WARPED_FUNGUS_CAKE.get(), ModBlocks.RED_VELVET_CAKE.get(), ModBlocks.GLOW_BERRY_CAKE.get() };
-	
+	private static final RegistryObject<?>[] CAKES = { ModBlocks.APPLE_CAKE, ModBlocks.BEETROOT_CAKE, ModBlocks.BIRTHDAY_CAKE, ModBlocks.BROWN_MUSHROOM_CAKE,
+			ModBlocks.CARROT_CAKE, ModBlocks.CHEESECAKE, ModBlocks.CHIRSTMAS_CAKE, ModBlocks.CHOCOLATE_CAKE, ModBlocks.CHORUS_CAKE, ModBlocks.COOKIE_CAKE,
+			ModBlocks.CREEPER_CAKE, ModBlocks.CRIMSON_FUNGUS_CAKE, ModBlocks.CUPCAKE, ModBlocks.ENDER_CAKE, ModBlocks.FIREY_CAKE, ModBlocks.GLOWSTONE_CAKE,
+			ModBlocks.GOLDEN_APPLE_CAKE, ModBlocks.HONEY_CAKE, ModBlocks.ICE_CAKE, ModBlocks.LAVA_CAKE, ModBlocks.MELON_CAKE, ModBlocks.POISON_CAKE,
+			ModBlocks.PUMPKIN_CAKE, ModBlocks.RED_MUSHROOM_CAKE, ModBlocks.REDSTONE_CAKE, ModBlocks.SEED_CAKE, ModBlocks.SLIME_CAKE, ModBlocks.SPRINKLE_CAKE,
+			ModBlocks.SWEET_BERRY_CAKE, ModBlocks.THREE_TIERED_CAKE, ModBlocks.TNT_CAKE, ModBlocks.WARPED_FUNGUS_CAKE, ModBlocks.RED_VELVET_CAKE, ModBlocks.GLOW_BERRY_CAKE };
+
 	public ModAdvancementsGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
 		super(generator, existingFileHelper);
 	}
@@ -37,17 +36,19 @@ public class ModAdvancementsGenerator extends AdvancementProvider {
 	@Override
 	protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
 		Advancement craftCake = addCakes(Advancement.Builder.advancement().parent(new ResourceLocation("minecraft:husbandry/plant_seed")).requirements(RequirementsStrategy.OR)
-			.display(Blocks.CAKE.asItem(), translatable("craft_cake.title"), translatable("craft_cake.description"), (ResourceLocation)null, FrameType.TASK, true, true, false))
-			.save(consumer, rl("husbandry/craft_cake"), fileHelper);
+			.display(Blocks.CAKE.asItem(), translatable("craft_cake.title"), translatable("craft_cake.description"), null, FrameType.TASK, true, true, false))
+			.save(consumer, modLoc("husbandry/craft_cake"), fileHelper);
 		addCakes(Advancement.Builder.advancement().parent(craftCake))
-			.display(ModBlocks.CHOCOLATE_CAKE.get(), translatable("craft_all_cakes.title"), translatable("craft_all_cakes.description"), (ResourceLocation)null, FrameType.CHALLENGE, true, true, false)
-			.rewards(AdvancementRewards.Builder.experience(100)).save(consumer, rl("husbandry/craft_all_cakes"), fileHelper);
+			.display(ModBlocks.CHOCOLATE_CAKE.get(), translatable("craft_all_cakes.title"), translatable("craft_all_cakes.description"), null, FrameType.CHALLENGE, true, true, false)
+			.rewards(AdvancementRewards.Builder.experience(100)).save(consumer, modLoc("husbandry/craft_all_cakes"), fileHelper);
 	}
 	
 	private Advancement.Builder addCakes(Advancement.Builder advancement) {
-		for (ItemLike cake : CAKES) {
-			Item cakeItem = cake.asItem();
-			advancement.addCriterion(ForgeRegistries.ITEMS.getKey(cakeItem).getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(cakeItem).build()));
+		advancement.addCriterion("cake", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(Blocks.CAKE).build()));
+
+		for (RegistryObject<?> cake : CAKES) {
+			Item cakeItem = ((ItemLike) cake.get()).asItem();
+			advancement.addCriterion(cake.getId().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(cakeItem).build()));
 		}
 		
 		return advancement;
@@ -57,7 +58,7 @@ public class ModAdvancementsGenerator extends AdvancementProvider {
 		return Component.translatable("advancements.husbandry." + str);
 	}
 	
-	private ResourceLocation rl(String path) {
+	private ResourceLocation modLoc(String path) {
 		return new ResourceLocation(JustMoreCakes.MOD_ID, path);
 	}
 	

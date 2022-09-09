@@ -1,10 +1,10 @@
 {
   "variants": {
     "lit=false": {
-      "model": "jmc:block/green_candle_tnt_cake"
+      "model": "minecraft:block/green_candle_cake"
     },
     "lit=true": {
-      "model": "jmc:block/green_candle_tnt_cake_lit"
+      "model": "minecraft:block/green_candle_cake"
     }
   }
 }

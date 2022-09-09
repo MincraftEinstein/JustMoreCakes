@@ -1,10 +1,10 @@
 {
   "variants": {
     "lit=false": {
-      "model": "jmc:block/magenta_candle_poison_cake"
+      "model": "minecraft:block/magenta_candle_cake"
     },
     "lit=true": {
-      "model": "jmc:block/magenta_candle_poison_cake_lit"
+      "model": "minecraft:block/magenta_candle_cake"
     }
   }
 }
