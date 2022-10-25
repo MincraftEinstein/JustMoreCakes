@@ -25,8 +25,8 @@ public class BlockAssetsGenerator extends BlockStateProvider {
     protected void registerStatesAndModels() {
         simpleBlock(ModBlocks.ENCASING_ICE.get(), models().withExistingParent("encasing_ice", mcLoc("ice")).renderType("translucent"));
 
-        for (int i = 0; i < ModDataGenerators.CAKE_TYPES.size(); i++) {
-            String name = ModDataGenerators.CAKE_TYPES.get(i);
+        for (int i = 0; i < JustMoreCakes.CAKE_TYPES.size(); i++) {
+            String name = JustMoreCakes.CAKE_TYPES.get(i);
             Block cake = ModBlocks.getBlock(modLoc(name));
             Block candleCake = ModBlocks.getBlock(modLoc("candle_" + name));
 

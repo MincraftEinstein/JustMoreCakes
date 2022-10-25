@@ -11,14 +11,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @EventBusSubscriber(modid = JustMoreCakes.MOD_ID, bus = Bus.MOD)
 public class ModDataGenerators {
 
-	public static final List<String> CAKE_TYPES = new ArrayList<>();
-	
 	@SubscribeEvent
 	public static void DataGenerator(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();

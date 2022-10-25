@@ -74,49 +74,49 @@ public class ModBlocks {
     public static void init(IEventBus modEventBus) {
     	BLOCKS.register(modEventBus);
     	
-    	ModDataGenerators.CAKE_TYPES.add("redstone_cake");
+    	JustMoreCakes.CAKE_TYPES.add("redstone_cake");
 		registerNoItem("candle_redstone_cake", () -> new RedstoneCandleCakeBlock((BaseCakeBlock) REDSTONE_CAKE.get(), candleCakeProperties()));
 		for (int i = 0; i < DyeColor.values().length; i++) {
 			String color = DyeColor.byId(i).getName();
 			registerNoItem(color + "_candle_redstone_cake", () -> new RedstoneCandleCakeBlock((BaseCakeBlock) REDSTONE_CAKE.get(), candleCakeProperties()));
 		}
-		
-		ModDataGenerators.CAKE_TYPES.add("ender_cake");
+
+		JustMoreCakes.CAKE_TYPES.add("ender_cake");
 		registerNoItem("candle_ender_cake", () -> new EnderCandleCakeBlock((BaseCakeBlock) ENDER_CAKE.get(), candleCakeProperties()));
 		for (int i = 0; i < DyeColor.values().length; i++) {
 			String color = DyeColor.byId(i).getName();
 			registerNoItem(color + "_candle_ender_cake", () -> new EnderCandleCakeBlock((BaseCakeBlock) ENDER_CAKE.get(), candleCakeProperties()));
 		}
 		
-		ModDataGenerators.CAKE_TYPES.add("three_tiered_cake");
+		JustMoreCakes.CAKE_TYPES.add("three_tiered_cake");
 		registerNoItem("candle_three_tiered_cake", () -> new ThreeTieredCandleCakeBlock((ThreeTieredCakeBlock) THREE_TIERED_CAKE.get(), candleCakeProperties()));
 		for (int i = 0; i < DyeColor.values().length; i++) {
 			String color = DyeColor.byId(i).getName();
 			registerNoItem(color + "_candle_three_tiered_cake", () -> new ThreeTieredCandleCakeBlock((ThreeTieredCakeBlock) THREE_TIERED_CAKE.get(), candleCakeProperties()));
 		}
 		
-		ModDataGenerators.CAKE_TYPES.add("slime_cake");
+		JustMoreCakes.CAKE_TYPES.add("slime_cake");
 		registerNoItem("candle_slime_cake", () -> new SlimeCandleCakeBlock((BaseCakeBlock) SLIME_CAKE.get(), candleCakeProperties().sound(SoundType.SLIME_BLOCK)));
 		for (int i = 0; i < DyeColor.values().length; i++) {
 			String color = DyeColor.byId(i).getName();
 			registerNoItem(color + "_candle_slime_cake", () -> new SlimeCandleCakeBlock((BaseCakeBlock) SLIME_CAKE.get(), candleCakeProperties().sound(SoundType.SLIME_BLOCK)));
 		}
 		
-		ModDataGenerators.CAKE_TYPES.add("lava_cake");
+		JustMoreCakes.CAKE_TYPES.add("lava_cake");
 		registerNoItem("candle_lava_cake", () -> new LavaCandleCakeBlock((BaseCakeBlock) LAVA_CAKE.get(), candleCakeProperties().lightLevel(state -> 9)));
 		for (int i = 0; i < DyeColor.values().length; i++) {
 			String color = DyeColor.byId(i).getName();
 			registerNoItem(color + "_candle_lava_cake", () -> new LavaCandleCakeBlock((BaseCakeBlock) LAVA_CAKE.get(), candleCakeProperties().lightLevel(state -> 9)));
 		}
 
-		ModDataGenerators.CAKE_TYPES.add("glowstone_cake");
+		JustMoreCakes.CAKE_TYPES.add("glowstone_cake");
 		registerNoItem("candle_glowstone_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) GLOWSTONE_CAKE.get(), candleCakeProperties().lightLevel(state -> 12), GlowstoneCakeBlockEntity::new));
 		for (int i = 0; i < DyeColor.values().length; i++) {
 			String color = DyeColor.byId(i).getName();
 			registerNoItem(color + "_candle_glowstone_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) GLOWSTONE_CAKE.get(), candleCakeProperties().lightLevel(state -> 12), GlowstoneCakeBlockEntity::new));
 		}
 
-		ModDataGenerators.CAKE_TYPES.add("tnt_cake");
+		JustMoreCakes.CAKE_TYPES.add("tnt_cake");
 		registerNoItem("candle_tnt_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) TNT_CAKE.get(), candleCakeProperties(), TNTCakeBlockEntity::new));
 		for (int i = 0; i < DyeColor.values().length; i++) {
 			String color = DyeColor.byId(i).getName();
@@ -151,7 +151,7 @@ public class ModBlocks {
 			registerNoItem(color + "_candle_" + name, () -> new BaseCandleCakeBlock((BaseCakeBlock) cake.get(), properties));
 		}
 
-		ModDataGenerators.CAKE_TYPES.add(name);
+		JustMoreCakes.CAKE_TYPES.add(name);
     	return cake;
     }
 

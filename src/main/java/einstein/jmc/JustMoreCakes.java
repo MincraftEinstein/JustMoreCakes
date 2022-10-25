@@ -43,6 +43,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -52,6 +53,7 @@ public class JustMoreCakes {
     public static final String MOD_ID = "jmc";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final JMCTab JMC_TAB = new JMCTab(CreativeModeTab.TABS.length, "jmc_tab");
+    public static final List<String> CAKE_TYPES = new ArrayList<>();
 
     public JustMoreCakes() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

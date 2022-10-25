@@ -3,13 +3,9 @@ package einstein.jmc.data;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.util.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -23,8 +19,8 @@ public class ItemAssetsGenerator extends ItemModelProvider {
 	
 	@Override
 	protected void registerModels() {
-		for (int i = 0; i < ModDataGenerators.CAKE_TYPES.size(); i++) {
-			String name = ModDataGenerators.CAKE_TYPES.get(i);
+		for (int i = 0; i < JustMoreCakes.CAKE_TYPES.size(); i++) {
+			String name = JustMoreCakes.CAKE_TYPES.get(i);
 
 			if (name.equals("poison_cake") || name.equals("tnt_cake")) {
 				generatedItem(name, mcLoc("item/cake"));
