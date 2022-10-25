@@ -76,8 +76,9 @@ public class JustMoreCakes {
             MinecraftForge.EVENT_BUS.addListener(CakeChompsEvents::onCakeEaten);
         }
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfigs.SERVERSPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.CLIENTSPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfigs.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
     }
 
     void commonSetup(final FMLCommonSetupEvent event) {
@@ -113,12 +114,14 @@ public class JustMoreCakes {
             final Field templatesField = StructureTemplatePool.class.getDeclaredField(ASMAPI.mapField("f_210560_"));
             templatesField.setAccessible(true);
             final ObjectArrayList<StructurePoolElement> templates = (ObjectArrayList<StructurePoolElement>) templatesField.get(templatePool);
-            templates.add(structure);
+            for (int i = 0; i < ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get(); i++) {
+                templates.add(structure);
+            }
 
             final Field rawTemplatesField = StructureTemplatePool.class.getDeclaredField(ASMAPI.mapField("f_210559_"));
             rawTemplatesField.setAccessible(true);
             final List<Pair<StructurePoolElement, Integer>> rawTemplates = (List<Pair<StructurePoolElement, Integer>>) rawTemplatesField.get(templatePool);
-            rawTemplates.add(Pair.of(structure, 1));
+            rawTemplates.add(Pair.of(structure, ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get()));
         } catch (Exception e) {
             e.printStackTrace();
         }

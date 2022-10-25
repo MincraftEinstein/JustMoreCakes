@@ -4,10 +4,8 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class ModServerConfigs {
 	
-	public static ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
-	static {
-		SERVER_BUILDER.comment("Durations of the cake potion effects").push("Potion durations");
-	}
+	private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder().comment("Durations of the cake potion effects").push("Potion durations");
+
 	public static final ForgeConfigSpec.IntValue POISON_CAKE_POISON_DUR = registerPotionDur("poisonCakePoisonDur", 300);
 	public static final ForgeConfigSpec.IntValue GAPPLE_CAKE_REGEN_DUR = registerPotionDur("goldenAppleCakeRegenDur", 200);
 	public static final ForgeConfigSpec.IntValue GAPPLE_CAKE_RES_DUR = registerPotionDur("goldenAppleCakeResDur", 3000);
@@ -24,8 +22,8 @@ public class ModServerConfigs {
 	public static final ForgeConfigSpec.IntValue CHORUS_CAKE_LEVITATION_DUR = registerPotionDur("chorusCakeLevitationDur", 300);
 	public static final ForgeConfigSpec.IntValue GLOWSTONE_CAKE_GLOWING_DUR = registerPotionDur("glowstoneCakeGlowingDur", 85);
 	static {
-		SERVER_BUILDER.pop();
-		SERVER_BUILDER.comment("Strengths of the cake potion effects").push("Potion strengths");
+		BUILDER.pop();
+		BUILDER.comment("Strengths of the cake potion effects").push("Potion strengths");
 	}
 	public static final ForgeConfigSpec.IntValue POISON_CAKE_POISON_STRENGTH = registerPotionStrength("poisonCakePoisonStrength", 1);
 	public static final ForgeConfigSpec.IntValue GAPPLE_CAKE_REGEN_STRENGTH = registerPotionStrength("goldenAppleCakeRegenStrength", 1);
@@ -41,20 +39,20 @@ public class ModServerConfigs {
 	public static final ForgeConfigSpec.IntValue ICE_CAKE_NIGHT_VISION_STRENGTH = registerPotionStrength("iceCakeNightVisionStrength", 0);
 	public static final ForgeConfigSpec.IntValue CHORUS_CAKE_LEVITATION_STRENGTH = registerPotionStrength("chorusCakeLevitationStrength", 1);
 	static {
-		SERVER_BUILDER.pop();
-		SERVER_BUILDER.comment("Miscellaneous configs").push("Misc");
+		BUILDER.pop();
+		BUILDER.comment("Miscellaneous configs").push("Misc");
 	}
-	public static final ForgeConfigSpec.DoubleValue CHORUS_CAKE_TELEPORT_RADIUS = SERVER_BUILDER.comment("The radius in which the player will be randomly teleported").defineInRange("chorusCakeTeleportRadius", 10, 0, 10000D);
-	public static final ForgeConfigSpec.DoubleValue ENDER_CAKE_TELEPORT_RADIUS = SERVER_BUILDER.comment("The radius in which the player will be randomly teleported").defineInRange("enderCakeTeleportRadius", 50, 0, 10000D);
-	public static final ForgeConfigSpec.BooleanValue EFFECTED_BY_REDSTONE = SERVER_BUILDER.comment("Whether the TNT cake will explode when powered by Redstone").define("effectedByRedstone", false);
-	
-	public static final ForgeConfigSpec SERVERSPEC = SERVER_BUILDER.build();
+	public static final ForgeConfigSpec.DoubleValue CHORUS_CAKE_TELEPORT_RADIUS = BUILDER.comment("The radius in which the player will be randomly teleported").defineInRange("chorusCakeTeleportRadius", 10, 0, 10000D);
+	public static final ForgeConfigSpec.DoubleValue ENDER_CAKE_TELEPORT_RADIUS = BUILDER.comment("The radius in which the player will be randomly teleported").defineInRange("enderCakeTeleportRadius", 50, 0, 10000D);
+	public static final ForgeConfigSpec.BooleanValue EFFECTED_BY_REDSTONE = BUILDER.comment("Whether the TNT cake will explode when powered by Redstone").define("effectedByRedstone", false);
 
+	public static final ForgeConfigSpec SPEC = BUILDER.build();
+	
 	private static ForgeConfigSpec.IntValue registerPotionDur(final String field, final int defaultInt) {
-		return SERVER_BUILDER.defineInRange(field, defaultInt, 0, 32000);
+		return BUILDER.defineInRange(field, defaultInt, 0, 32000);
 	}
 
 	private static ForgeConfigSpec.IntValue registerPotionStrength(final String field, final int defaultInt) {
-		return SERVER_BUILDER.defineInRange(field, defaultInt, 0, 9);
+		return BUILDER.defineInRange(field, defaultInt, 0, 9);
 	}
 }
