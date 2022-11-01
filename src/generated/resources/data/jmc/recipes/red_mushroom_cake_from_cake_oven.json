@@ -1,20 +1,20 @@
 {
   "type": "jmc:cake_baking",
   "cookingTime": 250,
-  "experience": 0.7,
+  "experience": 0.4,
   "ingredients": [
     {
-      "tag": "forge:cheese"
-    },
-    {
-      "item": "minecraft:egg"
+      "item": "minecraft:red_mushroom"
     },
     {
       "item": "minecraft:sugar"
     },
     {
+      "item": "minecraft:egg"
+    },
+    {
       "item": "minecraft:wheat"
     }
   ],
-  "result": "jmc:cheesecake"
+  "result": "jmc:red_mushroom_cake"
 }

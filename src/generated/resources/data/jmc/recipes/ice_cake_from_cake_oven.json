@@ -1,20 +1,20 @@
 {
   "type": "jmc:cake_baking",
   "cookingTime": 250,
-  "experience": 0.7,
+  "experience": 0.5,
   "ingredients": [
     {
-      "tag": "forge:cheese"
+      "item": "minecraft:ice"
     },
     {
       "item": "minecraft:egg"
     },
     {
-      "item": "minecraft:sugar"
+      "item": "minecraft:wheat"
     },
     {
-      "item": "minecraft:wheat"
+      "item": "minecraft:sugar"
     }
   ],
-  "result": "jmc:cheesecake"
+  "result": "jmc:ice_cake"
 }

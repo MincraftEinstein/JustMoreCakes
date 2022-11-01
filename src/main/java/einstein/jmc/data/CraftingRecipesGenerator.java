@@ -20,43 +20,13 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class CraftingRecipesGenerator extends RecipeProvider {
 
-	private final String has = "has_item";
-	
 	public CraftingRecipesGenerator(DataGenerator generator) {
 		super(generator);
 	}
 	
 	@Override
 	protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-		cakeRecipe(consumer, Items.APPLE, ModBlocks.APPLE_CAKE);
-		cakeRecipe(consumer, Items.BEETROOT, ModBlocks.BEETROOT_CAKE);
-		cakeRecipe(consumer, Items.MILK_BUCKET, Blocks.TORCH, ModBlocks.BIRTHDAY_CAKE);
-		cakeRecipe(consumer, Blocks.BROWN_MUSHROOM, ModBlocks.BROWN_MUSHROOM_CAKE);
-		cakeRecipe(consumer, Items.CARROT, ModBlocks.CARROT_CAKE);
-		cakeRecipe(consumer, ItemTagsGenerator.CHEESE, ModBlocks.CHEESECAKE);
-		cakeRecipe(consumer, Items.COCOA_BEANS, ModBlocks.CHOCOLATE_CAKE);
-		cakeRecipe(consumer, Items.CHORUS_FRUIT, Items.POPPED_CHORUS_FRUIT, ModBlocks.CHORUS_CAKE);
-		cakeRecipe(consumer, Items.COOKIE, ModBlocks.COOKIE_CAKE);
-		cakeRecipe(consumer, Items.MILK_BUCKET, Blocks.CREEPER_HEAD, ModBlocks.CREEPER_CAKE);
-		cakeRecipe(consumer, Blocks.CRIMSON_FUNGUS, ModBlocks.CRIMSON_FUNGUS_CAKE);
-		blazeCakeRecipe(consumer, Items.ENDER_PEARL, ModBlocks.ENDER_CAKE);
-		blazeCakeRecipe(consumer, Items.MAGMA_CREAM, ModBlocks.FIREY_CAKE);
-		cakeRecipe(consumer, Items.GLOWSTONE_DUST, ModBlocks.GLOWSTONE_CAKE);
-		cakeRecipe(consumer, Items.GOLDEN_APPLE, ModBlocks.GOLDEN_APPLE_CAKE);
-		cakeRecipe(consumer, Items.HONEY_BOTTLE, Items.HONEYCOMB, ModBlocks.HONEY_CAKE);
-		cakeRecipe(consumer, Blocks.ICE, ModBlocks.ICE_CAKE);
-		cakeRecipe(consumer, Items.LAVA_BUCKET, ModBlocks.LAVA_CAKE);
-		cakeRecipe(consumer, Items.MELON_SLICE, ModBlocks.MELON_CAKE);
-		cakeRecipe(consumer, Items.SPIDER_EYE, ModBlocks.POISON_CAKE);
-		cakeRecipe(consumer, Blocks.PUMPKIN, ModBlocks.PUMPKIN_CAKE);
-		cakeRecipe(consumer, Blocks.RED_MUSHROOM, ModBlocks.RED_MUSHROOM_CAKE);
-		cakeRecipe(consumer, Items.REDSTONE, ModBlocks.REDSTONE_CAKE);
-		cakeRecipe(consumer, Tags.Items.SEEDS, ModBlocks.SEED_CAKE);
-		cakeRecipe(consumer, Tags.Items.SLIMEBALLS, ModBlocks.SLIME_CAKE);
-		cakeRecipe(consumer, Items.SWEET_BERRIES, ModBlocks.SWEET_BERRY_CAKE);
-		cakeRecipe(consumer, Blocks.TNT, ModBlocks.TNT_CAKE);
-		cakeRecipe(consumer, Blocks.WARPED_FUNGUS, ModBlocks.WARPED_FUNGUS_CAKE);
-		
+		String has = "has_item";
 		ShapedRecipeBuilder.shaped(ModBlocks.CHIRSTMAS_CAKE.get())
 			.pattern("?#!")
 			.pattern("$~$")
@@ -122,60 +92,7 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.unlockedBy(has, has(Blocks.SMOOTH_STONE))
 			.save(consumer, ModBlocks.CAKE_OVEN.getId());
 	}
-	
-	public void cakeRecipe(Consumer<FinishedRecipe> consumer, ItemLike topping, RegistryObject<Block> cake) {
-		ShapedRecipeBuilder.shaped(cake.get().asItem())
-			.pattern("###")
-			.pattern("$~$")
-			.pattern("@@@")
-			.define('#', topping)
-			.define('$', Items.SUGAR)
-			.define('~', Items.EGG)
-			.define('@', Items.WHEAT)
-			.unlockedBy(has, has(Items.EGG))
-			.save(consumer, cake.getId());
-	}
-	
-	public void cakeRecipe(Consumer<FinishedRecipe> consumer, ItemLike topping1, ItemLike topping2, RegistryObject<Block> cake) {
-		ShapedRecipeBuilder.shaped(cake.get().asItem())
-			.pattern("#-#")
-			.pattern("$~$")
-			.pattern("@@@")
-			.define('#', topping1)
-			.define('-', topping2)
-			.define('$', Items.SUGAR)
-			.define('~', Items.EGG)
-			.define('@', Items.WHEAT)
-			.unlockedBy(has, has(Items.EGG))
-			.save(consumer, cake.getId());
-	}
-	
-	public void cakeRecipe(Consumer<FinishedRecipe> consumer, TagKey<Item> topping, RegistryObject<Block> cake) {
-		ShapedRecipeBuilder.shaped(cake.get())
-			.pattern("###")
-			.pattern("$~$")
-			.pattern("@@@")
-			.define('#', topping)
-			.define('$', Items.SUGAR)
-			.define('~', Items.EGG)
-			.define('@', Items.WHEAT)
-			.unlockedBy(has, has(Items.EGG))
-			.save(consumer, cake.getId());
-	}
-	
-	public void blazeCakeRecipe(Consumer<FinishedRecipe> consumer, ItemLike topping, RegistryObject<Block> cake) {
-		ShapedRecipeBuilder.shaped(cake.get())
-			.pattern("###")
-			.pattern("$~$")
-			.pattern("@@@")
-			.define('#', topping)
-			.define('$', Items.BLAZE_POWDER)
-			.define('~', Items.EGG)
-			.define('@', Items.WHEAT)
-			.unlockedBy(has, has(Items.EGG))
-			.save(consumer, cake.getId());
-	}
-	
+
 	@Override
 	public String getName() {
 		return "JustMoreCakes crafting recipes";

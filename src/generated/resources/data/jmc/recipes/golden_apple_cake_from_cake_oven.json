@@ -1,20 +1,20 @@
 {
   "type": "jmc:cake_baking",
-  "cookingTime": 250,
-  "experience": 0.7,
+  "cookingTime": 400,
+  "experience": 0.8,
   "ingredients": [
     {
-      "tag": "forge:cheese"
+      "item": "minecraft:golden_apple"
     },
     {
       "item": "minecraft:egg"
     },
     {
-      "item": "minecraft:sugar"
+      "item": "minecraft:milk_bucket"
     },
     {
       "item": "minecraft:wheat"
     }
   ],
-  "result": "jmc:cheesecake"
+  "result": "jmc:golden_apple_cake"
 }
