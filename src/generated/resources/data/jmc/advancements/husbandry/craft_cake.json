@@ -361,18 +361,6 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "sprinkle_cake": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "jmc:sprinkle_cake"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "sweet_berry_cake": {
       "conditions": {
         "items": [
@@ -467,7 +455,6 @@
       "redstone_cake",
       "seed_cake",
       "slime_cake",
-      "sprinkle_cake",
       "sweet_berry_cake",
       "three_tiered_cake",
       "tnt_cake",

@@ -1,9 +1,0 @@
-{
-  "parent": "jmc:block/template_cake_slice5",
-  "textures": {
-    "bottom": "jmc:block/sprinkle_cake_bottom",
-    "inside": "jmc:block/sprinkle_cake_inner",
-    "side": "jmc:block/sprinkle_cake_side",
-    "top": "jmc:block/sprinkle_cake_top"
-  }
-}

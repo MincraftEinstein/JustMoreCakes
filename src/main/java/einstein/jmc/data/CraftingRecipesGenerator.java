@@ -51,22 +51,6 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 			.unlockedBy(has, has(Items.EGG))
 			.save(consumer, ModItems.CUPCAKE.getId());
 		
-		ShapedRecipeBuilder.shaped(ModBlocks.SPRINKLE_CAKE.get())
-			.pattern("#$~")
-			.pattern("@-?")
-			.pattern("!^&")
-			.define('#', Tags.Items.DYES_PINK)
-			.define('$', Tags.Items.DYES_RED)
-			.define('~', Tags.Items.DYES_ORANGE)
-			.define('@', Tags.Items.DYES_YELLOW)
-			.define('-', Items.CAKE)
-			.define('?', Tags.Items.DYES_GREEN)
-			.define('!', Tags.Items.DYES_LIME)
-			.define('^', Tags.Items.DYES_BLUE)
-			.define('&', Tags.Items.DYES_PURPLE)
-			.unlockedBy(has, has(Blocks.CAKE))
-			.save(consumer, ModBlocks.SPRINKLE_CAKE.getId());
-		
 		ShapedRecipeBuilder.shaped(ModBlocks.THREE_TIERED_CAKE.get())
 			.pattern("#")
 			.pattern("#")

@@ -26,7 +26,7 @@ public class ModAdvancementsGenerator extends AdvancementProvider {
 			ModBlocks.CARROT_CAKE, ModBlocks.CHEESECAKE, ModBlocks.CHIRSTMAS_CAKE, ModBlocks.CHOCOLATE_CAKE, ModBlocks.CHORUS_CAKE, ModBlocks.COOKIE_CAKE,
 			ModBlocks.CREEPER_CAKE, ModBlocks.CRIMSON_FUNGUS_CAKE, ModBlocks.CUPCAKE, ModBlocks.ENDER_CAKE, ModBlocks.FIREY_CAKE, ModBlocks.GLOWSTONE_CAKE,
 			ModBlocks.GOLDEN_APPLE_CAKE, ModBlocks.HONEY_CAKE, ModBlocks.ICE_CAKE, ModBlocks.LAVA_CAKE, ModBlocks.MELON_CAKE, ModBlocks.POISON_CAKE,
-			ModBlocks.PUMPKIN_CAKE, ModBlocks.RED_MUSHROOM_CAKE, ModBlocks.REDSTONE_CAKE, ModBlocks.SEED_CAKE, ModBlocks.SLIME_CAKE, ModBlocks.SPRINKLE_CAKE,
+			ModBlocks.PUMPKIN_CAKE, ModBlocks.RED_MUSHROOM_CAKE, ModBlocks.REDSTONE_CAKE, ModBlocks.SEED_CAKE, ModBlocks.SLIME_CAKE,
 			ModBlocks.SWEET_BERRY_CAKE, ModBlocks.THREE_TIERED_CAKE, ModBlocks.TNT_CAKE, ModBlocks.WARPED_FUNGUS_CAKE, ModBlocks.RED_VELVET_CAKE, ModBlocks.GLOW_BERRY_CAKE };
 
 	public ModAdvancementsGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {

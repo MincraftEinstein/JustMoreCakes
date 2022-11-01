@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.init.*;
 import einstein.jmc.util.CakeChompsEvents;
+import einstein.jmc.util.Util;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.particles.ParticleTypes;
@@ -18,9 +19,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.GiveGiftToHero;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraftforge.common.MinecraftForge;
@@ -144,9 +147,17 @@ public class JustMoreCakes {
 
     @Nullable
     private Block missingBlock(String name) {
+        for (DyeColor color : DyeColor.values()) {
+            if (name.equals(color + "_candle_sprinkle_cake")) {
+                return ModBlocks.getBlock(new ResourceLocation("minecraft", color + "_candle_cake"));
+            }
+        }
+
         return switch (name) {
             case "cheese_cake" -> ModBlocks.CHEESECAKE.get();
             case "triple_decker_cake" -> ModBlocks.THREE_TIERED_CAKE.get();
+            case "sprinkle_cake" -> Blocks.CAKE;
+            case "candle_sprinkle_cake" -> Blocks.CANDLE_CAKE;
             default -> null;
         };
     }
