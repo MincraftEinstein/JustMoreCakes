@@ -58,7 +58,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> BROWN_MUSHROOM_CAKE = register("brown_mushroom_cake", () -> new BaseCakeBlock(cakeProperties(), false));
     public static final RegistryObject<Block> ICE_CAKE = registerCandleCake("ice_cake");
     public static final RegistryObject<Block> CHORUS_CAKE = register("chorus_cake", () -> new ChorusCakeBlock(cakeProperties()));
-    public static final RegistryObject<Block> CHIRSTMAS_CAKE = registerCandleCake("christmas_cake");
     public static final RegistryObject<Block> SWEET_BERRY_CAKE = registerCandleCake("sweet_berry_cake");
     public static final RegistryObject<Block> HONEY_CAKE = registerCandleCake("honey_cake");
     public static final RegistryObject<Block> GLOWSTONE_CAKE = register("glowstone_cake", () -> new GlowstoneCakeBlock(cakeProperties().lightLevel(state -> 12)));

@@ -27,19 +27,6 @@ public class CraftingRecipesGenerator extends RecipeProvider {
 	@Override
 	protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
 		String has = "has_item";
-		ShapedRecipeBuilder.shaped(ModBlocks.CHIRSTMAS_CAKE.get())
-			.pattern("?#!")
-			.pattern("$~$")
-			.pattern(" @ ")
-			.define('#', Items.MILK_BUCKET)
-			.define('$', Items.SUGAR)
-			.define('~', Items.EGG)
-			.define('@', Items.WHEAT)
-			.define('?', Tags.Items.DYES_GREEN)
-			.define('!', Tags.Items.DYES_RED)
-			.unlockedBy(has, has(Items.EGG))
-			.save(consumer, ModBlocks.CHIRSTMAS_CAKE.getId());
-		
 		ShapedRecipeBuilder.shaped(ModItems.CUPCAKE.get())
 			.pattern(" # ")
 			.pattern("$~$")

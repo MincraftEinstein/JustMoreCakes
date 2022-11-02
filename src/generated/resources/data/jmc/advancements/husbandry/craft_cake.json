@@ -109,18 +109,6 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "christmas_cake": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "jmc:christmas_cake"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "cookie_cake": {
       "conditions": {
         "items": [
@@ -434,7 +422,6 @@
       "brown_mushroom_cake",
       "carrot_cake",
       "cheesecake",
-      "christmas_cake",
       "chocolate_cake",
       "chorus_cake",
       "cookie_cake",

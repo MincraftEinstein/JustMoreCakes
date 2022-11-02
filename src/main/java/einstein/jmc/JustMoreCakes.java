@@ -147,17 +147,26 @@ public class JustMoreCakes {
 
     @Nullable
     private Block missingBlock(String name) {
-        for (DyeColor color : DyeColor.values()) {
-            if (name.equals(color + "_candle_sprinkle_cake")) {
-                return ModBlocks.getBlock(new ResourceLocation("minecraft", color + "_candle_cake"));
+        String[] removedCakes = { "sprinkle_cake", "christmas_cake" };
+        for (String cake : removedCakes) {
+            if (name.equals(cake)) {
+                return Blocks.CAKE;
+            }
+            else if (name.equals("candle_" + cake)) {
+                return Blocks.CANDLE_CAKE;
+            }
+            else {
+                for (DyeColor color : DyeColor.values()) {
+                    if (name.equals(color + "_candle_" + cake)) {
+                        return ModBlocks.getBlock(new ResourceLocation("minecraft", color + "_candle_cake"));
+                    }
+                }
             }
         }
 
         return switch (name) {
             case "cheese_cake" -> ModBlocks.CHEESECAKE.get();
             case "triple_decker_cake" -> ModBlocks.THREE_TIERED_CAKE.get();
-            case "sprinkle_cake" -> Blocks.CAKE;
-            case "candle_sprinkle_cake" -> Blocks.CANDLE_CAKE;
             default -> null;
         };
     }

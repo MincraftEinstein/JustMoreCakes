@@ -1,9 +1,0 @@
-{
-  "parent": "jmc:block/template_cake_slice3",
-  "textures": {
-    "bottom": "jmc:block/christmas_cake_bottom",
-    "inside": "jmc:block/christmas_cake_inner",
-    "side": "jmc:block/christmas_cake_side",
-    "top": "jmc:block/christmas_cake_top"
-  }
-}
