@@ -25,18 +25,6 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "birthday_cake": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "jmc:birthday_cake"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "brown_mushroom_cake": {
       "conditions": {
         "items": [
@@ -418,7 +406,6 @@
       "cake",
       "apple_cake",
       "beetroot_cake",
-      "birthday_cake",
       "brown_mushroom_cake",
       "carrot_cake",
       "cheesecake",

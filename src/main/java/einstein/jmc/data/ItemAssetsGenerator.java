@@ -32,7 +32,6 @@ public class ItemAssetsGenerator extends ItemModelProvider {
 		
 		generatedItem(getItemName(ModBlocks.RED_MUSHROOM_CAKE), modLoc("item/" + getItemName(ModBlocks.RED_MUSHROOM_CAKE)));
 		generatedItem(getItemName(ModBlocks.BROWN_MUSHROOM_CAKE), modLoc("item/" + getItemName(ModBlocks.BROWN_MUSHROOM_CAKE)));
-		generatedItem(getItemName(ModBlocks.BIRTHDAY_CAKE), modLoc("item/" + getItemName(ModBlocks.BIRTHDAY_CAKE)));
 		generatedItem(getItemName(ModBlocks.CUPCAKE), modLoc("item/" + getItemName(ModBlocks.CUPCAKE)));
 		generatedItem(getItemName(ModBlocks.CHORUS_CAKE), modLoc("item/" + getItemName(ModBlocks.CHORUS_CAKE)));
 		generatedItem(getItemName(ModBlocks.GLOWSTONE_CAKE), modLoc("item/" + getItemName(ModBlocks.GLOWSTONE_CAKE)));

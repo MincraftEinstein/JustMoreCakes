@@ -42,14 +42,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> CHEESECAKE = registerCandleCake("cheesecake");
     public static final RegistryObject<Block> THREE_TIERED_CAKE = register("three_tiered_cake", () -> new ThreeTieredCakeBlock(cakeProperties()));
     public static final RegistryObject<Block> SLIME_CAKE = register("slime_cake", () -> new SlimeCakeBlock(cakeProperties().sound(SoundType.SLIME_BLOCK)));
-    public static final RegistryObject<Block> BIRTHDAY_CAKE = register("birthday_cake", () -> new BirthdayCakeBlock(cakeProperties().lightLevel(state -> {
-    	if (state.getValue(BirthdayCakeBlock.BITES) < 1) {
-    		return 9;
-    	}
-    	else {
-    		return 0;
-    	}
-    })));
     public static final RegistryObject<Block> BEETROOT_CAKE = registerCandleCake("beetroot_cake");
     public static final RegistryObject<Block> LAVA_CAKE = register("lava_cake", () -> new LavaCakeBlock(cakeProperties().lightLevel(state -> 9)));
     public static final RegistryObject<Block> CREEPER_CAKE = registerCandleCake("creeper_cake");
