@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jmc:cheese"
+        "recipe": "jmc:cream_cheese"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "jmc:cheese"
+      "jmc:cream_cheese"
     ]
   }
 }

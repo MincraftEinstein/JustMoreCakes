@@ -4,20 +4,13 @@ import java.util.function.Consumer;
 
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.tags.ItemTagsGenerator;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.RegistryObject;
 
 public class CraftingRecipesGenerator extends RecipeProvider {
 
@@ -44,12 +37,12 @@ public class CraftingRecipesGenerator extends RecipeProvider {
                 .unlockedBy(has, has(Items.CAKE))
                 .save(consumer, ModBlocks.THREE_TIERED_CAKE.getId());
 
-        ShapedRecipeBuilder.shaped(ModItems.CHEESE.get(), 3)
+        ShapedRecipeBuilder.shaped(ModItems.CREAM_CHEESE.get(), 3)
                 .pattern("###")
                 .pattern("###")
                 .define('#', Items.MILK_BUCKET)
                 .unlockedBy(has, has(Items.MILK_BUCKET))
-                .save(consumer, ModItems.CHEESE.getId());
+                .save(consumer, ModItems.CREAM_CHEESE.getId());
 
         ShapedRecipeBuilder.shaped(ModBlocks.CAKE_OVEN.get().asItem())
                 .pattern("###")

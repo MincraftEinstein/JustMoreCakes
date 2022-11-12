@@ -21,7 +21,7 @@ public class ItemTagsGenerator extends ItemTagsProvider {
 	
 	@Override
 	protected void addTags() {
-		tag(CHEESE).add(ModItems.CHEESE.get());
+		tag(CHEESE).add(ModItems.CREAM_CHEESE.get());
 	}
 	
 	@Override

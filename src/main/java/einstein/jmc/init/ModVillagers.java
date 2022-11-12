@@ -52,7 +52,7 @@ public class ModVillagers {
 			journeyman.add(new EmeraldsForItems(Items.CARROT, 22, 1, 16, 20));
 			journeyman.add(new EmeraldsForItems(Items.SUGAR_CANE, 2, 1, 10));
 
-			expert.add(new EmeraldsForItems(ModItems.CHEESE.get(), 1, 6, 30));
+			expert.add(new EmeraldsForItems(ModItems.CREAM_CHEESE.get(), 1, 6, 30));
 			expert.add(new ItemsForEmeralds(ModItems.CUPCAKE.get(), 4, 1, 16, 15));
 
 			master.add(new ItemsForEmeralds(ModBlocks.THREE_TIERED_CAKE.get().asItem(), 15, 1, 30));

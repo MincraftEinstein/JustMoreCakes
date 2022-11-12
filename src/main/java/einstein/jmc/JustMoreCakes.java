@@ -4,7 +4,6 @@ import com.mojang.datafixers.util.Pair;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.init.*;
 import einstein.jmc.util.CakeChompsEvents;
-import einstein.jmc.util.Util;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.particles.ParticleTypes;
@@ -20,6 +19,7 @@ import net.minecraft.world.entity.ai.behavior.GiveGiftToHero;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -141,8 +141,18 @@ public class JustMoreCakes {
     }
 
     void missingMappings(MissingMappingsEvent event) {
-        handleMissingMappings(event, ForgeRegistries.ITEMS, (name) -> missingBlock(name).asItem());
+        handleMissingMappings(event, ForgeRegistries.ITEMS, this::missingItems);
         handleMissingMappings(event, ForgeRegistries.BLOCKS, this::missingBlock);
+    }
+
+    @Nullable
+    private Item missingItems(String name) {
+        if (name.equals("cheese")) {
+            return ModItems.CREAM_CHEESE.get();
+        }
+        else {
+            return missingBlock(name).asItem();
+        }
     }
 
     @Nullable

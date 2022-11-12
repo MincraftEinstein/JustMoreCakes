@@ -37,7 +37,7 @@ public class CakeOvenRecipesGenerator extends RecipeProvider {
 				.save(consumer, location(ModBlocks.CARROT_CAKE));
 
 		CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CHEESECAKE.get(), 0.7F, 250, Ingredient.of(ItemTagsGenerator.CHEESE), Ingredient.of(Items.EGG), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT))
-				.unlockedBy(has, has(ModItems.CHEESE.get()))
+				.unlockedBy(has, has(ModItems.CREAM_CHEESE.get()))
 				.save(consumer, location(ModBlocks.CHEESECAKE));
 
 		CakeOvenRecipeBuilder.cakeBaking(ModBlocks.SWEET_BERRY_CAKE.get(), 0.5F, 200, Ingredient.of(Items.SWEET_BERRIES), Ingredient.of(Items.WHEAT), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR))

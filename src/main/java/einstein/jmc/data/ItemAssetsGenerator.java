@@ -37,7 +37,7 @@ public class ItemAssetsGenerator extends ItemModelProvider {
 		generatedItem(getItemName(ModBlocks.GLOWSTONE_CAKE), modLoc("item/" + getItemName(ModBlocks.GLOWSTONE_CAKE)));
 		generatedItem(getItemName(ModBlocks.CRIMSON_FUNGUS_CAKE), modLoc("item/" + getItemName(ModBlocks.CRIMSON_FUNGUS_CAKE)));
 		generatedItem(getItemName(ModItems.CUPCAKE), modLoc("item/" + getItemName(ModItems.CUPCAKE)));
-		generatedItem(getItemName(ModItems.CHEESE), modLoc("item/" + getItemName(ModItems.CHEESE)));
+		generatedItem(getItemName(ModItems.CREAM_CHEESE), modLoc("item/" + getItemName(ModItems.CREAM_CHEESE)));
 
 		getBuilder("encasing_ice").parent(getExistingFile(mcLoc("block/ice")));
 		getBuilder("cake_oven").parent(getExistingFile(modLoc("block/cake_oven")));
