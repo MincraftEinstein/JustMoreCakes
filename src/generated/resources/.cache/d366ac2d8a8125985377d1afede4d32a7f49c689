@@ -1,9 +1,9 @@
-// 1.19.2	2022-11-01T22:18:40.3014958	JustMoreCakes crafting recipes
+// 1.19.2	2022-11-11T22:40:36.5672896	JustMoreCakes crafting recipes
 331578bb47bdb8dd6f45119210fb20c8a1ff7a54 data/jmc/advancements/recipes/jmc_tab/cake_oven.json
 7060f0d8f680bce43812c5983facb02763a15e11 data/jmc/advancements/recipes/jmc_tab/cheese.json
 1c965204499cc597b8273a27e297f99bab5113cb data/jmc/advancements/recipes/jmc_tab/cupcake.json
 18ea5f51cdf60f67e83a1508cc0ae8fd9b56b2d0 data/jmc/advancements/recipes/jmc_tab/three_tiered_cake.json
 588cf313d1b472257f24a1a52ab006b0b404bf43 data/jmc/recipes/cake_oven.json
 80d1097feccd979dc1ae62554ee14d9596c02383 data/jmc/recipes/cheese.json
-6c1ebd55ce39bab899e514fa663be69b92e3d0fa data/jmc/recipes/cupcake.json
+38dcfb8d3dca1ff18ee97b7e8fa36d09fffa0a1d data/jmc/recipes/cupcake.json
 f5cc6a503f68f0db1aa70cdd285086f803c71850 data/jmc/recipes/three_tiered_cake.json

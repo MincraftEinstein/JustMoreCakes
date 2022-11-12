@@ -1,25 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:egg"
+    },
+    {
       "item": "minecraft:milk_bucket"
     },
-    "$": {
-      "item": "minecraft:sugar"
-    },
-    "@": {
+    {
       "item": "minecraft:wheat"
     },
-    "~": {
-      "item": "minecraft:egg"
+    {
+      "item": "minecraft:sugar"
     }
-  },
-  "pattern": [
-    " # ",
-    "$~$",
-    " @ "
   ],
   "result": {
+    "count": 4,
     "item": "jmc:cupcake"
   }
 }
