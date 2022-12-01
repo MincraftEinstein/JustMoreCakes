@@ -4,10 +4,9 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blockentity.GlowstoneCakeBlockEntity;
 import einstein.jmc.blockentity.TNTCakeBlockEntity;
 import einstein.jmc.blocks.*;
-import einstein.jmc.data.ModDataGenerators;
+import einstein.jmc.util.CakeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -24,150 +22,108 @@ import java.util.function.Supplier;
 
 public class ModBlocks {
 
-	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, JustMoreCakes.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, JustMoreCakes.MOD_ID);
 
-	public static final RegistryObject<Block> CHOCOLATE_CAKE = registerCandleCake("chocolate_cake");
-	public static final RegistryObject<Block> CARROT_CAKE = registerCandleCake("carrot_cake");
-	public static final RegistryObject<Block> PUMPKIN_CAKE = registerCandleCake("pumpkin_cake");
-	public static final RegistryObject<Block> MELON_CAKE = registerCandleCake("melon_cake");
-	public static final RegistryObject<Block> APPLE_CAKE = registerCandleCake("apple_cake");
-	public static final RegistryObject<Block> POISON_CAKE = registerCandleCake("poison_cake");
-	public static final RegistryObject<Block> COOKIE_CAKE = registerCandleCake("cookie_cake");
-    public static final RegistryObject<Block> TNT_CAKE = register("tnt_cake", () -> new TNTCakeBlock(cakeProperties()));
-    public static final RegistryObject<Block> GOLDEN_APPLE_CAKE = registerCandleCake("golden_apple_cake");
-    public static final RegistryObject<Block> RED_MUSHROOM_CAKE = register("red_mushroom_cake", () -> new BaseCakeBlock(cakeProperties(), false));
-    public static final RegistryObject<Block> FIREY_CAKE = registerCandleCake("firey_cake");
-    public static final RegistryObject<Block> REDSTONE_CAKE = register("redstone_cake", () -> new RedstoneCakeBlock(cakeProperties()));
-    public static final RegistryObject<Block> ENDER_CAKE = register("ender_cake", () -> new EnderCakeBlock(cakeProperties()));
-    public static final RegistryObject<Block> CHEESECAKE = registerCandleCake("cheesecake");
-    public static final RegistryObject<Block> THREE_TIERED_CAKE = register("three_tiered_cake", () -> new ThreeTieredCakeBlock(cakeProperties()));
-    public static final RegistryObject<Block> SLIME_CAKE = register("slime_cake", () -> new SlimeCakeBlock(cakeProperties().sound(SoundType.SLIME_BLOCK)));
-    public static final RegistryObject<Block> BEETROOT_CAKE = registerCandleCake("beetroot_cake");
-    public static final RegistryObject<Block> LAVA_CAKE = register("lava_cake", () -> new LavaCakeBlock(cakeProperties().lightLevel(state -> 9)));
-    public static final RegistryObject<Block> CREEPER_CAKE = registerCandleCake("creeper_cake");
-    public static final RegistryObject<Block> SEED_CAKE = registerCandleCake("seed_cake");
-    public static final RegistryObject<Block> CUPCAKE = registerNoItem("cupcake", () -> new CupcakeBlock(cakeProperties()));
-    public static final RegistryObject<Block> BROWN_MUSHROOM_CAKE = register("brown_mushroom_cake", () -> new BaseCakeBlock(cakeProperties(), false));
-    public static final RegistryObject<Block> ICE_CAKE = registerCandleCake("ice_cake");
-    public static final RegistryObject<Block> CHORUS_CAKE = register("chorus_cake", () -> new ChorusCakeBlock(cakeProperties()));
-    public static final RegistryObject<Block> SWEET_BERRY_CAKE = registerCandleCake("sweet_berry_cake");
-    public static final RegistryObject<Block> HONEY_CAKE = registerCandleCake("honey_cake");
-    public static final RegistryObject<Block> GLOWSTONE_CAKE = register("glowstone_cake", () -> new GlowstoneCakeBlock(cakeProperties().lightLevel(state -> 12)));
-    public static final RegistryObject<Block> CRIMSON_FUNGUS_CAKE = register("crimson_fungus_cake", () -> new BaseCakeBlock(cakeProperties(), false));
-    public static final RegistryObject<Block> WARPED_FUNGUS_CAKE = registerCandleCake("warped_fungus_cake");
-	public static final RegistryObject<Block> RED_VELVET_CAKE = registerCandleCake("red_velvet_cake");
-	public static final RegistryObject<Block> GLOW_BERRY_CAKE = registerCandleCakeWithLight("glow_berry_cake", 7);
+	public static final RegistryObject<BaseCakeBlock> CHOCOLATE_CAKE = new CakeBuilder("chocolate_cake", true).build();
+	public static final RegistryObject<BaseCakeBlock> CARROT_CAKE = new CakeBuilder("carrot_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> PUMPKIN_CAKE = new CakeBuilder("pumpkin_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> MELON_CAKE = new CakeBuilder("melon_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> APPLE_CAKE = new CakeBuilder("apple_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> COOKIE_CAKE = new CakeBuilder("cookie_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake", true)
+        .setCakeClass((properties, allowsCandles) -> new TNTCakeBlock(properties))
+        .setCandleCakeClass((originalCake, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, properties, TNTCakeBlockEntity::new))
+        .build();
+    public static final RegistryObject<BaseCakeBlock> GOLDEN_APPLE_CAKE = new CakeBuilder("golden_apple_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake", false).build();
+    public static final RegistryObject<BaseCakeBlock> FIREY_CAKE = new CakeBuilder("firey_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> REDSTONE_CAKE = new CakeBuilder("redstone_cake", true)
+        .setCakeClass((properties, allowsCandles) -> new RedstoneCakeBlock(properties))
+        .setCandleCakeClass(RedstoneCandleCakeBlock::new)
+        .build();
+    public static final RegistryObject<BaseCakeBlock> ENDER_CAKE = new CakeBuilder("ender_cake", true)
+        .setCakeClass((properties, allowsCandles) -> new EnderCakeBlock(properties))
+        .setCandleCakeClass(EnderCandleCakeBlock::new)
+        .build();
+    public static final RegistryObject<BaseCakeBlock> CHEESECAKE = new CakeBuilder("cheesecake", true).build();
+    public static final RegistryObject<BaseCakeBlock> THREE_TIERED_CAKE = new CakeBuilder("three_tiered_cake", true)
+        .setCakeClass((properties, allowsCandles) -> new ThreeTieredCakeBlock(properties))
+        .setCandleCakeClass(ThreeTieredCandleCakeBlock::new)
+        .build();
+    public static final RegistryObject<BaseCakeBlock> SLIME_CAKE = new CakeBuilder("slime_cake", true)
+            .setCakeProperties(cakeProperties().sound(SoundType.SLIME_BLOCK))
+            .setCandleCakeProperties(candleCakeProperties().sound(SoundType.SLIME_BLOCK))
+            .setCakeClass((properties, allowsCandles) -> new SlimeCakeBlock(properties))
+            .setCandleCakeClass(SlimeCandleCakeBlock::new)
+            .build();
+    public static final RegistryObject<BaseCakeBlock> BEETROOT_CAKE = new CakeBuilder("beetroot_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> LAVA_CAKE = new CakeBuilder("lava_cake", true)
+        .setCakeClass((properties, allowsCandles) -> new LavaCakeBlock(properties))
+        .setCandleCakeClass(LavaCandleCakeBlock::new)
+        .setCakeProperties(cakeProperties().lightLevel(state -> 9))
+        .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 9))
+        .build();
+    public static final RegistryObject<BaseCakeBlock> CREEPER_CAKE = new CakeBuilder("creeper_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> SEED_CAKE = new CakeBuilder("seed_cake", true).build();
+    public static final RegistryObject<Block> CUPCAKE = registerNoItem("cupcake", () -> new CupcakeBlock(cakeProperties())); // Don't replace with CakeBuilder so a custom BlockItem cake be used
+    public static final RegistryObject<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake", false).build();
+    public static final RegistryObject<BaseCakeBlock> ICE_CAKE = new CakeBuilder("ice_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake", false)
+        .setCakeClass((properties, allowsCandles) -> new ChorusCakeBlock(properties))
+        .build();
+    public static final RegistryObject<BaseCakeBlock> SWEET_BERRY_CAKE = new CakeBuilder("sweet_berry_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> HONEY_CAKE = new CakeBuilder("honey_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> GLOWSTONE_CAKE = new CakeBuilder("glowstone_cake", true)
+        .setCakeProperties(cakeProperties().lightLevel(state -> 12))
+        .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 12))
+        .setCakeClass((properties, allowsCandles) -> new GlowstoneCakeBlock(properties))
+        .setCandleCakeClass((originalCake, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, properties, GlowstoneCakeBlockEntity::new))
+        .build();
+    public static final RegistryObject<BaseCakeBlock> CRIMSON_FUNGUS_CAKE = new CakeBuilder("crimson_fungus_cake", false).build();
+    public static final RegistryObject<BaseCakeBlock> WARPED_FUNGUS_CAKE = new CakeBuilder("warped_fungus_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> RED_VELVET_CAKE = new CakeBuilder("red_velvet_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> GLOW_BERRY_CAKE = new CakeBuilder("glow_berry_cake", true)
+        .setCakeProperties(cakeProperties().lightLevel(state -> 7))
+        .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 7))
+        .build();
 
     public static final RegistryObject<Block> ENCASING_ICE = register("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of(Material.ICE).friction(0.98F).randomTicks().strength(2.5F, 5.0F).sound(SoundType.GLASS).noLootTable().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never)));
     public static final RegistryObject<Block> CAKE_OVEN = register("cake_oven", () -> new CakeOvenBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(Blocks.litBlockEmission(13))));
-    
-    public static void init(IEventBus modEventBus) {
-    	BLOCKS.register(modEventBus);
-    	
-    	JustMoreCakes.CAKE_TYPES.add("redstone_cake");
-		registerNoItem("candle_redstone_cake", () -> new RedstoneCandleCakeBlock((BaseCakeBlock) REDSTONE_CAKE.get(), candleCakeProperties()));
-		for (int i = 0; i < DyeColor.values().length; i++) {
-			String color = DyeColor.byId(i).getName();
-			registerNoItem(color + "_candle_redstone_cake", () -> new RedstoneCandleCakeBlock((BaseCakeBlock) REDSTONE_CAKE.get(), candleCakeProperties()));
-		}
 
-		JustMoreCakes.CAKE_TYPES.add("ender_cake");
-		registerNoItem("candle_ender_cake", () -> new EnderCandleCakeBlock((BaseCakeBlock) ENDER_CAKE.get(), candleCakeProperties()));
-		for (int i = 0; i < DyeColor.values().length; i++) {
-			String color = DyeColor.byId(i).getName();
-			registerNoItem(color + "_candle_ender_cake", () -> new EnderCandleCakeBlock((BaseCakeBlock) ENDER_CAKE.get(), candleCakeProperties()));
-		}
-		
-		JustMoreCakes.CAKE_TYPES.add("three_tiered_cake");
-		registerNoItem("candle_three_tiered_cake", () -> new ThreeTieredCandleCakeBlock((ThreeTieredCakeBlock) THREE_TIERED_CAKE.get(), candleCakeProperties()));
-		for (int i = 0; i < DyeColor.values().length; i++) {
-			String color = DyeColor.byId(i).getName();
-			registerNoItem(color + "_candle_three_tiered_cake", () -> new ThreeTieredCandleCakeBlock((ThreeTieredCakeBlock) THREE_TIERED_CAKE.get(), candleCakeProperties()));
-		}
-		
-		JustMoreCakes.CAKE_TYPES.add("slime_cake");
-		registerNoItem("candle_slime_cake", () -> new SlimeCandleCakeBlock((BaseCakeBlock) SLIME_CAKE.get(), candleCakeProperties().sound(SoundType.SLIME_BLOCK)));
-		for (int i = 0; i < DyeColor.values().length; i++) {
-			String color = DyeColor.byId(i).getName();
-			registerNoItem(color + "_candle_slime_cake", () -> new SlimeCandleCakeBlock((BaseCakeBlock) SLIME_CAKE.get(), candleCakeProperties().sound(SoundType.SLIME_BLOCK)));
-		}
-		
-		JustMoreCakes.CAKE_TYPES.add("lava_cake");
-		registerNoItem("candle_lava_cake", () -> new LavaCandleCakeBlock((BaseCakeBlock) LAVA_CAKE.get(), candleCakeProperties().lightLevel(state -> 9)));
-		for (int i = 0; i < DyeColor.values().length; i++) {
-			String color = DyeColor.byId(i).getName();
-			registerNoItem(color + "_candle_lava_cake", () -> new LavaCandleCakeBlock((BaseCakeBlock) LAVA_CAKE.get(), candleCakeProperties().lightLevel(state -> 9)));
-		}
-
-		JustMoreCakes.CAKE_TYPES.add("glowstone_cake");
-		registerNoItem("candle_glowstone_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) GLOWSTONE_CAKE.get(), candleCakeProperties().lightLevel(state -> 12), GlowstoneCakeBlockEntity::new));
-		for (int i = 0; i < DyeColor.values().length; i++) {
-			String color = DyeColor.byId(i).getName();
-			registerNoItem(color + "_candle_glowstone_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) GLOWSTONE_CAKE.get(), candleCakeProperties().lightLevel(state -> 12), GlowstoneCakeBlockEntity::new));
-		}
-
-		JustMoreCakes.CAKE_TYPES.add("tnt_cake");
-		registerNoItem("candle_tnt_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) TNT_CAKE.get(), candleCakeProperties(), TNTCakeBlockEntity::new));
-		for (int i = 0; i < DyeColor.values().length; i++) {
-			String color = DyeColor.byId(i).getName();
-			registerNoItem(color + "_candle_tnt_cake", () -> new BaseEntityCandleCakeBlock<>((BaseCakeBlock) TNT_CAKE.get(), candleCakeProperties(), TNTCakeBlockEntity::new));
-		}
+    public static <T extends Block> RegistryObject<T> register(final String name, final Supplier<T> block) {
+        final RegistryObject<T> instance = BLOCKS.register(name, block);
+        ModItems.ITEMS.register(name, () -> new BlockItem(instance.get(), new Item.Properties().tab(JustMoreCakes.JMC_TAB)));
+        return instance;
     }
 
-    public static <T extends Block> RegistryObject<Block> register(final String name, final Supplier<T> block) {
-    	final RegistryObject<Block> instance = BLOCKS.register(name, block);
-		ModItems.ITEMS.register(name, () -> new BlockItem(instance.get(), new Item.Properties().tab(JustMoreCakes.JMC_TAB)));
-    	return instance;
-    }
-    
-    public static <T extends Block> RegistryObject<Block> registerNoItem(final String name, final Supplier<T> block) {
-    	return BLOCKS.register(name, block);
+    public static <T extends Block> RegistryObject<T> registerNoItem(final String name, final Supplier<T> block) {
+        return BLOCKS.register(name, block);
     }
 
-	public static RegistryObject<Block> registerCandleCake(final String name) {
-		return registerCandleCakeWithLight(name, 0);
-	}
-
-    public static RegistryObject<Block> registerCandleCakeWithLight(final String name, final int lightLevel) {
-		Properties properties = candleCakeProperties();
-		if (lightLevel > 3) {
-			properties.lightLevel((state) -> lightLevel);
-		}
-
-		RegistryObject<Block> cake = register(name, () -> new BaseCakeBlock(cakeProperties().lightLevel((state) -> lightLevel)));
-		registerNoItem("candle_" + name, () -> new BaseCandleCakeBlock((BaseCakeBlock) cake.get(), properties));
-		for (int i = 0; i < DyeColor.values().length; i++) {
-			String color = DyeColor.byId(i).getName();
-			registerNoItem(color + "_candle_" + name, () -> new BaseCandleCakeBlock((BaseCakeBlock) cake.get(), properties));
-		}
-
-		JustMoreCakes.CAKE_TYPES.add(name);
-    	return cake;
+    public static BlockBehaviour.Properties cakeProperties() {
+        return Properties.copy(Blocks.CAKE);
     }
 
-	private static BlockBehaviour.Properties cakeProperties() {
-		return Properties.copy(Blocks.CAKE);
-	}
-	
-	private static BlockBehaviour.Properties candleCakeProperties() {
-		return Properties.copy(Blocks.CANDLE_CAKE);
-	}
-	
-	public static Block getBlock(ResourceLocation location) {
-		Block block = ForgeRegistries.BLOCKS.getValue(location);
-		if (block != Blocks.AIR) {
-			return block;
-		}
-		else {
-			throw new NullPointerException("Could not find block: " + location.toString());
-		}
-	}
-	
-	public static ResourceLocation loc(String string) {
-		return new ResourceLocation(JustMoreCakes.MOD_ID, string);
-	}
-	
-	public static ResourceLocation mcLoc(String string) {
-		return new ResourceLocation("minecraft", string);
-	}
+    public static BlockBehaviour.Properties candleCakeProperties() {
+        return Properties.copy(Blocks.CANDLE_CAKE);
+    }
+
+    public static Block getBlock(ResourceLocation location) {
+        Block block = ForgeRegistries.BLOCKS.getValue(location);
+        if (block != Blocks.AIR) {
+            return block;
+        }
+        else {
+            throw new NullPointerException("Could not find block: " + location.toString());
+        }
+    }
+
+    public static ResourceLocation loc(String string) {
+        return new ResourceLocation(JustMoreCakes.MOD_ID, string);
+    }
+
+    public static ResourceLocation mcLoc(String string) {
+        return new ResourceLocation("minecraft", string);
+    }
 }

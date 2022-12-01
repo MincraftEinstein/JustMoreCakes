@@ -65,7 +65,7 @@ public class JustMoreCakes {
         modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::onParallelDispatch);
         ModItems.ITEMS.register(modEventBus);
-        ModBlocks.init(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
         ModBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
         ModMenuTypes.MENU_TYPES.register(modEventBus);
         ModRecipes.RECIPE_SERIALIZERS.register(modEventBus);
