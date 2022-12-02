@@ -1,6 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.jmc.init.ModClientConfigs;
+import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -13,8 +14,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class RedstoneCakeBlock extends BaseCakeBlock {
 
-	public RedstoneCakeBlock(Properties properties) {
-		super(properties);
+	public RedstoneCakeBlock(Properties properties, CakeBuilder builder) {
+		super(properties, builder);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package einstein.jmc.blocks;
 
 import einstein.jmc.blockentity.TNTCakeBlockEntity;
 import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -12,8 +13,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class TNTCakeBlock extends BaseEntityCakeBlock {
 
-    public TNTCakeBlock(Properties properties) {
-        super(properties);
+    public TNTCakeBlock(Properties properties, CakeBuilder builder) {
+        super(properties, builder);
     }
 
 	@Override

@@ -4,7 +4,7 @@
       "model": "minecraft:block/black_candle_cake"
     },
     "lit=true": {
-      "model": "minecraft:block/black_candle_cake"
+      "model": "minecraft:block/black_candle_cake_lit"
     }
   }
 }

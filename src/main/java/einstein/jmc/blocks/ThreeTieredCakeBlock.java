@@ -1,5 +1,6 @@
 package einstein.jmc.blocks;
 
+import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -45,8 +46,8 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
     		Block.box(11, 0, 1, 15, 8, 15) //15
     };
     
-    public ThreeTieredCakeBlock(Properties properties) {
-        super(properties, 15);
+    public ThreeTieredCakeBlock(Properties properties, CakeBuilder builder) {
+        super(properties, 15, builder);
     }
 
 	@Override

@@ -1,6 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.jmc.blockentity.GlowstoneCakeBlockEntity;
+import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -9,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class GlowstoneCakeBlock extends BaseEntityCakeBlock {
 
-    public GlowstoneCakeBlock(Properties properties) {
-        super(properties);
+    public GlowstoneCakeBlock(Properties properties, CakeBuilder builder) {
+        super(properties, builder);
     }
 
     @Override

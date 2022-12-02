@@ -2,6 +2,7 @@ package einstein.jmc.blocks;
 
 import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
@@ -19,8 +20,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class LavaCakeBlock extends BaseCakeBlock {
 
-    public LavaCakeBlock(Properties properties) {
-        super(properties);
+    public LavaCakeBlock(Properties properties, CakeBuilder builder) {
+        super(properties, builder);
     }
     
     @Override

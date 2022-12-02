@@ -406,97 +406,97 @@
       "cake"
     ],
     [
-      "apple_cake"
-    ],
-    [
-      "beetroot_cake"
-    ],
-    [
-      "brown_mushroom_cake"
-    ],
-    [
-      "carrot_cake"
-    ],
-    [
-      "cheesecake"
-    ],
-    [
-      "chocolate_cake"
-    ],
-    [
-      "chorus_cake"
-    ],
-    [
-      "cookie_cake"
-    ],
-    [
-      "creeper_cake"
-    ],
-    [
-      "crimson_fungus_cake"
-    ],
-    [
       "cupcake"
     ],
     [
       "ender_cake"
     ],
     [
-      "firey_cake"
+      "red_velvet_cake"
     ],
     [
       "glowstone_cake"
     ],
     [
-      "golden_apple_cake"
+      "cheesecake"
     ],
     [
-      "honey_cake"
-    ],
-    [
-      "ice_cake"
+      "cookie_cake"
     ],
     [
       "lava_cake"
     ],
     [
-      "melon_cake"
+      "crimson_fungus_cake"
     ],
     [
       "poison_cake"
     ],
     [
-      "pumpkin_cake"
+      "carrot_cake"
+    ],
+    [
+      "honey_cake"
+    ],
+    [
+      "chocolate_cake"
     ],
     [
       "red_mushroom_cake"
     ],
     [
-      "redstone_cake"
+      "tnt_cake"
     ],
     [
-      "seed_cake"
+      "pumpkin_cake"
     ],
     [
-      "slime_cake"
+      "apple_cake"
+    ],
+    [
+      "melon_cake"
     ],
     [
       "sweet_berry_cake"
     ],
     [
-      "three_tiered_cake"
-    ],
-    [
-      "tnt_cake"
+      "brown_mushroom_cake"
     ],
     [
       "warped_fungus_cake"
     ],
     [
-      "red_velvet_cake"
+      "creeper_cake"
+    ],
+    [
+      "redstone_cake"
     ],
     [
       "glow_berry_cake"
+    ],
+    [
+      "seed_cake"
+    ],
+    [
+      "firey_cake"
+    ],
+    [
+      "ice_cake"
+    ],
+    [
+      "chorus_cake"
+    ],
+    [
+      "three_tiered_cake"
+    ],
+    [
+      "slime_cake"
+    ],
+    [
+      "golden_apple_cake"
+    ],
+    [
+      "beetroot_cake"
     ]
   ],
   "rewards": {

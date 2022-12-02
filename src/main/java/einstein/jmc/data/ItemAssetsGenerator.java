@@ -1,8 +1,11 @@
 package einstein.jmc.data;
 
 import einstein.jmc.JustMoreCakes;
+import einstein.jmc.blocks.BaseCakeBlock;
+import einstein.jmc.blocks.BaseCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
+import einstein.jmc.util.CakeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
@@ -19,28 +22,19 @@ public class ItemAssetsGenerator extends ItemModelProvider {
 	
 	@Override
 	protected void registerModels() {
-		for (int i = 0; i < JustMoreCakes.CAKE_TYPES.size(); i++) {
-			String name = JustMoreCakes.CAKE_TYPES.get(i);
-
-			if (name.equals("poison_cake") || name.equals("tnt_cake")) {
-				generatedItem(name, mcLoc("item/cake"));
-			}
-			else {
-				generatedItem(name, modLoc("item/" + name));
-			}
-		}
-		
-		generatedItem(getItemName(ModBlocks.RED_MUSHROOM_CAKE), modLoc("item/" + getItemName(ModBlocks.RED_MUSHROOM_CAKE)));
-		generatedItem(getItemName(ModBlocks.BROWN_MUSHROOM_CAKE), modLoc("item/" + getItemName(ModBlocks.BROWN_MUSHROOM_CAKE)));
-		generatedItem(getItemName(ModBlocks.CUPCAKE), modLoc("item/" + getItemName(ModBlocks.CUPCAKE)));
-		generatedItem(getItemName(ModBlocks.CHORUS_CAKE), modLoc("item/" + getItemName(ModBlocks.CHORUS_CAKE)));
-		generatedItem(getItemName(ModBlocks.GLOWSTONE_CAKE), modLoc("item/" + getItemName(ModBlocks.GLOWSTONE_CAKE)));
-		generatedItem(getItemName(ModBlocks.CRIMSON_FUNGUS_CAKE), modLoc("item/" + getItemName(ModBlocks.CRIMSON_FUNGUS_CAKE)));
 		generatedItem(getItemName(ModItems.CUPCAKE), modLoc("item/" + getItemName(ModItems.CUPCAKE)));
 		generatedItem(getItemName(ModItems.CREAM_CHEESE), modLoc("item/" + getItemName(ModItems.CREAM_CHEESE)));
+		generatedItem(ModBlocks.POISON_CAKE.getId().getPath(), mcLoc("item/cake"));
+		generatedItem(ModBlocks.TNT_CAKE.getId().getPath(), mcLoc("item/cake"));
 
 		getBuilder("encasing_ice").parent(getExistingFile(mcLoc("block/ice")));
 		getBuilder("cake_oven").parent(getExistingFile(modLoc("block/cake_oven")));
+
+		for (RegistryObject<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
+			if (!cake.get().getBuilder().hasCustomItemModel()) {
+				generatedItem(getItemName(cake), modLoc("item/" + cake.getId().getPath()));
+			}
+		}
 	}
 
 	private ItemModelBuilder generatedItem(String name, ResourceLocation... layers) {

@@ -4,6 +4,7 @@ import einstein.jmc.effects.FreezingEffect;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModPotions;
 import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -50,25 +51,27 @@ public class BaseCakeBlock extends Block {
 
 	private final boolean allowsCandles;
 	private int biteCount = 6;
+	private final CakeBuilder builder;
 
-	public BaseCakeBlock(Properties properties) {
-		this(properties, true);
+	public BaseCakeBlock(Properties properties, CakeBuilder builder) {
+		this(properties, true, builder);
 	}
 
-	protected BaseCakeBlock(Properties properties, int biteCount) {
-		this(properties);
+	protected BaseCakeBlock(Properties properties, int biteCount, CakeBuilder builder) {
+		this(properties, builder);
 		this.biteCount = biteCount;
 	}
 
-	protected BaseCakeBlock(Properties properties, boolean allowsCandles, int biteCount) {
-		this(properties, allowsCandles);
+	protected BaseCakeBlock(Properties properties, boolean allowsCandles, int biteCount, CakeBuilder builder) {
+		this(properties, allowsCandles, builder);
 		this.biteCount = biteCount;
 	}
 
-	public BaseCakeBlock(Properties properties, boolean allowsCandles) {
+	public BaseCakeBlock(Properties properties, boolean allowsCandles, CakeBuilder builder) {
 		super(properties);
-		registerDefaultState(stateDefinition.any().setValue(getBites(), 0));
 		this.allowsCandles = allowsCandles;
+		this.builder = builder;
+		registerDefaultState(stateDefinition.any().setValue(getBites(), 0));
 	}
 
 	@Override
@@ -207,5 +210,9 @@ public class BaseCakeBlock extends Block {
 
 	public int getBiteCount() {
 		return biteCount;
+	}
+
+	public CakeBuilder getBuilder() {
+		return builder;
 	}
 }

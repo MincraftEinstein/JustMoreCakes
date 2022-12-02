@@ -2,6 +2,8 @@ package einstein.jmc.data;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.init.ModItems;
+import einstein.jmc.util.CakeBuilder;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
@@ -22,13 +24,6 @@ import java.util.function.Consumer;
 
 public class ModAdvancementsGenerator extends AdvancementProvider {
 
-	private static final RegistryObject<?>[] CAKES = { ModBlocks.APPLE_CAKE, ModBlocks.BEETROOT_CAKE, ModBlocks.BROWN_MUSHROOM_CAKE,
-			ModBlocks.CARROT_CAKE, ModBlocks.CHEESECAKE, ModBlocks.CHOCOLATE_CAKE, ModBlocks.CHORUS_CAKE, ModBlocks.COOKIE_CAKE,
-			ModBlocks.CREEPER_CAKE, ModBlocks.CRIMSON_FUNGUS_CAKE, ModBlocks.CUPCAKE, ModBlocks.ENDER_CAKE, ModBlocks.FIREY_CAKE, ModBlocks.GLOWSTONE_CAKE,
-			ModBlocks.GOLDEN_APPLE_CAKE, ModBlocks.HONEY_CAKE, ModBlocks.ICE_CAKE, ModBlocks.LAVA_CAKE, ModBlocks.MELON_CAKE, ModBlocks.POISON_CAKE,
-			ModBlocks.PUMPKIN_CAKE, ModBlocks.RED_MUSHROOM_CAKE, ModBlocks.REDSTONE_CAKE, ModBlocks.SEED_CAKE, ModBlocks.SLIME_CAKE,
-			ModBlocks.SWEET_BERRY_CAKE, ModBlocks.THREE_TIERED_CAKE, ModBlocks.TNT_CAKE, ModBlocks.WARPED_FUNGUS_CAKE, ModBlocks.RED_VELVET_CAKE, ModBlocks.GLOW_BERRY_CAKE };
-
 	public ModAdvancementsGenerator(DataGenerator generator, ExistingFileHelper existingFileHelper) {
 		super(generator, existingFileHelper);
 	}
@@ -45,8 +40,9 @@ public class ModAdvancementsGenerator extends AdvancementProvider {
 	
 	private Advancement.Builder addCakes(Advancement.Builder advancement) {
 		advancement.addCriterion("cake", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(Blocks.CAKE).build()));
+		advancement.addCriterion("cupcake", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(ModItems.CUPCAKE.get()).build()));
 
-		for (RegistryObject<?> cake : CAKES) {
+		for (RegistryObject<?> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
 			Item cakeItem = ((ItemLike) cake.get()).asItem();
 			advancement.addCriterion(cake.getId().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(cakeItem).build()));
 		}

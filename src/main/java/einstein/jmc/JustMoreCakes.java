@@ -56,7 +56,6 @@ public class JustMoreCakes {
     public static final String MOD_ID = "jmc";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final JMCTab JMC_TAB = new JMCTab(CreativeModeTab.TABS.length, "jmc_tab");
-    public static final List<String> CAKE_TYPES = new ArrayList<>();
 
     public JustMoreCakes() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -231,5 +230,25 @@ public class JustMoreCakes {
                 }
             }
         }
+    }
+
+    public static void AddSupportedCandles() {
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.CANDLE, ModBlocks.mcLoc(""));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.WHITE_CANDLE, ModBlocks.mcLoc("white_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.ORANGE_CANDLE, ModBlocks.mcLoc("orange_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.MAGENTA_CANDLE, ModBlocks.mcLoc("magenta_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.LIGHT_BLUE_CANDLE, ModBlocks.mcLoc("light_blue_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.YELLOW_CANDLE, ModBlocks.mcLoc("yellow_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.LIME_CANDLE, ModBlocks.mcLoc("lime_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.PINK_CANDLE, ModBlocks.mcLoc("pink_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.GRAY_CANDLE, ModBlocks.mcLoc("gray_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.LIGHT_GRAY_CANDLE, ModBlocks.mcLoc("light_gray_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.CYAN_CANDLE, ModBlocks.mcLoc("cyan_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.PURPLE_CANDLE, ModBlocks.mcLoc("purple_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.BLUE_CANDLE, ModBlocks.mcLoc("blue_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.BROWN_CANDLE, ModBlocks.mcLoc("brown_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.GREEN_CANDLE, ModBlocks.mcLoc("green_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.RED_CANDLE, ModBlocks.mcLoc("red_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.BLACK_CANDLE, ModBlocks.mcLoc("black_"));
     }
 }

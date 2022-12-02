@@ -18,48 +18,51 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, JustMoreCakes.MOD_ID);
+    public static final Map<Block, ResourceLocation> SUPPORTED_CANDLES = new HashMap<>();
 
 	public static final RegistryObject<BaseCakeBlock> CHOCOLATE_CAKE = new CakeBuilder("chocolate_cake", true).build();
 	public static final RegistryObject<BaseCakeBlock> CARROT_CAKE = new CakeBuilder("carrot_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> PUMPKIN_CAKE = new CakeBuilder("pumpkin_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> MELON_CAKE = new CakeBuilder("melon_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> APPLE_CAKE = new CakeBuilder("apple_cake", true).build();
-    public static final RegistryObject<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake", true).build();
+    public static final RegistryObject<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake", true, true, true).build();
     public static final RegistryObject<BaseCakeBlock> COOKIE_CAKE = new CakeBuilder("cookie_cake", true).build();
-    public static final RegistryObject<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake", true)
-        .setCakeClass((properties, allowsCandles) -> new TNTCakeBlock(properties))
+    public static final RegistryObject<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake", true, true, true)
+        .setCakeClass((properties, allowsCandles, builder) -> new TNTCakeBlock(properties, builder))
         .setCandleCakeClass((originalCake, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, properties, TNTCakeBlockEntity::new))
         .build();
     public static final RegistryObject<BaseCakeBlock> GOLDEN_APPLE_CAKE = new CakeBuilder("golden_apple_cake", true).build();
-    public static final RegistryObject<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake", false).build();
+    public static final RegistryObject<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake", false, true).build();
     public static final RegistryObject<BaseCakeBlock> FIREY_CAKE = new CakeBuilder("firey_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> REDSTONE_CAKE = new CakeBuilder("redstone_cake", true)
-        .setCakeClass((properties, allowsCandles) -> new RedstoneCakeBlock(properties))
+        .setCakeClass((properties, allowsCandles, builder) -> new RedstoneCakeBlock(properties, builder))
         .setCandleCakeClass(RedstoneCandleCakeBlock::new)
         .build();
     public static final RegistryObject<BaseCakeBlock> ENDER_CAKE = new CakeBuilder("ender_cake", true)
-        .setCakeClass((properties, allowsCandles) -> new EnderCakeBlock(properties))
+        .setCakeClass((properties, allowsCandles, builder) -> new EnderCakeBlock(properties, builder))
         .setCandleCakeClass(EnderCandleCakeBlock::new)
         .build();
     public static final RegistryObject<BaseCakeBlock> CHEESECAKE = new CakeBuilder("cheesecake", true).build();
-    public static final RegistryObject<BaseCakeBlock> THREE_TIERED_CAKE = new CakeBuilder("three_tiered_cake", true)
-        .setCakeClass((properties, allowsCandles) -> new ThreeTieredCakeBlock(properties))
+    public static final RegistryObject<BaseCakeBlock> THREE_TIERED_CAKE = new CakeBuilder("three_tiered_cake", true, true)
+        .setCakeClass((properties, allowsCandles, builder) -> new ThreeTieredCakeBlock(properties, builder))
         .setCandleCakeClass(ThreeTieredCandleCakeBlock::new)
         .build();
     public static final RegistryObject<BaseCakeBlock> SLIME_CAKE = new CakeBuilder("slime_cake", true)
             .setCakeProperties(cakeProperties().sound(SoundType.SLIME_BLOCK))
             .setCandleCakeProperties(candleCakeProperties().sound(SoundType.SLIME_BLOCK))
-            .setCakeClass((properties, allowsCandles) -> new SlimeCakeBlock(properties))
+            .setCakeClass((properties, allowsCandles, builder) -> new SlimeCakeBlock(properties, builder))
             .setCandleCakeClass(SlimeCandleCakeBlock::new)
             .build();
     public static final RegistryObject<BaseCakeBlock> BEETROOT_CAKE = new CakeBuilder("beetroot_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> LAVA_CAKE = new CakeBuilder("lava_cake", true)
-        .setCakeClass((properties, allowsCandles) -> new LavaCakeBlock(properties))
+        .setCakeClass((properties, allowsCandles, builder) -> new LavaCakeBlock(properties, builder))
         .setCandleCakeClass(LavaCandleCakeBlock::new)
         .setCakeProperties(cakeProperties().lightLevel(state -> 9))
         .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 9))
@@ -67,20 +70,20 @@ public class ModBlocks {
     public static final RegistryObject<BaseCakeBlock> CREEPER_CAKE = new CakeBuilder("creeper_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> SEED_CAKE = new CakeBuilder("seed_cake", true).build();
     public static final RegistryObject<Block> CUPCAKE = registerNoItem("cupcake", () -> new CupcakeBlock(cakeProperties())); // Don't replace with CakeBuilder so a custom BlockItem cake be used
-    public static final RegistryObject<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake", false).build();
+    public static final RegistryObject<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake", false, true).build();
     public static final RegistryObject<BaseCakeBlock> ICE_CAKE = new CakeBuilder("ice_cake", true).build();
-    public static final RegistryObject<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake", false)
-        .setCakeClass((properties, allowsCandles) -> new ChorusCakeBlock(properties))
+    public static final RegistryObject<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake", false, true)
+        .setCakeClass((properties, allowsCandles, builder) -> new ChorusCakeBlock(properties, builder))
         .build();
     public static final RegistryObject<BaseCakeBlock> SWEET_BERRY_CAKE = new CakeBuilder("sweet_berry_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> HONEY_CAKE = new CakeBuilder("honey_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> GLOWSTONE_CAKE = new CakeBuilder("glowstone_cake", true)
         .setCakeProperties(cakeProperties().lightLevel(state -> 12))
         .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 12))
-        .setCakeClass((properties, allowsCandles) -> new GlowstoneCakeBlock(properties))
+        .setCakeClass((properties, allowsCandles, builder) -> new GlowstoneCakeBlock(properties, builder))
         .setCandleCakeClass((originalCake, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, properties, GlowstoneCakeBlockEntity::new))
         .build();
-    public static final RegistryObject<BaseCakeBlock> CRIMSON_FUNGUS_CAKE = new CakeBuilder("crimson_fungus_cake", false).build();
+    public static final RegistryObject<BaseCakeBlock> CRIMSON_FUNGUS_CAKE = new CakeBuilder("crimson_fungus_cake", false, true).build();
     public static final RegistryObject<BaseCakeBlock> WARPED_FUNGUS_CAKE = new CakeBuilder("warped_fungus_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> RED_VELVET_CAKE = new CakeBuilder("red_velvet_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> GLOW_BERRY_CAKE = new CakeBuilder("glow_berry_cake", true)

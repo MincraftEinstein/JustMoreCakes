@@ -20,15 +20,15 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 public class ModLootTableProvider extends LootTableProvider {
 
-	private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> loot_tables = ImmutableList.of(Pair.of(BlockLootTableGenerator::new, LootContextParamSets.BLOCK));
+	private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> lootTables = ImmutableList.of(Pair.of(BlockLootTableGenerator::new, LootContextParamSets.BLOCK));
 	
-	public ModLootTableProvider(DataGenerator dataGeneratorIn) {
-		super(dataGeneratorIn);
+	public ModLootTableProvider(DataGenerator generator) {
+		super(generator);
 	}
 	
 	@Override
 	protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-		return loot_tables;
+		return lootTables;
 	}
 	
 	@Override

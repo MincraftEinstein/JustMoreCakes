@@ -2,6 +2,7 @@ package einstein.jmc.blocks;
 
 import einstein.jmc.init.ModPotions;
 import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -16,8 +17,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class SlimeCakeBlock extends BaseCakeBlock {
 
-    public SlimeCakeBlock(Properties properties) {
-        super(properties);
+    public SlimeCakeBlock(Properties properties, CakeBuilder builder) {
+        super(properties, builder);
     }
     
     @Override

@@ -1,6 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -10,8 +11,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class ChorusCakeBlock extends BaseCakeBlock {
 
-    public ChorusCakeBlock(Properties properties) {
-        super(properties, false);
+    public ChorusCakeBlock(Properties properties, CakeBuilder builder) {
+        super(properties, false, builder);
     }
     
 	@Override
