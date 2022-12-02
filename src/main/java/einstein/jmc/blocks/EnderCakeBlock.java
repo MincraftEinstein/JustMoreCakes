@@ -16,8 +16,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EnderCakeBlock extends BaseCakeBlock {
 
-    public EnderCakeBlock(Properties properties, CakeBuilder builder) {
-        super(properties, builder);
+    public EnderCakeBlock(CakeBuilder builder) {
+        super(builder);
     }
     
 	@Override

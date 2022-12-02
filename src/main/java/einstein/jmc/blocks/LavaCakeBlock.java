@@ -20,8 +20,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class LavaCakeBlock extends BaseCakeBlock {
 
-    public LavaCakeBlock(Properties properties, CakeBuilder builder) {
-        super(properties, builder);
+    public LavaCakeBlock(CakeBuilder builder) {
+        super(builder);
     }
     
     @Override

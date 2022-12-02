@@ -13,8 +13,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class TNTCakeBlock extends BaseEntityCakeBlock {
 
-    public TNTCakeBlock(Properties properties, CakeBuilder builder) {
-        super(properties, builder);
+    public TNTCakeBlock(CakeBuilder builder) {
+        super(builder);
     }
 
 	@Override

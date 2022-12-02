@@ -46,8 +46,8 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
     		Block.box(11, 0, 1, 15, 8, 15) //15
     };
     
-    public ThreeTieredCakeBlock(Properties properties, CakeBuilder builder) {
-        super(properties, 15, builder);
+    public ThreeTieredCakeBlock(CakeBuilder builder) {
+        super(builder, 15);
     }
 
 	@Override

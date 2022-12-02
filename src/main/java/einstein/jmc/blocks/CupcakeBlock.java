@@ -1,6 +1,5 @@
 package einstein.jmc.blocks;
 
-import einstein.jmc.util.CakeBuilder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -24,7 +23,7 @@ public class CupcakeBlock extends BaseCakeBlock {
     };
     
     public CupcakeBlock(Properties properties) {
-        super(properties, false, 1, null);
+        super(properties, false, 1);
     }
 
 	@Override

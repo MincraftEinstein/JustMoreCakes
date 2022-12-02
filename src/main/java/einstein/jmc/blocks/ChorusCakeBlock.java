@@ -11,8 +11,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class ChorusCakeBlock extends BaseCakeBlock {
 
-    public ChorusCakeBlock(Properties properties, CakeBuilder builder) {
-        super(properties, false, builder);
+    public ChorusCakeBlock(CakeBuilder builder) {
+        super(builder);
     }
     
 	@Override

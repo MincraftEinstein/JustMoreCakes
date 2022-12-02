@@ -73,7 +73,7 @@ public class CakeBuilder {
             cakeProperties = ModBlocks.cakeProperties();
         }
 
-        RegistryObject<BaseCakeBlock> cake = ModBlocks.register(cakeName, () -> cakeClazz.get(cakeProperties, allowsCandles, this));
+        RegistryObject<BaseCakeBlock> cake = ModBlocks.register(cakeName, () -> cakeClazz.get(this));
 
         if (allowsCandles) {
             if (candleCakeClazz == null) {
@@ -115,9 +115,13 @@ public class CakeBuilder {
         return customItemModel;
     }
 
+    public BlockBehaviour.Properties getCakeProperties() {
+        return cakeProperties;
+    }
+
     @FunctionalInterface
     public interface CakeClazzSupplier<T extends BaseCakeBlock> {
-        T get(BlockBehaviour.Properties properties, boolean allowsCandles, CakeBuilder builder);
+        T get(CakeBuilder builder);
     }
 
     @FunctionalInterface

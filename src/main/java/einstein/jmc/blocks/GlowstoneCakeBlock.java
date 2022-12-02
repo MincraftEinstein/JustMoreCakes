@@ -10,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class GlowstoneCakeBlock extends BaseEntityCakeBlock {
 
-    public GlowstoneCakeBlock(Properties properties, CakeBuilder builder) {
-        super(properties, builder);
+    public GlowstoneCakeBlock(CakeBuilder builder) {
+        super(builder);
     }
 
     @Override

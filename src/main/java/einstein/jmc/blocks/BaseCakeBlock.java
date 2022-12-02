@@ -26,6 +26,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CandleBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -50,27 +51,22 @@ public class BaseCakeBlock extends Block {
 	};
 
 	private final boolean allowsCandles;
-	private int biteCount = 6;
-	private final CakeBuilder builder;
+	private final int biteCount;
+	private CakeBuilder builder;
 
-	public BaseCakeBlock(Properties properties, CakeBuilder builder) {
-		this(properties, true, builder);
+	protected BaseCakeBlock(CakeBuilder builder, int biteCount) {
+		this(builder.getCakeProperties(), builder.allowsCandles(), biteCount);
+		this.builder = builder;
 	}
 
-	protected BaseCakeBlock(Properties properties, int biteCount, CakeBuilder builder) {
-		this(properties, builder);
-		this.biteCount = biteCount;
+	public BaseCakeBlock(CakeBuilder builder) {
+		this(builder, 6);
 	}
 
-	protected BaseCakeBlock(Properties properties, boolean allowsCandles, int biteCount, CakeBuilder builder) {
-		this(properties, allowsCandles, builder);
-		this.biteCount = biteCount;
-	}
-
-	public BaseCakeBlock(Properties properties, boolean allowsCandles, CakeBuilder builder) {
+	public BaseCakeBlock(Properties properties, boolean allowsCandles, int biteCount) {
 		super(properties);
 		this.allowsCandles = allowsCandles;
-		this.builder = builder;
+		this.biteCount = biteCount;
 		registerDefaultState(stateDefinition.any().setValue(getBites(), 0));
 	}
 
@@ -93,9 +89,8 @@ public class BaseCakeBlock extends Block {
 					}
 
 					level.playSound(null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1, 1);
-					String candle = Util.getBlockRegistryName(block).getPath();
-					Block candleBlock = ModBlocks.getBlock(ModBlocks.loc(candle + "_" + name));
-					level.setBlockAndUpdate(pos, candleBlock.defaultBlockState());
+					Block candleCake = builder.getCandleCakeByCandle().get(block).get();
+					level.setBlockAndUpdate(pos, candleCake.defaultBlockState());
 					level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 					player.awardStat(Stats.ITEM_USED.get(item));
 					return InteractionResult.SUCCESS;

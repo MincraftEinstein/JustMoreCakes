@@ -17,8 +17,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class SlimeCakeBlock extends BaseCakeBlock {
 
-    public SlimeCakeBlock(Properties properties, CakeBuilder builder) {
-        super(properties, builder);
+    public SlimeCakeBlock(CakeBuilder builder) {
+        super(builder);
     }
     
     @Override

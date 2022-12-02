@@ -14,8 +14,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class RedstoneCakeBlock extends BaseCakeBlock {
 
-	public RedstoneCakeBlock(Properties properties, CakeBuilder builder) {
-		super(properties, builder);
+	public RedstoneCakeBlock(CakeBuilder builder) {
+		super(builder);
 	}
 
 	@Override
