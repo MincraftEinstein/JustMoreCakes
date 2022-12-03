@@ -1,5 +1,7 @@
 package einstein.jmc.blocks;
 
+import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -24,13 +26,11 @@ public class EncasingIceBlock extends HalfTransparentBlock {
 	}
 
 	@Override
-	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
-		return;
-	}
+	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {}
 
 	@Override
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (timeGoneBy(level, 1)) {
+		if (Util.timeGoneBy(level, ModServerConfigs.ENCASING_ICE_MELT_SPEED.get())) {
 			level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 		}
 	}
@@ -44,12 +44,5 @@ public class EncasingIceBlock extends HalfTransparentBlock {
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
 		entity.setSprinting(false);
 		entity.makeStuckInBlock(state, new Vec3(0.001D, 0.001D, 0.001D));
-	}
-
-	private static boolean timeGoneBy(Level level, int ticks) {
-		if (ticks == 0) {
-			return true;
-		}
-		return level.getGameTime() % (ticks) == 0;
 	}
 }

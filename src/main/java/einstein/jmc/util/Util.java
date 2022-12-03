@@ -45,4 +45,11 @@ public class Util {
             throw new NullPointerException("Could not find block: " + location.toString());
         }
     }
+
+    public static boolean timeGoneBy(Level level, int ticks) {
+        if (ticks == 0) {
+            return true;
+        }
+        return level.getGameTime() % (ticks) == 0;
+    }
 }
