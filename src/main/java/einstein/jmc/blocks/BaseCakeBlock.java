@@ -1,8 +1,6 @@
 package einstein.jmc.blocks;
 
-import einstein.jmc.CakeEffects;
-import einstein.jmc.JustMoreCakes;
-import einstein.jmc.effects.FreezingEffect;
+import einstein.jmc.data.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.util.CakeBuilder;
@@ -16,7 +14,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

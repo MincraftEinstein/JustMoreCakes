@@ -1,10 +1,10 @@
-package einstein.jmc.data;
+package einstein.jmc.data.generators;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.item.crafting.builders.CakeOvenRecipeBuilder;
-import einstein.jmc.tags.ItemTagsGenerator;
+import einstein.jmc.data.tags.ItemTagsGenerator;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;

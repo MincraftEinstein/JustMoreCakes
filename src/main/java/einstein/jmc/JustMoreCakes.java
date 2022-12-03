@@ -3,6 +3,7 @@ package einstein.jmc;
 import com.mojang.datafixers.util.Pair;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
+import einstein.jmc.data.CakeEffectsManager;
 import einstein.jmc.init.*;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.CakeChompsEvents;

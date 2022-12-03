@@ -1,4 +1,4 @@
-package einstein.jmc.data;
+package einstein.jmc.data.generators;
 
 import java.util.List;
 import java.util.Map;
@@ -18,11 +18,11 @@ import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
-public class ModLootTableProvider extends LootTableProvider {
+public class ModLootTableGenerator extends LootTableProvider {
 
 	private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> lootTables = ImmutableList.of(Pair.of(BlockLootTableGenerator::new, LootContextParamSets.BLOCK));
 	
-	public ModLootTableProvider(DataGenerator generator) {
+	public ModLootTableGenerator(DataGenerator generator) {
 		super(generator);
 	}
 	

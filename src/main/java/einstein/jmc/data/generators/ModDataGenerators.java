@@ -1,9 +1,9 @@
-package einstein.jmc.data;
+package einstein.jmc.data.generators;
 
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.tags.BlockTagsGenerator;
-import einstein.jmc.tags.ItemTagsGenerator;
-import einstein.jmc.tags.POITagsGenerator;
+import einstein.jmc.data.tags.BlockTagsGenerator;
+import einstein.jmc.data.tags.ItemTagsGenerator;
+import einstein.jmc.data.tags.POITagsGenerator;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -26,7 +26,7 @@ public class ModDataGenerators {
 		generator.addProvider(event.includeServer(), new ItemTagsGenerator(generator, blockTags, event.getExistingFileHelper()));
 		generator.addProvider(event.includeServer(), new POITagsGenerator(generator, event.getExistingFileHelper()));
 		generator.addProvider(event.includeServer(), new ModAdvancementsGenerator(generator, event.getExistingFileHelper()));
-		generator.addProvider(event.includeServer(), new ModLootTableProvider(generator));
+		generator.addProvider(event.includeServer(), new ModLootTableGenerator(generator));
 		generator.addProvider(event.includeServer(), new CakeEffectsGenerator(generator));
 
 		// Client providers

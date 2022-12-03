@@ -1,4 +1,4 @@
-package einstein.jmc.data;
+package einstein.jmc.data.generators;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;

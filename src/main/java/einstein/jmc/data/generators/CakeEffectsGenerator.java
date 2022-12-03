@@ -1,12 +1,12 @@
-package einstein.jmc.data;
+package einstein.jmc.data.generators;
 
-import einstein.jmc.CakeEffects;
+import einstein.jmc.data.CakeEffects;
 import einstein.jmc.JustMoreCakes;
+import einstein.jmc.data.CakeEffectsProvider;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModPotions;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraftforge.fml.common.Mod;
 
 public class CakeEffectsGenerator extends CakeEffectsProvider {
 

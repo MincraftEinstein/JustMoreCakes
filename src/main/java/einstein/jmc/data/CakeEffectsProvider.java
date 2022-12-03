@@ -3,7 +3,6 @@ package einstein.jmc.data;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import cpw.mods.modlauncher.api.LamdbaExceptionUtils;
-import einstein.jmc.CakeEffects;
 import einstein.jmc.blocks.BaseCakeBlock;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;

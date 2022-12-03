@@ -1,4 +1,4 @@
-package einstein.jmc.tags;
+package einstein.jmc.data.tags;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModVillagers;
