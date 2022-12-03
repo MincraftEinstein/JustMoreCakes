@@ -118,8 +118,14 @@ public class BaseCakeBlock extends Block {
 			eatActions(player, pos, state);
 
 			if (cakeEffects != null) {
-				for (CakeEffects.MobEffectHolder effect : cakeEffects.mobEffects()) {
-					player.addEffect(new MobEffectInstance(effect.effect(), effect.duration().orElse(0), effect.amplifier().orElse(0)));
+				for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {
+					MobEffectInstance instance = new MobEffectInstance(holder.effect(), holder.duration().orElse(0), holder.amplifier().orElse(0));
+					if (holder.effect().isInstantenous()) {
+						instance.getEffect().applyInstantenousEffect(player, player, player, instance.getAmplifier(), 1);
+					}
+					else {
+						player.addEffect(instance);
+					}
 				}
 			}
 
