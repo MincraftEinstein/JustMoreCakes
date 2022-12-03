@@ -1,8 +1,10 @@
 package einstein.jmc;
 
 import com.mojang.datafixers.util.Pair;
+import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.init.*;
+import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.CakeChompsEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -28,7 +30,9 @@ import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.coremod.api.ASMAPI;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -46,7 +50,6 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -56,6 +59,7 @@ public class JustMoreCakes {
     public static final String MOD_ID = "jmc";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final JMCTab JMC_TAB = new JMCTab(CreativeModeTab.TABS.length, "jmc_tab");
+    private static CakeEffectsManager CAKE_EFFECTS_MANAGER;
 
     public JustMoreCakes() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -76,6 +80,8 @@ public class JustMoreCakes {
         MinecraftForge.EVENT_BUS.addListener(this::missingMappings);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJump);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityTick);
+        MinecraftForge.EVENT_BUS.addListener(this::onAddReloadListeners);
+        MinecraftForge.EVENT_BUS.addListener(this::onServerStarted);
         if (ModList.get().isLoaded("cakechomps")) {
             MinecraftForge.EVENT_BUS.addListener(CakeChompsEvents::onCakeEaten);
         }
@@ -83,6 +89,32 @@ public class JustMoreCakes {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
+    }
+
+    void onAddReloadListeners(AddReloadListenerEvent event) {
+        CAKE_EFFECTS_MANAGER = new CakeEffectsManager();
+        event.addListener(CAKE_EFFECTS_MANAGER);
+    }
+
+    public static CakeEffectsManager getCakeEffectsManager() {
+        if (CAKE_EFFECTS_MANAGER == null) {
+            throw new IllegalStateException("Can't retrieve CakeEffectsManager until resources have loaded");
+        }
+
+        return CAKE_EFFECTS_MANAGER;
+    }
+
+    public static void addCakeEffects(ResourceLocation id, BaseCakeBlock cake) {
+        CakeEffectsManager manager = getCakeEffectsManager();
+        manager.getRegisteredCakeEffects().forEach((location, cakeEffects) -> {
+            if (location.getPath().equals(id.getPath())) {
+                cake.setCakeEffects(cakeEffects);
+            }
+        });
+    }
+
+    void onServerStarted(ServerStartedEvent event) {
+        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> addCakeEffects(cake.getId(), cake.get()));
     }
 
     void commonSetup(final FMLCommonSetupEvent event) {

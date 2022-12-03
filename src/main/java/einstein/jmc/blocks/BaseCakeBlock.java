@@ -1,8 +1,9 @@
 package einstein.jmc.blocks;
 
+import einstein.jmc.CakeEffects;
+import einstein.jmc.JustMoreCakes;
 import einstein.jmc.effects.FreezingEffect;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.init.ModPotions;
 import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.Util;
@@ -26,7 +27,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CandleBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -53,6 +53,7 @@ public class BaseCakeBlock extends Block {
 	private final boolean allowsCandles;
 	private final int biteCount;
 	private CakeBuilder builder;
+	private CakeEffects cakeEffects;
 
 	protected BaseCakeBlock(CakeBuilder builder, int biteCount) {
 		this(builder.getCakeProperties(), builder.allowsCandles(), biteCount);
@@ -79,7 +80,6 @@ public class BaseCakeBlock extends Block {
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		Item item = itemstack.getItem();
-		String name = Util.getBlockRegistryName(asBlock()).getPath();
 		if (allowsCandles) {
 			if (itemstack.is(ItemTags.CANDLES) && state.getValue(getBites()) == 0) {
 				Block block = Block.byItem(item);
@@ -117,32 +117,13 @@ public class BaseCakeBlock extends Block {
 		}
 		else {
 			player.awardStat(Stats.EAT_CAKE_SLICE);
+			player.getFoodData().eat(2, 0.1F);
 			eatActions(player, pos, state);
-			String name = Util.getBlockRegistryName(asBlock()).getPath();
-			if (name.contains("poison_cake")) {
-				player.addEffect(new MobEffectInstance(MobEffects.POISON, ModServerConfigs.POISON_CAKE_POISON_DUR.get(), ModServerConfigs.POISON_CAKE_POISON_STRENGTH.get()));
-			}
-			else if (name.contains("golden_apple_cake")) {
-		        player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, ModServerConfigs.GAPPLE_CAKE_REGEN_DUR.get(), ModServerConfigs.GAPPLE_CAKE_REGEN_STRENGTH.get()));
-		        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, ModServerConfigs.GAPPLE_CAKE_RES_DUR.get(), ModServerConfigs.GAPPLE_CAKE_RES_STRENGTH.get()));
-		        player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, ModServerConfigs.GAPPLE_CAKE_ABSORPTION_DUR.get(), ModServerConfigs.GAPPLE_CAKE_ABSORPTION_STRENGTH.get()));
-			}
-			else if (name.contains("firey_cake")) {
-		        player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, ModServerConfigs.FIREY_CAKE_FIRE_RES_DUR.get(), ModServerConfigs.FIREY_CAKE_FIRE_RES_STRENGTH.get()));
-		        player.setSecondsOnFire(ModServerConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
-			}
-			else if (name.contains("beetroot_cake")) {
-				player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, ModServerConfigs.BEETROOT_CAKE_REGEN_DUR.get(), ModServerConfigs.BEETROOT_CAKE_REGEN_STRENGTH.get()));
-			}
-			else if (name.contains("ice_cake")) {
-		        player.clearFire();
-		        player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, ModServerConfigs.ICE_CAKE_NIGHT_VISION_DUR.get(), ModServerConfigs.ICE_CAKE_NIGHT_VISION_STRENGTH.get()));
-		        player.addEffect(new MobEffectInstance(ModPotions.FREEZING_EFFECT.get()));
-		        FreezingEffect.freezeEntity(player);
-			}
-			else if (name.contains("glow_berry_cake")) {
-				player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 1200));
-				player.addEffect(new MobEffectInstance(MobEffects.GLOWING, 1800));
+
+			if (cakeEffects != null) {
+				for (CakeEffects.MobEffectHolder effect : cakeEffects.mobEffects()) {
+					player.addEffect(new MobEffectInstance(effect.effect(), effect.duration().orElse(0), effect.amplifier().orElse(0)));
+				}
 			}
 
 			int i = state.getValue(getBites()); 
@@ -161,9 +142,21 @@ public class BaseCakeBlock extends Block {
 	}
 
 	public void eatActions(Player player, BlockPos pos, BlockState state) {
-		player.getFoodData().eat(2, 0.1F);
+		if (equals(ModBlocks.FIREY_CAKE.get())) {
+			player.setSecondsOnFire(ModServerConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
+		}
+		else if (equals(ModBlocks.ICE_CAKE.get())) {
+			player.clearFire();
+		}
+		else if (equals(ModBlocks.CHORUS_CAKE.get())) {
+			Util.teleportRandomly(player, ModServerConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get());
+		}
+		else if (equals(ModBlocks.ENDER_CAKE.get())) {
+			Util.teleportRandomly(player, ModServerConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
+			player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1, 1);
+		}
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor accessor, BlockPos pos, BlockPos neighborPos) {
@@ -209,5 +202,9 @@ public class BaseCakeBlock extends Block {
 
 	public CakeBuilder getBuilder() {
 		return builder;
+	}
+
+	public void setCakeEffects(CakeEffects cakeEffects) {
+		this.cakeEffects = cakeEffects;
 	}
 }

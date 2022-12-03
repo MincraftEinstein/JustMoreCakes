@@ -1,14 +1,10 @@
 package einstein.jmc.blocks;
 
 import einstein.jmc.init.ModClientConfigs;
-import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.util.CakeBuilder;
-import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,14 +15,7 @@ public class EnderCakeBlock extends BaseCakeBlock {
     public EnderCakeBlock(CakeBuilder builder) {
         super(builder);
     }
-    
-	@Override
-	public void eatActions(Player player, BlockPos pos, BlockState state) {
-		super.eatActions(player, pos, state);
-        Util.teleportRandomly(player, ModServerConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
-        player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1, 1);
-	}
-	
+
     @OnlyIn(Dist.CLIENT)
 	@Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {

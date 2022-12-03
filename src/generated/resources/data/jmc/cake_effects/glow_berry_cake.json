@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "duration": 1200,
+      "mob_effect": "minecraft:night_vision"
+    },
+    {
+      "duration": 1800,
+      "mob_effect": "minecraft:glowing"
+    }
+  ]
+}

@@ -72,9 +72,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> CUPCAKE = registerNoItem("cupcake", () -> new CupcakeBlock(cakeProperties())); // Don't replace with CakeBuilder so a custom BlockItem cake be used
     public static final RegistryObject<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake", false, true).build();
     public static final RegistryObject<BaseCakeBlock> ICE_CAKE = new CakeBuilder("ice_cake", true).build();
-    public static final RegistryObject<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake", false, true)
-        .setCakeClass(ChorusCakeBlock::new)
-        .build();
+    public static final RegistryObject<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake", false, true).build();
     public static final RegistryObject<BaseCakeBlock> SWEET_BERRY_CAKE = new CakeBuilder("sweet_berry_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> HONEY_CAKE = new CakeBuilder("honey_cake", true).build();
     public static final RegistryObject<BaseCakeBlock> GLOWSTONE_CAKE = new CakeBuilder("glowstone_cake", true)

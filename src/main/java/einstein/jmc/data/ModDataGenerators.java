@@ -27,6 +27,7 @@ public class ModDataGenerators {
 		generator.addProvider(event.includeServer(), new POITagsGenerator(generator, event.getExistingFileHelper()));
 		generator.addProvider(event.includeServer(), new ModAdvancementsGenerator(generator, event.getExistingFileHelper()));
 		generator.addProvider(event.includeServer(), new ModLootTableProvider(generator));
+		generator.addProvider(event.includeServer(), new CakeEffectsGenerator(generator));
 
 		// Client providers
 		generator.addProvider(event.includeClient(), new BlockAssetsGenerator(generator, event.getExistingFileHelper()));
