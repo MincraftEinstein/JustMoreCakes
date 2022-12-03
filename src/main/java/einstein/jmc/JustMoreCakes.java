@@ -6,6 +6,7 @@ import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.init.*;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.CakeChompsEvents;
+import einstein.jmc.util.Util;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.particles.ParticleTypes;
@@ -125,7 +126,7 @@ public class JustMoreCakes {
         registerVillageBuilding("snowy", "bakery_1");
         registerVillageBuilding("snowy", "bakery_2");
         registerVillageBuilding("taiga", "bakery_1");
-        GiveGiftToHero.GIFTS.put(ModVillagers.CAKE_BAKER.get(), new ResourceLocation(MOD_ID, "gameplay/hero_of_the_village/cake_baker_gift"));
+        GiveGiftToHero.GIFTS.put(ModVillagers.CAKE_BAKER.get(), loc("gameplay/hero_of_the_village/cake_baker_gift"));
         Items.CAKE.maxStackSize = 64;
     }
 
@@ -137,7 +138,7 @@ public class JustMoreCakes {
         SnowyVillagePools.bootstrap();
         TaigaVillagePools.bootstrap();
 
-        final StructureTemplatePool templatePool = BuiltinRegistries.TEMPLATE_POOL.get(new ResourceLocation("minecraft:village/" + biome + "/houses"));
+        final StructureTemplatePool templatePool = BuiltinRegistries.TEMPLATE_POOL.get(mcLoc("village/" + biome + "/houses"));
 
         if (templatePool == null) {
             LOGGER.warn("Failed to register " + biome + " village building");
@@ -199,7 +200,7 @@ public class JustMoreCakes {
             else {
                 for (DyeColor color : DyeColor.values()) {
                     if (name.equals(color + "_candle_" + cake)) {
-                        return ModBlocks.getBlock(new ResourceLocation("minecraft", color + "_candle_cake"));
+                        return Util.getBlock(mcLoc( color + "_candle_cake"));
                     }
                 }
             }
@@ -265,22 +266,30 @@ public class JustMoreCakes {
     }
 
     public static void AddSupportedCandles() {
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.CANDLE, ModBlocks.mcLoc(""));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.WHITE_CANDLE, ModBlocks.mcLoc("white_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.ORANGE_CANDLE, ModBlocks.mcLoc("orange_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.MAGENTA_CANDLE, ModBlocks.mcLoc("magenta_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.LIGHT_BLUE_CANDLE, ModBlocks.mcLoc("light_blue_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.YELLOW_CANDLE, ModBlocks.mcLoc("yellow_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.LIME_CANDLE, ModBlocks.mcLoc("lime_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.PINK_CANDLE, ModBlocks.mcLoc("pink_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.GRAY_CANDLE, ModBlocks.mcLoc("gray_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.LIGHT_GRAY_CANDLE, ModBlocks.mcLoc("light_gray_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.CYAN_CANDLE, ModBlocks.mcLoc("cyan_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.PURPLE_CANDLE, ModBlocks.mcLoc("purple_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.BLUE_CANDLE, ModBlocks.mcLoc("blue_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.BROWN_CANDLE, ModBlocks.mcLoc("brown_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.GREEN_CANDLE, ModBlocks.mcLoc("green_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.RED_CANDLE, ModBlocks.mcLoc("red_"));
-        ModBlocks.SUPPORTED_CANDLES.put(Blocks.BLACK_CANDLE, ModBlocks.mcLoc("black_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.CANDLE, mcLoc(""));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.WHITE_CANDLE, mcLoc("white_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.ORANGE_CANDLE, mcLoc("orange_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.MAGENTA_CANDLE, mcLoc("magenta_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.LIGHT_BLUE_CANDLE, mcLoc("light_blue_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.YELLOW_CANDLE, mcLoc("yellow_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.LIME_CANDLE, mcLoc("lime_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.PINK_CANDLE, mcLoc("pink_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.GRAY_CANDLE, mcLoc("gray_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.LIGHT_GRAY_CANDLE, mcLoc("light_gray_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.CYAN_CANDLE, mcLoc("cyan_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.PURPLE_CANDLE, mcLoc("purple_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.BLUE_CANDLE, mcLoc("blue_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.BROWN_CANDLE, mcLoc("brown_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.GREEN_CANDLE, mcLoc("green_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.RED_CANDLE, mcLoc("red_"));
+        ModBlocks.SUPPORTED_CANDLES.put(Blocks.BLACK_CANDLE, mcLoc("black_"));
+    }
+
+    public static ResourceLocation loc(String string) {
+        return new ResourceLocation(MOD_ID, string);
+    }
+
+    public static ResourceLocation mcLoc(String string) {
+        return new ResourceLocation("minecraft", string);
     }
 }

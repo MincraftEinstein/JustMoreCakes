@@ -2,7 +2,6 @@ package einstein.jmc.client.gui.screens.inventory;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.menu.cakeoven.CakeOvenMenu;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -16,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class CakeOvenScreen extends AbstractContainerScreen<CakeOvenMenu> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(JustMoreCakes.MOD_ID, "textures/gui/container/cake_oven.png");
+	private static final ResourceLocation TEXTURE = JustMoreCakes.loc("textures/gui/container/cake_oven.png");
 	
 	public CakeOvenScreen(CakeOvenMenu menu, Inventory inventory, Component component) {
 		super(menu, inventory, component);

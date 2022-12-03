@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, CakeOvenConstants {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(JustMoreCakes.MOD_ID, "textures/gui/jei_cake_oven_gui.png"); // Image must be 256x256 px
+	private static final ResourceLocation TEXTURE = JustMoreCakes.loc("textures/gui/jei_cake_oven_gui.png"); // Image must be 256x256 px
 	private final IDrawable background;
 	private final IDrawable icon;
 	private final IDrawableAnimated flame;

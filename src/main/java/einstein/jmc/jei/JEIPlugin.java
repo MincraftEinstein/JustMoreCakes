@@ -31,7 +31,7 @@ public class JEIPlugin implements IModPlugin {
 	
 	@Override
 	public ResourceLocation getPluginUid() {
-		return new ResourceLocation(JustMoreCakes.MOD_ID, "jei_plugin");
+		return JustMoreCakes.loc("jei_plugin");
 	}
 	
 	@Override

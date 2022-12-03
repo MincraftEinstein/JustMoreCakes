@@ -4,22 +4,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Random;
 
 public class Util {
-
-    public static final ResourceLocation getBlockRegistryName(Block block) {
-        return ForgeRegistries.BLOCKS.getKey(block);
-    }
-
-    public static final ResourceLocation getItemRegistryName(ItemLike item) {
-        return ForgeRegistries.ITEMS.getKey(item.asItem());
-    }
 
     public static void createExplosion(final Level level, final BlockPos pos, final float size) {
         if (level.isClientSide) {
@@ -42,5 +34,15 @@ public class Util {
             z = entity.zo + (rand.nextDouble() - rand.nextDouble()) * radius;
         }
         return teleported;
+    }
+
+    public static Block getBlock(ResourceLocation location) {
+        Block block = ForgeRegistries.BLOCKS.getValue(location);
+        if (block != Blocks.AIR) {
+            return block;
+        }
+        else {
+            throw new NullPointerException("Could not find block: " + location.toString());
+        }
     }
 }

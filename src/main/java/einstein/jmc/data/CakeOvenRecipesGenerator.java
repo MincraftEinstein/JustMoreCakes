@@ -30,7 +30,7 @@ public class CakeOvenRecipesGenerator extends RecipeProvider {
 
 		CakeOvenRecipeBuilder.cakeBaking(Blocks.CAKE, 0.5F, 200, Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT), Ingredient.of(Items.SUGAR), Ingredient.of(Items.EGG))
 				.unlockedBy(has, has(Items.EGG))
-				.save(consumer, new ResourceLocation(JustMoreCakes.MOD_ID, "cake_from_cake_oven"));
+				.save(consumer, JustMoreCakes.loc("cake_from_cake_oven"));
 
 		CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CARROT_CAKE.get(), 0.6F, 300, Ingredient.of(Items.CARROT), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT))
 				.unlockedBy(has, has(Items.CARROT))
@@ -146,7 +146,7 @@ public class CakeOvenRecipesGenerator extends RecipeProvider {
 	}
 	
 	private ResourceLocation location(RegistryObject<? extends ItemLike> item) {
-		return new ResourceLocation(JustMoreCakes.MOD_ID, item.getId().getPath() + "_from_cake_oven");
+		return JustMoreCakes.loc(item.getId().getPath() + "_from_cake_oven");
 	}
 	
 	@Override

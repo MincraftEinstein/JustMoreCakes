@@ -109,22 +109,4 @@ public class ModBlocks {
     public static BlockBehaviour.Properties candleCakeProperties() {
         return Properties.copy(Blocks.CANDLE_CAKE);
     }
-
-    public static Block getBlock(ResourceLocation location) {
-        Block block = ForgeRegistries.BLOCKS.getValue(location);
-        if (block != Blocks.AIR) {
-            return block;
-        }
-        else {
-            throw new NullPointerException("Could not find block: " + location.toString());
-        }
-    }
-
-    public static ResourceLocation loc(String string) {
-        return new ResourceLocation(JustMoreCakes.MOD_ID, string);
-    }
-
-    public static ResourceLocation mcLoc(String string) {
-        return new ResourceLocation("minecraft", string);
-    }
 }

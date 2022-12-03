@@ -13,7 +13,6 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
@@ -30,12 +29,12 @@ public class ModAdvancementsGenerator extends AdvancementProvider {
 	
 	@Override
 	protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
-		Advancement craftCake = addCakes(Advancement.Builder.advancement().parent(new ResourceLocation("minecraft:husbandry/plant_seed")).requirements(RequirementsStrategy.OR)
+		Advancement craftCake = addCakes(Advancement.Builder.advancement().parent(JustMoreCakes.mcLoc("husbandry/plant_seed")).requirements(RequirementsStrategy.OR)
 			.display(Blocks.CAKE.asItem(), translatable("craft_cake.title"), translatable("craft_cake.description"), null, FrameType.TASK, true, true, false))
-			.save(consumer, modLoc("husbandry/craft_cake"), fileHelper);
+			.save(consumer, JustMoreCakes.loc("husbandry/craft_cake"), fileHelper);
 		addCakes(Advancement.Builder.advancement().parent(craftCake))
 			.display(ModBlocks.CHOCOLATE_CAKE.get(), translatable("craft_all_cakes.title"), translatable("craft_all_cakes.description"), null, FrameType.CHALLENGE, true, true, false)
-			.rewards(AdvancementRewards.Builder.experience(100)).save(consumer, modLoc("husbandry/craft_all_cakes"), fileHelper);
+			.rewards(AdvancementRewards.Builder.experience(100)).save(consumer, JustMoreCakes.loc("husbandry/craft_all_cakes"), fileHelper);
 	}
 	
 	private Advancement.Builder addCakes(Advancement.Builder advancement) {
@@ -52,10 +51,6 @@ public class ModAdvancementsGenerator extends AdvancementProvider {
 	
 	private Component translatable(String str) {
 		return Component.translatable("advancements.husbandry." + str);
-	}
-	
-	private ResourceLocation modLoc(String path) {
-		return new ResourceLocation(JustMoreCakes.MOD_ID, path);
 	}
 	
 	@Override
