@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "jmc",
+  "version": "${version}",
+  "name": "Just More Cakes!",
+  "description": "A simple mod that adds 30+ new cakes to Minecraft",
+  "authors": [
+    "MincraftEinstein"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/just-more-cakes",
+    "sources": "https://github.com/MincraftEinstein/JustMoreCakes",
+    "issues": "https://github.com/MincraftEinstein/JustMoreCakes/issues"
+  },
+  "license": "All rights reserved",
+  "icon": "pack.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "einstein.jmc.JustMoreCakesFabric"
+    ],
+    "client": [
+      "einstein.jmc.JustMoreCakesClient"
+    ],
+    "jei_mod_plugin": [
+      "einstein.jmc.jei.JEIPlugin"
+    ]
+  },
+  "mixins": [
+    "jmc.mixins.json"
+  ],
+  "accessWidener": "jmc.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.14",
+    "fabric": "*",
+    "minecraft": "1.19.x",
+    "java": ">=17"
+  }
+}

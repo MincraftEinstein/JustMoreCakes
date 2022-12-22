@@ -1,9 +1,0 @@
-{
-  "parent": "jmc:block/template_cake_slice1",
-  "textures": {
-    "bottom": "jmc:block/pumpkin_cake_bottom",
-    "inside": "jmc:block/pumpkin_cake_inner",
-    "side": "jmc:block/pumpkin_cake_side",
-    "top": "jmc:block/pumpkin_cake_top"
-  }
-}

@@ -1,0 +1,35 @@
+modLoader = "javafml"
+loaderVersion = "[43,)"
+license = "All rights reserved"
+issueTrackerURL = "https://github.com/MincraftEinstein/JustMoreCakes/issues"
+
+[[mods]]
+    modId = "jmc"
+    version = "${version}"
+    displayName = "Just More Cakes!"
+    #updateJSONURL="http://myurl.me/"
+    displayURL = "https://www.curseforge.com/minecraft/mc-mods/just-more-cakes"
+    logoFile = "logo.png"
+    credits = "Me the mod author"
+    authors = "MincraftEinstein"
+    description = '''
+A simple mod that adds 30+ new cakes to Minecraft
+'''
+
+[modproperties.jmc]
+    catalogueItemIcon = "jmc:chocolate_cake"
+    configuredBackground = "minecraft:textures/block/bricks.png"
+
+[[dependencies.jmc]]
+    modId = "forge"
+    mandatory = true
+    versionRange = "[43.1.65,)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.jmc]]
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "[1.19.2, 1.20]"
+    ordering = "NONE"
+    side = "BOTH"

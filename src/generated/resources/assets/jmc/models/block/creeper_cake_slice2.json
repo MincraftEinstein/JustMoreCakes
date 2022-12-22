@@ -1,9 +1,0 @@
-{
-  "parent": "jmc:block/template_cake_slice2",
-  "textures": {
-    "bottom": "jmc:block/creeper_cake_bottom",
-    "inside": "jmc:block/creeper_cake_inner",
-    "side": "jmc:block/creeper_cake_side",
-    "top": "jmc:block/creeper_cake_top"
-  }
-}
