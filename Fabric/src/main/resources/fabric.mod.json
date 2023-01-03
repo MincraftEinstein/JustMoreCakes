@@ -22,6 +22,9 @@
     "client": [
       "einstein.jmc.JustMoreCakesClient"
     ],
+    "fabric-datagen": [
+      "einstein.jmc.JustMoreCakesData"
+    ],
     "jei_mod_plugin": [
       "einstein.jmc.jei.JEIPlugin"
     ]

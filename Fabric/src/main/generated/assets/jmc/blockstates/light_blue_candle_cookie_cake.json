@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/light_blue_candle_cookie_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/light_blue_candle_cookie_cake_lit"
+    }
+  }
+}

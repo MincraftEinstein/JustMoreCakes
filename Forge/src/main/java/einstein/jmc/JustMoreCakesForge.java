@@ -3,6 +3,10 @@ package einstein.jmc;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.data.CakeEffectsManager;
+import einstein.jmc.data.generators.*;
+import einstein.jmc.data.generators.BlockTagsGenerator;
+import einstein.jmc.data.generators.ItemTagsGenerator;
+import einstein.jmc.data.generators.POITagsGenerator;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.ForgeRegistryHelper;
 import einstein.jmc.platform.Services;
@@ -12,8 +16,9 @@ import einstein.jmc.util.ItemsForEmeralds;
 import einstein.jmc.util.Util;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.BlockPos;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.ai.behavior.GiveGiftToHero;
@@ -28,12 +33,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -68,6 +72,7 @@ public class JustMoreCakesForge {
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::onParallelDispatch);
+        modEventBus.addListener(this::generateData);
         ForgeRegistryHelper.ITEMS.register(modEventBus);
         ForgeRegistryHelper.BLOCKS.register(modEventBus);
         ForgeRegistryHelper.BLOCK_ENTITIES.register(modEventBus);
@@ -92,6 +97,24 @@ public class JustMoreCakesForge {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
+    }
+
+    void generateData(GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+
+        // Server providers
+        generator.addProvider(event.includeServer(), new RecipesGenerator(generator));
+        BlockTagsProvider blockTags = new BlockTagsGenerator(generator, event.getExistingFileHelper());
+        generator.addProvider(event.includeServer(), blockTags);
+        generator.addProvider(event.includeServer(), new ItemTagsGenerator(generator, blockTags, event.getExistingFileHelper()));
+        generator.addProvider(event.includeServer(), new POITagsGenerator(generator, event.getExistingFileHelper()));
+        generator.addProvider(event.includeServer(), new AdvancementsGenerator(generator, event.getExistingFileHelper()));
+        generator.addProvider(event.includeServer(), new LootTableGenerator(generator));
+        generator.addProvider(event.includeServer(), new CakeEffectsGenerator(generator));
+
+        // Client providers
+        generator.addProvider(event.includeClient(), new BlockAssetsGenerator(generator, event.getExistingFileHelper()));
+        generator.addProvider(event.includeClient(), new ItemAssetsGenerator(generator, event.getExistingFileHelper()));
     }
 
     /**

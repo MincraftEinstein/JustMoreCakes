@@ -1,0 +1,9 @@
+{
+  "effects": [
+    {
+      "amplifier": 1,
+      "duration": 100,
+      "mob_effect": "minecraft:regeneration"
+    }
+  ]
+}

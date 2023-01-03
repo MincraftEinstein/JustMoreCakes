@@ -1,0 +1,8 @@
+{
+  "parent": "jmc:block/template_cake",
+  "textures": {
+    "bottom": "jmc:block/redstone_cake_bottom",
+    "side": "jmc:block/redstone_cake_side",
+    "top": "jmc:block/redstone_cake_top"
+  }
+}

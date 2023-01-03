@@ -1,0 +1,20 @@
+{
+  "type": "jmc:cake_baking",
+  "cookingTime": 250,
+  "experience": 0.5,
+  "ingredients": [
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": "jmc:ice_cake"
+}

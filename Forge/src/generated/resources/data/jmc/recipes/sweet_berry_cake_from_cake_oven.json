@@ -1,0 +1,20 @@
+{
+  "type": "jmc:cake_baking",
+  "cookingTime": 200,
+  "experience": 0.5,
+  "ingredients": [
+    {
+      "item": "minecraft:sweet_berries"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": "jmc:sweet_berry_cake"
+}

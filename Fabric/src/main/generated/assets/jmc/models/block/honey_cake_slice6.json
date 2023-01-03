@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cake_slice6",
+  "textures": {
+    "bottom": "jmc:block/honey_cake_bottom",
+    "inside": "jmc:block/honey_cake_inner",
+    "side": "jmc:block/honey_cake_side",
+    "top": "jmc:block/honey_cake_top"
+  }
+}

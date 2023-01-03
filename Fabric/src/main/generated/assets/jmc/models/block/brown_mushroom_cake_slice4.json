@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cross_cake_slice4",
+  "textures": {
+    "bottom": "jmc:block/brown_mushroom_cake_bottom",
+    "inside": "jmc:block/brown_mushroom_cake_inner",
+    "side": "jmc:block/brown_mushroom_cake_side",
+    "top": "jmc:block/brown_mushroom_cake_top"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "jmc:cake_baking",
+  "cookingTime": 350,
+  "experience": 0.5,
+  "ingredients": [
+    {
+      "item": "minecraft:glow_berries"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
+  "result": "jmc:glow_berry_cake"
+}

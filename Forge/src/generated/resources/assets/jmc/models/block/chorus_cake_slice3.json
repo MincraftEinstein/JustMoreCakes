@@ -1,0 +1,11 @@
+{
+  "parent": "jmc:block/template_cross_cake_slice3",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "jmc:block/chorus_cake_bottom",
+    "cross": "jmc:block/chorus_cake_flower",
+    "inside": "jmc:block/chorus_cake_inner",
+    "side": "jmc:block/chorus_cake_side",
+    "top": "jmc:block/chorus_cake_top"
+  }
+}

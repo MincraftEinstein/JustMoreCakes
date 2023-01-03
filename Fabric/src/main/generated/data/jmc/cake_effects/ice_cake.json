@@ -1,0 +1,11 @@
+{
+  "effects": [
+    {
+      "duration": 2400,
+      "mob_effect": "minecraft:night_vision"
+    },
+    {
+      "mob_effect": "jmc:freezing"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cake_slice2",
+  "textures": {
+    "bottom": "jmc:block/red_velvet_cake_bottom",
+    "inside": "jmc:block/red_velvet_cake_inner",
+    "side": "jmc:block/red_velvet_cake_side",
+    "top": "jmc:block/red_velvet_cake_top"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cake_slice1",
+  "textures": {
+    "bottom": "jmc:block/firey_cake_bottom",
+    "inside": "jmc:block/firey_cake_inner",
+    "side": "jmc:block/firey_cake_side",
+    "top": "jmc:block/firey_cake_top"
+  }
+}

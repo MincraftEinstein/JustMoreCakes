@@ -1,0 +1,20 @@
+{
+  "type": "jmc:cake_baking",
+  "cookingTime": 250,
+  "experience": 0.6,
+  "ingredients": [
+    {
+      "item": "minecraft:pumpkin"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
+  "result": "jmc:pumpkin_cake"
+}

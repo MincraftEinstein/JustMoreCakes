@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/lime_candle_glowstone_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/lime_candle_glowstone_cake_lit"
+    }
+  }
+}

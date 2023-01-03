@@ -1,0 +1,20 @@
+{
+  "type": "jmc:cake_baking",
+  "cookingTime": 300,
+  "experience": 0.8,
+  "ingredients": [
+    {
+      "tag": "c:red_dye"
+    },
+    {
+      "item": "minecraft:cocoa_beans"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": "jmc:red_velvet_cake"
+}

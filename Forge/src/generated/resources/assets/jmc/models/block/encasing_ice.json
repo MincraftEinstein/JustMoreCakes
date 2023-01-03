@@ -1,0 +1,4 @@
+{
+  "parent": "minecraft:block/ice",
+  "render_type": "minecraft:translucent"
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/yellow_candle_golden_apple_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/yellow_candle_golden_apple_cake_lit"
+    }
+  }
+}

@@ -27,8 +27,8 @@ public class BlockAssetsGenerator extends BlockStateProvider {
     protected void registerStatesAndModels() {
         simpleBlock(ModBlocks.ENCASING_ICE.get(), models().withExistingParent("encasing_ice", mcLoc("ice")).renderType("translucent"));
 
-        defaultCake(ModBlocks.TNT_CAKE.get());
-        defaultCake(ModBlocks.POISON_CAKE.get());
+        defaultCakeBlock(ModBlocks.TNT_CAKE.get());
+        defaultCakeBlock(ModBlocks.POISON_CAKE.get());
         crossCakeBlock(ModBlocks.BROWN_MUSHROOM_CAKE.get(), mcLoc("block/brown_mushroom"));
         crossCakeBlock(ModBlocks.RED_MUSHROOM_CAKE.get(), mcLoc("block/red_mushroom"));
         crossCakeBlock(ModBlocks.CHORUS_CAKE.get(), modLoc("block/chorus_cake_flower"));
@@ -126,14 +126,13 @@ public class BlockAssetsGenerator extends BlockStateProvider {
         }
     }
 
-    private void defaultCake(BaseCakeBlock cake) {
+    private void defaultCakeBlock(BaseCakeBlock cake) {
         VariantBlockStateBuilder builder = getVariantBuilder(cake);
         CakeBuilder cakeBuilder = cake.getBuilder();
-        String name = cakeBuilder.getCakeName();
 
         builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().getExistingFile(mcLoc("cake"))));
-        for (int i1 = 1; i1 < 7; i1++) {
-            builder.partialState().with(BaseCakeBlock.BITES, i1).addModels(new ConfiguredModel(models().getExistingFile(mcLoc("cake_slice" + i1))));
+        for (int i = 1; i < 7; i++) {
+            builder.partialState().with(BaseCakeBlock.BITES, i).addModels(new ConfiguredModel(models().getExistingFile(mcLoc("cake_slice" + i))));
         }
 
         for (Block candle : cakeBuilder.getCandleCakeByCandle().keySet()) {

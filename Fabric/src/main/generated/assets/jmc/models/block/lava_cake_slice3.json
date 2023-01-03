@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cake_slice3",
+  "textures": {
+    "bottom": "jmc:block/lava_cake_bottom",
+    "inside": "jmc:block/lava_cake_inner",
+    "side": "jmc:block/lava_cake_side",
+    "top": "jmc:block/lava_cake_top"
+  }
+}
