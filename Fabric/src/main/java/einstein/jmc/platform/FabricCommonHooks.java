@@ -1,8 +1,8 @@
 package einstein.jmc.platform;
 
 import einstein.jmc.platform.services.CommonHooks;
-import einstein.jmc.util.FabricMenuDataProvider;
-import einstein.jmc.util.MenuDataProvider;
+import einstein.jmc.menu.FabricMenuDataProvider;
+import einstein.jmc.menu.MenuDataProvider;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;

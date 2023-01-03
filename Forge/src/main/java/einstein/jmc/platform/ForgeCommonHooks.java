@@ -1,7 +1,7 @@
 package einstein.jmc.platform;
 
 import einstein.jmc.platform.services.CommonHooks;
-import einstein.jmc.util.MenuDataProvider;
+import einstein.jmc.menu.MenuDataProvider;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +22,7 @@ public class ForgeCommonHooks implements CommonHooks {
     }
 
     @Override
-    public void openMenu(ServerPlayer player, MenuDataProvider menuProvider) {
-        NetworkHooks.openScreen(player, menuProvider);
+    public void openMenu(ServerPlayer player, MenuDataProvider provider) {
+        NetworkHooks.openScreen(player, provider, buf -> provider.writeMenuData(player, buf));
     }
 }

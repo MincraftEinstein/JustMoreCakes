@@ -8,7 +8,7 @@ import einstein.jmc.item.crafting.CakeOvenRecipe;
 import einstein.jmc.menu.cakeoven.CakeOvenMenu;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeOvenConstants;
-import einstein.jmc.util.MenuDataProvider;
+import einstein.jmc.menu.MenuDataProvider;
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;

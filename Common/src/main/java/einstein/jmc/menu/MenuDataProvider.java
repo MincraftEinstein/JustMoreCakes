@@ -1,4 +1,4 @@
-package einstein.jmc.util;
+package einstein.jmc.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;

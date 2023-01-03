@@ -1,4 +1,4 @@
-package einstein.jmc.util;
+package einstein.jmc.menu;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.network.FriendlyByteBuf;
