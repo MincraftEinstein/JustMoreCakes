@@ -20,8 +20,8 @@ import java.util.function.Supplier;
 
 public class ModAdvancements {
 
-    public static Advancement.Builder craftCake() { // TODO add parent back
-        return addCakes(Advancement.Builder.advancement()/*.parent(JustMoreCakes.mcLoc("husbandry/plant_seed"))*/.requirements(RequirementsStrategy.OR)
+    public static Advancement.Builder craftCake() {
+        return addCakes(Advancement.Builder.advancement().requirements(RequirementsStrategy.OR)
                 .display(Blocks.CAKE.asItem(), translatable("craft_cake.title"), translatable("craft_cake.description"), null, FrameType.TASK, true, true, false));
     }
 

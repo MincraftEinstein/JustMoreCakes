@@ -16,7 +16,7 @@ public class AdvancementsGenerator extends AdvancementProvider {
 	
 	@Override
 	protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
-		Advancement craftCake = ModAdvancements.craftCake().save(consumer, JustMoreCakes.loc("husbandry/craft_cake"), fileHelper);
+		Advancement craftCake = ModAdvancements.craftCake().parent(JustMoreCakes.mcLoc("husbandry/plant_seed")).save(consumer, JustMoreCakes.loc("husbandry/craft_cake"), fileHelper);
 		ModAdvancements.craftAllCakes(craftCake).save(consumer, JustMoreCakes.loc("husbandry/craft_all_cakes"), fileHelper);
 	}
 
