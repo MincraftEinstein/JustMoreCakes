@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.JsonOps;
+import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.blocks.BaseCandleCakeBlock;
 import einstein.jmc.data.CakeEffects;
@@ -158,7 +159,18 @@ public class Util {
         }
     }
 
-    public static void registerVillageBuilding(String biome, String name) {
+    public static void registerVillageBuilding(String biome, String name, int weight) {
+        String path = MOD_ID + ":village/" + biome + "/houses/" + biome + "_" + name;
+
+        if (weight < 1) {
+            return;
+        }
+
+        if (weight > 150) {
+            LOGGER.error("Failed to register village building: " + path + " - weight must be less than 150");
+            return;
+        }
+
         PlainVillagePools.bootstrap();
         DesertVillagePools.bootstrap();
         TaigaVillagePools.bootstrap();
@@ -168,17 +180,17 @@ public class Util {
         StructureTemplatePool templatePool = BuiltinRegistries.TEMPLATE_POOL.get(mcLoc("village/" + biome + "/houses"));
 
         if (templatePool == null) {
-            LOGGER.warn("Failed to register " + biome + " village building: Template pool is null");
+            LOGGER.warn("Failed to register village building: " + path + "  - template pool is null");
             return;
         }
 
-        StructurePoolElement structure = StructurePoolElement.legacy(MOD_ID + ":village/" + biome + "/houses/" + biome + "_" + name, ProcessorLists.MOSSIFY_10_PERCENT).apply(StructureTemplatePool.Projection.RIGID);
+        StructurePoolElement structure = StructurePoolElement.legacy(path, ProcessorLists.MOSSIFY_10_PERCENT).apply(StructureTemplatePool.Projection.RIGID);
 
-        for (int i = 0; i < ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get(); i++) {
+        for (int i = 0; i < weight; i++) {
             templatePool.templates.add(structure);
         }
 
-        templatePool.rawTemplates.add(Pair.of(structure, ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get()));
+        templatePool.rawTemplates.add(Pair.of(structure, weight));
     }
 
     public static Map<String, CakeEffects> deserializeCakeEffects(ResourceManager manager) {

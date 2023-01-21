@@ -29,13 +29,13 @@ public class JustMoreCakes {
     }
 
     public static void commonSetup() {
-        Util.registerVillageBuilding("plains", "bakery_1");
-        Util.registerVillageBuilding("plains", "bakery_2");
-        Util.registerVillageBuilding("desert", "bakery_1");
-        Util.registerVillageBuilding("savanna", "bakery_1");
-        Util.registerVillageBuilding("snowy", "bakery_1");
-        Util.registerVillageBuilding("snowy", "bakery_2");
-        Util.registerVillageBuilding("taiga", "bakery_1");
+        Util.registerVillageBuilding("plains", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding("plains", "bakery_2", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding("desert", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding("savanna", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding("snowy", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding("snowy", "bakery_2", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding("taiga", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
         Items.CAKE.maxStackSize = 64;
     }
 
