@@ -38,5 +38,12 @@
     "fabric": "*",
     "minecraft": "1.19.x",
     "java": ">=17"
+  },
+  "custom": {
+    "catalogue": {
+      "icon": {
+        "item": "jmc:chocolate_cake"
+      }
+    }
   }
 }

@@ -75,8 +75,8 @@ dependencies {
     compileOnly project(":Common")
 
     implementation fg.deobf("curse.maven:jei-238222:${forge_jei_v}")
-    implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_v}")
-    implementation fg.deobf("curse.maven:configured-457570:${configured_v}")
+    implementation fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_v}")
+    implementation fg.deobf("curse.maven:configured-457570:${forge_configured_v}")
     implementation fg.deobf("curse.maven:cake-chomps-307943:${forge_cake_chomps_v}")
 }
 

@@ -17,8 +17,10 @@ dependencies {
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation project(":Common")
 
-    modImplementation("curse.maven:modmenu-308702:${modmenu_v}")
     modImplementation("curse.maven:jei-238222:${fabric_jei_v}")
+//    modImplementation("curse.maven:modmenu-308702:${modmenu_v}")
+    modImplementation("curse.maven:catalogue-fabric-667377:${fabric_catalogue_v}")
+    modImplementation("curse.maven:configured-fabric-667378:${fabric_configured_v}")
     modImplementation("curse.maven:cake-chomps-fabric-394718:${fabric_cake_chomps_v}")
     modImplementation("net.minecraftforge:forgeconfigapiport-fabric:${config_port_v}")
 }
