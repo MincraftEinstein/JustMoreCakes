@@ -4,9 +4,6 @@ import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.data.CakeEffectsManager;
 import einstein.jmc.data.generators.*;
-import einstein.jmc.data.generators.BlockTagsGenerator;
-import einstein.jmc.data.generators.ItemTagsGenerator;
-import einstein.jmc.data.generators.POITagsGenerator;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.ForgeRegistryHelper;
 import einstein.jmc.platform.Services;
@@ -94,7 +91,6 @@ public class JustMoreCakesForge {
             MinecraftForge.EVENT_BUS.addListener(this::onBlockRightClicked);
         }
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
     }

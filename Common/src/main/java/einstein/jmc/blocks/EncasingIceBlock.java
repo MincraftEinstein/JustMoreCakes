@@ -1,6 +1,6 @@
 package einstein.jmc.blocks;
 
-import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.init.ModCommonConfigs;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -29,7 +29,7 @@ public class EncasingIceBlock extends HalfTransparentBlock {
 
 	@Override
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (Util.timeGoneBy(level, ModServerConfigs.ENCASING_ICE_MELT_SPEED.get())) {
+		if (Util.timeGoneBy(level, ModCommonConfigs.ENCASING_ICE_MELT_SPEED.get())) {
 			level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 		}
 	}

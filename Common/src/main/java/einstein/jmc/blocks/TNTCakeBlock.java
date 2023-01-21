@@ -1,7 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.jmc.blockentity.TNTCakeBlockEntity;
-import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.init.ModCommonConfigs;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -37,7 +37,7 @@ public class TNTCakeBlock extends BaseEntityCakeBlock {
 	}
 
 	private void explodeIfAllowed(Level level, BlockPos pos) {
-		if (ModServerConfigs.EFFECTED_BY_REDSTONE.get()) {
+		if (ModCommonConfigs.EFFECTED_BY_REDSTONE.get()) {
 			explode(level, pos);
 		}
 	}

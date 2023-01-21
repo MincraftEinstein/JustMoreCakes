@@ -44,7 +44,6 @@ public class JustMoreCakesFabric implements ModInitializer {
             onBlockRightClicked();
         }
 
-        ModLoadingContext.registerConfig(JustMoreCakes.MOD_ID, ModConfig.Type.SERVER, ModServerConfigs.SPEC);
         ModLoadingContext.registerConfig(JustMoreCakes.MOD_ID, ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
         ModLoadingContext.registerConfig(JustMoreCakes.MOD_ID, ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
 

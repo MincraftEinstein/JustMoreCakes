@@ -1,7 +1,7 @@
 package einstein.jmc.blockentity;
 
 import einstein.jmc.init.ModBlockEntityTypes;
-import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.init.ModCommonConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -24,7 +24,7 @@ public class GlowstoneCakeBlockEntity extends BlockEntity {
 			AABB aabb = new AABB(getBlockPos().below()).inflate(boundingBox).expandTowards(0, level.getHeight(), 0);
 			List<Mob> mobList = level.getEntitiesOfClass(Mob.class, aabb);
 			for (Mob mob : mobList) {
-				mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, ModServerConfigs.GLOWSTONE_CAKE_GLOWING_DUR.get(), 0, true, true));
+				mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, ModCommonConfigs.GLOWSTONE_CAKE_GLOWING_DUR.get(), 0, true, true));
 			}
 		}
 	}

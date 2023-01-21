@@ -2,7 +2,7 @@ package einstein.jmc.blocks;
 
 import einstein.jmc.data.CakeEffects;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.init.ModCommonConfigs;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
@@ -33,8 +33,6 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.Optional;
 
 public class BaseCakeBlock extends Block {
 
@@ -148,16 +146,16 @@ public class BaseCakeBlock extends Block {
 
 	public void eatActions(Player player, BlockPos pos, BlockState state) {
 		if (equals(ModBlocks.FIREY_CAKE.get())) {
-			player.setSecondsOnFire(ModServerConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
+			player.setSecondsOnFire(ModCommonConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
 		}
 		else if (equals(ModBlocks.ICE_CAKE.get())) {
 			player.clearFire();
 		}
 		else if (equals(ModBlocks.CHORUS_CAKE.get())) {
-			Util.teleportRandomly(player, ModServerConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get());
+			Util.teleportRandomly(player, ModCommonConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get());
 		}
 		else if (equals(ModBlocks.ENDER_CAKE.get())) {
-			Util.teleportRandomly(player, ModServerConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
+			Util.teleportRandomly(player, ModCommonConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
 			player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1, 1);
 		}
 	}
