@@ -1,24 +1,32 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
 
 version = "${mod_v}"
 group = "${mod_group}"
 archivesBaseName = "${mod_name}-forge-${mc_v}"
 
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}Common.mixins.json"
+}
+
 minecraft {
     mappings channel: 'official', version: "${mc_v}"
-    
+
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
@@ -71,8 +79,9 @@ sourceSets {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_v}-${forge_v}"
     compileOnly project(":Common")
+    minecraft "net.minecraftforge:forge:${mc_v}-${forge_v}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     implementation fg.deobf("curse.maven:jei-238222:${forge_jei_v}")
     implementation fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_v}")

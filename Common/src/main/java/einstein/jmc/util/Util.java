@@ -29,6 +29,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -49,6 +50,7 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static einstein.jmc.JustMoreCakes.*;
@@ -250,5 +252,23 @@ public class Util {
                 }
             }
         }
+    }
+
+    public static Predicate<ItemEntity> pandaItems() {
+        return itemEntity -> {
+            ItemStack stack = itemEntity.getItem();
+            return (stack.is(Blocks.BAMBOO.asItem()) || stack.is(Blocks.CAKE.asItem()) || isCake().test(stack)) && itemEntity.isAlive() && !itemEntity.hasPickUpDelay();
+        };
+    }
+
+    public static Predicate<ItemStack> isCake() {
+        return stack -> {
+            for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
+                if (stack.is(cake.get().asItem())) {
+                    return true;
+                }
+            }
+            return false;
+        };
     }
 }

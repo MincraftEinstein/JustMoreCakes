@@ -30,7 +30,8 @@
     ]
   },
   "mixins": [
-    "jmc.mixins.json"
+    "jmc.mixins.json",
+    "jmcCommon.mixins.json"
   ],
   "accessWidener": "jmc.accesswidener",
   "depends": {
