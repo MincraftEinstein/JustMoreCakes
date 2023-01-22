@@ -28,6 +28,10 @@ dependencies {
 loom {
     accessWidenerPath = file("src/main/resources/jmc.accesswidener")
 
+    mixin {
+        defaultRefmapName = "${mod_id}.refmap.json"
+    }
+
     runs {
         client {
             client()
