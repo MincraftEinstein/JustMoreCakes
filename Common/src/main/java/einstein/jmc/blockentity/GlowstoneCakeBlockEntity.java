@@ -20,8 +20,7 @@ public class GlowstoneCakeBlockEntity extends BlockEntity {
 	
 	public void setGlowing() {
 		if (!level.isClientSide) {
-			double boundingBox = 10 + 10;
-			AABB aabb = new AABB(getBlockPos().below()).inflate(boundingBox).expandTowards(0, level.getHeight(), 0);
+			AABB aabb = new AABB(getBlockPos().below()).inflate(ModCommonConfigs.GLOWSTONE_CAKE_EFFECT_RADIUS.get()).expandTowards(0, level.getHeight(), 0);
 			List<Mob> mobList = level.getEntitiesOfClass(Mob.class, aabb);
 			for (Mob mob : mobList) {
 				mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, ModCommonConfigs.GLOWSTONE_CAKE_GLOWING_DUR.get(), 0, true, true));
