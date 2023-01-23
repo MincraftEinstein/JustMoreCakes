@@ -33,7 +33,7 @@
     "jmc.mixins.json",
     "jmcCommon.mixins.json"
   ],
-  "accessWidener": "jmc.accesswidener",
+  "accessWidener": "jmcCommon.accesswidener",
   "depends": {
     "fabricloader": ">=0.14",
     "fabric": "*",

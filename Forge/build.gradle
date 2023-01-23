@@ -69,14 +69,7 @@ minecraft {
     }
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDir "src/generated/resources"
-            excludes.add("jmcCommon.accesswidener")
-        }
-    }
-}
+sourceSets.main.resources { srcDir "src/generated/resources" }
 
 dependencies {
     compileOnly project(":Common")
@@ -89,12 +82,12 @@ dependencies {
     implementation fg.deobf("curse.maven:cake-chomps-307943:${forge_cake_chomps_v}")
 }
 
-jar {
-    excludes.add("einstein/${mod_id}/data/generators")
-}
-
 processResources {
     from project(":Common").sourceSets.main.resources
+
+    exclude("jmcCommon.accesswidener")
+    exclude('.cache/')
+
     inputs.property "version", "${mod_v}"
 
     filesMatching("META-INF/mods.toml") {

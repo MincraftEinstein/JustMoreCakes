@@ -26,11 +26,9 @@ dependencies {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/jmc.accesswidener")
+    accessWidenerPath = project(":Common").file("src/main/resources/jmcCommon.accesswidener")
 
-    mixin {
-        defaultRefmapName = "${mod_id}.refmap.json"
-    }
+    mixin.defaultRefmapName = "${mod_id}.refmap.json"
 
     runs {
         client {
@@ -57,20 +55,13 @@ loom {
     }
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDirs += ["src/main/generated"]
-        }
-    }
-}
-
-jar {
-    excludes.add("jmcCommon.accesswidener")
-}
+sourceSets.main.resources { srcDirs += ["src/main/generated"] }
 
 processResources {
     from project(":Common").sourceSets.main.resources
+
+    exclude('.cache/')
+
     inputs.property "version", "${mod_v}"
 
     filesMatching("fabric.mod.json") {

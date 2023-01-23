@@ -101,7 +101,7 @@ public class JustMoreCakesFabric implements ModInitializer {
 
     void addVillagerTrades() {
 
-        // Novice (stone tier)
+        // Novice (Stone tier)
         TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 1, trades -> {
             trades.add(new EmeraldsForItems(Items.WHEAT, 20, 1, 16, 2));
             trades.add(new EmeraldsForItems(Items.EGG, 5, 1, 16, 2));
