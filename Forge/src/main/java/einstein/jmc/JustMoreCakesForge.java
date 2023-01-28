@@ -3,18 +3,21 @@ package einstein.jmc;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.data.CakeEffectsManager;
-import einstein.jmc.data.generators.*;
+import einstein.jmc.data.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.ForgeRegistryHelper;
 import einstein.jmc.platform.Services;
+import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
 import einstein.jmc.util.Util;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.PackOutput;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -30,11 +33,15 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.data.BlockTagsProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -52,6 +59,7 @@ import net.minecraftforge.registries.MissingMappingsEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 import static einstein.jmc.JustMoreCakes.*;
@@ -70,6 +78,7 @@ public class JustMoreCakesForge {
         modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::onParallelDispatch);
         modEventBus.addListener(this::generateData);
+        modEventBus.addListener(this::registerCreativeTab);
         ForgeRegistryHelper.ITEMS.register(modEventBus);
         ForgeRegistryHelper.BLOCKS.register(modEventBus);
         ForgeRegistryHelper.BLOCK_ENTITIES.register(modEventBus);
@@ -84,6 +93,7 @@ public class JustMoreCakesForge {
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJump);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityTick);
         MinecraftForge.EVENT_BUS.addListener(this::onAddReloadListeners);
+        MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarted);
         MinecraftForge.EVENT_BUS.addListener(this::onVillagerTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onWanderingTradesEvent);
@@ -97,20 +107,31 @@ public class JustMoreCakesForge {
 
     void generateData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
+        PackOutput output = generator.getPackOutput();
+        ExistingFileHelper helper = event.getExistingFileHelper();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         // Server providers
-        generator.addProvider(event.includeServer(), new RecipesGenerator(generator));
-        BlockTagsProvider blockTags = new BlockTagsGenerator(generator, event.getExistingFileHelper());
+        generator.addProvider(event.includeServer(), new ModRecipeProvider(output));
+        BlockTagsProvider blockTags = new ModBlockTagsProvider(output, lookupProvider, helper);
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ItemTagsGenerator(generator, blockTags, event.getExistingFileHelper()));
-        generator.addProvider(event.includeServer(), new POITagsGenerator(generator, event.getExistingFileHelper()));
-        generator.addProvider(event.includeServer(), new AdvancementsGenerator(generator, event.getExistingFileHelper()));
-        generator.addProvider(event.includeServer(), new LootTableGenerator(generator));
-        generator.addProvider(event.includeServer(), new CakeEffectsGenerator(generator));
+        generator.addProvider(event.includeServer(), new ModItemTagsProvider(output, lookupProvider, blockTags, helper));
+        generator.addProvider(event.includeServer(), new ModPOITagsProvider(output, lookupProvider, helper));
+        generator.addProvider(event.includeServer(), new ModAdvancementProvider(output, lookupProvider, helper));
+        generator.addProvider(event.includeServer(), new ModLootTableProvider(output));
+        generator.addProvider(event.includeServer(), new ModCakeEffectsProvider(output));
 
         // Client providers
-        generator.addProvider(event.includeClient(), new BlockAssetsGenerator(generator, event.getExistingFileHelper()));
-        generator.addProvider(event.includeClient(), new ItemAssetsGenerator(generator, event.getExistingFileHelper()));
+        generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, helper));
+        generator.addProvider(event.includeClient(), new ModItemModelProvider(output, helper));
+    }
+
+    void registerCreativeTab(CreativeModeTabEvent.Register event) {
+        event.registerCreativeModeTab(JustMoreCakes.loc("jmc_tab"), builder -> {
+            builder.icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).title(Component.translatable("itemGroup.jmc.jmc_tab")).displayItems((flags, output, hasPermission) -> {
+                RegistryHelper.CREATIVE_TAB_ITEMS.forEach(cake -> output.accept(cake.get()));
+            }).build();
+        });
     }
 
     /**
@@ -159,6 +180,10 @@ public class JustMoreCakesForge {
         else {
             throw new IllegalStateException("Can't retrieve CakeEffectsManager until resources have loaded");
         }
+    }
+
+    void onServerStarting(ServerStartingEvent event) {
+        JustMoreCakes.onServerStarting(event.getServer());
     }
 
     void onServerStarted(ServerStartedEvent event) {

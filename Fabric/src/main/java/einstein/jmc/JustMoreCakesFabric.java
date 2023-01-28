@@ -4,13 +4,16 @@ import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.data.CakeEffects;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
+import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
 import einstein.jmc.util.Util;
+import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.VillagerInteractionRegistries;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -19,9 +22,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.api.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 
 import java.util.Map;
@@ -36,6 +39,7 @@ public class JustMoreCakesFabric implements ModInitializer {
     public void onInitialize() {
         JustMoreCakes.init();
         onAddReloadListeners();
+        onServerStarting();
         onServerStarted();
         addVillagerTrades();
         ModPotions.registerPotionRecipes();
@@ -44,11 +48,15 @@ public class JustMoreCakesFabric implements ModInitializer {
             onBlockRightClicked();
         }
 
-        ModLoadingContext.registerConfig(JustMoreCakes.MOD_ID, ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
-        ModLoadingContext.registerConfig(JustMoreCakes.MOD_ID, ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
+        ForgeConfigRegistry.INSTANCE.register(JustMoreCakes.MOD_ID, ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
+        ForgeConfigRegistry.INSTANCE.register(JustMoreCakes.MOD_ID, ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
 
         VillagerInteractionRegistries.registerGiftLootTable(ModVillagers.CAKE_BAKER.get(), loc("gameplay/hero_of_the_village/cake_baker_gift"));
         JustMoreCakes.commonSetup();
+
+        FabricItemGroup.builder(JustMoreCakes.loc("jmc_tab")).icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).displayItems((flags, output, hasPermission) -> {
+            RegistryHelper.CREATIVE_TAB_ITEMS.forEach(supplier -> output.accept(supplier.get()));
+        }).build();
     }
 
     /**
@@ -78,6 +86,10 @@ public class JustMoreCakesFabric implements ModInitializer {
                 CAKE_EFFECTS = Util.deserializeCakeEffects(manager);
             }
         });
+    }
+
+    void onServerStarting() {
+        ServerLifecycleEvents.SERVER_STARTING.register(JustMoreCakes::onServerStarting);
     }
 
     void onServerStarted() {

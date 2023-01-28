@@ -1,11 +1,9 @@
 package einstein.jmc;
 
 import einstein.jmc.init.*;
-import einstein.jmc.platform.Services;
 import einstein.jmc.util.Util;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import org.slf4j.Logger;
@@ -16,7 +14,6 @@ public class JustMoreCakes {
     public static final String MOD_ID = "jmc";
     public static final String MOD_NAME = "Just More Cakes!";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
-    public static final CreativeModeTab JMC_TAB = Services.REGISTRY.registerTab("jmc_tab", () -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get()));
 
     public static void init() {
         ModItems.init();
@@ -29,14 +26,17 @@ public class JustMoreCakes {
     }
 
     public static void commonSetup() {
-        Util.registerVillageBuilding("plains", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
-        Util.registerVillageBuilding("plains", "bakery_2", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
-        Util.registerVillageBuilding("desert", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
-        Util.registerVillageBuilding("savanna", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
-        Util.registerVillageBuilding("snowy", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
-        Util.registerVillageBuilding("snowy", "bakery_2", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
-        Util.registerVillageBuilding("taiga", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
         Items.CAKE.maxStackSize = 64;
+    }
+
+    public static void onServerStarting(MinecraftServer server) {
+        Util.registerVillageBuilding(server, "plains", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding(server, "plains", "bakery_2", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding(server, "desert", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding(server, "savanna", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding(server, "snowy", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding(server, "snowy", "bakery_2", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
+        Util.registerVillageBuilding(server, "taiga", "bakery_1", ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT.get());
     }
 
     public static void AddSupportedCandles() {

@@ -26,27 +26,14 @@ minecraft {
     }
 }
 
-repositories {
-    maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-}
-
 dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
 
     compileOnly group: 'com.electronwill.night-config', name: 'core', version: '3.6.3'
     compileOnly group: 'com.electronwill.night-config', name: 'toml', version: '3.6.3'
-    compileOnly group: 'net.minecraftforge', name: 'forgeconfigapiport-fabric', version: "${config_port_v}"
-    compileOnly group: 'mezz.jei', name: "jei-${mc_v}-forge", version: "${common_jei_v}"
+    compileOnly group: 'fuzs.forgeconfigapiport', name: 'forgeconfigapiport-common', version: "${config_port_v}"
+    compileOnly group: 'mezz.jei', name: "jei-${mc_v}-common", version: "${jei_v}"
 }
 
 publishing {

@@ -7,6 +7,7 @@ import com.google.gson.JsonSyntaxException;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -48,7 +49,7 @@ public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> implements Recip
 			else {
 				String resultString = GsonHelper.getAsString(json, r);
 				ResourceLocation resourceLocation = new ResourceLocation(resultString);
-				resultStack = new ItemStack(Registry.ITEM.getOptional(resourceLocation).orElseThrow(
+				resultStack = new ItemStack(BuiltInRegistries.ITEM.getOptional(resourceLocation).orElseThrow(
 						() -> new IllegalStateException("Item: " + resultString + " does not exist")));
 			}
 			

@@ -9,9 +9,7 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -23,8 +21,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
-
-import static einstein.jmc.JustMoreCakes.loc;
 
 public class ForgeRegistryHelper implements RegistryHelper {
 
@@ -40,19 +36,10 @@ public class ForgeRegistryHelper implements RegistryHelper {
     public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONS = DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, JustMoreCakes.MOD_ID);
 
     @Override
-    public CreativeModeTab registerTab(String name, Supplier<ItemStack> icon) {
-        return new CreativeModeTab(CreativeModeTab.TABS.length, loc(name).toLanguageKey()) {
-
-            @Override
-            public ItemStack makeIcon() {
-                return icon.get();
-            }
-        };
-    }
-
-    @Override
     public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type) {
-        return ITEMS.register(name, type);
+        Supplier<T> item = ITEMS.register(name, type);
+        CREATIVE_TAB_ITEMS.add(item);
+        return item;
     }
 
     @Override

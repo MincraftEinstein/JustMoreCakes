@@ -76,9 +76,13 @@ dependencies {
     minecraft "net.minecraftforge:forge:${mc_v}-${forge_v}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("curse.maven:jei-238222:${forge_jei_v}")
-    implementation fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_v}")
-    implementation fg.deobf("curse.maven:configured-457570:${forge_configured_v}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_v}-common-api:${jei_v}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_v}-forge-api:${jei_v}")
+
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_v}-forge:${jei_v}")
+    runtimeOnly fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_v}")
+    runtimeOnly fg.deobf("curse.maven:configured-457570:${forge_configured_v}")
+
     implementation fg.deobf("curse.maven:cake-chomps-307943:${forge_cake_chomps_v}")
 }
 

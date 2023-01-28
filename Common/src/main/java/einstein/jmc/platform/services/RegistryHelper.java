@@ -1,6 +1,5 @@
 package einstein.jmc.platform.services;
 
-import einstein.jmc.JustMoreCakes;
 import einstein.jmc.util.BlockEntitySupplier;
 import einstein.jmc.util.MenuTypeSupplier;
 import net.minecraft.world.effect.MobEffect;
@@ -9,9 +8,7 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -19,17 +16,19 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public interface RegistryHelper {
 
-    CreativeModeTab registerTab(String name, Supplier<ItemStack> icon);
+    List<Supplier<? extends Item>> CREATIVE_TAB_ITEMS = new ArrayList<>();
 
     <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type);
 
     default <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> type) {
         Supplier<T> block = registerBlockNoItem(name, type);
-        registerItem(name, () -> new BlockItem(block.get(), new Item.Properties().tab(JustMoreCakes.JMC_TAB)));
+        registerItem(name, () -> new BlockItem(block.get(), new Item.Properties()));
         return block;
     }
 

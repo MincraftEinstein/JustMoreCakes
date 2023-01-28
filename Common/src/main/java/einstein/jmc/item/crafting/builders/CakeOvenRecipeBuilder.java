@@ -10,9 +10,10 @@ import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -25,27 +26,29 @@ import java.util.function.Consumer;
 
 public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 
+	private final RecipeCategory category;
 	private final Item result;
 	private final NonNullList<Ingredient> ingredients;
 	private final float experience;
 	private final int cookingTime;
 	private final Advancement.Builder advancement = Advancement.Builder.advancement();
 	
-	public CakeOvenRecipeBuilder(NonNullList<Ingredient> ingredients, ItemLike result, float experience, int cookingTime) {
+	public CakeOvenRecipeBuilder(RecipeCategory category, NonNullList<Ingredient> ingredients, ItemLike result, float experience, int cookingTime) {
+		this.category = category;
 		this.result = result.asItem();
 		this.ingredients = ingredients;
 		this.experience = experience;
 		this.cookingTime = cookingTime;
 	}
 	
-	public static CakeOvenRecipeBuilder cakeBaking(ItemLike result, float experience, int cookingTime, Ingredient... ingredients) {
+	public static CakeOvenRecipeBuilder cakeBaking(ItemLike result, float experience, int cookingTime, RecipeCategory category, Ingredient... ingredients) {
 		if (ingredients.length > INGREDIENT_SLOT_COUNT) {
 			throw new IllegalArgumentException("Too many ingredients for cake oven recipe. The max is 4");
 		}
 		
 		NonNullList<Ingredient> ingredientsList = NonNullList.create();
 		Collections.addAll(ingredientsList, ingredients);
-		return new CakeOvenRecipeBuilder(ingredientsList, result, experience, cookingTime);
+		return new CakeOvenRecipeBuilder(category, ingredientsList, result, experience, cookingTime);
 	}
 	
 	@Override
@@ -69,8 +72,7 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 		ensureValid(recipeId);
 		advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId))
 			.requirements(RequirementsStrategy.OR);
-		consumer.accept(new Result(recipeId, ingredients, result, experience, cookingTime, advancement, new ResourceLocation(recipeId.getNamespace(),
-			"recipes/" + result.getItemCategory().getRecipeFolderName() + "/" + recipeId.getPath())));
+		consumer.accept(new Result(recipeId, ingredients, result, experience, cookingTime, advancement, recipeId.withPrefix("recipes/" + category.getFolderName() + "/")));
 	}
 	
 	private void ensureValid(ResourceLocation recipeId) {
@@ -108,7 +110,7 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 			}
 			
 			json.add("ingredients", jsonIngredients);
-			json.addProperty("result", Registry.ITEM.getKey(result).toString());
+			json.addProperty("result", BuiltInRegistries.ITEM.getKey(result).toString());
 			json.addProperty("experience", experience);
 			json.addProperty("cookingTime", cookingTime);
 		}

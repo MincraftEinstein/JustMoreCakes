@@ -10,14 +10,18 @@ import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.blocks.BaseCandleCakeBlock;
 import einstein.jmc.data.CakeEffects;
 import einstein.jmc.init.ModPotions;
+import einstein.jmc.mixin.StructureTemplatePoolAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.data.worldgen.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.ProcessorLists;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvents;
@@ -33,7 +37,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -41,6 +44,7 @@ import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.phys.Vec3;
 
 import java.io.BufferedReader;
@@ -48,6 +52,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.Predicate;
@@ -61,18 +67,18 @@ public class Util {
     private static final Random RANDOM = new Random();
 
     public static <T extends Item> ResourceLocation getItemId(T item) {
-        return Registry.ITEM.getKey(item);
+        return BuiltInRegistries.ITEM.getKey(item);
     }
 
     public static <T extends Block> ResourceLocation getBlockId(T block) {
-        return Registry.BLOCK.getKey(block);
+        return BuiltInRegistries.BLOCK.getKey(block);
     }
 
     public static void createExplosion(final Level level, final BlockPos pos, final float size) {
         if (level.isClientSide) {
             return;
         }
-        level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, size, Explosion.BlockInteraction.BREAK);
+        level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, size, Level.ExplosionInteraction.TNT);
     }
 
     public static boolean teleportRandomly(final LivingEntity entity, final double radius) {
@@ -91,7 +97,7 @@ public class Util {
     }
 
     public static Block getBlock(ResourceLocation location) {
-        Block block = Registry.BLOCK.get(location);
+        Block block = BuiltInRegistries.BLOCK.get(location);
         if (block != Blocks.AIR) {
             return block;
         }
@@ -158,7 +164,7 @@ public class Util {
         }
     }
 
-    public static void registerVillageBuilding(String biome, String name, int weight) {
+    public static void registerVillageBuilding(MinecraftServer server, String biome, String name, int weight) {
         String path = MOD_ID + ":village/" + biome + "/houses/" + biome + "_" + name;
 
         if (weight < 1) {
@@ -170,26 +176,27 @@ public class Util {
             return;
         }
 
-        PlainVillagePools.bootstrap();
-        DesertVillagePools.bootstrap();
-        TaigaVillagePools.bootstrap();
-        SnowyVillagePools.bootstrap();
-        SavannaVillagePools.bootstrap();
+        RegistryAccess.Frozen access = server.registryAccess();
+        Registry<StructureTemplatePool> templatePoolRegistry = access.registry(Registries.TEMPLATE_POOL).orElseThrow();
+        Registry<StructureProcessorList> processorRegistry = access.registry(Registries.PROCESSOR_LIST).orElseThrow();
 
-        StructureTemplatePool templatePool = BuiltinRegistries.TEMPLATE_POOL.get(mcLoc("village/" + biome + "/houses"));
+        StructureTemplatePool templatePool = templatePoolRegistry.get(mcLoc("village/" + biome + "/houses"));
 
         if (templatePool == null) {
             LOGGER.warn("Failed to register village building: " + path + "  - template pool is null");
             return;
         }
 
-        StructurePoolElement structure = StructurePoolElement.legacy(path, ProcessorLists.MOSSIFY_10_PERCENT).apply(StructureTemplatePool.Projection.RIGID);
+        StructurePoolElement structure = StructurePoolElement.legacy(path, processorRegistry.getHolderOrThrow(ProcessorLists.MOSSIFY_10_PERCENT)).apply(StructureTemplatePool.Projection.RIGID);
+        StructureTemplatePoolAccessor templateAccessor = ((StructureTemplatePoolAccessor) templatePool);
 
         for (int i = 0; i < weight; i++) {
-            templatePool.templates.add(structure);
+            templateAccessor.getTemplates().add(structure);
         }
 
-        templatePool.rawTemplates.add(Pair.of(structure, weight));
+        List<Pair<StructurePoolElement, Integer>> rawTemplates = new ArrayList<>(templateAccessor.getRawTemplates());
+        rawTemplates.add(Pair.of(structure, weight));
+        templateAccessor.setRawTemplates(rawTemplates);
     }
 
     public static Map<String, CakeEffects> deserializeCakeEffects(ResourceManager manager) {
