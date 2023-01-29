@@ -253,6 +253,18 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "obsidian_cake": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:obsidian_cake"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "poison_cake": {
       "conditions": {
         "items": [
@@ -428,6 +440,9 @@
     ],
     [
       "crimson_fungus_cake"
+    ],
+    [
+      "obsidian_cake"
     ],
     [
       "poison_cake"

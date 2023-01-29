@@ -35,6 +35,7 @@
 	"block.jmc.warped_fungus_cake": "Warped Fungus Cake",
 	"block.jmc.red_velvet_cake": "Red Velvet Cake",
 	"block.jmc.glow_berry_cake": "Glow Berry Cake",
+	"block.jmc.obsidian_cake": "Obsidian Cake",
 	"block.jmc.encasing_ice": "Encasing Ice",
 	"block.jmc.cake_oven": "Cake Oven",
 
@@ -75,5 +76,7 @@
 	"advancements.husbandry.craft_cake.title": "Cake is a Lie",
 	"advancements.husbandry.craft_cake.description": "Craft a cake",
 	"advancements.husbandry.craft_all_cakes.title": "Num Num Num Num Num",
-	"advancements.husbandry.craft_all_cakes.description": "Craft all the cakes in the mod"
+	"advancements.husbandry.craft_all_cakes.description": "Craft all the cakes in the mod",
+	"advancements.husbandry.eat_obsidian_cake.title": "You Don't Have Diamond Teeth",
+	"advancements.husbandry.eat_obsidian_cake.description": "Try to eat an Obsidian Cake"
 }

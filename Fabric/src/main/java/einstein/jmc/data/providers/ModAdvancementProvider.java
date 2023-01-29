@@ -22,5 +22,6 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
 
         Advancement craftCake = ModAdvancements.craftCake().parent(plantSeedsDummy).save(consumer, JustMoreCakes.loc("husbandry/craft_cake").toString());
         ModAdvancements.craftAllCakes(craftCake).save(consumer, JustMoreCakes.loc("husbandry/craft_all_cakes").toString());
+        ModAdvancements.eatObsidianCake(craftCake).save(consumer, JustMoreCakes.loc("husbandry/eat_obsidian_cake").toString());
     }
 }

@@ -1,5 +1,6 @@
 package einstein.jmc.data.providers;
 
+import einstein.jmc.advancement.criterian.CakeEatenTrigger;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
@@ -29,6 +30,12 @@ public class ModAdvancements {
         return addCakes(Advancement.Builder.advancement().parent(parent))
                 .display(ModBlocks.CHOCOLATE_CAKE.get(), translatable("craft_all_cakes.title"), translatable("craft_all_cakes.description"), null, FrameType.CHALLENGE, true, true, false)
                 .rewards(AdvancementRewards.Builder.experience(100));
+    }
+
+    public static Advancement.Builder eatObsidianCake(Advancement parent) {
+        return Advancement.Builder.advancement().parent(parent)
+                .display(ModBlocks.OBSIDIAN_CAKE.get(), translatable("eat_obsidian_cake.title"), translatable("eat_obsidian_cake.description"), null, FrameType.TASK, true, true, false)
+                .addCriterion("obsidian_cake_eaten", new CakeEatenTrigger.TriggerInstance(Util.getBlockId(ModBlocks.OBSIDIAN_CAKE.get())));
     }
 
     private static Advancement.Builder addCakes(Advancement.Builder advancement) {

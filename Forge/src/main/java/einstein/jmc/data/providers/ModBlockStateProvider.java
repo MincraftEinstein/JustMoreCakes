@@ -59,23 +59,32 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
     }
 
-    private void cakeBlock(Block block, String name) {
+    private void cakeBlock(BaseCakeBlock cake, String name) {
         String side = "block/" + name + "_side";
         String top = "block/" + name + "_top";
         String bottom = "block/" + name + "_bottom";
         String inside = "block/" + name + "_inner";
-        VariantBlockStateBuilder builder = getVariantBuilder(block);
-        builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().withExistingParent(name, modLoc("template_cake"))
-                .texture("side", side)
-                .texture("top", top)
-                .texture("bottom", bottom)));
 
-        for (int i = 1; i < 7; i++) {
-            builder.partialState().with(BaseCakeBlock.BITES, i).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice" + i, modLoc("template_cake_slice" + i))
+        if (cake.getBiteCount() > 0) {
+            VariantBlockStateBuilder builder = getVariantBuilder(cake);
+            builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().withExistingParent(name, modLoc("template_cake"))
                     .texture("side", side)
                     .texture("top", top)
-                    .texture("bottom", bottom)
-                    .texture("inside", inside)));
+                    .texture("bottom", bottom)));
+
+            for (int i = 1; i < 7; i++) {
+                builder.partialState().with(BaseCakeBlock.BITES, i).addModels(new ConfiguredModel(models().withExistingParent(name + "_slice" + i, modLoc("template_cake_slice" + i))
+                        .texture("side", side)
+                        .texture("top", top)
+                        .texture("bottom", bottom)
+                        .texture("inside", inside)));
+            }
+        }
+        else {
+            simpleBlock(cake, models().withExistingParent(name, modLoc("template_cake"))
+                    .texture("side", side)
+                    .texture("top", top)
+                    .texture("bottom", bottom));
         }
     }
 
@@ -103,43 +112,61 @@ public class ModBlockStateProvider extends BlockStateProvider {
         String top = "block/" + name + "_top";
         String bottom = "block/" + name + "_bottom";
         String inside = "block/" + name + "_inner";
-        VariantBlockStateBuilder builder = getVariantBuilder(cake);
-        builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().withExistingParent(name, modLoc("template_cross_cake"))
-                .texture("side", side)
-                .texture("top", top)
-                .texture("bottom", bottom)
-                .texture("cross", cross).renderType(mcLoc("cutout"))));
 
-        for (int i = 1; i < 7; i++) {
-            BlockModelBuilder model = models().withExistingParent(name + "_slice" + i, modLoc("template_cross_cake_slice" + i))
-                    .renderType(mcLoc("cutout"))
+        if (cake.getBiteCount() > 0) {
+            VariantBlockStateBuilder builder = getVariantBuilder(cake);
+            builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().withExistingParent(name, modLoc("template_cross_cake"))
                     .texture("side", side)
                     .texture("top", top)
                     .texture("bottom", bottom)
-                    .texture("inside", inside);
+                    .texture("cross", cross).renderType(mcLoc("cutout"))));
 
-            if (i < 4) {
-                model.texture("cross", cross);
+            for (int i = 1; i < 7; i++) {
+                BlockModelBuilder model = models().withExistingParent(name + "_slice" + i, modLoc("template_cross_cake_slice" + i))
+                        .renderType(mcLoc("cutout"))
+                        .texture("side", side)
+                        .texture("top", top)
+                        .texture("bottom", bottom)
+                        .texture("inside", inside);
+
+                if (i < 4) {
+                    model.texture("cross", cross);
+                }
+
+                builder.partialState().with(BaseCakeBlock.BITES, i).addModels(new ConfiguredModel(model));
             }
-
-            builder.partialState().with(BaseCakeBlock.BITES, i).addModels(new ConfiguredModel(model));
+        }
+        else {
+            simpleBlock(cake, models().withExistingParent(name, modLoc("template_cross_cake"))
+                    .texture("side", side)
+                    .texture("top", top)
+                    .texture("bottom", bottom)
+                    .texture("cross", cross).renderType(mcLoc("cutout")));
         }
     }
 
     private void defaultCakeBlock(BaseCakeBlock cake) {
-        VariantBlockStateBuilder builder = getVariantBuilder(cake);
         CakeBuilder cakeBuilder = cake.getBuilder();
 
-        builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().getExistingFile(mcLoc("cake"))));
-        for (int i = 1; i < 7; i++) {
-            builder.partialState().with(BaseCakeBlock.BITES, i).addModels(new ConfiguredModel(models().getExistingFile(mcLoc("cake_slice" + i))));
+        if (cake.getBiteCount() > 0) {
+            VariantBlockStateBuilder builder = getVariantBuilder(cake);
+            builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().getExistingFile(mcLoc("cake"))));
+
+            for (int i = 1; i < 7; i++) {
+                builder.partialState().with(BaseCakeBlock.BITES, i).addModels(new ConfiguredModel(models().getExistingFile(mcLoc("cake_slice" + i))));
+            }
+        }
+        else {
+            simpleBlock(cake, models().getExistingFile(mcLoc("cake")));
         }
 
-        for (Block candle : cakeBuilder.getCandleCakeByCandle().keySet()) {
-            ResourceLocation type = ModBlocks.SUPPORTED_CANDLES.get(candle);
-            getVariantBuilder(cakeBuilder.getCandleCakeByCandle().get(candle).get())
-                    .partialState().with(BaseCandleCakeBlock.LIT, false).addModels(new ConfiguredModel(models().getExistingFile(new ResourceLocation(type.getNamespace(), type.getPath() + "candle_cake"))))
-                    .partialState().with(BaseCandleCakeBlock.LIT, true).addModels(new ConfiguredModel(models().getExistingFile(new ResourceLocation(type.getNamespace(), type.getPath() + "candle_cake_lit"))));
+        if (cakeBuilder.allowsCandles()) {
+            for (Block candle : cakeBuilder.getCandleCakeByCandle().keySet()) {
+                ResourceLocation type = ModBlocks.SUPPORTED_CANDLES.get(candle);
+                getVariantBuilder(cakeBuilder.getCandleCakeByCandle().get(candle).get())
+                        .partialState().with(BaseCandleCakeBlock.LIT, false).addModels(new ConfiguredModel(models().getExistingFile(new ResourceLocation(type.getNamespace(), type.getPath() + "candle_cake"))))
+                        .partialState().with(BaseCandleCakeBlock.LIT, true).addModels(new ConfiguredModel(models().getExistingFile(new ResourceLocation(type.getNamespace(), type.getPath() + "candle_cake_lit"))));
+            }
         }
     }
 }

@@ -30,6 +30,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
 		public void generate(HolderLookup.Provider provider, Consumer<Advancement> consumer) {
 			Advancement craftCake = ModAdvancements.craftCake().parent(JustMoreCakes.mcLoc("husbandry/plant_seed")).save(consumer, JustMoreCakes.loc("husbandry/craft_cake"), fileHelper);
 			ModAdvancements.craftAllCakes(craftCake).save(consumer, JustMoreCakes.loc("husbandry/craft_all_cakes"), fileHelper);
+			ModAdvancements.eatObsidianCake(craftCake).save(consumer, JustMoreCakes.loc("husbandry/eat_obsidian_cake"), fileHelper);
 		}
 	}
 }

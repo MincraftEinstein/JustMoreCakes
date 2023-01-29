@@ -253,6 +253,18 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "obsidian_cake": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:obsidian_cake"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "poison_cake": {
       "conditions": {
         "items": [
@@ -409,25 +421,19 @@
       "cupcake"
     ],
     [
-      "chocolate_cake"
+      "crimson_fungus_cake"
     ],
     [
-      "three_tiered_cake"
+      "glow_berry_cake"
     ],
     [
-      "pumpkin_cake"
+      "carrot_cake"
     ],
     [
-      "red_mushroom_cake"
+      "apple_cake"
     ],
     [
-      "ender_cake"
-    ],
-    [
-      "creeper_cake"
-    ],
-    [
-      "tnt_cake"
+      "golden_apple_cake"
     ],
     [
       "redstone_cake"
@@ -436,67 +442,76 @@
       "seed_cake"
     ],
     [
-      "sweet_berry_cake"
-    ],
-    [
       "red_velvet_cake"
-    ],
-    [
-      "apple_cake"
-    ],
-    [
-      "honey_cake"
-    ],
-    [
-      "cookie_cake"
-    ],
-    [
-      "brown_mushroom_cake"
-    ],
-    [
-      "glowstone_cake"
     ],
     [
       "firey_cake"
     ],
     [
-      "lava_cake"
-    ],
-    [
-      "chorus_cake"
-    ],
-    [
-      "melon_cake"
-    ],
-    [
       "poison_cake"
-    ],
-    [
-      "crimson_fungus_cake"
-    ],
-    [
-      "ice_cake"
-    ],
-    [
-      "cheesecake"
-    ],
-    [
-      "glow_berry_cake"
-    ],
-    [
-      "slime_cake"
-    ],
-    [
-      "beetroot_cake"
     ],
     [
       "warped_fungus_cake"
     ],
     [
-      "carrot_cake"
+      "chocolate_cake"
     ],
     [
-      "golden_apple_cake"
+      "tnt_cake"
+    ],
+    [
+      "red_mushroom_cake"
+    ],
+    [
+      "beetroot_cake"
+    ],
+    [
+      "glowstone_cake"
+    ],
+    [
+      "brown_mushroom_cake"
+    ],
+    [
+      "chorus_cake"
+    ],
+    [
+      "three_tiered_cake"
+    ],
+    [
+      "cheesecake"
+    ],
+    [
+      "sweet_berry_cake"
+    ],
+    [
+      "cookie_cake"
+    ],
+    [
+      "creeper_cake"
+    ],
+    [
+      "honey_cake"
+    ],
+    [
+      "slime_cake"
+    ],
+    [
+      "obsidian_cake"
+    ],
+    [
+      "lava_cake"
+    ],
+    [
+      "pumpkin_cake"
+    ],
+    [
+      "melon_cake"
+    ],
+    [
+      "ice_cake"
+    ],
+    [
+      "ender_cake"
     ]
   ],
   "rewards": {

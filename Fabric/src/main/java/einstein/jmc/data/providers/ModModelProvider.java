@@ -97,26 +97,35 @@ public class ModModelProvider extends FabricModelProvider {
         ResourceLocation top = TextureMapping.getBlockTexture(cake, "_top");
         ResourceLocation side = TextureMapping.getBlockTexture(cake, "_side");
         ResourceLocation inside = TextureMapping.getBlockTexture(cake, "_inner");
-        var builder = PropertyDispatch.property(BlockStateProperties.BITES);
 
-        builder.select(0, Variant.variant().with(VariantProperties.MODEL,
+        if (cake.getBiteCount() > 0) {
+            var builder = PropertyDispatch.property(BlockStateProperties.BITES);
+
+            builder.select(0, blankCake(generators, cake, bottom, top, side));
+
+            for (int i = 1; i < 7; i++) {
+                builder.select(i, Variant.variant().with(VariantProperties.MODEL,
+                        new ModelTemplate(Optional.of(loc("block/template_cake_slice" + i)), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.INSIDE, TextureSlot.SIDE)
+                                .createWithSuffix(cake, "_slice" + i, new TextureMapping()
+                                        .put(TextureSlot.BOTTOM, bottom)
+                                        .put(TextureSlot.TOP, top)
+                                        .put(TextureSlot.INSIDE, inside)
+                                        .put(TextureSlot.SIDE, side), generators.modelOutput)));
+            }
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(builder));
+        }
+        else {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake, blankCake(generators, cake, bottom, top, side)));
+        }
+    }
+
+    private Variant blankCake(BlockModelGenerators generators, BaseCakeBlock cake, ResourceLocation bottom, ResourceLocation top, ResourceLocation side) {
+        return Variant.variant().with(VariantProperties.MODEL,
                 new ModelTemplate(Optional.of(loc("block/template_cake")), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE)
                         .create(cake, new TextureMapping()
                                 .put(TextureSlot.BOTTOM, bottom)
                                 .put(TextureSlot.TOP, top)
-                                .put(TextureSlot.SIDE, side), generators.modelOutput)));
-
-        for (int i = 1; i < 7; i++) {
-            builder.select(i, Variant.variant().with(VariantProperties.MODEL,
-                    new ModelTemplate(Optional.of(loc("block/template_cake_slice" + i)), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.INSIDE, TextureSlot.SIDE)
-                            .createWithSuffix(cake, "_slice" + i, new TextureMapping()
-                                    .put(TextureSlot.BOTTOM, bottom)
-                                    .put(TextureSlot.TOP, top)
-                                    .put(TextureSlot.INSIDE, inside)
-                                    .put(TextureSlot.SIDE, side), generators.modelOutput)));
-        }
-
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(builder));
+                                .put(TextureSlot.SIDE, side), generators.modelOutput));
     }
 
     private void candleCakeBlock(BlockModelGenerators generators, BaseCandleCakeBlock candleCake, Block candle, BaseCakeBlock cake) {
@@ -147,54 +156,73 @@ public class ModModelProvider extends FabricModelProvider {
         ResourceLocation top = TextureMapping.getBlockTexture(cake, "_top");
         ResourceLocation side = TextureMapping.getBlockTexture(cake, "_side");
         ResourceLocation inside = TextureMapping.getBlockTexture(cake, "_inner");
-        var builder = PropertyDispatch.property(BlockStateProperties.BITES);
 
-        builder.select(0, Variant.variant().with(VariantProperties.MODEL,
+        if (cake.getBiteCount() > 0) {
+            var builder = PropertyDispatch.property(BlockStateProperties.BITES);
+
+            builder.select(0, blankCrossCake(generators, cake, bottom, top, side, cross));
+
+            for (int i = 1; i < 7; i++) {
+                TextureMapping mapping = new TextureMapping()
+                        .put(TextureSlot.BOTTOM, bottom)
+                        .put(TextureSlot.TOP, top)
+                        .put(TextureSlot.INSIDE, inside)
+                        .put(TextureSlot.SIDE, side);
+                List<TextureSlot> slots = new ArrayList<>(List.of(TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.INSIDE, TextureSlot.SIDE));
+
+                if (i < 4) {
+                    slots.add(TextureSlot.CROSS);
+                    mapping.put(TextureSlot.CROSS, cross);
+                }
+
+                builder.select(i, Variant.variant().with(VariantProperties.MODEL,
+                        new ModelTemplate(Optional.of(loc("block/template_cross_cake_slice" + i)), Optional.empty(), slots.toArray(new TextureSlot[]{}))
+                                .createWithSuffix(cake, "_slice" + i, mapping, generators.modelOutput)));
+            }
+
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(builder));
+        }
+        else {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake, blankCrossCake(generators, cake, bottom, top, side, cross)));
+        }
+    }
+
+    private Variant blankCrossCake(BlockModelGenerators generators, BaseCakeBlock cake, ResourceLocation bottom, ResourceLocation top, ResourceLocation side, ResourceLocation cross) {
+        return Variant.variant().with(VariantProperties.MODEL,
                 new ModelTemplate(Optional.of(loc("block/template_cross_cake")), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.CROSS)
                         .create(cake, new TextureMapping()
                                 .put(TextureSlot.BOTTOM, bottom)
                                 .put(TextureSlot.TOP, top)
                                 .put(TextureSlot.SIDE, side)
-                                .put(TextureSlot.CROSS, cross), generators.modelOutput)));
-
-        for (int i = 1; i < 7; i++) {
-            TextureMapping mapping = new TextureMapping()
-                    .put(TextureSlot.BOTTOM, bottom)
-                    .put(TextureSlot.TOP, top)
-                    .put(TextureSlot.INSIDE, inside)
-                    .put(TextureSlot.SIDE, side);
-            List<TextureSlot> slots = new ArrayList<>(List.of(TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.INSIDE, TextureSlot.SIDE));
-
-            if (i < 4) {
-                slots.add(TextureSlot.CROSS);
-                mapping.put(TextureSlot.CROSS, cross);
-            }
-
-            builder.select(i, Variant.variant().with(VariantProperties.MODEL,
-                    new ModelTemplate(Optional.of(loc("block/template_cross_cake_slice" + i)), Optional.empty(), slots.toArray(new TextureSlot[]{}))
-                            .createWithSuffix(cake, "_slice" + i, mapping, generators.modelOutput)));
-        }
-
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(builder));
+                                .put(TextureSlot.CROSS, cross), generators.modelOutput));
     }
 
     private void defaultCakeBlock(BlockModelGenerators generators, BaseCakeBlock cake) {
         CakeBuilder cakeBuilder = cake.getBuilder();
-        var builder = PropertyDispatch.property(BaseCakeBlock.BITES);
 
-        builder.select(0, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(Blocks.CAKE)));
-        for (int i = 1; i < 7; i++) {
-            builder.select(i, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(Blocks.CAKE, "_slice" + i)));
+        if (cake.getBiteCount() > 0) {
+            var builder = PropertyDispatch.property(BaseCakeBlock.BITES);
+
+            builder.select(0, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(Blocks.CAKE)));
+
+            for (int i = 1; i < 7; i++) {
+                builder.select(i, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(Blocks.CAKE, "_slice" + i)));
+            }
+
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(builder));
+        }
+        else {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(Blocks.CAKE))));
         }
 
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(builder));
-
-        for (Block candle : cakeBuilder.getCandleCakeByCandle().keySet()) {
-            ResourceLocation type = ModBlocks.SUPPORTED_CANDLES.get(candle);
-            BaseCandleCakeBlock candleCake = cakeBuilder.getCandleCakeByCandle().get(candle).get();
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake).with(BlockModelGenerators.createBooleanModelDispatch(BaseCandleCakeBlock.LIT,
-                    new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_cake_lit"),
-                    new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_cake"))));
+        if (cakeBuilder.allowsCandles()) {
+            for (Block candle : cakeBuilder.getCandleCakeByCandle().keySet()) {
+                ResourceLocation type = ModBlocks.SUPPORTED_CANDLES.get(candle);
+                BaseCandleCakeBlock candleCake = cakeBuilder.getCandleCakeByCandle().get(candle).get();
+                generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake).with(BlockModelGenerators.createBooleanModelDispatch(BaseCandleCakeBlock.LIT,
+                        new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_cake_lit"),
+                        new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_cake"))));
+            }
         }
     }
 }

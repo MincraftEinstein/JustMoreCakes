@@ -81,6 +81,9 @@ public class ModBlocks {
             .setCakeProperties(cakeProperties().lightLevel(state -> 7))
             .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 7))
             .build();
+    public static final Supplier<BaseCakeBlock> OBSIDIAN_CAKE = new CakeBuilder("obsidian_cake", true)
+            .setCakeClass(ObsidianCakeBlock::new)
+            .build();
 
     public static final Supplier<Block> ENCASING_ICE = Services.REGISTRY.registerBlock("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of(Material.ICE).friction(0.98F).randomTicks().strength(2.5F, 5.0F).sound(SoundType.GLASS).noLootTable().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never)));
     public static final Supplier<Block> CAKE_OVEN = Services.REGISTRY.registerBlock("cake_oven", () -> new CakeOvenBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(Blocks.litBlockEmission(13))));

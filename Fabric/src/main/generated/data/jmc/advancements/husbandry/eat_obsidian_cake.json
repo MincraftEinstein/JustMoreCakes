@@ -1,0 +1,31 @@
+{
+  "parent": "jmc:husbandry/craft_cake",
+  "criteria": {
+    "obsidian_cake_eaten": {
+      "conditions": {
+        "cake": "jmc:obsidian_cake"
+      },
+      "trigger": "jmc:cake_eaten"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.eat_obsidian_cake.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "jmc:obsidian_cake"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.eat_obsidian_cake.title"
+    }
+  },
+  "requirements": [
+    [
+      "obsidian_cake_eaten"
+    ]
+  ]
+}

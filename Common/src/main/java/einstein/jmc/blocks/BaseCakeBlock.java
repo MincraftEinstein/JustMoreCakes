@@ -1,5 +1,7 @@
 package einstein.jmc.blocks;
 
+import com.mojang.datafixers.util.Pair;
+import einstein.jmc.JustMoreCakes;
 import einstein.jmc.data.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModCommonConfigs;
@@ -7,6 +9,7 @@ import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -33,6 +36,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class BaseCakeBlock extends Block {
 
@@ -65,7 +69,9 @@ public class BaseCakeBlock extends Block {
 		super(properties);
 		this.allowsCandles = allowsCandles;
 		this.biteCount = biteCount;
-		registerDefaultState(stateDefinition.any().setValue(getBites(), 0));
+		if (getBiteCount() > 0) {
+			registerDefaultState(stateDefinition.any().setValue(getBites(), 0));
+		}
 	}
 
 	@Override
@@ -104,6 +110,11 @@ public class BaseCakeBlock extends Block {
 				return InteractionResult.CONSUME;
 			}
 		}
+		else {
+			if (player instanceof ServerPlayer serverPlayer) {
+				JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, this);
+			}
+		}
 		
 		return eat(level, pos, state, player);
 	}
@@ -114,7 +125,7 @@ public class BaseCakeBlock extends Block {
 		}
 		else {
 			player.awardStat(Stats.EAT_CAKE_SLICE);
-			player.getFoodData().eat(2, 0.1F);
+			player.getFoodData().eat(getNourishment().getFirst(), getNourishment().getSecond());
 			eatActions(player, pos, state);
 
 			if (cakeEffects != null) {
@@ -191,6 +202,7 @@ public class BaseCakeBlock extends Block {
 		return false;
 	}
 
+	@Nullable
 	public IntegerProperty getBites() {
 		return BITES;
 	}
@@ -209,5 +221,9 @@ public class BaseCakeBlock extends Block {
 
 	public void addCakeEffects(CakeEffects effects) {
 		cakeEffects = effects;
+	}
+
+	protected Pair<Integer, Float> getNourishment() {
+		return Pair.of(2, 0.1F);
 	}
 }
