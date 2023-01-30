@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-28T16:22:49.6575882	Recipes
+// 1.19.3	2023-01-29T21:57:35.720136	Recipes
 f68e22223d4e1922768e5ffd1c2c370467e716bf data/jmc/advancements/recipes/food/apple_cake_from_cake_oven.json
 f0d4d17ddec24adf554173b04a75093509c4a3dc data/jmc/advancements/recipes/food/beetroot_cake_from_cake_oven.json
 79c313ca2e5521853593bc8ba838ebf4d5ffbaba data/jmc/advancements/recipes/food/brown_mushroom_cake_from_cake_oven.json
@@ -21,6 +21,7 @@ dbeaa9466df49bc80449855ebee4c15be8684195 data/jmc/advancements/recipes/food/hone
 329d2b08a4a47b753e7c3b428aa7dd4f96c265e4 data/jmc/advancements/recipes/food/ice_cake_from_cake_oven.json
 4bbd7d3683973f3e5d4c1a537ee996da86a76c42 data/jmc/advancements/recipes/food/lava_cake_from_cake_oven.json
 d8ccc4788f7780b912e2cd133dc0645e83a64413 data/jmc/advancements/recipes/food/melon_cake_from_cake_oven.json
+c444363a558d27f0da0d91008482af51f355c6b1 data/jmc/advancements/recipes/food/obsidian_cake_from_cake_oven.json
 d74bd0aa76545bf651ced95b7e1b456b5fc5069b data/jmc/advancements/recipes/food/poison_cake_from_cake_oven.json
 59fcbbb0d13858d2b43c8795f174ed7ea41d45c4 data/jmc/advancements/recipes/food/pumpkin_cake_from_cake_oven.json
 ae36784307b5292ec00de08dac2489d9c0a155ee data/jmc/advancements/recipes/food/redstone_cake_from_cake_oven.json
@@ -54,6 +55,7 @@ f7093996fd840da9e64b3739fdcd2008769c1e78 data/jmc/recipes/honey_cake_from_cake_o
 2f3f99cfb867632f683664e9eb654a6faccff15c data/jmc/recipes/ice_cake_from_cake_oven.json
 ffa4c550744ca7a5e4fea0367367918f2ed4a7d4 data/jmc/recipes/lava_cake_from_cake_oven.json
 c4e25bf994b261b70f6b8fa187edb4b563abf89b data/jmc/recipes/melon_cake_from_cake_oven.json
+ecbc87f84e1afcf4c214ee5564c05cda2038d364 data/jmc/recipes/obsidian_cake_from_cake_oven.json
 71e6b46d0bd16cdabaf6011f426de290168e4d6b data/jmc/recipes/poison_cake_from_cake_oven.json
 5aaaf12b6ac93971143e4248c4b8dd43d5d77dc5 data/jmc/recipes/pumpkin_cake_from_cake_oven.json
 23d12370c990a3984067c820ec6f9f9808b6405a data/jmc/recipes/redstone_cake_from_cake_oven.json

@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-28T23:52:20.5024655	Just More Cakes!/Recipes
+// 1.19.3	2023-01-29T21:58:22.506732	Just More Cakes!/Recipes
 01df829b01fecca0d0bcd55d2bada21ba563749e data\jmc\advancements\recipes\food\cream_cheese_from_crafting.json
 392716976abcda275fefad628d6a6abd142775b9 data\jmc\recipes\red_mushroom_cake_from_cake_oven.json
 db6587af9aeee0913f5e07c7e0da90765d66580b data\jmc\recipes\glow_berry_cake_from_cake_oven.json
@@ -24,6 +24,7 @@ a6c7e0721c648fcb3064deab7b3ed36f08ecd37d data\jmc\advancements\recipes\food\seed
 ba6bb5cfc226d48490de7b32a5ef849afa3249f1 data\jmc\recipes\chorus_cake_from_cake_oven.json
 312d8b7984ec15ac8946f9169f3cf9540fe55ead data\jmc\recipes\firey_cake_from_cake_oven.json
 b6942b4460412076b544e8db943ff982f507832c data\jmc\advancements\recipes\food\glowstone_cake_from_cake_oven.json
+ecbc87f84e1afcf4c214ee5564c05cda2038d364 data\jmc\recipes\obsidian_cake_from_cake_oven.json
 59fcbbb0d13858d2b43c8795f174ed7ea41d45c4 data\jmc\advancements\recipes\food\pumpkin_cake_from_cake_oven.json
 ae36784307b5292ec00de08dac2489d9c0a155ee data\jmc\advancements\recipes\food\redstone_cake_from_cake_oven.json
 1b3a71666b05ec53b689c4f4afb2bca974054f22 data\jmc\advancements\recipes\food\cake_oven_from_crafting.json
@@ -55,6 +56,7 @@ d74bd0aa76545bf651ced95b7e1b456b5fc5069b data\jmc\advancements\recipes\food\pois
 71e6b46d0bd16cdabaf6011f426de290168e4d6b data\jmc\recipes\poison_cake_from_cake_oven.json
 0facfda4aa9404c342e0e7fcfbe2f0681ce51a1c data\jmc\advancements\recipes\food\carrot_cake_from_cake_oven.json
 5cf5fc6dadff1bcf4ffec7f0b89bc3c57d6e788c data\jmc\advancements\recipes\food\crimson_fungus_cake_from_cake_oven.json
+c444363a558d27f0da0d91008482af51f355c6b1 data\jmc\advancements\recipes\food\obsidian_cake_from_cake_oven.json
 54e5a3f1dd492a5a85d5e8be67cc7e4e29ea0b0b data\jmc\recipes\glowstone_cake_from_cake_oven.json
 896868ae55dc21fc46c080b799d683a41bc2d16f data\jmc\recipes\slime_cake_from_cake_oven.json
 0d18b3e8b5ed7d96d16aec21cd62fe22c10cda94 data\jmc\advancements\recipes\food\golden_apple_cake_from_cake_oven.json

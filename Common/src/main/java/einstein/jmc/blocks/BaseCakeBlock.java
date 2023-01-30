@@ -84,7 +84,7 @@ public class BaseCakeBlock extends Block {
 		ItemStack itemstack = player.getItemInHand(hand);
 		Item item = itemstack.getItem();
 		if (allowsCandles) {
-			if (itemstack.is(ItemTags.CANDLES) && state.getValue(getBites()) == 0) {
+			if (itemstack.is(ItemTags.CANDLES) && (getBiteCount() <= 0 || state.getValue(getBites()) == 0)) {
 				Block block = Block.byItem(item);
 				if (block instanceof CandleBlock) {
 					if (!player.isCreative()) {

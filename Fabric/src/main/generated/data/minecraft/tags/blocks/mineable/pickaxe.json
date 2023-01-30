@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "jmc:cake_oven"
+    "jmc:cake_oven",
+    "jmc:obsidian_cake"
   ]
 }

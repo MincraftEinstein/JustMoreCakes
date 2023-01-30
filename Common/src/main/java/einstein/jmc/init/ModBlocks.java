@@ -83,6 +83,8 @@ public class ModBlocks {
             .build();
     public static final Supplier<BaseCakeBlock> OBSIDIAN_CAKE = new CakeBuilder("obsidian_cake", true)
             .setCakeClass(ObsidianCakeBlock::new)
+            .setCakeProperties(cakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
+            .setCandleCakeProperties(candleCakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
             .build();
 
     public static final Supplier<Block> ENCASING_ICE = Services.REGISTRY.registerBlock("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of(Material.ICE).friction(0.98F).randomTicks().strength(2.5F, 5.0F).sound(SoundType.GLASS).noLootTable().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never)));
