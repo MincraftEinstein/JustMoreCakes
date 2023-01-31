@@ -51,13 +51,19 @@ public class CakeBuilder {
         return this;
     }
 
+    public <T extends BaseCakeBlock, T2 extends BaseCandleCakeBlock> CakeBuilder setBothClasses(CakeClazzSupplier<T> cakeClazz, CandleCakeClazzSupplier<T2> candleCakeClazz) {
+        this.cakeClazz = cakeClazz;
+        this.candleCakeClazz = candleCakeClazz;
+        return this;
+    }
+
     public CakeBuilder setCakeProperties(BlockBehaviour.Properties properties) {
-        this.cakeProperties = properties;
+        cakeProperties = properties;
         return this;
     }
 
     public CakeBuilder setCandleCakeProperties(BlockBehaviour.Properties properties) {
-        this.candleCakeProperties = properties;
+        candleCakeProperties = properties;
         return this;
     }
 
