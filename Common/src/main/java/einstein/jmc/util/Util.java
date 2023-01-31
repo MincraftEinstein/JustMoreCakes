@@ -130,8 +130,17 @@ public class Util {
             return;
         }
 
-        if (player.getItemInHand(hand).is(ItemTags.CANDLES) && block instanceof BaseCakeBlock &&
-                state.getOptionalValue(CakeBlock.BITES).map(val -> val == 0).orElse(false)) {
+        if (block instanceof BaseCakeBlock cake) {
+            if (player.getItemInHand(hand).is(ItemTags.CANDLES) && state.getOptionalValue(cake.getBites()).map(val -> val == 0).orElse(false)) {
+                return;
+            }
+
+            if (cake.getBiteCount() <= 0) {
+                return;
+            }
+        }
+
+        if (block instanceof BaseCandleCakeBlock candleCake && candleCake.getOriginalCake().getBiteCount() <= 0) {
             return;
         }
 
@@ -250,7 +259,7 @@ public class Util {
 
                 if (level.isClientSide) {
                     for (int i = 0; i < 8; ++i) {
-                        float f1 = random.nextFloat() * ((float)Math.PI * 2F);
+                        float f1 = random.nextFloat() * ((float) Math.PI * 2F);
                         float f2 = random.nextFloat() * 0.5F + 0.5F;
                         float f3 = Mth.sin(f1) * 1 * 0.5F * f2;
                         float f4 = Mth.cos(f1) * 1 * 0.5F * f2;

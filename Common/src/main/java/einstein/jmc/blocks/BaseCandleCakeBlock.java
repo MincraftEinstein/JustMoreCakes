@@ -134,4 +134,8 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 	protected double getCandleHeight() {
 		return 0.5D;
 	}
+
+	public BaseCakeBlock getOriginalCake() {
+		return originalCake;
+	}
 }
