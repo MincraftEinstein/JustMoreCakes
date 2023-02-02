@@ -9,7 +9,7 @@ issueTrackerURL = "https://github.com/MincraftEinstein/JustMoreCakes/issues"
     displayName = "Just More Cakes!"
     #updateJSONURL="http://myurl.me/"
     displayURL = "https://www.curseforge.com/minecraft/mc-mods/just-more-cakes"
-    logoFile = "logo.png"
+    logoFile = "pack.png"
     credits = "Me the mod author"
     authors = "MincraftEinstein"
     description = '''
@@ -17,7 +17,7 @@ A simple mod that adds 30+ new cakes to Minecraft
 '''
 
 [modproperties.jmc]
-    catalogueItemIcon = "jmc:chocolate_cake"
+    catalogueImageIcon = "pack.png"
     configuredBackground = "minecraft:textures/block/bricks.png"
 
 [[dependencies.jmc]]

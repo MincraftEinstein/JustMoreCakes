@@ -42,9 +42,7 @@
   },
   "custom": {
     "catalogue": {
-      "icon": {
-        "item": "jmc:chocolate_cake"
-      }
+      "banner": "pack.png"
     }
   }
 }
