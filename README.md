@@ -13,7 +13,7 @@ A simple mod that adds 30+ new cakes to Minecraft. Some have special properties 
 
 Supports [Cake Chomps](https://www.curseforge.com/minecraft/mc-mods/cake-chomps)
 
-[Fabric API](https://modrinth.com/mod/fabric-api) and [Forge Config API Port](https://modrinth.com/mod/forge-config-api-port) required for fabric version
+[Fabric API](https://modrinth.com/mod/fabric-api) and [Forge Config API Port](https://modrinth.com/mod/forge-config-api-port) required for Fabric version
 
 <br>
 <details>
