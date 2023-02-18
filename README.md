@@ -3,7 +3,8 @@
 ![Banner](https://i.imgur.com/diKMADr.png)
 
 ![](https://img.shields.io/badge/Mod%20Loaders-Forge%20%26%20Fabric-green?style=for-the-badge)
-[![Curseforge Page](https://img.shields.io/badge/Curseforge-Page-orange?style=for-the-badge&logo=curseforge "Curseforge page")](https://www.curseforge.com/minecraft/mc-mods/just-more-cakes)
+[![Curseforge Forge Page](https://img.shields.io/badge/Curseforge%20Page-Forge-orange?style=for-the-badge&logo=curseforge "Curseforge Forge page")](https://www.curseforge.com/minecraft/mc-mods/just-more-cakes)
+[![Curseforge Fabric Page](https://img.shields.io/badge/Curseforge%20Page-Fabric-orange?style=for-the-badge&logo=curseforge "Curseforge Fabric page")](https://www.curseforge.com/minecraft/mc-mods/just-more-cakes-fabric)
 [![Modrinth](https://img.shields.io/badge/Modrinth-Page-1bd96a?style=for-the-badge "Modrinth page")](https://modrinth.com/mod/just-more-cakes)
 [![Discord Invite](https://img.shields.io/badge/Discord-Einsteins%20Lab-blue?style=for-the-badge&logo=discord)](https://discord.gg/gSsaFAvrBM)
 
