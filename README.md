@@ -2,7 +2,7 @@
 
 ![Banner](https://i.imgur.com/diKMADr.png)
 
-![](https://img.shields.io/badge/Mod%20Loader-Forge%20%26%20Fabric-green?style=for-the-badge)
+![](https://img.shields.io/badge/Mod%20Loaders-Forge%20%26%20Fabric-green?style=for-the-badge)
 [![Curseforge Page](https://img.shields.io/badge/Curseforge-Page-orange?style=for-the-badge&logo=curseforge "Curseforge page")](https://www.curseforge.com/minecraft/mc-mods/just-more-cakes)
 [![Modrinth](https://img.shields.io/badge/Modrinth-Page-1bd96a?style=for-the-badge "Modrinth page")](https://modrinth.com/mod/just-more-cakes)
 [![Discord Invite](https://img.shields.io/badge/Discord-Einsteins%20Lab-blue?style=for-the-badge&logo=discord)](https://discord.gg/gSsaFAvrBM)
@@ -38,4 +38,13 @@ Supports [Cake Chomps](https://www.curseforge.com/minecraft/mc-mods/cake-chomps)
 
 ---
 
+### **💬 Translators**
+Chinese: [usamion](https://github.com/usamion)
+
+---
+
 [![Kinetic Hosting Banner](https://i.imgur.com/u6Fn0I0.png)](https://billing.kinetichosting.net/aff.php?aff=124)
+
+---
+
+Repository created from [MultiLoader-Template](https://github.com/jaredlll08/MultiLoader-Template/tree/1.19)
