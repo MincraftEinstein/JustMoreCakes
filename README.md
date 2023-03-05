@@ -40,7 +40,8 @@ Supports [Cake Chomps](https://www.curseforge.com/minecraft/mc-mods/cake-chomps)
 ---
 
 ### **💬 Translators**
-Chinese: [usamion](https://github.com/usamion)
+Chinese: [usamion](https://github.com/usamion)<br>
+Russian: [Telezhka-the-First](https://github.com/Telezhka-the-First)
 
 ---
 
