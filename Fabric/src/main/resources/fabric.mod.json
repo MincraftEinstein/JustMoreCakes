@@ -43,6 +43,11 @@
   "custom": {
     "catalogue": {
       "banner": "pack.png"
+    },
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/gSsaFAvrBM"
+      }
     }
   }
 }

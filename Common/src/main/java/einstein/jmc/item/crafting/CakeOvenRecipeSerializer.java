@@ -69,7 +69,7 @@ public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> implements Recip
            }
         }
         return nonNullList;
-     }
+	}
 	
 	@Override
 	public T fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buf) {
