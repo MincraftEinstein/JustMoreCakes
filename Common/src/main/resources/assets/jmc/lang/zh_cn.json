@@ -1,9 +1,9 @@
 {
-	// ITEMS
+	"_comment": "Items",
 	"item.jmc.cheese": "奶酪",
 	"item.jmc.cupcake": "纸杯蛋糕",
-	
-	// BLOCKS
+
+	"_comment": "Blocks",
 	"block.jmc.chocolate_cake": "巧克力蛋糕",
 	"block.jmc.carrot_cake": "胡萝卜蛋糕",
 	"block.jmc.pumpkin_cake": "南瓜蛋糕",
@@ -35,11 +35,12 @@
 	"block.jmc.warped_fungus_cake": "诡异菌蛋糕",
 	"block.jmc.encasing_ice": "裹冰",
 	"block.jmc.cake_oven": "蛋糕烤箱",
-	
-	// ENTITIES
+
+	"_comment": "Entities",
 	"entity.minecraft.villager.jmc.cake_baker": "蛋糕烘焙师",
-	
-	// POTIONS
+	"entity.minecraft.villager.cake_baker": "蛋糕烘焙师",
+
+	"_comment": "Potions",
 	"item.minecraft.potion.effect.bouncing":"弹跳药水",
 	"item.minecraft.splash_potion.effect.bouncing":"喷溅型弹跳药水",
 	"item.minecraft.lingering_potion.effect.bouncing":"滞留型弹跳药水",
@@ -52,23 +53,23 @@
 	"item.minecraft.splash_potion.effect.freezing":"喷溅型冷冻药水",
 	"item.minecraft.lingering_potion.effect.freezing":"滞留型冷冻药水",
 	"item.minecraft.tipped_arrow.effect.freezing":"冰冻之箭",
-	
-	// EFFECTS
+
+	"_comment": "Effects",
 	"effect.jmc.bouncing": "弹跳",
 	"effect.jmc.freezing": "冰冻",
-	
-	// CONTAINERS
+
+	"_comment": "Containers",
 	"container.jmc.cake_oven": "蛋糕烤箱",
-	
-	// JEI
+
+	"_comment": "JEI",
 	"gui.jei.jmc.category.cake_oven": "蛋糕烘焙",
 	"gui.jei.jmc.category.cake_oven.experience": "%s经验",
 	"gui.jei.jmc.category.cake_oven.time.seconds": "%s秒",
-	
-	// CREATIVE TAB
-	"itemGroup.jmc_tab": "只是更多的蛋糕！",
-	
-	// ADVANCEMENTS
+
+	"_comment": "Creative Tabs",
+	"itemGroup.jmc.jmc_tab": "只是更多的蛋糕！",
+
+	"_comment": "Advancements",
 	"advancements.husbandry.craft_cake.title": "蛋糕是个谎言",
 	"advancements.husbandry.craft_cake.description": "制作一个蛋糕",
 	"advancements.husbandry.craft_all_cakes.title": "Num Num Num Num Num",
