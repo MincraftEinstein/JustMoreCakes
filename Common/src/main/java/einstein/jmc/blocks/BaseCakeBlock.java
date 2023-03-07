@@ -38,7 +38,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class BaseCakeBlock extends Block {
+public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
 	public static final IntegerProperty BITES = BlockStateProperties.BITES;
 	protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[] {
@@ -219,8 +219,15 @@ public class BaseCakeBlock extends Block {
 		return builder;
 	}
 
-	public void addCakeEffects(CakeEffects effects) {
-		cakeEffects = effects;
+	@Nullable
+	@Override
+	public CakeEffects getCakeEffects() {
+		return cakeEffects;
+	}
+
+	@Override
+	public void setCakeEffects(CakeEffects cakeEffects) {
+		this.cakeEffects = cakeEffects;
 	}
 
 	protected Pair<Integer, Float> getNourishment() {

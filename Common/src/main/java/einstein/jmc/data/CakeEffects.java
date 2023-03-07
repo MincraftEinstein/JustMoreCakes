@@ -2,16 +2,17 @@ package einstein.jmc.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 import java.util.Optional;
 
-public record CakeEffects(List<MobEffectHolder> mobEffects) {
+public record CakeEffects(Block cake, List<MobEffectHolder> mobEffects) {
 
     public static final Codec<CakeEffects> CODEC = RecordCodecBuilder.create(inst -> inst.group(
+            BuiltInRegistries.BLOCK.byNameCodec().fieldOf("cake").forGetter(CakeEffects::cake),
             MobEffectHolder.MOB_EFFECT_CODEC.listOf().fieldOf("effects").forGetter(CakeEffects::mobEffects)
     ).apply(inst, CakeEffects::new));
 

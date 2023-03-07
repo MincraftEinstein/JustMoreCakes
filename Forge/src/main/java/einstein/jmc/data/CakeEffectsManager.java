@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class CakeEffectsManager extends SimpleJsonResourceReloadListener {
 
-    private Map<String, CakeEffects> registeredCakeEffects = ImmutableMap.of();
+    private Map<ResourceLocation, CakeEffects> registeredCakeEffects = ImmutableMap.of();
 
     public CakeEffectsManager() {
         super(Util.GSON, "cake_effects");
@@ -23,7 +23,7 @@ public class CakeEffectsManager extends SimpleJsonResourceReloadListener {
         registeredCakeEffects = Util.deserializeCakeEffects(manager);
     }
 
-    public Map<String, CakeEffects> getRegisteredCakeEffects() {
+    public Map<ResourceLocation, CakeEffects> getRegisteredCakeEffects() {
         return registeredCakeEffects;
     }
 }

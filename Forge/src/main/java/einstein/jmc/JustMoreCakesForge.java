@@ -1,6 +1,6 @@
 package einstein.jmc;
 
-import einstein.jmc.blocks.BaseCakeBlock;
+import einstein.jmc.blocks.CakeEffectsHolder;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.data.CakeEffectsManager;
 import einstein.jmc.data.providers.*;
@@ -8,7 +8,6 @@ import einstein.jmc.init.*;
 import einstein.jmc.platform.ForgeRegistryHelper;
 import einstein.jmc.platform.Services;
 import einstein.jmc.platform.services.RegistryHelper;
-import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
 import einstein.jmc.util.Util;
@@ -18,7 +17,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.ai.behavior.GiveGiftToHero;
@@ -169,11 +167,14 @@ public class JustMoreCakesForge {
         event.addListener(CAKE_EFFECTS_MANAGER);
     }
 
-    public static void addCakeEffects(ResourceLocation id, BaseCakeBlock cake) {
+    public static void addCakeEffects() {
         if (CAKE_EFFECTS_MANAGER != null) {
-            CAKE_EFFECTS_MANAGER.getRegisteredCakeEffects().forEach((name, cakeEffects) -> {
-                if (name.equals(id.getPath())) {
-                    cake.addCakeEffects(cakeEffects);
+            CAKE_EFFECTS_MANAGER.getRegisteredCakeEffects().forEach((location, cakeEffects) -> {
+                if (cakeEffects.cake() instanceof CakeEffectsHolder holder) {
+                    holder.addCakeEffects(cakeEffects);
+                }
+                else {
+                    LOGGER.error("Failed to load cake effect for block {} as it is not valid cake effect holder", cakeEffects.cake());
                 }
             });
         }
@@ -187,7 +188,7 @@ public class JustMoreCakesForge {
     }
 
     void onServerStarted(ServerStartedEvent event) {
-        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> addCakeEffects(Util.getBlockId(cake.get()), cake.get()));
+        addCakeEffects();
     }
 
     void commonSetup(final FMLCommonSetupEvent event) {

@@ -1,11 +1,10 @@
 package einstein.jmc;
 
-import einstein.jmc.blocks.BaseCakeBlock;
+import einstein.jmc.blocks.CakeEffectsHolder;
 import einstein.jmc.data.CakeEffects;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
 import einstein.jmc.platform.services.RegistryHelper;
-import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
 import einstein.jmc.util.Util;
@@ -29,11 +28,12 @@ import net.minecraftforge.fml.config.ModConfig;
 
 import java.util.Map;
 
+import static einstein.jmc.JustMoreCakes.LOGGER;
 import static einstein.jmc.JustMoreCakes.loc;
 
 public class JustMoreCakesFabric implements ModInitializer {
 
-    private static Map<String, CakeEffects> CAKE_EFFECTS;
+    private static Map<ResourceLocation, CakeEffects> CAKE_EFFECTS;
 
     @Override
     public void onInitialize() {
@@ -93,16 +93,17 @@ public class JustMoreCakesFabric implements ModInitializer {
     }
 
     void onServerStarted() {
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> JustMoreCakesFabric.addCakeEffects(Util.getBlockId(cake.get()), cake.get()));
-        });
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> addCakeEffects());
     }
 
-    public static void addCakeEffects(ResourceLocation id, BaseCakeBlock cake) {
+    public static void addCakeEffects() {
         if (CAKE_EFFECTS != null) {
-            CAKE_EFFECTS.forEach((name, cakeEffects) -> {
-                if (name.equals(id.getPath())) {
-                    cake.addCakeEffects(cakeEffects);
+            CAKE_EFFECTS.forEach((location, cakeEffects) -> {
+                if (cakeEffects.cake() instanceof CakeEffectsHolder holder) {
+                    holder.addCakeEffects(cakeEffects);
+                }
+                else {
+                    LOGGER.error("Failed to load cake effect for block {} as it is not valid cake effect holder", cakeEffects.cake());
                 }
             });
         }

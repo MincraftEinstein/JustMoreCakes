@@ -30,6 +30,7 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,7 +41,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
@@ -72,6 +72,10 @@ public class Util {
 
     public static <T extends Block> ResourceLocation getBlockId(T block) {
         return BuiltInRegistries.BLOCK.getKey(block);
+    }
+
+    public static <T extends MobEffect> ResourceLocation getMobEffectId(T effect) {
+        return BuiltInRegistries.MOB_EFFECT.getKey(effect);
     }
 
     public static void createExplosion(final Level level, final BlockPos pos, final float size) {
@@ -208,30 +212,25 @@ public class Util {
         templateAccessor.setRawTemplates(rawTemplates);
     }
 
-    public static Map<String, CakeEffects> deserializeCakeEffects(ResourceManager manager) {
-        ImmutableMap.Builder<String, CakeEffects> builder = ImmutableMap.builder();
+    public static Map<ResourceLocation, CakeEffects> deserializeCakeEffects(ResourceManager manager) {
+        ImmutableMap.Builder<ResourceLocation, CakeEffects> builder = ImmutableMap.builder();
         var locations = manager.listResources("cake_effects", location -> location.getPath().endsWith(".json"));
 
         locations.forEach((location, resource) -> {
             try (InputStream stream = resource.open();
                  Reader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
                 JsonObject object = GsonHelper.fromJson(GSON, reader, JsonObject.class);
-                String name = location.getPath().replace("cake_effects/", "").replace(".json", "");
 
-                CakeBuilder.BUILDER_BY_CAKE.forEach((block, cakeBuilder) -> {
-                    if (cakeBuilder.getCakeName().equals(name)) {
-                        CakeEffects.CODEC.parse(JsonOps.INSTANCE, object)
-                                .resultOrPartial(error -> LOGGER.error("Failed to decode cake effect with json id {} - Error: {}", location, error))
-                                .ifPresent(entry -> builder.put(name, entry));
-                    }
-                });
+                CakeEffects.CODEC.parse(JsonOps.INSTANCE, object)
+                        .resultOrPartial(error -> LOGGER.error("Failed to decode cake effect with json id {} - Error: {}", location, error))
+                        .ifPresent(entry -> builder.put(location, entry));
             }
             catch (Exception exception) {
                 LOGGER.error("Error occurred while loading resource json " + location.toString(), exception);
             }
         });
 
-        Map<String, CakeEffects> map = builder.build();
+        Map<ResourceLocation, CakeEffects> map = builder.build();
         LOGGER.info("Loaded {} cake effects", map.size());
         return map;
     }
