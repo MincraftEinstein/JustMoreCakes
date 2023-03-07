@@ -5,6 +5,7 @@
   "refmap": "jmc.refmap.json",
   "minVersion": "0.8",
   "mixins": [
+    "CakeMixin",
     "PandaMixin",
     "PandaMixin$PandaSitGoalMixin",
     "StructureTemplatePoolAccessor"
