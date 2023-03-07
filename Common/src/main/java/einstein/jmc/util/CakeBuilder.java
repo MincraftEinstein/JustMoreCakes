@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 public class CakeBuilder {
 
-    public static Map<Supplier<BaseCakeBlock>, CakeBuilder> BUILDER_BY_CAKE = new HashMap<>();
+    public static final Map<Supplier<BaseCakeBlock>, CakeBuilder> BUILDER_BY_CAKE = new HashMap<>();
 
     private final String cakeName;
     private final boolean allowsCandles;

@@ -1,9 +1,7 @@
 package einstein.jmc.platform;
 
 import einstein.jmc.platform.services.IPlatformHelper;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.loading.FMLLoader;
 
 public class ForgePlatformHelper implements IPlatformHelper {

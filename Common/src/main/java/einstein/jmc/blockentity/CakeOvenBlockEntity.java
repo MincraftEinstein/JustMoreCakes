@@ -302,9 +302,8 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 		tag.putInt("CookTimeTotal", cookingTotalTime);
 		ContainerHelper.saveAllItems(tag, items);
 		CompoundTag usedRecipes = new CompoundTag();
-		recipesUsed.forEach((id, par1) -> {
-			usedRecipes.putInt(id.toString(), par1);
-		});
+		recipesUsed.forEach((id, par1) ->
+				usedRecipes.putInt(id.toString(), par1));
 		tag.put("RecipesUsed", usedRecipes);
 	}
 	

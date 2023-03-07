@@ -106,7 +106,7 @@ public class Util {
             return block;
         }
         else {
-            throw new NullPointerException("Could not find block: " + location.toString());
+            throw new NullPointerException("Could not find block: " + location);
         }
     }
 

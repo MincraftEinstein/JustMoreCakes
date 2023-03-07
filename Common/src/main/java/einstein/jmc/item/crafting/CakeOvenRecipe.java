@@ -35,7 +35,7 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 	
 	@Override
 	public boolean matches(Container container, Level level) {
-		List<ItemStack> inputs = new ArrayList<ItemStack>();
+		List<ItemStack> inputs = new ArrayList<>();
 		int stackCount = 0;
 		
 		for (int i = 0; i < container.getContainerSize(); i++) {

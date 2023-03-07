@@ -1,7 +1,6 @@
 package einstein.jmc.menu.cakeoven;
 
 import einstein.jmc.init.ModMenuTypes;
-import einstein.jmc.init.ModRecipes;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.world.Container;

@@ -125,11 +125,9 @@ public class JustMoreCakesForge {
     }
 
     void registerCreativeTab(CreativeModeTabEvent.Register event) {
-        event.registerCreativeModeTab(JustMoreCakes.loc("jmc_tab"), builder -> {
-            builder.icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).title(Component.translatable("itemGroup.jmc.jmc_tab")).displayItems((flags, output, hasPermission) -> {
-                RegistryHelper.CREATIVE_TAB_ITEMS.forEach(cake -> output.accept(cake.get()));
-            }).build();
-        });
+        event.registerCreativeModeTab(JustMoreCakes.loc("jmc_tab"), builder ->
+                builder.icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).title(Component.translatable("itemGroup.jmc.jmc_tab")).displayItems((flags, output, hasPermission) ->
+                        RegistryHelper.CREATIVE_TAB_ITEMS.forEach(cake -> output.accept(cake.get()))).build());
     }
 
     /**
@@ -221,7 +219,7 @@ public class JustMoreCakesForge {
 
     @Nullable
     private Block missingBlock(String name) {
-        String[] removedCakes = { "sprinkle_cake", "christmas_cake" };
+        String[] removedCakes = {"sprinkle_cake", "christmas_cake"};
         for (String cake : removedCakes) {
             if (name.equals(cake)) {
                 return Blocks.CAKE;
@@ -232,7 +230,7 @@ public class JustMoreCakesForge {
             else {
                 for (DyeColor color : DyeColor.values()) {
                     if (name.equals(color + "_candle_" + cake)) {
-                        return Util.getBlock(mcLoc( color + "_candle_cake"));
+                        return Util.getBlock(mcLoc(color + "_candle_cake"));
                     }
                 }
             }
@@ -253,7 +251,8 @@ public class JustMoreCakesForge {
             T value = function.apply(mapping.getKey().getPath());
             if (value != null) {
                 mapping.remap(value);
-            } else {
+            }
+            else {
                 LOGGER.info("Failed to remap (" + mapping.getKey().toString() + ") of registry (" + registry.getRegistryName() + ")");
                 mapping.fail();
             }
@@ -293,7 +292,7 @@ public class JustMoreCakesForge {
             expert.add(new ItemsForEmeralds(ModItems.CUPCAKE.get(), 4, 1, 16, 15));
 
             master.add(new ItemsForEmeralds(ModBlocks.THREE_TIERED_CAKE.get().asItem(), 15, 1, 30));
-            master.add(new ItemsForEmeralds(ModBlocks.CREEPER_CAKE.get().asItem(), 20, 1,  30));
+            master.add(new ItemsForEmeralds(ModBlocks.CREEPER_CAKE.get().asItem(), 20, 1, 30));
         }
     }
 

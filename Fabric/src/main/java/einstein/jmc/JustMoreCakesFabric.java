@@ -54,9 +54,8 @@ public class JustMoreCakesFabric implements ModInitializer {
         VillagerInteractionRegistries.registerGiftLootTable(ModVillagers.CAKE_BAKER.get(), loc("gameplay/hero_of_the_village/cake_baker_gift"));
         JustMoreCakes.commonSetup();
 
-        FabricItemGroup.builder(JustMoreCakes.loc("jmc_tab")).icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).displayItems((flags, output, hasPermission) -> {
-            RegistryHelper.CREATIVE_TAB_ITEMS.forEach(supplier -> output.accept(supplier.get()));
-        }).build();
+        FabricItemGroup.builder(JustMoreCakes.loc("jmc_tab")).icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).displayItems((flags, output, hasPermission) ->
+                RegistryHelper.CREATIVE_TAB_ITEMS.forEach(supplier -> output.accept(supplier.get()))).build();
     }
 
     /**
