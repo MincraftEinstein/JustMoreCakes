@@ -17,6 +17,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.Comparator;
+import java.util.TreeSet;
 import java.util.function.Supplier;
 
 public class ModAdvancements {
@@ -42,7 +44,10 @@ public class ModAdvancements {
         advancement.addCriterion("cake", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(Blocks.CAKE).build()));
         advancement.addCriterion("cupcake", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(ModItems.CUPCAKE.get()).build()));
 
-        for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
+        TreeSet<Supplier<BaseCakeBlock>> set = new TreeSet<>(Comparator.comparing(o -> o.get().getBuilder().getCakeName()));
+        set.addAll(CakeBuilder.BUILDER_BY_CAKE.keySet());
+
+        for (Supplier<BaseCakeBlock> cake : set) {
             Item cakeItem = ((ItemLike) cake.get()).asItem();
             advancement.addCriterion(Util.getBlockId(cake.get()).getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(cakeItem).build()));
         }

@@ -1,4 +1,4 @@
-// 1.19.3	2023-03-06T19:13:22.8580914	Just More Cakes!/Recipes
+// 1.19.3	2023-03-06T22:35:26.7552316	Just More Cakes!/Recipes
 01df829b01fecca0d0bcd55d2bada21ba563749e data\jmc\advancements\recipes\food\cream_cheese_from_crafting.json
 392716976abcda275fefad628d6a6abd142775b9 data\jmc\recipes\red_mushroom_cake_from_cake_oven.json
 db6587af9aeee0913f5e07c7e0da90765d66580b data\jmc\recipes\glow_berry_cake_from_cake_oven.json
@@ -18,8 +18,8 @@ dd7fc5582f2b04a9960aeb21b18fc065e69c131c data\jmc\advancements\recipes\food\red_
 0de67cd8105aab0d29d9cbb1bb5c7f3f10b03153 data\jmc\recipes\golden_apple_cake_from_cake_oven.json
 329d2b08a4a47b753e7c3b428aa7dd4f96c265e4 data\jmc\advancements\recipes\food\ice_cake_from_cake_oven.json
 ffa4c550744ca7a5e4fea0367367918f2ed4a7d4 data\jmc\recipes\lava_cake_from_cake_oven.json
-6a78bd86c8887cf2a10007ac91277192be6e8ed1 data\jmc\advancements\recipes\food\chocolate_cake_from_cake_oven.json
 e4b0eab0d3b3d4d09ebd074c6b794be766f35d2f data\jmc\recipes\chocolate_cake_from_cake_oven.json
+6a78bd86c8887cf2a10007ac91277192be6e8ed1 data\jmc\advancements\recipes\food\chocolate_cake_from_cake_oven.json
 a6c7e0721c648fcb3064deab7b3ed36f08ecd37d data\jmc\advancements\recipes\food\seed_cake_from_cake_oven.json
 ba6bb5cfc226d48490de7b32a5ef849afa3249f1 data\jmc\recipes\chorus_cake_from_cake_oven.json
 312d8b7984ec15ac8946f9169f3cf9540fe55ead data\jmc\recipes\firey_cake_from_cake_oven.json
