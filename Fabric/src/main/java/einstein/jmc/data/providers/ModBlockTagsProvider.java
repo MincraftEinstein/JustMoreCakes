@@ -19,5 +19,6 @@ public class ModBlockTagsProvider extends FabricTagProvider<Block> {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.CAKE_OVEN.get(), ModBlocks.OBSIDIAN_CAKE.get());
+        getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(ModBlocks.CHOCOLATE_CAKE.get());
     }
 }

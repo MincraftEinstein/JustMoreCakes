@@ -24,6 +24,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 	protected void registerModels() {
 		generatedItem(getItemName(ModItems.CUPCAKE), modLoc("item/" + getItemName(ModItems.CUPCAKE)));
 		generatedItem(getItemName(ModItems.CREAM_CHEESE), modLoc("item/" + getItemName(ModItems.CREAM_CHEESE)));
+		generatedItem(getItemName(ModItems.CAKE_SPATULA), modLoc("item/" + getItemName(ModItems.CAKE_SPATULA)));
 		generatedItem("poison_cake", mcLoc("item/cake"));
 		generatedItem("tnt_cake", mcLoc("item/cake"));
 
