@@ -38,13 +38,13 @@ A simple mod that adds 30+ new cakes to Minecraft
 [[dependencies.jmc]]
     modId = "jei"
     mandatory = false
-    versionRange = "[12.3.0.18)"
+    versionRange = "[12.3.0.18,)"
     ordering = "NONE"
     side = "CLIENT"
 
 [[dependencies.jmc]]
     modId = "cake-chomps"
     mandatory = false
-    versionRange = "[6.0.1+1.19.3)"
+    versionRange = "[6.0.1+1.19.3,)"
     ordering = "NONE"
     side = "CLIENT"
