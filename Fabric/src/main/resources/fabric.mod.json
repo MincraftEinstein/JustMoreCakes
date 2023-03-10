@@ -36,9 +36,15 @@
   "accessWidener": "jmcCommon.accesswidener",
   "depends": {
     "fabricloader": ">=0.14",
-    "fabric": "*",
-    "minecraft": "1.19.x",
-    "java": ">=17"
+    "fabric": ">=0.75.1",
+    "minecraft": "1.19.3",
+    "java": ">=17",
+    "forgeconfigapiport": ">=5.0.9"
+  },
+  "suggests": {
+    "jei": ">=12.3.0.18",
+    "configured": ">=2.0.2",
+    "cakechomps": ">=6.0.1+1.19.3"
   },
   "custom": {
     "catalogue": {
