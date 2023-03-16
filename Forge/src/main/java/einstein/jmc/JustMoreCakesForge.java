@@ -113,7 +113,7 @@ public class JustMoreCakesForge {
         generator.addProvider(event.includeServer(), new ModRecipeProvider(output));
         BlockTagsProvider blockTags = new ModBlockTagsProvider(output, lookupProvider, helper);
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ModItemTagsProvider(output, lookupProvider, blockTags, helper));
+        generator.addProvider(event.includeServer(), new ModItemTagsProvider(output, lookupProvider, blockTags.contentsGetter(), helper));
         generator.addProvider(event.includeServer(), new ModPOITagsProvider(output, lookupProvider, helper));
         generator.addProvider(event.includeServer(), new ModAdvancementProvider(output, lookupProvider, helper));
         generator.addProvider(event.includeServer(), new ModLootTableProvider(output));
@@ -126,7 +126,7 @@ public class JustMoreCakesForge {
 
     void registerCreativeTab(CreativeModeTabEvent.Register event) {
         event.registerCreativeModeTab(JustMoreCakes.loc("jmc_tab"), builder ->
-                builder.icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).title(Component.translatable("itemGroup.jmc.jmc_tab")).displayItems((flags, output, hasPermission) ->
+                builder.icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).title(Component.translatable("itemGroup.jmc.jmc_tab")).displayItems((displayParameters, output) ->
                         RegistryHelper.CREATIVE_TAB_ITEMS.forEach(cake -> output.accept(cake.get()))).build());
     }
 

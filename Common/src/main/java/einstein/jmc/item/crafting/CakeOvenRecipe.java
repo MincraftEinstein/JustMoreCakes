@@ -5,6 +5,7 @@ import einstein.jmc.init.ModRecipes;
 import einstein.jmc.util.CakeOvenConstants;
 import einstein.jmc.util.RecipeMatcher;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -51,7 +52,7 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 	}
 	
 	@Override
-	public ItemStack assemble(Container container) {
+	public ItemStack assemble(Container container, RegistryAccess access) {
 		return result.copy();
 	}
 	
@@ -66,7 +67,7 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 	}
 	
 	@Override
-	public ItemStack getResultItem() {
+	public ItemStack getResultItem(RegistryAccess access) {
 		return result;
 	}
 	

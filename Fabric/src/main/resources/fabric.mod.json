@@ -36,10 +36,10 @@
   "accessWidener": "jmcCommon.accesswidener",
   "depends": {
     "fabricloader": ">=0.14",
-    "fabric": ">=0.75.1",
-    "minecraft": "1.19.3",
+    "fabric": ">=0.76.0",
+    "minecraft": "1.19.4",
     "java": ">=17",
-    "forgeconfigapiport": ">=5.0.9"
+    "forgeconfigapiport": ">=6.0.0"
   },
   "suggests": {
     "jei": ">=12.3.0.18",

@@ -87,7 +87,7 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 			ingredientSlots[i].addIngredients(recipe.getIngredients().get(i)); // Adds the ingredients for menu slot 'i' to JEI slot i
 		}
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, /*X*/ 112, /*Y*/ 14).addItemStack(recipe.getResultItem());
+//		builder.addSlot(RecipeIngredientRole.OUTPUT, /*X*/ 112, /*Y*/ 14).addItemStack(recipe.getResultItem());	// TODO re-add when JEI updates
 		builder.setShapeless();
 	}
 

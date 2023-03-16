@@ -30,7 +30,7 @@ public class ObsidianCakeBlock extends BaseCakeBlock {
 
     @Override
     public InteractionResult eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player) {
-        player.hurt(DamageSource.GENERIC, 2);
+        player.hurt(player.level.damageSources().generic(), 2);
         accessor.setBlock(pos, state, 3);
         return InteractionResult.SUCCESS;
     }
