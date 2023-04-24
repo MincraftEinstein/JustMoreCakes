@@ -8,7 +8,6 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
 import einstein.jmc.util.CakeOvenConstants;
-import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -25,7 +24,10 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, CakeOvenConstants {
 
@@ -38,10 +40,11 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 
 	public CakeOvenRecipeCategory(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(TEXTURE, /*ImageX*/ 0, /*ImageY*/ 0, /*Width*/ 133, /*Height*/ 44);
-		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.CAKE_OVEN.get()));
+		icon = guiHelper.createDrawableItemStack(new ItemStack(ModBlocks.CAKE_OVEN.get()));
 		title = Component.translatable("gui.jei.jmc.category.cake_oven");
 		flame = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(TEXTURE, /*ImageX*/ 133, /*ImageY*/ 0, /*Width*/ 14, /*Height*/ 14), /*AnimationTime*/ 300, StartDirection.TOP, true);
 		cachedArrows = CacheBuilder.newBuilder().maximumSize(25L).build(new CacheLoader<>() {
+
 			@Override
 			public IDrawableAnimated load(Integer cookTime) {
 				return guiHelper.drawableBuilder(TEXTURE, /*ImageX*/ 133, /*ImageY*/ 14, /*Width*/ 24, /*Height*/ 17).buildAnimated(/*AnimationTime*/ cookTime, StartDirection.LEFT, false);
@@ -76,6 +79,7 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, CakeOvenRecipe recipe, IFocusGroup focuses) {
+		Level level = Objects.requireNonNull(Minecraft.getInstance().level);
 		IRecipeSlotBuilder[] ingredientSlots = {
 				builder.addSlot(RecipeIngredientRole.INPUT, /*X*/ 34, /*Y*/ 5),
 				builder.addSlot(RecipeIngredientRole.INPUT, /*X*/ 52, /*Y*/ 5),
@@ -87,7 +91,7 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 			ingredientSlots[i].addIngredients(recipe.getIngredients().get(i)); // Adds the ingredients for menu slot 'i' to JEI slot i
 		}
 
-//		builder.addSlot(RecipeIngredientRole.OUTPUT, /*X*/ 112, /*Y*/ 14).addItemStack(recipe.getResultItem());	// TODO re-add when JEI updates
+		builder.addSlot(RecipeIngredientRole.OUTPUT, /*X*/ 112, /*Y*/ 14).addItemStack(recipe.getResultItem(level.registryAccess()));
 		builder.setShapeless();
 	}
 
