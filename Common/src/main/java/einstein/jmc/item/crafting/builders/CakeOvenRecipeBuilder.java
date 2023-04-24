@@ -33,7 +33,7 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 	private final int cookingTime;
 	private final Advancement.Builder advancement = Advancement.Builder.advancement();
 	
-	public CakeOvenRecipeBuilder(RecipeCategory category, NonNullList<Ingredient> ingredients, ItemLike result, float experience, int cookingTime) {
+	private CakeOvenRecipeBuilder(RecipeCategory category, NonNullList<Ingredient> ingredients, ItemLike result, float experience, int cookingTime) {
 		this.category = category;
 		this.result = result.asItem();
 		this.ingredients = ingredients;

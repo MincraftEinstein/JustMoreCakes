@@ -50,7 +50,7 @@ public class FabricRegistryHelper implements RegistryHelper {
 
     @Override
     public <T extends BlockEntity> BlockEntityType<T> createBlockEntity(BlockEntitySupplier<T> supplier, Block... blocks) {
-        return FabricBlockEntityTypeBuilder.create(supplier::create, blocks).build(null);
+        return FabricBlockEntityTypeBuilder.create(supplier::create, blocks).build();
     }
 
     @Override
