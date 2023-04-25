@@ -1,4 +1,4 @@
-package einstein.jmc.jei;
+package einstein.jmc.compat.jei;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;

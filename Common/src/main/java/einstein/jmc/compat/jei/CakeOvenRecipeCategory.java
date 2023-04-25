@@ -1,4 +1,4 @@
-package einstein.jmc.jei;
+package einstein.jmc.compat.jei;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
