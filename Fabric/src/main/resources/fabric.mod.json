@@ -48,9 +48,10 @@
     "forgeconfigapiport": ">=6.0.0"
   },
   "suggests": {
-    "jei": ">=12.3.0.18",
+    "jei": ">=13.1.0.6",
     "configured": ">=2.0.2",
-    "cakechomps": ">=6.0.1+1.19.3"
+    "cakechomps": ">=6.0.1+1.19.4",
+    "roughlyenoughitems": ">=11.0.597"
   },
   "custom": {
     "catalogue": {
