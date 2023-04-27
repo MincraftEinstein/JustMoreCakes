@@ -27,6 +27,12 @@
     ],
     "jei_mod_plugin": [
       "einstein.jmc.compat.jei.JEIPlugin"
+    ],
+    "rei_client": [
+      "einstein.jmc.compat.rei.REIClientPlugin"
+    ],
+    "rei_common": [
+      "einstein.jmc.compat.rei.REIPlugin"
     ]
   },
   "mixins": [

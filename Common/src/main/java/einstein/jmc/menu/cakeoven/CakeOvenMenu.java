@@ -138,4 +138,8 @@ public class CakeOvenMenu extends AbstractContainerMenu implements CakeOvenConst
 	public boolean isLit() {
 		return data.get(0) > 0;
 	}
+
+	public Container getContainer() {
+		return container;
+	}
 }

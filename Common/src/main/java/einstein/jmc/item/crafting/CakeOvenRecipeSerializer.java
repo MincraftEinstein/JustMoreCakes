@@ -53,7 +53,7 @@ public class CakeOvenRecipeSerializer<T extends CakeOvenRecipe> implements Recip
 			}
 			
 			float experience = GsonHelper.getAsFloat(json, "experience", 0);
-			int cookingTime = GsonHelper.getAsInt(json, "cookingTime", this.defaultCookingTime);
+			int cookingTime = GsonHelper.getAsInt(json, "cookingTime", defaultCookingTime);
 			return factory.create(recipeId, ingredients, resultStack, experience, cookingTime);
 		}
 	}

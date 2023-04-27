@@ -30,7 +30,7 @@ subprojects {
         }
 
         maven {
-            url "https://cursemaven.com"
+            url = "https://cursemaven.com"
             content {
                 includeGroup "curse.maven"
             }
@@ -49,6 +49,14 @@ subprojects {
         maven {
             name = "ModMaven"
             url = "https://modmaven.dev"
+        }
+
+        maven {
+            url = "https://maven.shedaniel.me/"
+        }
+
+        maven {
+            url = "https://maven.architectury.dev/"
         }
     }
 
