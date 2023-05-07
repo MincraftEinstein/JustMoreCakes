@@ -34,6 +34,8 @@ dependencies {
     compileOnly group: 'com.electronwill.night-config', name: 'toml', version: '3.6.3'
     compileOnly group: 'fuzs.forgeconfigapiport', name: 'forgeconfigapiport-common', version: "${config_port_v}"
     compileOnly group: 'mezz.jei', name: "jei-${mc_v}-common-api", version: "${jei_v}"
+    compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-api-forge", version: "${rei_v}"
+    compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-default-plugin-forge", version: "${rei_v}"
 }
 
 publishing {

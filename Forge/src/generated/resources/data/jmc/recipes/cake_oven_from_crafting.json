@@ -19,5 +19,6 @@
   ],
   "result": {
     "item": "jmc:cake_oven"
-  }
+  },
+  "show_notification": true
 }

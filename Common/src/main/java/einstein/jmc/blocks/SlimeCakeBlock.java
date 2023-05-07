@@ -21,7 +21,7 @@ public class SlimeCakeBlock extends BaseCakeBlock {
 		if (entity.isSuppressingBounce()) {
 			super.fallOn(level, state, pos, entity, fallDistance);
 		} else {
-			entity.causeFallDamage(fallDistance, 0, DamageSource.FALL);
+			entity.causeFallDamage(fallDistance, 0, level.damageSources().fall());
 		}
 	}
 

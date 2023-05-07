@@ -1,7 +1,6 @@
 modLoader = "javafml"
-loaderVersion = "[43,)"
+loaderVersion = "[45,)"
 license = "All rights reserved"
-issueTrackerURL = "https://github.com/MincraftEinstein/JustMoreCakes/issues"
 
 [[mods]]
     modId = "jmc"
@@ -9,9 +8,11 @@ issueTrackerURL = "https://github.com/MincraftEinstein/JustMoreCakes/issues"
     displayName = "Just More Cakes!"
     #updateJSONURL="http://myurl.me/"
     displayURL = "https://www.curseforge.com/minecraft/mc-mods/just-more-cakes"
+    issueTrackerURL = "https://github.com/MincraftEinstein/JustMoreCakes/issues"
     logoFile = "pack.png"
     credits = "Me the mod author"
     authors = "MincraftEinstein"
+    displayTest = "MATCH_VERSION"
     description = '''
 A simple mod that adds 30+ new cakes to Minecraft
 '''
@@ -23,13 +24,34 @@ A simple mod that adds 30+ new cakes to Minecraft
 [[dependencies.jmc]]
     modId = "forge"
     mandatory = true
-    versionRange = "[43.1.65,)"
+    versionRange = "[45.0.6,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.jmc]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "[1.19.2, 1.20]"
+    versionRange = "[1.19.4, 1.20]"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.jmc]]
+    modId = "jei"
+    mandatory = false
+    versionRange = "[13.1.0.6,)"
+    ordering = "NONE"
+    side = "CLIENT"
+
+[[dependencies.jmc]]
+    modId = "cake-chomps"
+    mandatory = false
+    versionRange = "[6.0.1+1.19.4,)"
+    ordering = "NONE"
+    side = "CLIENT"
+
+[[dependencies.jmc]]
+    modId = "roughlyenoughitems"
+    mandatory = false
+    versionRange = "[11.0.597,)"
     ordering = "NONE"
     side = "BOTH"

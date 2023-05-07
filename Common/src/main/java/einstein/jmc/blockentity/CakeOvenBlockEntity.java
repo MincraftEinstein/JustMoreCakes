@@ -14,6 +14,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -102,9 +103,10 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 				!blockEntity.items.get(INGREDIENT_SLOT_2).isEmpty() || !blockEntity.items.get(INGREDIENT_SLOT_3).isEmpty() || !blockEntity.items.get(INGREDIENT_SLOT_4).isEmpty())) {
 			Recipe<?> recipe = level.getRecipeManager().getRecipeFor(ModRecipes.CAKE_OVEN_RECIPE.get(), blockEntity, level).orElse(null);
 			int stackSize = blockEntity.getMaxStackSize();
+			RegistryAccess access = level.registryAccess();
 			
 			// Controls the fuel progress and fuel items
-			if (!blockEntity.isLit() && blockEntity.hasResultSpace(recipe, blockEntity.items, stackSize)) {
+			if (!blockEntity.isLit() && blockEntity.hasResultSpace(access, recipe, blockEntity.items, stackSize)) {
 				blockEntity.litTime = blockEntity.getBurnDuration(fuelStack);
 				blockEntity.litDuration = blockEntity.litTime;
 				if (blockEntity.isLit()) {
@@ -122,12 +124,12 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 			}
 			
 			// Controls the burn progress and outputs the items
-			if (blockEntity.isLit() && blockEntity.hasResultSpace(recipe, blockEntity.items, stackSize)) {
+			if (blockEntity.isLit() && blockEntity.hasResultSpace(access, recipe, blockEntity.items, stackSize)) {
 				++blockEntity.cookingProgress;
 				if (blockEntity.cookingProgress == blockEntity.cookingTotalTime) {
 					blockEntity.cookingProgress = 0;
 					blockEntity.cookingTotalTime = getTotalCookTime(level, blockEntity);
-					if (blockEntity.smeltRecipe(recipe, blockEntity.items, stackSize)) {
+					if (blockEntity.smeltRecipe(access, recipe, blockEntity.items, stackSize)) {
 						blockEntity.setRecipeUsed(recipe);
 					}
 				}
@@ -148,9 +150,9 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 		}
 	}
 	
-	private boolean hasResultSpace(Recipe<?> recipe, NonNullList<ItemStack> slotItems, int maxStackSize) {
+	private boolean hasResultSpace(RegistryAccess access, @Nullable Recipe<?> recipe, NonNullList<ItemStack> slotItems, int maxStackSize) {
 		if (recipe != null) {
-			ItemStack stack = ((CakeOvenRecipe)recipe).assemble(this);	
+			ItemStack stack = ((CakeOvenRecipe)recipe).assemble(this, access);
 			if (stack.isEmpty()) {
 				return false;
 			}
@@ -175,10 +177,10 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 		}
 	}
 	
-	private boolean smeltRecipe(@Nullable Recipe<?> recipe, NonNullList<ItemStack> slotItems, int maxStackSize) {
-		if (recipe != null && hasResultSpace(recipe, slotItems, maxStackSize)) {
+	private boolean smeltRecipe(RegistryAccess access, @Nullable Recipe<?> recipe, NonNullList<ItemStack> slotItems, int maxStackSize) {
+		if (recipe != null && hasResultSpace(access, recipe, slotItems, maxStackSize)) {
 			ItemStack resultStack = slotItems.get(RESULT_SLOT);
-			ItemStack stack = ((CakeOvenRecipe)recipe).assemble(this);
+			ItemStack stack = ((CakeOvenRecipe)recipe).assemble(this, access);
 			if (resultStack.isEmpty()) { // If the result slot is empty set the slot items to the recipe result
 				slotItems.set(RESULT_SLOT, stack.copy());
 			}
@@ -215,8 +217,8 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 	}
 	
 	@Override
-	public ItemStack removeItem(int par0, int par1) {
-		return ContainerHelper.removeItem(items, par0, par1);
+	public ItemStack removeItem(int slotIndex, int count) {
+		return ContainerHelper.removeItem(items, slotIndex, count);
 	}
 	
 	@Override

@@ -119,7 +119,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 		return eat(level, pos, state, player);
 	}
 
-	public InteractionResult eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player) {
+	public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
 		if (!player.canEat(false)) {
 			return InteractionResult.PASS;
 		}
@@ -141,14 +141,14 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 			}
 
 			int i = state.getValue(getBites()); 
-			accessor.gameEvent(player, GameEvent.EAT, pos);
+			level.gameEvent(player, GameEvent.EAT, pos);
 
 			if (i < getBiteCount()) {
-				accessor.setBlock(pos, state.setValue(getBites(), i + 1), 3);
+				level.setBlock(pos, state.setValue(getBites(), i + 1), 3);
 			}
 			else {
-				accessor.removeBlock(pos, false);
-				accessor.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
+				level.removeBlock(pos, false);
+				level.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
 			}
 
 			return InteractionResult.SUCCESS;

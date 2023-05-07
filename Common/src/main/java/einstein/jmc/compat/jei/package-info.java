@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package einstein.jmc.jei;
+package einstein.jmc.compat.jei;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

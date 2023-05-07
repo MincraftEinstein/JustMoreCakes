@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "jmc:three_tiered_cake"
-  }
+  },
+  "show_notification": true
 }

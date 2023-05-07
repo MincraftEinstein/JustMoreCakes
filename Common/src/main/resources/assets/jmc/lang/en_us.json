@@ -68,6 +68,10 @@
 	"gui.jei.jmc.category.cake_oven": "Cake Baking",
 	"gui.jei.jmc.category.cake_oven.experience": "%s XP",
 	"gui.jei.jmc.category.cake_oven.time.seconds": "%ss",
+
+	"_comment": "REI",
+	"category.rei.jmc.cake_oven": "Cake Baking",
+	"category.rei.jmc.cake_oven.time&xp": "%s XP in %s sec",
 	
 	"_comment": "Creative Tabs",
 	"itemGroup.jmc.jmc_tab": "Just More Cakes!",

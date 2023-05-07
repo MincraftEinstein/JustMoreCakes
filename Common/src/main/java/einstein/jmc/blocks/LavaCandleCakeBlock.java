@@ -20,7 +20,7 @@ public class LavaCandleCakeBlock extends BaseCandleCakeBlock {
 	@Override
 	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
 		if (!entity.fireImmune() && entity instanceof LivingEntity livingEntity && !EnchantmentHelper.hasFrostWalker(livingEntity)) {
-			livingEntity.hurt(DamageSource.HOT_FLOOR, 1);
+			livingEntity.hurt(level.damageSources().hotFloor(), 1);
 		}
 
 		super.stepOn(level, pos, state, entity);

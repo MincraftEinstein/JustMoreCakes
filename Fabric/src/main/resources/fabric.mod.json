@@ -26,7 +26,13 @@
       "einstein.jmc.JustMoreCakesData"
     ],
     "jei_mod_plugin": [
-      "einstein.jmc.jei.JEIPlugin"
+      "einstein.jmc.compat.jei.JEIPlugin"
+    ],
+    "rei_client": [
+      "einstein.jmc.compat.rei.REIClientPlugin"
+    ],
+    "rei_common": [
+      "einstein.jmc.compat.rei.REIPlugin"
     ]
   },
   "mixins": [
@@ -36,9 +42,16 @@
   "accessWidener": "jmcCommon.accesswidener",
   "depends": {
     "fabricloader": ">=0.14",
-    "fabric": "*",
-    "minecraft": "1.19.x",
-    "java": ">=17"
+    "fabric": ">=0.76.0",
+    "minecraft": "1.19.4",
+    "java": ">=17",
+    "forgeconfigapiport": ">=6.0.0"
+  },
+  "suggests": {
+    "jei": ">=13.1.0.6",
+    "configured": ">=2.0.2",
+    "cakechomps": ">=6.0.1+1.19.4",
+    "roughlyenoughitems": ">=11.0.597"
   },
   "custom": {
     "catalogue": {

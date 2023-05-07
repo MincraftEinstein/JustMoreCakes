@@ -6,7 +6,6 @@ import einstein.jmc.init.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -21,7 +20,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
 	public static final TagKey<Item> CHEESE = ItemTags.create(new ResourceLocation("forge", "cheese"));
 	
-	public ModItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, TagsProvider<Block> blockTags, ExistingFileHelper existingFileHelper) {
+	public ModItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, ExistingFileHelper existingFileHelper) {
 		super(output, lookupProvider, blockTags, JustMoreCakes.MOD_ID, existingFileHelper);
 	}
 	
