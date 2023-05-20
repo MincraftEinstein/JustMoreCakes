@@ -1,6 +1,6 @@
 package einstein.jmc.platform;
 
-import einstein.jmc.CakeOvenTransferBlockEntity;
+import einstein.jmc.blockentity.CakeOvenTransferBlockEntity;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blockentity.CakeOvenBlockEntity;
 import einstein.jmc.platform.services.RegistryHelper;
