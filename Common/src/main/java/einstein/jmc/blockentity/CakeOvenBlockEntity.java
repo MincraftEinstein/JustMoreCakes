@@ -32,6 +32,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
@@ -111,13 +112,14 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 				blockEntity.litDuration = blockEntity.litTime;
 				if (blockEntity.isLit()) {
 					flag2 = true;
+					ItemStack remainingStack = new ItemStack(fuelStack.getItem().getCraftingRemainingItem());
 					if (fuelStack.getItem().hasCraftingRemainingItem()) {
-						blockEntity.items.set(FUEL_SLOT, new ItemStack(fuelStack.getItem().getCraftingRemainingItem()));
+						blockEntity.items.set(FUEL_SLOT, remainingStack);
 					}
 					else if (!fuelStack.isEmpty()) {
 						fuelStack.shrink(1);
 						if (fuelStack.isEmpty()) {
-							blockEntity.items.set(FUEL_SLOT, new ItemStack(fuelStack.getItem().getCraftingRemainingItem()));
+							blockEntity.items.set(FUEL_SLOT, remainingStack);
 						}
 					}
 				}
