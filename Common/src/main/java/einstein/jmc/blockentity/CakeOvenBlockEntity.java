@@ -46,7 +46,6 @@ import java.util.List;
 public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements MenuDataProvider, WorldlyContainer, RecipeHolder, StackedContentsCompatible, CakeOvenConstants {
 
     private NonNullList<ItemStack> items = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
-    //	private LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
     private int litTime;
     private int litDuration;
     private int cookingProgress;
@@ -354,36 +353,6 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 
         return list;
     }
-
-//	@Override
-//	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction direction) {
-//		if (!remove && direction != null && capability == ForgeCapabilities.ITEM_HANDLER) {
-//			if (direction == Direction.UP) {
-//				return handlers[0].cast();
-//			}
-//			else if (direction == Direction.DOWN) {
-//				return handlers[1].cast();
-//			}
-//			else {
-//				return handlers[2].cast();
-//			}
-//		}
-//		return super.getCapability(capability, direction);
-//	}
-//
-//	@Override
-//	public void invalidateCaps() {
-//		super.invalidateCaps();
-//		for (LazyOptional<? extends IItemHandler> handler : handlers) {
-//			handler.invalidate();
-//		}
-//	}
-//
-//	@Override
-//	public void reviveCaps() {
-//		super.reviveCaps();
-//		handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
-//	}
 
     @Override
     public int[] getSlotsForFace(Direction faceDirection) {
