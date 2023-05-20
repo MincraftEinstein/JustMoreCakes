@@ -20,28 +20,29 @@ import javax.annotation.Nullable;
 
 public class EncasingIceBlock extends HalfTransparentBlock {
 
-	public EncasingIceBlock(Properties properties) {
-		super(properties);
-	}
+    public EncasingIceBlock(Properties properties) {
+        super(properties);
+    }
 
-	@Override
-	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {}
+    @Override
+    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
+    }
 
-	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (Util.timeGoneBy(level, ModCommonConfigs.ENCASING_ICE_MELT_SPEED.get())) {
-			level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-		}
-	}
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (Util.timeGoneBy(level, ModCommonConfigs.ENCASING_ICE_MELT_SPEED.get())) {
+            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+        }
+    }
 
-	@Override
-	public PushReaction getPistonPushReaction(BlockState state) {
-		return PushReaction.NORMAL;
-	}
+    @Override
+    public PushReaction getPistonPushReaction(BlockState state) {
+        return PushReaction.NORMAL;
+    }
 
-	@Override
-	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-		entity.setSprinting(false);
-		entity.makeStuckInBlock(state, new Vec3(0.001D, 0.001D, 0.001D));
-	}
+    @Override
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        entity.setSprinting(false);
+        entity.makeStuckInBlock(state, new Vec3(0.001D, 0.001D, 0.001D));
+    }
 }

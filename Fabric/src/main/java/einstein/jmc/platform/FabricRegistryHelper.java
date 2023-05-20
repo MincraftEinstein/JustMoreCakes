@@ -91,7 +91,7 @@ public class FabricRegistryHelper implements RegistryHelper {
     @SuppressWarnings("unchecked")
     @Override
     public <T extends PoiType> Supplier<T> registerPOIType(String name, Supplier<T> type) {
-        T poi = (T)PointOfInterestHelper.register(loc(name), type.get().maxTickets(), type.get().validRange(), type.get().matchingStates());
+        T poi = (T) PointOfInterestHelper.register(loc(name), type.get().maxTickets(), type.get().validRange(), type.get().matchingStates());
         return () -> poi;
     }
 

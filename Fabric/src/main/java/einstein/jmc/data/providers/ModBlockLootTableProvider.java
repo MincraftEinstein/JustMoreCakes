@@ -21,7 +21,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
     }
 
     @Override
-    public void generate() {}
+    public void generate() {
+    }
 
     @Override
     public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {

@@ -14,17 +14,17 @@ import java.util.List;
 
 public class GlowstoneCakeBlockEntity extends BlockEntity {
 
-	public GlowstoneCakeBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.GLOWSTONE_CAKE.get(), pos, state);
-	}
-	
-	public void setGlowing() {
-		if (!level.isClientSide) {
-			AABB aabb = new AABB(getBlockPos().below()).inflate(ModCommonConfigs.GLOWSTONE_CAKE_EFFECT_RADIUS.get()).expandTowards(0, level.getHeight(), 0);
-			List<Mob> mobList = level.getEntitiesOfClass(Mob.class, aabb);
-			for (Mob mob : mobList) {
-				mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, ModCommonConfigs.GLOWSTONE_CAKE_GLOWING_DUR.get(), 0, true, true));
-			}
-		}
-	}
+    public GlowstoneCakeBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntityTypes.GLOWSTONE_CAKE.get(), pos, state);
+    }
+
+    public void setGlowing() {
+        if (!level.isClientSide) {
+            AABB aabb = new AABB(getBlockPos().below()).inflate(ModCommonConfigs.GLOWSTONE_CAKE_EFFECT_RADIUS.get()).expandTowards(0, level.getHeight(), 0);
+            List<Mob> mobList = level.getEntitiesOfClass(Mob.class, aabb);
+            for (Mob mob : mobList) {
+                mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, ModCommonConfigs.GLOWSTONE_CAKE_GLOWING_DUR.get(), 0, true, true));
+            }
+        }
+    }
 }

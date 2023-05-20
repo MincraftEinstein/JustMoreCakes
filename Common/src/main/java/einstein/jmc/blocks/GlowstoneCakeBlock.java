@@ -23,8 +23,8 @@ public class GlowstoneCakeBlock extends BaseEntityCakeBlock {
     }
 
     @Nullable
-	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new GlowstoneCakeBlockEntity(pos, state);
-	}
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new GlowstoneCakeBlockEntity(pos, state);
+    }
 }

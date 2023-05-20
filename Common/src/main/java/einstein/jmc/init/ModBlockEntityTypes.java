@@ -14,5 +14,6 @@ public class ModBlockEntityTypes {
     public static final Supplier<BlockEntityType<TNTCakeBlockEntity>> TNT_CAKE = Services.REGISTRY.registerBlockEntity("tnt_cake", () -> Services.REGISTRY.createBlockEntity(TNTCakeBlockEntity::new, ModBlocks.TNT_CAKE.get()));
     public static final Supplier<BlockEntityType<CakeOvenBlockEntity>> CAKE_OVEN = Services.REGISTRY.registerBlockEntity("cake_oven", () -> Services.REGISTRY.createBlockEntity(CakeOvenBlockEntity::new, ModBlocks.CAKE_OVEN.get()));
 
-    public static void init() {}
+    public static void init() {
+    }
 }

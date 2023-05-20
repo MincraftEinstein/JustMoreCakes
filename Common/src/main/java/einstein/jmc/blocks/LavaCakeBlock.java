@@ -25,16 +25,16 @@ public class LavaCakeBlock extends BaseCakeBlock {
 
         super.stepOn(level, pos, state, entity);
     }
-    
+
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
-    	if (ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
-        	if (rand.nextInt(10) == 0) {
-    	        double x = pos.getX() + rand.nextDouble();
-    	        double y = pos.getY() + 1;
-    	        double z = pos.getZ() + rand.nextDouble();
-    	    	level.addParticle(ParticleTypes.LAVA, x, y, z, 0, 0, 0);
-        	}
-    	}
+        if (ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
+            if (rand.nextInt(10) == 0) {
+                double x = pos.getX() + rand.nextDouble();
+                double y = pos.getY() + 1;
+                double z = pos.getZ() + rand.nextDouble();
+                level.addParticle(ParticleTypes.LAVA, x, y, z, 0, 0, 0);
+            }
+        }
     }
 }

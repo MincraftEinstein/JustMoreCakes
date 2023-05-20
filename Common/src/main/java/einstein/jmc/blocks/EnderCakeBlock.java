@@ -14,20 +14,20 @@ public class EnderCakeBlock extends BaseCakeBlock {
         super(builder);
     }
 
-	@Override
+    @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
-    	if (ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
-	       for (int i = 0; i < 3; ++i) {
-	           int i1 = rand.nextInt(2) * 2 - 1;
-	           int i2 = rand.nextInt(2) * 2 - 1;
-	           double x = pos.getX() + 0.5D + 0.25D * i1;
-	           double y = (pos.getY() + rand.nextFloat());
-	           double z = pos.getZ() + 0.5D + 0.25D * i2;
-	           double XSpeed = (rand.nextFloat() * i1);
-	           double YSpeed = (rand.nextFloat() - 0.5D) * 0.125D;
-	           double ZSpeed = (rand.nextFloat() * i2);
-	           level.addParticle(ParticleTypes.PORTAL, x, y, z, XSpeed , YSpeed, ZSpeed);
-	        }
-    	}
+        if (ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
+            for (int i = 0; i < 3; ++i) {
+                int i1 = rand.nextInt(2) * 2 - 1;
+                int i2 = rand.nextInt(2) * 2 - 1;
+                double x = pos.getX() + 0.5D + 0.25D * i1;
+                double y = (pos.getY() + rand.nextFloat());
+                double z = pos.getZ() + 0.5D + 0.25D * i2;
+                double XSpeed = (rand.nextFloat() * i1);
+                double YSpeed = (rand.nextFloat() - 0.5D) * 0.125D;
+                double ZSpeed = (rand.nextFloat() * i2);
+                level.addParticle(ParticleTypes.PORTAL, x, y, z, XSpeed, YSpeed, ZSpeed);
+            }
+        }
     }
 }

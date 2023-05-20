@@ -91,5 +91,6 @@ public class ModBlocks {
         return BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE);
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 }

@@ -125,7 +125,7 @@ public class JustMoreCakesFabric implements ModInitializer {
         TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 2, trades -> {
             trades.add(new ItemsForEmeralds(Blocks.CAKE.asItem(), 1, 1, 10));
             trades.add(new ItemsForEmeralds(Items.COCOA_BEANS, 3, 1, 5));
-            trades.add(new ItemsForEmeralds(ModBlocks.CARROT_CAKE.get().asItem(), 1, 1,10));
+            trades.add(new ItemsForEmeralds(ModBlocks.CARROT_CAKE.get().asItem(), 1, 1, 10));
         });
 
         // Journeyman (Gold tier)
@@ -144,7 +144,7 @@ public class JustMoreCakesFabric implements ModInitializer {
         // Master (Diamond tier)
         TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 5, trades -> {
             trades.add(new ItemsForEmeralds(ModBlocks.THREE_TIERED_CAKE.get().asItem(), 15, 1, 30));
-            trades.add(new ItemsForEmeralds(ModBlocks.CREEPER_CAKE.get().asItem(), 20, 1,  30));
+            trades.add(new ItemsForEmeralds(ModBlocks.CREEPER_CAKE.get().asItem(), 20, 1, 30));
         });
 
         // Wandering trader

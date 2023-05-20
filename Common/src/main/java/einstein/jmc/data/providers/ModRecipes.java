@@ -58,7 +58,7 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Blocks.SMOOTH_STONE))
                 .save(consumer, craftingLoc(ModBlocks.CAKE_OVEN));
     }
-    
+
     private static void cakeOvenRecipes(Consumer<FinishedRecipe> consumer) {
         CakeOvenRecipeBuilder.cakeBaking(Blocks.CAKE, 0.5F, 200, RecipeCategory.FOOD, Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT), Ingredient.of(Items.SUGAR), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Items.EGG))

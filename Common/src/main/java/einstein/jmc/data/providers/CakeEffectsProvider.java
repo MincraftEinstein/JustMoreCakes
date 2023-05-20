@@ -46,7 +46,8 @@ public abstract class CakeEffectsProvider implements DataProvider {
     }
 
     public void add(Supplier<BaseCakeBlock> cake, CakeEffects.MobEffectHolder... mobEffects) {
-        JsonElement element = CakeEffects.CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(cake.get(), List.of(mobEffects))).getOrThrow(false, s -> {});
+        JsonElement element = CakeEffects.CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(cake.get(), List.of(mobEffects))).getOrThrow(false, s -> {
+        });
         map.put(Util.getBlockId(cake.get()).getPath(), element);
     }
 
