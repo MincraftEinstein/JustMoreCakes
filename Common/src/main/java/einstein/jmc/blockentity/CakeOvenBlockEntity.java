@@ -93,7 +93,6 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
         return new CakeOvenMenu(id, inventory, this, dataAccess);
     }
 
-    // TODO check if result item is enabled before starting
     public static void serverTick(Level level, BlockPos pos, BlockState state, CakeOvenBlockEntity blockEntity) {
         boolean flag = blockEntity.isLit();
         boolean flag2 = false;
