@@ -24,6 +24,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -46,6 +47,7 @@ import java.util.List;
 public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements MenuDataProvider, WorldlyContainer, RecipeHolder, StackedContentsCompatible, CakeOvenConstants {
 
     private NonNullList<ItemStack> items = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
+    private NonNullList<ItemStack> remainingItems = NonNullList.withSize(REMAINING_ITEMS, ItemStack.EMPTY);
     private int litTime;
     private int litDuration;
     private int cookingProgress;
@@ -91,6 +93,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
         return new CakeOvenMenu(id, inventory, this, dataAccess);
     }
 
+    // TODO check if result item is enabled before starting
     public static void serverTick(Level level, BlockPos pos, BlockState state, CakeOvenBlockEntity blockEntity) {
         boolean flag = blockEntity.isLit();
         boolean flag2 = false;
@@ -189,7 +192,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
                 resultStack.grow(stack.getCount());
             }
 
-            ((CakeOvenRecipe) recipe).consumeIngredients(this);
+            ((CakeOvenRecipe) recipe).consumeIngredients(this, remainingItems);
             return true;
         }
         else {
@@ -286,6 +289,8 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
         super.load(tag);
         items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);    // Sets the default items in the container
         ContainerHelper.loadAllItems(tag, items);
+        remainingItems = NonNullList.withSize(REMAINING_ITEMS, ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(tag.getCompound("RemainingItems"), remainingItems);
         litTime = tag.getInt("BurnTime");
         cookingProgress = tag.getInt("CookTime");
         cookingTotalTime = tag.getInt("CookTimeTotal");
@@ -304,9 +309,11 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
         tag.putInt("CookTime", cookingProgress);
         tag.putInt("CookTimeTotal", cookingTotalTime);
         ContainerHelper.saveAllItems(tag, items);
+        CompoundTag remainingItemsTag = new CompoundTag();
+        ContainerHelper.saveAllItems(remainingItemsTag, remainingItems);
+        tag.put("RemainingItems", remainingItemsTag);
         CompoundTag usedRecipes = new CompoundTag();
-        recipesUsed.forEach((id, par1) ->
-                usedRecipes.putInt(id.toString(), par1));
+        recipesUsed.forEach((id, par1) -> usedRecipes.putInt(id.toString(), par1));
         tag.put("RecipesUsed", usedRecipes);
     }
 
@@ -342,16 +349,21 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
     }
 
     public List<Recipe<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 pos) {
-        List<Recipe<?>> list = Lists.newArrayList();
+        List<Recipe<?>> recipes = Lists.newArrayList();
 
         for (Entry<ResourceLocation> entry : recipesUsed.object2IntEntrySet()) {
             level.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> {
-                list.add(recipe);
+                recipes.add(recipe);
                 AbstractFurnaceBlockEntity.createExperience(level, pos, entry.getIntValue(), ((CakeOvenRecipe) recipe).getExperience());
             });
         }
 
-        return list;
+        return recipes;
+    }
+
+    public void dropRemainingItems(Level level, BlockPos pos) {
+        Containers.dropContents(level, pos, remainingItems);
+        remainingItems.clear();
     }
 
     @Override
@@ -386,5 +398,9 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 
     @Override
     public void writeMenuData(ServerPlayer player, FriendlyByteBuf buf) {
+    }
+
+    public NonNullList<ItemStack> getRemainingItems() {
+        return remainingItems;
     }
 }

@@ -104,16 +104,44 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
         return new ItemStack(ModBlocks.CAKE_OVEN.get());
     }
 
-    public void consumeIngredients(Container container) {
+    public void consumeIngredients(Container container, NonNullList<ItemStack> remainingItems) {
         for (Ingredient ingredient : ingredients) {
             for (int i = 0; i < container.getContainerSize(); i++) {
                 if (i != RESULT_SLOT && i != FUEL_SLOT) {
                     ItemStack stack = container.getItem(i);
                     if (!stack.isEmpty() && ingredient.test(stack)) {
+                        // Remaining item info must be gotten before shrinking otherwise if this is the last item in the stack, the stack will forget
+                        boolean hasRemainingItem = stack.getItem().hasCraftingRemainingItem();
+                        ItemStack remainingStack = new ItemStack(stack.getItem().getCraftingRemainingItem());
+                        int i2 = 0;
+
+                        for (int i3 = 0; i3 < remainingItems.size(); i3++) {
+                            ItemStack remainingItem = remainingItems.get(i3);
+                            if (!remainingItem.isEmpty()) {
+                                if (ItemStack.isSame(remainingStack, remainingItem) && ItemStack.tagMatches(remainingStack, remainingItem)) {
+                                    remainingItem.grow(remainingStack.getCount());
+                                    remainingItems.set(i3, remainingItem);
+                                    remainingStack = remainingItems.get(i3);
+                                    i2 = i3;
+                                    break;
+                                }
+                            }
+                            else {
+                                remainingItem = remainingStack.copy();
+                                remainingItems.set(i3, remainingItem);
+                                remainingStack = remainingItems.get(i3);
+                                i2 = i3;
+                                break;
+                            }
+                        }
 
                         stack.shrink(1);
 
-                        if (stack.isEmpty()) {
+                        if (stack.isEmpty() && hasRemainingItem) {
+                            container.setItem(i, remainingStack.copy());
+                            remainingItems.set(i2, ItemStack.EMPTY);
+                        }
+                        else if (stack.isEmpty()) {
                             container.setItem(i, ItemStack.EMPTY);
                         }
                     }

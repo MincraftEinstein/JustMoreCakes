@@ -3,6 +3,7 @@ package einstein.jmc.util;
 public interface CakeOvenConstants {
 
     int SLOT_COUNT = 6;
+    int REMAINING_ITEMS = 4;
     int DATA_COUNT = 4;
     int INGREDIENT_SLOT_1 = 0;
     int INGREDIENT_SLOT_2 = 1;
