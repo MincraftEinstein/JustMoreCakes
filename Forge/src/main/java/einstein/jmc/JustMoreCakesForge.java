@@ -213,7 +213,8 @@ public class JustMoreCakesForge {
             return ModItems.CREAM_CHEESE.get();
         }
         else {
-            return missingBlock(name).asItem();
+            Block block = missingBlock(name);
+            return block == null ? null : block.asItem();
         }
     }
 
