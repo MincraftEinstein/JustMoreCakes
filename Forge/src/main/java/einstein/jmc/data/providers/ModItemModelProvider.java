@@ -28,17 +28,6 @@ public class ModItemModelProvider extends ItemModelProvider {
 		generatedItem("poison_cake", mcLoc("item/cake"));
 		generatedItem("tnt_cake", mcLoc("item/cake"));
 
-    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, JustMoreCakes.MOD_ID, existingFileHelper);
-    }
-
-    @Override
-    protected void registerModels() {
-        generatedItem(getItemName(ModItems.CUPCAKE), modLoc("item/" + getItemName(ModItems.CUPCAKE)));
-        generatedItem(getItemName(ModItems.CREAM_CHEESE), modLoc("item/" + getItemName(ModItems.CREAM_CHEESE)));
-        generatedItem("poison_cake", mcLoc("item/cake"));
-        generatedItem("tnt_cake", mcLoc("item/cake"));
-
         getBuilder("encasing_ice").parent(getExistingFile(mcLoc("block/ice")));
         getBuilder("cake_oven").parent(getExistingFile(modLoc("block/cake_oven")));
 
