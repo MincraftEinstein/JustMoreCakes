@@ -28,5 +28,6 @@ public class ModPotions {
         PotionBrewing.addMix(Potions.AWKWARD, Items.PACKED_ICE, ModPotions.FREEZING_POTION.get());
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 }

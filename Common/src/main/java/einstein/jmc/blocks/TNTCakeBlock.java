@@ -17,41 +17,41 @@ public class TNTCakeBlock extends BaseEntityCakeBlock {
         super(builder);
     }
 
-	@Override
-	public void eatActions(Player player, BlockPos pos, BlockState state) {
-		explode(player.getCommandSenderWorld(), pos);
-	}
+    @Override
+    public void eatActions(Player player, BlockPos pos, BlockState state) {
+        explode(player.getCommandSenderWorld(), pos);
+    }
 
-	@Override
-	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos oldPos, boolean isMoving) {
-		if (level.hasNeighborSignal(pos)) {
-			explodeIfAllowed(level, pos);
-		}
-	}
-	
-	@Override
-	public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
-		if (level.hasNeighborSignal(pos)) {
-			explodeIfAllowed(level, pos);
-		}
-	}
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos oldPos, boolean isMoving) {
+        if (level.hasNeighborSignal(pos)) {
+            explodeIfAllowed(level, pos);
+        }
+    }
 
-	private void explodeIfAllowed(Level level, BlockPos pos) {
-		if (ModCommonConfigs.EFFECTED_BY_REDSTONE.get()) {
-			explode(level, pos);
-		}
-	}
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        if (level.hasNeighborSignal(pos)) {
+            explodeIfAllowed(level, pos);
+        }
+    }
 
-	private void explode(Level level, BlockPos pos) {
-		BlockEntity blockEntity = level.getBlockEntity(pos);
-		if (blockEntity instanceof TNTCakeBlockEntity tntCakeBlockEntity) {
-			tntCakeBlockEntity.explode();
-		}
-	}
+    private void explodeIfAllowed(Level level, BlockPos pos) {
+        if (ModCommonConfigs.EFFECTED_BY_REDSTONE.get()) {
+            explode(level, pos);
+        }
+    }
 
-	@Nullable
-	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new TNTCakeBlockEntity(pos, state);
-	}
+    private void explode(Level level, BlockPos pos) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof TNTCakeBlockEntity tntCakeBlockEntity) {
+            tntCakeBlockEntity.explode();
+        }
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new TNTCakeBlockEntity(pos, state);
+    }
 }

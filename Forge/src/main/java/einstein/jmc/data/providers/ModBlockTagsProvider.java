@@ -12,9 +12,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {
 
-	public ModBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-		super(output, lookupProvider, JustMoreCakes.MOD_ID, existingFileHelper);
-	}
+    public ModBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, JustMoreCakes.MOD_ID, existingFileHelper);
+    }
 
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {

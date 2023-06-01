@@ -14,23 +14,23 @@ import java.util.function.Consumer;
 
 public class ModAdvancementProvider extends AdvancementProvider {
 
-	public ModAdvancementProvider(PackOutput generator, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper fileHelper) {
-		super(generator, lookupProvider, List.of(new JMCAdvancements(fileHelper)));
-	}
+    public ModAdvancementProvider(PackOutput generator, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper fileHelper) {
+        super(generator, lookupProvider, List.of(new JMCAdvancements(fileHelper)));
+    }
 
-	public static class JMCAdvancements implements AdvancementSubProvider {
+    public static class JMCAdvancements implements AdvancementSubProvider {
 
-		private final ExistingFileHelper fileHelper;
+        private final ExistingFileHelper fileHelper;
 
-		public JMCAdvancements(ExistingFileHelper fileHelper) {
-			this.fileHelper = fileHelper;
-		}
+        public JMCAdvancements(ExistingFileHelper fileHelper) {
+            this.fileHelper = fileHelper;
+        }
 
-		@Override
-		public void generate(HolderLookup.Provider provider, Consumer<Advancement> consumer) {
-			Advancement craftCake = ModAdvancements.craftCake().parent(JustMoreCakes.mcLoc("husbandry/plant_seed")).save(consumer, JustMoreCakes.loc("husbandry/craft_cake"), fileHelper);
-			ModAdvancements.craftAllCakes(craftCake).save(consumer, JustMoreCakes.loc("husbandry/craft_all_cakes"), fileHelper);
-			ModAdvancements.eatObsidianCake(craftCake).save(consumer, JustMoreCakes.loc("husbandry/eat_obsidian_cake"), fileHelper);
-		}
-	}
+        @Override
+        public void generate(HolderLookup.Provider provider, Consumer<Advancement> consumer) {
+            Advancement craftCake = ModAdvancements.craftCake().parent(JustMoreCakes.mcLoc("husbandry/plant_seed")).save(consumer, JustMoreCakes.loc("husbandry/craft_cake"), fileHelper);
+            ModAdvancements.craftAllCakes(craftCake).save(consumer, JustMoreCakes.loc("husbandry/craft_all_cakes"), fileHelper);
+            ModAdvancements.eatObsidianCake(craftCake).save(consumer, JustMoreCakes.loc("husbandry/eat_obsidian_cake"), fileHelper);
+        }
+    }
 }

@@ -10,5 +10,6 @@ public class ModMenuTypes {
 
     public static final Supplier<MenuType<CakeOvenMenu>> CAKE_OVEN = Services.REGISTRY.registerMenuType("cake_oven", () -> Services.REGISTRY.createMenuType((id, inventory, buf) -> new CakeOvenMenu(id, inventory)));
 
-    public static void init() {}
+    public static void init() {
+    }
 }

@@ -81,6 +81,7 @@ public class CakeOvenBlock extends BaseEntityBlock {
                 if (level instanceof ServerLevel) {
                     Containers.dropContents(level, pos, cakeOvenBlockEntity);
                     cakeOvenBlockEntity.getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(pos));
+                    cakeOvenBlockEntity.dropRemainingItems(level, pos);
                 }
                 level.updateNeighbourForOutputSignal(pos, this);
             }

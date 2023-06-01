@@ -2,11 +2,11 @@ package einstein.jmc.advancement.criterian;
 
 import com.google.gson.JsonObject;
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.Block;
 
 public class CakeEatenTrigger extends SimpleCriterionTrigger<CakeEatenTrigger.TriggerInstance> {
 
@@ -21,8 +21,8 @@ public class CakeEatenTrigger extends SimpleCriterionTrigger<CakeEatenTrigger.Tr
         super.trigger(player, trigger -> trigger.test(cake));
     }
 
-    public void trigger(ServerPlayer player, BaseCakeBlock cake) {
-        trigger(player, Util.getBlockId(cake));
+    public void trigger(ServerPlayer player, Block block) {
+        trigger(player, Util.getBlockId(block));
     }
 
     @Override

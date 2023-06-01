@@ -4,11 +4,9 @@ import com.mojang.datafixers.util.Pair;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -36,7 +34,8 @@ public class ObsidianCakeBlock extends BaseCakeBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {}
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    }
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {

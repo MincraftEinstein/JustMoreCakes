@@ -2,8 +2,8 @@ package einstein.jmc.platform;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.platform.services.CommonHooks;
-import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.platform.services.IPlatformHelper;
+import einstein.jmc.platform.services.RegistryHelper;
 
 import java.util.ServiceLoader;
 

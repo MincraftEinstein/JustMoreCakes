@@ -12,11 +12,13 @@ public class ModRecipes {
 
     public static final Supplier<RecipeSerializer<CakeOvenRecipe>> CAKE_OVEN_SERIALIZER = Services.REGISTRY.registerRecipeSerializer("cake_baking", () -> new CakeOvenRecipeSerializer<>(CakeOvenRecipe::new, 100));
     public static final Supplier<RecipeType<CakeOvenRecipe>> CAKE_OVEN_RECIPE = Services.REGISTRY.registerRecipeType("cake_baking", () -> new RecipeType<>() {
+
         @Override
         public String toString() {
             return "cake_baking";
         }
     });
 
-    public static void init() {}
+    public static void init() {
+    }
 }

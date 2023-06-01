@@ -1,6 +1,8 @@
 package einstein.jmc.platform;
 
+import einstein.jmc.blockentity.CakeOvenTransferBlockEntity;
 import einstein.jmc.JustMoreCakes;
+import einstein.jmc.blockentity.CakeOvenBlockEntity;
 import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.util.BlockEntitySupplier;
 import einstein.jmc.util.MenuTypeSupplier;
@@ -52,9 +54,16 @@ public class ForgeRegistryHelper implements RegistryHelper {
         return BLOCK_ENTITIES.register(name, type);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <T extends BlockEntity> BlockEntityType<T> createBlockEntity(BlockEntitySupplier<T> supplier, Block... blocks) {
-        return BlockEntityType.Builder.of(supplier::create, blocks).build(null);
+        return BlockEntityType.Builder.of((pos, state) -> {
+            T t = supplier.create(pos, state);
+            if (t instanceof CakeOvenBlockEntity) {
+                return (T) new CakeOvenTransferBlockEntity(pos, state);
+            }
+            return t;
+        }, blocks).build(null);
     }
 
     @Override

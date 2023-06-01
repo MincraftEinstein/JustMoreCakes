@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.EntityBlock;
 
 public abstract class BaseEntityCakeBlock extends BaseCakeBlock implements EntityBlock {
 
-	public BaseEntityCakeBlock(CakeBuilder builder) {
-		super(builder);
-	}
+    public BaseEntityCakeBlock(CakeBuilder builder) {
+        super(builder);
+    }
 }

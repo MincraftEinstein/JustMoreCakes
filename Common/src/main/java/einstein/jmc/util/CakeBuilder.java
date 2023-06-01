@@ -128,11 +128,13 @@ public class CakeBuilder {
 
     @FunctionalInterface
     public interface CakeClazzSupplier<T extends BaseCakeBlock> {
+
         T get(CakeBuilder builder);
     }
 
     @FunctionalInterface
     public interface CandleCakeClazzSupplier<T extends BaseCandleCakeBlock> {
+
         T get(BaseCakeBlock originalCake, BlockBehaviour.Properties properties);
     }
 }

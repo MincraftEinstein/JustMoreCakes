@@ -14,5 +14,6 @@ public class ModItems {
     public static final Supplier<Item> CUPCAKE = Services.REGISTRY.registerItem("cupcake", () -> new ItemNameBlockItem(ModBlocks.CUPCAKE.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(0).build())));
     public static final Supplier<Item> CAKE_SPATULA = Services.REGISTRY.registerItem("cake_spatula", () -> new CakeSpatulaItem(new Item.Properties().stacksTo(1)));
 
-    public static void init() {}
+    public static void init() {
+    }
 }

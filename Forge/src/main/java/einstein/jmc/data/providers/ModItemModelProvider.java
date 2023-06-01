@@ -28,25 +28,36 @@ public class ModItemModelProvider extends ItemModelProvider {
 		generatedItem("poison_cake", mcLoc("item/cake"));
 		generatedItem("tnt_cake", mcLoc("item/cake"));
 
-		getBuilder("encasing_ice").parent(getExistingFile(mcLoc("block/ice")));
-		getBuilder("cake_oven").parent(getExistingFile(modLoc("block/cake_oven")));
+    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, JustMoreCakes.MOD_ID, existingFileHelper);
+    }
 
-		for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
-			if (!cake.get().getBuilder().hasCustomItemModel()) {
-				generatedItem(getItemName(cake), modLoc("item/" + Util.getItemId(cake.get().asItem()).getPath()));
-			}
-		}
-	}
+    @Override
+    protected void registerModels() {
+        generatedItem(getItemName(ModItems.CUPCAKE), modLoc("item/" + getItemName(ModItems.CUPCAKE)));
+        generatedItem(getItemName(ModItems.CREAM_CHEESE), modLoc("item/" + getItemName(ModItems.CREAM_CHEESE)));
+        generatedItem("poison_cake", mcLoc("item/cake"));
+        generatedItem("tnt_cake", mcLoc("item/cake"));
 
-	private ItemModelBuilder generatedItem(String name, ResourceLocation... layers) {
-		ItemModelBuilder model = withExistingParent(name, "item/generated");
-		for (int i = 0; i < layers.length; i++) {
-			model = model.texture("layer" + i, layers[i]);
-		}
-		return model;
-	}
-	
-	private String getItemName(Supplier<? extends ItemLike> item) {
-		return Util.getItemId(item.get().asItem()).getPath();
-	}
+        getBuilder("encasing_ice").parent(getExistingFile(mcLoc("block/ice")));
+        getBuilder("cake_oven").parent(getExistingFile(modLoc("block/cake_oven")));
+
+        for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
+            if (!cake.get().getBuilder().hasCustomItemModel()) {
+                generatedItem(getItemName(cake), modLoc("item/" + Util.getItemId(cake.get().asItem()).getPath()));
+            }
+        }
+    }
+
+    private ItemModelBuilder generatedItem(String name, ResourceLocation... layers) {
+        ItemModelBuilder model = withExistingParent(name, "item/generated");
+        for (int i = 0; i < layers.length; i++) {
+            model = model.texture("layer" + i, layers[i]);
+        }
+        return model;
+    }
+
+    private String getItemName(Supplier<? extends ItemLike> item) {
+        return Util.getItemId(item.get().asItem()).getPath();
+    }
 }
