@@ -37,15 +37,15 @@ public class CakeOvenMenu extends AbstractContainerMenu implements CakeOvenConst
         addSlot(new CakeOvenResultSlot(inventory.player, container, RESULT_SLOT, 130, 35));
 
         // Adds the player's inventory slots
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                addSlot(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+        for (int y = 0; y < 3; ++y) {
+            for (int x = 0; x < 9; ++x) {
+                addSlot(new Slot(inventory, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
             }
         }
 
         // Adds the player's hotbar slots
-        for (int k = 0; k < 9; ++k) {
-            addSlot(new Slot(inventory, k, 8 + k * 18, 142));
+        for (int x = 0; x < 9; ++x) {
+            addSlot(new Slot(inventory, x, 8 + x * 18, 142));
         }
 
         addDataSlots(data);
