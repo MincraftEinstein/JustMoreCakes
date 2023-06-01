@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "jmc:item/cake_spatula"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ 0, 0, 45 ],
+      "translation": [ 0, 5.25, 0 ],
+      "scale": [ 0.9, 0.9, 0.9 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 0, 0, -45 ],
+      "translation": [ 0, 5.25, 0 ],
+      "scale": [ 0.9, 0.9, 0.9 ]
+    }
+  }
+}
