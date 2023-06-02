@@ -1,3 +1,7 @@
-// 1.19.4	2023-06-01T17:17:22.7624554	Just More Cakes!/Tags for minecraft:block
+// 1.19.4	2023-06-01T22:20:25.9715843	Just More Cakes!/Tags for minecraft:block
+8ea4905c5506130ae13634ed233972a025659f79 data\c\tags\blocks\cakes.json
 26252e683681441feb1ca07c86ad6ec13521f94b data\jmc\tags\blocks\cake_spatula_usable.json
+8e2dd45b7c2081cad64c965322d053df3c8186c6 data\c\tags\blocks\candle_cakes.json
 f44250833c44e7412e263321dd61e8648f36770d data\minecraft\tags\blocks\mineable\pickaxe.json
+9e8cb483256b291aa4f92a8064a21eedad9760d9 data\jmc\tags\blocks\cakes.json
+ef8f5f9ef21f8d1696b3df6a9bace5b4956c7a75 data\jmc\tags\blocks\candle_cakes.json

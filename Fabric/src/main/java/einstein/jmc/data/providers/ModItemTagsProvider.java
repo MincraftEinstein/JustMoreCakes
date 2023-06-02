@@ -12,10 +12,10 @@ import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModItemTagsProvider extends FabricTagProvider<Item> {
+public class ModItemTagsProvider extends FabricTagProvider.ItemTagProvider {
 
-    public ModItemTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, Registries.ITEM, lookupProvider);
+    public ModItemTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, BlockTagProvider blockTags) {
+        super(output, lookupProvider, blockTags);
     }
 
     @Override
@@ -28,5 +28,7 @@ public class ModItemTagsProvider extends FabricTagProvider<Item> {
                 .addOptionalTag(ConventionalItemTags.RED_DYES);
         getOrCreateTagBuilder(ModItemTags.SEEDS).add(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
         getOrCreateTagBuilder(ModItemTags.SLIME_BALLS).add(Items.SLIME_BALL);
+        copy(ModBlockTags.CAKES, ModItemTags.CAKES);
+        getOrCreateTagBuilder(ModItemTags.C_CAKES).addTag(ModItemTags.CAKES);
     }
 }
