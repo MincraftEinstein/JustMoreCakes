@@ -4,10 +4,13 @@ import einstein.jmc.advancement.criterian.CakeEatenTrigger;
 import einstein.jmc.init.*;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +20,7 @@ public class JustMoreCakes {
     public static final String MOD_NAME = "Just More Cakes!";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
     public static final CakeEatenTrigger CAKE_EATEN_TRIGGER = CriteriaTriggers.register(new CakeEatenTrigger());
+    public static final LootItemCondition.Builder HAS_CAKE_SPATULA = MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModItems.CAKE_SPATULA.get()));
 
     public static void init() {
         ModItems.init();
