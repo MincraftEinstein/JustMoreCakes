@@ -1,2 +1,6 @@
-// 1.19.4	2023-03-16T14:05:30.9692898	Tags for minecraft:block mod id jmc
+// 1.19.4	2023-06-01T21:29:58.7995503	Tags for minecraft:block mod id jmc
+b309abc5734e51409824164bb4935186385e4b9b data/c/tags/blocks/cakes.json
+4d60c932f859099f6892e6554d664403f3724792 data/c/tags/blocks/candle_cakes.json
+69fe623e343bc7e8ad812562a32bff3df083684e data/jmc/tags/blocks/cakes.json
+55b22646e1619b67f888f15ca8723fa3f01c391c data/jmc/tags/blocks/candle_cakes.json
 77dd7eb35b6cf53bf32401eaf577e61f1a887759 data/minecraft/tags/blocks/mineable/pickaxe.json

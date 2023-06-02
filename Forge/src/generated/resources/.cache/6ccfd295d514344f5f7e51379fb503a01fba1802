@@ -1,4 +1,5 @@
-// 1.19.4	2023-03-16T14:05:30.946782	Tags for minecraft:item mod id jmc
+// 1.19.4	2023-06-01T21:27:34.3647923	Tags for minecraft:item mod id jmc
+b309abc5734e51409824164bb4935186385e4b9b data/c/tags/items/cakes.json
 baff2e4766328d0d89e55e50611c81f97f8a203a data/c/tags/items/cheese.json
 3f1a666a9752e3dca076126e9069598bd157ee2f data/c/tags/items/cheesecakes.json
 baff2e4766328d0d89e55e50611c81f97f8a203a data/c/tags/items/cheeses.json
@@ -7,3 +8,4 @@ baff2e4766328d0d89e55e50611c81f97f8a203a data/c/tags/items/cheeses.json
 7dacce0ec9e5cbd0efc722b3fc437fb8ec9e813b data/c/tags/items/seeds.json
 0212a93f845270829cbb31b2ab72bff86995677e data/c/tags/items/slime_balls.json
 baff2e4766328d0d89e55e50611c81f97f8a203a data/forge/tags/items/cheese.json
+69fe623e343bc7e8ad812562a32bff3df083684e data/jmc/tags/items/cakes.json

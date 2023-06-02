@@ -36,5 +36,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .addOptionalTag(Tags.Items.DYES_RED.location());
         tag(ModItemTags.SEEDS).addTag(Tags.Items.SEEDS);
         tag(ModItemTags.SLIME_BALLS).addTag(Tags.Items.SLIMEBALLS);
+        copy(ModBlockTags.CAKES, ModItemTags.CAKES);
+        tag(ModItemTags.C_CAKES).addTag(ModItemTags.CAKES);
     }
 }
