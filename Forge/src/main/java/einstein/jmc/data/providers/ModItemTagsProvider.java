@@ -18,7 +18,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagsProvider extends ItemTagsProvider {
 
-    public static final TagKey<Item> CHEESE = ItemTags.create(new ResourceLocation("forge", "cheese"));
+    public static final TagKey<Item> F_CHEESE = ItemTags.create(new ResourceLocation("forge", "cheese"));
+    public static final TagKey<Item> F_CAKES = ItemTags.create(new ResourceLocation("forge", "cakes"));
 
     public ModItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTags, JustMoreCakes.MOD_ID, existingFileHelper);
@@ -26,7 +27,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(CHEESE).add(ModItems.CREAM_CHEESE.get());
+        tag(F_CHEESE).add(ModItems.CREAM_CHEESE.get());
         tag(ModItemTags.CHEESE).add(ModItems.CREAM_CHEESE.get());
         tag(ModItemTags.CHEESES).add(ModItems.CREAM_CHEESE.get());
         tag(ModItemTags.CHEESE_CAKES).add(ModBlocks.CHEESECAKE.get().asItem());
@@ -38,5 +39,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ModItemTags.SLIME_BALLS).addTag(Tags.Items.SLIMEBALLS);
         copy(ModBlockTags.CAKES, ModItemTags.CAKES);
         tag(ModItemTags.C_CAKES).addTag(ModItemTags.CAKES);
+        tag(F_CAKES).addTag(ModItemTags.CAKES);
     }
 }
