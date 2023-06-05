@@ -20,12 +20,12 @@ import java.util.function.Supplier;
 public abstract class CakeEffectsProvider implements DataProvider {
 
     private final PackOutput output;
-    private final String mod_id;
+    private final String modId;
     private final Map<String, JsonElement> map = new HashMap<>();
 
-    public CakeEffectsProvider(PackOutput output, String mod_id) {
+    public CakeEffectsProvider(PackOutput output, String modId) {
         this.output = output;
-        this.mod_id = mod_id;
+        this.modId = modId;
     }
 
     protected abstract void addCakeEffects();
@@ -34,7 +34,7 @@ public abstract class CakeEffectsProvider implements DataProvider {
     public CompletableFuture<?> run(CachedOutput cache) {
         addCakeEffects();
 
-        Path folderPath = output.getOutputFolder(PackOutput.Target.DATA_PACK).resolve(mod_id).resolve("cake_effects");
+        Path folderPath = output.getOutputFolder(PackOutput.Target.DATA_PACK).resolve(modId).resolve("cake_effects");
         ImmutableList.Builder<CompletableFuture<?>> builder = new ImmutableList.Builder<>();
 
         map.forEach((name, element) -> {
