@@ -48,7 +48,7 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.MILK_BUCKET))
                 .save(consumer, craftingLoc(ModItems.CREAM_CHEESE));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModBlocks.CAKE_OVEN.get().asItem())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.CAKE_OVEN.get().asItem())
                 .pattern("###")
                 .pattern("#$#")
                 .pattern("~~~")
