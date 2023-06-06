@@ -44,6 +44,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             });
         });
 
+        tag(ModBlockTags.CAKES).add(ModBlocks.CUPCAKE.get());
         tag(ModBlockTags.C_CAKES).addTag(ModBlockTags.CAKES);
         tag(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         tag(F_CAKES).addTag(ModBlockTags.CAKES);

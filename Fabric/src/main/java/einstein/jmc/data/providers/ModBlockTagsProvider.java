@@ -36,6 +36,7 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
             });
         });
 
+        getOrCreateTagBuilder(ModBlockTags.CAKES).add(ModBlocks.CUPCAKE.get());
         getOrCreateTagBuilder(ModBlockTags.C_CAKES).addTag(ModBlockTags.CAKES);
         getOrCreateTagBuilder(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
     }
