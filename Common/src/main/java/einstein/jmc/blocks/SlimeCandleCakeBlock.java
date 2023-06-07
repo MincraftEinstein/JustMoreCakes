@@ -14,7 +14,7 @@ public class SlimeCandleCakeBlock extends BaseCandleCakeBlock {
 
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        if (entity.isSuppressingBounce()) {
+        if (entity.isSuppressingBounce() || isAboveCake(pos, entity)) {
             super.fallOn(level, state, pos, entity, fallDistance);
         }
         else {
@@ -24,7 +24,7 @@ public class SlimeCandleCakeBlock extends BaseCandleCakeBlock {
 
     @Override
     public void updateEntityAfterFallOn(BlockGetter getter, Entity entity) {
-        if (entity.isSuppressingBounce()) {
+        if (entity.isSuppressingBounce() || isAboveCake(entity.getOnPosLegacy(), entity)) {
             super.updateEntityAfterFallOn(getter, entity);
         }
         else {
@@ -35,10 +35,14 @@ public class SlimeCandleCakeBlock extends BaseCandleCakeBlock {
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         double d0 = Math.abs(entity.getDeltaMovement().y);
-        if (d0 < 0.1D && !entity.isSteppingCarefully()) {
+        if (d0 < 0.1D && !(entity.isSteppingCarefully() || isAboveCake(pos, entity))) {
             double d1 = 0.4D + d0 * 0.2D;
             entity.setDeltaMovement(entity.getDeltaMovement().multiply(d1, 1, d1));
         }
         super.stepOn(level, pos, state, entity);
+    }
+
+    private boolean isAboveCake(BlockPos pos, Entity entity) {
+        return entity.getY() - pos.getY() > getCandleHeight();
     }
 }
