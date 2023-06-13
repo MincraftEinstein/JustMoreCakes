@@ -179,7 +179,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {
-        return reader.getBlockState(pos.below()).getMaterial().isSolid();
+        return reader.getBlockState(pos.below()).isSolid();
     }
 
     @Override

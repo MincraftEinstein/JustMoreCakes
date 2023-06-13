@@ -26,17 +26,21 @@ public class CakeEatenTrigger extends SimpleCriterionTrigger<CakeEatenTrigger.Tr
     }
 
     @Override
-    protected TriggerInstance createInstance(JsonObject json, EntityPredicate.Composite composite, DeserializationContext context) {
-        return new TriggerInstance(new ResourceLocation(json.get("cake").getAsString()));
+    protected TriggerInstance createInstance(JsonObject json, ContextAwarePredicate predicate, DeserializationContext context) {
+        return new TriggerInstance(predicate, new ResourceLocation(json.get("cake").getAsString()));
     }
 
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
 
         private final ResourceLocation cake;
 
-        public TriggerInstance(ResourceLocation cake) {
-            super(ID, EntityPredicate.Composite.ANY);
+        public TriggerInstance(ContextAwarePredicate predicate, ResourceLocation cake) {
+            super(ID, predicate);
             this.cake = cake;
+        }
+
+        public static TriggerInstance cakeEaten(ResourceLocation cake) {
+            return new TriggerInstance(ContextAwarePredicate.ANY, cake);
         }
 
         public boolean test(ResourceLocation cake) {

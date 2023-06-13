@@ -58,7 +58,7 @@ public class CakeOvenResultSlot extends Slot {
 
     @Override
     protected void checkTakeAchievements(ItemStack resultStack) {
-        resultStack.onCraftedBy(player.level, player, removeCount);
+        resultStack.onCraftedBy(player.level(), player, removeCount);
         if (player instanceof ServerPlayer serverPlayer && container instanceof CakeOvenBlockEntity blockEntity) {
             blockEntity.awardUsedRecipesAndPopExperience(serverPlayer);
         }

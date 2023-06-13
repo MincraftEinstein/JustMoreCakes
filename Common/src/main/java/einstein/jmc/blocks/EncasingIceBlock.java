@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -33,11 +32,6 @@ public class EncasingIceBlock extends HalfTransparentBlock {
         if (Util.timeGoneBy(level, ModCommonConfigs.ENCASING_ICE_MELT_SPEED.get())) {
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         }
-    }
-
-    @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.NORMAL;
     }
 
     @Override

@@ -8,6 +8,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -112,13 +113,14 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
                     if (!stack.isEmpty() && ingredient.test(stack)) {
                         // Remaining item info must be gotten before shrinking otherwise if this is the last item in the stack, the stack will forget
                         boolean hasRemainingItem = stack.getItem().hasCraftingRemainingItem();
-                        ItemStack remainingStack = new ItemStack(stack.getItem().getCraftingRemainingItem());
+                        Item v = stack.getItem().getCraftingRemainingItem();
+                        ItemStack remainingStack = v == null ? ItemStack.EMPTY : new ItemStack(v);
                         int i2 = 0;
 
                         for (int i3 = 0; i3 < remainingItems.size(); i3++) {
                             ItemStack remainingItem = remainingItems.get(i3);
                             if (!remainingItem.isEmpty()) {
-                                if (ItemStack.isSame(remainingStack, remainingItem) && ItemStack.tagMatches(remainingStack, remainingItem)) {
+                                if (ItemStack.isSameItemSameTags(remainingStack, remainingItem)) {
                                     remainingItem.grow(remainingStack.getCount());
                                     remainingItems.set(i3, remainingItem);
                                     remainingStack = remainingItems.get(i3);

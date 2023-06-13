@@ -37,7 +37,7 @@ public class ModAdvancements {
     public static Advancement.Builder eatObsidianCake(Advancement parent) {
         return Advancement.Builder.advancement().parent(parent)
                 .display(ModBlocks.OBSIDIAN_CAKE.get(), translatable("eat_obsidian_cake.title"), translatable("eat_obsidian_cake.description"), null, FrameType.TASK, true, true, false)
-                .addCriterion("obsidian_cake_eaten", new CakeEatenTrigger.TriggerInstance(Util.getBlockId(ModBlocks.OBSIDIAN_CAKE.get())));
+                .addCriterion("obsidian_cake_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(Util.getBlockId(ModBlocks.OBSIDIAN_CAKE.get())));
     }
 
     private static Advancement.Builder addCakes(Advancement.Builder advancement) {

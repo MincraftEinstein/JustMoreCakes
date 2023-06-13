@@ -8,6 +8,7 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public interface RegistryHelper {
@@ -53,4 +55,6 @@ public interface RegistryHelper {
     <T extends PoiType> Supplier<T> registerPOIType(String name, Supplier<T> type);
 
     <T extends VillagerProfession> Supplier<T> registerVillagerProfession(String name, Supplier<T> type);
+
+    <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String name, Function<CreativeModeTab.Builder, T> type);
 }

@@ -120,7 +120,7 @@ public class Util {
      * and slightly changed to work with JustMoreCakes
      */
     public static void useCake(Player player, BlockPos pos, InteractionHand hand, Supplier<Boolean> canInteract) {
-        Level level = player.getLevel();
+        Level level = player.level();
         BlockState state = level.getBlockState(pos);
         Block block = state.getBlock();
 
@@ -164,7 +164,7 @@ public class Util {
 
                 ParticleOptions particle = new ItemParticleOption(ParticleTypes.ITEM, blockStack);
 
-                if (player.level instanceof ServerLevel serverWorld) {
+                if (player.level() instanceof ServerLevel serverWorld) {
                     serverWorld.sendParticles(particle, vec31.x, vec31.y, vec31.z, 1, vec3.x, vec3.y + 0.05D, vec3.z, 0.0D);
                 }
                 else {
@@ -244,7 +244,7 @@ public class Util {
     public static void livingEntityTick(Level level, LivingEntity entity) {
         RandomSource random = entity.getRandom();
         if (entity.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
-            if (entity.verticalCollision && entity.isOnGround() && !entity.isSleeping()) {
+            if (entity.verticalCollision && entity.onGround() && !entity.isSleeping()) {
                 float f = 0.65F;
 
                 if (entity.hasEffect(MobEffects.JUMP)) {

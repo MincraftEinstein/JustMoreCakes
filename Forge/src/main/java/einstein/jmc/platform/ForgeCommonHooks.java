@@ -5,7 +5,12 @@ import einstein.jmc.platform.services.CommonHooks;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -24,5 +29,10 @@ public class ForgeCommonHooks implements CommonHooks {
     @Override
     public void openMenu(ServerPlayer player, MenuDataProvider provider) {
         NetworkHooks.openScreen(player, provider, buf -> provider.writeMenuData(player, buf));
+    }
+
+    @Override
+    public void registerBrewingRecipe(Potion potion, Ingredient ingredient, Potion result) {
+        BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), potion)), ingredient, PotionUtils.setPotion(new ItemStack(Items.POTION), result));
     }
 }
