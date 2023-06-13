@@ -449,5 +449,6 @@
       "tnt_cake",
       "warped_fungus_cake"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

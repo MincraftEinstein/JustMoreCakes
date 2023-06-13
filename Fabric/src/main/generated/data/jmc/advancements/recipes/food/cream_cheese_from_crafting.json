@@ -30,5 +30,6 @@
     "recipes": [
       "jmc:cream_cheese_from_crafting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -27,5 +27,6 @@
     [
       "obsidian_cake_eaten"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

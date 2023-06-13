@@ -30,5 +30,6 @@
     "recipes": [
       "jmc:poison_cake_from_cake_oven"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

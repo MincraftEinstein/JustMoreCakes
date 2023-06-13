@@ -30,5 +30,6 @@
     "recipes": [
       "jmc:three_tiered_cake_from_crafting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
