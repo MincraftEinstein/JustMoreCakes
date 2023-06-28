@@ -1,6 +1,8 @@
 {
   "values": [
     "minecraft:cake",
+    "#forge:cakes",
+    "#forge:candle_cakes",
     "minecraft:candle_cake",
     "minecraft:white_candle_cake",
     "minecraft:orange_candle_cake",
@@ -17,8 +19,6 @@
     "minecraft:brown_candle_cake",
     "minecraft:green_candle_cake",
     "minecraft:red_candle_cake",
-    "minecraft:black_candle_cake",
-    "#forge:cakes",
-    "#forge:candle_cakes"
+    "minecraft:black_candle_cake"
   ]
 }

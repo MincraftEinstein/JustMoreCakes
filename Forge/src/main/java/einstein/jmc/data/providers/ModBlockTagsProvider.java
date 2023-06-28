@@ -49,11 +49,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         tag(F_CAKES).addTag(ModBlockTags.CAKES);
         tag(F_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
-        tag(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE, Blocks.CANDLE_CAKE, Blocks.WHITE_CANDLE_CAKE,
-                        Blocks.ORANGE_CANDLE_CAKE, Blocks.MAGENTA_CANDLE_CAKE, Blocks.LIGHT_BLUE_CANDLE_CAKE,
-                        Blocks.YELLOW_CANDLE_CAKE, Blocks.LIME_CANDLE_CAKE, Blocks.PINK_CANDLE_CAKE, Blocks.GRAY_CANDLE_CAKE,
-                        Blocks.LIGHT_GRAY_CANDLE_CAKE, Blocks.CYAN_CANDLE_CAKE, Blocks.PURPLE_CANDLE_CAKE, Blocks.BLUE_CANDLE_CAKE,
-                        Blocks.BROWN_CANDLE_CAKE, Blocks.GREEN_CANDLE_CAKE, Blocks.RED_CANDLE_CAKE, Blocks.BLACK_CANDLE_CAKE)
-                .addTag(F_CAKES).addTag(F_CANDLE_CAKES);
+        tag(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE).addTag(F_CAKES).addTag(F_CANDLE_CAKES);
+        Util.getVanillaCandleCakes().forEach(cake -> tag(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
     }
 }

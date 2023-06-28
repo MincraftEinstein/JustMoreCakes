@@ -1,5 +1,6 @@
 package einstein.jmc.util;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -310,8 +311,8 @@ public class Util {
                 .add(LootItem.lootTableItem(block).when(HAS_CAKE_SPATULA)));
     }
 
-    public static List<Block> getVanillaCandleCakes() {
-        return List.of(Blocks.CANDLE_CAKE, Blocks.WHITE_CANDLE_CAKE,
+    public static ImmutableList<Block> getVanillaCandleCakes() {
+        return ImmutableList.of(Blocks.CANDLE_CAKE, Blocks.WHITE_CANDLE_CAKE,
                 Blocks.ORANGE_CANDLE_CAKE, Blocks.MAGENTA_CANDLE_CAKE, Blocks.LIGHT_BLUE_CANDLE_CAKE,
                 Blocks.YELLOW_CANDLE_CAKE, Blocks.LIME_CANDLE_CAKE, Blocks.PINK_CANDLE_CAKE, Blocks.GRAY_CANDLE_CAKE,
                 Blocks.LIGHT_GRAY_CANDLE_CAKE, Blocks.CYAN_CANDLE_CAKE, Blocks.PURPLE_CANDLE_CAKE, Blocks.BLUE_CANDLE_CAKE,
