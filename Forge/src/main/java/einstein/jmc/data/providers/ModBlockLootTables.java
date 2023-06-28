@@ -2,6 +2,7 @@ package einstein.jmc.data.providers;
 
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.Util;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import static einstein.jmc.util.Util.HAS_CAKE_SPATULA;
+import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
 
@@ -30,12 +32,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             dropWhenCakeSpatula(cake.get());
-            knownBlocks.add(cake.get());
 
             builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                add(candleCake.get(), block -> createCandleCakeDrops(candle).withPool(LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
-                        .add(LootItem.lootTableItem(cake.get()).when(HAS_CAKE_SPATULA))));
+                add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), cake.get()));
                 knownBlocks.add(candleCake.get());
             });
         });
@@ -46,13 +45,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected Iterable<Block> getKnownBlocks() {
         knownBlocks.add(ModBlocks.CAKE_OVEN.get());
-        knownBlocks.add(ModBlocks.CUPCAKE.get());
         return knownBlocks;
     }
 
     private void dropWhenCakeSpatula(Block block) {
-        add(block, LootTable.lootTable().withPool(LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1))
-                .add(LootItem.lootTableItem(block).when(HAS_CAKE_SPATULA))));
+        add(block, addDropWhenCakeSpatulaPool(LootTable.lootTable(), block));
+        knownBlocks.add(block);
     }
 }
