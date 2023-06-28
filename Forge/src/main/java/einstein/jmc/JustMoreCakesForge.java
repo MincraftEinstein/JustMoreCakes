@@ -82,6 +82,7 @@ public class JustMoreCakesForge {
         ForgeRegistryHelper.MOB_EFFECTS.register(modEventBus);
         ForgeRegistryHelper.POTIONS.register(modEventBus);
         ForgeRegistryHelper.CREATIVE_MODE_TABS.register(modEventBus);
+        ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         MinecraftForge.EVENT_BUS.addListener(this::missingMappings);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJump);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityTick);
@@ -113,6 +114,7 @@ public class JustMoreCakesForge {
         generator.addProvider(event.includeServer(), new ModAdvancementProvider(output, lookupProvider, helper));
         generator.addProvider(event.includeServer(), new ModLootTableProvider(output));
         generator.addProvider(event.includeServer(), new ModCakeEffectsProvider(output));
+        generator.addProvider(event.includeServer(), new ModLootModifiersProvider(output));
 
         // Client providers
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, helper));

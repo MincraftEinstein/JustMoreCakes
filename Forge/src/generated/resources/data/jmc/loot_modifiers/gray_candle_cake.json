@@ -1,0 +1,18 @@
+{
+  "type": "jmc:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:blocks/gray_candle_cake"
+    },
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "items": [
+          "jmc:cake_spatula"
+        ]
+      }
+    }
+  ],
+  "item": "minecraft:cake"
+}
