@@ -30,5 +30,6 @@
     "recipes": [
       "jmc:golden_apple_cake_from_cake_oven"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

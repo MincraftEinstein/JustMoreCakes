@@ -1,16 +1,18 @@
 package einstein.jmc.platform;
 
-import einstein.jmc.blockentity.CakeOvenTransferBlockEntity;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blockentity.CakeOvenBlockEntity;
+import einstein.jmc.blockentity.CakeOvenTransferBlockEntity;
 import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.util.BlockEntitySupplier;
 import einstein.jmc.util.MenuTypeSupplier;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -22,6 +24,7 @@ import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ForgeRegistryHelper implements RegistryHelper {
@@ -36,6 +39,7 @@ public class ForgeRegistryHelper implements RegistryHelper {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, JustMoreCakes.MOD_ID);
     public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, JustMoreCakes.MOD_ID);
     public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONS = DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, JustMoreCakes.MOD_ID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, JustMoreCakes.MOD_ID);
 
     @Override
     public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type) {
@@ -104,5 +108,10 @@ public class ForgeRegistryHelper implements RegistryHelper {
     @Override
     public <T extends VillagerProfession> Supplier<T> registerVillagerProfession(String name, Supplier<T> type) {
         return VILLAGER_PROFESSIONS.register(name, type);
+    }
+
+    @Override
+    public <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String name, Function<CreativeModeTab.Builder, T> type) {
+        return CREATIVE_MODE_TABS.register(name, () -> type.apply(CreativeModeTab.builder()));
     }
 }

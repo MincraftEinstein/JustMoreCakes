@@ -33,6 +33,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
@@ -113,14 +114,14 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
                 blockEntity.litDuration = blockEntity.litTime;
                 if (blockEntity.isLit()) {
                     flag2 = true;
-                    ItemStack remainingStack = new ItemStack(fuelStack.getItem().getCraftingRemainingItem());
+                    Item remainingItem = fuelStack.getItem().getCraftingRemainingItem();
                     if (fuelStack.getItem().hasCraftingRemainingItem()) {
-                        blockEntity.items.set(FUEL_SLOT, remainingStack);
+                        blockEntity.items.set(FUEL_SLOT, remainingItem == null ? ItemStack.EMPTY : new ItemStack(remainingItem));
                     }
                     else if (!fuelStack.isEmpty()) {
                         fuelStack.shrink(1);
                         if (fuelStack.isEmpty()) {
-                            blockEntity.items.set(FUEL_SLOT, remainingStack);
+                            blockEntity.items.set(FUEL_SLOT, remainingItem == null ? ItemStack.EMPTY : new ItemStack(remainingItem));
                         }
                     }
                 }
@@ -164,7 +165,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
                 if (resultStack.isEmpty()) {
                     return true;
                 }
-                else if (!resultStack.sameItem(stack)) {
+                else if (!ItemStack.isSameItem(resultStack, stack)) {
                     return false;
                 }
                 else if (resultStack.getCount() + stack.getCount() <= maxStackSize && resultStack.getCount() + stack.getCount() <= resultStack.getMaxStackSize()) {
@@ -232,7 +233,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
     @Override
     public void setItem(int slotIndex, ItemStack stack) {
         ItemStack stack1 = items.get(slotIndex);
-        boolean flag = !stack.isEmpty() && stack.sameItem(stack1) && ItemStack.tagMatches(stack, stack1);
+        boolean flag = !stack.isEmpty() && ItemStack.isSameItemSameTags(stack, stack1);
         items.set(slotIndex, stack);
 
         if (stack.getCount() > getMaxStackSize()) {
@@ -338,11 +339,11 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
     }
 
     @Override
-    public void awardUsedRecipes(Player player) {
+    public void awardUsedRecipes(Player player, List<ItemStack> $$1) {
     }
 
     public void awardUsedRecipesAndPopExperience(ServerPlayer player) {
-        List<Recipe<?>> list = getRecipesToAwardAndPopExperience(player.getLevel(), player.position());
+        List<Recipe<?>> list = getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
         player.awardRecipes(list);
         recipesUsed.clear();
     }

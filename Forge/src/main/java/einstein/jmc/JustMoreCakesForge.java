@@ -7,7 +7,6 @@ import einstein.jmc.data.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.ForgeRegistryHelper;
 import einstein.jmc.platform.Services;
-import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
 import einstein.jmc.util.Util;
@@ -16,7 +15,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.ai.behavior.GiveGiftToHero;
@@ -35,7 +33,6 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
@@ -49,7 +46,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -74,9 +70,7 @@ public class JustMoreCakesForge {
         modEventBus.register(this);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
-        modEventBus.addListener(this::onParallelDispatch);
         modEventBus.addListener(this::generateData);
-        modEventBus.addListener(this::registerCreativeTab);
         ForgeRegistryHelper.ITEMS.register(modEventBus);
         ForgeRegistryHelper.BLOCKS.register(modEventBus);
         ForgeRegistryHelper.BLOCK_ENTITIES.register(modEventBus);
@@ -87,6 +81,7 @@ public class JustMoreCakesForge {
         ForgeRegistryHelper.VILLAGER_PROFESSIONS.register(modEventBus);
         ForgeRegistryHelper.MOB_EFFECTS.register(modEventBus);
         ForgeRegistryHelper.POTIONS.register(modEventBus);
+        ForgeRegistryHelper.CREATIVE_MODE_TABS.register(modEventBus);
         MinecraftForge.EVENT_BUS.addListener(this::missingMappings);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJump);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityTick);
@@ -124,12 +119,6 @@ public class JustMoreCakesForge {
         generator.addProvider(event.includeClient(), new ModItemModelProvider(output, helper));
     }
 
-    void registerCreativeTab(CreativeModeTabEvent.Register event) {
-        event.registerCreativeModeTab(JustMoreCakes.loc("jmc_tab"), builder ->
-                builder.icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).title(Component.translatable("itemGroup.jmc.jmc_tab")).displayItems((displayParameters, output) ->
-                        RegistryHelper.CREATIVE_TAB_ITEMS.forEach(cake -> output.accept(cake.get()))).build());
-    }
-
     /**
      * Copied from {@link com.illusivesoulworks.cakechomps.CakeChompsForgeMod}
      * and slightly changed to work with JustMoreCakes
@@ -153,8 +142,8 @@ public class JustMoreCakesForge {
 
             boolean flag = !player.getMainHandItem().isEmpty() || !player.getOffhandItem().isEmpty();
             boolean flag1 = (player.isSecondaryUseActive() && flag) &&
-                    !(player.getMainHandItem().doesSneakBypassUse(player.getLevel(), pos, player) &&
-                            player.getOffhandItem().doesSneakBypassUse(player.getLevel(), pos, player));
+                    !(player.getMainHandItem().doesSneakBypassUse(player.level(), pos, player) &&
+                            player.getOffhandItem().doesSneakBypassUse(player.level(), pos, player));
 
             return event.getUseBlock() == Event.Result.ALLOW || (event.getUseBlock() != Event.Result.DENY && !flag1);
         });
@@ -192,10 +181,6 @@ public class JustMoreCakesForge {
     void commonSetup(final FMLCommonSetupEvent event) {
         GiveGiftToHero.GIFTS.put(ModVillagers.CAKE_BAKER.get(), loc("gameplay/hero_of_the_village/cake_baker_gift"));
         JustMoreCakes.commonSetup();
-    }
-
-    void onParallelDispatch(final ParallelDispatchEvent event) {
-        event.enqueueWork(ModPotions::registerPotionRecipes);
     }
 
     void clientSetup(final FMLClientSetupEvent event) {
@@ -265,7 +250,7 @@ public class JustMoreCakesForge {
     }
 
     void onEntityTick(final LivingEvent.LivingTickEvent event) {
-        Util.livingEntityTick(event.getEntity().getLevel(), event.getEntity());
+        Util.livingEntityTick(event.getEntity().level(), event.getEntity());
     }
 
     void onVillagerTradesEvent(final VillagerTradesEvent event) {

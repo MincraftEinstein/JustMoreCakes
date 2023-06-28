@@ -17,7 +17,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
 
     @Override
     public void generateAdvancement(Consumer<Advancement> consumer) {
-        Advancement plantSeedsDummy = new Advancement(JustMoreCakes.mcLoc("husbandry/plant_seed"), null, null, AdvancementRewards.EMPTY, new HashMap<>(), null);
+        Advancement plantSeedsDummy = new Advancement(JustMoreCakes.mcLoc("husbandry/plant_seed"), null, null, AdvancementRewards.EMPTY, new HashMap<>(), null, false);
 
         Advancement craftCake = ModAdvancements.craftCake().parent(plantSeedsDummy).save(consumer, JustMoreCakes.loc("husbandry/craft_cake").toString());
         ModAdvancements.craftAllCakes(craftCake).save(consumer, JustMoreCakes.loc("husbandry/craft_all_cakes").toString());

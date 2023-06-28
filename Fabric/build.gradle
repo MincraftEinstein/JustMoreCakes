@@ -23,7 +23,7 @@ dependencies {
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation project(":Common")
 
-    modRuntimeOnly("curse.maven:catalogue-fabric-667377:${fabric_catalogue_v}")
+//    modRuntimeOnly("curse.maven:catalogue-fabric-667377:${fabric_catalogue_v}")
 //    modRuntimeOnly("curse.maven:configured-fabric-667378:${fabric_configured_v}")
     modRuntimeOnly("mezz.jei:jei-${mc_v}-fabric:${jei_v}")
 //    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${rei_v}")
@@ -31,7 +31,7 @@ dependencies {
     modRuntimeOnly("dev.architectury:architectury-fabric:${architectury_v}")
 
     modImplementation("com.terraformersmc:modmenu:${modmenu_v}")
-    modImplementation("curse.maven:cake-chomps-307943:${fabric_cake_chomps_v}")
+//    modImplementation("curse.maven:cake-chomps-307943:${fabric_cake_chomps_v}")
     modImplementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${config_port_v}")
 
     modCompileOnlyApi("mezz.jei:jei-${mc_v}-common-api:${jei_v}")

@@ -30,5 +30,6 @@
     "recipes": [
       "jmc:crimson_fungus_cake_from_cake_oven"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

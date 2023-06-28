@@ -30,10 +30,12 @@ public class JustMoreCakes {
         ModRecipes.init();
         ModVillagers.init();
         ModPotions.init();
+        ModCreativeModeTabs.init();
     }
 
     public static void commonSetup() {
         Items.CAKE.maxStackSize = 64;
+        ModPotions.registerPotionRecipes();
     }
 
     public static void onServerStarting(MinecraftServer server) {

@@ -3,7 +3,6 @@ package einstein.jmc.compat.jei;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.mojang.blaze3d.vertex.PoseStack;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
@@ -21,6 +20,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -105,29 +105,29 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
     }
 
     @Override
-    public void draw(CakeOvenRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        flame.draw(stack, /*X*/ 1, /*Y*/ 4);
-        getArrow(recipe).draw(stack, /*X*/ 75, /*Y*/ 13);
-        drawExperienceText(recipe, stack, /*Y*/ 0);
-        drawCookTimeText(recipe, stack, /*Y*/ 37);
+    public void draw(CakeOvenRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        flame.draw(guiGraphics, /*X*/ 1, /*Y*/ 4);
+        getArrow(recipe).draw(guiGraphics, /*X*/ 75, /*Y*/ 13);
+        drawExperienceText(recipe, guiGraphics, /*Y*/ 0);
+        drawCookTimeText(recipe, guiGraphics, /*Y*/ 37);
     }
 
-    private void drawExperienceText(CakeOvenRecipe recipe, PoseStack stack, int y) {
+    private void drawExperienceText(CakeOvenRecipe recipe, GuiGraphics guiGraphics, int y) {
         float experience = recipe.getExperience();
         if (experience > 0) {
             Component experienceText = Component.translatable("gui.jei.jmc.category.cake_oven.experience", experience);
-            Font fontRenderer = Minecraft.getInstance().font;
-            fontRenderer.draw(stack, experienceText, /*X*/ (background.getWidth() - fontRenderer.width(experienceText) - /*Makes room for the shapeless icon*/13), y, -8355712);
+            Font font = Minecraft.getInstance().font;
+            guiGraphics.drawString(font, experienceText, /*X*/ (background.getWidth() - font.width(experienceText) - /*Makes room for the shapeless icon*/13), y, -8355712, false);
         }
     }
 
-    private void drawCookTimeText(CakeOvenRecipe recipe, PoseStack stack, int y) {
+    private void drawCookTimeText(CakeOvenRecipe recipe, GuiGraphics guiGraphics, int y) {
         int cookTime = recipe.getCookingTime();
         if (cookTime > 0) {
             int cookTimeSeconds = cookTime / 20; // Converts cook time in ticks to cook time in seconds
             Component cookTimeText = Component.translatable("gui.jei.jmc.category.cake_oven.time.seconds", cookTimeSeconds);
-            Font fontRenderer = Minecraft.getInstance().font;
-            fontRenderer.draw(stack, cookTimeText, /*X*/ (background.getWidth() - fontRenderer.width(cookTimeText)), y, -8355712);
+            Font font = Minecraft.getInstance().font;
+            guiGraphics.drawString(font, cookTimeText, /*X*/ (background.getWidth() - font.width(cookTimeText)), y, -8355712, false);
         }
     }
 }

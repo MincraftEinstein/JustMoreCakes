@@ -4,7 +4,6 @@ import einstein.jmc.blocks.CakeEffectsHolder;
 import einstein.jmc.data.CakeEffects;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
-import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
 import einstein.jmc.util.Util;
@@ -12,7 +11,6 @@ import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.VillagerInteractionRegistries;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -21,7 +19,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fml.config.ModConfig;
@@ -42,7 +39,6 @@ public class JustMoreCakesFabric implements ModInitializer {
         onServerStarting();
         onServerStarted();
         addVillagerTrades();
-        ModPotions.registerPotionRecipes();
 
         if (Services.PLATFORM.isModLoaded("cakechomps")) {
             onBlockRightClicked();
@@ -53,9 +49,6 @@ public class JustMoreCakesFabric implements ModInitializer {
 
         VillagerInteractionRegistries.registerGiftLootTable(ModVillagers.CAKE_BAKER.get(), loc("gameplay/hero_of_the_village/cake_baker_gift"));
         JustMoreCakes.commonSetup();
-
-        FabricItemGroup.builder(JustMoreCakes.loc("jmc_tab")).icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).displayItems((displayParameters, output) ->
-                RegistryHelper.CREATIVE_TAB_ITEMS.forEach(supplier -> output.accept(supplier.get()))).build();
     }
 
     /**

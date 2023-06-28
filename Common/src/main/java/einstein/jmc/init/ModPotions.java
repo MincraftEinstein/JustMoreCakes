@@ -8,8 +8,8 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
@@ -23,9 +23,9 @@ public class ModPotions {
     public static final Supplier<Potion> FREEZING_POTION = Services.REGISTRY.registerPotion("freezing", () -> new Potion(new MobEffectInstance(FREEZING_EFFECT.get())));
 
     public static void registerPotionRecipes() {
-        PotionBrewing.addMix(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.BOUNCING_POTION.get());
-        PotionBrewing.addMix(ModPotions.BOUNCING_POTION.get(), Items.REDSTONE, ModPotions.LONG_BOUNCING_POTION.get());
-        PotionBrewing.addMix(Potions.AWKWARD, Items.PACKED_ICE, ModPotions.FREEZING_POTION.get());
+        Services.HOOKS.registerBrewingRecipe(Potions.AWKWARD, Ingredient.of(Items.SLIME_BALL), ModPotions.BOUNCING_POTION.get());
+        Services.HOOKS.registerBrewingRecipe(BOUNCING_POTION.get(), Ingredient.of(Items.REDSTONE), LONG_BOUNCING_POTION.get());
+        Services.HOOKS.registerBrewingRecipe(Potions.AWKWARD, Ingredient.of(Items.PACKED_ICE), FREEZING_POTION.get());
     }
 
     public static void init() {

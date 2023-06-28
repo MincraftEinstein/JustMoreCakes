@@ -19,7 +19,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(at = @At("HEAD"), method = "tick()V")
     public void tick(CallbackInfo info) {
-        Util.livingEntityTick(level, (LivingEntity) (Object) this);
+        Util.livingEntityTick(level(), (LivingEntity) (Object) this);
     }
 
     @Inject(at = @At("RETURN"), method = "jumpFromGround()V")

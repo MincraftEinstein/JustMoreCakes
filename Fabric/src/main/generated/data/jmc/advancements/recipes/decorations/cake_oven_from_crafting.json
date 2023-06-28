@@ -30,5 +30,6 @@
     "recipes": [
       "jmc:cake_oven_from_crafting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
