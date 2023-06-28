@@ -9,8 +9,10 @@ import com.mojang.serialization.JsonOps;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.blocks.BaseCandleCakeBlock;
 import einstein.jmc.data.CakeEffects;
+import einstein.jmc.init.ModItems;
 import einstein.jmc.init.ModPotions;
 import einstein.jmc.mixin.StructureTemplatePoolAccessor;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -45,6 +47,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.phys.Vec3;
 
 import java.io.BufferedReader;
@@ -63,6 +67,7 @@ public class Util {
 
     public static final Gson GSON = new GsonBuilder().create();
     private static final Random RANDOM = new Random();
+    public static final LootItemCondition.Builder HAS_CAKE_SPATULA = MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModItems.CAKE_SPATULA.get()));
 
     public static <T extends Item> ResourceLocation getItemId(T item) {
         return BuiltInRegistries.ITEM.getKey(item);

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static einstein.jmc.JustMoreCakes.HAS_CAKE_SPATULA;
+import static einstein.jmc.util.Util.HAS_CAKE_SPATULA;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
 
