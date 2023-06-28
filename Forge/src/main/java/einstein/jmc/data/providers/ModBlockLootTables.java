@@ -37,7 +37,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
             builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                 add(candleCake.get(), block -> createCandleCakeDrops(candle).withPool(LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
-                        .add(LootItem.lootTableItem(block).when(HAS_CAKE_SPATULA))));
+                        .add(LootItem.lootTableItem(cake.get()).when(HAS_CAKE_SPATULA))));
                 knownBlocks.add(candleCake.get());
             });
         });
