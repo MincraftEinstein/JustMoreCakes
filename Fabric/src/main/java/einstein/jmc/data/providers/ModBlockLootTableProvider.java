@@ -4,6 +4,7 @@ import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -22,9 +23,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         add(ModBlocks.CAKE_OVEN.get(), createSingleItemTable(ModBlocks.CAKE_OVEN.get()));
 
         CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
-            add(cake.get(), LootTable.lootTable().withPool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
-                    .add(LootItem.lootTableItem(cake.get()).when(HAS_CAKE_SPATULA))));
+            dropWhenCakeSpatula(cake.get());
 
             builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                 add(candleCake.get(), block -> createCandleCakeDrops(candle).withPool(LootPool.lootPool()
@@ -32,5 +31,13 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                         .add(LootItem.lootTableItem(cake.get()).when(HAS_CAKE_SPATULA))));
             });
         });
+
+        dropWhenCakeSpatula(ModBlocks.CUPCAKE.get());
+    }
+
+    private void dropWhenCakeSpatula(Block block) {
+        add(block, LootTable.lootTable().withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(block).when(HAS_CAKE_SPATULA))));
     }
 }

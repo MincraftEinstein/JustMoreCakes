@@ -29,9 +29,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.CAKE_OVEN.get());
 
         CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
-            add(cake.get(), block -> LootTable.lootTable().withPool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1.0F))
-                    .add(LootItem.lootTableItem(block).when(HAS_CAKE_SPATULA))));
+            dropWhenCakeSpatula(cake.get());
             knownBlocks.add(cake.get());
 
             builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
@@ -41,11 +39,20 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 knownBlocks.add(candleCake.get());
             });
         });
+
+        dropWhenCakeSpatula(ModBlocks.CUPCAKE.get());
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
         knownBlocks.add(ModBlocks.CAKE_OVEN.get());
+        knownBlocks.add(ModBlocks.CUPCAKE.get());
         return knownBlocks;
+    }
+
+    private void dropWhenCakeSpatula(Block block) {
+        add(block, LootTable.lootTable().withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(block).when(HAS_CAKE_SPATULA))));
     }
 }

@@ -1,4 +1,4 @@
-// 1.20	2023-06-27T22:16:06.5560732	Just More Cakes!/Block Loot Tables
+// 1.20	2023-06-27T22:51:00.4081199	Just More Cakes!/Block Loot Tables
 aa0d47eacd211cd1db288acdc3a0a0569b6f626e data\jmc\loot_tables\blocks\magenta_candle_carrot_cake.json
 f30ed388f3e6a12dc5f203af32c3edbddac7bb49 data\jmc\loot_tables\blocks\cyan_candle_honey_cake.json
 ac3fe0f2374e0775c3244a8bb12473ee5460afd8 data\jmc\loot_tables\blocks\yellow_candle_golden_apple_cake.json
@@ -10,6 +10,7 @@ ac3fe0f2374e0775c3244a8bb12473ee5460afd8 data\jmc\loot_tables\blocks\yellow_cand
 eeb8bb9de323f446d362a43aebf2fc45a0859159 data\jmc\loot_tables\blocks\red_candle_apple_cake.json
 0de147006b591185ab832774410ef53c797573bb data\jmc\loot_tables\blocks\brown_mushroom_cake.json
 f1d7c13403c378e535537218962d52879e7c9744 data\jmc\loot_tables\blocks\light_blue_candle_ender_cake.json
+080dbd7dd3b347642f249f7625c9531b43eda42f data\jmc\loot_tables\blocks\cupcake.json
 82fd48e1aefb3d860787ccea3a4c5f0e521ebb61 data\jmc\loot_tables\blocks\white_candle_lava_cake.json
 8309635ff35f9ab8089cef6e3b4e1c5c6fee30e8 data\jmc\loot_tables\blocks\orange_candle_honey_cake.json
 3a836c15abaa95781ffe20d069546964253716f7 data\jmc\loot_tables\blocks\red_candle_red_velvet_cake.json
@@ -102,8 +103,8 @@ abcb140785d9ec4c0f5a339272326ef1fdc6f52b data\jmc\loot_tables\blocks\blue_candle
 e196d28bbbe896dd05a4566fac267b94ca8dda86 data\jmc\loot_tables\blocks\blue_candle_warped_fungus_cake.json
 2a116e2d286e35bf824a8a7f6eacfa25592800ae data\jmc\loot_tables\blocks\light_gray_candle_firey_cake.json
 316e6abb3613df2af4cc7ffa5a50ad42311cd18b data\jmc\loot_tables\blocks\brown_candle_ender_cake.json
-55de8621746e5077e5fc5e3d0d6c0004825c6479 data\jmc\loot_tables\blocks\seed_cake.json
 7dba52f9a321b964b5a79df8dddead515861d977 data\jmc\loot_tables\blocks\gray_candle_creeper_cake.json
+55de8621746e5077e5fc5e3d0d6c0004825c6479 data\jmc\loot_tables\blocks\seed_cake.json
 828812b7a5752dc581bf6874331cbaff4d83aad7 data\jmc\loot_tables\blocks\light_blue_candle_lava_cake.json
 d284b1bb7fc0dfc14089ff78a18355002f59663e data\jmc\loot_tables\blocks\gray_candle_honey_cake.json
 f09095b74a9494f1670ec8a355a9db191f7fe071 data\jmc\loot_tables\blocks\magenta_candle_cookie_cake.json
