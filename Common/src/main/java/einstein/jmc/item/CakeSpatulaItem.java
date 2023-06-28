@@ -6,7 +6,6 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -15,8 +14,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -37,12 +37,16 @@ public class CakeSpatulaItem extends Item {
             ItemStack stack = context.getItemInHand();
             if (state.is(ModBlockTags.CAKE_SPATULA_USABLE)) {
                 if (!level.isClientSide) {
-                    level.destroyBlock(pos, !player.isCreative());
+                    level.destroyBlock(pos, false, player);
                     stack.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(context.getHand()));
                     CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, pos, stack);
+
+                    if (!player.isCreative()) {
+                        BlockEntity blockEntity = state.hasBlockEntity() ? level.getBlockEntity(pos) : null;
+                        Block.dropResources(state, level, pos, blockEntity, player, stack);
+                    }
                 }
 
-                level.gameEvent(GameEvent.BLOCK_DESTROY, pos, GameEvent.Context.of(player, state));
                 player.awardStat(Stats.BLOCK_MINED.get(state.getBlock()));
                 return InteractionResult.SUCCESS;
             }
