@@ -76,12 +76,12 @@ dependencies {
     minecraft "net.minecraftforge:forge:${mc_v}-${forge_v}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-//    runtimeOnly fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_v}")
+    runtimeOnly fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_v}")
 //    runtimeOnly fg.deobf("curse.maven:configured-457570:${forge_configured_v}")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_v}-forge:${jei_v}")
 //    runtimeOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_v}")
 
-//    implementation fg.deobf("curse.maven:cake-chomps-307943:${forge_cake_chomps_v}")
+    implementation fg.deobf("curse.maven:cake-chomps-307943:${forge_cake_chomps_v}")
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_v}")
     implementation fg.deobf("dev.architectury:architectury-forge:${architectury_v}")
 
