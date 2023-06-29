@@ -23,14 +23,14 @@ public class CakeOvenScreen extends AbstractContainerScreen<CakeOvenMenu> {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int par1, int par2, float par3) {
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(guiGraphics);
-        super.render(guiGraphics, par1, par2, par3);
-        renderTooltip(guiGraphics, par1, par2);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float mouseX, int mouseY, int partialTick) {
+    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         guiGraphics.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
         // 'leftPos' and 'topPos' are the calculated edges of the left and top sides of the image
 

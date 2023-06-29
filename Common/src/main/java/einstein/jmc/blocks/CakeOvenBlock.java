@@ -33,6 +33,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
+@SuppressWarnings("deprecation")
 public class CakeOvenBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -74,8 +75,8 @@ public class CakeOvenBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean par4) {
-        if (!state.is(oldState.getBlock())) {
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.is(newState.getBlock())) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof CakeOvenBlockEntity cakeOvenBlockEntity) {
                 if (level instanceof ServerLevel) {
@@ -85,7 +86,7 @@ public class CakeOvenBlock extends BaseEntityBlock {
                 }
                 level.updateNeighbourForOutputSignal(pos, this);
             }
-            super.onRemove(state, level, pos, oldState, par4);
+            super.onRemove(state, level, pos, newState, moved);
         }
     }
 

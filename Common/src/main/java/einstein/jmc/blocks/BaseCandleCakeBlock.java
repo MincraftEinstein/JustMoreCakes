@@ -29,6 +29,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+@SuppressWarnings("deprecation")
 public class BaseCandleCakeBlock extends AbstractCandleBlock {
 
     public static final BooleanProperty LIT = AbstractCandleBlock.LIT;

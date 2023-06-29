@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("deprecation")
 public class TNTCakeBlock extends BaseEntityCakeBlock {
 
     public TNTCakeBlock(CakeBuilder builder) {

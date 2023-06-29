@@ -6,6 +6,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
+@SuppressWarnings("deprecation")
 public class SlimeCandleCakeBlock extends BaseCandleCakeBlock {
 
     public SlimeCandleCakeBlock(BaseCakeBlock originalCake, Properties properties) {
