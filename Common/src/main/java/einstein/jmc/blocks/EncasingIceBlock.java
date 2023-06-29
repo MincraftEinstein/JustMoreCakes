@@ -24,10 +24,6 @@ public class EncasingIceBlock extends HalfTransparentBlock {
     }
 
     @Override
-    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
-    }
-
-    @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (Util.timeGoneBy(level, ModCommonConfigs.ENCASING_ICE_MELT_SPEED.get())) {
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
