@@ -9,6 +9,7 @@
     "CakeMixin",
     "PandaMixin",
     "PandaMixin$PandaSitGoalMixin",
-    "StructureTemplatePoolAccessor"
+    "StructureTemplatePoolAccessor",
+    "VillagerGoalPackagesMixin"
   ]
 }
