@@ -58,10 +58,15 @@
 	"item.minecraft.splash_potion.effect.freezing":"Splash Potion of Freezing",
 	"item.minecraft.lingering_potion.effect.freezing":"Lingering Potion of Freezing",
 	"item.minecraft.tipped_arrow.effect.freezing":"Arrow of Freezing",
+	"item.minecraft.potion.effect.sneaking":"Potion of Sneaking",
+	"item.minecraft.splash_potion.effect.sneaking":"Splash Potion of Sneaking",
+	"item.minecraft.lingering_potion.effect.sneaking":"Lingering Potion of Sneaking",
+	"item.minecraft.tipped_arrow.effect.sneaking":"Arrow of Sneaking",
 	
 	"_comment": "Effects",
 	"effect.jmc.bouncing": "Bouncing",
 	"effect.jmc.freezing": "Freezing",
+	"effect.jmc.sneaking": "Sneaking",
 	
 	"_comment": "Containers",
 	"container.jmc.cake_oven": "Cake Oven",

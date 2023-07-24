@@ -13,6 +13,7 @@ public class JustMoreCakesData implements DataGeneratorEntrypoint {
         FabricTagProvider.BlockTagProvider blockTags = pack.addProvider(ModBlockTagsProvider::new);
         pack.addProvider((output, registriesFuture) -> new ModItemTagsProvider(output, registriesFuture, blockTags));
         pack.addProvider(ModPOITagsProvider::new);
+        pack.addProvider(ModGameEventTagsProvider::new);
         pack.addProvider(ModAdvancementProvider::new);
         pack.addProvider(ModRecipeProvider::new);
         pack.addProvider(ModModelProvider::new);

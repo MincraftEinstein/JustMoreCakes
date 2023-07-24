@@ -111,6 +111,7 @@ public class JustMoreCakesForge {
         generator.addProvider(event.includeServer(), blockTags);
         generator.addProvider(event.includeServer(), new ModItemTagsProvider(output, lookupProvider, blockTags.contentsGetter(), helper));
         generator.addProvider(event.includeServer(), new ModPOITagsProvider(output, lookupProvider, helper));
+        generator.addProvider(event.includeServer(), new ModGameEventTagsProvider(output, lookupProvider, helper));
         generator.addProvider(event.includeServer(), new ModAdvancementProvider(output, lookupProvider, helper));
         generator.addProvider(event.includeServer(), new ModLootTableProvider(output));
         generator.addProvider(event.includeServer(), new ModCakeEffectsProvider(output));
