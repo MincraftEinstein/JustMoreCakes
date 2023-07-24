@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cake_slice6",
+  "textures": {
+    "bottom": "jmc:block/sculk_cake_bottom",
+    "inside": "jmc:block/sculk_cake_inner",
+    "side": "jmc:block/sculk_cake_side",
+    "top": "jmc:block/sculk_cake_top"
+  }
+}

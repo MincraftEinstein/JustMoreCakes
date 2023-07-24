@@ -40,6 +40,8 @@ public class ModCakeEffectsProvider extends CakeEffectsProvider {
         add(ModBlocks.GLOW_BERRY_CAKE,
                 new CakeEffects.MobEffectHolder(MobEffects.NIGHT_VISION, 1200),
                 new CakeEffects.MobEffectHolder(MobEffects.GLOWING, 1800));
+        add(ModBlocks.SCULK_CAKE,
+                new CakeEffects.MobEffectHolder(ModPotions.SNEAKING_EFFECT.get(), 600));
     }
 
     @Override

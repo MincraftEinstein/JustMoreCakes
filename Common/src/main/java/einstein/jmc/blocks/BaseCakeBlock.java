@@ -127,7 +127,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         else {
             player.awardStat(Stats.EAT_CAKE_SLICE);
             player.getFoodData().eat(getNourishment().getFirst(), getNourishment().getSecond());
-            eatActions(player, pos, state);
+            state = eatActions(player, pos, state);
 
             if (cakeEffects != null) {
                 for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {
@@ -156,7 +156,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         }
     }
 
-    public void eatActions(Player player, BlockPos pos, BlockState state) {
+    public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
         if (equals(ModBlocks.FIREY_CAKE.get())) {
             player.setSecondsOnFire(ModCommonConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
         }
@@ -170,6 +170,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             Util.teleportRandomly(player, ModCommonConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
             player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1, 1);
         }
+        return state;
     }
 
     @SuppressWarnings("deprecation")

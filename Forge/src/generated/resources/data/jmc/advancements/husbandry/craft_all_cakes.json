@@ -325,6 +325,18 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "sculk_cake": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:sculk_cake"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "seed_cake": {
       "conditions": {
         "items": [
@@ -494,6 +506,9 @@
     ],
     [
       "redstone_cake"
+    ],
+    [
+      "sculk_cake"
     ],
     [
       "seed_cake"

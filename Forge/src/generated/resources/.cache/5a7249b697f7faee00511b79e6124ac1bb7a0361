@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-23T20:26:33.649285	Item Models: jmc
+// 1.20.1	2023-07-24T11:59:32.6047473	Item Models: jmc
 e26168662503f6bf68944dc8a9698074be40a3c1 assets/jmc/models/item/apple_cake.json
 99f7f794c501eab38d68782e17e5dd37decfc434 assets/jmc/models/item/beetroot_cake.json
 d6a3b36f36fe2004277a7cbdcf3405980b8ecd84 assets/jmc/models/item/brown_mushroom_cake.json
@@ -28,6 +28,7 @@ e198da113e189c17b5d132573d5336779f5de277 assets/jmc/models/item/ender_cake.json
 220f9dcd25c4e1719dab728e08faeece017eee1e assets/jmc/models/item/redstone_cake.json
 a92040464d292bba41d553c3ffdddc15ce03aa77 assets/jmc/models/item/red_mushroom_cake.json
 daf74cfd63b73586df43b7ffcb47de3100374ccf assets/jmc/models/item/red_velvet_cake.json
+86dd4248b967c9afd0bda14f98789ced8d2d55c2 assets/jmc/models/item/sculk_cake.json
 069ccce04dc7867a5371080bac482b5fe7f60f26 assets/jmc/models/item/seed_cake.json
 2f32c011b1b53c6dcb4c808d50c4a8407deca855 assets/jmc/models/item/slime_cake.json
 7bcfda134db9b76a1966e22c0a1a6366e7fb35bf assets/jmc/models/item/sweet_berry_cake.json
