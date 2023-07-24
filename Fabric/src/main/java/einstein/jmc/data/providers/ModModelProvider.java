@@ -60,9 +60,9 @@ public class ModModelProvider extends FabricModelProvider {
             }
         }
 
-        CakeBuilder cakeBuilder = ModBlocks.THREE_TIERED_CAKE.get().getBuilder();
-        for (Block candle : cakeBuilder.getCandleCakeByCandle().keySet()) {
-            BaseCandleCakeBlock cake = cakeBuilder.getCandleCakeByCandle().get(candle).get();
+        CakeBuilder threeTieredBuilder = ModBlocks.THREE_TIERED_CAKE.get().getBuilder();
+        for (Block candle : threeTieredBuilder.getCandleCakeByCandle().keySet()) {
+            BaseCandleCakeBlock cake = threeTieredBuilder.getCandleCakeByCandle().get(candle).get();
             generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(PropertyDispatch.property(ThreeTieredCandleCakeBlock.LIT)
                     .select(false, Variant.variant().with(VariantProperties.MODEL,
                             new ModelTemplate(Optional.of(loc("block/template_three_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
@@ -72,6 +72,12 @@ public class ModModelProvider extends FabricModelProvider {
                             new ModelTemplate(Optional.of(loc("block/template_three_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
                                     .createWithSuffix(cake, "_lit", new TextureMapping()
                                             .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle, "_lit")), generators.modelOutput)))));
+        }
+
+        CakeBuilder sculkBuilder = ModBlocks.SCULK_CAKE.get().getBuilder();
+        for (Block candle : sculkBuilder.getCandleCakeByCandle().keySet()) {
+            Supplier<BaseCandleCakeBlock> candleCake = sculkBuilder.getCandleCakeByCandle().get(candle);
+            candleCakeBlock(generators, candleCake.get(), candle, ModBlocks.SCULK_CAKE.get());
         }
     }
 

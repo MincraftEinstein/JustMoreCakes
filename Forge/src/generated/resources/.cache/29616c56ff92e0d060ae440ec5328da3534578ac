@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-24T11:59:32.6107311	Block States: jmc
+// 1.20.1	2023-07-24T18:27:36.5621681	Block States: jmc
 a4c84d9c31e439f53bbf76ba16810cbe96747c6d assets/jmc/blockstates/apple_cake.json
 3bc70d03aec28178d6ca6f8640d4e9dcfd60c840 assets/jmc/blockstates/beetroot_cake.json
 66dc8c2fcc3fd08d8cbf87d9421c6fc916de4979 assets/jmc/blockstates/black_candle_apple_cake.json
@@ -445,7 +445,6 @@ a2107e1de89ce5d6ca62297a1228c1acecb1120e assets/jmc/blockstates/red_candle_sweet
 534011ea561dd842774354ed50343260e4586d1e assets/jmc/blockstates/red_candle_warped_fungus_cake.json
 db7c3c3cc7affdb46b1520e9ace4b046e54e0447 assets/jmc/blockstates/red_mushroom_cake.json
 076124be1a970a9f319e0894ceb621c1e6e01ab4 assets/jmc/blockstates/red_velvet_cake.json
-d7506e9051cc36ce2a762d729a69510c77641bfc assets/jmc/blockstates/sculk_cake.json
 cdd9d1e2cfd2321620f36fbda99c6a86ad93651f assets/jmc/blockstates/seed_cake.json
 f88546755205fa5c8a03dcf77337be894a00f720 assets/jmc/blockstates/slime_cake.json
 a3100b641f6ded9b35eff3f7249fb3b6867ba026 assets/jmc/blockstates/sweet_berry_cake.json
@@ -1450,13 +1449,6 @@ a753c7acecef9f30108f67926ee5d49c20ae227b assets/jmc/models/block/red_velvet_cake
 79077495f3aaa26de4572fb44a8826ce514fa86e assets/jmc/models/block/red_velvet_cake_slice4.json
 af00a826d91e91f9aa1f3bc9879e5566fe3570b6 assets/jmc/models/block/red_velvet_cake_slice5.json
 1ddb65c7266c33efdd6e11ef80a78b8d3604ccd1 assets/jmc/models/block/red_velvet_cake_slice6.json
-b24663daec5478720e4ee78a264fc952a617d45a assets/jmc/models/block/sculk_cake.json
-c802a2ddfb1d788a66976ce09067bd39460190ec assets/jmc/models/block/sculk_cake_slice1.json
-6687b883b692999c4bcf7421c437c6e673d42cd3 assets/jmc/models/block/sculk_cake_slice2.json
-707721002f09b1f59120d25cfbf10324ed3d9991 assets/jmc/models/block/sculk_cake_slice3.json
-11446ce612095219c3193166f9d669e865daa545 assets/jmc/models/block/sculk_cake_slice4.json
-2caf50ed56f20e0be14bf407b73a57c8ee29b4b9 assets/jmc/models/block/sculk_cake_slice5.json
-40735aa59f9517adf9a6c31569b2a5358204652b assets/jmc/models/block/sculk_cake_slice6.json
 3d795533504f7d1c5bebc8c4b450e2ebc6b18b9d assets/jmc/models/block/seed_cake.json
 5c1b67d3721a4b8ad2ba5c53716411de2cbe14bd assets/jmc/models/block/seed_cake_slice1.json
 28f898b919ad5cee8ab1c5d769d773c6d5e8ef7b assets/jmc/models/block/seed_cake_slice2.json

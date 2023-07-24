@@ -1,0 +1,67 @@
+{
+  "variants": {
+    "bites=0,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/sculk_cake"
+    },
+    "bites=0,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/sculk_cake_active"
+    },
+    "bites=0,sculk_sensor_phase=active": {
+      "model": "jmc:block/sculk_cake_active"
+    },
+    "bites=1,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/sculk_cake_slice1"
+    },
+    "bites=1,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/sculk_cake_slice1_active"
+    },
+    "bites=1,sculk_sensor_phase=active": {
+      "model": "jmc:block/sculk_cake_slice1_active"
+    },
+    "bites=2,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/sculk_cake_slice2"
+    },
+    "bites=2,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/sculk_cake_slice2_active"
+    },
+    "bites=2,sculk_sensor_phase=active": {
+      "model": "jmc:block/sculk_cake_slice2_active"
+    },
+    "bites=3,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/sculk_cake_slice3"
+    },
+    "bites=3,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/sculk_cake_slice3_active"
+    },
+    "bites=3,sculk_sensor_phase=active": {
+      "model": "jmc:block/sculk_cake_slice3_active"
+    },
+    "bites=4,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/sculk_cake_slice4"
+    },
+    "bites=4,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/sculk_cake_slice4_active"
+    },
+    "bites=4,sculk_sensor_phase=active": {
+      "model": "jmc:block/sculk_cake_slice4_active"
+    },
+    "bites=5,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/sculk_cake_slice5"
+    },
+    "bites=5,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/sculk_cake_slice5_active"
+    },
+    "bites=5,sculk_sensor_phase=active": {
+      "model": "jmc:block/sculk_cake_slice5_active"
+    },
+    "bites=6,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/sculk_cake_slice6"
+    },
+    "bites=6,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/sculk_cake_slice6_active"
+    },
+    "bites=6,sculk_sensor_phase=active": {
+      "model": "jmc:block/sculk_cake_slice6_active"
+    }
+  }
+}

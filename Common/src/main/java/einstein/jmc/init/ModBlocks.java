@@ -81,7 +81,7 @@ public class ModBlocks {
             .setCandleCakeProperties(candleCakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
             .build();
 
-    public static final Supplier<BaseCakeBlock> SCULK_CAKE = new CakeBuilder("sculk_cake", true)
+    public static final Supplier<BaseCakeBlock> SCULK_CAKE = new CakeBuilder("sculk_cake", true, true)
             .setCakeClass(SculkCakeBlock::new)
             .build();
 

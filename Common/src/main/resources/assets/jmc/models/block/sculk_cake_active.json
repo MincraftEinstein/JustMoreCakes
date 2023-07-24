@@ -2,7 +2,7 @@
   "parent": "jmc:block/template_cake",
   "textures": {
     "bottom": "jmc:block/sculk_cake_bottom",
-    "side": "jmc:block/sculk_cake_side",
-    "top": "jmc:block/sculk_cake_top"
+    "side": "jmc:block/sculk_cake_side_active",
+    "top": "jmc:block/sculk_cake_top_active"
   }
 }
