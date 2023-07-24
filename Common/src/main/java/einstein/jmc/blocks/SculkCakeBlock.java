@@ -1,5 +1,6 @@
 package einstein.jmc.blocks;
 
+import einstein.jmc.init.ModGameEvents;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -46,6 +47,7 @@ public class SculkCakeBlock extends BaseCakeBlock {
 
     @Override
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
+        player.level().gameEvent(player, ModGameEvents.SCULK_CAKE_EATEN.get(), pos);
         return activate(player, player.level(), pos, state);
     }
 

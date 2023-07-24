@@ -82,6 +82,7 @@ public class JustMoreCakesForge {
         ForgeRegistryHelper.MOB_EFFECTS.register(modEventBus);
         ForgeRegistryHelper.POTIONS.register(modEventBus);
         ForgeRegistryHelper.CREATIVE_MODE_TABS.register(modEventBus);
+        ForgeRegistryHelper.GAME_EVENTS.register(modEventBus);
         ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         MinecraftForge.EVENT_BUS.addListener(this::missingMappings);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJump);

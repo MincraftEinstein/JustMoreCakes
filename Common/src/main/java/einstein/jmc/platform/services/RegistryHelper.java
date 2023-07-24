@@ -16,6 +16,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,4 +58,6 @@ public interface RegistryHelper {
     <T extends VillagerProfession> Supplier<T> registerVillagerProfession(String name, Supplier<T> type);
 
     <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String name, Function<CreativeModeTab.Builder, T> type);
+
+    <T extends GameEvent> Supplier<GameEvent> registerGameEvent(String name, Supplier<T> type);
 }

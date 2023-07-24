@@ -27,6 +27,7 @@ public class JustMoreCakes {
         ModVillagers.init();
         ModPotions.init();
         ModCreativeModeTabs.init();
+        ModGameEvents.init();
     }
 
     public static void commonSetup() {

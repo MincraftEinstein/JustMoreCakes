@@ -22,6 +22,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -108,5 +109,11 @@ public class FabricRegistryHelper implements RegistryHelper {
     public <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String name, Function<CreativeModeTab.Builder, T> type) {
         T tab = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, loc(name), type.apply(FabricItemGroup.builder()));
         return () -> tab;
+    }
+
+    @Override
+    public <T extends GameEvent> Supplier<GameEvent> registerGameEvent(String name, Supplier<T> type) {
+        T gameEvent = Registry.register(BuiltInRegistries.GAME_EVENT, loc(name), type.get());
+        return () -> gameEvent;
     }
 }
