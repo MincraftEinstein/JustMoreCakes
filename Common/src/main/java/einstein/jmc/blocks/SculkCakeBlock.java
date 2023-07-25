@@ -15,6 +15,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -101,6 +102,11 @@ public class SculkCakeBlock extends BaseCakeBlock {
         if (dropExperience && !stack.is(ModItems.CAKE_SPATULA.get())) {
             tryDropExperience(level, pos, stack, ConstantInt.of(5));
         }
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        return super.getAnalogOutputSignal(state, level, pos) + (getPhase(state) == SculkSensorPhase.ACTIVE ? 1 : 0);
     }
 
     private static void updateNeighbours(Level level, BlockPos pos, BlockState $$2) {
