@@ -1,6 +1,10 @@
 {
-    "variants": {
-        "bites=0": { "model": "jmc:block/cupcake" },
-        "bites=1": { "model": "jmc:block/cupcake_slice1" }
+  "variants": {
+    "bites=0": {
+      "model": "jmc:block/cupcake"
+    },
+    "bites=1": {
+      "model": "jmc:block/cupcake_slice1"
     }
+  }
 }
