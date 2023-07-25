@@ -27,7 +27,7 @@ public class ModPotions {
         Services.HOOKS.registerBrewingRecipe(Potions.AWKWARD, Ingredient.of(Items.SLIME_BALL), ModPotions.BOUNCING_POTION.get());
         Services.HOOKS.registerBrewingRecipe(BOUNCING_POTION.get(), Ingredient.of(Items.REDSTONE), LONG_BOUNCING_POTION.get());
         Services.HOOKS.registerBrewingRecipe(Potions.AWKWARD, Ingredient.of(Items.PACKED_ICE), FREEZING_POTION.get());
-        Services.HOOKS.registerBrewingRecipe(Potions.AWKWARD, Ingredient.of(Items.ECHO_SHARD), STEALTH_POTION.get());
+        Services.HOOKS.registerBrewingRecipe(Potions.SLOWNESS, Ingredient.of(Items.ECHO_SHARD), STEALTH_POTION.get());
     }
 
     public static void init() {
