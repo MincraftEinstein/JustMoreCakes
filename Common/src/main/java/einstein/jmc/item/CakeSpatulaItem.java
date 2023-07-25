@@ -1,5 +1,6 @@
 package einstein.jmc.item;
 
+import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.data.providers.ModBlockTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -35,7 +37,21 @@ public class CakeSpatulaItem extends Item {
             BlockPos pos = context.getClickedPos();
             BlockState state = level.getBlockState(pos);
             ItemStack stack = context.getItemInHand();
+            Block block = state.getBlock();
             if (state.is(ModBlockTags.CAKE_SPATULA_USABLE)) {
+                if (block instanceof BaseCakeBlock cake) {
+                    int bites = state.getValue(cake.getBites());
+                    if (bites > 0) {
+                        return InteractionResult.PASS;
+                    }
+                }
+                else if (block instanceof CakeBlock) {
+                    int bites = state.getValue(CakeBlock.BITES);
+                    if (bites > 0) {
+                        return InteractionResult.PASS;
+                    }
+                }
+                
                 if (!level.isClientSide) {
                     level.destroyBlock(pos, false, player);
                     stack.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(context.getHand()));
@@ -47,7 +63,7 @@ public class CakeSpatulaItem extends Item {
                     }
                 }
 
-                player.awardStat(Stats.BLOCK_MINED.get(state.getBlock()));
+                player.awardStat(Stats.BLOCK_MINED.get(block));
                 return InteractionResult.SUCCESS;
             }
         }
