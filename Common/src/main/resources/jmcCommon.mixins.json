@@ -7,7 +7,7 @@
   "mixins": [
     "BlockMixin",
     "CakeMixin",
-    "VibrationSystemUserMixin",
+    "VibrationSystemListenerMixin",
     "PandaMixin",
     "PandaMixin$PandaSitGoalMixin",
     "StructureTemplatePoolAccessor",

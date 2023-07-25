@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(VibrationSystem.Listener.class)
-public class VibrationSystemUserMixin {
+public class VibrationSystemListenerMixin {
 
     @Redirect(method = "handleGameEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/gameevent/vibrations/VibrationSystem$User;isValidVibration(Lnet/minecraft/world/level/gameevent/GameEvent;Lnet/minecraft/world/level/gameevent/GameEvent$Context;)Z"))
     private boolean isValidVibration(VibrationSystem.User instance, GameEvent event, GameEvent.Context context) {
