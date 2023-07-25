@@ -1,6 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.jmc.init.ModGameEvents;
+import einstein.jmc.init.ModItems;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -97,7 +98,7 @@ public class SculkCakeBlock extends BaseCakeBlock {
     @Override
     public void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack stack, boolean dropExperience) {
         super.spawnAfterBreak(state, level, pos, stack, dropExperience);
-        if (dropExperience) {
+        if (dropExperience && !stack.is(ModItems.CAKE_SPATULA.get())) {
             tryDropExperience(level, pos, stack, ConstantInt.of(5));
         }
     }

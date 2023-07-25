@@ -35,6 +35,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -92,6 +93,7 @@ public class JustMoreCakesForge {
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarted);
         MinecraftForge.EVENT_BUS.addListener(this::onVillagerTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onWanderingTradesEvent);
+        MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
         if (Services.PLATFORM.isModLoaded("cakechomps")) {
             MinecraftForge.EVENT_BUS.addListener(this::onBlockRightClicked);
         }
@@ -151,6 +153,12 @@ public class JustMoreCakesForge {
 
             return event.getUseBlock() == Event.Result.ALLOW || (event.getUseBlock() != Event.Result.DENY && !flag1);
         });
+    }
+
+    void onBlockBreak(BlockEvent.BreakEvent event) {
+        if (event.getState().is(ModBlocks.SCULK_CAKE.get())) {
+            event.setExpToDrop(5);
+        }
     }
 
     void onAddReloadListeners(AddReloadListenerEvent event) {
