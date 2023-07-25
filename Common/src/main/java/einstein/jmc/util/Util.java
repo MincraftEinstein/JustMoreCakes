@@ -9,6 +9,7 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.JsonOps;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.blocks.BaseCandleCakeBlock;
+import einstein.jmc.blocks.SculkCakeBlock;
 import einstein.jmc.data.CakeEffects;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.init.ModPotions;
@@ -44,6 +45,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SculkSensorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
@@ -153,6 +155,10 @@ public class Util {
         }
 
         if (block instanceof BaseCandleCakeBlock candleCake && candleCake.getOriginalCake().getBiteCount() <= 0) {
+            return;
+        }
+
+        if (block instanceof SculkCakeBlock && !SculkSensorBlock.canActivate(state)) {
             return;
         }
 
