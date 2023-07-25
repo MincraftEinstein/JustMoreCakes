@@ -20,7 +20,7 @@ public class TNTCakeBlock extends BaseEntityCakeBlock {
 
     @Override
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
-        explode(player.getCommandSenderWorld(), pos);
+        explode(player.level(), pos);
         return state;
     }
 

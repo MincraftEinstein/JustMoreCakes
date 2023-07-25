@@ -16,7 +16,7 @@ public class GlowstoneCakeBlock extends BaseEntityCakeBlock {
 
     @Override
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
-        BlockEntity blockEntity = player.getCommandSenderWorld().getBlockEntity(pos);
+        BlockEntity blockEntity = player.level().getBlockEntity(pos);
         if (blockEntity instanceof GlowstoneCakeBlockEntity glowstoneCakeBlockEntity) {
             glowstoneCakeBlockEntity.setGlowing();
         }
