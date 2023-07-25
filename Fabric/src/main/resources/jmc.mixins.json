@@ -4,6 +4,7 @@
   "package": "einstein.jmc.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BlockMixin",
     "LivingEntityMixin"
   ],
   "injectors": {

@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "einstein.jmc.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "jmc.refmap.json",
+  "minVersion": "0.8",
+  "mixins": [
+    "BlockMixin"
+  ]
+}

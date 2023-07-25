@@ -5,7 +5,6 @@
   "refmap": "jmc.refmap.json",
   "minVersion": "0.8",
   "mixins": [
-    "BlockMixin",
     "CakeMixin",
     "VibrationSystemListenerMixin",
     "PandaMixin",

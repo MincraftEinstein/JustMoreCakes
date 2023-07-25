@@ -22,6 +22,7 @@ archivesBaseName = "${mod_name}-forge-${mc_v}"
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
     config "${mod_id}Common.mixins.json"
+    config "${mod_id}.mixins.json"
 }
 
 minecraft {
