@@ -20,7 +20,7 @@ public class ModGameEventTagsProvider extends GameEventTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider p_255981_) {
-        tag(ModGameEventTags.SNEAKING_EFFECT_BLOCKS).add(GameEvent.DRINK,
+        tag(ModGameEventTags.STEALTH_EFFECT_BLOCKS).add(GameEvent.DRINK,
                 GameEvent.EQUIP, GameEvent.EAT, GameEvent.ELYTRA_GLIDE, GameEvent.HIT_GROUND,
                 GameEvent.TELEPORT, GameEvent.ITEM_INTERACT_START, GameEvent.ITEM_INTERACT_FINISH,
                 GameEvent.PROJECTILE_SHOOT, GameEvent.STEP, GameEvent.SWIM, GameEvent.SHEAR, GameEvent.SPLASH,

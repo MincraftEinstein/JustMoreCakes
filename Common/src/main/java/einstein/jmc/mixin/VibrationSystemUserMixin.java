@@ -17,8 +17,8 @@ public class VibrationSystemUserMixin {
     private boolean isValidVibration(VibrationSystem.User instance, GameEvent event, GameEvent.Context context) {
         Entity entity = context.sourceEntity();
         if (entity instanceof LivingEntity livingEntity) {
-            if (livingEntity.hasEffect(ModPotions.SNEAKING_EFFECT.get())) {
-                if (event.is(ModGameEventTags.SNEAKING_EFFECT_BLOCKS)) {
+            if (livingEntity.hasEffect(ModPotions.STEALTH_EFFECT.get())) {
+                if (event.is(ModGameEventTags.STEALTH_EFFECT_BLOCKS)) {
                     return false;
                 }
             }

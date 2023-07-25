@@ -3,7 +3,7 @@
   "effects": [
     {
       "duration": 600,
-      "mob_effect": "jmc:sneaking"
+      "mob_effect": "jmc:stealth"
     }
   ]
 }

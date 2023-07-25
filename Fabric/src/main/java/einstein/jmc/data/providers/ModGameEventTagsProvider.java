@@ -1,7 +1,6 @@
 package einstein.jmc.data.providers;
 
 import einstein.jmc.init.ModGameEvents;
-import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
@@ -18,7 +17,7 @@ public class ModGameEventTagsProvider extends FabricTagProvider.GameEventTagProv
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        getOrCreateTagBuilder(ModGameEventTags.SNEAKING_EFFECT_BLOCKS).add(GameEvent.DRINK,
+        getOrCreateTagBuilder(ModGameEventTags.STEALTH_EFFECT_BLOCKS).add(GameEvent.DRINK,
                 GameEvent.EQUIP, GameEvent.EAT, GameEvent.ELYTRA_GLIDE, GameEvent.HIT_GROUND,
                 GameEvent.TELEPORT, GameEvent.ITEM_INTERACT_START, GameEvent.ITEM_INTERACT_FINISH,
                 GameEvent.PROJECTILE_SHOOT, GameEvent.STEP, GameEvent.SWIM, GameEvent.SHEAR, GameEvent.SPLASH,
