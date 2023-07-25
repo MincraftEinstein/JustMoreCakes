@@ -179,6 +179,10 @@ public class ModRecipes {
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.OBSIDIAN_CAKE.get(), 1, 800, RecipeCategory.FOOD, Ingredient.of(Blocks.OBSIDIAN), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Blocks.OBSIDIAN))
                 .save(consumer, cakeOvenLoc(ModBlocks.OBSIDIAN_CAKE));
+
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.SCULK_CAKE.get(), 0.7F, 350, RecipeCategory.FOOD, Ingredient.of(Items.ECHO_SHARD), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.EGG), Ingredient.of(Items.SUGAR))
+                .unlockedBy(has, RecipeProvider.has(Items.ECHO_SHARD))
+                .save(consumer, cakeOvenLoc(ModBlocks.SCULK_CAKE));
     }
 
     private static ResourceLocation craftingLoc(Supplier<? extends ItemLike> item) {

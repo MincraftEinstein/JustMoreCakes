@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-23T20:26:33.6722231	Recipes
+// 1.20.1	2023-07-24T22:11:54.7072883	Recipes
 5519dbe5d882ca3d853aeb53678fc21c52f8f601 data/jmc/advancements/recipes/decorations/cake_oven_from_crafting.json
 ed489c005d76f9f34d4a5bb7310a19bb0671d27e data/jmc/advancements/recipes/food/apple_cake_from_cake_oven.json
 502d1fb7953647089b5e4b886e36df779ae1f581 data/jmc/advancements/recipes/food/beetroot_cake_from_cake_oven.json
@@ -27,6 +27,7 @@ e287b2f552c2f0928e904508c2d00bd1d2bbe23f data/jmc/advancements/recipes/food/pois
 f750bf60e24c9df5c8e5a02481950c2baf884809 data/jmc/advancements/recipes/food/redstone_cake_from_cake_oven.json
 1aebc1544658eb0ad3548cde323b56f45185e1ef data/jmc/advancements/recipes/food/red_mushroom_cake_from_cake_oven.json
 ab96fced0769bae9edbf9426c442997916d3cc40 data/jmc/advancements/recipes/food/red_velvet_cake_from_cake_oven.json
+7952fe5419141baeb83df93ca163be806cf5630f data/jmc/advancements/recipes/food/sculk_cake_from_cake_oven.json
 3ebcfebcf82cd3ae920cf72a57f207300699adc6 data/jmc/advancements/recipes/food/seed_cake_from_cake_oven.json
 65b458311306f35e9de7ed1aa90868ed9ce69822 data/jmc/advancements/recipes/food/slime_cake_from_cake_oven.json
 c2efb55ed3cf0ec4e1fa8900c473a3387672163d data/jmc/advancements/recipes/food/sweet_berry_cake_from_cake_oven.json
@@ -61,6 +62,7 @@ ecbc87f84e1afcf4c214ee5564c05cda2038d364 data/jmc/recipes/obsidian_cake_from_cak
 23d12370c990a3984067c820ec6f9f9808b6405a data/jmc/recipes/redstone_cake_from_cake_oven.json
 392716976abcda275fefad628d6a6abd142775b9 data/jmc/recipes/red_mushroom_cake_from_cake_oven.json
 1fb100ade800b99170f921fe6d232e1438565e22 data/jmc/recipes/red_velvet_cake_from_cake_oven.json
+b90b953442a1340964f56cbb3aa94c2ad831f3a8 data/jmc/recipes/sculk_cake_from_cake_oven.json
 f5e5e941c36f5e2de9c5f5f990038402018b6bb6 data/jmc/recipes/seed_cake_from_cake_oven.json
 896868ae55dc21fc46c080b799d683a41bc2d16f data/jmc/recipes/slime_cake_from_cake_oven.json
 7e1eb71c31a00a840cb607013c83747f5251b2f6 data/jmc/recipes/sweet_berry_cake_from_cake_oven.json
