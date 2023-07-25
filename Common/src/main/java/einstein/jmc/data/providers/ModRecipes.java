@@ -57,6 +57,15 @@ public class ModRecipes {
                 .define('~', Blocks.SMOOTH_STONE)
                 .unlockedBy(has, RecipeProvider.has(Blocks.SMOOTH_STONE))
                 .save(consumer, craftingLoc(ModBlocks.CAKE_OVEN));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.CAKE_SPATULA.get())
+                .pattern(" ##")
+                .pattern(" ##")
+                .pattern("$  ")
+                .define('#', Items.IRON_INGOT)
+                .define('$', Items.STICK)
+                .unlockedBy(has, RecipeProvider.has(Items.IRON_INGOT))
+                .save(consumer, craftingLoc(ModItems.CAKE_SPATULA));
     }
 
     private static void cakeOvenRecipes(Consumer<FinishedRecipe> consumer) {
