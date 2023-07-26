@@ -45,6 +45,8 @@ Chinese: [usamion](https://github.com/usamion)
 Russian: [Telezhka-the-First](https://github.com/Telezhka-the-First)
 <br>
 German: [Cape-City](https://github.com/Cape-City)
+<br>
+Ukrainian: [Un roman](https://github.com/unroman)
 
 ---
 
