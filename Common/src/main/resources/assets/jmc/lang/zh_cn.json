@@ -1,6 +1,6 @@
 {
 	"_comment": "Items",
-	"item.jmc.cheese": "奶酪",
+	"item.jmc.cream_cheese": "奶酪",
 	"item.jmc.cupcake": "纸杯蛋糕",
 	"item.jmc.cake_spatula": "蛋糕抹刀",
 	"item.jmc.cake_spatula.desc": "(§oShift + 右键§r) 一个未食用过的蛋糕以收集",
@@ -59,6 +59,10 @@
 	"item.minecraft.splash_potion.effect.freezing":"喷溅型冷冻药水",
 	"item.minecraft.lingering_potion.effect.freezing":"滞留型冷冻药水",
 	"item.minecraft.tipped_arrow.effect.freezing":"冰冻之箭",
+	"item.minecraft.potion.effect.stealth":"隐匿药水",
+	"item.minecraft.splash_potion.effect.stealth":"喷溅型隐匿药水",
+	"item.minecraft.lingering_potion.effect.stealth":"滞留型隐匿药水",
+	"item.minecraft.tipped_arrow.effect.stealth":"隐匿之箭",
 
 	"_comment": "Effects",
 	"effect.jmc.bouncing": "弹跳",
@@ -72,6 +76,10 @@
 	"gui.jei.jmc.category.cake_oven": "蛋糕烘焙",
 	"gui.jei.jmc.category.cake_oven.experience": "%s经验",
 	"gui.jei.jmc.category.cake_oven.time.seconds": "%s秒",
+
+	"_comment": "REI",
+	"category.rei.jmc.cake_oven": "蛋糕烘焙",
+	"category.rei.jmc.cake_oven.time&xp": "%s 经验 %s 秒",
 
 	"_comment": "Creative Tabs",
 	"itemGroup.jmc.jmc_tab": "只是更多的蛋糕！",
