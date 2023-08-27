@@ -54,4 +54,4 @@ Ukrainian: [Un roman](https://github.com/unroman)
 
 ---
 
-Repository created from [MultiLoader-Template](https://github.com/jaredlll08/MultiLoader-Template/tree/1.19)
+Repository created from [MultiLoader-Template](https://github.com/jaredlll08/MultiLoader-Template)
