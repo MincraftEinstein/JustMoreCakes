@@ -1,15 +1,18 @@
 {
   "required": true,
-  "package": "einstein.jmc.mixin",
-  "compatibilityLevel": "JAVA_17",
-  "refmap": "jmc.refmap.json",
   "minVersion": "0.8",
+  "package": "einstein.jmc.mixin",
+  "refmap": "jmc.refmap.json",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "CakeMixin",
-    "VibrationSystemListenerMixin",
     "PandaMixin",
     "PandaMixin$PandaSitGoalMixin",
     "StructureTemplatePoolAccessor",
+    "VibrationSystemListenerMixin",
     "VillagerGoalPackagesMixin"
-  ]
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

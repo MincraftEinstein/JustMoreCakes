@@ -1,32 +1,23 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
-    }
+plugins {
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle'
+    id 'org.spongepowered.mixin'
 }
-apply plugin: 'java'
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'org.spongepowered.mixin'
 
-version = "${mod_v}"
-group = "${mod_group}"
-archivesBaseName = "${mod_name}-forge-${mc_v}"
+base {
+    archivesName = "${mod_name}-forge-${minecraft_version}"
+}
 
 mixin {
-    add sourceSets.main, "${mod_id}.refmap.json"
-    config "${mod_id}Common.mixins.json"
-    config "${mod_id}.mixins.json"
+    add(sourceSets.main, "${mod_id}.refmap.json")
+
+    config("${mod_id}.mixins.json")
+    config("${mod_id}.forge.mixins.json")
 }
 
 minecraft {
-    mappings channel: 'official', version: "${mc_v}"
+    mappings channel: 'official', version: minecraft_version
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -35,10 +26,12 @@ minecraft {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Client'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 modClientRun {
                     source sourceSets.main
-                    source project(":Common").sourceSets.main
+                    source project(":common").sourceSets.main
                 }
             }
         }
@@ -47,10 +40,12 @@ minecraft {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Server'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 modServerRun {
                     source sourceSets.main
-                    source project(":Common").sourceSets.main
+                    source project(":common").sourceSets.main
                 }
             }
         }
@@ -58,54 +53,56 @@ minecraft {
         data {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
-            args '--mod', "${mod_id}", '--all', '--output', file("src/generated/resources/"), '--existing', project(":Common").file("src/main/resources/")
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             taskName 'Data'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 modDataRun {
                     source sourceSets.main
-                    source project(":Common").sourceSets.main
+                    source project(":common").sourceSets.main
                 }
             }
         }
     }
 }
 
-sourceSets.main.resources { srcDir "src/generated/resources" }
+sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
-    compileOnly project(":Common")
-    minecraft "net.minecraftforge:forge:${mc_v}-${forge_v}"
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compileOnly project(":common")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    runtimeOnly fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_v}")
+    runtimeOnly fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_version}")
 //    runtimeOnly fg.deobf("curse.maven:configured-457570:${forge_configured_v}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_v}-forge:${jei_v}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 //    runtimeOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_v}")
 
-    implementation fg.deobf("curse.maven:cake-chomps-307943:${forge_cake_chomps_v}")
-    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_v}")
-    implementation fg.deobf("dev.architectury:architectury-forge:${architectury_v}")
+    implementation fg.deobf("curse.maven:cake-chomps-307943:${forge_cake_chomps_version}")
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
+    implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 
-    compileOnly(testCompileOnly(fg.deobf("mezz.jei:jei-${mc_v}-common-api:${jei_v}")))
-    compileOnly(testCompileOnly(fg.deobf("mezz.jei:jei-${mc_v}-forge-api:${jei_v}")))
-    compileOnly(testCompileOnly(fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_v}")))
-}
-
-processResources {
-    from project(":Common").sourceSets.main.resources
-
-    exclude("jmcCommon.accesswidener")
-    exclude('.cache/')
-
-    inputs.property "version", "${mod_v}"
-
-    filesMatching("META-INF/mods.toml") {
-        expand "version": "${mod_v}"
-    }
+    compileOnly(testCompileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")))
+    compileOnly(testCompileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")))
+    compileOnly(testCompileOnly(fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")))
 }
 
 tasks.withType(JavaCompile) {
-    source(project(":Common").sourceSets.main.allSource)
+    source(project(":common").sourceSets.main.allSource)
+}
+
+processResources {
+    from project(":common").sourceSets.main.resources
+
+    exclude("${mod_id}.accesswidener")
+    exclude('.cache/')
+
+    inputs.property("version", version)
+
+    filesMatching("META-INF/mods.toml") {
+        expand("version": version)
+    }
 }
 
 jar.finalizedBy('reobfJar')
@@ -113,10 +110,9 @@ jar.finalizedBy('reobfJar')
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.archivesBaseName
-            version project.version
-            artifact jar
+            artifactId base.archivesName.get()
+            from components.java
+            fg.component(it)
         }
     }
     repositories {

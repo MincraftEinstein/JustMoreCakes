@@ -1,29 +1,18 @@
 plugins {
+    id 'idea'
     id 'java'
-    id 'org.spongepowered.gradle.vanilla' version '0.2.1-SNAPSHOT'
     id 'maven-publish'
+    id 'org.spongepowered.gradle.vanilla'
 }
 
-version = "${mod_v}"
-group = "${mod_group}"
-archivesBaseName = "${mod_name}-common-${mc_v}"
+base {
+    archivesName = "${mod_name}-common-${minecraft_version}"
+}
 
 minecraft {
-    version("${mc_v}")
+    version("${minecraft_version}")
 
-    accessWideners(file("src/main/resources/jmcCommon.accesswidener"))
-
-    runs {
-        if (project.hasProperty('common_runs_enabled') ? project.findProperty('common_runs_enabled').toBoolean() : true) {
-            server(project.hasProperty('common_server_run_name') ? project.findProperty('common_server_run_name') : 'vanilla_server') {
-                workingDirectory(this.file("run"))
-            }
-
-            client(project.hasProperty('common_client_run_name') ? project.findProperty('common_client_run_name') : 'vanilla_client') {
-                workingDirectory(this.file("run"))
-            }
-        }
-    }
+    accessWideners(file("src/main/resources/${mod_id}.accesswidener"))
 }
 
 dependencies {
@@ -32,22 +21,19 @@ dependencies {
 
     compileOnly group: 'com.electronwill.night-config', name: 'core', version: '3.6.3'
     compileOnly group: 'com.electronwill.night-config', name: 'toml', version: '3.6.3'
-    compileOnly group: 'fuzs.forgeconfigapiport', name: 'forgeconfigapiport-common', version: "${config_port_v}"
-    compileOnly group: 'mezz.jei', name: "jei-${mc_v}-common-api", version: "${jei_v}"
-    compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-api-forge", version: "${rei_v}"
-    compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-default-plugin-forge", version: "${rei_v}"
+    compileOnly group: 'fuzs.forgeconfigapiport', name: 'forgeconfigapiport-common', version: "${config_port_version}"
+    compileOnly group: 'mezz.jei', name: "jei-${minecraft_version}-common-api", version: "${jei_version}"
+    compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-api-forge", version: "${rei_version}"
+    compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-default-plugin-forge", version: "${rei_version}"
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.archivesBaseName
-            version project.version
+            artifactId base.archivesName.get()
             from components.java
         }
     }
-
     repositories {
         maven {
             url "file://" + System.getenv("local_maven")
