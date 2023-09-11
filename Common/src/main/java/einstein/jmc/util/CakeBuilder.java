@@ -69,7 +69,7 @@ public class CakeBuilder {
 
     public Supplier<BaseCakeBlock> build() {
         if (ModBlocks.SUPPORTED_CANDLES.isEmpty()) {
-            JustMoreCakes.AddSupportedCandles();
+            JustMoreCakes.addSupportedCandles();
         }
 
         if (cakeClazz == null) {
