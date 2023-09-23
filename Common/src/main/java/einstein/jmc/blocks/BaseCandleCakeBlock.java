@@ -57,8 +57,8 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (!itemstack.is(Items.FLINT_AND_STEEL) && !itemstack.is(Items.FIRE_CHARGE)) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (!stack.is(Items.FLINT_AND_STEEL) && !stack.is(Items.FIRE_CHARGE)) {
             if (candleHit(hitResult) && player.getItemInHand(hand).isEmpty() && state.getValue(LIT)) {
                 extinguish(player, state, level, pos);
                 return InteractionResult.sidedSuccess(level.isClientSide);
@@ -76,7 +76,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
                 level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1, level.getRandom().nextFloat() * 0.4F + 0.8F);
                 level.setBlock(pos, defaultBlockState().setValue(BlockStateProperties.LIT, true), 11);
                 level.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
-                itemstack.hurtAndBreak(1, player, (player1) -> player1.broadcastBreakEvent(player.getUsedItemHand()));
+                stack.hurtAndBreak(1, player, (player1) -> player1.broadcastBreakEvent(player.getUsedItemHand()));
 
                 return InteractionResult.sidedSuccess(level.isClientSide());
             }

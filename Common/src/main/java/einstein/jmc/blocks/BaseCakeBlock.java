@@ -5,6 +5,7 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.data.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModCommonConfigs;
+import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
@@ -37,6 +38,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import static einstein.jmc.util.Util.RANDOM;
 
 @SuppressWarnings("deprecation")
 public class BaseCakeBlock extends Block implements CakeEffectsHolder {
@@ -82,14 +85,14 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
+        ItemStack stack = player.getItemInHand(hand);
+        Item item = stack.getItem();
         if (allowsCandles) {
-            if (itemstack.is(ItemTags.CANDLES) && (getBiteCount() <= 0 || state.getValue(getBites()) == 0)) {
+            if (stack.is(ItemTags.CANDLES) && (getBiteCount() <= 0 || state.getValue(getBites()) == 0)) {
                 Block block = Block.byItem(item);
                 if (block instanceof CandleBlock) {
                     if (!player.isCreative()) {
-                        itemstack.shrink(1);
+                        stack.shrink(1);
                     }
 
                     level.playSound(null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1, 1);
@@ -107,7 +110,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 return InteractionResult.SUCCESS;
             }
 
-            if (itemstack.isEmpty()) {
+            if (stack.isEmpty()) {
                 return InteractionResult.CONSUME;
             }
         }
@@ -125,6 +128,11 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             return InteractionResult.PASS;
         }
         else {
+            if (Services.PLATFORM.isModLoaded("cakechomps")) {
+                ItemStack stack = state.getBlock().getCloneItemStack(level, pos, state);
+                player.spawnItemParticles(stack, 16);
+                player.playSound(player.getEatingSound(stack), 0.5F + 0.5F * RANDOM.nextInt(2), (RANDOM.nextFloat() - RANDOM.nextFloat()) * 0.2F + 1.0F);
+            }
             player.awardStat(Stats.EAT_CAKE_SLICE);
             player.getFoodData().eat(getNourishment().getFirst(), getNourishment().getSecond());
             state = eatActions(player, pos, state);
@@ -141,11 +149,11 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 }
             }
 
-            int i = state.getValue(getBites());
+            int bite = state.getValue(getBites());
             level.gameEvent(player, GameEvent.EAT, pos);
 
-            if (i < getBiteCount()) {
-                level.setBlock(pos, state.setValue(getBites(), i + 1), 3);
+            if (bite < getBiteCount()) {
+                level.setBlock(pos, state.setValue(getBites(), bite + 1), 3);
             }
             else {
                 level.removeBlock(pos, false);

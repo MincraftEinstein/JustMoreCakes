@@ -46,30 +46,12 @@ public class JustMoreCakesFabric implements ModInitializer {
         onServerStarted();
         addVillagerTrades();
 
-        if (Services.PLATFORM.isModLoaded("cakechomps")) {
-            onBlockRightClicked();
-        }
-
         ForgeConfigRegistry.INSTANCE.register(JustMoreCakes.MOD_ID, ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
         ForgeConfigRegistry.INSTANCE.register(JustMoreCakes.MOD_ID, ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
 
         VillagerInteractionRegistries.registerGiftLootTable(ModVillagers.CAKE_BAKER.get(), loc("gameplay/hero_of_the_village/cake_baker_gift"));
         JustMoreCakes.commonSetup();
         modifyLootTables();
-    }
-
-    /**
-     * Copied from {@link com.illusivesoulworks.cakechomps.CakeChompsFabricMod}
-     * and slightly changed to work with JustMoreCakes
-     */
-    void onBlockRightClicked() {
-        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
-            Util.useCake(player, hitResult.getBlockPos(), hand, () -> {
-                boolean bl = !player.getMainHandItem().isEmpty() || !player.getOffhandItem().isEmpty();
-                return !(player.isSecondaryUseActive() && bl);
-            });
-            return InteractionResult.PASS;
-        });
     }
 
     void onAddReloadListeners() {

@@ -94,9 +94,6 @@ public class JustMoreCakesForge {
         MinecraftForge.EVENT_BUS.addListener(this::onVillagerTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onWanderingTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
-        if (Services.PLATFORM.isModLoaded("cakechomps")) {
-            MinecraftForge.EVENT_BUS.addListener(this::onBlockRightClicked);
-        }
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
@@ -125,35 +122,6 @@ public class JustMoreCakesForge {
         generator.addProvider(event.includeClient(), new ModItemModelProvider(output, helper));
     }
 
-    /**
-     * Copied from {@link com.illusivesoulworks.cakechomps.CakeChompsForgeMod}
-     * and slightly changed to work with JustMoreCakes
-     */
-    void onBlockRightClicked(PlayerInteractEvent.RightClickBlock event) {
-        Player player = event.getEntity();
-        BlockPos pos = event.getPos();
-        InteractionHand hand = event.getHand();
-        BlockHitResult result = event.getHitVec();
-        Util.useCake(player, pos, hand, () -> {
-            UseOnContext useoncontext = new UseOnContext(player, hand, result);
-            ItemStack stack = player.getItemInHand(hand);
-
-            if (event.getUseItem() != Event.Result.DENY) {
-                InteractionResult interact = stack.onItemUseFirst(useoncontext);
-
-                if (interact != InteractionResult.PASS) {
-                    return false;
-                }
-            }
-
-            boolean flag = !player.getMainHandItem().isEmpty() || !player.getOffhandItem().isEmpty();
-            boolean flag1 = (player.isSecondaryUseActive() && flag) &&
-                    !(player.getMainHandItem().doesSneakBypassUse(player.level(), pos, player) &&
-                            player.getOffhandItem().doesSneakBypassUse(player.level(), pos, player));
-
-            return event.getUseBlock() == Event.Result.ALLOW || (event.getUseBlock() != Event.Result.DENY && !flag1);
-        });
-    }
 
     void onBlockBreak(BlockEvent.BreakEvent event) {
         if (event.getState().is(ModBlocks.SCULK_CAKE.get())) {
