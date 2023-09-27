@@ -21,14 +21,12 @@ import java.util.List;
 
 public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 
-    protected final ResourceLocation id;
     protected final ItemStack result;
     protected final float experience;
     protected final int cookingTime;
     protected final NonNullList<Ingredient> ingredients;
 
-    public CakeOvenRecipe(ResourceLocation id, NonNullList<Ingredient> ingredients, ItemStack result, float experience, int cookingTime) {
-        this.id = id;
+    public CakeOvenRecipe(NonNullList<Ingredient> ingredients, ItemStack result, float experience, int cookingTime) {
         this.ingredients = ingredients;
         this.result = result;
         this.experience = experience;
@@ -70,11 +68,6 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
     @Override
     public ItemStack getResultItem(RegistryAccess access) {
         return result;
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return id;
     }
 
     public float getExperience() {

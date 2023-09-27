@@ -31,11 +31,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.RecipeHolder;
+import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
@@ -45,7 +46,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements MenuDataProvider, WorldlyContainer, RecipeHolder, StackedContentsCompatible, CakeOvenConstants {
+public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements MenuDataProvider, WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible, CakeOvenConstants {
 
     private NonNullList<ItemStack> items = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
     private NonNullList<ItemStack> remainingItems = NonNullList.withSize(REMAINING_ITEMS, ItemStack.EMPTY);
@@ -54,6 +55,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
     private int cookingProgress;
     private int cookingTotalTime;
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
+    private final RecipeManager.CachedCheck<Container, CakeOvenRecipe> quickCheck;
     private final ContainerData dataAccess = new ContainerData() {
 
         public int get(int index) {
@@ -82,6 +84,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 
     public CakeOvenBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityTypes.CAKE_OVEN.get(), pos, state);
+        quickCheck = RecipeManager.createCheck(ModRecipes.CAKE_OVEN_RECIPE.get());
     }
 
     @Override
@@ -102,9 +105,15 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
         }
 
         ItemStack fuelStack = blockEntity.items.get(FUEL_SLOT);
-        if (blockEntity.isLit() || !fuelStack.isEmpty() && (!blockEntity.items.get(INGREDIENT_SLOT_1).isEmpty() ||
-                !blockEntity.items.get(INGREDIENT_SLOT_2).isEmpty() || !blockEntity.items.get(INGREDIENT_SLOT_3).isEmpty() || !blockEntity.items.get(INGREDIENT_SLOT_4).isEmpty())) {
-            Recipe<?> recipe = level.getRecipeManager().getRecipeFor(ModRecipes.CAKE_OVEN_RECIPE.get(), blockEntity, level).orElse(null);
+        boolean hasIngredient = !blockEntity.items.get(INGREDIENT_SLOT_1).isEmpty() ||
+                !blockEntity.items.get(INGREDIENT_SLOT_2).isEmpty() || !blockEntity.items.get(INGREDIENT_SLOT_3).isEmpty() || !blockEntity.items.get(INGREDIENT_SLOT_4).isEmpty();
+        if (blockEntity.isLit() || !fuelStack.isEmpty() && hasIngredient) {
+//            Recipe<?> recipe = level.getRecipeManager().getRecipeFor(ModRecipes.CAKE_OVEN_RECIPE.get(), blockEntity, level).orElse(null);
+            RecipeHolder<CakeOvenRecipe> recipe = null;
+            if (hasIngredient) {
+                recipe = blockEntity.quickCheck.getRecipeFor(blockEntity, level).orElse(null);
+            }
+
             int stackSize = blockEntity.getMaxStackSize();
             RegistryAccess access = level.registryAccess();
 
@@ -154,37 +163,32 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
         }
     }
 
-    private boolean hasResultSpace(RegistryAccess access, @Nullable Recipe<?> recipe, NonNullList<ItemStack> slotItems, int maxStackSize) {
-        if (recipe != null) {
-            ItemStack stack = ((CakeOvenRecipe) recipe).assemble(this, access);
+    private boolean hasResultSpace(RegistryAccess access, @Nullable RecipeHolder<CakeOvenRecipe> holder, NonNullList<ItemStack> slotItems, int maxStackSize) {
+        if (holder != null) {
+            ItemStack stack = holder.value().getResultItem(access);
             if (stack.isEmpty()) {
                 return false;
             }
-            else {
-                ItemStack resultStack = slotItems.get(RESULT_SLOT);
-                if (resultStack.isEmpty()) {
-                    return true;
-                }
-                else if (!ItemStack.isSameItem(resultStack, stack)) {
-                    return false;
-                }
-                else if (resultStack.getCount() + stack.getCount() <= maxStackSize && resultStack.getCount() + stack.getCount() <= resultStack.getMaxStackSize()) {
-                    return true;
-                }
-                else {
-                    return resultStack.getCount() + stack.getCount() <= stack.getMaxStackSize();
-                }
+
+            ItemStack resultStack = slotItems.get(RESULT_SLOT);
+            if (resultStack.isEmpty()) {
+                return true;
             }
+            else if (!ItemStack.isSameItem(resultStack, stack)) {
+                return false;
+            }
+            else if (resultStack.getCount() + stack.getCount() <= maxStackSize && resultStack.getCount() + stack.getCount() <= resultStack.getMaxStackSize()) {
+                return true;
+            }
+            return resultStack.getCount() + stack.getCount() <= stack.getMaxStackSize();
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
-    private boolean smeltRecipe(RegistryAccess access, @Nullable Recipe<?> recipe, NonNullList<ItemStack> slotItems, int maxStackSize) {
-        if (recipe != null && hasResultSpace(access, recipe, slotItems, maxStackSize)) {
+    private boolean smeltRecipe(RegistryAccess access, @Nullable RecipeHolder<CakeOvenRecipe> holder, NonNullList<ItemStack> slotItems, int maxStackSize) {
+        if (hasResultSpace(access, holder, slotItems, maxStackSize)) {
             ItemStack resultStack = slotItems.get(RESULT_SLOT);
-            ItemStack stack = ((CakeOvenRecipe) recipe).assemble(this, access);
+            ItemStack stack = holder.value().getResultItem(access);
             if (resultStack.isEmpty()) { // If the result slot is empty set the slot items to the recipe result
                 slotItems.set(RESULT_SLOT, stack.copy());
             }
@@ -192,12 +196,10 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
                 resultStack.grow(stack.getCount());
             }
 
-            ((CakeOvenRecipe) recipe).consumeIngredients(this, remainingItems);
+            holder.value().consumeIngredients(this, remainingItems);
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     @Override
@@ -249,7 +251,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
     }
 
     private static int getTotalCookTime(Level level, Container container) {
-        return level.getRecipeManager().getRecipeFor(ModRecipes.CAKE_OVEN_RECIPE.get(), container, level).map(CakeOvenRecipe::getCookingTime).orElse(DEFAULT_BURN_TIME);
+        return level.getRecipeManager().getRecipeFor(ModRecipes.CAKE_OVEN_RECIPE.get(), container, level).map(holder -> holder.value().getCookingTime()).orElse(DEFAULT_BURN_TIME);
     }
 
     @Override
@@ -327,34 +329,41 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
     }
 
     @Override
-    public void setRecipeUsed(Recipe<?> recipe) {
-        if (recipe != null) {
-            recipesUsed.addTo(recipe.getId(), 1);
+    public void setRecipeUsed(@Nullable RecipeHolder<?> holder) {
+        if (holder != null) {
+            recipesUsed.addTo(holder.id(), 1);
         }
     }
 
     @Override
-    public Recipe<?> getRecipeUsed() {
+    public RecipeHolder<?> getRecipeUsed() {
         return null;
     }
 
     @Override
-    public void awardUsedRecipes(Player player, List<ItemStack> $$1) {
+    public void awardUsedRecipes(Player player, List<ItemStack> stacks) {
     }
 
     public void awardUsedRecipesAndPopExperience(ServerPlayer player) {
-        List<Recipe<?>> list = getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
-        player.awardRecipes(list);
+        List<RecipeHolder<?>> holders = getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
+        player.awardRecipes(holders);
+
+        for (RecipeHolder<?> holder : holders) {
+            if (holder != null) {
+                player.triggerRecipeCrafted(holder, items);
+            }
+        }
+
         recipesUsed.clear();
     }
 
-    public List<Recipe<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 pos) {
-        List<Recipe<?>> recipes = Lists.newArrayList();
+    public List<RecipeHolder<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 pos) {
+        List<RecipeHolder<?>> recipes = Lists.newArrayList();
 
         for (Entry<ResourceLocation> entry : recipesUsed.object2IntEntrySet()) {
-            level.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> {
-                recipes.add(recipe);
-                AbstractFurnaceBlockEntity.createExperience(level, pos, entry.getIntValue(), ((CakeOvenRecipe) recipe).getExperience());
+            level.getRecipeManager().byKey(entry.getKey()).ifPresent(holder -> {
+                recipes.add(holder);
+                AbstractFurnaceBlockEntity.createExperience(level, pos, entry.getIntValue(), ((CakeOvenRecipe) holder.value()).getExperience());
             });
         }
 
@@ -380,7 +389,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
     }
 
     @Override
-    public boolean canPlaceItemThroughFace(int slotIndex, ItemStack stack, Direction direction) {
+    public boolean canPlaceItemThroughFace(int slotIndex, ItemStack stack, @Nullable Direction direction) {
         return canPlaceItem(slotIndex, stack);
     }
 

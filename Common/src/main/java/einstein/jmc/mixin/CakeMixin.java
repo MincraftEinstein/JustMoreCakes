@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -23,7 +24,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(CakeBlock.class)
 public class CakeMixin implements CakeEffectsHolder {
 
-    private CakeEffects cakeEffects;
+    @Unique
+    private CakeEffects justMoreCakes$cakeEffects;
 
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/CakeBlock;eat(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/InteractionResult;"))
     private void use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
@@ -35,7 +37,7 @@ public class CakeMixin implements CakeEffectsHolder {
     @Inject(method = "eat", at = @At(value = "RETURN", target = "Lnet/minecraft/world/food/FoodData;eat(IF)V"))
     private static void eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<InteractionResult> cir) {
         CakeBlock cake = (CakeBlock) state.getBlock();
-        CakeEffects effects = ((CakeMixin) (Object) cake).cakeEffects;
+        CakeEffects effects = ((CakeMixin) (Object) cake).justMoreCakes$cakeEffects;
         if (effects != null) {
             for (CakeEffects.MobEffectHolder holder : effects.mobEffects()) {
                 MobEffectInstance instance = new MobEffectInstance(holder.effect(), holder.duration().orElse(0), holder.amplifier().orElse(0));
@@ -51,11 +53,11 @@ public class CakeMixin implements CakeEffectsHolder {
 
     @Override
     public @Nullable CakeEffects getCakeEffects() {
-        return cakeEffects;
+        return justMoreCakes$cakeEffects;
     }
 
     @Override
     public void setCakeEffects(CakeEffects effects) {
-        cakeEffects = effects;
+        justMoreCakes$cakeEffects = effects;
     }
 }

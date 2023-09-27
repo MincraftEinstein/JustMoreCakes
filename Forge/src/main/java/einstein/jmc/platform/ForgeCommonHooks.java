@@ -12,7 +12,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.network.NetworkHooks;
 
 public class ForgeCommonHooks implements CommonHooks {
 
@@ -28,7 +27,7 @@ public class ForgeCommonHooks implements CommonHooks {
 
     @Override
     public void openMenu(ServerPlayer player, MenuDataProvider provider) {
-        NetworkHooks.openScreen(player, provider, buf -> provider.writeMenuData(player, buf));
+        player.openMenu(provider, buf -> provider.writeMenuData(player, buf));
     }
 
     @Override

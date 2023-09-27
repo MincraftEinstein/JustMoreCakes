@@ -19,7 +19,7 @@ public class JustMoreCakes {
     public static final String MOD_ID = "jmc";
     public static final String MOD_NAME = "Just More Cakes!";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
-    public static final CakeEatenTrigger CAKE_EATEN_TRIGGER = CriteriaTriggers.register(new CakeEatenTrigger());
+    public static final CakeEatenTrigger CAKE_EATEN_TRIGGER = CriteriaTriggers.register(MOD_ID + ":cake_eaten", new CakeEatenTrigger());
 
     public static void init() {
         ModItems.init();

@@ -108,26 +108,26 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
     public void draw(CakeOvenRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         flame.draw(guiGraphics, /*X*/ 1, /*Y*/ 4);
         getArrow(recipe).draw(guiGraphics, /*X*/ 75, /*Y*/ 13);
-        drawExperienceText(recipe, guiGraphics, /*Y*/ 0);
-        drawCookTimeText(recipe, guiGraphics, /*Y*/ 37);
+        drawExperienceText(recipe, guiGraphics);
+        drawCookTimeText(recipe, guiGraphics);
     }
 
-    private void drawExperienceText(CakeOvenRecipe recipe, GuiGraphics guiGraphics, int y) {
+    private void drawExperienceText(CakeOvenRecipe recipe, GuiGraphics guiGraphics) {
         float experience = recipe.getExperience();
         if (experience > 0) {
             Component experienceText = Component.translatable("gui.jei.jmc.category.cake_oven.experience", experience);
             Font font = Minecraft.getInstance().font;
-            guiGraphics.drawString(font, experienceText, /*X*/ (background.getWidth() - font.width(experienceText) - /*Makes room for the shapeless icon*/13), y, -8355712, false);
+            guiGraphics.drawString(font, experienceText, /*X*/ (background.getWidth() - font.width(experienceText) - /*Makes room for the shapeless icon*/13), /*Y*/ 0, -8355712, false);
         }
     }
 
-    private void drawCookTimeText(CakeOvenRecipe recipe, GuiGraphics guiGraphics, int y) {
+    private void drawCookTimeText(CakeOvenRecipe recipe, GuiGraphics guiGraphics) {
         int cookTime = recipe.getCookingTime();
         if (cookTime > 0) {
             int cookTimeSeconds = cookTime / 20; // Converts cook time in ticks to cook time in seconds
             Component cookTimeText = Component.translatable("gui.jei.jmc.category.cake_oven.time.seconds", cookTimeSeconds);
             Font font = Minecraft.getInstance().font;
-            guiGraphics.drawString(font, cookTimeText, /*X*/ (background.getWidth() - font.width(cookTimeText)), y, -8355712, false);
+            guiGraphics.drawString(font, cookTimeText, /*X*/ (background.getWidth() - font.width(cookTimeText)), /*Y*/ 37, -8355712, false);
         }
     }
 }
