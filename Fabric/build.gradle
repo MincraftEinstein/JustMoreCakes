@@ -24,7 +24,7 @@ dependencies {
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation project(":common")
 
-    modRuntimeOnly("curse.maven:catalogue-fabric-667377:${fabric_catalogue_version}")
+//    modRuntimeOnly("curse.maven:catalogue-fabric-667377:${fabric_catalogue_version}")
 //    modRuntimeOnly("curse.maven:configured-fabric-667378:${fabric_configured_v}")
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
 //    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${rei_v}")

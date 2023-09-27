@@ -74,7 +74,7 @@ dependencies {
     compileOnly project(":common")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    runtimeOnly fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_version}")
+//    runtimeOnly fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_version}")
 //    runtimeOnly fg.deobf("curse.maven:configured-457570:${forge_configured_v}")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 //    runtimeOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_v}")
