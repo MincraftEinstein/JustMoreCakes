@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-24T22:20:33.1643447	Tags for minecraft:game_event mod id jmc
-992b8aed61e7ec6b96e1613ea57f31e45eb48bb5 data/jmc/tags/game_events/stealth_effect_blocks.json
+// 1.20.2	2023-09-27T17:44:48.7459242	Tags for minecraft:game_event mod id jmc
+54027899b8a5bfc4e14cac281f39fd391c50745b data/jmc/tags/game_events/stealth_effect_blocks.json
 dbc1ea9addba7012301bd01fc9e6a97461f0d1f5 data/minecraft/tags/game_events/vibrations.json
 dbc1ea9addba7012301bd01fc9e6a97461f0d1f5 data/minecraft/tags/game_events/warden_can_listen.json
