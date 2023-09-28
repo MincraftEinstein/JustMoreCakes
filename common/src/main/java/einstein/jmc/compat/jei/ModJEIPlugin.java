@@ -22,7 +22,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import java.util.Objects;
 
 @JeiPlugin
-public class JEIPlugin implements IModPlugin {
+public class ModJEIPlugin implements IModPlugin {
 
     public static final RecipeType<CakeOvenRecipe> CAKE_OVEN = RecipeType.create(JustMoreCakes.MOD_ID, "cake_oven", CakeOvenRecipe.class);
 

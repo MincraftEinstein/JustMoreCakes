@@ -26,7 +26,7 @@
       "einstein.jmc.JustMoreCakesData"
     ],
     "jei_mod_plugin": [
-      "einstein.jmc.compat.jei.JEIPlugin"
+      "einstein.jmc.compat.jei.ModJEIPlugin"
     ],
     "rei_client": [
       "einstein.jmc.compat.rei.REIClientPlugin"

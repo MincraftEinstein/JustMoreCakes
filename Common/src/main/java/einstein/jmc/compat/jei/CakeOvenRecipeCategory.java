@@ -59,7 +59,7 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
 
     @Override
     public RecipeType<CakeOvenRecipe> getRecipeType() {
-        return JEIPlugin.CAKE_OVEN;
+        return ModJEIPlugin.CAKE_OVEN;
     }
 
     @Override
