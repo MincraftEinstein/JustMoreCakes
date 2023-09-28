@@ -11,6 +11,7 @@ import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
 import java.text.DecimalFormat;
@@ -21,7 +22,7 @@ public class CakeOvenRecipeCategory implements DisplayCategory<CakeOvenDisplay> 
 
     @Override
     public CategoryIdentifier<? extends CakeOvenDisplay> getCategoryIdentifier() {
-        return REIPlugin.CAKE_OVEN;
+        return ModREICommonPlugin.CAKE_OVEN;
     }
 
     @Override
@@ -54,10 +55,11 @@ public class CakeOvenRecipeCategory implements DisplayCategory<CakeOvenDisplay> 
         widgets.add(Widgets.createRecipeBase(bounds));
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.getX() + 78, startPoint.getY() + 14)));
         widgets.add(Widgets.createBurningFire(new Point(startPoint.getX() - 20, startPoint.getY() + 25)).animationDurationMS(10000));
-        widgets.add(Widgets.createLabel(new Point(bounds.getX() + bounds.getWidth() - 5, bounds.getY() + 5), Component.translatable("category.rei.jmc.cake_oven.time&xp",
-                formatter.format(display.getExperience()), formatter.format(cookingTime / 20))).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
+        Component text = Component.translatable("category.rei.jmc.cake_oven.time&xp", formatter.format(display.getExperience()), formatter.format(cookingTime / 20));
+        widgets.add(Widgets.createLabel(new Point(bounds.getX() + Minecraft.getInstance().font.width(text) + 5, bounds.getY() + 5), text).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
         widgets.add(Widgets.createArrow(new Point(startPoint.getX() + 42, startPoint.getY() + 13)).animationDurationTicks(cookingTime));
         widgets.add(Widgets.createSlot(new Point(startPoint.getX() + 78, startPoint.getY() + 14)).entries(display.getOutputEntries().get(0)).disableBackground().markOutput());
+        widgets.add(Widgets.createShapelessIcon(bounds));
 
         int slotIndex = 0;
         for (int x = 0; x < 2; x++) {

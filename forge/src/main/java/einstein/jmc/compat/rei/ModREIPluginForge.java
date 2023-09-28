@@ -5,15 +5,15 @@ import me.shedaniel.rei.forge.REIPluginCommon;
 
 // DO NOT DELETE!! Exists as a way to add REI plugin annotations to the actual plugins from the common project
 @SuppressWarnings("unused")
-public class REIPluginLoaderForge {
+public class ModREIPluginForge {
 
     @REIPluginCommon
-    public static class REIPluginForge extends REIPlugin {
+    public static class ModREICommonPluginForge extends ModREICommonPlugin {
 
     }
 
     @REIPluginClient
-    public static class REIClientPluginForge extends REIClientPlugin {
+    public static class ModREIClientPluginForge extends ModREIClientPlugin {
 
     }
 }

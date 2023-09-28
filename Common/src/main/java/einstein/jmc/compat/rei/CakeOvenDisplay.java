@@ -64,7 +64,7 @@ public class CakeOvenDisplay extends BasicDisplay implements SimpleGridMenuDispl
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return REIPlugin.CAKE_OVEN;
+        return ModREICommonPlugin.CAKE_OVEN;
     }
 
     public float getExperience() {

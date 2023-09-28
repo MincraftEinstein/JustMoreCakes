@@ -5,7 +5,7 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.DisplaySerializerRegistry;
 import me.shedaniel.rei.api.common.plugins.REIServerPlugin;
 
-public class REIPlugin implements REIServerPlugin {
+public class ModREICommonPlugin implements REIServerPlugin {
 
     public static final CategoryIdentifier<CakeOvenDisplay> CAKE_OVEN = CategoryIdentifier.of(JustMoreCakes.MOD_ID, "cake_oven");
 

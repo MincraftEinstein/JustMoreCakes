@@ -29,10 +29,10 @@
       "einstein.jmc.compat.jei.ModJEIPlugin"
     ],
     "rei_client": [
-      "einstein.jmc.compat.rei.REIClientPlugin"
+      "einstein.jmc.compat.rei.ModREIClientPlugin"
     ],
     "rei_common": [
-      "einstein.jmc.compat.rei.REIPlugin"
+      "einstein.jmc.compat.rei.ModREICommonPlugin"
     ]
   },
   "mixins": [

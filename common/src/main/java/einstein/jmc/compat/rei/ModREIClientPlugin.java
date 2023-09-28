@@ -6,6 +6,7 @@ import einstein.jmc.init.ModRecipes;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
 import einstein.jmc.menu.cakeoven.CakeOvenMenu;
 import me.shedaniel.math.Rectangle;
+import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
@@ -14,9 +15,9 @@ import me.shedaniel.rei.api.client.registry.transfer.simple.SimpleTransferHandle
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
 
-import static einstein.jmc.compat.rei.REIPlugin.CAKE_OVEN;
+import static einstein.jmc.compat.rei.ModREICommonPlugin.CAKE_OVEN;
 
-public class REIClientPlugin implements me.shedaniel.rei.api.client.plugins.REIClientPlugin {
+public class ModREIClientPlugin implements REIClientPlugin {
 
     @Override
     public void registerCategories(CategoryRegistry registry) {
@@ -37,6 +38,6 @@ public class REIClientPlugin implements me.shedaniel.rei.api.client.plugins.REIC
 
     @Override
     public void registerTransferHandlers(TransferHandlerRegistry registry) {
-        registry.register(SimpleTransferHandler.create(CakeOvenMenu.class, CAKE_OVEN, new SimpleTransferHandler.IntRange(1, 5)));
+        registry.register(SimpleTransferHandler.create(CakeOvenMenu.class, CAKE_OVEN, new SimpleTransferHandler.IntRange(0, 4)));
     }
 }
