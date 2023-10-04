@@ -3,6 +3,7 @@ package einstein.jmc.menu.cakeoven;
 import einstein.jmc.init.ModMenuTypes;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeOvenConstants;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -119,20 +120,18 @@ public class CakeOvenMenu extends AbstractContainerMenu implements CakeOvenConst
         return Services.HOOKS.getBurnTime(stack) > 0;
     }
 
-    public int getBurnProgress() {
+    public float getBurnProgress() {
         int cookingProgress = data.get(2);
         int cookingTotalTime = data.get(3);
-        // 																		 24 is the width of the progress arrow
-        return cookingTotalTime != 0 && cookingProgress != 0 ? cookingProgress * 24 / cookingTotalTime : 0;
+        return cookingTotalTime != 0 && cookingProgress != 0 ? Mth.clamp((float) cookingProgress / cookingTotalTime, 0F, 1F) : 0;
     }
 
-    public int getLitProgress() {
+    public float getLitProgress() {
         int litDuration = data.get(1);
         if (litDuration == 0) {
             litDuration = DEFAULT_BURN_TIME;
         }
-        // 13 is the height of the burn flame - 1
-        return data.get(0) * 13 / litDuration;
+        return Mth.clamp((float) data.get(0) / litDuration, 0F, 1F);
     }
 
     public boolean isLit() {
