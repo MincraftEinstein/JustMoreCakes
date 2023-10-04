@@ -20,10 +20,10 @@
       "einstein.jmc.JustMoreCakesFabric"
     ],
     "client": [
-      "einstein.jmc.JustMoreCakesClient"
+      "einstein.jmc.JustMoreCakesFabric"
     ],
     "fabric-datagen": [
-      "einstein.jmc.JustMoreCakesData"
+      "einstein.jmc.JustMoreCakesFabric"
     ],
     "jei_mod_plugin": [
       "einstein.jmc.compat.jei.ModJEIPlugin"

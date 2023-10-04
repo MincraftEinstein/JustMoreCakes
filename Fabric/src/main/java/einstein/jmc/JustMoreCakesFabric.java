@@ -1,14 +1,21 @@
 package einstein.jmc;
 
 import einstein.jmc.blocks.CakeEffectsHolder;
+import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.data.CakeEffects;
+import einstein.jmc.data.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
 import einstein.jmc.util.Util;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -16,6 +23,8 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.VillagerInteractionRegistries;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -34,7 +43,7 @@ import static einstein.jmc.JustMoreCakes.LOGGER;
 import static einstein.jmc.JustMoreCakes.loc;
 import static einstein.jmc.util.Util.*;
 
-public class JustMoreCakesFabric implements ModInitializer {
+public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer, DataGeneratorEntrypoint {
 
     private static Map<ResourceLocation, CakeEffects> CAKE_EFFECTS;
 
@@ -52,6 +61,31 @@ public class JustMoreCakesFabric implements ModInitializer {
         VillagerInteractionRegistries.registerGiftLootTable(ModVillagers.CAKE_BAKER.get(), loc("gameplay/hero_of_the_village/cake_baker_gift"));
         JustMoreCakes.commonSetup();
         modifyLootTables();
+    }
+
+    @Override
+    public void onInitializeDataGenerator(FabricDataGenerator generator) {
+        FabricDataGenerator.Pack pack = generator.createPack();
+        FabricTagProvider.BlockTagProvider blockTags = pack.addProvider(ModBlockTagsProvider::new);
+        pack.addProvider((output, registriesFuture) -> new ModItemTagsProvider(output, registriesFuture, blockTags));
+        pack.addProvider(ModPOITagsProvider::new);
+        pack.addProvider(ModGameEventTagsProvider::new);
+        pack.addProvider(ModAdvancementProvider::new);
+        pack.addProvider(ModRecipeProvider::new);
+        pack.addProvider(ModModelProvider::new);
+        pack.addProvider(ModBlockLootTableProvider::new);
+        pack.addProvider((FabricDataGenerator.Pack.Factory<ModCakeEffectsProvider>) ModCakeEffectsProvider::new);
+    }
+
+    @Override
+    public void onInitializeClient() {
+        MenuScreens.register(ModMenuTypes.CAKE_OVEN.get(), CakeOvenScreen::new);
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.RED_MUSHROOM_CAKE.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BROWN_MUSHROOM_CAKE.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CHORUS_CAKE.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CRIMSON_FUNGUS_CAKE.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ENCASING_ICE.get(), RenderType.translucent());
     }
 
     void onAddReloadListeners() {
