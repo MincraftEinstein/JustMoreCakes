@@ -85,12 +85,12 @@
   "itemGroup.jmc.jmc_tab": "Just More Cakes!",
 
   "_comment": "Advancements",
-  "advancements.husbandry.craft_cake.title": "Cake is a Lie",
-  "advancements.husbandry.craft_cake.description": "Craft a cake",
-  "advancements.husbandry.craft_all_cakes.title": "Num Num Num Num Num",
-  "advancements.husbandry.craft_all_cakes.description": "Craft all the cakes in the mod",
-  "advancements.husbandry.eat_obsidian_cake.title": "You Don't Have Diamond Teeth",
-  "advancements.husbandry.eat_obsidian_cake.description": "Try to eat an Obsidian Cake",
+  "advancements.husbandry.jmc.craft_cake.title": "Cake is a Lie",
+  "advancements.husbandry.jmc.craft_cake.description": "Craft a cake",
+  "advancements.husbandry.jmc.craft_all_cakes.title": "Num Num Num Num Num",
+  "advancements.husbandry.jmc.craft_all_cakes.description": "Craft all the cakes in the mod",
+  "advancements.husbandry.jmc.eat_obsidian_cake.title": "You Don't Have Diamond Teeth",
+  "advancements.husbandry.jmc.eat_obsidian_cake.description": "Try to eat an Obsidian Cake",
 
   "_comment": "Configs",
   "config.jmc.redstone_cake_particles": "Enable Redstone Cake Particles",

@@ -413,7 +413,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.husbandry.craft_all_cakes.description"
+      "translate": "advancements.husbandry.jmc.craft_all_cakes.description"
     },
     "frame": "challenge",
     "hidden": false,
@@ -422,7 +422,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.husbandry.craft_all_cakes.title"
+      "translate": "advancements.husbandry.jmc.craft_all_cakes.title"
     }
   },
   "requirements": [

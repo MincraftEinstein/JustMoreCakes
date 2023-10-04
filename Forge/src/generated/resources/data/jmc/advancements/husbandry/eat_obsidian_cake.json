@@ -11,7 +11,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.husbandry.eat_obsidian_cake.description"
+      "translate": "advancements.husbandry.jmc.eat_obsidian_cake.description"
     },
     "frame": "task",
     "hidden": false,
@@ -20,7 +20,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.husbandry.eat_obsidian_cake.title"
+      "translate": "advancements.husbandry.jmc.eat_obsidian_cake.title"
     }
   },
   "requirements": [

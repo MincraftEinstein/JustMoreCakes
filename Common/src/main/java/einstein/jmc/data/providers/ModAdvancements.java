@@ -59,7 +59,7 @@ public class ModAdvancements {
         return advancement;
     }
 
-    private static Component translatable(String string) {
-        return Component.translatable("advancements.husbandry." + string);
+    private static Component translatable(String name) {
+        return Component.translatable("advancements.husbandry." + JustMoreCakes.MOD_ID + "." + name);
     }
 }
