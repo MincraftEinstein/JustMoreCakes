@@ -90,5 +90,19 @@
 	"advancements.husbandry.craft_all_cakes.title": "Num Num Num Num Num",
 	"advancements.husbandry.craft_all_cakes.description": "Craft all the cakes in the mod",
 	"advancements.husbandry.eat_obsidian_cake.title": "You Don't Have Diamond Teeth",
-	"advancements.husbandry.eat_obsidian_cake.description": "Try to eat an Obsidian Cake"
+	"advancements.husbandry.eat_obsidian_cake.description": "Try to eat an Obsidian Cake",
+
+	"_comment": "Configs",
+	"config.jmc.redstone_cake_particles": "Enable Redstone Cake Particles",
+	"config.jmc.ender_cake_particles": "Enable Ender Cake Particles",
+	"config.jmc.lava_cake_particles": "Enable Lava Cake Particles",
+	"config.jmc.firey_cake_fire_duration": "Firey Cake Fire Duration",
+    "config.jmc.glowstone_cake_glowing_duration": "Glowstone Cake Glowing Duration",
+    "config.jmc.chorus_cake_teleport_radius": "Chorus Cake Teleport Radius",
+	"config.jmc.ender_cake_teleport_radius": "Ender Cake Teleport Radius",
+	"config.jmc.effected_by_redstone": "TNT Cake Affected By Redstone",
+	"config.jmc.tnt_cake_explosion_size": "TNT Cake Explosion Size",
+	"config.jmc.encasing_ice_melt_speed": "Encasing Ice Melt Speed",
+	"config.jmc.cake_bakery_generation_weight": "Cake Bakery Generation Weight",
+	"config.jmc.glowstone_cake_effect_radius": "Glowstone Cake Effect Radius"
 }
