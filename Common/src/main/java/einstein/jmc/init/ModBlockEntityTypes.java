@@ -1,6 +1,7 @@
 package einstein.jmc.init;
 
 import einstein.jmc.blockentity.CakeOvenBlockEntity;
+import einstein.jmc.blockentity.CakeStandBlockEntity;
 import einstein.jmc.blockentity.GlowstoneCakeBlockEntity;
 import einstein.jmc.blockentity.TNTCakeBlockEntity;
 import einstein.jmc.platform.Services;
@@ -18,6 +19,7 @@ public class ModBlockEntityTypes {
     public static final Supplier<BlockEntityType<GlowstoneCakeBlockEntity>> GLOWSTONE_CAKE = register("glowstone_cake", GlowstoneCakeBlockEntity::new, ModBlocks.GLOWSTONE_CAKE);
     public static final Supplier<BlockEntityType<TNTCakeBlockEntity>> TNT_CAKE = register("tnt_cake", TNTCakeBlockEntity::new, ModBlocks.TNT_CAKE);
     public static final Supplier<BlockEntityType<CakeOvenBlockEntity>> CAKE_OVEN = register("cake_oven", CakeOvenBlockEntity::new, ModBlocks.CAKE_OVEN);
+    public static final Supplier<BlockEntityType<CakeStandBlockEntity>> CAKE_STAND = register("cake_stand", CakeStandBlockEntity::new, ModBlocks.CAKE_STAND);
 
     public static void init() {
     }
