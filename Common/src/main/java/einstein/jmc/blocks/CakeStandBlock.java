@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -18,13 +19,29 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class CakeStandBlock extends BaseEntityBlock {
 
+    private static final VoxelShape SHAPE = Shapes.or(
+            Block.box(7, 15, 7, 9, 16, 9),
+            Block.box(1, 6, 1, 15, 15, 15),
+            Block.box(0, 5, 0, 16, 6, 16),
+            Block.box(4, 1, 4, 12, 5, 12),
+            Block.box(3, 0, 3, 13, 1, 13)
+    );
+
     public CakeStandBlock(BlockBehaviour.Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
+        return SHAPE;
     }
 
     @Override
