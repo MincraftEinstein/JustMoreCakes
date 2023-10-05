@@ -31,6 +31,11 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
 
         sortedCakes.forEach((cake, cakeBuilder) -> {
             getOrCreateTagBuilder(ModBlockTags.CAKES).add(cake.get());
+
+            if (cake != ModBlocks.THREE_TIERED_CAKE) {
+                getOrCreateTagBuilder(ModBlockTags.CAKE_STAND_STORABLES).add(cake.get());
+            }
+
             Map<Block, Supplier<BaseCandleCakeBlock>> sortedCandleCakes = Util.createKeySortedMap(cakeBuilder.getCandleCakeByCandle(), Comparator.comparing(o -> o.getName().toString()));
             sortedCandleCakes.forEach((candle, candleCake) -> {
                 getOrCreateTagBuilder(ModBlockTags.CANDLE_CAKES).add(candleCake.get());
@@ -42,5 +47,6 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE).addTag(ModBlockTags.C_CAKES).addTag(ModBlockTags.C_CANDLE_CAKES);
         Util.getVanillaCandleCakes().forEach(cake -> getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
+        getOrCreateTagBuilder(ModBlockTags.CAKE_STAND_STORABLES).add(Blocks.CAKE);
     }
 }

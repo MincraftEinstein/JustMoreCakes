@@ -1,6 +1,7 @@
 package einstein.jmc.blocks;
 
 import einstein.jmc.blockentity.CakeStandBlockEntity;
+import einstein.jmc.data.providers.ModBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -55,12 +56,15 @@ public class CakeStandBlock extends BaseEntityBlock {
 
             if (cakeStandBlockEntity.isEmpty()) {
                 if (!stack.isEmpty() && stack.getItem() instanceof BlockItem blockItem) {
-                    if (!player.isCreative()) {
-                        stack.shrink(1);
-                    }
+                    Block block = blockItem.getBlock();
+                    if (block.defaultBlockState().is(ModBlockTags.CAKE_STAND_STORABLES)) {
+                        if (!player.isCreative()) {
+                            stack.shrink(1);
+                        }
 
-                    cakeStandBlockEntity.setStoredBlock(blockItem.getBlock());
-                    return InteractionResult.SUCCESS;
+                        cakeStandBlockEntity.setStoredBlock(block);
+                        return InteractionResult.SUCCESS;
+                    }
                 }
                 return InteractionResult.CONSUME;
             }
