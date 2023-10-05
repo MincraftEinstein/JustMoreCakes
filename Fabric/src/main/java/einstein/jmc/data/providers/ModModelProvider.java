@@ -90,6 +90,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         generators.output.accept(loc("item/encasing_ice"), new DelegatedModel(mcLoc("block/ice")));
         generators.output.accept(loc("item/cake_oven"), new DelegatedModel(loc("block/cake_oven")));
+        generators.output.accept(loc("item/cake_stand"), new DelegatedModel(loc("block/cake_stand")));
 
         for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
             if (!cake.get().getBuilder().hasCustomItemModel()) {

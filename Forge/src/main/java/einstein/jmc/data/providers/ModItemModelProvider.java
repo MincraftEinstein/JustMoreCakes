@@ -29,6 +29,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         getBuilder("encasing_ice").parent(getExistingFile(mcLoc("block/ice")));
         getBuilder("cake_oven").parent(getExistingFile(modLoc("block/cake_oven")));
+        getBuilder("cake_stand").parent(getExistingFile(modLoc("block/cake_stand")));
 
         for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
             if (!cake.get().getBuilder().hasCustomItemModel()) {
