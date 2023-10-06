@@ -2,7 +2,6 @@ package einstein.jmc.blocks;
 
 import einstein.jmc.blockentity.CakeStandBlockEntity;
 import einstein.jmc.data.providers.ModBlockTags;
-import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
@@ -112,6 +111,22 @@ public class CakeStandBlock extends BaseEntityBlock {
             }
             super.onRemove(state, level, pos, newState, movedByPiston);
         }
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof CakeStandBlockEntity cakeStandBlockEntity) {
+            if (!cakeStandBlockEntity.isEmpty()) {
+                return 15;
+            }
+        }
+        return 0;
     }
 
     @Nullable
