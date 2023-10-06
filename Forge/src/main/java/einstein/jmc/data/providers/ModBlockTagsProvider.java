@@ -56,6 +56,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(F_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         tag(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE).addTag(F_CAKES).addTag(F_CANDLE_CAKES);
         Util.getVanillaCandleCakes().forEach(cake -> tag(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
-        tag(ModBlockTags.CAKE_STAND_STORABLES).add(Blocks.CAKE);
+        tag(ModBlockTags.CAKE_STAND_STORABLES).add(ModBlocks.CUPCAKE.get(), Blocks.CAKE);
     }
 }
