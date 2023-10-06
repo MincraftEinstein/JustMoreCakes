@@ -1,4 +1,4 @@
-// 1.20.2	2023-09-27T17:44:48.7668683	Recipes
+// 1.20.2	2023-10-06T14:07:02.2373337	Recipes
 c96909147b1d3d0d843b5b26a016b27513219a30 data/jmc/advancements/recipes/decorations/cake_oven_from_crafting.json
 d1139d8fdeb78fc0eb586257be1a3ca00c83ac69 data/jmc/advancements/recipes/food/apple_cake_from_cake_oven.json
 764af8470c663a72848cc3a18f1a8e302cadbe0c data/jmc/advancements/recipes/food/beetroot_cake_from_cake_oven.json
@@ -34,6 +34,7 @@ e46616890626739c92953e50a69c2e81750089af data/jmc/advancements/recipes/food/scul
 5cffd4ef2dd112df3ef69f53e2c3b7bc7893c8e2 data/jmc/advancements/recipes/food/three_tiered_cake_from_crafting.json
 adf4879bc6127c779eb61a84160f347f940e172f data/jmc/advancements/recipes/food/tnt_cake_from_cake_oven.json
 fa4210e6a2bde9555f82efd89f1de75b4a4ae8ae data/jmc/advancements/recipes/food/warped_fungus_cake_from_cake_oven.json
+d6789949c295823784af6ee19cefd437410cf8e4 data/jmc/advancements/recipes/misc/cake_stand_from_crafting.json
 88b69b330626b5e4653a02114c33bbfb0917e13d data/jmc/advancements/recipes/tools/cake_spatula_from_crafting.json
 6544707256b4cc36560fdac5d4337ec6db2f0d31 data/jmc/recipes/apple_cake_from_cake_oven.json
 c579694daa12df8db501169d528ef1220f3f341b data/jmc/recipes/beetroot_cake_from_cake_oven.json
@@ -41,6 +42,7 @@ c579694daa12df8db501169d528ef1220f3f341b data/jmc/recipes/beetroot_cake_from_cak
 01d038f7c72c2766204c90a0b16522b6015008aa data/jmc/recipes/cake_from_cake_oven.json
 a3fb8e922dbb80fbaf882b424739884a6aef36ae data/jmc/recipes/cake_oven_from_crafting.json
 f73180596261e7c6916a895cde6dac0559cc2649 data/jmc/recipes/cake_spatula_from_crafting.json
+3014d521974015251747c5e4acc05d7bf25a9e5c data/jmc/recipes/cake_stand_from_crafting.json
 54dd010921016c728e1f94956deb3b612b6e5506 data/jmc/recipes/carrot_cake_from_cake_oven.json
 d6a34083771b5b3f85014709856a438690b4bd0b data/jmc/recipes/cheesecake_from_cake_oven.json
 e4b0eab0d3b3d4d09ebd074c6b794be766f35d2f data/jmc/recipes/chocolate_cake_from_cake_oven.json
