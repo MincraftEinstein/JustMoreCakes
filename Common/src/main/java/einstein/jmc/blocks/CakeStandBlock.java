@@ -4,6 +4,7 @@ import einstein.jmc.blockentity.CakeStandBlockEntity;
 import einstein.jmc.data.providers.ModBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -82,6 +83,17 @@ public class CakeStandBlock extends BaseEntityBlock {
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof CakeStandBlockEntity cakeStandBlockEntity && !cakeStandBlockEntity.isEmpty()) {
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(cakeStandBlockEntity.getStoredBlock()));
+            }
+            super.onRemove(state, level, pos, newState, movedByPiston);
+        }
     }
 
     @Nullable
