@@ -67,6 +67,7 @@ public class CakeStandBlock extends BaseEntityBlock {
                             stack.shrink(1);
                         }
 
+                        level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
                         cakeStandBlockEntity.setStoredBlock(block);
                         return InteractionResult.SUCCESS;
                     }
