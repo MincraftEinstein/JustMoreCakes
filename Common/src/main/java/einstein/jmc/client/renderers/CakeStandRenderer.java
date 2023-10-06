@@ -19,7 +19,8 @@ public class CakeStandRenderer implements BlockEntityRenderer<CakeStandBlockEnti
     public void render(CakeStandBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         if (!blockEntity.isEmpty()) {
             poseStack.pushPose();
-            poseStack.translate(0, 1, 0);
+            poseStack.scale(0.75F, 0.75F, 0.75F);
+            poseStack.translate(0.169, 0.5, 0.169);
             blockRenderer.renderSingleBlock(blockEntity.getStoredBlock().defaultBlockState(), poseStack, buffer, packedLight, packedOverlay);
             poseStack.popPose();
         }
