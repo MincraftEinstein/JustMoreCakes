@@ -1,5 +1,6 @@
 package einstein.jmc.init;
 
+import einstein.jmc.JustMoreCakes;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
 import einstein.jmc.item.crafting.CakeOvenRecipeSerializer;
 import einstein.jmc.platform.Services;
@@ -15,7 +16,7 @@ public class ModRecipes {
 
         @Override
         public String toString() {
-            return "cake_baking";
+            return JustMoreCakes.MOD_ID + ":cake_baking";
         }
     });
 
