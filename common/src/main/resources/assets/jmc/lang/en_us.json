@@ -41,6 +41,7 @@
   "block.jmc.sculk_cake": "Sculk Cake",
   "block.jmc.encasing_ice": "Encasing Ice",
   "block.jmc.cake_oven": "Cake Oven",
+  "block.jmc.cake_stand": "Cake Stand",
 
   "_comment": "Entities",
   "entity.minecraft.villager.jmc.cake_baker": "Cake Baker",

@@ -13,6 +13,7 @@ public class ModBlockTags {
     public static final TagKey<Block> C_CAKES = createC("cakes");
     public static final TagKey<Block> C_CANDLE_CAKES = createC("candle_cakes");
     public static final TagKey<Block> CAKE_SPATULA_USABLE = create("cake_spatula_usable");
+    public static final TagKey<Block> CAKE_STAND_STORABLES = create("cake_stand_storables");
 
     private static TagKey<Block> createC(String string) {
         return TagKey.create(Registries.BLOCK, new ResourceLocation("c", string));

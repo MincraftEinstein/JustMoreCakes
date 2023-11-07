@@ -66,6 +66,15 @@ public class ModRecipes {
                 .define('$', Items.STICK)
                 .unlockedBy(has, RecipeProvider.has(Items.IRON_INGOT))
                 .save(output, craftingLoc(ModItems.CAKE_SPATULA));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.CAKE_STAND.get(), 2)
+                .pattern("###")
+                .pattern("$$$")
+                .pattern(" $ ")
+                .define('#', Blocks.GLASS)
+                .define('$', Blocks.QUARTZ_SLAB)
+                .unlockedBy(has, RecipeProvider.has(Blocks.QUARTZ_SLAB))
+                .save(output, craftingLoc(ModBlocks.CAKE_STAND));
     }
 
     private static void cakeOvenRecipes(RecipeOutput output) {
