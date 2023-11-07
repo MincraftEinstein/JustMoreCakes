@@ -2,10 +2,12 @@ package einstein.jmc;
 
 import einstein.jmc.advancement.criterian.CakeEatenTrigger;
 import einstein.jmc.init.*;
+import einstein.jmc.util.Util;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Blocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +48,10 @@ public class JustMoreCakes {
         registerVillageBuilding(server, "snowy", "bakery_1", CAKE_BAKERY_GENERATION_WEIGHT.get());
         registerVillageBuilding(server, "snowy", "bakery_2", CAKE_BAKERY_GENERATION_WEIGHT.get());
         registerVillageBuilding(server, "taiga", "bakery_1", CAKE_BAKERY_GENERATION_WEIGHT.get());
+
+        if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
+            Util.removeRecipe(server.getRecipeManager(), RecipeType.CRAFTING, mcLoc("cake"));
+        }
     }
 
     public static void addSupportedCandles() {

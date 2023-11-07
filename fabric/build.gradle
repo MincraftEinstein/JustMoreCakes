@@ -79,8 +79,6 @@ sourceSets.main.resources { srcDirs += ["src/main/generated"] }
 processResources {
     from project(":common").sourceSets.main.resources
 
-    exclude('.cache/')
-
     inputs.property("version", version)
 
     filesMatching("fabric.mod.json") {
@@ -88,7 +86,7 @@ processResources {
     }
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     source(project(":common").sourceSets.main.allSource)
 }
 
