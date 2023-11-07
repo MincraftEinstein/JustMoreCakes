@@ -10,7 +10,7 @@ base {
 }
 
 minecraft {
-    version("${minecraft_version}")
+    version(minecraft_version)
 
     accessWideners(file("src/main/resources/${mod_id}.accesswidener"))
 }
