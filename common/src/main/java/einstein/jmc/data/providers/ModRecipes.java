@@ -67,7 +67,7 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.IRON_INGOT))
                 .save(output, craftingLoc(ModItems.CAKE_SPATULA));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.CAKE_STAND.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.CAKE_STAND.get(), 2)
                 .pattern("###")
                 .pattern("$$$")
                 .pattern(" $ ")
