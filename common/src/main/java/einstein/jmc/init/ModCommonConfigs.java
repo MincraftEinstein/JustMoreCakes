@@ -43,6 +43,10 @@ public class ModCommonConfigs {
             .comment("The radius in blocks at which the glowstone cake will effect mobs")
             .translation(key("glowstone_cake_effect_radius"))
             .defineInRange("glowstoneCakeEffectRadius", 20, 0, 100);
+    public static final ForgeConfigSpec.BooleanValue DISABLE_DEFAULT_CAKE_RECIPE = BUILDER
+            .comment("Disables the game's default cake crafting recipe")
+            .translation(key("disable_cake_crafting_recipes"))
+            .define("disableCakeCraftingRecipes", true);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 

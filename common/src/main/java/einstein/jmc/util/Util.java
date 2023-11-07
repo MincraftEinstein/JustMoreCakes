@@ -13,6 +13,7 @@ import einstein.jmc.blocks.SculkCakeBlock;
 import einstein.jmc.data.CakeEffects;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.init.ModPotions;
+import einstein.jmc.mixin.RecipeManagerAccessor;
 import einstein.jmc.mixin.StructureTemplatePoolAccessor;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.BlockPos;
@@ -42,6 +43,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -264,5 +268,21 @@ public class Util {
                 Blocks.YELLOW_CANDLE_CAKE, Blocks.LIME_CANDLE_CAKE, Blocks.PINK_CANDLE_CAKE, Blocks.GRAY_CANDLE_CAKE,
                 Blocks.LIGHT_GRAY_CANDLE_CAKE, Blocks.CYAN_CANDLE_CAKE, Blocks.PURPLE_CANDLE_CAKE, Blocks.BLUE_CANDLE_CAKE,
                 Blocks.BROWN_CANDLE_CAKE, Blocks.GREEN_CANDLE_CAKE, Blocks.RED_CANDLE_CAKE, Blocks.BLACK_CANDLE_CAKE);
+    }
+
+    public static void removeRecipe(RecipeManager recipeManager, RecipeType<?> type, ResourceLocation id) {
+        RecipeManagerAccessor manager = (RecipeManagerAccessor) recipeManager;
+        Map<RecipeType<?>, Map<ResourceLocation, RecipeHolder<?>>> recipesByType = new HashMap<>(manager.getRecipes());
+        Map<ResourceLocation, RecipeHolder<?>> recipes = new HashMap<>(recipesByType.get(type));
+
+        for (ResourceLocation recipeId : recipes.keySet()) {
+            if (recipeId.equals(id)) {
+                recipes.remove(recipeId);
+                break;
+            }
+        }
+
+        recipesByType.replace(type, recipes);
+        manager.setRecipes(recipesByType);
     }
 }
