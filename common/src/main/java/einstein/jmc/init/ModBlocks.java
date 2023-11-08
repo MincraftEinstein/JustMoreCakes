@@ -69,7 +69,9 @@ public class ModBlocks {
             .setCakeProperties(cakeProperties().lightLevel(state -> 9))
             .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 9))
             .build();
-    public static final Supplier<BaseCakeBlock> CREEPER_CAKE = new CakeBuilder("creeper_cake", true).build();
+    public static final Supplier<BaseCakeBlock> CREEPER_CAKE = new CakeBuilder("creeper_cake", true)
+            .setCakeClass(CreeperCakeBlock::new)
+            .build();
     public static final Supplier<BaseCakeBlock> SEED_CAKE = new CakeBuilder("seed_cake", true).build();
     public static final Supplier<Block> CUPCAKE = Services.REGISTRY.registerBlockNoItem("cupcake", () -> new CupcakeBlock(cakeProperties())); // Don't replace with CakeBuilder so a custom BlockItem cake be used
     public static final Supplier<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake", false, true).build();

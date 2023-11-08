@@ -1,0 +1,15 @@
+{
+  "cake": "jmc:creeper_cake",
+  "effects": [
+    {
+      "amplifier": 1,
+      "duration": 600,
+      "mob_effect": "minecraft:luck"
+    },
+    {
+      "amplifier": 1,
+      "duration": 600,
+      "mob_effect": "minecraft:unluck"
+    }
+  ]
+}

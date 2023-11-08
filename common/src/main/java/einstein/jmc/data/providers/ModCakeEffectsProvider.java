@@ -42,6 +42,9 @@ public class ModCakeEffectsProvider extends CakeEffectsProvider {
                 new CakeEffects.MobEffectHolder(MobEffects.GLOWING, 1800));
         add(ModBlocks.SCULK_CAKE,
                 new CakeEffects.MobEffectHolder(ModPotions.STEALTH_EFFECT.get(), 600));
+        add(ModBlocks.CREEPER_CAKE,
+                new CakeEffects.MobEffectHolder(MobEffects.LUCK, 600, 1),
+                new CakeEffects.MobEffectHolder(MobEffects.UNLUCK, 600, 1));
     }
 
     @Override

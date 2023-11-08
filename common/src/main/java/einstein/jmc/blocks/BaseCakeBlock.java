@@ -40,6 +40,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import static einstein.jmc.util.Util.RANDOM;
+import static einstein.jmc.util.Util.applyEffectFromHolder;
 
 @SuppressWarnings("deprecation")
 public class BaseCakeBlock extends Block implements CakeEffectsHolder {
@@ -140,15 +141,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             state = eatActions(player, pos, state);
 
             if (cakeEffects != null) {
-                for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {
-                    MobEffectInstance instance = new MobEffectInstance(holder.effect(), holder.duration().orElse(0), holder.amplifier().orElse(0));
-                    if (holder.effect().isInstantenous()) {
-                        instance.getEffect().applyInstantenousEffect(player, player, player, instance.getAmplifier(), 1);
-                    }
-                    else {
-                        player.addEffect(instance);
-                    }
-                }
+                applyEffects(player);
             }
 
             int bite = state.getValue(getBites());
@@ -163,6 +156,12 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             }
 
             return InteractionResult.SUCCESS;
+        }
+    }
+
+    public void applyEffects(Player player) {
+        for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {
+            applyEffectFromHolder(holder, player);
         }
     }
 
