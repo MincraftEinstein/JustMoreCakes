@@ -33,7 +33,7 @@ public class ModBlocks {
     public static final Supplier<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake", true, true, true)
             .setBothClasses(TNTCakeBlock::new, (originalCake, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, properties, TNTCakeBlockEntity::new))
             .build();
-    public static final Supplier<BaseCakeBlock> GOLDEN_APPLE_CAKE = new CakeBuilder("golden_apple_cake", true).build();
+    public static final Supplier<BaseCakeBlock> GOLDEN_APPLE_CAKE = new CakeBuilder("golden_apple_cake", true).alwaysEat().build();
     public static final Supplier<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake", false, true).build();
     public static final Supplier<BaseCakeBlock> FIREY_CAKE = new CakeBuilder("firey_cake", true).build();
     public static final Supplier<BaseCakeBlock> REDSTONE_CAKE = new CakeBuilder("redstone_cake", true)
@@ -41,6 +41,7 @@ public class ModBlocks {
             .build();
     public static final Supplier<BaseCakeBlock> ENDER_CAKE = new CakeBuilder("ender_cake", true)
             .setBothClasses(EnderCakeBlock::new, EnderCandleCakeBlock::new)
+            .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> CHEESECAKE = new CakeBuilder("cheesecake", true).build();
     public static final Supplier<BaseCakeBlock> THREE_TIERED_CAKE = new CakeBuilder("three_tiered_cake", true, true)
@@ -51,7 +52,7 @@ public class ModBlocks {
             .setCandleCakeProperties(candleCakeProperties().sound(SoundType.SLIME_BLOCK))
             .setBothClasses(SlimeCakeBlock::new, SlimeCandleCakeBlock::new)
             .build();
-    public static final Supplier<BaseCakeBlock> BEETROOT_CAKE = new CakeBuilder("beetroot_cake", true).build();
+    public static final Supplier<BaseCakeBlock> BEETROOT_CAKE = new CakeBuilder("beetroot_cake", true).alwaysEat().build();
     public static final Supplier<BaseCakeBlock> LAVA_CAKE = new CakeBuilder("lava_cake", true)
             .setBothClasses(LavaCakeBlock::new, LavaCandleCakeBlock::new)
             .setCakeProperties(cakeProperties().lightLevel(state -> 9))
@@ -62,7 +63,7 @@ public class ModBlocks {
     public static final Supplier<Block> CUPCAKE = Services.REGISTRY.registerBlockNoItem("cupcake", () -> new CupcakeBlock(cakeProperties())); // Don't replace with CakeBuilder so a custom BlockItem cake be used
     public static final Supplier<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake", false, true).build();
     public static final Supplier<BaseCakeBlock> ICE_CAKE = new CakeBuilder("ice_cake", true).build();
-    public static final Supplier<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake", false, true).build();
+    public static final Supplier<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake", false, true).alwaysEat().build();
     public static final Supplier<BaseCakeBlock> SWEET_BERRY_CAKE = new CakeBuilder("sweet_berry_cake", true).build();
     public static final Supplier<BaseCakeBlock> HONEY_CAKE = new CakeBuilder("honey_cake", true).build();
     public static final Supplier<BaseCakeBlock> GLOWSTONE_CAKE = new CakeBuilder("glowstone_cake", true)
@@ -81,12 +82,14 @@ public class ModBlocks {
             .setCakeClass(ObsidianCakeBlock::new)
             .setCakeProperties(cakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
             .setCandleCakeProperties(candleCakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
+            .alwaysEat()
             .build();
 
     public static final Supplier<BaseCakeBlock> SCULK_CAKE = new CakeBuilder("sculk_cake", true, true)
             .setCakeClass(SculkCakeBlock::new)
             .setCakeProperties(cakeProperties().lightLevel(state -> 1)
                     .emissiveRendering((state, getter, pos) -> SculkSensorBlock.getPhase(state) == SculkSensorPhase.ACTIVE))
+            .alwaysEat()
             .build();
 
     public static final Supplier<Block> ENCASING_ICE = Services.REGISTRY.registerBlock("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).friction(0.98F).randomTicks().strength(2.5F, 5.0F).sound(SoundType.GLASS).noLootTable().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never).pushReaction(PushReaction.NORMAL)));

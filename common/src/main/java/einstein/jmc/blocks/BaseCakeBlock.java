@@ -56,12 +56,13 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     };
 
     private final boolean allowsCandles;
+    private final boolean canAlwaysEat;
     private final int biteCount;
     private CakeBuilder builder;
     private CakeEffects cakeEffects;
 
     protected BaseCakeBlock(CakeBuilder builder, int biteCount) {
-        this(builder.getCakeProperties(), builder.allowsCandles(), biteCount);
+        this(builder.getCakeProperties(), builder.allowsCandles(), builder.canAlwaysEat(), biteCount);
         this.builder = builder;
     }
 
@@ -69,9 +70,10 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         this(builder, 6);
     }
 
-    public BaseCakeBlock(Properties properties, boolean allowsCandles, int biteCount) {
+    public BaseCakeBlock(Properties properties, boolean allowsCandles, boolean canAlwaysEat, int biteCount) {
         super(properties);
         this.allowsCandles = allowsCandles;
+        this.canAlwaysEat = canAlwaysEat;
         this.biteCount = biteCount;
         if (getBiteCount() > 0) {
             registerDefaultState(stateDefinition.any().setValue(getBites(), 0));
@@ -124,7 +126,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
-        if (!player.canEat(false)) {
+        if (!player.canEat(false) && !canAlwaysEat) {
             return InteractionResult.PASS;
         }
         else {

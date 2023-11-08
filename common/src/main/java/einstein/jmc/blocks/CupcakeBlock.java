@@ -23,7 +23,7 @@ public class CupcakeBlock extends BaseCakeBlock {
     };
 
     public CupcakeBlock(Properties properties) {
-        super(properties, false, 1);
+        super(properties, false, false, 1);
     }
 
     @Override

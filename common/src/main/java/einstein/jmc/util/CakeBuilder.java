@@ -21,6 +21,7 @@ public class CakeBuilder {
     private final boolean customBlockModel;
     private final boolean customItemModel;
     private final Map<Block, Supplier<BaseCandleCakeBlock>> candleCakeByCandle = new HashMap<>();
+    private boolean canAlwaysEat;
     private CakeClazzSupplier<?> cakeClazz;
     private CandleCakeClazzSupplier<?> candleCakeClazz;
     private BlockBehaviour.Properties cakeProperties;
@@ -64,6 +65,11 @@ public class CakeBuilder {
 
     public CakeBuilder setCandleCakeProperties(BlockBehaviour.Properties properties) {
         candleCakeProperties = properties;
+        return this;
+    }
+
+    public CakeBuilder alwaysEat() {
+        this.canAlwaysEat = true;
         return this;
     }
 
@@ -124,6 +130,10 @@ public class CakeBuilder {
 
     public BlockBehaviour.Properties getCakeProperties() {
         return cakeProperties;
+    }
+
+    public boolean canAlwaysEat() {
+        return canAlwaysEat;
     }
 
     @FunctionalInterface
