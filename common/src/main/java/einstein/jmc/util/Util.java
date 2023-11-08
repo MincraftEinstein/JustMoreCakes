@@ -62,6 +62,7 @@ import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -88,6 +89,7 @@ public class Util {
         return BuiltInRegistries.BLOCK.getKey(block);
     }
 
+    @Nullable
     public static <T extends MobEffect> ResourceLocation getMobEffectId(T effect) {
         return BuiltInRegistries.MOB_EFFECT.getKey(effect);
     }
