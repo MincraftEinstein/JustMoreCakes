@@ -26,14 +26,21 @@ public class ModBlocks {
     public static final Supplier<BaseCakeBlock> CHOCOLATE_CAKE = new CakeBuilder("chocolate_cake", true).build();
     public static final Supplier<BaseCakeBlock> CARROT_CAKE = new CakeBuilder("carrot_cake", true).build();
     public static final Supplier<BaseCakeBlock> PUMPKIN_CAKE = new CakeBuilder("pumpkin_cake", true).build();
-    public static final Supplier<BaseCakeBlock> MELON_CAKE = new CakeBuilder("melon_cake", true).build();
+    public static final Supplier<BaseCakeBlock> MELON_CAKE = new CakeBuilder("melon_cake", true)
+            .nutrition(1)
+            .saturation(0.4F)
+            .build();
     public static final Supplier<BaseCakeBlock> APPLE_CAKE = new CakeBuilder("apple_cake", true).build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake", true, true, true).build();
     public static final Supplier<BaseCakeBlock> COOKIE_CAKE = new CakeBuilder("cookie_cake", true).build();
     public static final Supplier<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake", true, true, true)
             .setBothClasses(TNTCakeBlock::new, (originalCake, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, properties, TNTCakeBlockEntity::new))
             .build();
-    public static final Supplier<BaseCakeBlock> GOLDEN_APPLE_CAKE = new CakeBuilder("golden_apple_cake", true).alwaysEat().build();
+    public static final Supplier<BaseCakeBlock> GOLDEN_APPLE_CAKE = new CakeBuilder("golden_apple_cake", true)
+            .nutrition(4)
+            .saturation(0.5F)
+            .alwaysEat()
+            .build();
     public static final Supplier<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake", false, true).build();
     public static final Supplier<BaseCakeBlock> FIREY_CAKE = new CakeBuilder("firey_cake", true).build();
     public static final Supplier<BaseCakeBlock> REDSTONE_CAKE = new CakeBuilder("redstone_cake", true)
@@ -52,7 +59,11 @@ public class ModBlocks {
             .setCandleCakeProperties(candleCakeProperties().sound(SoundType.SLIME_BLOCK))
             .setBothClasses(SlimeCakeBlock::new, SlimeCandleCakeBlock::new)
             .build();
-    public static final Supplier<BaseCakeBlock> BEETROOT_CAKE = new CakeBuilder("beetroot_cake", true).alwaysEat().build();
+    public static final Supplier<BaseCakeBlock> BEETROOT_CAKE = new CakeBuilder("beetroot_cake", true)
+            .nutrition(3)
+            .saturation(0.4F)
+            .alwaysEat()
+            .build();
     public static final Supplier<BaseCakeBlock> LAVA_CAKE = new CakeBuilder("lava_cake", true)
             .setBothClasses(LavaCakeBlock::new, LavaCandleCakeBlock::new)
             .setCakeProperties(cakeProperties().lightLevel(state -> 9))
@@ -64,8 +75,13 @@ public class ModBlocks {
     public static final Supplier<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake", false, true).build();
     public static final Supplier<BaseCakeBlock> ICE_CAKE = new CakeBuilder("ice_cake", true).build();
     public static final Supplier<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake", false, true).alwaysEat().build();
-    public static final Supplier<BaseCakeBlock> SWEET_BERRY_CAKE = new CakeBuilder("sweet_berry_cake", true).build();
-    public static final Supplier<BaseCakeBlock> HONEY_CAKE = new CakeBuilder("honey_cake", true).build();
+    public static final Supplier<BaseCakeBlock> SWEET_BERRY_CAKE = new CakeBuilder("sweet_berry_cake", true)
+            .nutrition(1)
+            .saturation(0.5F)
+            .build();
+    public static final Supplier<BaseCakeBlock> HONEY_CAKE = new CakeBuilder("honey_cake", true)
+            .saturation(0.4F)
+            .build();
     public static final Supplier<BaseCakeBlock> GLOWSTONE_CAKE = new CakeBuilder("glowstone_cake", true)
             .setCakeProperties(cakeProperties().lightLevel(state -> 12))
             .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 12))
@@ -82,6 +98,8 @@ public class ModBlocks {
             .setCakeClass(ObsidianCakeBlock::new)
             .setCakeProperties(cakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
             .setCandleCakeProperties(candleCakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
+            .nutrition(0)
+            .saturation(0)
             .alwaysEat()
             .build();
 

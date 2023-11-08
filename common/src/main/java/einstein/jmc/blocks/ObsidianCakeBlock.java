@@ -1,6 +1,5 @@
 package einstein.jmc.blocks;
 
-import com.mojang.datafixers.util.Pair;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -45,10 +44,5 @@ public class ObsidianCakeBlock extends BaseCakeBlock {
     @Override
     public IntegerProperty getBites() {
         return null;
-    }
-
-    @Override
-    protected Pair<Integer, Float> getNourishment() {
-        return Pair.of(0, 0F);
     }
 }

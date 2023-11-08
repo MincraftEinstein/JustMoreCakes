@@ -22,6 +22,8 @@ public class CakeBuilder {
     private final boolean customItemModel;
     private final Map<Block, Supplier<BaseCandleCakeBlock>> candleCakeByCandle = new HashMap<>();
     private boolean canAlwaysEat;
+    private int nutrition = 2;
+    private float saturation = 0.1F;
     private CakeClazzSupplier<?> cakeClazz;
     private CandleCakeClazzSupplier<?> candleCakeClazz;
     private BlockBehaviour.Properties cakeProperties;
@@ -70,6 +72,16 @@ public class CakeBuilder {
 
     public CakeBuilder alwaysEat() {
         this.canAlwaysEat = true;
+        return this;
+    }
+
+    public CakeBuilder nutrition(int nutrition) {
+        this.nutrition = nutrition;
+        return this;
+    }
+
+    public CakeBuilder saturation(float saturation) {
+        this.saturation = saturation;
         return this;
     }
 
@@ -134,6 +146,14 @@ public class CakeBuilder {
 
     public boolean canAlwaysEat() {
         return canAlwaysEat;
+    }
+
+    public int getNutrition() {
+        return nutrition;
+    }
+
+    public float getSaturation() {
+        return saturation;
     }
 
     @FunctionalInterface

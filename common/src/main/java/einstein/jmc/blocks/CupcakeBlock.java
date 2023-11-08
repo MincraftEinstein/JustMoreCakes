@@ -1,5 +1,6 @@
 package einstein.jmc.blocks;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -34,5 +35,10 @@ public class CupcakeBlock extends BaseCakeBlock {
     @Override
     public VoxelShape[] getShapeByBite() {
         return SHAPE_BY_BITE;
+    }
+
+    @Override
+    protected Pair<Integer, Float> getNourishment() {
+        return Pair.of(1, 0.3F);
     }
 }

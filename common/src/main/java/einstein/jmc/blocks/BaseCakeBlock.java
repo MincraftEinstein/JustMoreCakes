@@ -243,6 +243,9 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     protected Pair<Integer, Float> getNourishment() {
+        if (builder != null) {
+            return Pair.of(builder.getNutrition(), builder.getSaturation());
+        }
         return Pair.of(2, 0.1F);
     }
 }
