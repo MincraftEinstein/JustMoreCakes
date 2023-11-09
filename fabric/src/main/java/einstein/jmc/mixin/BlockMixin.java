@@ -1,6 +1,6 @@
 package einstein.jmc.mixin;
 
-import einstein.jmc.data.providers.ModBlockTags;
+import einstein.jmc.data.packs.ModBlockTags;
 import einstein.jmc.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;

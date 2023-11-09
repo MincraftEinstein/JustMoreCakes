@@ -1,6 +1,6 @@
 package einstein.jmc.menu.cakeoven;
 
-import einstein.jmc.blockentity.CakeOvenBlockEntity;
+import einstein.jmc.blocks.entities.CakeOvenBlockEntity;
 import einstein.jmc.platform.Services;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;

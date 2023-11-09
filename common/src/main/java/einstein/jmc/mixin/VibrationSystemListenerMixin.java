@@ -1,6 +1,6 @@
 package einstein.jmc.mixin;
 
-import einstein.jmc.data.providers.ModGameEventTags;
+import einstein.jmc.data.packs.ModGameEventTags;
 import einstein.jmc.init.ModPotions;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;

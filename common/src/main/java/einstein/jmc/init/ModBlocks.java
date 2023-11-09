@@ -1,7 +1,9 @@
 package einstein.jmc.init;
 
-import einstein.jmc.blockentity.GlowstoneCakeBlockEntity;
-import einstein.jmc.blockentity.TNTCakeBlockEntity;
+import einstein.jmc.blocks.cakes.*;
+import einstein.jmc.blocks.candle_cakes.*;
+import einstein.jmc.blocks.entities.GlowstoneCakeBlockEntity;
+import einstein.jmc.blocks.entities.TNTCakeBlockEntity;
 import einstein.jmc.blocks.*;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeBuilder;

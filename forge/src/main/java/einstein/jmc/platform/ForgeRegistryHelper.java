@@ -1,7 +1,7 @@
 package einstein.jmc.platform;
 
-import einstein.jmc.blockentity.CakeOvenBlockEntity;
-import einstein.jmc.blockentity.CakeOvenTransferBlockEntity;
+import einstein.jmc.blocks.entities.CakeOvenBlockEntity;
+import einstein.jmc.blocks.entities.CakeOvenTransferBlockEntity;
 import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.util.BlockEntitySupplier;
 import einstein.jmc.util.MenuTypeSupplier;

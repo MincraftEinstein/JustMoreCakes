@@ -1,7 +1,7 @@
 package einstein.jmc.blocks;
 
-import einstein.jmc.blockentity.CakeStandBlockEntity;
-import einstein.jmc.data.providers.ModBlockTags;
+import einstein.jmc.blocks.entities.CakeStandBlockEntity;
+import einstein.jmc.data.packs.ModBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;

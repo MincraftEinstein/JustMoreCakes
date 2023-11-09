@@ -2,7 +2,7 @@ package einstein.jmc.mixin;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blocks.CakeEffectsHolder;
-import einstein.jmc.data.CakeEffects;
+import einstein.jmc.data.cake_effects.CakeEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;

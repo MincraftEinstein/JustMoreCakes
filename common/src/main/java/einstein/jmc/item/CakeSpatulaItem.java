@@ -1,7 +1,7 @@
 package einstein.jmc.item;
 
-import einstein.jmc.blocks.BaseCakeBlock;
-import einstein.jmc.data.providers.ModBlockTags;
+import einstein.jmc.blocks.cakes.BaseCakeBlock;
+import einstein.jmc.data.packs.ModBlockTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;

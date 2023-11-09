@@ -2,9 +2,10 @@ package einstein.jmc;
 
 import einstein.jmc.blocks.CakeEffectsHolder;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
-import einstein.jmc.client.renderers.CakeStandRenderer;
-import einstein.jmc.data.CakeEffectsManager;
-import einstein.jmc.data.providers.*;
+import einstein.jmc.client.renderers.entities.CakeStandRenderer;
+import einstein.jmc.data.cake_effects.CakeEffectsManager;
+import einstein.jmc.data.packs.providers.ModCakeEffectsProvider;
+import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.ForgeRegistryHelper;
 import einstein.jmc.util.EmeraldsForItems;
