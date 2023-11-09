@@ -26,8 +26,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                 add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), cake.get()));
             });
         });
-
-        dropWhenCakeSpatula(ModBlocks.CUPCAKE.get());
     }
 
     private void dropWhenCakeSpatula(Block block) {

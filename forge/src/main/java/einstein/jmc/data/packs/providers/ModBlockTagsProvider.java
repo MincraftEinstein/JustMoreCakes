@@ -50,13 +50,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             });
         });
 
-        tag(ModBlockTags.CAKES).add(ModBlocks.CUPCAKE.get());
+        tag(ModBlockTags.CAKES);
         tag(ModBlockTags.C_CAKES).addTag(ModBlockTags.CAKES);
         tag(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         tag(F_CAKES).addTag(ModBlockTags.CAKES);
         tag(F_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         tag(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE).addTag(F_CAKES).addTag(F_CANDLE_CAKES);
         Util.getVanillaCandleCakes().forEach(cake -> tag(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
-        tag(ModBlockTags.CAKE_STAND_STORABLES).add(ModBlocks.CUPCAKE.get(), Blocks.CAKE);
+        tag(ModBlockTags.CAKE_STAND_STORABLES).add(Blocks.CAKE);
     }
 }

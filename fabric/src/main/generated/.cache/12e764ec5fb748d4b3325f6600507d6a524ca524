@@ -1,4 +1,4 @@
-// 1.20.2	2023-11-08T22:31:24.0766308	Just More Cakes!/Block Loot Tables
+// 1.20.2	2023-11-09T15:10:08.3554635	Just More Cakes!/Block Loot Tables
 aa0d47eacd211cd1db288acdc3a0a0569b6f626e data\jmc\loot_tables\blocks\magenta_candle_carrot_cake.json
 f30ed388f3e6a12dc5f203af32c3edbddac7bb49 data\jmc\loot_tables\blocks\cyan_candle_honey_cake.json
 ac3fe0f2374e0775c3244a8bb12473ee5460afd8 data\jmc\loot_tables\blocks\yellow_candle_golden_apple_cake.json
@@ -131,8 +131,8 @@ e196d28bbbe896dd05a4566fac267b94ca8dda86 data\jmc\loot_tables\blocks\blue_candle
 55de8621746e5077e5fc5e3d0d6c0004825c6479 data\jmc\loot_tables\blocks\seed_cake.json
 828812b7a5752dc581bf6874331cbaff4d83aad7 data\jmc\loot_tables\blocks\light_blue_candle_lava_cake.json
 d284b1bb7fc0dfc14089ff78a18355002f59663e data\jmc\loot_tables\blocks\gray_candle_honey_cake.json
-f09095b74a9494f1670ec8a355a9db191f7fe071 data\jmc\loot_tables\blocks\magenta_candle_cookie_cake.json
 c83a8d01d71d7b8f83d6febb87b694ac0590c37e data\jmc\loot_tables\blocks\orange_candle_brown_mushroom_cake.json
+f09095b74a9494f1670ec8a355a9db191f7fe071 data\jmc\loot_tables\blocks\magenta_candle_cookie_cake.json
 1802330ce8d82429e35b2d1bff4ba13c2acb02c7 data\jmc\loot_tables\blocks\green_candle_lava_cake.json
 1d3118618b2d7e561e555ceb67760de1f4e4356d data\jmc\loot_tables\blocks\magenta_candle_slime_cake.json
 3ea7124764f91988ff1faa082e443de935f64254 data\jmc\loot_tables\blocks\red_candle_cookie_cake.json

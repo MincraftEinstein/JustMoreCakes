@@ -428,7 +428,6 @@
   "requirements": [
     [
       "cake",
-      "cupcake",
       "apple_cake",
       "beetroot_cake",
       "brown_mushroom_cake",
@@ -439,6 +438,7 @@
       "cookie_cake",
       "creeper_cake",
       "crimson_fungus_cake",
+      "cupcake",
       "ender_cake",
       "firey_cake",
       "glow_berry_cake",

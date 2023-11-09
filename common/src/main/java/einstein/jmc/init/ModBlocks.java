@@ -81,7 +81,14 @@ public class ModBlocks {
             .setCakeClass(CreeperCakeBlock::new)
             .build();
     public static final Supplier<BaseCakeBlock> SEED_CAKE = new CakeBuilder("seed_cake").build();
-    public static final Supplier<Block> CUPCAKE = Services.REGISTRY.registerBlockNoItem("cupcake", () -> new CupcakeBlock(cakeProperties())); // Don't replace with CakeBuilder so a custom BlockItem cake be used
+    public static final Supplier<BaseCakeBlock> CUPCAKE = new CakeBuilder("cupcake")
+            .setCakeClass(CupcakeBlock::new)
+            .customBlockModel()
+            .disallowCandles()
+            .noItem()
+            .nutrition(1)
+            .saturation(0.3F)
+            .build();
     public static final Supplier<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake")
             .customBlockModel()
             .build();

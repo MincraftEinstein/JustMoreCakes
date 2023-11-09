@@ -46,7 +46,6 @@ public class ModAdvancements {
 
     private static Advancement.Builder addCakes(Advancement.Builder advancement) {
         advancement.addCriterion("cake", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(Blocks.CAKE).build()));
-        advancement.addCriterion("cupcake", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(ModItems.CUPCAKE.get()).build()));
 
         TreeSet<Supplier<BaseCakeBlock>> set = new TreeSet<>(Comparator.comparing(o -> o.get().getBuilder().getCakeName()));
         set.addAll(CakeBuilder.BUILDER_BY_CAKE.keySet());

@@ -38,8 +38,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 knownBlocks.add(candleCake.get());
             });
         });
-
-        dropWhenCakeSpatula(ModBlocks.CUPCAKE.get());
     }
 
     @Override

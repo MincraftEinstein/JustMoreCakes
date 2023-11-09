@@ -43,11 +43,11 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
             });
         });
 
-        getOrCreateTagBuilder(ModBlockTags.CAKES).add(ModBlocks.CUPCAKE.get());
+        getOrCreateTagBuilder(ModBlockTags.CAKES);
         getOrCreateTagBuilder(ModBlockTags.C_CAKES).addTag(ModBlockTags.CAKES);
         getOrCreateTagBuilder(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE).addTag(ModBlockTags.C_CAKES).addTag(ModBlockTags.C_CANDLE_CAKES);
         Util.getVanillaCandleCakes().forEach(cake -> getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
-        getOrCreateTagBuilder(ModBlockTags.CAKE_STAND_STORABLES).add(ModBlocks.CUPCAKE.get(), Blocks.CAKE);
+        getOrCreateTagBuilder(ModBlockTags.CAKE_STAND_STORABLES).add(Blocks.CAKE);
     }
 }
