@@ -44,13 +44,13 @@ public class CakeBuilder {
     private final String cakeName;
     private final Map<Block, Supplier<BaseCandleCakeBlock>> candleCakeByCandle = new HashMap<>();
     private boolean canAlwaysEat;
-    private int nutrition = 2;
-    private float saturation = 0.1F;
+    private boolean allowsCandles = true;
     private boolean noItem = false;
     private boolean customBlockModel;
     private boolean customCandleCakeBlockModels;
     private boolean customItemModel;
-    private boolean allowsCandles = true;
+    private int nutrition = 2;
+    private float saturation = 0.1F;
     private CakeClazzSupplier<?> cakeClazz;
     private CandleCakeClazzSupplier<?> candleCakeClazz;
     private BlockBehaviour.Properties cakeProperties;
@@ -91,13 +91,11 @@ public class CakeBuilder {
         return this;
     }
 
-    public CakeBuilder nutrition(int nutrition) {
-        this.nutrition = nutrition;
+    public CakeBuilder disallowCandles() {
+        allowsCandles = false;
         return this;
     }
 
-    public CakeBuilder saturation(float saturation) {
-        this.saturation = saturation;
     public CakeBuilder noItem() {
         noItem = true;
         return this;
@@ -118,8 +116,13 @@ public class CakeBuilder {
         return this;
     }
 
-    public CakeBuilder disallowCandles() {
-        allowsCandles = false;
+    public CakeBuilder nutrition(int nutrition) {
+        this.nutrition = nutrition;
+        return this;
+    }
+
+    public CakeBuilder saturation(float saturation) {
+        this.saturation = saturation;
         return this;
     }
 
@@ -162,6 +165,10 @@ public class CakeBuilder {
         return candleCakeByCandle;
     }
 
+    public boolean canAlwaysEat() {
+        return canAlwaysEat;
+    }
+
     public boolean allowsCandles() {
         return allowsCandles;
     }
@@ -184,10 +191,6 @@ public class CakeBuilder {
 
     public BlockBehaviour.Properties getCakeProperties() {
         return cakeProperties;
-    }
-
-    public boolean canAlwaysEat() {
-        return canAlwaysEat;
     }
 
     public int getNutrition() {
