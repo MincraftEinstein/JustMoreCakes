@@ -32,7 +32,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         getBuilder("cake_stand").parent(getExistingFile(modLoc("block/cake_stand")));
 
         for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
-            if (!cake.get().getBuilder().hasCustomItemModel()) {
+            CakeBuilder builder = cake.get().getBuilder();
+            if (builder.hasItem() && !builder.hasCustomItemModel()) {
                 generatedItem(getItemName(cake), modLoc("item/" + Util.getItemId(cake.get().asItem()).getPath()));
             }
         }
