@@ -24,6 +24,7 @@ public class CakeBuilder {
     private boolean canAlwaysEat;
     private int nutrition = 2;
     private float saturation = 0.1F;
+    private boolean customCandleCakeBlockModels;
     private CakeClazzSupplier<?> cakeClazz;
     private CandleCakeClazzSupplier<?> candleCakeClazz;
     private BlockBehaviour.Properties cakeProperties;
@@ -85,6 +86,11 @@ public class CakeBuilder {
         return this;
     }
 
+    public CakeBuilder customCandleCakeBlockModels() {
+        customCandleCakeBlockModels = true;
+        return this;
+    }
+
     public Supplier<BaseCakeBlock> build() {
         if (ModBlocks.SUPPORTED_CANDLES.isEmpty()) {
             JustMoreCakes.addSupportedCandles();
@@ -138,6 +144,10 @@ public class CakeBuilder {
 
     public boolean hasCustomItemModel() {
         return customItemModel;
+    }
+
+    public boolean hasCustomCandleCakeBlockModels() {
+        return customCandleCakeBlockModels;
     }
 
     public BlockBehaviour.Properties getCakeProperties() {

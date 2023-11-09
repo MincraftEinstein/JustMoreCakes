@@ -50,12 +50,12 @@ public class ModModelProvider extends FabricModelProvider {
             CakeBuilder builder = CakeBuilder.BUILDER_BY_CAKE.get(cake);
             if (!builder.hasCustomBlockModel()) {
                 cakeBlock(generators, cake.get());
+            }
 
-                if (builder.allowsCandles()) {
-                    for (Block candle : builder.getCandleCakeByCandle().keySet()) {
-                        Supplier<BaseCandleCakeBlock> candleCake = builder.getCandleCakeByCandle().get(candle);
-                        candleCakeBlock(generators, candleCake.get(), candle, cake.get());
-                    }
+            if (!builder.hasCustomCandleCakeBlockModels() && builder.allowsCandles()) {
+                for (Block candle : builder.getCandleCakeByCandle().keySet()) {
+                    Supplier<BaseCandleCakeBlock> candleCake = builder.getCandleCakeByCandle().get(candle);
+                    candleCakeBlock(generators, candleCake.get(), candle, cake.get());
                 }
             }
         }

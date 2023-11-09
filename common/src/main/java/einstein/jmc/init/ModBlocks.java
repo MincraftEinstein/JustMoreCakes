@@ -31,17 +31,20 @@ public class ModBlocks {
             .saturation(0.4F)
             .build();
     public static final Supplier<BaseCakeBlock> APPLE_CAKE = new CakeBuilder("apple_cake", true).build();
-    public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake", true, true, true).build();
+    public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake", true, true, true)
+            .customCandleCakeBlockModels()
+            .build();
     public static final Supplier<BaseCakeBlock> COOKIE_CAKE = new CakeBuilder("cookie_cake", true).build();
     public static final Supplier<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake", true, true, true)
             .setBothClasses(TNTCakeBlock::new, (originalCake, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, properties, TNTCakeBlockEntity::new))
+            .customCandleCakeBlockModels()
             .build();
     public static final Supplier<BaseCakeBlock> GOLDEN_APPLE_CAKE = new CakeBuilder("golden_apple_cake", true)
             .nutrition(4)
             .saturation(0.5F)
             .alwaysEat()
             .build();
-    public static final Supplier<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake", false, true).build();
+    public static final Supplier<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake", true, true).build();
     public static final Supplier<BaseCakeBlock> FIREY_CAKE = new CakeBuilder("firey_cake", true).build();
     public static final Supplier<BaseCakeBlock> REDSTONE_CAKE = new CakeBuilder("redstone_cake", true)
             .setBothClasses(RedstoneCakeBlock::new, RedstoneCandleCakeBlock::new)
@@ -53,6 +56,7 @@ public class ModBlocks {
     public static final Supplier<BaseCakeBlock> CHEESECAKE = new CakeBuilder("cheesecake", true).build();
     public static final Supplier<BaseCakeBlock> THREE_TIERED_CAKE = new CakeBuilder("three_tiered_cake", true, true)
             .setBothClasses(ThreeTieredCakeBlock::new, ThreeTieredCandleCakeBlock::new)
+            .customCandleCakeBlockModels()
             .build();
     public static final Supplier<BaseCakeBlock> SLIME_CAKE = new CakeBuilder("slime_cake", true)
             .setCakeProperties(cakeProperties().sound(SoundType.SLIME_BLOCK))
@@ -74,9 +78,9 @@ public class ModBlocks {
             .build();
     public static final Supplier<BaseCakeBlock> SEED_CAKE = new CakeBuilder("seed_cake", true).build();
     public static final Supplier<Block> CUPCAKE = Services.REGISTRY.registerBlockNoItem("cupcake", () -> new CupcakeBlock(cakeProperties())); // Don't replace with CakeBuilder so a custom BlockItem cake be used
-    public static final Supplier<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake", false, true).build();
+    public static final Supplier<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake", true, true).build();
     public static final Supplier<BaseCakeBlock> ICE_CAKE = new CakeBuilder("ice_cake", true).build();
-    public static final Supplier<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake", false, true).alwaysEat().build();
+    public static final Supplier<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake", true, true).alwaysEat().build();
     public static final Supplier<BaseCakeBlock> SWEET_BERRY_CAKE = new CakeBuilder("sweet_berry_cake", true)
             .nutrition(1)
             .saturation(0.5F)
@@ -89,7 +93,7 @@ public class ModBlocks {
             .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 12))
             .setBothClasses(GlowstoneCakeBlock::new, (originalCake, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, properties, GlowstoneCakeBlockEntity::new))
             .build();
-    public static final Supplier<BaseCakeBlock> CRIMSON_FUNGUS_CAKE = new CakeBuilder("crimson_fungus_cake", false, true).build();
+    public static final Supplier<BaseCakeBlock> CRIMSON_FUNGUS_CAKE = new CakeBuilder("crimson_fungus_cake", true, true).build();
     public static final Supplier<BaseCakeBlock> WARPED_FUNGUS_CAKE = new CakeBuilder("warped_fungus_cake", true).build();
     public static final Supplier<BaseCakeBlock> RED_VELVET_CAKE = new CakeBuilder("red_velvet_cake", true).build();
     public static final Supplier<BaseCakeBlock> GLOW_BERRY_CAKE = new CakeBuilder("glow_berry_cake", true)
@@ -109,6 +113,7 @@ public class ModBlocks {
             .setCakeClass(SculkCakeBlock::new)
             .setCakeProperties(cakeProperties().lightLevel(state -> 1)
                     .emissiveRendering((state, getter, pos) -> SculkSensorBlock.getPhase(state) == SculkSensorPhase.ACTIVE))
+            .customCandleCakeBlockModels()
             .alwaysEat()
             .build();
 

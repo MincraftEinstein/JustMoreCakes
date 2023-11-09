@@ -38,12 +38,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
             CakeBuilder builder = CakeBuilder.BUILDER_BY_CAKE.get(cake);
             if (!builder.hasCustomBlockModel()) {
                 cakeBlock(cake.get(), builder.getCakeName());
+            }
 
-                if (builder.allowsCandles()) {
-                    for (Block candle : builder.getCandleCakeByCandle().keySet()) {
-                        Supplier<BaseCandleCakeBlock> candleCake = builder.getCandleCakeByCandle().get(candle);
-                        candleCakeBlock(candleCake.get(), ModBlocks.SUPPORTED_CANDLES.get(candle), builder.getCakeName());
-                    }
+            if (!builder.hasCustomCandleCakeBlockModels() && builder.allowsCandles()) {
+                for (Block candle : builder.getCandleCakeByCandle().keySet()) {
+                    Supplier<BaseCandleCakeBlock> candleCake = builder.getCandleCakeByCandle().get(candle);
+                    candleCakeBlock(candleCake.get(), ModBlocks.SUPPORTED_CANDLES.get(candle), builder.getCakeName());
                 }
             }
         }

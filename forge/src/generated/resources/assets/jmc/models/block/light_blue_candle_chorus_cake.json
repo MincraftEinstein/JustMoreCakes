@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/template_cake_with_candle",
+  "textures": {
+    "bottom": "jmc:block/chorus_cake_bottom",
+    "candle": "minecraft:block/light_blue_candle",
+    "particle": "#side",
+    "side": "jmc:block/chorus_cake_side",
+    "top": "jmc:block/chorus_cake_top"
+  }
+}
