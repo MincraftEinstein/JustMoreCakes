@@ -3,6 +3,7 @@ package einstein.jmc.data.packs.providers;
 import einstein.jmc.blocks.cakes.BaseCakeBlock;
 import einstein.jmc.blocks.candle_cakes.BaseCandleCakeBlock;
 import einstein.jmc.blocks.candle_cakes.ThreeTieredCandleCakeBlock;
+import einstein.jmc.blocks.candle_cakes.TwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.util.CakeBuilder;
@@ -73,6 +74,22 @@ public class ModModelProvider extends FabricModelProvider {
                                     .createWithSuffix(cake, "_lit", new TextureMapping()
                                             .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle, "_lit")), generators.modelOutput)))));
         }
+
+        CakeBuilder twoTieredBuilder = ModBlocks.TWO_TIERED_CAKE.get().getBuilder();
+        twoTieredBuilder.getCandleCakeByCandle().forEach((candle, cake) -> {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake.get()).with(PropertyDispatch.property(TwoTieredCandleCakeBlock.LIT)
+                    .select(false, Variant.variant().with(VariantProperties.MODEL,
+                            new ModelTemplate(Optional.of(loc("block/template_two_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
+                                    .create(cake.get(), new TextureMapping()
+                                            .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle)), generators.modelOutput)
+                    ))
+                    .select(true, Variant.variant().with(VariantProperties.MODEL,
+                            new ModelTemplate(Optional.of(loc("block/template_two_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
+                                    .createWithSuffix(cake.get(), "_lit", new TextureMapping()
+                                            .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle, "_lit")), generators.modelOutput)
+                    ))
+            ));
+        });
 
         CakeBuilder sculkBuilder = ModBlocks.SCULK_CAKE.get().getBuilder();
         for (Block candle : sculkBuilder.getCandleCakeByCandle().keySet()) {

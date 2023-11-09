@@ -15,10 +15,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
 
     protected static final VoxelShape SHAPE = Shapes.or(
-            Block.box(3, 15, 3, 13, 21, 13),
-            Block.box(1, 0, 1, 15, 8, 15),
-            Block.box(2, 8, 2, 14, 15, 14),
-            Block.box(7, 21, 7, 9, 27, 9));
+            Block.box(1, 0, 1, 15, 8, 15), // Lower
+            Block.box(2, 8, 2, 14, 15, 14), // Middle
+            Block.box(3, 15, 3, 13, 21, 13), // Top
+            Block.box(7, 21, 7, 9, 27, 9) // Candle
+    );
 
     public ThreeTieredCandleCakeBlock(BaseCakeBlock originalCake, Properties properties) {
         super(originalCake, properties);

@@ -1,0 +1,24 @@
+{
+    "textures": {
+        "bottom": "jmc:block/two_tiered_cake_bottom",
+        "lower_side": "jmc:block/two_tiered_cake_lower_side",
+        "lower_top": "jmc:block/two_tiered_cake_lower_top",
+        "lower_inner": "jmc:block/two_tiered_cake_lower_inner",
+        "particle": "#lower_side"
+    },
+    "elements": [
+        {
+            "name": "lower_cake",
+            "from": [ 9, 0, 1 ], 
+            "to": [ 15, 8, 15 ], 
+            "faces": {
+                "north": { "texture": "#lower_side", "uv": [ 1, 8, 7, 16 ] },
+                "east": { "texture": "#lower_side", "uv": [ 1, 8, 15, 16 ] },
+                "south": { "texture": "#lower_side", "uv": [ 9, 8, 15, 16 ] },
+                "west": { "texture": "#lower_inner", "uv": [ 1, 8, 15, 16 ] },
+                "up": { "texture": "#lower_top", "uv": [ 9, 1, 15, 15 ] },
+                "down": { "texture": "#bottom", "uv": [ 1, 1, 15, 15 ] }
+            }
+        }
+    ]
+}

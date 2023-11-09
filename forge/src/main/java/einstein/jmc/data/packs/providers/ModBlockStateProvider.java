@@ -4,6 +4,7 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blocks.cakes.BaseCakeBlock;
 import einstein.jmc.blocks.candle_cakes.BaseCandleCakeBlock;
 import einstein.jmc.blocks.candle_cakes.ThreeTieredCandleCakeBlock;
+import einstein.jmc.blocks.candle_cakes.TwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.data.PackOutput;
@@ -57,6 +58,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .partialState().with(ThreeTieredCandleCakeBlock.LIT, true).addModels(new ConfiguredModel(models().withExistingParent(type.getPath() + "candle_three_tiered_cake_lit", modLoc("template_three_tiered_candle_cake"))
                             .texture("candle", new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_lit"))));
         }
+
+        CakeBuilder twoTieredBuilder = ModBlocks.TWO_TIERED_CAKE.get().getBuilder();
+        twoTieredBuilder.getCandleCakeByCandle().forEach((candle, cake) -> {
+            ResourceLocation type = CakeBuilder.SUPPORTED_CANDLES.get(candle);
+            getVariantBuilder(cake.get())
+                    .partialState().with(TwoTieredCandleCakeBlock.LIT, false).addModels(new ConfiguredModel(models().withExistingParent(type.getPath() + "candle_two_tiered_cake", modLoc("template_two_tiered_candle_cake"))
+                            .texture("candle", new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle"))
+                    ))
+                    .partialState().with(TwoTieredCandleCakeBlock.LIT, true).addModels(new ConfiguredModel(models().withExistingParent(type.getPath() + "candle_two_tiered_cake_lit", modLoc("template_two_tiered_candle_cake"))
+                            .texture("candle", new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_lit"))
+                    ));
+        });
 
         CakeBuilder sculkBuilder = ModBlocks.SCULK_CAKE.get().getBuilder();
         for (Block candle : sculkBuilder.getCandleCakeByCandle().keySet()) {

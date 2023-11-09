@@ -57,6 +57,11 @@ public class ModBlocks {
             .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> CHEESECAKE = new CakeBuilder("cheesecake").build();
+    public static final Supplier<BaseCakeBlock> TWO_TIERED_CAKE = new CakeBuilder("two_tiered_cake")
+            .setBothClasses(TwoTieredCakeBlock::new, TwoTieredCandleCakeBlock::new)
+            .customBlockModel()
+            .customCandleCakeBlockModels()
+            .build();
     public static final Supplier<BaseCakeBlock> THREE_TIERED_CAKE = new CakeBuilder("three_tiered_cake")
             .setBothClasses(ThreeTieredCakeBlock::new, ThreeTieredCandleCakeBlock::new)
             .customBlockModel()

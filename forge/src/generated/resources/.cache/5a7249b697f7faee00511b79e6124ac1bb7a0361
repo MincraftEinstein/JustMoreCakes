@@ -1,4 +1,4 @@
-// 1.20.2	2023-10-05T17:38:23.9635178	Item Models: jmc
+// 1.20.2	2023-11-09T16:58:17.2973641	Item Models: jmc
 e26168662503f6bf68944dc8a9698074be40a3c1 assets/jmc/models/item/apple_cake.json
 99f7f794c501eab38d68782e17e5dd37decfc434 assets/jmc/models/item/beetroot_cake.json
 d6a3b36f36fe2004277a7cbdcf3405980b8ecd84 assets/jmc/models/item/brown_mushroom_cake.json
@@ -35,4 +35,5 @@ daf74cfd63b73586df43b7ffcb47de3100374ccf assets/jmc/models/item/red_velvet_cake.
 7bcfda134db9b76a1966e22c0a1a6366e7fb35bf assets/jmc/models/item/sweet_berry_cake.json
 0c3bc06aa61d2dea60820f132f7a0d8642aeb176 assets/jmc/models/item/three_tiered_cake.json
 5f14a566c45764ff6d637ba57703d336892c4168 assets/jmc/models/item/tnt_cake.json
+93742d108f562bdb8f40ae3d2e563cb69bfcfcca assets/jmc/models/item/two_tiered_cake.json
 7b851f5a8387ab31b17f57c49aeb4da9be1f1d65 assets/jmc/models/item/warped_fungus_cake.json

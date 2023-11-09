@@ -397,6 +397,18 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "two_tiered_cake": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jmc:two_tiered_cake"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "warped_fungus_cake": {
       "conditions": {
         "items": [
@@ -524,6 +536,9 @@
     ],
     [
       "tnt_cake"
+    ],
+    [
+      "two_tiered_cake"
     ],
     [
       "warped_fungus_cake"
