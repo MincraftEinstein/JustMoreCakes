@@ -224,7 +224,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         if (cakeBuilder.allowsCandles()) {
             for (Block candle : cakeBuilder.getCandleCakeByCandle().keySet()) {
-                ResourceLocation type = ModBlocks.SUPPORTED_CANDLES.get(candle);
+                ResourceLocation type = CakeBuilder.SUPPORTED_CANDLES.get(candle);
                 BaseCandleCakeBlock candleCake = cakeBuilder.getCandleCakeByCandle().get(candle).get();
                 generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake).with(BlockModelGenerators.createBooleanModelDispatch(BaseCandleCakeBlock.LIT,
                         new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_cake_lit"),

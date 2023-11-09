@@ -5,7 +5,6 @@ import einstein.jmc.blockentity.TNTCakeBlockEntity;
 import einstein.jmc.blocks.*;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeBuilder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkSensorBlock;
@@ -15,13 +14,9 @@ import net.minecraft.world.level.block.state.properties.SculkSensorPhase;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModBlocks {
-
-    public static final Map<Block, ResourceLocation> SUPPORTED_CANDLES = new HashMap<>();
 
     public static final Supplier<BaseCakeBlock> CHOCOLATE_CAKE = new CakeBuilder("chocolate_cake").build();
     public static final Supplier<BaseCakeBlock> CARROT_CAKE = new CakeBuilder("carrot_cake").build();

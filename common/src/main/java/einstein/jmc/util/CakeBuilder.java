@@ -1,22 +1,45 @@
 package einstein.jmc.util;
 
-import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blocks.BaseCakeBlock;
 import einstein.jmc.blocks.BaseCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.platform.Services;
+import net.minecraft.Util;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import static einstein.jmc.JustMoreCakes.mcLoc;
 import static einstein.jmc.init.ModBlocks.register;
 
 public class CakeBuilder {
 
     public static final Map<Supplier<BaseCakeBlock>, CakeBuilder> BUILDER_BY_CAKE = new HashMap<>();
+    public static final Map<Block, ResourceLocation> SUPPORTED_CANDLES = Util.make(new HashMap<>(), map -> {
+        // Is not using a for loop to prevent modded colors from being added,
+        // the main reason for this is adding unsupported candle cakes with missing models
+        map.put(Blocks.CANDLE, mcLoc(""));
+        map.put(Blocks.WHITE_CANDLE, mcLoc("white_"));
+        map.put(Blocks.ORANGE_CANDLE, mcLoc("orange_"));
+        map.put(Blocks.MAGENTA_CANDLE, mcLoc("magenta_"));
+        map.put(Blocks.LIGHT_BLUE_CANDLE, mcLoc("light_blue_"));
+        map.put(Blocks.YELLOW_CANDLE, mcLoc("yellow_"));
+        map.put(Blocks.LIME_CANDLE, mcLoc("lime_"));
+        map.put(Blocks.PINK_CANDLE, mcLoc("pink_"));
+        map.put(Blocks.GRAY_CANDLE, mcLoc("gray_"));
+        map.put(Blocks.LIGHT_GRAY_CANDLE, mcLoc("light_gray_"));
+        map.put(Blocks.CYAN_CANDLE, mcLoc("cyan_"));
+        map.put(Blocks.PURPLE_CANDLE, mcLoc("purple_"));
+        map.put(Blocks.BLUE_CANDLE, mcLoc("blue_"));
+        map.put(Blocks.BROWN_CANDLE, mcLoc("brown_"));
+        map.put(Blocks.GREEN_CANDLE, mcLoc("green_"));
+        map.put(Blocks.RED_CANDLE, mcLoc("red_"));
+        map.put(Blocks.BLACK_CANDLE, mcLoc("black_"));
+    });
 
     private final String cakeName;
     private final Map<Block, Supplier<BaseCandleCakeBlock>> candleCakeByCandle = new HashMap<>();
@@ -98,10 +121,6 @@ public class CakeBuilder {
     }
 
     public Supplier<BaseCakeBlock> build() {
-        if (ModBlocks.SUPPORTED_CANDLES.isEmpty()) {
-            JustMoreCakes.addSupportedCandles();
-        }
-
         if (cakeClazz == null) {
             cakeClazz = BaseCakeBlock::new;
         }
@@ -121,8 +140,8 @@ public class CakeBuilder {
                 candleCakeProperties = ModBlocks.candleCakeProperties();
             }
 
-            for (Block candle : ModBlocks.SUPPORTED_CANDLES.keySet()) {
-                String type = ModBlocks.SUPPORTED_CANDLES.get(candle).getPath();
+            for (Block candle : SUPPORTED_CANDLES.keySet()) {
+                String type = SUPPORTED_CANDLES.get(candle).getPath();
                 Supplier<BaseCandleCakeBlock> coloredCandleCake = register(type + "candle_" + cakeName, () -> candleCakeClazz.get(cake.get(), candleCakeProperties), false);
                 candleCakeByCandle.put(candle, coloredCandleCake);
             }

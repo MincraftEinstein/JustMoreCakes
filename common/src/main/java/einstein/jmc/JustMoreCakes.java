@@ -8,11 +8,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.Blocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static einstein.jmc.init.ModBlocks.SUPPORTED_CANDLES;
 import static einstein.jmc.init.ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT;
 import static einstein.jmc.util.Util.registerVillageBuilding;
 
@@ -52,26 +50,6 @@ public class JustMoreCakes {
         if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
             Util.removeRecipe(server.getRecipeManager(), RecipeType.CRAFTING, mcLoc("cake"));
         }
-    }
-
-    public static void addSupportedCandles() {
-        SUPPORTED_CANDLES.put(Blocks.CANDLE, mcLoc(""));
-        SUPPORTED_CANDLES.put(Blocks.WHITE_CANDLE, mcLoc("white_"));
-        SUPPORTED_CANDLES.put(Blocks.ORANGE_CANDLE, mcLoc("orange_"));
-        SUPPORTED_CANDLES.put(Blocks.MAGENTA_CANDLE, mcLoc("magenta_"));
-        SUPPORTED_CANDLES.put(Blocks.LIGHT_BLUE_CANDLE, mcLoc("light_blue_"));
-        SUPPORTED_CANDLES.put(Blocks.YELLOW_CANDLE, mcLoc("yellow_"));
-        SUPPORTED_CANDLES.put(Blocks.LIME_CANDLE, mcLoc("lime_"));
-        SUPPORTED_CANDLES.put(Blocks.PINK_CANDLE, mcLoc("pink_"));
-        SUPPORTED_CANDLES.put(Blocks.GRAY_CANDLE, mcLoc("gray_"));
-        SUPPORTED_CANDLES.put(Blocks.LIGHT_GRAY_CANDLE, mcLoc("light_gray_"));
-        SUPPORTED_CANDLES.put(Blocks.CYAN_CANDLE, mcLoc("cyan_"));
-        SUPPORTED_CANDLES.put(Blocks.PURPLE_CANDLE, mcLoc("purple_"));
-        SUPPORTED_CANDLES.put(Blocks.BLUE_CANDLE, mcLoc("blue_"));
-        SUPPORTED_CANDLES.put(Blocks.BROWN_CANDLE, mcLoc("brown_"));
-        SUPPORTED_CANDLES.put(Blocks.GREEN_CANDLE, mcLoc("green_"));
-        SUPPORTED_CANDLES.put(Blocks.RED_CANDLE, mcLoc("red_"));
-        SUPPORTED_CANDLES.put(Blocks.BLACK_CANDLE, mcLoc("black_"));
     }
 
     public static ResourceLocation loc(String string) {
