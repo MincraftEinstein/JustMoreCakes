@@ -1,7 +1,7 @@
 package einstein.jmc.blocks.candle_cakes;
 
 import einstein.jmc.blocks.cakes.BaseCakeBlock;
-import einstein.jmc.blocks.cakes.SlimeCakeBlock;
+import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
@@ -31,7 +31,7 @@ public class SlimeCandleCakeBlock extends BaseCandleCakeBlock {
             super.updateEntityAfterFallOn(getter, entity);
         }
         else {
-            SlimeCakeBlock.bounceUp(entity);
+            Util.bounceUp(entity);
         }
     }
 

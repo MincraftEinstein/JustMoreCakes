@@ -22,7 +22,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     private static final List<Block> knownBlocks = new ArrayList<>();
 
-    protected ModBlockLootTables() {
+    public ModBlockLootTables() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 

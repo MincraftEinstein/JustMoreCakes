@@ -52,6 +52,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.io.BufferedReader;
@@ -286,6 +287,14 @@ public class Util {
         }
         else {
             entity.addEffect(instance);
+        }
+    }
+
+    public static void bounceUp(Entity entity) {
+        Vec3 vec3 = entity.getDeltaMovement();
+        if (vec3.y < 0) {
+            double d0 = entity instanceof LivingEntity ? 0.5 : 0.3D;
+            entity.setDeltaMovement(vec3.x, -vec3.y * d0, vec3.z);
         }
     }
 }
