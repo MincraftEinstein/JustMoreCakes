@@ -12,37 +12,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import static einstein.jmc.init.ModBlocks.register;
+
 public class CakeBuilder {
 
     public static final Map<Supplier<BaseCakeBlock>, CakeBuilder> BUILDER_BY_CAKE = new HashMap<>();
 
     private final String cakeName;
-    private final boolean allowsCandles;
-    private final boolean customBlockModel;
-    private final boolean customItemModel;
     private final Map<Block, Supplier<BaseCandleCakeBlock>> candleCakeByCandle = new HashMap<>();
     private boolean canAlwaysEat;
     private int nutrition = 2;
     private float saturation = 0.1F;
+    private boolean customBlockModel;
     private boolean customCandleCakeBlockModels;
+    private boolean customItemModel;
+    private boolean allowsCandles = true;
     private CakeClazzSupplier<?> cakeClazz;
     private CandleCakeClazzSupplier<?> candleCakeClazz;
     private BlockBehaviour.Properties cakeProperties;
     private BlockBehaviour.Properties candleCakeProperties;
 
-    public CakeBuilder(String cakeName, boolean allowsCandles, boolean customBlockModel, boolean customItemModel) {
+    public CakeBuilder(String cakeName) {
         this.cakeName = cakeName;
-        this.allowsCandles = allowsCandles;
-        this.customBlockModel = customBlockModel;
-        this.customItemModel = customItemModel;
-    }
-
-    public CakeBuilder(String cakeName, boolean allowsCandles, boolean customBlockModel) {
-        this(cakeName, allowsCandles, customBlockModel, false);
-    }
-
-    public CakeBuilder(String cakeName, boolean allowsCandles) {
-        this(cakeName, allowsCandles, false);
     }
 
     public <T extends BaseCakeBlock> CakeBuilder setCakeClass(CakeClazzSupplier<T> clazz) {
@@ -55,7 +46,7 @@ public class CakeBuilder {
         return this;
     }
 
-    public <T extends BaseCakeBlock, T2 extends BaseCandleCakeBlock> CakeBuilder setBothClasses(CakeClazzSupplier<T> cakeClazz, CandleCakeClazzSupplier<T2> candleCakeClazz) {
+    public <T extends BaseCakeBlock, V extends BaseCandleCakeBlock> CakeBuilder setBothClasses(CakeClazzSupplier<T> cakeClazz, CandleCakeClazzSupplier<V> candleCakeClazz) {
         this.cakeClazz = cakeClazz;
         this.candleCakeClazz = candleCakeClazz;
         return this;
@@ -86,8 +77,23 @@ public class CakeBuilder {
         return this;
     }
 
+    public CakeBuilder customBlockModel() {
+        customBlockModel = true;
+        return this;
+    }
+
     public CakeBuilder customCandleCakeBlockModels() {
         customCandleCakeBlockModels = true;
+        return this;
+    }
+
+    public CakeBuilder customItemModel() {
+        customItemModel = true;
+        return this;
+    }
+
+    public CakeBuilder disallowCandles() {
+        allowsCandles = false;
         return this;
     }
 
@@ -104,7 +110,7 @@ public class CakeBuilder {
             cakeProperties = ModBlocks.cakeProperties();
         }
 
-        Supplier<BaseCakeBlock> cake = Services.REGISTRY.registerBlock(cakeName, () -> cakeClazz.get(this));
+        Supplier<BaseCakeBlock> cake = register(cakeName, () -> cakeClazz.get(this), true);
 
         if (allowsCandles) {
             if (candleCakeClazz == null) {
@@ -117,7 +123,7 @@ public class CakeBuilder {
 
             for (Block candle : ModBlocks.SUPPORTED_CANDLES.keySet()) {
                 String type = ModBlocks.SUPPORTED_CANDLES.get(candle).getPath();
-                Supplier<BaseCandleCakeBlock> coloredCandleCake = Services.REGISTRY.registerBlockNoItem(type + "candle_" + cakeName, () -> candleCakeClazz.get(cake.get(), candleCakeProperties));
+                Supplier<BaseCandleCakeBlock> coloredCandleCake = register(type + "candle_" + cakeName, () -> candleCakeClazz.get(cake.get(), candleCakeProperties), false);
                 candleCakeByCandle.put(candle, coloredCandleCake);
             }
         }
