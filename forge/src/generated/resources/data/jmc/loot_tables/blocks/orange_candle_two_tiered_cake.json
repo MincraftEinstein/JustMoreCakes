@@ -26,10 +26,10 @@
               }
             }
           ],
-          "name": "jmc:two_tiered_cake"
+          "name": "minecraft:cake"
         }
       ],
-      "rolls": 1.0
+      "rolls": 2.0
     }
   ],
   "random_sequence": "jmc:blocks/orange_candle_two_tiered_cake"

@@ -32,14 +32,6 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.EGG))
                 .save(output, craftingLoc(ModBlocks.CUPCAKE));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModBlocks.THREE_TIERED_CAKE.get())
-                .pattern("#")
-                .pattern("#")
-                .pattern("#")
-                .define('#', Items.CAKE)
-                .unlockedBy(has, RecipeProvider.has(Items.CAKE))
-                .save(output, craftingLoc(ModBlocks.THREE_TIERED_CAKE));
-
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.CREAM_CHEESE.get(), 3)
                 .pattern("###")
                 .pattern("###")

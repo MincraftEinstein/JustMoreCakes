@@ -1,4 +1,4 @@
-// 1.20.2	2023-11-07T18:47:01.5510145	Recipes
+// 1.20.2	2023-11-10T14:23:34.6160706	Recipes
 c96909147b1d3d0d843b5b26a016b27513219a30 data/jmc/advancements/recipes/decorations/cake_oven_from_crafting.json
 d1139d8fdeb78fc0eb586257be1a3ca00c83ac69 data/jmc/advancements/recipes/food/apple_cake_from_cake_oven.json
 764af8470c663a72848cc3a18f1a8e302cadbe0c data/jmc/advancements/recipes/food/beetroot_cake_from_cake_oven.json
@@ -31,7 +31,6 @@ e46616890626739c92953e50a69c2e81750089af data/jmc/advancements/recipes/food/scul
 790a1da38ff317a25c7da0f7c0eb8a904fd23822 data/jmc/advancements/recipes/food/seed_cake_from_cake_oven.json
 5c252023fb9aa7760adf4cfdca2d330e13fc7f9a data/jmc/advancements/recipes/food/slime_cake_from_cake_oven.json
 2103dc18a325b541fdbaa752e47fd9c990a7f08f data/jmc/advancements/recipes/food/sweet_berry_cake_from_cake_oven.json
-5cffd4ef2dd112df3ef69f53e2c3b7bc7893c8e2 data/jmc/advancements/recipes/food/three_tiered_cake_from_crafting.json
 adf4879bc6127c779eb61a84160f347f940e172f data/jmc/advancements/recipes/food/tnt_cake_from_cake_oven.json
 fa4210e6a2bde9555f82efd89f1de75b4a4ae8ae data/jmc/advancements/recipes/food/warped_fungus_cake_from_cake_oven.json
 d6789949c295823784af6ee19cefd437410cf8e4 data/jmc/advancements/recipes/misc/cake_stand_from_crafting.json
@@ -70,6 +69,5 @@ b90b953442a1340964f56cbb3aa94c2ad831f3a8 data/jmc/recipes/sculk_cake_from_cake_o
 f5e5e941c36f5e2de9c5f5f990038402018b6bb6 data/jmc/recipes/seed_cake_from_cake_oven.json
 896868ae55dc21fc46c080b799d683a41bc2d16f data/jmc/recipes/slime_cake_from_cake_oven.json
 7e1eb71c31a00a840cb607013c83747f5251b2f6 data/jmc/recipes/sweet_berry_cake_from_cake_oven.json
-b2d894a7510d1779a7f19e5e4dd6e311fee72aef data/jmc/recipes/three_tiered_cake_from_crafting.json
 f00576f4ff3056fe260eb755f9a7d97713a3d7b8 data/jmc/recipes/tnt_cake_from_cake_oven.json
 70b05fab0f84740685dc354cce353e40199f644f data/jmc/recipes/warped_fungus_cake_from_cake_oven.json

@@ -256,6 +256,12 @@ public class Util {
                 .add(LootItem.lootTableItem(block).when(HAS_CAKE_SPATULA)));
     }
 
+    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, Block block, int count) {
+        return builder.withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(count))
+                .add(LootItem.lootTableItem(block).when(HAS_CAKE_SPATULA)));
+    }
+
     public static ImmutableList<Block> getVanillaCandleCakes() {
         return ImmutableList.of(Blocks.CANDLE_CAKE, Blocks.WHITE_CANDLE_CAKE,
                 Blocks.ORANGE_CANDLE_CAKE, Blocks.MAGENTA_CANDLE_CAKE, Blocks.LIGHT_BLUE_CANDLE_CAKE,

@@ -1,4 +1,4 @@
-// 1.20.2	2023-11-09T17:10:24.9505813	Just More Cakes!/Recipes
+// 1.20.2	2023-11-10T14:25:16.7348587	Just More Cakes!/Recipes
 925c2e7a466607e318a13080b00bacdad4684726 data\jmc\advancements\recipes\food\cream_cheese_from_crafting.json
 392716976abcda275fefad628d6a6abd142775b9 data\jmc\recipes\red_mushroom_cake_from_cake_oven.json
 db6587af9aeee0913f5e07c7e0da90765d66580b data\jmc\recipes\glow_berry_cake_from_cake_oven.json
@@ -42,7 +42,6 @@ ed678a0429971fdffada90dc130e7492b269fa4a data\jmc\recipes\cupcake_from_crafting.
 54dd010921016c728e1f94956deb3b612b6e5506 data\jmc\recipes\carrot_cake_from_cake_oven.json
 419d9a91c55c8d896b8969d1842fb03c83c58ab4 data\jmc\advancements\recipes\food\ender_cake_from_cake_oven.json
 23d12370c990a3984067c820ec6f9f9808b6405a data\jmc\recipes\redstone_cake_from_cake_oven.json
-b2d894a7510d1779a7f19e5e4dd6e311fee72aef data\jmc\recipes\three_tiered_cake_from_crafting.json
 d340a8bd9cc5c14c642eb32ef20e5f93794eb630 data\jmc\advancements\recipes\food\cake_from_cake_oven.json
 6ac7d411a478bcb1917daaf37171df19fe1d741f data\jmc\recipes\ender_cake_from_cake_oven.json
 c96909147b1d3d0d843b5b26a016b27513219a30 data\jmc\advancements\recipes\decorations\cake_oven_from_crafting.json
@@ -70,6 +69,5 @@ d6789949c295823784af6ee19cefd437410cf8e4 data\jmc\advancements\recipes\misc\cake
 f5e5e941c36f5e2de9c5f5f990038402018b6bb6 data\jmc\recipes\seed_cake_from_cake_oven.json
 64a17ab3c6ee7af143b14e9e84ca001c6b034e3f data\jmc\advancements\recipes\food\cookie_cake_from_cake_oven.json
 f7093996fd840da9e64b3739fdcd2008769c1e78 data\jmc\recipes\honey_cake_from_cake_oven.json
-5cffd4ef2dd112df3ef69f53e2c3b7bc7893c8e2 data\jmc\advancements\recipes\food\three_tiered_cake_from_crafting.json
 01d038f7c72c2766204c90a0b16522b6015008aa data\jmc\recipes\cake_from_cake_oven.json
 c4e25bf994b261b70f6b8fa187edb4b563abf89b data\jmc\recipes\melon_cake_from_cake_oven.json

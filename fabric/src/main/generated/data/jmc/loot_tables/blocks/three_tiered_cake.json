@@ -16,10 +16,10 @@
               }
             }
           ],
-          "name": "jmc:three_tiered_cake"
+          "name": "minecraft:cake"
         }
       ],
-      "rolls": 1.0
+      "rolls": 3.0
     }
   ]
 }
