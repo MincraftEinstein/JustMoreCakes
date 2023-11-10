@@ -4,7 +4,6 @@ import einstein.jmc.blocks.CakeEffectsHolder;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.entities.CakeStandRenderer;
 import einstein.jmc.data.cake_effects.CakeEffectsManager;
-import einstein.jmc.data.packs.providers.ModCakeEffectsProvider;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.ForgeRegistryHelper;
@@ -115,7 +114,6 @@ public class JustMoreCakesForge {
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, helper));
         generator.addProvider(event.includeClient(), new ModItemModelProvider(output, helper));
     }
-
 
     void onBlockBreak(BlockEvent.BreakEvent event) {
         if (event.getState().is(ModBlocks.SCULK_CAKE.get())) {

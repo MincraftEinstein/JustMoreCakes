@@ -91,7 +91,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         ItemStack stack = player.getItemInHand(hand);
         Item item = stack.getItem();
         if (allowsCandles) {
-            if (stack.is(ItemTags.CANDLES) && (getBiteCount() <= 0 || state.getValue(getBites()) == 0)) {
+            if (stack.is(ItemTags.CANDLES) && isUneaten(state)) {
                 Block block = Block.byItem(item);
                 if (block instanceof CandleBlock) {
                     if (!player.isCreative()) {
@@ -246,5 +246,12 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             return Pair.of(builder.getNutrition(), builder.getSaturation());
         }
         return Pair.of(2, 0.1F);
+    }
+
+    public static boolean isUneaten(BlockState state) {
+        if (state.getBlock() instanceof BaseCakeBlock cakeBlock && cakeBlock.getBites() != null) {
+            return cakeBlock.getBiteCount() <= 0 || state.getValue(cakeBlock.getBites()) == 0;
+        }
+        return false;
     }
 }
