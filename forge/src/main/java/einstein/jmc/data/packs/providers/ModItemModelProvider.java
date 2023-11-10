@@ -31,12 +31,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         getBuilder("cake_oven").parent(getExistingFile(modLoc("block/cake_oven")));
         getBuilder("cake_stand").parent(getExistingFile(modLoc("block/cake_stand")));
 
-        for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
-            CakeBuilder builder = cake.get().getBuilder();
+        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             if (builder.hasItem() && !builder.hasCustomItemModel()) {
                 generatedItem(getItemName(cake), modLoc("item/" + Util.getItemId(cake.get().asItem()).getPath()));
             }
-        }
+        });
     }
 
     private ItemModelBuilder generatedItem(String name, ResourceLocation... layers) {

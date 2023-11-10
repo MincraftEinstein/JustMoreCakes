@@ -47,55 +47,51 @@ public class ModModelProvider extends FabricModelProvider {
         crossCakeBlock(generators, ModBlocks.CHORUS_CAKE.get(), loc("block/chorus_cake_flower"));
         crossCakeBlock(generators, ModBlocks.CRIMSON_FUNGUS_CAKE.get(), mcLoc("block/crimson_fungus"));
 
-        for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
-            CakeBuilder builder = CakeBuilder.BUILDER_BY_CAKE.get(cake);
+        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             if (!builder.hasCustomBlockModel()) {
                 cakeBlock(generators, cake.get());
             }
 
             if (!builder.hasCustomCandleCakeBlockModels() && builder.allowsCandles()) {
-                for (Block candle : builder.getCandleCakeByCandle().keySet()) {
-                    Supplier<BaseCandleCakeBlock> candleCake = builder.getCandleCakeByCandle().get(candle);
+                builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                     candleCakeBlock(generators, candleCake.get(), candle, cake.get());
-                }
+                });
             }
-        }
+        });
 
         CakeBuilder threeTieredBuilder = ModBlocks.THREE_TIERED_CAKE.get().getBuilder();
-        for (Block candle : threeTieredBuilder.getCandleCakeByCandle().keySet()) {
-            BaseCandleCakeBlock cake = threeTieredBuilder.getCandleCakeByCandle().get(candle).get();
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(PropertyDispatch.property(ThreeTieredCandleCakeBlock.LIT)
+        threeTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake.get()).with(PropertyDispatch.property(ThreeTieredCandleCakeBlock.LIT)
                     .select(false, Variant.variant().with(VariantProperties.MODEL,
                             new ModelTemplate(Optional.of(loc("block/template_three_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
-                                    .create(cake, new TextureMapping()
+                                    .create(candleCake.get(), new TextureMapping()
                                             .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle)), generators.modelOutput)))
                     .select(true, Variant.variant().with(VariantProperties.MODEL,
                             new ModelTemplate(Optional.of(loc("block/template_three_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
-                                    .createWithSuffix(cake, "_lit", new TextureMapping()
+                                    .createWithSuffix(candleCake.get(), "_lit", new TextureMapping()
                                             .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle, "_lit")), generators.modelOutput)))));
-        }
+        });
 
         CakeBuilder twoTieredBuilder = ModBlocks.TWO_TIERED_CAKE.get().getBuilder();
-        twoTieredBuilder.getCandleCakeByCandle().forEach((candle, cake) -> {
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake.get()).with(PropertyDispatch.property(TwoTieredCandleCakeBlock.LIT)
+        twoTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake.get()).with(PropertyDispatch.property(TwoTieredCandleCakeBlock.LIT)
                     .select(false, Variant.variant().with(VariantProperties.MODEL,
                             new ModelTemplate(Optional.of(loc("block/template_two_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
-                                    .create(cake.get(), new TextureMapping()
+                                    .create(candleCake.get(), new TextureMapping()
                                             .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle)), generators.modelOutput)
                     ))
                     .select(true, Variant.variant().with(VariantProperties.MODEL,
                             new ModelTemplate(Optional.of(loc("block/template_two_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
-                                    .createWithSuffix(cake.get(), "_lit", new TextureMapping()
+                                    .createWithSuffix(candleCake.get(), "_lit", new TextureMapping()
                                             .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle, "_lit")), generators.modelOutput)
                     ))
             ));
         });
 
         CakeBuilder sculkBuilder = ModBlocks.SCULK_CAKE.get().getBuilder();
-        for (Block candle : sculkBuilder.getCandleCakeByCandle().keySet()) {
-            Supplier<BaseCandleCakeBlock> candleCake = sculkBuilder.getCandleCakeByCandle().get(candle);
+        sculkBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
             candleCakeBlock(generators, candleCake.get(), candle, ModBlocks.SCULK_CAKE.get());
-        }
+        });
     }
 
     @Override
@@ -109,12 +105,11 @@ public class ModModelProvider extends FabricModelProvider {
         generators.output.accept(loc("item/cake_oven"), new DelegatedModel(loc("block/cake_oven")));
         generators.output.accept(loc("item/cake_stand"), new DelegatedModel(loc("block/cake_stand")));
 
-        for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
-            CakeBuilder builder = cake.get().getBuilder();
+        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             if (builder.hasItem() && !builder.hasCustomItemModel()) {
                 generators.generateFlatItem(cake.get().asItem(), ModelTemplates.FLAT_ITEM);
             }
-        }
+        });
     }
 
     private void cakeBlock(BlockModelGenerators generators, BaseCakeBlock cake) {
@@ -241,13 +236,12 @@ public class ModModelProvider extends FabricModelProvider {
         }
 
         if (cakeBuilder.allowsCandles()) {
-            for (Block candle : cakeBuilder.getCandleCakeByCandle().keySet()) {
+            cakeBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                 ResourceLocation type = CakeBuilder.SUPPORTED_CANDLES.get(candle);
-                BaseCandleCakeBlock candleCake = cakeBuilder.getCandleCakeByCandle().get(candle).get();
-                generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake).with(BlockModelGenerators.createBooleanModelDispatch(BaseCandleCakeBlock.LIT,
+                generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake.get()).with(BlockModelGenerators.createBooleanModelDispatch(BaseCandleCakeBlock.LIT,
                         new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_cake_lit"),
                         new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_cake"))));
-            }
+            });
         }
     }
 }

@@ -35,34 +35,32 @@ public class ModBlockStateProvider extends BlockStateProvider {
         crossCakeBlock(ModBlocks.CHORUS_CAKE.get(), modLoc("block/chorus_cake_flower"));
         crossCakeBlock(ModBlocks.CRIMSON_FUNGUS_CAKE.get(), mcLoc("block/crimson_fungus"));
 
-        for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
-            CakeBuilder builder = CakeBuilder.BUILDER_BY_CAKE.get(cake);
+        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             if (!builder.hasCustomBlockModel()) {
                 cakeBlock(cake.get(), builder.getCakeName());
             }
 
             if (!builder.hasCustomCandleCakeBlockModels() && builder.allowsCandles()) {
-                for (Block candle : builder.getCandleCakeByCandle().keySet()) {
-                    Supplier<BaseCandleCakeBlock> candleCake = builder.getCandleCakeByCandle().get(candle);
+                builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                     candleCakeBlock(candleCake.get(), CakeBuilder.SUPPORTED_CANDLES.get(candle), builder.getCakeName());
-                }
+                });
             }
-        }
+        });
 
         CakeBuilder threeTieredBuilder = ModBlocks.THREE_TIERED_CAKE.get().getBuilder();
-        for (Block candle : threeTieredBuilder.getCandleCakeByCandle().keySet()) {
+        threeTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
             ResourceLocation type = CakeBuilder.SUPPORTED_CANDLES.get(candle);
-            getVariantBuilder(threeTieredBuilder.getCandleCakeByCandle().get(candle).get())
+            getVariantBuilder(candleCake.get())
                     .partialState().with(ThreeTieredCandleCakeBlock.LIT, false).addModels(new ConfiguredModel(models().withExistingParent(type.getPath() + "candle_three_tiered_cake", modLoc("template_three_tiered_candle_cake"))
                             .texture("candle", new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle"))))
                     .partialState().with(ThreeTieredCandleCakeBlock.LIT, true).addModels(new ConfiguredModel(models().withExistingParent(type.getPath() + "candle_three_tiered_cake_lit", modLoc("template_three_tiered_candle_cake"))
                             .texture("candle", new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_lit"))));
-        }
+        });
 
         CakeBuilder twoTieredBuilder = ModBlocks.TWO_TIERED_CAKE.get().getBuilder();
-        twoTieredBuilder.getCandleCakeByCandle().forEach((candle, cake) -> {
+        twoTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
             ResourceLocation type = CakeBuilder.SUPPORTED_CANDLES.get(candle);
-            getVariantBuilder(cake.get())
+            getVariantBuilder(candleCake.get())
                     .partialState().with(TwoTieredCandleCakeBlock.LIT, false).addModels(new ConfiguredModel(models().withExistingParent(type.getPath() + "candle_two_tiered_cake", modLoc("template_two_tiered_candle_cake"))
                             .texture("candle", new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle"))
                     ))
@@ -72,10 +70,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         });
 
         CakeBuilder sculkBuilder = ModBlocks.SCULK_CAKE.get().getBuilder();
-        for (Block candle : sculkBuilder.getCandleCakeByCandle().keySet()) {
-            Supplier<BaseCandleCakeBlock> candleCake = sculkBuilder.getCandleCakeByCandle().get(candle);
+        sculkBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
             candleCakeBlock(candleCake.get(), CakeBuilder.SUPPORTED_CANDLES.get(candle), sculkBuilder.getCakeName());
-        }
+        });
     }
 
     private void cakeBlock(BaseCakeBlock cake, String name) {
@@ -180,12 +177,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
 
         if (cakeBuilder.allowsCandles()) {
-            for (Block candle : cakeBuilder.getCandleCakeByCandle().keySet()) {
+            cakeBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                 ResourceLocation type = CakeBuilder.SUPPORTED_CANDLES.get(candle);
-                getVariantBuilder(cakeBuilder.getCandleCakeByCandle().get(candle).get())
+                getVariantBuilder(candleCake.get())
                         .partialState().with(BaseCandleCakeBlock.LIT, false).addModels(new ConfiguredModel(models().getExistingFile(new ResourceLocation(type.getNamespace(), type.getPath() + "candle_cake"))))
                         .partialState().with(BaseCandleCakeBlock.LIT, true).addModels(new ConfiguredModel(models().getExistingFile(new ResourceLocation(type.getNamespace(), type.getPath() + "candle_cake_lit"))));
-            }
+            });
         }
     }
 }
