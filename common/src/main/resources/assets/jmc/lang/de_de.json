@@ -77,10 +77,10 @@
 	"itemGroup.jmc.jmc_tab": "Einfach mehr Kuchen!",
 	
 	"_comment": "Weiterentwicklungen",
-	"advancements.husbandry.craft_cake.title": "Kuchen ist eine Lüge",
-	"advancements.husbandry.craft_cake.description": "Einen Kuchen basteln",
-	"advancements.husbandry.craft_all_cakes.title": "Num Num Num Num Num",
-	"advancements.husbandry.craft_all_cakes.description": "Alle Torten in der Mod herstellen",
-	"advancements.husbandry.eat_obsidian_cake.title": "Du hast keine Diamantenzähne!",
-	"advancements.husbandry.eat_obsidian_cake.description": "Versuche, einen Obsidian-Kuchen zu essen"
+	"advancements.husbandry.jmc.craft_cake.title": "Kuchen ist eine Lüge",
+	"advancements.husbandry.jmc.craft_cake.description": "Einen Kuchen basteln",
+	"advancements.husbandry.jmc.craft_all_cakes.title": "Num Num Num Num Num",
+	"advancements.husbandry.jmc.craft_all_cakes.description": "Alle Torten in der Mod herstellen",
+	"advancements.husbandry.jmc.eat_obsidian_cake.title": "Du hast keine Diamantenzähne!",
+	"advancements.husbandry.jmc.eat_obsidian_cake.description": "Versuche, einen Obsidian-Kuchen zu essen"
 }

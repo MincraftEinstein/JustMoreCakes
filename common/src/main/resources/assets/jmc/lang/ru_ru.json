@@ -72,8 +72,8 @@
 	"itemGroup.jmc.jmc_tab": "Just More Cakes!",
 	
 	"_comment": "Advancements",
-	"advancements.husbandry.craft_cake.title": "Торт это ложь",
-	"advancements.husbandry.craft_cake.description": "Создать торт",
-	"advancements.husbandry.craft_all_cakes.title": "Вкуснятина",
-	"advancements.husbandry.craft_all_cakes.description": "Создать все торты мода"
+	"advancements.husbandry.jmc.craft_cake.title": "Торт это ложь",
+	"advancements.husbandry.jmc.craft_cake.description": "Создать торт",
+	"advancements.husbandry.jmc.craft_all_cakes.title": "Вкуснятина",
+	"advancements.husbandry.jmc.craft_all_cakes.description": "Создать все торты мода"
 }

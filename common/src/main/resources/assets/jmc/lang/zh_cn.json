@@ -85,10 +85,10 @@
 	"itemGroup.jmc.jmc_tab": "只是更多的蛋糕！",
 
 	"_comment": "Advancements",
-	"advancements.husbandry.craft_cake.title": "蛋糕是个谎言",
-	"advancements.husbandry.craft_cake.description": "制作一个蛋糕",
-	"advancements.husbandry.craft_all_cakes.title": "Num Num Num Num Num",
-	"advancements.husbandry.craft_all_cakes.description": "制作模组中的所有蛋糕",
-	"advancements.husbandry.eat_obsidian_cake.title": "你没有镶钻的牙齿",
-	"advancements.husbandry.eat_obsidian_cake.description": "食用黑曜石蛋糕"
+	"advancements.husbandry.jmc.craft_cake.title": "蛋糕是个谎言",
+	"advancements.husbandry.jmc.craft_cake.description": "制作一个蛋糕",
+	"advancements.husbandry.jmc.craft_all_cakes.title": "Num Num Num Num Num",
+	"advancements.husbandry.jmc.craft_all_cakes.description": "制作模组中的所有蛋糕",
+	"advancements.husbandry.jmc.eat_obsidian_cake.title": "你没有镶钻的牙齿",
+	"advancements.husbandry.jmc.eat_obsidian_cake.description": "食用黑曜石蛋糕"
 }

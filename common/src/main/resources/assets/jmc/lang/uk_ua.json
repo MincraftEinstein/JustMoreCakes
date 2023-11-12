@@ -85,10 +85,10 @@
 	"itemGroup.jmc.jmc_tab": "Just More Cakes!",
 	
 	"_comment": "Advancements",
-	"advancements.husbandry.craft_cake.title": "Торт — брехня",
-	"advancements.husbandry.craft_cake.description": "Випечіть торт",
-	"advancements.husbandry.craft_all_cakes.title": "Ам ням",
-	"advancements.husbandry.craft_all_cakes.description": "Випечіть усі торти в цьому моді",
-	"advancements.husbandry.eat_obsidian_cake.title": "Ти не маєш діамантових зубів",
-	"advancements.husbandry.eat_obsidian_cake.description": "Спробуйте з'їсти обсидіановий торт"
+	"advancements.husbandry.jmc.craft_cake.title": "Торт — брехня",
+	"advancements.husbandry.jmc.craft_cake.description": "Випечіть торт",
+	"advancements.husbandry.jmc.craft_all_cakes.title": "Ам ням",
+	"advancements.husbandry.jmc.craft_all_cakes.description": "Випечіть усі торти в цьому моді",
+	"advancements.husbandry.jmc.eat_obsidian_cake.title": "Ти не маєш діамантових зубів",
+	"advancements.husbandry.jmc.eat_obsidian_cake.description": "Спробуйте з'їсти обсидіановий торт"
 }
