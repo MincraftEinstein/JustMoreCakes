@@ -1,6 +1,6 @@
 # Just More Cakes
 
-![Banner](https://i.imgur.com/diKMADr.png)
+![Banner](https://i.imgur.com/OSN1fFh.png)
 
 ![](https://img.shields.io/badge/Mod%20Loaders-Forge%20%26%20Fabric-green?style=for-the-badge)
 [![Curseforge Forge Page](https://img.shields.io/badge/Curseforge%20Page-Forge-orange?style=for-the-badge&logo=curseforge "Curseforge Forge page")](https://www.curseforge.com/minecraft/mc-mods/just-more-cakes)
@@ -9,7 +9,7 @@
 [![Discord Invite](https://img.shields.io/badge/Discord-Einsteins%20Lab-blue?style=for-the-badge&logo=discord)](https://discord.gg/gSsaFAvrBM)
 
 ### **📘 Description**
-A simple mod that adds 30+ new cakes to Minecraft. Some have special properties and abilitties ranging from exploding and poisoning to healing and teleporting (randomly). A new villager is in town as well, the Cake Baker will buy and sell cake ingredients which he uses in his Cake Oven to make cake. Most cakes also allow candles to be placed on them
+A simple mod that adds 30+ new cakes to Minecraft. Some have special properties and abilities ranging from exploding and poisoning to healing and teleporting (randomly). A new villager is in town as well, the Cake Baker will buy and sell cake ingredients which he uses in his Cake Oven to make cake. Most cakes also allow candles to be placed on them
 
 Supports [Cake Chomps](https://www.curseforge.com/minecraft/mc-mods/cake-chomps)
 
@@ -33,9 +33,11 @@ Supports [Cake Chomps](https://www.curseforge.com/minecraft/mc-mods/cake-chomps)
 
 ### **📷 Images**
 
-![All the cakes](https://i.imgur.com/DDWm1I6.png)
+![All The Cakes](https://i.imgur.com/cbKeflc.png)
 
-![The Cake Bakery](https://i.imgur.com/aXRhtZm.png)
+![Village Cake Bakery](https://i.imgur.com/kCBoKsV.png)
+
+![Cake Bakery Interior](https://i.imgur.com/4vhGdDY.png)
 
 ---
 
