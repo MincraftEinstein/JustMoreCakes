@@ -46,6 +46,7 @@ public class ModCommonConfigs {
     public static final ForgeConfigSpec.BooleanValue DISABLE_DEFAULT_CAKE_RECIPE = BUILDER
             .comment("Disables the game's default cake crafting recipe")
             .translation(key("disable_cake_crafting_recipe"))
+            .worldRestart()
             .define("disableCakeCraftingRecipe", true);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
