@@ -6,6 +6,7 @@ import einstein.jmc.util.Util;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.slf4j.Logger;
@@ -46,9 +47,16 @@ public class JustMoreCakes {
         registerVillageBuilding(server, "snowy", "bakery_1", CAKE_BAKERY_GENERATION_WEIGHT.get());
         registerVillageBuilding(server, "snowy", "bakery_2", CAKE_BAKERY_GENERATION_WEIGHT.get());
         registerVillageBuilding(server, "taiga", "bakery_1", CAKE_BAKERY_GENERATION_WEIGHT.get());
+    }
 
-        if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
-            Util.removeRecipe(server.getRecipeManager(), RecipeType.CRAFTING, mcLoc("cake"));
+    public static void onDatapackSync(ServerPlayer player) {
+        if (player != null) {
+            MinecraftServer server = player.getServer();
+            if (server != null) {
+                if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
+                    Util.removeRecipe(server.getRecipeManager(), RecipeType.CRAFTING, mcLoc("cake"));
+                }
+            }
         }
     }
 

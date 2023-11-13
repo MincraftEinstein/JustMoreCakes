@@ -28,6 +28,7 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
@@ -88,6 +89,7 @@ public class JustMoreCakesForge {
         MinecraftForge.EVENT_BUS.addListener(this::onVillagerTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onWanderingTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
+        MinecraftForge.EVENT_BUS.addListener(this::onDataPackSync);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
@@ -149,6 +151,10 @@ public class JustMoreCakesForge {
 
     void onServerStarted(ServerStartedEvent event) {
         addCakeEffects();
+    }
+
+    void onDataPackSync(OnDatapackSyncEvent event) {
+        JustMoreCakes.onDatapackSync(event.getPlayer());
     }
 
     void commonSetup(final FMLCommonSetupEvent event) {

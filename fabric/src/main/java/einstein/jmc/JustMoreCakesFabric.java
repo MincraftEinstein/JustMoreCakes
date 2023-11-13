@@ -51,6 +51,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         onAddReloadListeners();
         onServerStarting();
         onServerStarted();
+        onDatapackSync();
         addVillagerTrades();
 
         ForgeConfigRegistry.INSTANCE.register(JustMoreCakes.MOD_ID, ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
@@ -126,6 +127,10 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         else {
             throw new IllegalStateException("Can't retrieve CakeEffectsManager until resources have loaded");
         }
+    }
+
+    void onDatapackSync() {
+        ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> JustMoreCakes.onDatapackSync(player));
     }
 
     void addVillagerTrades() {
