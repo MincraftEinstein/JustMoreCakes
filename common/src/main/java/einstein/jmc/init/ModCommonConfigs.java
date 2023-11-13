@@ -44,9 +44,8 @@ public class ModCommonConfigs {
             .translation(key("glowstone_cake_effect_radius"))
             .defineInRange("glowstoneCakeEffectRadius", 20, 0, 100);
     public static final ForgeConfigSpec.BooleanValue DISABLE_DEFAULT_CAKE_RECIPE = BUILDER
-            .comment("Disables the game's default cake crafting recipe")
+            .comment("Disables the game's default cake crafting recipe", "Requires resources to be reloaded")
             .translation(key("disable_cake_crafting_recipe"))
-            .worldRestart()
             .define("disableCakeCraftingRecipe", true);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
