@@ -25,6 +25,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         dropSelf(ModBlocks.CAKE_OVEN.get());
+        dropSelf(ModBlocks.CAKE_STAND.get());
 
         CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             if (cake == ModBlocks.TWO_TIERED_CAKE) {
@@ -58,6 +59,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected Iterable<Block> getKnownBlocks() {
         knownBlocks.add(ModBlocks.CAKE_OVEN.get());
+        knownBlocks.add(ModBlocks.CAKE_STAND.get());
         knownBlocks.add(ModBlocks.TWO_TIERED_CAKE.get());
         knownBlocks.add(ModBlocks.THREE_TIERED_CAKE.get());
         return knownBlocks;

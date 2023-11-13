@@ -1,4 +1,4 @@
-// 1.20.2	2023-11-10T14:23:34.6070709	Loot Tables
+// 1.20.2	2023-11-13T11:34:33.5453465	Loot Tables
 c11e342b60462a9f3178021ed850689f36ad1795 data/jmc/loot_tables/blocks/apple_cake.json
 4fbfc857e31d5a297e8d777f01293a45b0b8ed18 data/jmc/loot_tables/blocks/beetroot_cake.json
 cc021a7d923caea384e427d07df0d271649dc587 data/jmc/loot_tables/blocks/black_candle_apple_cake.json
@@ -102,6 +102,7 @@ ce0e2683f3520c400067223a6bfa32ec4af0ec8a data/jmc/loot_tables/blocks/brown_candl
 ee9ea79553cdf902a355029ca78cf7b4f7eee391 data/jmc/loot_tables/blocks/brown_candle_warped_fungus_cake.json
 1fd8efb131a2223b96c448bd9fdfd79142e798db data/jmc/loot_tables/blocks/brown_mushroom_cake.json
 0168621cb58e71e70da71aec3adfe9b72fb1fe7a data/jmc/loot_tables/blocks/cake_oven.json
+b583911ac602a6e176a13760d89654ab7b1d1428 data/jmc/loot_tables/blocks/cake_stand.json
 1e4f60e13f93f885c215c09300501b327520a9dd data/jmc/loot_tables/blocks/candle_apple_cake.json
 d7cf1186deeb1423e4d3f3b77b195e3c417b646b data/jmc/loot_tables/blocks/candle_beetroot_cake.json
 2f7b040ec9698f481e476e40ff4e172fdd08280f data/jmc/loot_tables/blocks/candle_brown_mushroom_cake.json

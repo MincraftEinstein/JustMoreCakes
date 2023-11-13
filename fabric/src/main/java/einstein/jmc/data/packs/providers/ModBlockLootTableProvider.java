@@ -19,6 +19,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
     @Override
     public void generate() {
         add(ModBlocks.CAKE_OVEN.get(), createSingleItemTable(ModBlocks.CAKE_OVEN.get()));
+        add(ModBlocks.CAKE_STAND.get(), createSingleItemTable(ModBlocks.CAKE_STAND.get()));
 
         CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             if (cake == ModBlocks.TWO_TIERED_CAKE) {
