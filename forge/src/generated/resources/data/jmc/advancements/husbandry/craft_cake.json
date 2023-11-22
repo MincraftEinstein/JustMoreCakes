@@ -373,36 +373,12 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "three_tiered_cake": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "jmc:three_tiered_cake"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "tnt_cake": {
       "conditions": {
         "items": [
           {
             "items": [
               "jmc:tnt_cake"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "two_tiered_cake": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "jmc:two_tiered_cake"
             ]
           }
         ]
@@ -470,9 +446,7 @@
       "seed_cake",
       "slime_cake",
       "sweet_berry_cake",
-      "three_tiered_cake",
       "tnt_cake",
-      "two_tiered_cake",
       "warped_fungus_cake"
     ]
   ],

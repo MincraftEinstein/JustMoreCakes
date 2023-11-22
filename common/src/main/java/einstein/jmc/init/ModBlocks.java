@@ -2,7 +2,6 @@ package einstein.jmc.init;
 
 import einstein.jmc.block.cake.*;
 import einstein.jmc.block.cake.candle.*;
-import einstein.jmc.block.candle_cakes.*;
 import einstein.jmc.block.entity.GlowstoneCakeBlockEntity;
 import einstein.jmc.block.entity.TNTCakeBlockEntity;
 import einstein.jmc.block.*;
