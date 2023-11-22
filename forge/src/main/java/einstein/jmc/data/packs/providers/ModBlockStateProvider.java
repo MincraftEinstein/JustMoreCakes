@@ -1,10 +1,10 @@
 package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.blocks.cakes.BaseCakeBlock;
-import einstein.jmc.blocks.candle_cakes.BaseCandleCakeBlock;
-import einstein.jmc.blocks.candle_cakes.ThreeTieredCandleCakeBlock;
-import einstein.jmc.blocks.candle_cakes.TwoTieredCandleCakeBlock;
+import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
+import einstein.jmc.block.cake.candle.ThreeTieredCandleCakeBlock;
+import einstein.jmc.block.cake.candle.TwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.data.PackOutput;
@@ -15,8 +15,6 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
-
-import java.util.function.Supplier;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 

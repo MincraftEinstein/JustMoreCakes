@@ -1,7 +1,7 @@
 package einstein.jmc.util;
 
-import einstein.jmc.blocks.cakes.BaseCakeBlock;
-import einstein.jmc.blocks.candle_cakes.BaseCandleCakeBlock;
+import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;

@@ -1,6 +1,6 @@
 package einstein.jmc.init;
 
-import einstein.jmc.effects.FreezingEffect;
+import einstein.jmc.effect.FreezingEffect;
 import einstein.jmc.platform.Services;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

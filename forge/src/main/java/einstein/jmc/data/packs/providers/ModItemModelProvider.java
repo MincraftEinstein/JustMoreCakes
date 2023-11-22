@@ -1,7 +1,6 @@
 package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.blocks.cakes.BaseCakeBlock;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.Util;

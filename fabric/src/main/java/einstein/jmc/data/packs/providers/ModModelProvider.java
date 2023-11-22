@@ -1,9 +1,9 @@
 package einstein.jmc.data.packs.providers;
 
-import einstein.jmc.blocks.cakes.BaseCakeBlock;
-import einstein.jmc.blocks.candle_cakes.BaseCandleCakeBlock;
-import einstein.jmc.blocks.candle_cakes.ThreeTieredCandleCakeBlock;
-import einstein.jmc.blocks.candle_cakes.TwoTieredCandleCakeBlock;
+import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
+import einstein.jmc.block.cake.candle.ThreeTieredCandleCakeBlock;
+import einstein.jmc.block.cake.candle.TwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.util.CakeBuilder;
@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 import static einstein.jmc.JustMoreCakes.loc;
 import static einstein.jmc.JustMoreCakes.mcLoc;

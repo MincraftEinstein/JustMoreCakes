@@ -1,8 +1,8 @@
 package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.blocks.cakes.BaseCakeBlock;
-import einstein.jmc.blocks.candle_cakes.BaseCandleCakeBlock;
+import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;

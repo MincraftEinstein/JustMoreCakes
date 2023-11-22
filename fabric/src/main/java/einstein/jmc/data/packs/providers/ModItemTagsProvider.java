@@ -1,6 +1,6 @@
 package einstein.jmc.data.packs.providers;
 
-import einstein.jmc.blocks.cakes.BaseCakeBlock;
+import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.packs.ModItemTags;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;

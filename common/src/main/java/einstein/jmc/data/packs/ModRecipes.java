@@ -3,7 +3,7 @@ package einstein.jmc.data.packs;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.item.crafting.builders.CakeOvenRecipeBuilder;
+import einstein.jmc.data.CakeOvenRecipeBuilder;
 import einstein.jmc.util.Util;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;

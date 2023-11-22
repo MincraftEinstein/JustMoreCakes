@@ -1,9 +1,9 @@
 package einstein.jmc.init;
 
-import einstein.jmc.blocks.entities.CakeOvenBlockEntity;
-import einstein.jmc.blocks.entities.CakeStandBlockEntity;
-import einstein.jmc.blocks.entities.GlowstoneCakeBlockEntity;
-import einstein.jmc.blocks.entities.TNTCakeBlockEntity;
+import einstein.jmc.block.entity.CakeOvenBlockEntity;
+import einstein.jmc.block.entity.CakeStandBlockEntity;
+import einstein.jmc.block.entity.GlowstoneCakeBlockEntity;
+import einstein.jmc.block.entity.TNTCakeBlockEntity;
 import einstein.jmc.util.BlockEntitySupplier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;

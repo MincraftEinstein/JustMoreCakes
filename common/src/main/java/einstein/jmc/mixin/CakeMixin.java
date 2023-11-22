@@ -1,9 +1,9 @@
 package einstein.jmc.mixin;
 
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.blocks.CakeEffectsHolder;
-import einstein.jmc.blocks.cakes.BaseCakeBlock;
-import einstein.jmc.data.cake_effects.CakeEffects;
+import einstein.jmc.block.CakeEffectsHolder;
+import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.data.cakeeffect.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;

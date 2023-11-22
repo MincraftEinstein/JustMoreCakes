@@ -6,7 +6,6 @@ import einstein.jmc.util.CakeOvenConstants;
 import einstein.jmc.util.RecipeMatcher;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
