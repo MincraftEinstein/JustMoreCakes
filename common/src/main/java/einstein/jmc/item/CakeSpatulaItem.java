@@ -16,7 +16,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -39,19 +38,10 @@ public class CakeSpatulaItem extends Item {
             ItemStack stack = context.getItemInHand();
             Block block = state.getBlock();
             if (state.is(ModBlockTags.CAKE_SPATULA_USABLE)) {
-                if (block instanceof BaseCakeBlock cake) {
-                    int bites = state.getValue(cake.getBites());
-                    if (bites > 0) {
-                        return InteractionResult.PASS;
-                    }
+                if (!BaseCakeBlock.isUneaten(state)) {
+                    return InteractionResult.PASS;
                 }
-                else if (block instanceof CakeBlock) {
-                    int bites = state.getValue(CakeBlock.BITES);
-                    if (bites > 0) {
-                        return InteractionResult.PASS;
-                    }
-                }
-                
+
                 if (!level.isClientSide) {
                     level.destroyBlock(pos, false, player);
                     stack.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(context.getHand()));

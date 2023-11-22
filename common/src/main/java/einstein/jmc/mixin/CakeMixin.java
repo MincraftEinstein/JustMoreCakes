@@ -2,6 +2,7 @@ package einstein.jmc.mixin;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.blocks.CakeEffectsHolder;
+import einstein.jmc.blocks.cakes.BaseCakeBlock;
 import einstein.jmc.data.cake_effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -39,7 +40,7 @@ public class CakeMixin implements CakeEffectsHolder {
     private void use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (state.getBlock() instanceof CakeBlock && state.getValue(CakeBlock.BITES) == 0) {
+        if (BaseCakeBlock.isUneaten(state)) {
             if (stack.is(Items.CAKE)) {
                 BlockState newState = ModBlocks.TWO_TIERED_CAKE.get().defaultBlockState();
                 Block.pushEntitiesUp(state, newState, level, pos);

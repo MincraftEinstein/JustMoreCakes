@@ -27,6 +27,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -249,9 +250,10 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public static boolean isUneaten(BlockState state) {
-        if (state.getBlock() instanceof BaseCakeBlock cakeBlock && cakeBlock.getBites() != null) {
+        Block block = state.getBlock();
+        if (block instanceof BaseCakeBlock cakeBlock && cakeBlock.getBites() != null) {
             return cakeBlock.getBiteCount() <= 0 || state.getValue(cakeBlock.getBites()) == 0;
         }
-        return false;
+        return !(block instanceof CakeBlock) || state.getValue(CakeBlock.BITES) == 0;
     }
 }
