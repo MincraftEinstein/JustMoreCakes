@@ -412,4 +412,8 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
     public NonNullList<ItemStack> getRemainingItems() {
         return remainingItems;
     }
+
+    public NonNullList<ItemStack> getItems() {
+        return items;
+    }
 }
