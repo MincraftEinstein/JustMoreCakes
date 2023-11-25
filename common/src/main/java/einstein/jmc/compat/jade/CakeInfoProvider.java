@@ -57,6 +57,6 @@ public class CakeInfoProvider implements IBlockComponentProvider {
 
     @Override
     public ResourceLocation getUid() {
-        return JustMoreCakes.loc("cake_info");
+        return ModJadePlugin.CAKE_INFO;
     }
 }

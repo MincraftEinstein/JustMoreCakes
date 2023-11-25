@@ -10,14 +10,22 @@ import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.CandleCakeBlock;
 import snownee.jade.api.*;
 
+import static einstein.jmc.JustMoreCakes.loc;
+
 @WailaPlugin
 public class ModJadePlugin implements IWailaPlugin {
 
     public static final CakeInfoProvider CAKE_INFO_COMPONENT_PROVIDER = new CakeInfoProvider();
     public static final CakeEffectsProvider CAKE_EFFECT_PROVIDER = new CakeEffectsProvider();
-    public static final ResourceLocation DISPLAY_TYPE = JustMoreCakes.loc("cake_info.display_type");
-    public static final ResourceLocation FOOD_ICONS_PER_LINE = JustMoreCakes.loc("cake_info.food_icons_per_line");
-    public static final ResourceLocation SHOW_SATURATION = JustMoreCakes.loc("cake_info.show_saturation");
+
+    // Features
+    public static final ResourceLocation CAKE_INFO = loc("cake_info");
+    public static final ResourceLocation CAKE_EFFECTS = loc("cake_effects");
+    
+    // Configs
+    public static final ResourceLocation DISPLAY_TYPE = loc("cake_info.display_type");
+    public static final ResourceLocation FOOD_ICONS_PER_LINE = loc("cake_info.food_icons_per_line");
+    public static final ResourceLocation SHOW_SATURATION = loc("cake_info.show_saturation");
 
     @Override
     public void register(IWailaCommonRegistration registration) {
@@ -39,6 +47,11 @@ public class ModJadePlugin implements IWailaPlugin {
         registration.registerBlockComponent(CAKE_EFFECT_PROVIDER, BaseCandleCakeBlock.class);
         registration.registerBlockComponent(CAKE_EFFECT_PROVIDER, CakeBlock.class);
         registration.registerBlockComponent(CAKE_EFFECT_PROVIDER, CandleCakeBlock.class);
+
+        registration.markAsClientFeature(CAKE_INFO);
+        registration.markAsClientFeature(DISPLAY_TYPE);
+        registration.markAsClientFeature(FOOD_ICONS_PER_LINE);
+        registration.markAsClientFeature(SHOW_SATURATION);
     }
 
     public enum CakeInfoDisplayType {
