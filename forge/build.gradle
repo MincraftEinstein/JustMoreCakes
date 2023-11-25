@@ -84,6 +84,7 @@ dependencies {
     implementation fg.deobf("curse.maven:cake-chomps-307943:${forge_cake_chomps_version}")
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
     implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
+    implementation fg.deobf("maven.modrinth:jade:${forge_jade_version}")
 
     compileOnly(testCompileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")))
     compileOnly(testCompileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")))

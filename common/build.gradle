@@ -25,6 +25,7 @@ dependencies {
     compileOnly group: 'mezz.jei', name: "jei-${minecraft_version}-common-api", version: "${jei_version}"
     compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-api-forge", version: "${rei_version}"
     compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-default-plugin-forge", version: "${rei_version}"
+    compileOnly group: "maven.modrinth", name: "jade", version: "${forge_jade_version}"
 }
 
 publishing {

@@ -242,7 +242,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         this.cakeEffects = cakeEffects;
     }
 
-    protected Pair<Integer, Float> getNourishment() {
+    public Pair<Integer, Float> getNourishment() {
         if (builder != null) {
             return Pair.of(builder.getNutrition(), builder.getSaturation());
         }

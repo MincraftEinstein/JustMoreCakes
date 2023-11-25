@@ -63,6 +63,11 @@ subprojects {
         maven {
             url = "https://maven.architectury.dev/"
         }
+
+        maven {
+            name = "Modrinth"
+            url = "https://api.modrinth.com/maven"
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {

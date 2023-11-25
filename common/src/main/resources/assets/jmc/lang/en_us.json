@@ -83,6 +83,20 @@
   "category.rei.jmc.cake_oven": "Cake Baking",
   "category.rei.jmc.cake_oven.time&xp": "%s XP in %s sec",
 
+  "_comment": "Jade",
+  "config.jade.plugin_jmc.cake_info": "Cake Info",
+  "config.jade.plugin_jmc.cake_info.display_type": "Display Type",
+  "config.jade.plugin_jmc.cake_info.display_type_total": "Total",
+  "config.jade.plugin_jmc.cake_info.display_type_total_desc": "The amount of nutrition and saturation from eating an entire cake",
+  "config.jade.plugin_jmc.cake_info.display_type_per_slice": "Per Slice",
+  "config.jade.plugin_jmc.cake_info.display_type_per_slice_desc": "The amount of nutrition and saturation from eating a slice of cake",
+  "config.jade.plugin_jmc.cake_info.food_icons_per_line": "Icons per Line",
+  "config.jade.plugin_jmc.cake_info.show_saturation": "Show Saturation",
+  "config.jade.plugin_jmc.cake_info.show_saturation_desc": "Show the saturation a cake will provide [Value affected by Display Type]",
+  "jade.plugin_jmc.count": "x%s",
+  "jade.plugin_jmc.saturation": "Saturation: %s",
+  "narration.jade.jmc.nutrition": "Nutrition: %s",
+
   "_comment": "Creative Tabs",
   "itemGroup.jmc.jmc_tab": "Just More Cakes!",
 

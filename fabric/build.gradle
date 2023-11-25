@@ -34,6 +34,7 @@ dependencies {
     modImplementation("com.terraformersmc:modmenu:${modmenu_version}")
     modImplementation("curse.maven:cake-chomps-307943:${fabric_cake_chomps_version}")
     modImplementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${config_port_version}")
+    modImplementation("maven.modrinth:jade:${fabric_jade_version}")
 
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}")

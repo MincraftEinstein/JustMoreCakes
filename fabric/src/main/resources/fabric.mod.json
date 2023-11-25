@@ -33,6 +33,9 @@
     ],
     "rei_common": [
       "einstein.jmc.compat.rei.ModREICommonPlugin"
+    ],
+    "jade": [
+      "einstein.jmc.compat.jade.ModJadePlugin"
     ]
   },
   "mixins": [
