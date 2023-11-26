@@ -1,6 +1,7 @@
-package einstein.jmc.compat.jade;
+package einstein.jmc.compat.jade.providers;
 
 import einstein.jmc.block.entity.CakeOvenBlockEntity;
+import einstein.jmc.compat.jade.ModJadePlugin;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;

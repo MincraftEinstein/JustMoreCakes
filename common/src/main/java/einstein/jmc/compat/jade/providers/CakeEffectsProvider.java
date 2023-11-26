@@ -1,8 +1,8 @@
-package einstein.jmc.compat.jade;
+package einstein.jmc.compat.jade.providers;
 
-import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
+import einstein.jmc.compat.jade.ModJadePlugin;
 import einstein.jmc.data.cakeeffect.CakeEffects;
 import einstein.jmc.util.Util;
 import net.minecraft.client.resources.language.I18n;
@@ -13,8 +13,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CandleBlock;
-import net.minecraft.world.level.block.CandleCakeBlock;
 import snownee.jade.addon.vanilla.StatusEffectsProvider;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;

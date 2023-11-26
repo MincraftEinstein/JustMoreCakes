@@ -4,6 +4,7 @@ import einstein.jmc.block.CakeOvenBlock;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.entity.CakeOvenBlockEntity;
+import einstein.jmc.compat.jade.providers.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.CandleCakeBlock;

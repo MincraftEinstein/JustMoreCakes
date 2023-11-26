@@ -1,9 +1,10 @@
-package einstein.jmc.compat.jade;
+package einstein.jmc.compat.jade.providers;
 
 import com.mojang.datafixers.util.Pair;
-import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
+import einstein.jmc.compat.jade.elements.FoodPointsSpriteElement;
+import einstein.jmc.compat.jade.ModJadePlugin;
 import einstein.jmc.util.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

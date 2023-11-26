@@ -1,5 +1,6 @@
-package einstein.jmc.compat.jade;
+package einstein.jmc.compat.jade.providers;
 
+import einstein.jmc.compat.jade.ModJadePlugin;
 import net.minecraft.resources.ResourceLocation;
 import snownee.jade.api.*;
 import snownee.jade.api.config.IPluginConfig;

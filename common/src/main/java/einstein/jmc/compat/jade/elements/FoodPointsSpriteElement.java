@@ -1,5 +1,6 @@
-package einstein.jmc.compat.jade;
+package einstein.jmc.compat.jade.elements;
 
+import einstein.jmc.compat.jade.ModJadePlugin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
