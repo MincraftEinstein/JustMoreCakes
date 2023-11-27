@@ -43,8 +43,10 @@ public class CakeInfoProvider implements IBlockComponentProvider {
     }
 
     private static void addNutrition(ITooltip tooltip, IPluginConfig config, int slices, int nutrition) {
-        if (nutrition > 0) {
-            tooltip.add(new FoodPointsSpriteElement(config, slices, nutrition));
+        if (config.get(ModJadePlugin.SHOW_NUTRITION)) {
+            if (nutrition > 0) {
+                tooltip.add(new FoodPointsSpriteElement(config, slices, nutrition));
+            }
         }
     }
 

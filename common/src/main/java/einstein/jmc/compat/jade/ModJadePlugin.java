@@ -40,6 +40,7 @@ public class ModJadePlugin implements IWailaPlugin {
     // Configs
     public static final ResourceLocation DISPLAY_TYPE = loc("cake_info.display_type");
     public static final ResourceLocation FOOD_ICONS_PER_LINE = loc("cake_info.food_icons_per_line");
+    public static final ResourceLocation SHOW_NUTRITION = loc("cake_info.show_nutrition");
     public static final ResourceLocation SHOW_SATURATION = loc("cake_info.show_saturation");
     public static final ResourceLocation HIDE_TRAPPED_CAKES = loc("hide_trapped_cakes");
 
@@ -52,6 +53,7 @@ public class ModJadePlugin implements IWailaPlugin {
     public void registerClient(IWailaClientRegistration registration) {
         registration.addConfig(DISPLAY_TYPE, CakeInfoDisplayType.TOTAL);
         registration.addConfig(FOOD_ICONS_PER_LINE, 10, 5, 30, false);
+        registration.addConfig(SHOW_NUTRITION, true);
         registration.addConfig(SHOW_SATURATION, true);
         registration.addConfig(HIDE_TRAPPED_CAKES, false);
 
@@ -94,6 +96,7 @@ public class ModJadePlugin implements IWailaPlugin {
         registration.markAsClientFeature(CAKE_INFO);
         registration.markAsClientFeature(DISPLAY_TYPE);
         registration.markAsClientFeature(FOOD_ICONS_PER_LINE);
+        registration.markAsClientFeature(SHOW_NUTRITION);
         registration.markAsClientFeature(SHOW_SATURATION);
         registration.markAsClientFeature(HIDE_TRAPPED_CAKES);
     }
