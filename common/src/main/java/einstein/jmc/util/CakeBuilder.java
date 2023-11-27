@@ -148,7 +148,7 @@ public class CakeBuilder {
 
             for (Block candle : SUPPORTED_CANDLES.keySet()) {
                 String type = SUPPORTED_CANDLES.get(candle).getPath();
-                Supplier<BaseCandleCakeBlock> coloredCandleCake = register(type + "candle_" + cakeName, () -> candleCakeClazz.get(cake.get(), candleCakeProperties), false);
+                Supplier<BaseCandleCakeBlock> coloredCandleCake = register(type + "candle_" + cakeName, () -> candleCakeClazz.get(cake.get(), candle, candleCakeProperties), false);
                 candleCakeByCandle.put(candle, coloredCandleCake);
             }
         }
@@ -210,6 +210,6 @@ public class CakeBuilder {
     @FunctionalInterface
     public interface CandleCakeClazzSupplier<T extends BaseCandleCakeBlock> {
 
-        T get(BaseCakeBlock originalCake, BlockBehaviour.Properties properties);
+        T get(BaseCakeBlock originalCake, Block candle, BlockBehaviour.Properties properties);
     }
 }

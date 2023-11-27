@@ -8,13 +8,14 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 @SuppressWarnings("deprecation")
 public class RedstoneCandleCakeBlock extends BaseCandleCakeBlock {
 
-    public RedstoneCandleCakeBlock(BaseCakeBlock originalCake, Properties properties) {
-        super(originalCake, properties);
+    public RedstoneCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
+        super(originalCake, candle, properties);
     }
 
     @Override

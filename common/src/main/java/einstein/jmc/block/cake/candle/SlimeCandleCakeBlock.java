@@ -6,13 +6,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 @SuppressWarnings("deprecation")
 public class SlimeCandleCakeBlock extends BaseCandleCakeBlock {
 
-    public SlimeCandleCakeBlock(BaseCakeBlock originalCake, Properties properties) {
-        super(originalCake, properties);
+    public SlimeCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
+        super(originalCake, candle, properties);
     }
 
     @Override

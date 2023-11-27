@@ -9,12 +9,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class LavaCandleCakeBlock extends BaseCandleCakeBlock {
 
-    public LavaCandleCakeBlock(BaseCakeBlock originalCake, Properties properties) {
-        super(originalCake, properties);
+    public LavaCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
+        super(originalCake, candle, properties);
     }
 
     @Override

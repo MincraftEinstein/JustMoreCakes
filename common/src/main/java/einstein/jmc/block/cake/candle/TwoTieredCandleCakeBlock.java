@@ -5,6 +5,7 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -19,8 +20,8 @@ public class TwoTieredCandleCakeBlock extends BaseCandleCakeBlock {
             box(7, 15, 7, 9, 21, 9) // Candle
     );
 
-    public TwoTieredCandleCakeBlock(BaseCakeBlock originalCake, Properties properties) {
-        super(originalCake, properties);
+    public TwoTieredCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
+        super(originalCake, candle, properties);
     }
 
     @Override

@@ -39,10 +39,12 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
             Block.box(7, 8, 7, 9, 14, 9));
 
     private final BaseCakeBlock originalCake;
+    private final Block candle;
 
-    public BaseCandleCakeBlock(BaseCakeBlock originalCake, Properties properties) {
+    public BaseCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
         super(properties);
         this.originalCake = originalCake;
+        this.candle = candle;
         registerDefaultState(stateDefinition.any().setValue(LIT, false));
     }
 
@@ -139,5 +141,9 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 
     public BaseCakeBlock getOriginalCake() {
         return originalCake;
+    }
+
+    public Block getCandle() {
+        return candle;
     }
 }

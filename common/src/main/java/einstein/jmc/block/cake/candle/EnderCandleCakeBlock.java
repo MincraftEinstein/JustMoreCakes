@@ -6,12 +6,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class EnderCandleCakeBlock extends BaseCandleCakeBlock {
 
-    public EnderCandleCakeBlock(BaseCakeBlock originalCake, Properties properties) {
-        super(originalCake, properties);
+    public EnderCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
+        super(originalCake, candle, properties);
     }
 
     @Override

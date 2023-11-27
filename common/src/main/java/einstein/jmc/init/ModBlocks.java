@@ -35,7 +35,7 @@ public class ModBlocks {
             .build();
     public static final Supplier<BaseCakeBlock> COOKIE_CAKE = new CakeBuilder("cookie_cake").build();
     public static final Supplier<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake")
-            .setBothClasses(TNTCakeBlock::new, (originalCake, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, properties, TNTCakeBlockEntity::new))
+            .setBothClasses(TNTCakeBlock::new, (originalCake, candle, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, candle, properties, TNTCakeBlockEntity::new))
             .customBlockModel()
             .customCandleCakeBlockModels()
             .customItemModel()
@@ -112,7 +112,7 @@ public class ModBlocks {
     public static final Supplier<BaseCakeBlock> GLOWSTONE_CAKE = new CakeBuilder("glowstone_cake")
             .setCakeProperties(cakeProperties().lightLevel(state -> 12))
             .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 12))
-            .setBothClasses(GlowstoneCakeBlock::new, (originalCake, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, properties, GlowstoneCakeBlockEntity::new))
+            .setBothClasses(GlowstoneCakeBlock::new, (originalCake, candle, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, candle, properties, GlowstoneCakeBlockEntity::new))
             .build();
     public static final Supplier<BaseCakeBlock> CRIMSON_FUNGUS_CAKE = new CakeBuilder("crimson_fungus_cake")
             .customBlockModel()

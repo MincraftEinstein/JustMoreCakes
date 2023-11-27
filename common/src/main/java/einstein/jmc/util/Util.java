@@ -72,6 +72,25 @@ public class Util {
     public static final Gson GSON = new GsonBuilder().create();
     public static final Random RANDOM = new Random();
     public static final LootItemCondition.Builder HAS_CAKE_SPATULA = MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModItems.CAKE_SPATULA.get()));
+    public static final ImmutableMap<Block, Block> VANILLA_CANDLE_CAKES_BY_CANDLE = new ImmutableMap.Builder<Block, Block>()
+            .put(Blocks.CANDLE, Blocks.CANDLE_CAKE)
+            .put(Blocks.WHITE_CANDLE, Blocks.WHITE_CANDLE_CAKE)
+            .put(Blocks.ORANGE_CANDLE, Blocks.ORANGE_CANDLE_CAKE)
+            .put(Blocks.MAGENTA_CANDLE, Blocks.MAGENTA_CANDLE_CAKE)
+            .put(Blocks.LIGHT_BLUE_CANDLE, Blocks.LIGHT_BLUE_CANDLE_CAKE)
+            .put(Blocks.YELLOW_CANDLE, Blocks.YELLOW_CANDLE_CAKE)
+            .put(Blocks.LIME_CANDLE, Blocks.LIME_CANDLE_CAKE)
+            .put(Blocks.PINK_CANDLE, Blocks.PINK_CANDLE_CAKE)
+            .put(Blocks.GRAY_CANDLE, Blocks.GRAY_CANDLE_CAKE)
+            .put(Blocks.LIGHT_GRAY_CANDLE, Blocks.LIGHT_GRAY_CANDLE_CAKE)
+            .put(Blocks.CYAN_CANDLE, Blocks.CYAN_CANDLE_CAKE)
+            .put(Blocks.PURPLE_CANDLE, Blocks.PURPLE_CANDLE_CAKE)
+            .put(Blocks.BLUE_CANDLE, Blocks.BLUE_CANDLE_CAKE)
+            .put(Blocks.BROWN_CANDLE, Blocks.BROWN_CANDLE_CAKE)
+            .put(Blocks.GREEN_CANDLE, Blocks.GREEN_CANDLE_CAKE)
+            .put(Blocks.RED_CANDLE, Blocks.RED_CANDLE_CAKE)
+            .put(Blocks.BLACK_CANDLE, Blocks.BLACK_CANDLE_CAKE)
+            .buildOrThrow();
 
     public static <T extends Item> ResourceLocation getItemId(T item) {
         return BuiltInRegistries.ITEM.getKey(item);
@@ -263,11 +282,7 @@ public class Util {
     }
 
     public static ImmutableList<Block> getVanillaCandleCakes() {
-        return ImmutableList.of(Blocks.CANDLE_CAKE, Blocks.WHITE_CANDLE_CAKE,
-                Blocks.ORANGE_CANDLE_CAKE, Blocks.MAGENTA_CANDLE_CAKE, Blocks.LIGHT_BLUE_CANDLE_CAKE,
-                Blocks.YELLOW_CANDLE_CAKE, Blocks.LIME_CANDLE_CAKE, Blocks.PINK_CANDLE_CAKE, Blocks.GRAY_CANDLE_CAKE,
-                Blocks.LIGHT_GRAY_CANDLE_CAKE, Blocks.CYAN_CANDLE_CAKE, Blocks.PURPLE_CANDLE_CAKE, Blocks.BLUE_CANDLE_CAKE,
-                Blocks.BROWN_CANDLE_CAKE, Blocks.GREEN_CANDLE_CAKE, Blocks.RED_CANDLE_CAKE, Blocks.BLACK_CANDLE_CAKE);
+        return VANILLA_CANDLE_CAKES_BY_CANDLE.values().asList();
     }
 
     public static void removeRecipe(RecipeManager recipeManager, RecipeType<?> type, ResourceLocation id) {
