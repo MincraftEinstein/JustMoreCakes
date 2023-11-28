@@ -99,6 +99,7 @@
   "config.jade.plugin_jmc.cake_oven.item_storage_remover": "Remove Default Item Storage",
   "config.jade.plugin_jmc.cake_oven.item_storage_remover_desc": "Removes the default item storage provider from the Cake Oven. Turning this off and leaving Cake Oven Contents on will cause duplicate items to display, this is not a bug",
   "config.jade.plugin_jmc.hide_trapped_cakes": "Hide Trapped Cakes",
+  "config.jade.plugin_jmc.candle_type": "Candle Type",
   "jade.plugin_jmc.count": "x%s",
   "jade.plugin_jmc.saturation": "Saturation: %s",
   "narration.jade.jmc.nutrition": "Nutrition: %s",
