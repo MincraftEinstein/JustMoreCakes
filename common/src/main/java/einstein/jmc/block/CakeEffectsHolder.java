@@ -1,7 +1,6 @@
 package einstein.jmc.block;
 
 import einstein.jmc.data.cakeeffect.CakeEffects;
-import einstein.jmc.util.Util;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -15,27 +14,31 @@ public interface CakeEffectsHolder {
     void setCakeEffects(CakeEffects effects);
 
     default void addCakeEffects(CakeEffects effects) {
-        if (getCakeEffects() == null) {
+        if (getCakeEffects() == null || getCakeEffects().mobEffects().isEmpty()) {
             setCakeEffects(effects);
+            return;
         }
-        else {
-            List<CakeEffects.MobEffectHolder> list = new ArrayList<>();
-            getCakeEffects().mobEffects().forEach(currentEffects -> effects.mobEffects().forEach(newEffects -> {
-                if (Util.getMobEffectId(currentEffects.effect()).equals(Util.getMobEffectId(newEffects.effect()))) {
-                    list.add(new CakeEffects.MobEffectHolder(currentEffects.effect(),
-                            Math.max(currentEffects.duration().orElse(0), newEffects.duration().orElse(0)),
-                            Math.max(currentEffects.amplifier().orElse(0), newEffects.amplifier().orElse(0))));
+
+        List<CakeEffects.MobEffectHolder> holders = new ArrayList<>();
+
+        effects.mobEffects().forEach(holder -> {
+            boolean foundMatch = false;
+            for (CakeEffects.MobEffectHolder currentHolder : getCakeEffects().mobEffects()) {
+                if (holder.effect().equals(currentHolder.effect())) {
+                    holders.add(new CakeEffects.MobEffectHolder(holder.effect(),
+                            Math.max(holder.duration().orElse(0), currentHolder.duration().orElse(0)),
+                            Math.max(holder.amplifier().orElse(0), currentHolder.amplifier().orElse(0))
+                    ));
+                    foundMatch = true;
+                    break;
                 }
-                else {
-                    if (!list.contains(currentEffects)) {
-                        list.add(currentEffects);
-                    }
-                    if (!list.contains(newEffects)) {
-                        list.add(newEffects);
-                    }
-                }
-            }));
-            setCakeEffects(new CakeEffects(effects.cake(), list));
-        }
+            }
+
+            if (!foundMatch) {
+                holders.add(holder);
+            }
+        });
+
+        setCakeEffects(new CakeEffects(effects.cake(), holders));
     }
 }
