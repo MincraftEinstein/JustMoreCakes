@@ -18,7 +18,7 @@ import snownee.jade.api.ui.IElementHelper;
 
 import java.text.DecimalFormat;
 
-public class CakeInfoProvider implements IBlockComponentProvider {
+public class CakeNourishmentProvider implements IBlockComponentProvider {
 
     private static final DecimalFormat FORMATTER = new DecimalFormat("0.##");
 
@@ -60,6 +60,6 @@ public class CakeInfoProvider implements IBlockComponentProvider {
 
     @Override
     public ResourceLocation getUid() {
-        return ModJadePlugin.CAKE_INFO;
+        return ModJadePlugin.CAKE_NOURISHMENT;
     }
 }

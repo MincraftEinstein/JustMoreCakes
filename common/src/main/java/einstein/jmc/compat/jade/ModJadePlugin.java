@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.CandleCakeBlock;
 import snownee.jade.api.*;
-import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.config.IWailaConfig;
 
 import java.util.function.Supplier;
@@ -23,24 +22,24 @@ import static einstein.jmc.JustMoreCakes.loc;
 @WailaPlugin
 public class ModJadePlugin implements IWailaPlugin {
 
-    public static final CakeInfoProvider CAKE_INFO_COMPONENT_PROVIDER = new CakeInfoProvider();
+    public static final CakeNourishmentProvider CAKE_NOURISHMENT_COMPONENT_PROVIDER = new CakeNourishmentProvider();
     public static final CakeEffectsProvider CAKE_EFFECT_PROVIDER = new CakeEffectsProvider();
     public static final CakeOvenProvider CAKE_OVEN_PROVIDER = new CakeOvenProvider();
     public static final ItemStorageRemoverProvider ITEM_STORAGE_REMOVER_PROVIDER = new ItemStorageRemoverProvider();
     public static final CandleTypeProvider CANDLE_TYPE_PROVIDER = new CandleTypeProvider();
 
     // Features
-    public static final ResourceLocation CAKE_INFO = loc("cake_info");
+    public static final ResourceLocation CAKE_NOURISHMENT = loc("cake_nourishment");
     public static final ResourceLocation CAKE_EFFECTS = loc("cake_effects");
     public static final ResourceLocation CAKE_OVEN = loc("cake_oven");
     public static final ResourceLocation ITEM_STORAGE_REMOVER = loc("cake_oven.item_storage_remover");
     public static final ResourceLocation CANDLE_TYPE = loc("candle_type");
 
     // Configs
-    public static final ResourceLocation DISPLAY_TYPE = loc("cake_info.display_type");
-    public static final ResourceLocation FOOD_ICONS_PER_LINE = loc("cake_info.food_icons_per_line");
-    public static final ResourceLocation SHOW_NUTRITION = loc("cake_info.show_nutrition");
-    public static final ResourceLocation SHOW_SATURATION = loc("cake_info.show_saturation");
+    public static final ResourceLocation DISPLAY_TYPE = loc("cake_nourishment.display_type");
+    public static final ResourceLocation FOOD_ICONS_PER_LINE = loc("cake_nourishment.food_icons_per_line");
+    public static final ResourceLocation SHOW_NUTRITION = loc("cake_nourishment.show_nutrition");
+    public static final ResourceLocation SHOW_SATURATION = loc("cake_nourishment.show_saturation");
     public static final ResourceLocation HIDE_TRAPPED_CAKES = loc("hide_trapped_cakes");
 
     @Override
@@ -56,10 +55,10 @@ public class ModJadePlugin implements IWailaPlugin {
         registration.addConfig(SHOW_SATURATION, true);
         registration.addConfig(HIDE_TRAPPED_CAKES, false);
 
-        registration.registerBlockComponent(CAKE_INFO_COMPONENT_PROVIDER, BaseCakeBlock.class);
-        registration.registerBlockComponent(CAKE_INFO_COMPONENT_PROVIDER, BaseCandleCakeBlock.class);
-        registration.registerBlockComponent(CAKE_INFO_COMPONENT_PROVIDER, CakeBlock.class);
-        registration.registerBlockComponent(CAKE_INFO_COMPONENT_PROVIDER, CandleCakeBlock.class);
+        registration.registerBlockComponent(CAKE_NOURISHMENT_COMPONENT_PROVIDER, BaseCakeBlock.class);
+        registration.registerBlockComponent(CAKE_NOURISHMENT_COMPONENT_PROVIDER, BaseCandleCakeBlock.class);
+        registration.registerBlockComponent(CAKE_NOURISHMENT_COMPONENT_PROVIDER, CakeBlock.class);
+        registration.registerBlockComponent(CAKE_NOURISHMENT_COMPONENT_PROVIDER, CandleCakeBlock.class);
 
         registration.registerBlockComponent(CANDLE_TYPE_PROVIDER, BaseCandleCakeBlock.class);
         registration.registerBlockComponent(CANDLE_TYPE_PROVIDER, CandleCakeBlock.class);
@@ -95,7 +94,7 @@ public class ModJadePlugin implements IWailaPlugin {
             return accessor;
         });
 
-        registration.markAsClientFeature(CAKE_INFO);
+        registration.markAsClientFeature(CAKE_NOURISHMENT);
         registration.markAsClientFeature(DISPLAY_TYPE);
         registration.markAsClientFeature(FOOD_ICONS_PER_LINE);
         registration.markAsClientFeature(SHOW_NUTRITION);
