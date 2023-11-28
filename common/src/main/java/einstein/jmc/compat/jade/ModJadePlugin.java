@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.CandleCakeBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import snownee.jade.api.*;
 import snownee.jade.api.config.IWailaConfig;
 
@@ -75,18 +76,19 @@ public class ModJadePlugin implements IWailaPlugin {
             if (IWailaConfig.get().getPlugin().get(HIDE_TRAPPED_CAKES)) {
                 if (accessor instanceof BlockAccessor blockAccessor) {
                     Block block = blockAccessor.getBlock();
+                    BlockState state = blockAccessor.getBlockState();
                     if (block.equals(ModBlocks.TNT_CAKE.get()) || block.equals(ModBlocks.POISON_CAKE.get())) {
                         return registration.blockAccessor()
                                 .from(blockAccessor)
                                 .blockEntity(() -> null) // Required for TNT cake to be displayed (idk why)
-                                .blockState(Blocks.CAKE.defaultBlockState())
+                                .blockState(Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, state.getValue(BaseCakeBlock.BITES)))
                                 .build();
                     }
                     else if (isTrappedCandleCake(block, ModBlocks.TNT_CAKE.get()) || isTrappedCandleCake(block, ModBlocks.POISON_CAKE.get())) {
                         return registration.blockAccessor()
                                 .from(blockAccessor)
                                 .blockEntity(() -> null)
-                                .blockState(Util.VANILLA_CANDLE_CAKES_BY_CANDLE.get(((BaseCandleCakeBlock) block).getCandle()).defaultBlockState())
+                                .blockState(Util.VANILLA_CANDLE_CAKES_BY_CANDLE.get(((BaseCandleCakeBlock) block).getCandle()).defaultBlockState().setValue(CandleCakeBlock.LIT, state.getValue(BaseCandleCakeBlock.LIT)))
                                 .build();
                     }
                 }
