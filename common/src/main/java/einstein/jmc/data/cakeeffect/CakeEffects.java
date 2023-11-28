@@ -20,7 +20,7 @@ public record CakeEffects(Block cake, List<MobEffectHolder> mobEffects) {
 
         public static final Codec<MobEffectHolder> MOB_EFFECT_CODEC = RecordCodecBuilder.create(inst -> inst.group(
                 BuiltInRegistries.MOB_EFFECT.byNameCodec().fieldOf("mob_effect").forGetter(MobEffectHolder::effect),
-                Codec.intRange(0, Integer.MAX_VALUE).optionalFieldOf("duration").forGetter(MobEffectHolder::duration),
+                Codec.intRange(-1, Integer.MAX_VALUE).optionalFieldOf("duration").forGetter(MobEffectHolder::duration),
                 Codec.intRange(0, 255).optionalFieldOf("amplifier").forGetter(MobEffectHolder::amplifier)
         ).apply(inst, MobEffectHolder::new));
 
