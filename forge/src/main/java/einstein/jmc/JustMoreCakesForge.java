@@ -1,6 +1,5 @@
 package einstein.jmc;
 
-import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
 import einstein.jmc.data.cakeeffect.CakeEffectsManager;
@@ -31,7 +30,6 @@ import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
@@ -85,7 +83,6 @@ public class JustMoreCakesForge {
         MinecraftForge.EVENT_BUS.addListener(this::onEntityTick);
         MinecraftForge.EVENT_BUS.addListener(this::onAddReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
-        MinecraftForge.EVENT_BUS.addListener(this::onServerStarted);
         MinecraftForge.EVENT_BUS.addListener(this::onVillagerTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onWanderingTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
@@ -129,32 +126,21 @@ public class JustMoreCakesForge {
         event.addListener(CAKE_EFFECTS_MANAGER);
     }
 
-    public static void addCakeEffects() {
+    public static void loadCakeEffects() {
         if (CAKE_EFFECTS_MANAGER != null) {
-            CAKE_EFFECTS_MANAGER.getRegisteredCakeEffects().forEach((location, cakeEffects) -> {
-                if (cakeEffects.cake() instanceof CakeEffectsHolder holder) {
-                    holder.addCakeEffects(cakeEffects);
-                }
-                else {
-                    LOGGER.error("Failed to load cake effect for block {} as it is not valid cake effect holder", cakeEffects.cake());
-                }
-            });
+            JustMoreCakes.loadCakeEffects(CAKE_EFFECTS_MANAGER.getRegisteredCakeEffects());
+            return;
         }
-        else {
-            throw new IllegalStateException("Can't retrieve CakeEffectsManager until resources have loaded");
-        }
+        throw new IllegalStateException("Can't retrieve CakeEffects until resources have loaded");
     }
 
     void onServerStarting(ServerStartingEvent event) {
         JustMoreCakes.onServerStarting(event.getServer());
     }
 
-    void onServerStarted(ServerStartedEvent event) {
-        addCakeEffects();
-    }
-
     void onDataPackSync(OnDatapackSyncEvent event) {
         JustMoreCakes.onDatapackSync(event.getPlayer());
+        loadCakeEffects();
     }
 
     void commonSetup(final FMLCommonSetupEvent event) {

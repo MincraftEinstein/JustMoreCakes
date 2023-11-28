@@ -48,9 +48,8 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     @Override
     public void onInitialize() {
         JustMoreCakes.init();
-        onAddReloadListeners();
         onServerStarting();
-        onServerStarted();
+        onAddReloadListeners();
         onDatapackSync();
         addVillagerTrades();
 
@@ -90,6 +89,10 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         BlockEntityRenderers.register(ModBlockEntityTypes.CAKE_STAND.get(), CakeStandRenderer::new);
     }
 
+    void onServerStarting() {
+        ServerLifecycleEvents.SERVER_STARTING.register(JustMoreCakes::onServerStarting);
+    }
+
     void onAddReloadListeners() {
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
 
@@ -105,32 +108,19 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         });
     }
 
-    void onServerStarting() {
-        ServerLifecycleEvents.SERVER_STARTING.register(JustMoreCakes::onServerStarting);
-    }
-
-    void onServerStarted() {
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> addCakeEffects());
-    }
-
-    public static void addCakeEffects() {
+    public static void loadCakeEffects() {
         if (CAKE_EFFECTS != null) {
-            CAKE_EFFECTS.forEach((location, cakeEffects) -> {
-                if (cakeEffects.cake() instanceof CakeEffectsHolder holder) {
-                    holder.addCakeEffects(cakeEffects);
-                }
-                else {
-                    LOGGER.error("Failed to load cake effect for block {} as it is not valid cake effect holder", cakeEffects.cake());
-                }
-            });
+            JustMoreCakes.loadCakeEffects(CAKE_EFFECTS);
+            return;
         }
-        else {
-            throw new IllegalStateException("Can't retrieve CakeEffectsManager until resources have loaded");
-        }
+        throw new IllegalStateException("Can't retrieve CakeEffects until resources have loaded");
     }
 
     void onDatapackSync() {
-        ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> JustMoreCakes.onDatapackSync(player));
+        ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> {
+            JustMoreCakes.onDatapackSync(player);
+            loadCakeEffects();
+        });
     }
 
     void addVillagerTrades() {

@@ -1,6 +1,8 @@
 package einstein.jmc;
 
 import einstein.jmc.advancement.criterian.CakeEatenTrigger;
+import einstein.jmc.block.CakeEffectsHolder;
+import einstein.jmc.data.cakeeffect.CakeEffects;
 import einstein.jmc.init.*;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -11,6 +13,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Map;
 
 import static einstein.jmc.init.ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT;
 import static einstein.jmc.util.Util.registerVillageBuilding;
@@ -58,6 +62,17 @@ public class JustMoreCakes {
                 }
             }
         }
+    }
+
+    public static void loadCakeEffects(Map<ResourceLocation, CakeEffects> map) {
+        map.forEach((location, cakeEffects) -> {
+            if (cakeEffects.cake() instanceof CakeEffectsHolder holder) {
+                holder.addCakeEffects(cakeEffects);
+            }
+            else {
+                LOGGER.error("Failed to load cake effect for block {} as it is not valid cake effect holder", cakeEffects.cake());
+            }
+        });
     }
 
     public static ResourceLocation loc(String string) {
