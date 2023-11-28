@@ -14,9 +14,7 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
-import snownee.jade.api.ui.IDisplayHelper;
 import snownee.jade.api.ui.IElementHelper;
-import snownee.jade.overlay.DisplayHelper;
 
 import java.text.DecimalFormat;
 
@@ -29,36 +27,27 @@ public class CakeInfoProvider implements IBlockComponentProvider {
         Block block = accessor.getBlock();
         if (block instanceof BaseCakeBlock cake) {
             Pair<Integer, Float> nourishment = cake.getNourishment();
-            int nutrition = nourishment.getFirst();
-            int slices = cake.getBiteCount() + 1;
 
-            addNutrition(tooltip, config, slices, nutrition);
-            addSaturation(tooltip, config, slices, nutrition, nourishment.getSecond());
+            addNourishmentInfo(tooltip, config, cake.getBiteCount() + 1, nourishment.getFirst(), nourishment.getSecond());
         }
         else if (block instanceof BaseCandleCakeBlock candleCake) {
             BaseCakeBlock originalCake = candleCake.getOriginalCake();
             Pair<Integer, Float> nourishment = originalCake.getNourishment();
-            int nutrition = nourishment.getFirst();
-            int slices = originalCake.getBiteCount() + 1;
 
-            addNutrition(tooltip, config, slices, nutrition);
-            addSaturation(tooltip, config, slices, originalCake.getNourishment().getFirst(), originalCake.getNourishment().getSecond());
+            addNourishmentInfo(tooltip, config, originalCake.getBiteCount() + 1, nourishment.getFirst(), nourishment.getSecond());
         }
         else if (block == Blocks.CAKE || Util.getVanillaCandleCakes().contains(block)) {
-            addNutrition(tooltip, config, 7, 2);
-            addSaturation(tooltip, config, 7, 2, 0.1F);
+            addNourishmentInfo(tooltip, config, 7, 2, 0.1F);
         }
     }
 
-    private static void addNutrition(ITooltip tooltip, IPluginConfig config, int slices, int nutrition) {
+    private static void addNourishmentInfo(ITooltip tooltip, IPluginConfig config, int slices, int nutrition, float saturationModifier) {
         if (config.get(ModJadePlugin.SHOW_NUTRITION)) {
             if (nutrition > 0) {
                 tooltip.add(new FoodPointsSpriteElement(config, slices, nutrition));
             }
         }
-    }
 
-    private static void addSaturation(ITooltip tooltip, IPluginConfig config, int slices, int nutrition, float saturationModifier) {
         if (config.get(ModJadePlugin.SHOW_SATURATION)) {
             if (saturationModifier > 0 && nutrition > 0) {
                 if (config.getEnum(ModJadePlugin.DISPLAY_TYPE) == ModJadePlugin.CakeInfoDisplayType.PER_SLICE) {
