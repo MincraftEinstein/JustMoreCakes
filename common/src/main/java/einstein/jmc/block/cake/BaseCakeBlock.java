@@ -155,6 +155,8 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
             }
 
+            afterEaten(state, pos, player);
+
             return InteractionResult.SUCCESS;
         }
     }
@@ -180,6 +182,9 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1, 1);
         }
         return state;
+    }
+
+    public void afterEaten(BlockState state, BlockPos pos, Player player) {
     }
 
     @SuppressWarnings("deprecation")
