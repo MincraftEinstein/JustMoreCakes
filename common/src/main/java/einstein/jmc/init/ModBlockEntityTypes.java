@@ -1,5 +1,6 @@
 package einstein.jmc.init;
 
+import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.entity.CakeOvenBlockEntity;
 import einstein.jmc.block.entity.CakeStandBlockEntity;
 import einstein.jmc.block.entity.GlowstoneCakeBlockEntity;
@@ -9,18 +10,28 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static einstein.jmc.platform.Services.REGISTRY;
 
 public class ModBlockEntityTypes {
 
-    public static final Supplier<BlockEntityType<GlowstoneCakeBlockEntity>> GLOWSTONE_CAKE = register("glowstone_cake", GlowstoneCakeBlockEntity::new, ModBlocks.GLOWSTONE_CAKE);
-    public static final Supplier<BlockEntityType<TNTCakeBlockEntity>> TNT_CAKE = register("tnt_cake", TNTCakeBlockEntity::new, ModBlocks.TNT_CAKE);
+    public static final Supplier<BlockEntityType<GlowstoneCakeBlockEntity>> GLOWSTONE_CAKE = registerForCake("glowstone_cake", GlowstoneCakeBlockEntity::new, ModBlocks.GLOWSTONE_CAKE);
+    public static final Supplier<BlockEntityType<TNTCakeBlockEntity>> TNT_CAKE = registerForCake("tnt_cake", TNTCakeBlockEntity::new, ModBlocks.TNT_CAKE);
     public static final Supplier<BlockEntityType<CakeOvenBlockEntity>> CAKE_OVEN = register("cake_oven", CakeOvenBlockEntity::new, ModBlocks.CAKE_OVEN);
     public static final Supplier<BlockEntityType<CakeStandBlockEntity>> CAKE_STAND = register("cake_stand", CakeStandBlockEntity::new, ModBlocks.CAKE_STAND);
 
     public static void init() {
+    }
+
+    private static <T extends BlockEntity> Supplier<BlockEntityType<T>> registerForCake(String name, BlockEntitySupplier<T> supplier, Supplier<? extends BaseCakeBlock> cake) {
+        return REGISTRY.registerBlockEntity(name, () -> {
+            List<Supplier<? extends Block>> cakes = new ArrayList<>(cake.get().getBuilder().getCandleCakeByCandle().values());
+            cakes.add(cake);
+            return REGISTRY.createBlockEntity(supplier, cakes.stream().map(Supplier::get).toArray(Block[]::new));
+        });
     }
 
     private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String name, BlockEntitySupplier<T> supplier, Supplier<? extends Block> block) {
