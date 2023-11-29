@@ -25,7 +25,7 @@ public class ModBlocks {
     public static final Supplier<BaseCakeBlock> PUMPKIN_CAKE = new CakeBuilder("pumpkin_cake").build();
     public static final Supplier<BaseCakeBlock> MELON_CAKE = new CakeBuilder("melon_cake")
             .nutrition(1)
-            .saturation(0.4F)
+            .saturationModifier(0.4F)
             .build();
     public static final Supplier<BaseCakeBlock> APPLE_CAKE = new CakeBuilder("apple_cake").build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
@@ -42,7 +42,7 @@ public class ModBlocks {
             .build();
     public static final Supplier<BaseCakeBlock> GOLDEN_APPLE_CAKE = new CakeBuilder("golden_apple_cake")
             .nutrition(4)
-            .saturation(0.5F)
+            .saturationModifier(0.5F)
             .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake")
@@ -74,7 +74,7 @@ public class ModBlocks {
             .build();
     public static final Supplier<BaseCakeBlock> BEETROOT_CAKE = new CakeBuilder("beetroot_cake")
             .nutrition(3)
-            .saturation(0.4F)
+            .saturationModifier(0.4F)
             .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> LAVA_CAKE = new CakeBuilder("lava_cake")
@@ -92,7 +92,7 @@ public class ModBlocks {
             .disallowCandles()
             .noItem()
             .nutrition(1)
-            .saturation(0.3F)
+            .saturationModifier(0.3F)
             .build();
     public static final Supplier<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake")
             .customBlockModel()
@@ -104,10 +104,10 @@ public class ModBlocks {
             .build();
     public static final Supplier<BaseCakeBlock> SWEET_BERRY_CAKE = new CakeBuilder("sweet_berry_cake")
             .nutrition(1)
-            .saturation(0.5F)
+            .saturationModifier(0.5F)
             .build();
     public static final Supplier<BaseCakeBlock> HONEY_CAKE = new CakeBuilder("honey_cake")
-            .saturation(0.4F)
+            .saturationModifier(0.4F)
             .build();
     public static final Supplier<BaseCakeBlock> GLOWSTONE_CAKE = new CakeBuilder("glowstone_cake")
             .setCakeProperties(cakeProperties().lightLevel(state -> 12))
@@ -128,7 +128,7 @@ public class ModBlocks {
             .setCakeProperties(cakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
             .setCandleCakeProperties(candleCakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
             .nutrition(0)
-            .saturation(0)
+            .saturationModifier(0)
             .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> SCULK_CAKE = new CakeBuilder("sculk_cake")

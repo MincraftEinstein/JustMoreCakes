@@ -117,7 +117,7 @@ public class ModModelProvider extends FabricModelProvider {
         ResourceLocation side = TextureMapping.getBlockTexture(cake, "_side");
         ResourceLocation inside = TextureMapping.getBlockTexture(cake, "_inner");
 
-        if (cake.getBiteCount() > 0) {
+        if (cake.getSlices() > 0) {
             var builder = PropertyDispatch.property(BlockStateProperties.BITES);
 
             builder.select(0, blankCake(generators, cake, bottom, top, side));
@@ -176,7 +176,7 @@ public class ModModelProvider extends FabricModelProvider {
         ResourceLocation side = TextureMapping.getBlockTexture(cake, "_side");
         ResourceLocation inside = TextureMapping.getBlockTexture(cake, "_inner");
 
-        if (cake.getBiteCount() > 0) {
+        if (cake.getSlices() > 0) {
             var builder = PropertyDispatch.property(BlockStateProperties.BITES);
 
             builder.select(0, blankCrossCake(generators, cake, bottom, top, side, cross));
@@ -219,7 +219,7 @@ public class ModModelProvider extends FabricModelProvider {
     private void defaultCakeBlock(BlockModelGenerators generators, BaseCakeBlock cake) {
         CakeBuilder cakeBuilder = cake.getBuilder();
 
-        if (cake.getBiteCount() > 0) {
+        if (cake.getSlices() > 0) {
             var builder = PropertyDispatch.property(BaseCakeBlock.BITES);
 
             builder.select(0, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(Blocks.CAKE)));

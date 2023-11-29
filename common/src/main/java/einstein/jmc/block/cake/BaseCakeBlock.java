@@ -59,12 +59,12 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     private final boolean allowsCandles;
     private final boolean canAlwaysEat;
-    private final int biteCount;
+    private final int slices;
     private CakeBuilder builder;
     private CakeEffects cakeEffects;
 
-    protected BaseCakeBlock(CakeBuilder builder, int biteCount) {
-        this(builder.getCakeProperties(), builder.allowsCandles(), builder.canAlwaysEat(), biteCount);
+    protected BaseCakeBlock(CakeBuilder builder, int slices) {
+        this(builder.getCakeProperties(), builder.allowsCandles(), builder.canAlwaysEat(), slices);
         this.builder = builder;
     }
 
@@ -72,12 +72,12 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         this(builder, 6);
     }
 
-    public BaseCakeBlock(Properties properties, boolean allowsCandles, boolean canAlwaysEat, int biteCount) {
+    public BaseCakeBlock(Properties properties, boolean allowsCandles, boolean canAlwaysEat, int slices) {
         super(properties);
         this.allowsCandles = allowsCandles;
         this.canAlwaysEat = canAlwaysEat;
-        this.biteCount = biteCount;
-        if (getBiteCount() > 0) {
+        this.slices = slices;
+        if (getSlices() > 0) {
             registerDefaultState(stateDefinition.any().setValue(getBites(), 0));
         }
     }
@@ -147,7 +147,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             int bite = state.getValue(getBites());
             level.gameEvent(player, GameEvent.EAT, pos);
 
-            if (bite < getBiteCount()) {
+            if (bite < getSlices()) {
                 level.setBlock(pos, state.setValue(getBites(), bite + 1), 3);
             }
             else {
@@ -205,7 +205,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return ((getBiteCount() + 1) - state.getValue(getBites())) * 2;
+        return ((getSlices() + 1) - state.getValue(getBites())) * 2;
     }
 
     @Override
@@ -227,8 +227,8 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         return SHAPE_BY_BITE;
     }
 
-    public int getBiteCount() {
-        return biteCount;
+    public int getSlices() {
+        return slices;
     }
 
     public CakeBuilder getBuilder() {
@@ -248,7 +248,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     public Pair<Integer, Float> getNourishment() {
         if (builder != null) {
-            return Pair.of(builder.getNutrition(), builder.getSaturation());
+            return Pair.of(builder.getNutrition(), builder.getSaturationModifier());
         }
         return Pair.of(2, 0.1F);
     }
@@ -256,7 +256,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     public static boolean isUneaten(BlockState state) {
         Block block = state.getBlock();
         if (block instanceof BaseCakeBlock cakeBlock && cakeBlock.getBites() != null) {
-            return cakeBlock.getBiteCount() <= 0 || state.getValue(cakeBlock.getBites()) == 0;
+            return cakeBlock.getSlices() <= 0 || state.getValue(cakeBlock.getBites()) == 0;
         }
         return !(block instanceof CakeBlock) || state.getValue(CakeBlock.BITES) == 0;
     }

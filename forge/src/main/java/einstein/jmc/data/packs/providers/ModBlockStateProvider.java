@@ -79,7 +79,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         String bottom = "block/" + name + "_bottom";
         String inside = "block/" + name + "_inner";
 
-        if (cake.getBiteCount() > 0) {
+        if (cake.getSlices() > 0) {
             VariantBlockStateBuilder builder = getVariantBuilder(cake);
             builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().withExistingParent(name, modLoc("template_cake"))
                     .texture("side", side)
@@ -127,7 +127,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         String bottom = "block/" + name + "_bottom";
         String inside = "block/" + name + "_inner";
 
-        if (cake.getBiteCount() > 0) {
+        if (cake.getSlices() > 0) {
             VariantBlockStateBuilder builder = getVariantBuilder(cake);
             builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().withExistingParent(name, modLoc("template_cross_cake"))
                     .texture("side", side)
@@ -162,7 +162,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void defaultCakeBlock(BaseCakeBlock cake) {
         CakeBuilder cakeBuilder = cake.getBuilder();
 
-        if (cake.getBiteCount() > 0) {
+        if (cake.getSlices() > 0) {
             VariantBlockStateBuilder builder = getVariantBuilder(cake);
             builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().getExistingFile(mcLoc("cake"))));
 

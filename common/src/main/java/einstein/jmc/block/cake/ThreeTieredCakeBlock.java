@@ -62,6 +62,6 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return ((getBiteCount() + 1) - state.getValue(getBites()));
+        return ((getSlices() + 1) - state.getValue(getBites()));
     }
 }
