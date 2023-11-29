@@ -9,6 +9,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -33,5 +35,10 @@ public class ForgeCommonHooks implements CommonHooks {
     @Override
     public void registerBrewingRecipe(Potion potion, Ingredient ingredient, Potion result) {
         BrewingRecipeRegistry.addRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), potion)), ingredient, PotionUtils.setPotion(new ItemStack(Items.POTION), result));
+    }
+
+    @Override
+    public void registerCompostableInternal(ItemLike item, float chance) {
+        ComposterBlock.COMPOSTABLES.put(item, chance);
     }
 }
