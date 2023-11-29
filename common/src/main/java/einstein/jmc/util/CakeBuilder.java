@@ -49,8 +49,8 @@ public class CakeBuilder {
     private boolean customBlockModel;
     private boolean customCandleCakeBlockModels;
     private boolean customItemModel;
-    private int nutrition = 2;
-    private float saturationModifier = 0.1F;
+    private int nutrition = BaseCakeBlock.DEFAULT_NUTRITION;
+    private float saturationModifier = BaseCakeBlock.DEFAULT_SATURATION_MODIFIER;
     private CakeClazzSupplier<?> cakeClazz;
     private CandleCakeClazzSupplier<?> candleCakeClazz;
     private BlockBehaviour.Properties cakeProperties;

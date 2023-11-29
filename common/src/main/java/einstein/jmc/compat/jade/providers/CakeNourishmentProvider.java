@@ -26,15 +26,11 @@ public class CakeNourishmentProvider implements IBlockComponentProvider {
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
         Block block = accessor.getBlock();
         if (block instanceof BaseCakeBlock cake) {
-            Pair<Integer, Float> nourishment = cake.getNourishment();
-
-            addNourishmentInfo(tooltip, config, cake.getSlices() + 1, nourishment.getFirst(), nourishment.getSecond());
+            addNourishmentInfo(tooltip, config, cake.getSlices() + 1, cake.getNutrition(), cake.getSaturationModifier());
         }
         else if (block instanceof BaseCandleCakeBlock candleCake) {
             BaseCakeBlock originalCake = candleCake.getOriginalCake();
-            Pair<Integer, Float> nourishment = originalCake.getNourishment();
-
-            addNourishmentInfo(tooltip, config, originalCake.getSlices() + 1, nourishment.getFirst(), nourishment.getSecond());
+            addNourishmentInfo(tooltip, config, originalCake.getSlices() + 1, originalCake.getNutrition(), originalCake.getSaturationModifier());
         }
         else if (block == Blocks.CAKE || Util.getVanillaCandleCakes().contains(block)) {
             addNourishmentInfo(tooltip, config, 7, 2, 0.1F);

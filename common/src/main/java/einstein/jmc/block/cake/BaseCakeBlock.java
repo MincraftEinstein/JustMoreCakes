@@ -1,6 +1,5 @@
 package einstein.jmc.block.cake;
 
-import com.mojang.datafixers.util.Pair;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.data.cakeeffect.CakeEffects;
@@ -46,6 +45,8 @@ import static einstein.jmc.util.Util.applyEffectFromHolder;
 @SuppressWarnings("deprecation")
 public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
+    public static final int DEFAULT_NUTRITION = 2;
+    public static final float DEFAULT_SATURATION_MODIFIER = 0.1F;
     public static final IntegerProperty BITES = BlockStateProperties.BITES;
     protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[]{
             Block.box(1, 0, 1, 15, 8, 15),
@@ -133,7 +134,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 player.playSound(player.getEatingSound(stack), 0.5F + 0.5F * RANDOM.nextInt(2), (RANDOM.nextFloat() - RANDOM.nextFloat()) * 0.2F + 1.0F);
             }
             player.awardStat(Stats.EAT_CAKE_SLICE);
-            player.getFoodData().eat(getNourishment().getFirst(), getNourishment().getSecond());
+            player.getFoodData().eat(getNutrition(), getSaturationModifier());
             state = eatActions(player, pos, state);
 
             if (cakeEffects != null) {
@@ -246,11 +247,18 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         this.cakeEffects = cakeEffects;
     }
 
-    public Pair<Integer, Float> getNourishment() {
+    public int getNutrition() {
         if (builder != null) {
-            return Pair.of(builder.getNutrition(), builder.getSaturationModifier());
+            return builder.getNutrition();
         }
-        return Pair.of(2, 0.1F);
+        return DEFAULT_NUTRITION;
+    }
+
+    public float getSaturationModifier() {
+        if (builder != null) {
+            return builder.getSaturationModifier();
+        }
+        return DEFAULT_SATURATION_MODIFIER;
     }
 
     public static boolean isUneaten(BlockState state) {
