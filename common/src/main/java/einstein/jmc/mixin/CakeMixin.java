@@ -5,6 +5,7 @@ import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.cakeeffect.CakeEffects;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -12,7 +13,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -40,19 +40,20 @@ public class CakeMixin implements CakeEffectsHolder {
     private void use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (BaseCakeBlock.isUneaten(state)) {
-            if (stack.is(Items.CAKE)) {
-                BlockState newState = ModBlocks.TWO_TIERED_CAKE.get().defaultBlockState();
-                Block.pushEntitiesUp(state, newState, level, pos);
-                level.setBlockAndUpdate(pos, newState);
-                level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                level.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1, 1);
-                player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
-                if (!player.isCreative()) {
-                    stack.shrink(1);
-                }
-                cir.setReturnValue(InteractionResult.SUCCESS);
+        if (stack.is(Items.CAKE) && BaseCakeBlock.isUneaten(state)) {
+            BlockState newState = ModBlocks.TWO_TIERED_CAKE.get().defaultBlockState();
+            Block.pushEntitiesUp(state, newState, level, pos);
+
+            level.setBlockAndUpdate(pos, newState);
+            level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+            level.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1, 1);
+            player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
+
+            if (!player.isCreative()) {
+                stack.shrink(1);
             }
+
+            cir.setReturnValue(InteractionResult.SUCCESS);
         }
     }
 
@@ -63,19 +64,13 @@ public class CakeMixin implements CakeEffectsHolder {
         }
     }
 
-    @Inject(method = "eat", at = @At(value = "RETURN", target = "Lnet/minecraft/world/food/FoodData;eat(IF)V"))
+    @Inject(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;eat(IF)V"))
     private static void eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<InteractionResult> cir) {
-        CakeBlock cake = (CakeBlock) state.getBlock();
-        CakeEffects effects = ((CakeMixin) (Object) cake).justMoreCakes$cakeEffects;
-        if (effects != null) {
-            for (CakeEffects.MobEffectHolder holder : effects.mobEffects()) {
-                MobEffectInstance instance = new MobEffectInstance(holder.effect(), holder.duration().orElse(0), holder.amplifier().orElse(0));
-                if (holder.effect().isInstantenous()) {
-                    instance.getEffect().applyInstantenousEffect(player, player, player, instance.getAmplifier(), 1);
-                }
-                else {
-                    player.addEffect(instance);
-                }
+        CakeBlock cake = (CakeBlock) state.getBlock(); // Don't replace with a reference to Blocks.CAKE, so that this will work with inheritors
+        CakeEffects cakeEffects = ((CakeEffectsHolder) cake).getCakeEffects();
+        if (cakeEffects != null) {
+            for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {
+                Util.applyEffectFromHolder(holder, player);
             }
         }
     }
