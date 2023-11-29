@@ -118,11 +118,6 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 return InteractionResult.CONSUME;
             }
         }
-        else {
-            if (player instanceof ServerPlayer serverPlayer) {
-                JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, this);
-            }
-        }
 
         return eat(level, pos, state, player);
     }
@@ -143,6 +138,10 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
             if (cakeEffects != null) {
                 applyEffects(player);
+            }
+
+            if (player instanceof ServerPlayer serverPlayer) {
+                JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, this);
             }
 
             int bite = state.getValue(getBites());

@@ -57,13 +57,6 @@ public class CakeMixin implements CakeEffectsHolder {
         }
     }
 
-    @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/CakeBlock;eat(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/InteractionResult;"))
-    private void eatInvoked(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
-        if (player instanceof ServerPlayer serverPlayer) {
-            JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, ((CakeBlock) (Object) this));
-        }
-    }
-
     @Inject(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;eat(IF)V"))
     private static void eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<InteractionResult> cir) {
         CakeBlock cake = (CakeBlock) state.getBlock(); // Don't replace with a reference to Blocks.CAKE, so that this will work with inheritors
@@ -72,6 +65,10 @@ public class CakeMixin implements CakeEffectsHolder {
             for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {
                 Util.applyEffectFromHolder(holder, player);
             }
+        }
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, cake);
         }
     }
 

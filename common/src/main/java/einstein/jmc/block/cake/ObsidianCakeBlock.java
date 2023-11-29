@@ -1,7 +1,9 @@
 package einstein.jmc.block.cake;
 
+import einstein.jmc.JustMoreCakes;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
@@ -29,6 +31,11 @@ public class ObsidianCakeBlock extends BaseCakeBlock {
     public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
         player.hurt(player.damageSources().generic(), 2);
         level.setBlock(pos, state, 3);
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, this);
+        }
+
         return InteractionResult.SUCCESS;
     }
 
