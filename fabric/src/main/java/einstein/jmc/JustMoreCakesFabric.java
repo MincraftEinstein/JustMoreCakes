@@ -6,6 +6,7 @@ import einstein.jmc.data.cakeeffect.FabricCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.FabricNetworkHelper;
+import einstein.jmc.platform.services.NetworkHelper;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
@@ -39,7 +40,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     @Override
     public void onInitialize() {
         JustMoreCakes.init();
-        FabricNetworkHelper.init();
+        FabricNetworkHelper.init(NetworkHelper.Direction.TO_SERVER);
         onServerStarting();
         onAddReloadListeners();
         addVillagerTrades();
@@ -78,6 +79,8 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CAKE_STAND.get(), RenderType.cutout());
 
         BlockEntityRenderers.register(ModBlockEntityTypes.CAKE_STAND.get(), CakeStandRenderer::new);
+
+        FabricNetworkHelper.init(NetworkHelper.Direction.TO_CLIENT);
     }
 
     void onServerStarting() {

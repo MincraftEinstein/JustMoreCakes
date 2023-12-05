@@ -38,21 +38,23 @@ public class FabricNetworkHelper implements NetworkHelper {
         ServerPlayNetworking.send(player, loc(name), buf);
     }
 
-    public static void init() {
+    public static void init(Direction directionToRegister) {
         PACKETS.forEach((name, holder) -> {
             Packet packet = holder.packet();
             PacketData<?> data = holder.data();
-            if (data.direction() == Direction.TO_CLIENT) {
-                ClientPlayNetworking.registerGlobalReceiver(loc(name), (minecraft, handler, buf, responseSender) -> {
-                    packet.decode(buf);
-                    minecraft.execute(() -> packet.handle(null));
-                });
-            }
-            else if (data.direction() == Direction.TO_SERVER) {
-                ServerPlayNetworking.registerGlobalReceiver(loc(name), (server, player, handler, buf, responseSender) -> {
-                    packet.decode(buf);
-                    server.execute(() -> packet.handle(player));
-                });
+            if (data.direction() == directionToRegister) {
+                if (directionToRegister == Direction.TO_CLIENT) {
+                    ClientPlayNetworking.registerGlobalReceiver(loc(name), (minecraft, handler, buf, responseSender) -> {
+                        packet.decode(buf);
+                        minecraft.execute(() -> packet.handle(null));
+                    });
+                }
+                else if (directionToRegister == Direction.TO_SERVER) {
+                    ServerPlayNetworking.registerGlobalReceiver(loc(name), (server, player, handler, buf, responseSender) -> {
+                        packet.decode(buf);
+                        server.execute(() -> packet.handle(player));
+                    });
+                }
             }
         });
     }
