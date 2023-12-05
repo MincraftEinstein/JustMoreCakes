@@ -137,8 +137,10 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             player.getFoodData().eat(getNutrition(), getSaturationModifier());
             state = eatActions(player, pos, state);
 
-            if (cakeEffects != null) {
-                applyEffects(player);
+            if (!level.isClientSide()) {
+                if (cakeEffects != null) {
+                    applyEffects(player);
+                }
             }
 
             if (player instanceof ServerPlayer serverPlayer) {
