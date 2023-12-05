@@ -8,6 +8,7 @@
     "CakeMixin",
     "PandaMixin",
     "PandaMixin$PandaSitGoalMixin",
+    "PlayerListMixin",
     "RecipeManagerAccessor",
     "StructureTemplatePoolAccessor",
     "VibrationSystemListenerMixin",

@@ -1,14 +1,13 @@
 package einstein.jmc;
 
-import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
-import einstein.jmc.data.cakeeffect.CakeEffects;
+import einstein.jmc.data.cakeeffect.FabricCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
+import einstein.jmc.platform.FabricNetworkHelper;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
-import einstein.jmc.util.Util;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
@@ -21,36 +20,28 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.VillagerInteractionRegistries;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fml.config.ModConfig;
 
-import java.util.Map;
-
-import static einstein.jmc.JustMoreCakes.LOGGER;
 import static einstein.jmc.JustMoreCakes.loc;
 import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
 import static einstein.jmc.util.Util.getVanillaCandleCakes;
 
 public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer, DataGeneratorEntrypoint {
 
-    private static Map<ResourceLocation, CakeEffects> CAKE_EFFECTS;
-
     @Override
     public void onInitialize() {
         JustMoreCakes.init();
+        FabricNetworkHelper.init();
         onServerStarting();
         onAddReloadListeners();
-        onDatapackSync();
         addVillagerTrades();
 
         ForgeConfigRegistry.INSTANCE.register(JustMoreCakes.MOD_ID, ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
@@ -94,33 +85,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     }
 
     void onAddReloadListeners() {
-        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
-
-            @Override
-            public ResourceLocation getFabricId() {
-                return JustMoreCakes.loc("cake_effects");
-            }
-
-            @Override
-            public void onResourceManagerReload(ResourceManager manager) {
-                CAKE_EFFECTS = Util.deserializeCakeEffects(manager);
-            }
-        });
-    }
-
-    public static void loadCakeEffects() {
-        if (CAKE_EFFECTS != null) {
-            JustMoreCakes.loadCakeEffects(CAKE_EFFECTS);
-            return;
-        }
-        throw new IllegalStateException("Can't retrieve CakeEffects until resources have loaded");
-    }
-
-    void onDatapackSync() {
-        ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> {
-            JustMoreCakes.onDatapackSync(player);
-            loadCakeEffects();
-        });
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new FabricCakeEffectsReloadListener());
     }
 
     void addVillagerTrades() {

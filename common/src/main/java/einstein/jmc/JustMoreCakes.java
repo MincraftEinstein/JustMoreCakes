@@ -1,9 +1,8 @@
 package einstein.jmc;
 
 import einstein.jmc.advancement.criterian.CakeEatenTrigger;
-import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.data.cakeeffect.CakeEffects;
+import einstein.jmc.data.cakeeffect.CakeEffectsManager;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeBuilder;
@@ -14,10 +13,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
 import java.util.function.Supplier;
 
 import static einstein.jmc.init.ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT;
@@ -40,6 +39,7 @@ public class JustMoreCakes {
         ModPotions.init();
         ModCreativeModeTabs.init();
         ModGameEvents.init();
+        ModPackets.init();
     }
 
     public static void commonSetup() {
@@ -66,26 +66,17 @@ public class JustMoreCakes {
         registerVillageBuilding(server, "taiga", "bakery_1", CAKE_BAKERY_GENERATION_WEIGHT.get());
     }
 
-    public static void onDatapackSync(ServerPlayer player) {
-        if (player != null) {
-            MinecraftServer server = player.getServer();
-            if (server != null) {
-                if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
-                    Util.removeRecipe(server.getRecipeManager(), RecipeType.CRAFTING, mcLoc("cake"));
-                }
-            }
+    public static void onDatapackSync(@Nullable ServerPlayer player, MinecraftServer server, boolean playerUpdate) {
+        if (playerUpdate) {
+            CakeEffectsManager.syncToPlayer(player);
         }
-    }
+        else {
+            CakeEffectsManager.loadCakeEffects();
+        }
 
-    public static void loadCakeEffects(Map<ResourceLocation, CakeEffects> map) {
-        map.forEach((location, cakeEffects) -> {
-            if (cakeEffects.cake() instanceof CakeEffectsHolder holder) {
-                holder.addCakeEffects(cakeEffects);
-            }
-            else {
-                LOGGER.error("Failed to load cake effect for block {} as it is not valid cake effect holder", cakeEffects.cake());
-            }
-        });
+        if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
+            Util.removeRecipe(server.getRecipeManager(), RecipeType.CRAFTING, mcLoc("cake"));
+        }
     }
 
     public static ResourceLocation loc(String string) {

@@ -2,9 +2,10 @@ package einstein.jmc;
 
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
-import einstein.jmc.data.cakeeffect.CakeEffectsManager;
+import einstein.jmc.data.cakeeffect.ForgeCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
+import einstein.jmc.platform.ForgeNetworkHelper;
 import einstein.jmc.platform.ForgeRegistryHelper;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
@@ -27,7 +28,6 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -54,12 +54,11 @@ import static einstein.jmc.JustMoreCakes.*;
 @Mod(MOD_ID)
 public class JustMoreCakesForge {
 
-    private static CakeEffectsManager CAKE_EFFECTS_MANAGER;
-
     public JustMoreCakesForge() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         JustMoreCakes.init();
+        ForgeNetworkHelper.init();
         modEventBus.register(this);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
@@ -86,7 +85,6 @@ public class JustMoreCakesForge {
         MinecraftForge.EVENT_BUS.addListener(this::onVillagerTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onWanderingTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
-        MinecraftForge.EVENT_BUS.addListener(this::onDataPackSync);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
@@ -122,25 +120,11 @@ public class JustMoreCakesForge {
     }
 
     void onAddReloadListeners(AddReloadListenerEvent event) {
-        CAKE_EFFECTS_MANAGER = new CakeEffectsManager();
-        event.addListener(CAKE_EFFECTS_MANAGER);
-    }
-
-    public static void loadCakeEffects() {
-        if (CAKE_EFFECTS_MANAGER != null) {
-            JustMoreCakes.loadCakeEffects(CAKE_EFFECTS_MANAGER.getRegisteredCakeEffects());
-            return;
-        }
-        throw new IllegalStateException("Can't retrieve CakeEffects until resources have loaded");
+        event.addListener(new ForgeCakeEffectsReloadListener());
     }
 
     void onServerStarting(ServerStartingEvent event) {
         JustMoreCakes.onServerStarting(event.getServer());
-    }
-
-    void onDataPackSync(OnDatapackSyncEvent event) {
-        JustMoreCakes.onDatapackSync(event.getPlayer());
-        loadCakeEffects();
     }
 
     void commonSetup(final FMLCommonSetupEvent event) {
