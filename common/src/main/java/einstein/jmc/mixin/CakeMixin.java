@@ -61,7 +61,7 @@ public class CakeMixin implements CakeEffectsHolder {
     private static void eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<InteractionResult> cir) {
         CakeBlock cake = (CakeBlock) state.getBlock(); // Don't replace with a reference to Blocks.CAKE, so that this will work with inheritors
         CakeEffects cakeEffects = ((CakeEffectsHolder) cake).getCakeEffects();
-        if (cakeEffects != null) {
+        if (!player.level().isClientSide && cakeEffects != null) {
             for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {
                 Util.applyEffectFromHolder(holder, player);
             }
