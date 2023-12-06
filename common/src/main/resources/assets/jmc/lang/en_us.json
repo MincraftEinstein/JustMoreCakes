@@ -116,9 +116,9 @@
   "advancements.husbandry.jmc.eat_obsidian_cake.description": "Try to eat an Obsidian Cake",
 
   "_comment": "Configs",
-  "config.jmc.redstone_cake_particles": "Enable Redstone Cake Particles",
-  "config.jmc.ender_cake_particles": "Enable Ender Cake Particles",
-  "config.jmc.lava_cake_particles": "Enable Lava Cake Particles",
+  "config.jmc.cake_particles.redstone_cake_particles": "Enable Redstone Cake Particles",
+  "config.jmc.cake_particles.ender_cake_particles": "Enable Ender Cake Particles",
+  "config.jmc.cake_particles.lava_cake_particles": "Enable Lava Cake Particles",
   "config.jmc.firey_cake_fire_duration": "Firey Cake Fire Duration",
   "config.jmc.glowstone_cake_glowing_duration": "Glowstone Cake Glowing Duration",
   "config.jmc.chorus_cake_teleport_radius": "Chorus Cake Teleport Radius",
