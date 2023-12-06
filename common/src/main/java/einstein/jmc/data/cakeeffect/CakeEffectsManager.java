@@ -30,22 +30,23 @@ import static einstein.jmc.JustMoreCakes.LOGGER;
 
 public class CakeEffectsManager {
 
-    private static final Map<ResourceLocation, CakeEffects> CAKE_EFFECTS = new HashMap<>();
+    private static final Map<ResourceLocation, CakeEffects> RAW_CAKE_EFFECTS = new HashMap<>();
+    private static final Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> CAKE_EFFECTS = new HashMap<>();
 
     public static void syncToPlayer(ServerPlayer player) {
         Services.NETWORK.toClient(ModPackets.CLIENTBOUND_CAKE_EFFECTS, player);
     }
 
     public static void loadCakeEffects() {
-        Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> combinedEffectsByHolder = new HashMap<>();
-        CAKE_EFFECTS.forEach((location, cakeEffects) -> {
+        CAKE_EFFECTS.clear();
+        RAW_CAKE_EFFECTS.forEach((location, cakeEffects) -> {
             if (cakeEffects.cake() instanceof CakeEffectsHolder holder) {
                 cakeEffects.mobEffects().forEach(effectHolder -> {
                     MobEffect effect = effectHolder.effect();
                     int duration = effectHolder.duration().orElse(0);
                     int amplifier = effectHolder.amplifier().orElse(0);
-                    if (combinedEffectsByHolder.containsKey(holder)) {
-                        Map<MobEffect, Pair<Integer, Integer>> combinedEffects = combinedEffectsByHolder.get(holder);
+                    if (CAKE_EFFECTS.containsKey(holder)) {
+                        Map<MobEffect, Pair<Integer, Integer>> combinedEffects = CAKE_EFFECTS.get(holder);
                         if (combinedEffects.containsKey(effect)) {
                             Pair<Integer, Integer> pair = combinedEffects.get(effect);
                             int currentDuration = pair.getSecond();
@@ -60,7 +61,7 @@ public class CakeEffectsManager {
                         }
                     }
                     else {
-                        combinedEffectsByHolder.put(holder, new HashMap<>(Map.of(effect, Pair.of(duration, amplifier))));
+                        CAKE_EFFECTS.put(holder, new HashMap<>(Map.of(effect, Pair.of(duration, amplifier))));
                     }
                 });
             }
@@ -69,7 +70,12 @@ public class CakeEffectsManager {
             }
         });
 
-        combinedEffectsByHolder.forEach((holder, effects) -> {
+        RAW_CAKE_EFFECTS.clear();
+        setEffectsOnHolders(CAKE_EFFECTS);
+    }
+
+    public static void setEffectsOnHolders(Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> cakeEffects) {
+        cakeEffects.forEach((holder, effects) -> {
             List<CakeEffects.MobEffectHolder> mobEffectHolders = new ArrayList<>();
 
             effects.forEach((mobEffect, pair) -> {
@@ -98,16 +104,11 @@ public class CakeEffectsManager {
             }
         });
 
-        clearAndSet(builder.build());
-        LOGGER.info("Loaded {} cake effects", CAKE_EFFECTS.size());
+        RAW_CAKE_EFFECTS.putAll(builder.buildOrThrow());
+        LOGGER.info("Loaded {} cake effects", RAW_CAKE_EFFECTS.size());
     }
 
-    public static void clearAndSet(Map<ResourceLocation, CakeEffects> effects) {
-        CAKE_EFFECTS.clear();
-        CAKE_EFFECTS.putAll(effects);
-    }
-
-    public static Map<ResourceLocation, CakeEffects> getCakeEffects() {
+    public static Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> getCakeEffects() {
         return CAKE_EFFECTS;
     }
 }
