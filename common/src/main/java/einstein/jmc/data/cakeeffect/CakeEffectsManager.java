@@ -2,6 +2,7 @@ package einstein.jmc.data.cakeeffect;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.JsonOps;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.init.ModPackets;
@@ -12,6 +13,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.level.block.Block;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -27,50 +30,54 @@ import static einstein.jmc.JustMoreCakes.LOGGER;
 
 public class CakeEffectsManager {
 
-    public static final Map<ResourceLocation, CakeEffects> CAKE_EFFECTS = new HashMap<>();
+    private static final Map<ResourceLocation, CakeEffects> CAKE_EFFECTS = new HashMap<>();
 
     public static void syncToPlayer(ServerPlayer player) {
         Services.NETWORK.toClient(ModPackets.CLIENTBOUND_CAKE_EFFECTS, player);
     }
 
     public static void loadCakeEffects() {
+        Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> combinedEffectsByHolder = new HashMap<>();
         CAKE_EFFECTS.forEach((location, cakeEffects) -> {
             if (cakeEffects.cake() instanceof CakeEffectsHolder holder) {
-                addOrCombine(holder, cakeEffects);
+                cakeEffects.mobEffects().forEach(effectHolder -> {
+                    MobEffect effect = effectHolder.effect();
+                    int duration = effectHolder.duration().orElse(0);
+                    int amplifier = effectHolder.amplifier().orElse(0);
+                    if (combinedEffectsByHolder.containsKey(holder)) {
+                        Map<MobEffect, Pair<Integer, Integer>> combinedEffects = combinedEffectsByHolder.get(holder);
+                        if (combinedEffects.containsKey(effect)) {
+                            Pair<Integer, Integer> pair = combinedEffects.get(effect);
+                            int currentDuration = pair.getSecond();
+
+                            combinedEffects.put(effect, Pair.of(
+                                    duration == -1 || currentDuration == -1 ? -1 : Math.max(duration, currentDuration),
+                                    Math.max(amplifier, pair.getSecond())
+                            ));
+                        }
+                        else {
+                            combinedEffects.put(effect, Pair.of(duration, amplifier));
+                        }
+                    }
+                    else {
+                        combinedEffectsByHolder.put(holder, new HashMap<>(Map.of(effect, Pair.of(duration, amplifier))));
+                    }
+                });
             }
             else {
                 LOGGER.error("Failed to load cake effect for block {} as it is not valid cake effect holder", cakeEffects.cake());
             }
         });
-    }
 
-    public static void addOrCombine(CakeEffectsHolder holder, CakeEffects effects) {
-        if (holder.getCakeEffects() == null || holder.getCakeEffects().mobEffects().isEmpty()) {
-            holder.setCakeEffects(effects);
-            return;
-        }
+        combinedEffectsByHolder.forEach((holder, effects) -> {
+            List<CakeEffects.MobEffectHolder> mobEffectHolders = new ArrayList<>();
 
-        List<CakeEffects.MobEffectHolder> holders = new ArrayList<>();
+            effects.forEach((mobEffect, pair) -> {
+                mobEffectHolders.add(new CakeEffects.MobEffectHolder(mobEffect, pair.getFirst(), pair.getSecond()));
+            });
 
-        effects.mobEffects().forEach(mobEffectHolder -> {
-            boolean foundMatch = false;
-            for (CakeEffects.MobEffectHolder currentHolder : holder.getCakeEffects().mobEffects()) {
-                if (mobEffectHolder.effect().equals(currentHolder.effect())) {
-                    holders.add(new CakeEffects.MobEffectHolder(mobEffectHolder.effect(),
-                            Math.max(mobEffectHolder.duration().orElse(0), currentHolder.duration().orElse(0)),
-                            Math.max(mobEffectHolder.amplifier().orElse(0), currentHolder.amplifier().orElse(0))
-                    ));
-                    foundMatch = true;
-                    break;
-                }
-            }
-
-            if (!foundMatch) {
-                holders.add(mobEffectHolder);
-            }
+            holder.setCakeEffects(new CakeEffects((Block) holder, mobEffectHolders));
         });
-
-        holder.setCakeEffects(new CakeEffects(effects.cake(), holders));
     }
 
     public static void deserializeCakeEffects(ResourceManager manager) {
