@@ -4,6 +4,7 @@ import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.compat.jade.ModJadePlugin;
 import einstein.jmc.data.cakeeffect.CakeEffects;
+import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.util.Util;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
@@ -27,6 +28,10 @@ public class CakeEffectsProvider implements IBlockComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
+        if (!ModServerConfigs.ALLOW_DISPLAYING_CAKE_EFFECTS.get()) {
+            return;
+        }
+
         Block block = accessor.getBlock();
         CakeEffects cakeEffects = null;
 

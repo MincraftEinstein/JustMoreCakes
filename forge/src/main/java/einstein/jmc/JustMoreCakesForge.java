@@ -87,6 +87,7 @@ public class JustMoreCakesForge {
         MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModServerConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
     }
 

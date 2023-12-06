@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fml.config.ModConfig;
 
+import static einstein.jmc.JustMoreCakes.MOD_ID;
 import static einstein.jmc.JustMoreCakes.loc;
 import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
 import static einstein.jmc.util.Util.getVanillaCandleCakes;
@@ -45,8 +46,9 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         onAddReloadListeners();
         addVillagerTrades();
 
-        ForgeConfigRegistry.INSTANCE.register(JustMoreCakes.MOD_ID, ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
-        ForgeConfigRegistry.INSTANCE.register(JustMoreCakes.MOD_ID, ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
+        ForgeConfigRegistry.INSTANCE.register(MOD_ID, ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
+        ForgeConfigRegistry.INSTANCE.register(MOD_ID, ModConfig.Type.SERVER, ModServerConfigs.SPEC);
+        ForgeConfigRegistry.INSTANCE.register(MOD_ID, ModConfig.Type.COMMON, ModCommonConfigs.SPEC);
 
         VillagerInteractionRegistries.registerGiftLootTable(ModVillagers.CAKE_BAKER.get(), loc("gameplay/hero_of_the_village/cake_baker_gift"));
         JustMoreCakes.commonSetup();

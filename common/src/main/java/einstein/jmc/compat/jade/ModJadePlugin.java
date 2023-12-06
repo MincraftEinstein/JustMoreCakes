@@ -6,6 +6,7 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.entity.CakeOvenBlockEntity;
 import einstein.jmc.compat.jade.providers.*;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.util.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -73,7 +74,7 @@ public class ModJadePlugin implements IWailaPlugin {
         registration.registerBlockComponent(ITEM_STORAGE_REMOVER_PROVIDER, CakeOvenBlock.class);
 
         registration.addRayTraceCallback((hitResult, accessor, unmodifiedAccessor) -> {
-            if (IWailaConfig.get().getPlugin().get(HIDE_TRAPPED_CAKES)) {
+            if (ModServerConfigs.HIDE_TRAPPED_CAKES.get() || IWailaConfig.get().getPlugin().get(HIDE_TRAPPED_CAKES)) {
                 if (accessor instanceof BlockAccessor blockAccessor) {
                     Block block = blockAccessor.getBlock();
                     BlockState state = blockAccessor.getBlockState();

@@ -128,5 +128,7 @@
   "config.jmc.encasing_ice_melt_speed": "Encasing Ice Melt Speed",
   "config.jmc.cake_bakery_generation_weight": "Cake Bakery Generation Weight",
   "config.jmc.glowstone_cake_effect_radius": "Glowstone Cake Effect Radius",
-  "config.jmc.disable_cake_crafting_recipes": "Disable Cake Crafting Recipes"
+  "config.jmc.disable_cake_crafting_recipes": "Disable Cake Crafting Recipes",
+  "config.jmc.jade.allow_displaying_cake_effects": "Allow Displaying Cake Effects",
+  "config.jmc.jade.hide_trapped_cakes": "Hide Trapped Cakes"
 }
