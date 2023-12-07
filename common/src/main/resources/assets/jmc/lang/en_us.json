@@ -83,6 +83,9 @@
   "category.rei.jmc.cake_oven": "Cake Baking",
   "category.rei.jmc.cake_oven.time&xp": "%s XP in %s sec",
 
+  "_comment": "ModMenu",
+  "modmenu.descriptionTranslation.jmc": "A simple mod that adds 30+ new cakes to Minecraft",
+
   "_comment": "Jade",
   "config.jade.plugin_jmc.cake_nourishment": "Cake Nourishment Info",
   "config.jade.plugin_jmc.cake_nourishment.display_type": "Display Type",
