@@ -1,6 +1,6 @@
 package einstein.jmc.block;
 
-import einstein.jmc.data.cakeeffect.CakeEffects;
+import einstein.jmc.block.cake.effects.CakeEffects;
 import org.jetbrains.annotations.Nullable;
 
 public interface CakeEffectsHolder {

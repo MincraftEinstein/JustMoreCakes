@@ -1,6 +1,7 @@
-package einstein.jmc.data.cakeeffect;
+package einstein.jmc.data;
 
 import einstein.jmc.JustMoreCakes;
+import einstein.jmc.block.cake.effects.CakeEffectsManager;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;

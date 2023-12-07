@@ -1,9 +1,10 @@
-package einstein.jmc.data.cakeeffect;
+package einstein.jmc.data;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.util.Util;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;

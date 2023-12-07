@@ -1,4 +1,4 @@
-package einstein.jmc.data.cakeeffect;
+package einstein.jmc.block.cake.effects;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;

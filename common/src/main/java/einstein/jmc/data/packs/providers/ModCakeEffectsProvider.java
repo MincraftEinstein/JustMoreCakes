@@ -1,8 +1,8 @@
 package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.data.cakeeffect.CakeEffects;
-import einstein.jmc.data.cakeeffect.CakeEffectsProvider;
+import einstein.jmc.block.cake.effects.CakeEffects;
+import einstein.jmc.data.CakeEffectsProvider;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModPotions;
 import net.minecraft.data.PackOutput;

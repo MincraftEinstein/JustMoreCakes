@@ -2,7 +2,7 @@ package einstein.jmc;
 
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
-import einstein.jmc.data.cakeeffect.ForgeCakeEffectsReloadListener;
+import einstein.jmc.data.ForgeCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.ForgeNetworkHelper;

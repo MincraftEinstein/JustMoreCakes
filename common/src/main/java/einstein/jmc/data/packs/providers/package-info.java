@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package einstein.jmc.data.cakeeffect;
+package einstein.jmc.data.packs.providers;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

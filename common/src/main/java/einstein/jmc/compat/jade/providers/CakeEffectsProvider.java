@@ -3,7 +3,7 @@ package einstein.jmc.compat.jade.providers;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.compat.jade.ModJadePlugin;
-import einstein.jmc.data.cakeeffect.CakeEffects;
+import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.util.Util;
 import net.minecraft.client.resources.language.I18n;

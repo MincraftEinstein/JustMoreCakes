@@ -1,6 +1,6 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.data.cakeeffect.CakeEffects;
+import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;

@@ -2,7 +2,7 @@ package einstein.jmc.block.cake;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
-import einstein.jmc.data.cakeeffect.CakeEffects;
+import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModCommonConfigs;
 import einstein.jmc.platform.Services;
