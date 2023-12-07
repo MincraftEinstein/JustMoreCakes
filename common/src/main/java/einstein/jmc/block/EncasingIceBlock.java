@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
+@SuppressWarnings("deprecation")
 public class EncasingIceBlock extends HalfTransparentBlock {
 
     public EncasingIceBlock(Properties properties) {
