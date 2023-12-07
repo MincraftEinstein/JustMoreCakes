@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package einstein.jmc.data.packs.providers;
+package einstein.jmc.data.packs;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 
