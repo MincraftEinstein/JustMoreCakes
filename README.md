@@ -9,7 +9,7 @@
 [![Discord Invite](https://img.shields.io/badge/Discord-Einstein%27s%20Lab-blue?style=for-the-badge&logo=discord)](https://discord.gg/gSsaFAvrBM)
 
 ### **📘 Description**
-A simple mod that adds 30+ new cakes to Minecraft. Some have special properties and abilities ranging from exploding and poisoning to healing and teleporting (randomly). A new villager is in town as well, the Cake Baker will buy and sell cake ingredients which he uses in his Cake Oven to make cake. Most cakes also allow candles to be placed on them
+A simple mod that adds 30+ new cakes to Minecraft. Some have special properties and abilities ranging from exploding and poisoning to healing and teleporting (randomly). A new villager is in town as well, the Cake Baker will buy and sell cake ingredients which he uses in his Cake Oven to make cake. All cakes also allow candles to be placed on them and did I mention that all potion effects applied from eating a cake can be completely configured with a data pack? Well, they can.
 
 Supports [Cake Chomps](https://www.curseforge.com/minecraft/mc-mods/cake-chomps)
 
