@@ -11,7 +11,7 @@
 ### **📘 Description**
 A simple mod that adds 30+ new cakes to Minecraft. Some have special properties and abilities ranging from exploding and poisoning to healing and teleporting (randomly). A new villager is in town as well, the Cake Baker will buy and sell cake ingredients which he uses in his Cake Oven to make cake. All cakes also allow candles to be placed on them and did I mention that all potion effects applied from eating a cake can be completely configured with a data pack? Well, they can.
 
-Supports [Cake Chomps](https://www.curseforge.com/minecraft/mc-mods/cake-chomps)
+Supports: [Cake Chomps](https://curseforge.com/minecraft/mc-mods/cake-chomps), [Just Enough Items (JEI)](https://curseforge.com/minecraft/mc-mods/jei), [Roughly Enough Items (REI)](https://curseforge.com/minecraft/mc-mods/roughly-enough-items), [Jade](https://curseforge.com/minecraft/mc-mods/jade)
 
 [Fabric API](https://modrinth.com/mod/fabric-api) and [Forge Config API Port](https://modrinth.com/mod/forge-config-api-port) required for Fabric version
 
