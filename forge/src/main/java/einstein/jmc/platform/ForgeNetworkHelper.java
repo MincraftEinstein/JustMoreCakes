@@ -7,9 +7,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.network.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ForgeNetworkHelper implements NetworkHelper {
 
     private static final int PROTOCOL_VERSION = 1;
@@ -18,7 +15,6 @@ public class ForgeNetworkHelper implements NetworkHelper {
             .clientAcceptedVersions(Channel.VersionTest.exact(PROTOCOL_VERSION))
             .serverAcceptedVersions(Channel.VersionTest.exact(PROTOCOL_VERSION))
             .simpleChannel();
-    private static final Map<String, PacketHolder> PACKETS = new HashMap<>();
 
     @Override
     public <T extends Packet> void registerPacket(String name, PacketData<T> data) {
@@ -27,14 +23,24 @@ public class ForgeNetworkHelper implements NetworkHelper {
 
     @Override
     public void toServer(String name) {
-        PacketHolder holder = PACKETS.get(name);
-        CHANNEL.send(holder.packet(), PacketDistributor.SERVER.noArg());
+        if (PACKETS.containsKey(name)) {
+            PacketHolder holder = PACKETS.get(name);
+            CHANNEL.send(holder.packet(), PacketDistributor.SERVER.noArg());
+        }
+        else {
+            JustMoreCakes.LOGGER.warn("Failed to find packet named: {}", name);
+        }
     }
 
     @Override
     public void toClient(String name, ServerPlayer player) {
-        PacketHolder holder = PACKETS.get(name);
-        CHANNEL.send(holder.packet(), PacketDistributor.PLAYER.with(player));
+        if (PACKETS.containsKey(name)) {
+            PacketHolder holder = PACKETS.get(name);
+            CHANNEL.send(holder.packet(), PacketDistributor.PLAYER.with(player));
+        }
+        else {
+            JustMoreCakes.LOGGER.warn("Failed to find packet named: {}", name);
+        }
     }
 
     @SuppressWarnings("unchecked")

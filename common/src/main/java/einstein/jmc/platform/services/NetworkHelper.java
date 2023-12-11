@@ -3,9 +3,13 @@ package einstein.jmc.platform.services;
 import einstein.jmc.network.Packet;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public interface NetworkHelper {
+
+    Map<String, PacketHolder> PACKETS = new HashMap<>();
 
     <T extends Packet> void registerPacket(String name, PacketData<T> data);
 
