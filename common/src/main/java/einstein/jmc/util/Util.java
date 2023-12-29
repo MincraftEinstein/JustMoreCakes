@@ -6,12 +6,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.datafixers.util.Pair;
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.ThreeTieredCakeBlock;
 import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.init.ModPotions;
 import einstein.jmc.mixin.RecipeManagerAccessor;
 import einstein.jmc.mixin.StructureTemplatePoolAccessor;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -39,18 +41,20 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -237,16 +241,30 @@ public class Util {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 
-    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, Block block) {
-        return builder.withPool(LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1))
-                .add(LootItem.lootTableItem(block).when(HAS_CAKE_SPATULA)));
+    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, Block dropped) {
+        return addDropWhenCakeSpatulaPool(builder, dropped, 1);
     }
 
-    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, Block block, int count) {
-        return builder.withPool(LootPool.lootPool()
+    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, Block dropped, int count) {
+        return addDropWhenCakeSpatulaPool(builder, null, dropped, count, false);
+    }
+
+    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, @Nullable Block block, Block dropped, int count, boolean addHalfCondition) {
+        LootPool.Builder pool = LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(count))
-                .add(LootItem.lootTableItem(block).when(HAS_CAKE_SPATULA)));
+                .add(LootItem.lootTableItem(dropped).when(HAS_CAKE_SPATULA));
+
+        if (addHalfCondition) {
+            pool = addHalfConditionToPool(pool, block);
+        }
+
+        return builder.withPool(pool);
+    }
+
+    public static LootPool.Builder addHalfConditionToPool(LootPool.Builder builder, Block block) {
+        return builder.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                .setProperties(StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(ThreeTieredCakeBlock.HALF, DoubleBlockHalf.LOWER)));
     }
 
     public static ImmutableList<Block> getVanillaCandleCakes() {
