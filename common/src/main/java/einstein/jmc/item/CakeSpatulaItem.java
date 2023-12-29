@@ -1,6 +1,7 @@
 package einstein.jmc.item;
 
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.ThreeTieredCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -38,12 +40,24 @@ public class CakeSpatulaItem extends Item {
             ItemStack stack = context.getItemInHand();
             Block block = state.getBlock();
             if (state.is(ModBlockTags.CAKE_SPATULA_USABLE)) {
-                if (!BaseCakeBlock.isUneaten(state)) {
+                if (!BaseCakeBlock.isUneaten(state, pos, level)) {
                     return InteractionResult.PASS;
                 }
 
                 if (!level.isClientSide) {
                     level.destroyBlock(pos, false, player);
+
+                    // TODO look into swapping with ThreeTieredCakeBlock.destroyOppositeHalf()
+                    if (block instanceof ThreeTieredCakeBlock) {
+                        boolean isLower = state.getValue(ThreeTieredCakeBlock.HALF) == DoubleBlockHalf.LOWER;
+                        BlockPos otherPos = isLower ? pos.above() : pos.below();
+                        BlockState otherState = level.getBlockState(otherPos);
+
+                        if (otherState.getValue(ThreeTieredCakeBlock.HALF) == (isLower ? DoubleBlockHalf.UPPER : DoubleBlockHalf.LOWER)) {
+                            level.destroyBlock(isLower ? pos.above() : pos.below(), false, player);
+                        }
+                    }
+
                     stack.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(context.getHand()));
                     CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, pos, stack);
 
