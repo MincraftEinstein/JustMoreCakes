@@ -17,7 +17,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -98,8 +97,8 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
 
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (!level.isClientSide() && player.isCreative()) {
-            DoublePlantBlock.preventCreativeDropFromBottomPart(level, pos, state, player);
+        if (!level.isClientSide()) {
+            ThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, player);
         }
 
         super.playerWillDestroy(level, pos, state, player);

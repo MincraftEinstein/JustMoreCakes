@@ -264,7 +264,7 @@ public class Util {
     public static LootPool.Builder addHalfConditionToPool(LootPool.Builder builder, Block block) {
         return builder.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                 .setProperties(StatePropertiesPredicate.Builder.properties()
-                        .hasProperty(ThreeTieredCakeBlock.HALF, DoubleBlockHalf.LOWER)));
+                        .hasProperty(ThreeTieredCakeBlock.HALF, DoubleBlockHalf.UPPER)));
     }
 
     public static ImmutableList<Block> getVanillaCandleCakes() {
