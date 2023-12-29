@@ -15,13 +15,13 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -90,8 +90,21 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
         BlockState belowState = level.getBlockState(belowPos);
 
         if (belowState.is(this) && belowState.getValue(HALF) == LOWER) {
-            level.setBlockAndUpdate(belowPos, candleCake.defaultBlockState().setValue(HALF, LOWER));
+            level.setBlockAndUpdate(belowPos, createLowerState(candleCake, false));
         }
+    }
+
+    @Override
+    public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
+        InteractionResult result = super.eat(level, pos, state, player);
+
+        BlockPos belowPos = pos.below();
+        BlockState belowState = level.getBlockState(belowPos);
+        if (belowState.is(this) && belowState.getValue(HALF) == LOWER) {
+            level.updateNeighbourForOutputSignal(belowPos, belowState.getBlock());
+        }
+
+        return result;
     }
 
     @Override
@@ -123,22 +136,11 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
 
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (!level.isClientSide()) {
-            destroyOppositeHalf(state, pos, level, player);
+        if (!level.isClientSide() && player.isCreative()) {
+            DoublePlantBlock.preventCreativeDropFromBottomPart(level, pos, state, player);
         }
 
         super.playerWillDestroy(level, pos, state, player);
-    }
-
-    // TODO look into swapping with Level.destroyBlock()
-    public static void destroyOppositeHalf(BlockState state, BlockPos pos, Level level, Player player) {
-        boolean isLower = state.getValue(HALF) == LOWER;
-        BlockPos otherPos = isLower ? pos.above() : pos.below();
-        BlockState otherState = level.getBlockState(otherPos);
-        if (otherState.is(state.getBlock()) && otherState.getValue(HALF) == (isLower ? UPPER : LOWER)) {
-            level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 35);
-            level.levelEvent(player, 2001, otherPos, Block.getId(otherState));
-        }
     }
 
     @Nullable
@@ -148,7 +150,7 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
         Level level = context.getLevel();
 
         if (pos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(pos.above()).canBeReplaced(context)) {
-            return defaultBlockState().setValue(HALF, LOWER).setValue(BITES, 5);
+            return createLowerState(this, true);
         }
 
         return null;
@@ -182,7 +184,6 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
         return state.getValue(HALF) == LOWER ? SHAPE_BY_BITE_LOWER : SHAPE_BY_BITE_UPPER;
     }
 
-    // TODO signal not updated when upper half changed/eaten
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         BlockPos abovePos = pos.above();
@@ -194,5 +195,18 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
         }
 
         return slices - state.getValue(getBites());
+    }
+
+    public static BlockState createLowerState(Block block, boolean hasBites) {
+        BlockState newState = block.defaultBlockState().setValue(HALF, LOWER);
+
+        if (hasBites) {
+            BaseCakeBlock cakeBlock = ((BaseCakeBlock) block);
+            if (cakeBlock.getSlices() > 0) {
+                newState = newState.setValue(cakeBlock.getBites(), 5);
+            }
+        }
+
+        return newState;
     }
 }

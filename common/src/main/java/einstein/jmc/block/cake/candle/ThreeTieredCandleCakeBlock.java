@@ -17,6 +17,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -67,14 +68,12 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
-    protected void afterEaten(BlockState state, BlockPos pos, Level level) {
+    protected void beforeEaten(BlockState state, BlockPos pos, Level level) {
         BlockPos belowPos = pos.below();
         BlockState belowState = level.getBlockState(belowPos);
 
-        if (belowState.is(this) && belowState.getValue(ThreeTieredCandleCakeBlock.HALF) == LOWER) {
-            level.setBlockAndUpdate(belowPos, getOriginalCake().defaultBlockState()
-                    .setValue(HALF, LOWER)
-                    .setValue(ThreeTieredCakeBlock.BITES, 5));
+        if (belowState.is(this) && belowState.getValue(HALF) == LOWER) {
+            level.setBlockAndUpdate(belowPos, createLowerState());
         }
     }
 
@@ -88,17 +87,19 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
                     : super.updateShape(state, direction, neighborState, accessor, pos, neighborPos);
         }
 
-//        if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
-//            return neighborState.is(this) ? state : Blocks.AIR.defaultBlockState();
-//        }
+        return neighborState.is(this) && neighborState.getValue(HALF) != blockHalf
+                ? state
+                : blockHalf == LOWER ? createLowerState() : Blocks.AIR.defaultBlockState();
+    }
 
-        return super.updateShape(state, direction, neighborState, accessor, pos, neighborPos);
+    protected BlockState createLowerState() {
+        return ThreeTieredCakeBlock.createLowerState(getOriginalCake(), true);
     }
 
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (!level.isClientSide()) {
-            ThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, player);
+        if (!level.isClientSide() && player.isCreative()) {
+            DoublePlantBlock.preventCreativeDropFromBottomPart(level, pos, state, player);
         }
 
         super.playerWillDestroy(level, pos, state, player);
@@ -148,5 +149,10 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         return 16;
+    }
+
+    @Override
+    public ThreeTieredCakeBlock getOriginalCake() {
+        return (ThreeTieredCakeBlock) super.getOriginalCake();
     }
 }

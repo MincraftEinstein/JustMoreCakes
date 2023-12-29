@@ -2,6 +2,7 @@ package einstein.jmc.item;
 
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.ThreeTieredCakeBlock;
+import einstein.jmc.block.cake.candle.ThreeTieredCandleCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -45,18 +46,19 @@ public class CakeSpatulaItem extends Item {
                 }
 
                 if (!level.isClientSide) {
-                    level.destroyBlock(pos, false, player);
-
-                    // TODO look into swapping with ThreeTieredCakeBlock.destroyOppositeHalf()
-                    if (block instanceof ThreeTieredCakeBlock) {
-                        boolean isLower = state.getValue(ThreeTieredCakeBlock.HALF) == DoubleBlockHalf.LOWER;
-                        BlockPos otherPos = isLower ? pos.above() : pos.below();
-                        BlockState otherState = level.getBlockState(otherPos);
-
-                        if (otherState.getValue(ThreeTieredCakeBlock.HALF) == (isLower ? DoubleBlockHalf.UPPER : DoubleBlockHalf.LOWER)) {
-                            level.destroyBlock(isLower ? pos.above() : pos.below(), false, player);
+                    if (block instanceof ThreeTieredCakeBlock || block instanceof ThreeTieredCandleCakeBlock) {
+                        BlockPos belowPos = pos.below();
+                        BlockState belowState = level.getBlockState(belowPos);
+                        if (belowState.is(block)
+                                && belowState.getValue(ThreeTieredCakeBlock.HALF) == DoubleBlockHalf.LOWER
+                                && state.getValue(ThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
+                            pos = belowPos;
+                            state = belowState;
+                            block = belowState.getBlock();
                         }
                     }
+
+                    level.destroyBlock(pos, false, player);
 
                     stack.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(context.getHand()));
                     CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, pos, stack);
