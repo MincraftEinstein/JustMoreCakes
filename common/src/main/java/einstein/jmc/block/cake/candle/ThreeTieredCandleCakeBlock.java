@@ -67,7 +67,7 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
-    protected void beforeEaten(BlockState state, BlockPos pos, Level level) {
+    protected void afterEaten(BlockState state, BlockPos pos, Level level, Player player) {
         BlockPos belowPos = pos.below();
         BlockState belowState = level.getBlockState(belowPos);
 
@@ -98,7 +98,7 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide()) {
-            ThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, player);
+            ThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, ItemStack.EMPTY, !player.isCreative());
         }
 
         super.playerWillDestroy(level, pos, state, player);

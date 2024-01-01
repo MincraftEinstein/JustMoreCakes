@@ -67,10 +67,10 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
             else {
-                beforeEaten(state, pos, level);
                 InteractionResult interactionresult = originalCake.eat(level, pos, originalCake.defaultBlockState(), player);
                 if (interactionresult.consumesAction()) {
                     dropResources(state, level, pos);
+                    afterEaten(state, pos, level, player);
                 }
                 return interactionresult;
             }
@@ -96,7 +96,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
         }
     }
 
-    protected void beforeEaten(BlockState state, BlockPos pos, Level level) {
+    protected void afterEaten(BlockState state, BlockPos pos, Level level, Player player) {
     }
 
     protected boolean candleHit(BlockHitResult hitResult) {

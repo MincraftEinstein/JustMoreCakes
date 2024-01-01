@@ -47,17 +47,10 @@ public class CakeSpatulaItem extends Item {
 
                 if (!level.isClientSide) {
                     if (block instanceof ThreeTieredCakeBlock || block instanceof ThreeTieredCandleCakeBlock) {
-                        BlockPos belowPos = pos.below();
-                        BlockState belowState = level.getBlockState(belowPos);
-                        if (belowState.is(block)
-                                && belowState.getValue(ThreeTieredCakeBlock.HALF) == DoubleBlockHalf.LOWER
-                                && state.getValue(ThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
-                            pos = belowPos;
-                            state = belowState;
-                            block = belowState.getBlock();
-                        }
+                        ThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, stack, !player.isCreative());
                     }
 
+                    // Can't drop resources here because a tool needs to be provided to the loot table
                     level.destroyBlock(pos, false, player);
 
                     stack.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(context.getHand()));

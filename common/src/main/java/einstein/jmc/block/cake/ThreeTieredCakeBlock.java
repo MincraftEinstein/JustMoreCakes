@@ -15,6 +15,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -134,13 +135,9 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
     }
 
     @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
-    }
-
-    @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide()) {
-            destroyOppositeHalf(state, pos, level, player);
+            destroyOppositeHalf(state, pos, level, ItemStack.EMPTY, !player.isCreative());
         }
 
         super.playerWillDestroy(level, pos, state, player);
@@ -213,13 +210,21 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
         return newState;
     }
 
-    public static void destroyOppositeHalf(BlockState state, BlockPos pos, Level level, Player player) {
+    public static void destroyOppositeHalf(BlockState state, BlockPos pos, Level level, ItemStack toolStack, boolean dropResources) {
         boolean isLower = state.getValue(HALF) == LOWER;
         BlockPos otherPos = isLower ? pos.above() : pos.below();
         BlockState otherState = level.getBlockState(otherPos);
         if (otherState.is(state.getBlock()) && otherState.getValue(HALF) == (isLower ? UPPER : LOWER)) {
-            level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 35);
-            level.levelEvent(player, 2001, otherPos, Block.getId(otherState));
+            level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 19); // 19 ignores block shape updates
+            level.levelEvent(2001, otherPos, Block.getId(otherState));
+
+            otherState.updateNeighbourShapes(level, otherPos, 2, Block.UPDATE_LIMIT - 1);
+            otherState.updateIndirectNeighbourShapes(level, otherPos, 2, Block.UPDATE_LIMIT - 1);
+
+            if (dropResources) {
+                BlockEntity otherBlockEntity = otherState.hasBlockEntity() ? level.getBlockEntity(otherPos) : null;
+                dropResources(otherState, level, otherPos, otherBlockEntity, null, toolStack);
+            }
         }
     }
 }
