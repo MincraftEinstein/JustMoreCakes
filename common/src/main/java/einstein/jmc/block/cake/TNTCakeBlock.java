@@ -28,25 +28,21 @@ public class TNTCakeBlock extends BaseEntityCakeBlock {
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
-        if (level.hasNeighborSignal(pos)) {
-            explodeIfAllowed(level, pos);
-        }
+        explodeIfAllowed(level, pos);
     }
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-        if (level.hasNeighborSignal(pos)) {
-            explodeIfAllowed(level, pos);
-        }
+        explodeIfAllowed(level, pos);
     }
 
-    private void explodeIfAllowed(Level level, BlockPos pos) {
-        if (ModCommonConfigs.EFFECTED_BY_REDSTONE.get()) {
+    public static void explodeIfAllowed(Level level, BlockPos pos) {
+        if (ModCommonConfigs.EFFECTED_BY_REDSTONE.get() && level.hasNeighborSignal(pos)) {
             explode(level, pos);
         }
     }
 
-    private void explode(Level level, BlockPos pos) {
+    public static void explode(Level level, BlockPos pos) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof TNTCakeBlockEntity tntCakeBlockEntity) {
             tntCakeBlockEntity.explode();

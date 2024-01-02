@@ -35,7 +35,7 @@ public class ModBlocks {
             .build();
     public static final Supplier<BaseCakeBlock> COOKIE_CAKE = new CakeBuilder("cookie_cake").build();
     public static final Supplier<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake")
-            .setBothClasses(TNTCakeBlock::new, (originalCake, candle, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, candle, properties, TNTCakeBlockEntity::new))
+            .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
             .customBlockModel()
             .customCandleCakeBlockModels()
             .customItemModel()
