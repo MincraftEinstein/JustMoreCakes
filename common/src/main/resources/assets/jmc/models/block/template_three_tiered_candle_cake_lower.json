@@ -6,7 +6,7 @@
 		"lower_side": "jmc:block/three_tiered_cake_lower_side",
 		"lower_top": "jmc:block/three_tiered_cake_lower_top",
 		"middle_top": "jmc:block/three_tiered_cake_middle_top",
-		"particle": "#side"
+		"particle": "#lower_side"
 	},
 	"elements": [
 		{
