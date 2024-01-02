@@ -91,11 +91,6 @@ public class Util {
         return BuiltInRegistries.BLOCK.getKey(block);
     }
 
-    @Nullable
-    public static <T extends MobEffect> ResourceLocation getMobEffectId(T effect) {
-        return BuiltInRegistries.MOB_EFFECT.getKey(effect);
-    }
-
     public static void createExplosion(final Level level, final BlockPos pos, final float size) {
         if (level.isClientSide) {
             return;

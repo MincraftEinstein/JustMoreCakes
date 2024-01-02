@@ -66,33 +66,24 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
                 extinguish(player, state, level, pos);
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
-            else {
-                InteractionResult interactionresult = originalCake.eat(level, pos, originalCake.defaultBlockState(), player);
-                if (interactionresult.consumesAction()) {
-                    dropResources(state, level, pos);
-                }
-                return interactionresult;
-            }
-        }
-        else {
-            if (!state.getValue(LIT)) {
-                level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1, level.getRandom().nextFloat() * 0.4F + 0.8F);
-                level.setBlock(pos, defaultBlockState().setValue(BlockStateProperties.LIT, true), 11);
-                level.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
-                stack.hurtAndBreak(1, player, (player1) -> player1.broadcastBreakEvent(player.getUsedItemHand()));
 
-                return InteractionResult.sidedSuccess(level.isClientSide());
+            InteractionResult result = originalCake.eat(level, pos, originalCake.defaultBlockState(), player);
+            if (result.consumesAction()) {
+                dropResources(state, level, pos);
             }
-            else {
-                Item heldItem = player.getMainHandItem().getItem();
-                if (heldItem instanceof FlintAndSteelItem || heldItem instanceof FireChargeItem) {
-                    return heldItem.useOn(new UseOnContext(player, hand, hitResult));
-                }
-                else {
-                    return InteractionResult.PASS;
-                }
-            }
+            return result;
         }
+
+        if (!state.getValue(LIT)) {
+            level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1, level.getRandom().nextFloat() * 0.4F + 0.8F);
+            level.setBlock(pos, defaultBlockState().setValue(BlockStateProperties.LIT, true), Block.UPDATE_ALL_IMMEDIATE);
+            level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+            stack.hurtAndBreak(1, player, broadcaster -> broadcaster.broadcastBreakEvent(player.getUsedItemHand()));
+
+            return InteractionResult.sidedSuccess(level.isClientSide());
+        }
+
+        return InteractionResult.PASS;
     }
 
     protected boolean candleHit(BlockHitResult hitResult) {

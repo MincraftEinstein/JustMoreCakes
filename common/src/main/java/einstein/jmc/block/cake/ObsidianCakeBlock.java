@@ -17,7 +17,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ObsidianCakeBlock extends BaseCakeBlock {
 
-
     public ObsidianCakeBlock(CakeBuilder builder) {
         super(builder, 0);
     }
@@ -30,7 +29,7 @@ public class ObsidianCakeBlock extends BaseCakeBlock {
     @Override
     public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
         player.hurt(player.damageSources().generic(), 2);
-        level.setBlock(pos, state, 3);
+        level.setBlockAndUpdate(pos, state);
 
         if (player instanceof ServerPlayer serverPlayer) {
             JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, this);

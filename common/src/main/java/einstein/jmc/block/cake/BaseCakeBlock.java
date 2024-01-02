@@ -48,7 +48,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     public static final int DEFAULT_NUTRITION = 2;
     public static final float DEFAULT_SATURATION_MODIFIER = 0.1F;
     public static final IntegerProperty BITES = BlockStateProperties.BITES;
-    protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[]{
+    protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[] {
             Block.box(1, 0, 1, 15, 8, 15),
             Block.box(3, 0, 1, 15, 8, 15),
             Block.box(5, 0, 1, 15, 8, 15),
@@ -127,41 +127,39 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         if (!player.canEat(false) && !canAlwaysEat) {
             return InteractionResult.PASS;
         }
-        else {
-            if (Services.PLATFORM.isModLoaded("cakechomps")) {
-                ItemStack stack = state.getBlock().getCloneItemStack(level, pos, state);
-                player.spawnItemParticles(stack, 16);
-                player.playSound(player.getEatingSound(stack), 0.5F + 0.5F * RANDOM.nextInt(2), (RANDOM.nextFloat() - RANDOM.nextFloat()) * 0.2F + 1.0F);
-            }
-            player.awardStat(Stats.EAT_CAKE_SLICE);
-            player.getFoodData().eat(getNutrition(), getSaturationModifier());
-            state = eatActions(player, pos, state);
 
-            if (!level.isClientSide()) {
-                if (cakeEffects != null) {
-                    applyEffects(player);
-                }
-            }
-
-            if (player instanceof ServerPlayer serverPlayer) {
-                JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, this);
-            }
-
-            int bite = state.getValue(getBites());
-            level.gameEvent(player, GameEvent.EAT, pos);
-
-            if (bite < getSlices()) {
-                level.setBlock(pos, state.setValue(getBites(), bite + 1), 3);
-            }
-            else {
-                level.removeBlock(pos, false);
-                level.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
-            }
-
-            afterEaten(state, pos, player);
-
-            return InteractionResult.SUCCESS;
+        if (Services.PLATFORM.isModLoaded("cakechomps")) {
+            ItemStack stack = state.getBlock().getCloneItemStack(level, pos, state);
+            player.spawnItemParticles(stack, 16);
+            player.playSound(player.getEatingSound(stack), 0.5F + 0.5F * RANDOM.nextInt(2), (RANDOM.nextFloat() - RANDOM.nextFloat()) * 0.2F + 1.0F);
         }
+
+        player.awardStat(Stats.EAT_CAKE_SLICE);
+        player.getFoodData().eat(getNutrition(), getSaturationModifier());
+        state = eatActions(player, pos, state);
+
+        if (!level.isClientSide()) {
+            if (cakeEffects != null) {
+                applyEffects(player);
+            }
+        }
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, this);
+        }
+
+        int bite = state.getValue(getBites());
+        level.gameEvent(player, GameEvent.EAT, pos);
+
+        if (bite < getSlices()) {
+            level.setBlock(pos, state.setValue(getBites(), bite + 1), 3);
+        }
+        else {
+            level.removeBlock(pos, false);
+            level.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
+        }
+
+        return InteractionResult.SUCCESS;
     }
 
     public void applyEffects(Player player) {
@@ -185,9 +183,6 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1, 1);
         }
         return state;
-    }
-
-    public void afterEaten(BlockState state, BlockPos pos, Player player) {
     }
 
     @SuppressWarnings("deprecation")

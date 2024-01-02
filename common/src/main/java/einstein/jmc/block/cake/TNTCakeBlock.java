@@ -4,6 +4,7 @@ import einstein.jmc.block.entity.TNTCakeBlockEntity;
 import einstein.jmc.init.ModCommonConfigs;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -19,19 +20,21 @@ public class TNTCakeBlock extends BaseEntityCakeBlock {
     }
 
     @Override
-    public void afterEaten(BlockState state, BlockPos pos, Player player) {
-        explode(player.level(), pos);
+    public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
+        InteractionResult result = super.eat(level, pos, state, player);
+        explode(level, pos);
+        return result;
     }
 
     @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos oldPos, boolean isMoving) {
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
         if (level.hasNeighborSignal(pos)) {
             explodeIfAllowed(level, pos);
         }
     }
 
     @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         if (level.hasNeighborSignal(pos)) {
             explodeIfAllowed(level, pos);
         }
