@@ -62,7 +62,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack stack = player.getItemInHand(hand);
         if (!stack.is(Items.FLINT_AND_STEEL) && !stack.is(Items.FIRE_CHARGE)) {
-            if (candleHit(hitResult) && player.getItemInHand(hand).isEmpty() && state.getValue(LIT)) {
+            if (candleHit(hitResult, state) && player.getItemInHand(hand).isEmpty() && state.getValue(LIT)) {
                 extinguish(player, state, level, pos);
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
@@ -99,7 +99,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
     protected void afterEaten(BlockState state, BlockPos pos, Level level, Player player) {
     }
 
-    protected boolean candleHit(BlockHitResult hitResult) {
+    protected boolean candleHit(BlockHitResult hitResult, BlockState state) {
         return hitResult.getLocation().y - hitResult.getBlockPos().getY() > getCandleHeight();
     }
 

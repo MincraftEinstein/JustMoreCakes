@@ -5,6 +5,7 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.ThreeTieredCakeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,8 +37,8 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
 
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     protected static final VoxelShape UPPER_SHAPE = Shapes.or(
-            box(3, 0, 3, 13, 6, 13), // Top
-            box(7, 6, 7, 9, 12, 9) // Candle
+            box(3, -1, 3, 13, 5, 13), // Top
+            box(7, 5, 7, 9, 11, 9) // Candle
     );
     protected static final VoxelShape LOWER_SHAPE = Shapes.or(
             box(1, 0, 1, 15, 8, 15), // Lower
@@ -136,13 +137,29 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(HALF) == UPPER) {
+            super.animateTick(state, level, pos, random);
+        }
+    }
+
+    @Override
+    protected boolean candleHit(BlockHitResult hitResult, BlockState state) {
+        if (state.getValue(HALF) == UPPER) {
+            return super.candleHit(hitResult, state);
+        }
+
+        return false;
+    }
+
+    @Override
     protected double getCandleHeight() {
-        return 1.3125D;
+        return 0.3125D;
     }
 
     @Override
     protected Iterable<Vec3> getParticleOffsets(BlockState state) {
-        return ImmutableList.of(new Vec3(0.5D, 1.8125D, 0.5D));
+        return ImmutableList.of(new Vec3(0.5D, 0.8125D, 0.5D));
     }
 
     @Override
