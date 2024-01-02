@@ -2,6 +2,7 @@ package einstein.jmc.block.cake;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
+import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModCommonConfigs;
@@ -31,6 +32,7 @@ import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -85,7 +87,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-        return getShapeByBite()[state.getValue(getBites())];
+        return getShapeByBite(state)[state.getValue(getBites())];
     }
 
     @Override
@@ -93,7 +95,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         ItemStack stack = player.getItemInHand(hand);
         Item item = stack.getItem();
         if (allowsCandles) {
-            if (stack.is(ItemTags.CANDLES) && isUneaten(state)) {
+            if (stack.is(ItemTags.CANDLES) && isUneaten(state, pos, level)) {
                 Block block = Block.byItem(item);
                 if (block instanceof CandleBlock) {
                     if (!player.isCreative()) {
@@ -101,11 +103,12 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                     }
 
                     level.playSound(null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1, 1);
-                    Block candleCake = builder.getCandleCakeByCandle().get(block).get();
+                    BaseCandleCakeBlock candleCake = builder.getCandleCakeByCandle().get(block).get();
                     BlockState newState = candleCake.defaultBlockState();
                     level.setBlockAndUpdate(pos, newState);
                     level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
                     player.awardStat(Stats.ITEM_USED.get(item));
+                    afterCandlePlaced(level, state, pos, candleCake);
                     Block.pushEntitiesUp(state, newState, level, pos);
                     return InteractionResult.SUCCESS;
                 }
@@ -123,6 +126,9 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         }
 
         return eat(level, pos, state, player);
+    }
+
+    public void afterCandlePlaced(Level level, BlockState state, BlockPos pos, BaseCandleCakeBlock candleCake) {
     }
 
     public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
@@ -154,7 +160,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         level.gameEvent(player, GameEvent.EAT, pos);
 
         if (bite < getSlices()) {
-            level.setBlock(pos, state.setValue(getBites(), bite + 1), 3);
+            level.setBlockAndUpdate(pos, state.setValue(getBites(), bite + 1));
         }
         else {
             level.removeBlock(pos, false);
@@ -223,7 +229,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         return BITES;
     }
 
-    public VoxelShape[] getShapeByBite() {
+    public VoxelShape[] getShapeByBite(BlockState state) {
         return SHAPE_BY_BITE;
     }
 
@@ -260,11 +266,27 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         return DEFAULT_SATURATION_MODIFIER;
     }
 
-    public static boolean isUneaten(BlockState state) {
+    public static boolean isUneaten(BlockState state, BlockPos pos, Level level) {
         Block block = state.getBlock();
-        if (block instanceof BaseCakeBlock cakeBlock && cakeBlock.getBites() != null) {
-            return cakeBlock.getSlices() <= 0 || state.getValue(cakeBlock.getBites()) == 0;
+        if (block instanceof ThreeTieredCakeBlock threeTieredCakeBlock) {
+            if (state.getValue(ThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
+                return isUneaten(state, threeTieredCakeBlock);
+            }
+
+            BlockState aboveState = level.getBlockState(pos.above());
+            if (aboveState.getBlock() instanceof ThreeTieredCakeBlock aboveThreeTieredCakeBlock
+                    && aboveState.getValue(ThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
+                return isUneaten(aboveState, aboveThreeTieredCakeBlock);
+            }
+            return false;
+        }
+        else if (block instanceof BaseCakeBlock cakeBlock && cakeBlock.getBites() != null) {
+            return isUneaten(state, cakeBlock);
         }
         return !(block instanceof CakeBlock) || state.getValue(CakeBlock.BITES) == 0;
+    }
+
+    private static boolean isUneaten(BlockState state, BaseCakeBlock cakeBlock) {
+        return cakeBlock.getSlices() <= 0 || state.getValue(cakeBlock.getBites()) == 0;
     }
 }

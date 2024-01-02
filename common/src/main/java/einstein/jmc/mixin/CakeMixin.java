@@ -52,7 +52,7 @@ public class CakeMixin implements CakeEffectsHolder {
             }
         }
 
-        if (stack.is(Items.CAKE) && BaseCakeBlock.isUneaten(state)) {
+        if (stack.is(Items.CAKE) && BaseCakeBlock.isUneaten(state, pos, level)) {
             BlockState newState = ModBlocks.TWO_TIERED_CAKE.get().defaultBlockState();
             Block.pushEntitiesUp(state, newState, level, pos);
 

@@ -1,6 +1,8 @@
 package einstein.jmc.item;
 
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.ThreeTieredCakeBlock;
+import einstein.jmc.block.cake.candle.ThreeTieredCandleCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -38,12 +41,18 @@ public class CakeSpatulaItem extends Item {
             ItemStack stack = context.getItemInHand();
             Block block = state.getBlock();
             if (state.is(ModBlockTags.CAKE_SPATULA_USABLE)) {
-                if (!BaseCakeBlock.isUneaten(state)) {
+                if (!BaseCakeBlock.isUneaten(state, pos, level)) {
                     return InteractionResult.PASS;
                 }
 
                 if (!level.isClientSide) {
+                    if (block instanceof ThreeTieredCakeBlock || block instanceof ThreeTieredCandleCakeBlock) {
+                        ThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, stack, !player.isCreative());
+                    }
+
+                    // Can't drop resources here because a tool needs to be provided to the loot table
                     level.destroyBlock(pos, false, player);
+
                     stack.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(context.getHand()));
                     CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, pos, stack);
 

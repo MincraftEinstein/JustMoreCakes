@@ -9,8 +9,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -62,7 +62,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack stack = player.getItemInHand(hand);
         if (!stack.is(Items.FLINT_AND_STEEL) && !stack.is(Items.FIRE_CHARGE)) {
-            if (candleHit(hitResult) && player.getItemInHand(hand).isEmpty() && state.getValue(LIT)) {
+            if (candleHit(hitResult, state) && player.getItemInHand(hand).isEmpty() && state.getValue(LIT)) {
                 extinguish(player, state, level, pos);
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
@@ -70,6 +70,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
             InteractionResult result = originalCake.eat(level, pos, originalCake.defaultBlockState(), player);
             if (result.consumesAction()) {
                 dropResources(state, level, pos);
+                afterEaten(state, pos, level, player);
             }
             return result;
         }
@@ -86,7 +87,10 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
         return InteractionResult.PASS;
     }
 
-    protected boolean candleHit(BlockHitResult hitResult) {
+    protected void afterEaten(BlockState state, BlockPos pos, Level level, Player player) {
+    }
+
+    protected boolean candleHit(BlockHitResult hitResult, BlockState state) {
         return hitResult.getLocation().y - hitResult.getBlockPos().getY() > getCandleHeight();
     }
 
