@@ -21,7 +21,7 @@ Supports: [Cake Chomps](https://curseforge.com/minecraft/mc-mods/cake-chomps), [
   
 ```
 You may
-✅ Use this mod as a reference to understand and or create something of your own
+✅ Use this mod as a reference to understand and or create something of your own, as long as it is not a copy or recreation
 ✅ Use this mod in modpacks with credit and one or more links to any of the project pages*
 ✅ Edit for personal use
 ✅ Use this mod for/in YouTube videos with credit and one or more links to any of the project pages*
