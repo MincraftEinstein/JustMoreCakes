@@ -102,9 +102,11 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
                     level.playSound(null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1, 1);
                     Block candleCake = builder.getCandleCakeByCandle().get(block).get();
-                    level.setBlockAndUpdate(pos, candleCake.defaultBlockState());
+                    BlockState newState = candleCake.defaultBlockState();
+                    level.setBlockAndUpdate(pos, newState);
                     level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
                     player.awardStat(Stats.ITEM_USED.get(item));
+                    Block.pushEntitiesUp(state, newState, level, pos);
                     return InteractionResult.SUCCESS;
                 }
             }
