@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +56,7 @@ public class CakeBuilder {
     private CandleCakeClazzSupplier<?> candleCakeClazz;
     private BlockBehaviour.Properties cakeProperties;
     private BlockBehaviour.Properties candleCakeProperties;
+    private CakeFamily family;
 
     public CakeBuilder(String cakeName) {
         this.cakeName = cakeName;
@@ -123,6 +125,11 @@ public class CakeBuilder {
 
     public CakeBuilder saturationModifier(float modifier) {
         saturationModifier = modifier;
+        return this;
+    }
+
+    CakeBuilder setFamily(CakeFamily family) {
+        this.family = family;
         return this;
     }
 
@@ -199,6 +206,11 @@ public class CakeBuilder {
 
     public float getSaturationModifier() {
         return saturationModifier;
+    }
+
+    @Nullable
+    public CakeFamily getFamily() {
+        return family;
     }
 
     @FunctionalInterface
