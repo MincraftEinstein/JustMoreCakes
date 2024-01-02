@@ -10,11 +10,14 @@ import einstein.jmc.util.CakeBuilder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+
+import static einstein.jmc.util.CakeBuilder.SUPPORTED_CANDLES;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
@@ -40,24 +43,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
             if (!builder.hasCustomCandleCakeBlockModels() && builder.allowsCandles()) {
                 builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                    candleCakeBlock(candleCake.get(), CakeBuilder.SUPPORTED_CANDLES.get(candle), builder.getCakeName());
+                    candleCakeBlock(candleCake.get(), SUPPORTED_CANDLES.get(candle), builder.getCakeName());
                 });
             }
         });
 
         CakeBuilder threeTieredBuilder = ModBlocks.THREE_TIERED_CAKE.get().getBuilder();
         threeTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-            ResourceLocation type = CakeBuilder.SUPPORTED_CANDLES.get(candle);
-            getVariantBuilder(candleCake.get())
-                    .partialState().with(ThreeTieredCandleCakeBlock.LIT, false).addModels(new ConfiguredModel(models().withExistingParent(type.getPath() + "candle_three_tiered_cake", modLoc("template_three_tiered_candle_cake"))
-                            .texture("candle", new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle"))))
-                    .partialState().with(ThreeTieredCandleCakeBlock.LIT, true).addModels(new ConfiguredModel(models().withExistingParent(type.getPath() + "candle_three_tiered_cake_lit", modLoc("template_three_tiered_candle_cake"))
-                            .texture("candle", new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_lit"))));
+            ResourceLocation type = SUPPORTED_CANDLES.get(candle);
+            VariantBlockStateBuilder builder = getVariantBuilder(candleCake.get());
+            addThreeTieredVariant(builder, type, true, DoubleBlockHalf.LOWER);
+            addThreeTieredVariant(builder, type, false, DoubleBlockHalf.LOWER);
+            addThreeTieredVariant(builder, type, true, DoubleBlockHalf.UPPER);
+            addThreeTieredVariant(builder, type, false, DoubleBlockHalf.UPPER);
         });
 
         CakeBuilder twoTieredBuilder = ModBlocks.TWO_TIERED_CAKE.get().getBuilder();
         twoTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-            ResourceLocation type = CakeBuilder.SUPPORTED_CANDLES.get(candle);
+            ResourceLocation type = SUPPORTED_CANDLES.get(candle);
             getVariantBuilder(candleCake.get())
                     .partialState().with(TwoTieredCandleCakeBlock.LIT, false).addModels(new ConfiguredModel(models().withExistingParent(type.getPath() + "candle_two_tiered_cake", modLoc("template_two_tiered_candle_cake"))
                             .texture("candle", new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle"))
@@ -69,8 +72,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         CakeBuilder sculkBuilder = ModBlocks.SCULK_CAKE.get().getBuilder();
         sculkBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-            candleCakeBlock(candleCake.get(), CakeBuilder.SUPPORTED_CANDLES.get(candle), sculkBuilder.getCakeName());
+            candleCakeBlock(candleCake.get(), SUPPORTED_CANDLES.get(candle), sculkBuilder.getCakeName());
         });
+    }
+
+    private void addThreeTieredVariant(VariantBlockStateBuilder builder, ResourceLocation type, boolean lit, DoubleBlockHalf half) {
+        String lit_name = lit ? "_lit" : "";
+        String half_name = "_" + half;
+
+        builder.partialState()
+                .with(ThreeTieredCandleCakeBlock.LIT, lit)
+                .with(ThreeTieredCandleCakeBlock.HALF, half)
+                .addModels(new ConfiguredModel(models()
+                        .withExistingParent(type.getPath() + "candle_three_tiered_cake" + half_name + lit_name, modLoc("template_three_tiered_candle_cake" + half_name))
+                        .texture("candle", new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle" + lit_name))));
     }
 
     private void cakeBlock(BaseCakeBlock cake, String name) {
@@ -176,7 +191,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         if (cakeBuilder.allowsCandles()) {
             cakeBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                ResourceLocation type = CakeBuilder.SUPPORTED_CANDLES.get(candle);
+                ResourceLocation type = SUPPORTED_CANDLES.get(candle);
                 getVariantBuilder(candleCake.get())
                         .partialState().with(BaseCandleCakeBlock.LIT, false).addModels(new ConfiguredModel(models().getExistingFile(new ResourceLocation(type.getNamespace(), type.getPath() + "candle_cake"))))
                         .partialState().with(BaseCandleCakeBlock.LIT, true).addModels(new ConfiguredModel(models().getExistingFile(new ResourceLocation(type.getNamespace(), type.getPath() + "candle_cake_lit"))));

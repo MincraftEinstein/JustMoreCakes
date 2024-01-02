@@ -21,6 +21,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,15 +61,12 @@ public class ModModelProvider extends FabricModelProvider {
 
         CakeBuilder threeTieredBuilder = ModBlocks.THREE_TIERED_CAKE.get().getBuilder();
         threeTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake.get()).with(PropertyDispatch.property(ThreeTieredCandleCakeBlock.LIT)
-                    .select(false, Variant.variant().with(VariantProperties.MODEL,
-                            new ModelTemplate(Optional.of(loc("block/template_three_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
-                                    .create(candleCake.get(), new TextureMapping()
-                                            .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle)), generators.modelOutput)))
-                    .select(true, Variant.variant().with(VariantProperties.MODEL,
-                            new ModelTemplate(Optional.of(loc("block/template_three_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
-                                    .createWithSuffix(candleCake.get(), "_lit", new TextureMapping()
-                                            .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle, "_lit")), generators.modelOutput)))));
+            PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch = PropertyDispatch.properties(ThreeTieredCandleCakeBlock.LIT, ThreeTieredCandleCakeBlock.HALF);
+            addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, true, DoubleBlockHalf.LOWER);
+            addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, false, DoubleBlockHalf.LOWER);
+            addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, true, DoubleBlockHalf.UPPER);
+            addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, false, DoubleBlockHalf.UPPER);
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake.get()).with(dispatch));
         });
 
         CakeBuilder twoTieredBuilder = ModBlocks.TWO_TIERED_CAKE.get().getBuilder();
@@ -91,6 +89,17 @@ public class ModModelProvider extends FabricModelProvider {
         sculkBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
             candleCakeBlock(generators, candleCake.get(), candle, ModBlocks.SCULK_CAKE.get());
         });
+    }
+
+    private void addThreeTieredVariant(BlockModelGenerators generators, PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch, Block candleCake, Block candle, boolean lit, DoubleBlockHalf half) {
+        String lit_name = lit ? "_lit" : "";
+        String half_name = "_" + half;
+
+        dispatch.select(lit, half, Variant.variant().with(VariantProperties.MODEL,
+                new ModelTemplate(Optional.of(loc("block/template_three_tiered_candle_cake" + half_name)), Optional.empty(), TextureSlot.CANDLE)
+                        .createWithSuffix(candleCake, half_name + lit_name, new TextureMapping()
+                                .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle, lit_name)), generators.modelOutput))
+        );
     }
 
     @Override
@@ -195,7 +204,7 @@ public class ModModelProvider extends FabricModelProvider {
                 }
 
                 builder.select(i, Variant.variant().with(VariantProperties.MODEL,
-                        new ModelTemplate(Optional.of(loc("block/template_cross_cake_slice" + i)), Optional.empty(), slots.toArray(new TextureSlot[]{}))
+                        new ModelTemplate(Optional.of(loc("block/template_cross_cake_slice" + i)), Optional.empty(), slots.toArray(new TextureSlot[] {}))
                                 .createWithSuffix(cake, "_slice" + i, mapping, generators.modelOutput)));
             }
 

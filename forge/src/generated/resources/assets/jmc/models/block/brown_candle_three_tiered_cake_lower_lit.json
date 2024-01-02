@@ -1,0 +1,6 @@
+{
+  "parent": "jmc:block/template_three_tiered_candle_cake_lower",
+  "textures": {
+    "candle": "minecraft:block/brown_candle_lit"
+  }
+}
