@@ -1,6 +1,5 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -23,7 +22,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class TwoTieredCakeBlock extends BaseCakeBlock {
+public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
 
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 10);
     protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[] {
@@ -45,7 +44,7 @@ public class TwoTieredCakeBlock extends BaseCakeBlock {
             Block.box(11, 0, 1, 15, 8, 15) //10
     };
 
-    public TwoTieredCakeBlock(CakeBuilder builder) {
+    public BaseTwoTieredCakeBlock(CakeBuilder builder) {
         super(builder, 10);
     }
 
@@ -63,23 +62,26 @@ public class TwoTieredCakeBlock extends BaseCakeBlock {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (stack.is(Items.CAKE) && isUneaten(state, pos, level)) {
-            BlockState aboveState = ModBlocks.THREE_TIERED_CAKE.get().defaultBlockState();
-            BlockPos abovePos = pos.above();
+        if (getFamily() != null) {
+            Block baseCake = getFamily().getBaseCake().get();
+            if (stack.is(baseCake.asItem()) && isUneaten(state, pos, level)) {
+                BlockState newState = baseCake.defaultBlockState();
+                BlockPos abovePos = pos.above();
 
-            level.setBlockAndUpdate(pos, ModBlocks.THREE_TIERED_CAKE.get().defaultBlockState()
-                    .setValue(ThreeTieredCakeBlock.HALF, DoubleBlockHalf.LOWER)
-                    .setValue(ThreeTieredCakeBlock.BITES, 5));
-            level.setBlockAndUpdate(abovePos, aboveState);
-            Block.pushEntitiesUp(Blocks.AIR.defaultBlockState(), aboveState, level, abovePos);
-            level.gameEvent(player, GameEvent.BLOCK_CHANGE, abovePos);
-            level.playSound(null, abovePos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1, 1);
-            player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
+                level.setBlockAndUpdate(pos, newState
+                        .setValue(BaseThreeTieredCakeBlock.HALF, DoubleBlockHalf.LOWER)
+                        .setValue(BaseThreeTieredCakeBlock.BITES, 5));
+                level.setBlockAndUpdate(abovePos, newState);
+                Block.pushEntitiesUp(Blocks.AIR.defaultBlockState(), newState, level, abovePos);
+                level.gameEvent(player, GameEvent.BLOCK_CHANGE, abovePos);
+                level.playSound(null, abovePos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1, 1);
+                player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
 
-            if (!player.isCreative()) {
-                stack.shrink(1);
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                }
+                return InteractionResult.SUCCESS;
             }
-            return InteractionResult.SUCCESS;
         }
         return super.use(state, level, pos, player, hand, hitResult);
     }

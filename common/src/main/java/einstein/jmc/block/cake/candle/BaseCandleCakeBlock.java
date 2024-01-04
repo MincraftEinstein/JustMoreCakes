@@ -33,7 +33,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 @SuppressWarnings("deprecation")
 public class BaseCandleCakeBlock extends AbstractCandleBlock {
 
-    public static final BooleanProperty LIT = AbstractCandleBlock.LIT;
+    // TODO remove if works without
+//    public static final BooleanProperty LIT = AbstractCandleBlock.LIT;
     protected static final VoxelShape SHAPE = Shapes.or(
             Block.box(1, 0, 1, 15, 8, 15),
             Block.box(7, 8, 7, 9, 14, 9));

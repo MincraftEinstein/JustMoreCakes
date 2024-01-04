@@ -2,7 +2,7 @@ package einstein.jmc.block.cake.candle;
 
 import com.google.common.collect.ImmutableList;
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.block.cake.ThreeTieredCakeBlock;
+import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER;
 
-public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
+public class BaseThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
 
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     protected static final VoxelShape UPPER_SHAPE = Shapes.or(
@@ -45,7 +45,7 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
             box(2, 8, 2, 14, 15, 14) // Middle
     );
 
-    public ThreeTieredCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
+    public BaseThreeTieredCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
         super(originalCake, candle, properties);
         registerDefaultState(defaultBlockState().setValue(HALF, UPPER));
     }
@@ -93,13 +93,13 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     protected BlockState createLowerState() {
-        return ThreeTieredCakeBlock.createLowerState(getOriginalCake(), true);
+        return BaseThreeTieredCakeBlock.createLowerState(getOriginalCake(), true);
     }
 
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide()) {
-            ThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, ItemStack.EMPTY, !player.isCreative());
+            BaseThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, ItemStack.EMPTY, !player.isCreative());
         }
 
         super.playerWillDestroy(level, pos, state, player);
@@ -168,7 +168,7 @@ public class ThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
-    public ThreeTieredCakeBlock getOriginalCake() {
-        return (ThreeTieredCakeBlock) super.getOriginalCake();
+    public BaseThreeTieredCakeBlock getOriginalCake() {
+        return (BaseThreeTieredCakeBlock) super.getOriginalCake();
     }
 }

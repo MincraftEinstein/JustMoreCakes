@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.datafixers.util.Pair;
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.block.cake.ThreeTieredCakeBlock;
+import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
 import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.init.ModPotions;
@@ -26,7 +26,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -259,7 +258,7 @@ public class Util {
     public static LootPool.Builder addHalfConditionToPool(LootPool.Builder builder, Block block) {
         return builder.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                 .setProperties(StatePropertiesPredicate.Builder.properties()
-                        .hasProperty(ThreeTieredCakeBlock.HALF, DoubleBlockHalf.UPPER)));
+                        .hasProperty(BaseThreeTieredCakeBlock.HALF, DoubleBlockHalf.UPPER)));
     }
 
     public static ImmutableList<Block> getVanillaCandleCakes() {

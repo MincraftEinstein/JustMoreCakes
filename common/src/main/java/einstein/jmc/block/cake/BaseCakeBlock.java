@@ -8,6 +8,8 @@ import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModCommonConfigs;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeFamily;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -242,6 +244,15 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     @Nullable
+    public CakeFamily getFamily() {
+        return builder.getFamily();
+    }
+
+    public boolean isBaseCake() {
+        return builder.getVariant() == CakeVariant.BASE;
+    }
+
+    @Nullable
     @Override
     public CakeEffects getCakeEffects() {
         return cakeEffects;
@@ -268,14 +279,14 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     public static boolean isUneaten(BlockState state, BlockPos pos, Level level) {
         Block block = state.getBlock();
-        if (block instanceof ThreeTieredCakeBlock threeTieredCakeBlock) {
-            if (state.getValue(ThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
+        if (block instanceof BaseThreeTieredCakeBlock threeTieredCakeBlock) {
+            if (state.getValue(BaseThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
                 return isUneaten(state, threeTieredCakeBlock);
             }
 
             BlockState aboveState = level.getBlockState(pos.above());
-            if (aboveState.getBlock() instanceof ThreeTieredCakeBlock aboveThreeTieredCakeBlock
-                    && aboveState.getValue(ThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
+            if (aboveState.getBlock() instanceof BaseThreeTieredCakeBlock aboveThreeTieredCakeBlock
+                    && aboveState.getValue(BaseThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
                 return isUneaten(aboveState, aboveThreeTieredCakeBlock);
             }
             return false;

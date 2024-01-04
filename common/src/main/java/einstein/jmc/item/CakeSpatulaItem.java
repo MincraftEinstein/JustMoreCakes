@@ -1,8 +1,8 @@
 package einstein.jmc.item;
 
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.block.cake.ThreeTieredCakeBlock;
-import einstein.jmc.block.cake.candle.ThreeTieredCandleCakeBlock;
+import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
+import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -20,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -46,8 +45,8 @@ public class CakeSpatulaItem extends Item {
                 }
 
                 if (!level.isClientSide) {
-                    if (block instanceof ThreeTieredCakeBlock || block instanceof ThreeTieredCandleCakeBlock) {
-                        ThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, stack, !player.isCreative());
+                    if (block instanceof BaseThreeTieredCakeBlock || block instanceof BaseThreeTieredCandleCakeBlock) {
+                        BaseThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, stack, !player.isCreative());
                     }
 
                     // Can't drop resources here because a tool needs to be provided to the loot table

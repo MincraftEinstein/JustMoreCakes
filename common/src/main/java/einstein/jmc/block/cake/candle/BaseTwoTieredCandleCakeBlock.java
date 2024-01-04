@@ -2,6 +2,7 @@ package einstein.jmc.block.cake.candle;
 
 import com.google.common.collect.ImmutableList;
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.BaseTwoTieredCakeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -12,7 +13,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class TwoTieredCandleCakeBlock extends BaseCandleCakeBlock {
+public class BaseTwoTieredCandleCakeBlock extends BaseCandleCakeBlock {
 
     protected static final VoxelShape SHAPE = Shapes.or(
             box(1, 0, 1, 15, 8, 15), // Lower
@@ -20,7 +21,7 @@ public class TwoTieredCandleCakeBlock extends BaseCandleCakeBlock {
             box(7, 15, 7, 9, 21, 9) // Candle
     );
 
-    public TwoTieredCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
+    public BaseTwoTieredCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
         super(originalCake, candle, properties);
     }
 
@@ -42,5 +43,10 @@ public class TwoTieredCandleCakeBlock extends BaseCandleCakeBlock {
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         return 11;
+    }
+
+    @Override
+    public BaseTwoTieredCakeBlock getOriginalCake() {
+        return (BaseTwoTieredCakeBlock) super.getOriginalCake();
     }
 }

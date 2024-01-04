@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static einstein.jmc.block.cake.TNTCakeBlock.explodeIfAllowed;
 
+@SuppressWarnings("deprecation")
 public class TNTCandleCakeBlock extends BaseEntityCandleCakeBlock<TNTCakeBlockEntity> {
 
     public TNTCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {

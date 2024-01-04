@@ -1,12 +1,16 @@
 package einstein.jmc.init;
 
+import einstein.jmc.JustMoreCakes;
+import einstein.jmc.block.CakeOvenBlock;
+import einstein.jmc.block.CakeStandBlock;
+import einstein.jmc.block.EncasingIceBlock;
 import einstein.jmc.block.cake.*;
 import einstein.jmc.block.cake.candle.*;
 import einstein.jmc.block.entity.GlowstoneCakeBlockEntity;
-import einstein.jmc.block.entity.TNTCakeBlockEntity;
-import einstein.jmc.block.*;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeModel;
+import einstein.jmc.util.VanillaCakeFamily;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkSensorBlock;
@@ -18,7 +22,12 @@ import net.minecraft.world.level.material.PushReaction;
 
 import java.util.function.Supplier;
 
+import static einstein.jmc.JustMoreCakes.mcLoc;
+
 public class ModBlocks {
+
+//    public static final DefaultCakeFamily CHOCOLATE_CAKE_FAMILY = CakeFamily.create("chocolate").build();
+    public static final VanillaCakeFamily VANILLA_CAKE_FAMILY = new VanillaCakeFamily();
 
     public static final Supplier<BaseCakeBlock> CHOCOLATE_CAKE = new CakeBuilder("chocolate_cake").build();
     public static final Supplier<BaseCakeBlock> CARROT_CAKE = new CakeBuilder("carrot_cake").build();
@@ -29,15 +38,13 @@ public class ModBlocks {
             .build();
     public static final Supplier<BaseCakeBlock> APPLE_CAKE = new CakeBuilder("apple_cake").build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
-            .customBlockModel()
-            .customCandleCakeBlockModels()
+            .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
             .build();
     public static final Supplier<BaseCakeBlock> COOKIE_CAKE = new CakeBuilder("cookie_cake").build();
     public static final Supplier<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake")
             .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
-            .customBlockModel()
-            .customCandleCakeBlockModels()
+            .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
             .build();
     public static final Supplier<BaseCakeBlock> GOLDEN_APPLE_CAKE = new CakeBuilder("golden_apple_cake")
@@ -46,7 +53,7 @@ public class ModBlocks {
             .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake")
-            .customBlockModel()
+            .model(new CakeModel.CrossCakeModel(mcLoc("block/red_mushroom")))
             .build();
     public static final Supplier<BaseCakeBlock> FIREY_CAKE = new CakeBuilder("firey_cake").build();
     public static final Supplier<BaseCakeBlock> REDSTONE_CAKE = new CakeBuilder("redstone_cake")
@@ -57,16 +64,16 @@ public class ModBlocks {
             .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> CHEESECAKE = new CakeBuilder("cheesecake").build();
-    public static final Supplier<BaseCakeBlock> TWO_TIERED_CAKE = new CakeBuilder("two_tiered_cake")
-            .setBothClasses(TwoTieredCakeBlock::new, TwoTieredCandleCakeBlock::new)
-            .customBlockModel()
-            .customCandleCakeBlockModels()
-            .build();
-    public static final Supplier<BaseCakeBlock> THREE_TIERED_CAKE = new CakeBuilder("three_tiered_cake")
-            .setBothClasses(ThreeTieredCakeBlock::new, ThreeTieredCandleCakeBlock::new)
-            .customBlockModel()
-            .customCandleCakeBlockModels()
-            .build();
+//    public static final Supplier<BaseCakeBlock> TWO_TIERED_CAKE = new CakeBuilder("two_tiered_cake")
+//            .setBothClasses(BaseTwoTieredCakeBlock::new, TwoTieredCandleCakeBlock::new)
+//            .customBlockModel()
+//            .customCandleCakeBlockModels()
+//            .build();
+//    public static final Supplier<BaseCakeBlock> THREE_TIERED_CAKE = new CakeBuilder("three_tiered_cake")
+//            .setBothClasses(BaseThreeTieredCakeBlock::new, ThreeTieredCandleCakeBlock::new)
+//            .customBlockModel()
+//            .customCandleCakeBlockModels()
+//            .build();
     public static final Supplier<BaseCakeBlock> SLIME_CAKE = new CakeBuilder("slime_cake")
             .setCakeProperties(cakeProperties().sound(SoundType.SLIME_BLOCK))
             .setCandleCakeProperties(candleCakeProperties().sound(SoundType.SLIME_BLOCK))
@@ -88,18 +95,18 @@ public class ModBlocks {
     public static final Supplier<BaseCakeBlock> SEED_CAKE = new CakeBuilder("seed_cake").build();
     public static final Supplier<BaseCakeBlock> CUPCAKE = new CakeBuilder("cupcake")
             .setCakeClass(CupcakeBlock::new)
-            .customBlockModel()
+            .model(CakeModel.CUSTOM)
             .disallowCandles()
             .noItem()
             .nutrition(1)
             .saturationModifier(0.3F)
             .build();
     public static final Supplier<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake")
-            .customBlockModel()
+            .model(new CakeModel.CrossCakeModel(mcLoc("block/brown_mushroom")))
             .build();
     public static final Supplier<BaseCakeBlock> ICE_CAKE = new CakeBuilder("ice_cake").build();
     public static final Supplier<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake")
-            .customBlockModel()
+            .model(new CakeModel.CrossCakeModel(JustMoreCakes.loc("block/chorus_cake_flower")))
             .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> SWEET_BERRY_CAKE = new CakeBuilder("sweet_berry_cake")
@@ -115,7 +122,7 @@ public class ModBlocks {
             .setBothClasses(GlowstoneCakeBlock::new, (originalCake, candle, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, candle, properties, GlowstoneCakeBlockEntity::new))
             .build();
     public static final Supplier<BaseCakeBlock> CRIMSON_FUNGUS_CAKE = new CakeBuilder("crimson_fungus_cake")
-            .customBlockModel()
+            .model(new CakeModel.CrossCakeModel(mcLoc("block/crimson_fungus")))
             .build();
     public static final Supplier<BaseCakeBlock> WARPED_FUNGUS_CAKE = new CakeBuilder("warped_fungus_cake").build();
     public static final Supplier<BaseCakeBlock> RED_VELVET_CAKE = new CakeBuilder("red_velvet_cake").build();
@@ -135,8 +142,7 @@ public class ModBlocks {
             .setCakeClass(SculkCakeBlock::new)
             .setCakeProperties(cakeProperties().lightLevel(state -> 1)
                     .emissiveRendering((state, getter, pos) -> SculkSensorBlock.getPhase(state) == SculkSensorPhase.ACTIVE))
-            .customBlockModel()
-            .customCandleCakeBlockModels()
+            .models(CakeModel.CUSTOM, CakeModel.DEFAULT)
             .alwaysEat()
             .build();
 

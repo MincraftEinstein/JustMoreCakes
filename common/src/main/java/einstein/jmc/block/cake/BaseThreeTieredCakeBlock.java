@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER;
 
-public class ThreeTieredCakeBlock extends BaseCakeBlock {
+public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
 
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 15);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
@@ -67,7 +67,7 @@ public class ThreeTieredCakeBlock extends BaseCakeBlock {
             Block.box(11, 0, 1, 15, 8, 15) //15
     };
 
-    public ThreeTieredCakeBlock(CakeBuilder builder) {
+    public BaseThreeTieredCakeBlock(CakeBuilder builder) {
         super(builder, 15);
         registerDefaultState(defaultBlockState().setValue(HALF, UPPER));
     }

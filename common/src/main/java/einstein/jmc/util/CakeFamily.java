@@ -1,6 +1,8 @@
 package einstein.jmc.util;
 
 import einstein.jmc.block.cake.BaseCakeBlock;
+import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,33 +13,49 @@ public class CakeFamily {
 
     public static final List<CakeFamily> REGISTERED_CAKE_FAMILIES = new ArrayList<>();
 
-    private final String flavorName;
-    private final CakeBuilder baseBuilder;
-    private final CakeBuilder twoTieredBuilder;
-    private final CakeBuilder threeTieredBuilder;
-    private Supplier<BaseCakeBlock> baseCake;
-    private Supplier<BaseCakeBlock> twoTieredCake;
-    private Supplier<BaseCakeBlock> threeTieredCake;
-    private int nutrition = BaseCakeBlock.DEFAULT_NUTRITION;
-    private float saturationModifier = BaseCakeBlock.DEFAULT_SATURATION_MODIFIER;
+    private final String baseCakeName;
+    @Nullable
+    protected CakeBuilder baseBuilder;
+    protected final CakeBuilder twoTieredBuilder;
+    protected final CakeBuilder threeTieredBuilder;
+    protected Supplier<BaseCakeBlock> baseCake;
+    protected Supplier<BaseCakeBlock> twoTieredCake;
+    protected Supplier<BaseCakeBlock> threeTieredCake;
+    protected int nutrition = BaseCakeBlock.DEFAULT_NUTRITION;
+    protected float saturationModifier = BaseCakeBlock.DEFAULT_SATURATION_MODIFIER;
+    protected CakeModel model = CakeModel.DEFAULT;
 
-    private CakeFamily(String flavorName) {
-        this.flavorName = flavorName;
+    CakeFamily(String baseCakeName) {
+        this.baseCakeName = baseCakeName;
 
-        String cakeName = flavorName + "_cake";
-        baseBuilder = new CakeBuilder(cakeName);
-        twoTieredBuilder = new CakeBuilder("two_tiered_" + cakeName);
-        threeTieredBuilder = new CakeBuilder("three_tiered_" + cakeName);
+        baseBuilder = new CakeBuilder(baseCakeName)
+                .setFamily(this)
+                .nutrition(nutrition)
+                .saturationModifier(saturationModifier)
+                .models(model, model);
+
+        twoTieredBuilder = new CakeBuilder("two_tiered_" + baseCakeName, CakeVariant.TWO_TIERED)
+                .setFamily(this)
+                .nutrition(nutrition)
+                .saturationModifier(saturationModifier)
+                .models(model, model);
+
+        threeTieredBuilder = new CakeBuilder("three_tiered_" + baseCakeName, CakeVariant.THREE_TIERED)
+                .setFamily(this)
+                .nutrition(nutrition)
+                .saturationModifier(saturationModifier)
+                .models(model, model);
     }
 
     public static Builder create(String flavorName) {
         return new Builder(flavorName);
     }
 
-    public String getFlavorName() {
-        return flavorName;
+    public String getBaseCakeName() {
+        return baseCakeName;
     }
 
+    @Nullable
     public CakeBuilder getBaseBuilder() {
         return baseBuilder;
     }
@@ -50,7 +68,7 @@ public class CakeFamily {
         return threeTieredBuilder;
     }
 
-    public Supplier<BaseCakeBlock> getBaseCake() {
+    public Supplier<? extends Block> getBaseCake() {
         return baseCake;
     }
 
@@ -70,12 +88,16 @@ public class CakeFamily {
         return saturationModifier;
     }
 
+    public CakeModel getModel() {
+        return model;
+    }
+
     public static class Builder {
 
-        private final CakeFamily family;
+        private final DefaultCakeFamily family;
 
         private Builder(String flavorName) {
-            family = new CakeFamily(flavorName);
+            family = new DefaultCakeFamily(flavorName);
         }
 
         public Builder modifyBaseBuilder(Consumer<CakeBuilder> consumer) {
@@ -103,25 +125,15 @@ public class CakeFamily {
             return this;
         }
 
-        public CakeFamily build() {
-            family.baseCake = family.baseBuilder
-                    .setFamily(family)
-                    .nutrition(family.nutrition)
-                    .saturationModifier(family.saturationModifier)
-                    .build();
+        public Builder model(CakeModel model) {
+            family.model = model;
+            return this;
+        }
 
-            family.twoTieredCake = family.twoTieredBuilder
-                    .setFamily(family)
-                    .nutrition(family.nutrition)
-                    .saturationModifier(family.saturationModifier)
-                    .build();
-
-            family.threeTieredCake = family.threeTieredBuilder
-                    .setFamily(family)
-                    .nutrition(family.nutrition)
-                    .saturationModifier(family.saturationModifier)
-                    .build();
-
+        public DefaultCakeFamily build() {
+            family.baseCake = family.baseBuilder.build();
+            family.twoTieredCake = family.twoTieredBuilder.noItem().build();
+            family.threeTieredCake = family.threeTieredBuilder.noItem().build();
             REGISTERED_CAKE_FAMILIES.add(family);
             return family;
         }

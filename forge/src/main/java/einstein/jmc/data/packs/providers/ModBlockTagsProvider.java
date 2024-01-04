@@ -41,7 +41,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         sortedCakes.forEach((cake, cakeBuilder) -> {
             tag(ModBlockTags.CAKES).add(cake.get());
 
-            if (cake != ModBlocks.THREE_TIERED_CAKE && cake != ModBlocks.TWO_TIERED_CAKE) {
+            if (cake.get().isBaseCake()) {
                 tag(ModBlockTags.CAKE_STAND_STORABLES).add(cake.get());
             }
 

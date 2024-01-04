@@ -2,8 +2,8 @@ package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
-import einstein.jmc.block.cake.candle.ThreeTieredCandleCakeBlock;
-import einstein.jmc.block.cake.candle.TwoTieredCandleCakeBlock;
+import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
+import einstein.jmc.block.cake.candle.BaseTwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.util.CakeBuilder;
@@ -61,7 +61,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         CakeBuilder threeTieredBuilder = ModBlocks.THREE_TIERED_CAKE.get().getBuilder();
         threeTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-            PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch = PropertyDispatch.properties(ThreeTieredCandleCakeBlock.LIT, ThreeTieredCandleCakeBlock.HALF);
+            PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch = PropertyDispatch.properties(BaseThreeTieredCandleCakeBlock.LIT, BaseThreeTieredCandleCakeBlock.HALF);
             addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, true, DoubleBlockHalf.LOWER);
             addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, false, DoubleBlockHalf.LOWER);
             addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, true, DoubleBlockHalf.UPPER);
@@ -71,7 +71,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         CakeBuilder twoTieredBuilder = ModBlocks.TWO_TIERED_CAKE.get().getBuilder();
         twoTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake.get()).with(PropertyDispatch.property(TwoTieredCandleCakeBlock.LIT)
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake.get()).with(PropertyDispatch.property(BaseTwoTieredCandleCakeBlock.LIT)
                     .select(false, Variant.variant().with(VariantProperties.MODEL,
                             new ModelTemplate(Optional.of(loc("block/template_two_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
                                     .create(candleCake.get(), new TextureMapping()
