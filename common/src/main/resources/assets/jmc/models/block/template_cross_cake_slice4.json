@@ -1,19 +1,22 @@
 {
-    "render_type": "minecraft:cutout",
-    "textures": {
-        "particle": "#side"
-    },
-    "elements": [
-        {   "from": [ 9, 0, 1 ],
-            "to": [ 15, 8, 15 ],
-            "faces": {
-                "down":  { "texture": "#bottom", "cullface": "down" },
-                "up":    { "texture": "#top" },
-                "north": { "texture": "#side" },
-                "south": { "texture": "#side" },
-                "west":  { "texture": "#inside" },
-                "east":  { "texture": "#side" }
-            }
-        }
-    ]
+	"credit": "Made with Blockbench by MincraftEinstein",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"particle": "#side"
+	},
+	"elements": [
+		{
+			"name": "cake",
+			"from": [9, 0, 1],
+			"to": [15, 8, 15],
+			"faces": {
+				"north": {"uv": [1, 8, 7, 16], "texture": "#side"},
+				"east": {"uv": [1, 8, 15, 16], "texture": "#side"},
+				"south": {"uv": [9, 8, 15, 16], "texture": "#side"},
+				"west": {"uv": [1, 8, 15, 16], "texture": "#inside"},
+				"up": {"uv": [9, 1, 15, 15], "texture": "#top"},
+				"down": {"uv": [9, 1, 15, 15], "texture": "#bottom", "cullface": "down"}
+			}
+		}
+	]
 }

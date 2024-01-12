@@ -1,38 +1,42 @@
 {
-    "render_type": "minecraft:cutout",
-    "textures": {
-        "particle": "#side"
-    },
-    "elements": [
-        {
-            "from": [ 1, 0, 1 ], 
-            "to": [ 15, 8, 15 ], 
-            "faces": {
-                "north": { "texture": "#side", "uv": [ 1, 8, 15, 16 ] },
-                "east": { "texture": "#side", "uv": [ 1, 8, 15, 16 ] },
-                "south": { "texture": "#side", "uv": [ 1, 8, 15, 16 ] },
-                "west": { "texture": "#side", "uv": [ 1, 8, 15, 16 ] },
-                "up": { "texture": "#top", "uv": [ 1, 1, 15, 15 ] },
-                "down": { "texture": "#bottom", "uv": [ 1, 1, 15, 15 ], "cullface": "down" }
-            }
-        },
-        {
-            "from": [ 8, 8, 0 ], 
-            "to": [ 8, 24, 16 ], 
-            "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": -45.0 },
-            "faces": {
-                "east": { "texture": "#cross", "uv": [ 0, 0, 16, 16 ] },
-                "west": { "texture": "#cross", "uv": [ 0, 0, 16, 16 ] }
-            }
-        },
-        {
-            "from": [ 8, 8, 0 ], 
-            "to": [ 8, 24, 16 ], 
-            "rotation": { "origin": [ 8, 8, 8 ], "axis": "y", "angle": 45.0 },
-            "faces": {
-                "east": { "texture": "#cross", "uv": [ 0, 0, 16, 16 ] },
-                "west": { "texture": "#cross", "uv": [ 0, 0, 16, 16 ] }
-            }
-        }
-    ]
+	"credit": "Made with Blockbench by MincraftEinstein",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"particle": "#side"
+	},
+	"elements": [
+		{
+			"name": "cake",
+			"from": [1, 0, 1],
+			"to": [15, 8, 15],
+			"faces": {
+				"north": {"uv": [1, 8, 15, 16], "texture": "#side"},
+				"east": {"uv": [1, 8, 15, 16], "texture": "#side"},
+				"south": {"uv": [1, 8, 15, 16], "texture": "#side"},
+				"west": {"uv": [1, 8, 15, 16], "texture": "#side"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#bottom", "cullface": "down"}
+			}
+		},
+		{
+			"name": "cross1",
+			"from": [8, 8, 0],
+			"to": [8, 24, 16],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#cross"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#cross"}
+			}
+		},
+		{
+			"name": "cross2",
+			"from": [8, 8, 0],
+			"to": [8, 24, 16],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#cross"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#cross"}
+			}
+		}
+	]
 }
