@@ -1,6 +1,7 @@
 package einstein.jmc.block.cake;
 
 import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeFamily;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -61,11 +62,13 @@ public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack stack = player.getItemInHand(hand);
+        CakeFamily family = getFamily();
 
-        if (getFamily() != null) {
-            Block baseCake = getFamily().getBaseCake().get();
+        if (family != null) {
+            Block baseCake = family.getBaseCake().get();
+
             if (stack.is(baseCake.asItem()) && isUneaten(state, pos, level)) {
-                BlockState newState = baseCake.defaultBlockState();
+                BlockState newState = family.getThreeTieredCake().get().defaultBlockState();
                 BlockPos abovePos = pos.above();
 
                 level.setBlockAndUpdate(pos, newState
