@@ -1,9 +1,5 @@
 {
     "textures": {
-        "bottom": "jmc:block/three_tiered_cake_bottom",
-        "lower_side": "jmc:block/three_tiered_cake_lower_side",
-        "lower_top": "jmc:block/three_tiered_cake_lower_top",
-        "lower_inner": "jmc:block/three_tiered_cake_lower_inner",
         "particle": "#lower_side"
     },
     "elements": [

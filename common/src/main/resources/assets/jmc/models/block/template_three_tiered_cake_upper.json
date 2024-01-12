@@ -1,9 +1,6 @@
 {
 	"credit": "Made with Blockbench by MincraftEinstein",
 	"textures": {
-		"bottom": "jmc:block/three_tiered_cake_bottom",
-		"top": "jmc:block/three_tiered_cake_top",
-		"top_side": "jmc:block/three_tiered_cake_top_side",
 		"particle": "#top_side"
 	},
 	"elements": [
