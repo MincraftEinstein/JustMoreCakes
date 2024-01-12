@@ -35,7 +35,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             BaseCakeBlock cakeBlock = cake.get();
             CakeVariant variant = builder.getVariant();
-            Block baseCake = builder.getFamily().getBaseCake().get();
 
             knownBlocks.add(cakeBlock);
             switch (variant) {
@@ -48,6 +47,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                     });
                 }
                 case TWO_TIERED -> {
+                    Block baseCake = builder.getFamily().getBaseCake().get();
                     add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 2));
 
                     builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
@@ -56,6 +56,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                     });
                 }
                 case THREE_TIERED -> {
+                    Block baseCake = builder.getFamily().getBaseCake().get();
                     add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 3));
 
                     builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {

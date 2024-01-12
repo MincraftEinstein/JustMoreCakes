@@ -1,0 +1,10 @@
+{
+  "parent": "jmc:block/template_three_tiered_cake_lower",
+  "textures": {
+    "bottom": "jmc:block/three_tiered_cake_bottom",
+    "lower_side": "jmc:block/three_tiered_cake_lower_side",
+    "lower_top": "jmc:block/three_tiered_cake_lower_top",
+    "middle_side": "jmc:block/three_tiered_cake_middle_side",
+    "middle_top": "jmc:block/three_tiered_cake_middle_top"
+  }
+}
