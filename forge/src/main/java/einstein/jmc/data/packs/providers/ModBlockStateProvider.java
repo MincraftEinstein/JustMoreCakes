@@ -282,7 +282,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     modelBuilder.texture("lower_inner", "block/" + name + "_lower_inner");
                 }
 
-                if (i < 4) {
+                if (i < 3) {
                     addCrossTexture(addCross, modelBuilder, crossTexture);
                 }
 

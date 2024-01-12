@@ -1,0 +1,54 @@
+{
+	"credit": "Made with Blockbench by MincraftEinstein",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"particle": "#lower_side"
+	},
+	"elements": [
+		{
+			"name": "lower_cake",
+			"from": [1, 0, 1],
+			"to": [15, 8, 15],
+			"faces": {
+				"north": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
+				"east": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
+				"south": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
+				"west": {"uv": [1, 8, 15, 16], "texture": "#lower_side"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#lower_top"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#bottom"}
+			}
+		},
+		{
+			"name": "top_cake",
+			"from": [2, 8, 2],
+			"to": [14, 15, 14],
+			"faces": {
+				"north": {"uv": [2, 9, 14, 16], "texture": "#top_side"},
+				"east": {"uv": [2, 9, 14, 16], "texture": "#top_side"},
+				"south": {"uv": [2, 9, 14, 16], "texture": "#top_side"},
+				"west": {"uv": [2, 9, 14, 16], "texture": "#top_side"},
+				"up": {"uv": [2, 2, 14, 14], "texture": "#top"}
+			}
+		},
+		{
+			"name": "cross1",
+			"from": [8, 15, 0],
+			"to": [8, 31, 16],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 15, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#cross"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#cross"}
+			}
+		},
+		{
+			"name": "cross2",
+			"from": [8, 15, 0],
+			"to": [8, 31, 16],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 15, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#cross"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#cross"}
+			}
+		}
+	]
+}
