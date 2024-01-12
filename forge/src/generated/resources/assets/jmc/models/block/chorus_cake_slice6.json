@@ -1,6 +1,5 @@
 {
   "parent": "jmc:block/template_cross_cake_slice6",
-  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "jmc:block/chorus_cake_bottom",
     "inside": "jmc:block/chorus_cake_inner",

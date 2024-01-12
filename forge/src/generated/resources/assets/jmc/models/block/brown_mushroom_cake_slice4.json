@@ -1,6 +1,5 @@
 {
   "parent": "jmc:block/template_cross_cake_slice4",
-  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "jmc:block/brown_mushroom_cake_bottom",
     "inside": "jmc:block/brown_mushroom_cake_inner",

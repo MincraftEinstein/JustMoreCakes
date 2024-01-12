@@ -381,7 +381,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void addCrossTexture(boolean should, BlockModelBuilder modelBuilder, @Nullable ResourceLocation texture) {
         if (should) {
-            modelBuilder.texture("cross", texture).renderType(mcLoc("cutout"));
+            modelBuilder.texture("cross", texture);
         }
     }
 
