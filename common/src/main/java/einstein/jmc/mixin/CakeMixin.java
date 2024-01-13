@@ -20,10 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CakeBlock;
-import net.minecraft.world.level.block.CandleBlock;
-import net.minecraft.world.level.block.CandleCakeBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
@@ -40,6 +37,9 @@ public class CakeMixin implements CakeEffectsHolder {
     @Unique
     private CakeEffects justMoreCakes$cakeEffects;
 
+    @Unique
+    private final CakeBlock justMoreCakes$me = (CakeBlock) (Object) this;
+
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack stack = player.getItemInHand(hand);
@@ -52,26 +52,28 @@ public class CakeMixin implements CakeEffectsHolder {
             }
         }
 
-        if (stack.is(Items.CAKE) && BaseCakeBlock.isUneaten(state, pos, level)) {
-            BlockState newState = ModBlocks.VANILLA_CAKE_FAMILY.getTwoTieredCake().get().defaultBlockState();
-            Block.pushEntitiesUp(state, newState, level, pos);
+        if (justMoreCakes$me.equals(Blocks.CAKE)) {  // Need to check that this is the default cake, so that things won't break with inheritance
+            if (stack.is(Items.CAKE) && BaseCakeBlock.isUneaten(state, pos, level)) {
+                BlockState newState = ModBlocks.VANILLA_CAKE_FAMILY.getTwoTieredCake().get().defaultBlockState();
 
-            level.setBlockAndUpdate(pos, newState);
-            level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-            level.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1, 1);
-            player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
+                level.setBlockAndUpdate(pos, newState);
+                Block.pushEntitiesUp(state, newState, level, pos);
+                level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+                level.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1, 1);
+                player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
 
-            if (!player.isCreative()) {
-                stack.shrink(1);
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                }
+
+                cir.setReturnValue(InteractionResult.SUCCESS);
             }
-
-            cir.setReturnValue(InteractionResult.SUCCESS);
         }
     }
 
     @Inject(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;eat(IF)V"))
     private static void eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<InteractionResult> cir) {
-        CakeBlock cake = (CakeBlock) state.getBlock(); // Don't replace with a reference to Blocks.CAKE, so that this will work with inheritors
+        CakeBlock cake = (CakeBlock) state.getBlock(); // Don't replace with a reference to Blocks.CAKE, so that this will work with inheritance
         CakeEffects cakeEffects = ((CakeEffectsHolder) cake).getCakeEffects();
         if (!player.level().isClientSide && cakeEffects != null) {
             for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {

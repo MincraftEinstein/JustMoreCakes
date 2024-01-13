@@ -65,9 +65,7 @@ public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
         CakeFamily family = getFamily();
 
         if (family != null) {
-            Block baseCake = family.getBaseCake().get();
-
-            if (stack.is(baseCake.asItem()) && isUneaten(state, pos, level)) {
+            if (stack.is(family.getBaseCake().get().asItem()) && isUneaten(state, pos, level)) {
                 BlockState newState = family.getThreeTieredCake().get().defaultBlockState();
                 BlockPos abovePos = pos.above();
 
