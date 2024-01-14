@@ -120,7 +120,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             }
         }
 
-        if (family != null) {
+        if (family != null && isBaseCake()) {
             if (stack.is(family.getBaseCake().get().asItem()) && isUneaten(state, pos, level)) {
                 BlockState newState = family.getTwoTieredCake().get().defaultBlockState();
 
