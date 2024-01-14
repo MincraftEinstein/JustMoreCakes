@@ -1,12 +1,17 @@
 package einstein.jmc.data.packs.providers;
 
+import com.mojang.datafixers.util.Pair;
+import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
+import einstein.jmc.block.cake.BaseTwoTieredCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
-import einstein.jmc.block.cake.candle.BaseTwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeModel;
+import einstein.jmc.util.CakeVariant;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -19,87 +24,32 @@ import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static einstein.jmc.JustMoreCakes.loc;
 import static einstein.jmc.JustMoreCakes.mcLoc;
+import static einstein.jmc.util.CakeBuilder.SUPPORTED_CANDLES;
+import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
+import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER;
+import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER;
 
 public class ModModelProvider extends FabricModelProvider {
 
+    private static final TextureSlot TOP_SIDE = TextureSlot.create("top_side");
+    private static final TextureSlot TOP_INNER = TextureSlot.create("top_inner");
+    private static final TextureSlot MIDDLE_TOP = TextureSlot.create("middle_top");
+    private static final TextureSlot MIDDLE_SIDE = TextureSlot.create("middle_side");
+    private static final TextureSlot MIDDLE_INNER = TextureSlot.create("middle_inner");
+    private static final TextureSlot LOWER_TOP = TextureSlot.create("lower_top");
+    private static final TextureSlot LOWER_SIDE = TextureSlot.create("lower_side");
+    private static final TextureSlot LOWER_INNER = TextureSlot.create("lower_inner");
+
     public ModModelProvider(FabricDataOutput output) {
         super(output);
-    }
-
-    @Override
-    public void generateBlockStateModels(BlockModelGenerators generators) {
-        generators.createTrivialBlock(ModBlocks.ENCASING_ICE.get(), new TextureMapping(), new ModelTemplate(Optional.of(mcLoc("block/ice")), Optional.empty()));
-
-        defaultCakeBlock(generators, ModBlocks.TNT_CAKE.get());
-        defaultCakeBlock(generators, ModBlocks.POISON_CAKE.get());
-        crossCakeBlock(generators, ModBlocks.BROWN_MUSHROOM_CAKE.get(), mcLoc("block/brown_mushroom"));
-        crossCakeBlock(generators, ModBlocks.RED_MUSHROOM_CAKE.get(), mcLoc("block/red_mushroom"));
-        crossCakeBlock(generators, ModBlocks.CHORUS_CAKE.get(), loc("block/chorus_cake_flower"));
-        crossCakeBlock(generators, ModBlocks.CRIMSON_FUNGUS_CAKE.get(), mcLoc("block/crimson_fungus"));
-
-        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
-            if (!builder.hasCustomBlockModel()) {
-                cakeBlock(generators, cake.get());
-            }
-
-            if (!builder.hasCustomCandleCakeBlockModels() && builder.allowsCandles()) {
-                builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                    candleCakeBlock(generators, candleCake.get(), candle, cake.get());
-                });
-            }
-        });
-
-        CakeBuilder threeTieredBuilder = ModBlocks.THREE_TIERED_CAKE.get().getBuilder();
-        threeTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-            PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch = PropertyDispatch.properties(BaseThreeTieredCandleCakeBlock.LIT, BaseThreeTieredCandleCakeBlock.HALF);
-            addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, true, DoubleBlockHalf.LOWER);
-            addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, false, DoubleBlockHalf.LOWER);
-            addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, true, DoubleBlockHalf.UPPER);
-            addThreeTieredVariant(generators, dispatch, candleCake.get(), candle, false, DoubleBlockHalf.UPPER);
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake.get()).with(dispatch));
-        });
-
-        CakeBuilder twoTieredBuilder = ModBlocks.TWO_TIERED_CAKE.get().getBuilder();
-        twoTieredBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake.get()).with(PropertyDispatch.property(BaseTwoTieredCandleCakeBlock.LIT)
-                    .select(false, Variant.variant().with(VariantProperties.MODEL,
-                            new ModelTemplate(Optional.of(loc("block/template_two_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
-                                    .create(candleCake.get(), new TextureMapping()
-                                            .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle)), generators.modelOutput)
-                    ))
-                    .select(true, Variant.variant().with(VariantProperties.MODEL,
-                            new ModelTemplate(Optional.of(loc("block/template_two_tiered_candle_cake")), Optional.empty(), TextureSlot.CANDLE)
-                                    .createWithSuffix(candleCake.get(), "_lit", new TextureMapping()
-                                            .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle, "_lit")), generators.modelOutput)
-                    ))
-            ));
-        });
-
-        CakeBuilder sculkBuilder = ModBlocks.SCULK_CAKE.get().getBuilder();
-        sculkBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-            candleCakeBlock(generators, candleCake.get(), candle, ModBlocks.SCULK_CAKE.get());
-        });
-    }
-
-    private void addThreeTieredVariant(BlockModelGenerators generators, PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch, Block candleCake, Block candle, boolean lit, DoubleBlockHalf half) {
-        String lit_name = lit ? "_lit" : "";
-        String half_name = "_" + half;
-
-        dispatch.select(lit, half, Variant.variant().with(VariantProperties.MODEL,
-                new ModelTemplate(Optional.of(loc("block/template_three_tiered_candle_cake" + half_name)), Optional.empty(), TextureSlot.CANDLE)
-                        .createWithSuffix(candleCake, half_name + lit_name, new TextureMapping()
-                                .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle, lit_name)), generators.modelOutput))
-        );
     }
 
     @Override
@@ -120,136 +70,403 @@ public class ModModelProvider extends FabricModelProvider {
         });
     }
 
-    private void cakeBlock(BlockModelGenerators generators, BaseCakeBlock cake) {
-        ResourceLocation bottom = TextureMapping.getBlockTexture(cake, "_bottom");
-        ResourceLocation top = TextureMapping.getBlockTexture(cake, "_top");
-        ResourceLocation side = TextureMapping.getBlockTexture(cake, "_side");
-        ResourceLocation inside = TextureMapping.getBlockTexture(cake, "_inner");
+    @Override
+    public void generateBlockStateModels(BlockModelGenerators generators) {
+        generators.createTrivialBlock(ModBlocks.ENCASING_ICE.get(), new TextureMapping(), new ModelTemplate(Optional.of(mcLoc("block/ice")), Optional.empty()));
 
-        if (cake.getSlices() > 0) {
-            var builder = PropertyDispatch.property(BlockStateProperties.BITES);
+        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
+            BaseCakeBlock cakeBlock = cake.get();
+            CakeVariant variant = builder.getVariant();
+            CakeModel cakeModel = builder.getCakeModel();
+            CakeModel candleCakeModel = builder.getCandleCakeModel();
+            String cakeName = builder.getCakeName();
 
-            builder.select(0, blankCake(generators, cake, bottom, top, side));
+            if (cakeModel != CakeModel.CUSTOM) {
+                if (cakeModel == CakeModel.DEFAULT) {
+                    switch (variant) {
+                        case BASE -> createCake(generators, cakeBlock, null);
+                        case TWO_TIERED -> createTwoTieredCake(generators, cakeBlock, null);
+                        case THREE_TIERED -> createThreeTieredCake(generators, cakeBlock, null);
+                    }
+                }
+                else if (cakeModel == CakeModel.FROM_VANILLA) {
+                    switch (variant) {
+                        case BASE -> createFromVanillaCake(generators, cakeBlock, 7, mcLoc("block/cake"));
+                        case TWO_TIERED -> createFromVanillaCake(generators, cakeBlock, 10, loc("block/two_tiered_cake"));
+                        case THREE_TIERED -> {
+                            List<Pair<DoubleBlockHalf, Integer>> halves = List.of(Pair.of(UPPER, 5), Pair.of(LOWER, 11));
 
-            for (int i = 1; i < 7; i++) {
-                builder.select(i, Variant.variant().with(VariantProperties.MODEL,
-                        new ModelTemplate(Optional.of(loc("block/template_cake_slice" + i)), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.INSIDE, TextureSlot.SIDE)
-                                .createWithSuffix(cake, "_slice" + i, new TextureMapping()
-                                        .put(TextureSlot.BOTTOM, bottom)
-                                        .put(TextureSlot.TOP, top)
-                                        .put(TextureSlot.INSIDE, inside)
-                                        .put(TextureSlot.SIDE, side), generators.modelOutput)));
+                            for (Pair<DoubleBlockHalf, Integer> halfPair : halves) {
+                                DoubleBlockHalf half = halfPair.getFirst();
+                                Variant propertyVariant = Variant.variant().with(VariantProperties.MODEL, loc("three_tiered_cake_" + half));
+
+                                if (cakeBlock.getSlices() > 0) {
+                                    PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseThreeTieredCakeBlock.BITES);
+
+                                    for (int i = 1; i < halfPair.getSecond(); i++) {
+                                        dispatch.select(i, Variant.variant().with(VariantProperties.MODEL, loc("three_tiered_cake_" + half + "_slice" + (half == LOWER ? i - 5 : i))));
+                                    }
+                                    generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cakeBlock).with(dispatch));
+                                }
+                                else {
+                                    PropertyDispatch.C1<DoubleBlockHalf> dispatch = PropertyDispatch.property(BaseThreeTieredCakeBlock.HALF);
+                                    dispatch.select(half, propertyVariant);
+                                    generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cakeBlock).with(dispatch));
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (cakeModel instanceof CakeModel.CrossCakeModel crossModel) {
+                    switch (variant) {
+                        case BASE -> createCake(generators, cakeBlock, crossModel.crossTexture());
+                        case TWO_TIERED -> createTwoTieredCake(generators, cakeBlock, crossModel.crossTexture());
+                        case THREE_TIERED -> createThreeTieredCake(generators, cakeBlock, crossModel.crossTexture());
+                    }
+                }
             }
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(builder));
+
+            if (candleCakeModel != CakeModel.CUSTOM && builder.allowsCandles()) {
+                builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+                    ResourceLocation candleType = SUPPORTED_CANDLES.get(candle);
+                    BaseCandleCakeBlock candleCakeBlock = candleCake.get();
+                    PropertyDispatch.C1<Boolean> dispatch = PropertyDispatch.property(BaseCandleCakeBlock.LIT);
+
+                    if (candleCakeModel == CakeModel.FROM_VANILLA) {
+                        switch (variant) {
+                            case BASE -> {
+                                createFromVanillaCandleCake(dispatch, candleType, candleType.getNamespace(), "cake", true);
+                                createFromVanillaCandleCake(dispatch, candleType, candleType.getNamespace(), "cake", false);
+                            }
+                            case TWO_TIERED -> {
+                                createFromVanillaCandleCake(dispatch, candleType, JustMoreCakes.MOD_ID, "two_tiered_cake", true);
+                                createFromVanillaCandleCake(dispatch, candleType, JustMoreCakes.MOD_ID, "two_tiered_cake", false);
+                            }
+                            case THREE_TIERED -> {
+                                PropertyDispatch.C2<Boolean, DoubleBlockHalf> threeTieredDispatch = PropertyDispatch.properties(BaseThreeTieredCandleCakeBlock.LIT, BaseThreeTieredCandleCakeBlock.HALF);
+                                createFromVanillaThreeTieredCandleCake(threeTieredDispatch, candleType, UPPER, true);
+                                createFromVanillaThreeTieredCandleCake(threeTieredDispatch, candleType, UPPER, false);
+                                createFromVanillaThreeTieredCandleCake(threeTieredDispatch, candleType, LOWER, true);
+                                createFromVanillaThreeTieredCandleCake(threeTieredDispatch, candleType, LOWER, false);
+                                generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCakeBlock).with(threeTieredDispatch));
+                                return;
+                            }
+                        }
+                    }
+                    else if (candleCakeModel instanceof CakeModel.CrossCakeModel) {
+                        throw new IllegalArgumentException("Cannot have a cross model candle cake");
+                    }
+                    else {
+                        switch (variant) {
+                            case BASE -> {
+                                addVariant(generators, dispatch, candleCakeBlock, candle, true);
+                                addVariant(generators, dispatch, candleCakeBlock, candle, false);
+                            }
+                            case TWO_TIERED -> {
+                                addTwoTieredVariant(generators, dispatch, candleCakeBlock, candle, true);
+                                addTwoTieredVariant(generators, dispatch, candleCakeBlock, candle, false);
+                            }
+                            case THREE_TIERED -> {
+                                PropertyDispatch.C2<Boolean, DoubleBlockHalf> threeTieredDispatch = PropertyDispatch.properties(BaseThreeTieredCandleCakeBlock.LIT, BaseThreeTieredCandleCakeBlock.HALF);
+                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, true, LOWER);
+                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, false, LOWER);
+                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, true, UPPER);
+                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, false, UPPER);
+                                generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCakeBlock).with(threeTieredDispatch));
+                                return;
+                            }
+                        }
+                    }
+                    generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCakeBlock).with(dispatch));
+                });
+            }
+        });
+    }
+
+    private void addVariant(BlockModelGenerators generators, PropertyDispatch.C1<Boolean> dispatch, Block candleCake, Block candle, boolean lit) {
+        String litName = lit ? "_lit" : "";
+
+        dispatch.select(lit, Variant.variant().with(VariantProperties.MODEL,
+                new ModelTemplate(Optional.of(loc("block/template_cake_with_candle")), Optional.of(litName), TextureSlot.CANDLE, TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.PARTICLE)
+                        .create(candleCake, new TextureMapping()
+                                        .put(TextureSlot.CANDLE, getBlockTexture(candle, litName))
+                                        .put(TextureSlot.BOTTOM, getBlockTexture(candleCake, "_bottom"))
+                                        .put(TextureSlot.TOP, getBlockTexture(candleCake, "_top"))
+                                        .put(TextureSlot.SIDE, getBlockTexture(candleCake, "_side"))
+                                        .put(TextureSlot.PARTICLE, new ResourceLocation("", "#side")),
+                                generators.modelOutput)
+        ));
+    }
+
+    private void addTwoTieredVariant(BlockModelGenerators generators, PropertyDispatch.C1<Boolean> dispatch, Block candleCake, Block candle, boolean lit) {
+        String litName = lit ? "_lit" : "";
+
+        dispatch.select(lit, Variant.variant().with(VariantProperties.MODEL,
+                new ModelTemplate(Optional.of(loc("block/template_two_tiered_candle_cake")), Optional.of(litName), TextureSlot.CANDLE, TextureSlot.BOTTOM, TextureSlot.TOP, TOP_SIDE, LOWER_TOP, LOWER_SIDE)
+                        .create(candleCake, new TextureMapping()
+                                        .put(TextureSlot.CANDLE, getBlockTexture(candle, litName))
+                                        .put(TextureSlot.BOTTOM, getBlockTexture(candleCake, "_bottom"))
+                                        .put(TextureSlot.TOP, getBlockTexture(candleCake, "_top"))
+                                        .put(TOP_SIDE, getBlockTexture(candleCake, "_top_side"))
+                                        .put(LOWER_TOP, getBlockTexture(candleCake, "_lower_top"))
+                                        .put(LOWER_SIDE, getBlockTexture(candleCake, "_lower_side")),
+                                generators.modelOutput)
+        ));
+    }
+
+    private void addThreeTieredVariant(BlockModelGenerators generators, PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch, Block candleCake, Block candle, boolean lit, DoubleBlockHalf half) {
+        String litName = lit ? "_lit" : "";
+        String halfName = "_" + half;
+
+        TextureMapping mapping = new TextureMapping().put(TextureSlot.BOTTOM, getBlockTexture(candleCake, "_bottom"))
+                .put(TextureSlot.CANDLE, getBlockTexture(candle, litName));
+
+        if (half == LOWER) {
+            mapping.put(MIDDLE_SIDE, getBlockTexture(candleCake, "_middle_side"))
+                    .put(MIDDLE_TOP, getBlockTexture(candleCake, "_middle_top"))
+                    .put(LOWER_SIDE, getBlockTexture(candleCake, "_lower_side"))
+                    .put(LOWER_TOP, getBlockTexture(candleCake, "_lower_top"));
         }
         else {
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake, blankCake(generators, cake, bottom, top, side)));
+            mapping.put(TOP_SIDE, getBlockTexture(candleCake, "_top_side"))
+                    .put(TextureSlot.TOP, getBlockTexture(candleCake, "_top"));
         }
+
+        dispatch.select(lit, half, Variant.variant().with(VariantProperties.MODEL,
+                new ModelTemplate(Optional.of(loc("block/template_three_tiered_candle_cake" + halfName)), Optional.of(halfName + litName), TextureSlot.CANDLE, TextureSlot.BOTTOM, MIDDLE_SIDE, MIDDLE_TOP, LOWER_SIDE, LOWER_TOP, TOP_SIDE, TextureSlot.TOP)
+                        .create(candleCake, mapping, generators.modelOutput))
+        );
     }
 
-    private Variant blankCake(BlockModelGenerators generators, BaseCakeBlock cake, ResourceLocation bottom, ResourceLocation top, ResourceLocation side) {
-        return Variant.variant().with(VariantProperties.MODEL,
-                new ModelTemplate(Optional.of(loc("block/template_cake")), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE)
-                        .create(cake, new TextureMapping()
-                                .put(TextureSlot.BOTTOM, bottom)
-                                .put(TextureSlot.TOP, top)
-                                .put(TextureSlot.SIDE, side), generators.modelOutput));
-    }
-
-    private void candleCakeBlock(BlockModelGenerators generators, BaseCandleCakeBlock candleCake, Block candle, BaseCakeBlock cake) {
-        ResourceLocation bottom = TextureMapping.getBlockTexture(cake, "_bottom");
-        ResourceLocation top = TextureMapping.getBlockTexture(cake, "_top");
-        ResourceLocation side = TextureMapping.getBlockTexture(cake, "_side");
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake).with(PropertyDispatch.property(BaseCandleCakeBlock.LIT)
-                .select(false, Variant.variant().with(VariantProperties.MODEL,
-                        new ModelTemplate(Optional.of(mcLoc("block/template_cake_with_candle")), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.CANDLE, TextureSlot.PARTICLE)
-                                .create(candleCake, new TextureMapping()
-                                        .put(TextureSlot.BOTTOM, bottom)
-                                        .put(TextureSlot.TOP, top)
-                                        .put(TextureSlot.SIDE, side)
-                                        .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle))
-                                        .put(TextureSlot.PARTICLE, side), generators.modelOutput)))
-                .select(true, Variant.variant().with(VariantProperties.MODEL,
-                        new ModelTemplate(Optional.of(mcLoc("block/template_cake_with_candle")), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.CANDLE, TextureSlot.PARTICLE)
-                                .createWithSuffix(candleCake, "_lit", new TextureMapping()
-                                        .put(TextureSlot.BOTTOM, bottom)
-                                        .put(TextureSlot.TOP, top)
-                                        .put(TextureSlot.SIDE, side)
-                                        .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(candle, "_lit"))
-                                        .put(TextureSlot.PARTICLE, side), generators.modelOutput)))));
-    }
-
-    private void crossCakeBlock(BlockModelGenerators generators, BaseCakeBlock cake, ResourceLocation cross) {
-        ResourceLocation bottom = TextureMapping.getBlockTexture(cake, "_bottom");
-        ResourceLocation top = TextureMapping.getBlockTexture(cake, "_top");
-        ResourceLocation side = TextureMapping.getBlockTexture(cake, "_side");
-        ResourceLocation inside = TextureMapping.getBlockTexture(cake, "_inner");
+    private void createCake(BlockModelGenerators generators, BaseCakeBlock cake, @Nullable ResourceLocation crossTexture) {
+        boolean addCross = crossTexture != null;
+        String parentModel = addCross ? "block/template_cross_cake" : "block/template_cake";
+        ResourceLocation bottom = getBlockTexture(cake, "_bottom");
+        ResourceLocation top = getBlockTexture(cake, "_top");
+        ResourceLocation side = getBlockTexture(cake, "_side");
+        ResourceLocation inside = getBlockTexture(cake, "_inner");
 
         if (cake.getSlices() > 0) {
-            var builder = PropertyDispatch.property(BlockStateProperties.BITES);
+            PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseCakeBlock.BITES);
 
-            builder.select(0, blankCrossCake(generators, cake, bottom, top, side, cross));
+            TextureMapping mapping = new TextureMapping()
+                    .put(TextureSlot.BOTTOM, bottom)
+                    .put(TextureSlot.TOP, top)
+                    .put(TextureSlot.SIDE, side);
+
+            addCross(mapping, crossTexture);
+            dispatch.select(0, Variant.variant().with(VariantProperties.MODEL,
+                    new ModelTemplate(Optional.of(loc(parentModel)), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.CROSS)
+                            .create(cake, mapping, generators.modelOutput)));
 
             for (int i = 1; i < 7; i++) {
-                TextureMapping mapping = new TextureMapping()
+                TextureMapping sliceMapping = new TextureMapping()
                         .put(TextureSlot.BOTTOM, bottom)
                         .put(TextureSlot.TOP, top)
                         .put(TextureSlot.INSIDE, inside)
                         .put(TextureSlot.SIDE, side);
-                List<TextureSlot> slots = new ArrayList<>(List.of(TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.INSIDE, TextureSlot.SIDE));
 
                 if (i < 4) {
-                    slots.add(TextureSlot.CROSS);
-                    mapping.put(TextureSlot.CROSS, cross);
+                    addCross(sliceMapping, crossTexture);
                 }
 
-                builder.select(i, Variant.variant().with(VariantProperties.MODEL,
-                        new ModelTemplate(Optional.of(loc("block/template_cross_cake_slice" + i)), Optional.empty(), slots.toArray(new TextureSlot[] {}))
-                                .createWithSuffix(cake, "_slice" + i, mapping, generators.modelOutput)));
+                dispatch.select(i, Variant.variant().with(VariantProperties.MODEL,
+                        new ModelTemplate(Optional.of(loc(parentModel + "_slice" + i)), Optional.of("_slice" + i), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.INSIDE, TextureSlot.SIDE, TextureSlot.CROSS)
+                                .create(cake, sliceMapping, generators.modelOutput)));
             }
-
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(builder));
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(dispatch));
         }
         else {
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake, blankCrossCake(generators, cake, bottom, top, side, cross)));
+            TextureMapping mapping = new TextureMapping()
+                    .put(TextureSlot.BOTTOM, bottom)
+                    .put(TextureSlot.TOP, top)
+                    .put(TextureSlot.SIDE, side);
+
+            addCross(mapping, crossTexture);
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake, Variant.variant().with(VariantProperties.MODEL,
+                    new ModelTemplate(Optional.of(loc(parentModel)), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.CROSS)
+                            .create(cake, mapping, generators.modelOutput))));
         }
     }
 
-    private Variant blankCrossCake(BlockModelGenerators generators, BaseCakeBlock cake, ResourceLocation bottom, ResourceLocation top, ResourceLocation side, ResourceLocation cross) {
-        return Variant.variant().with(VariantProperties.MODEL,
-                new ModelTemplate(Optional.of(loc("block/template_cross_cake")), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE, TextureSlot.CROSS)
-                        .create(cake, new TextureMapping()
-                                .put(TextureSlot.BOTTOM, bottom)
-                                .put(TextureSlot.TOP, top)
-                                .put(TextureSlot.SIDE, side)
-                                .put(TextureSlot.CROSS, cross), generators.modelOutput));
-    }
-
-    private void defaultCakeBlock(BlockModelGenerators generators, BaseCakeBlock cake) {
-        CakeBuilder cakeBuilder = cake.getBuilder();
+    private void createTwoTieredCake(BlockModelGenerators generators, BaseCakeBlock cake, @Nullable ResourceLocation crossTexture) {
+        boolean addCross = crossTexture != null;
+        String parentModel = addCross ? "block/template_cross_two_tiered_cake" : "block/template_two_tiered_cake";
+        ResourceLocation bottom = getBlockTexture(cake, "_bottom");
+        ResourceLocation top = getBlockTexture(cake, "_top");
+        ResourceLocation topSide = getBlockTexture(cake, "_top_side");
+        ResourceLocation lowerTop = getBlockTexture(cake, "_lower_top");
+        ResourceLocation lowerSide = getBlockTexture(cake, "_lower_side");
 
         if (cake.getSlices() > 0) {
-            var builder = PropertyDispatch.property(BaseCakeBlock.BITES);
+            PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseTwoTieredCakeBlock.BITES);
+            TextureMapping mapping = new TextureMapping()
+                    .put(TextureSlot.BOTTOM, bottom)
+                    .put(TextureSlot.TOP, top)
+                    .put(TOP_SIDE, topSide)
+                    .put(LOWER_SIDE, lowerSide)
+                    .put(LOWER_TOP, lowerTop);
 
-            builder.select(0, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(Blocks.CAKE)));
+            addCross(mapping, crossTexture);
+            dispatch.select(0, Variant.variant().with(VariantProperties.MODEL,
+                    new ModelTemplate(Optional.of(loc(parentModel)), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TOP_SIDE, LOWER_SIDE, LOWER_TOP, TextureSlot.CROSS)
+                            .create(cake, mapping, generators.modelOutput)));
 
-            for (int i = 1; i < 7; i++) {
-                builder.select(i, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(Blocks.CAKE, "_slice" + i)));
+            for (int i = 1; i < 11; i++) {
+                TextureMapping sliceMapping = new TextureMapping()
+                        .put(TextureSlot.BOTTOM, bottom)
+                        .put(LOWER_SIDE, lowerSide)
+                        .put(LOWER_TOP, lowerTop);
+
+                if (i < 5) {
+                    sliceMapping.put(TextureSlot.TOP, top)
+                            .put(TOP_SIDE, topSide)
+                            .put(TOP_INNER, getBlockTexture(cake, "_top_inner"));
+                }
+
+                if (i > 5) {
+                    sliceMapping.put(LOWER_INNER, getBlockTexture(cake, "_lower_inner"));
+                }
+
+                if (i < 3) {
+                    addCross(sliceMapping, crossTexture);
+                }
+
+                dispatch.select(i, Variant.variant().with(VariantProperties.MODEL,
+                        new ModelTemplate(Optional.of(loc(parentModel + "_slice" + i)), Optional.of("_slice" + i), TextureSlot.BOTTOM, TextureSlot.TOP, TOP_SIDE, TOP_INNER, LOWER_TOP, LOWER_SIDE, LOWER_INNER, TextureSlot.CROSS)
+                                .create(cake, sliceMapping, generators.modelOutput)));
             }
-
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(builder));
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(dispatch));
         }
         else {
-            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(Blocks.CAKE))));
-        }
+            TextureMapping mapping = new TextureMapping()
+                    .put(TextureSlot.BOTTOM, bottom)
+                    .put(TextureSlot.TOP, top)
+                    .put(TOP_SIDE, topSide)
+                    .put(LOWER_TOP, lowerTop)
+                    .put(LOWER_SIDE, lowerSide);
 
-        if (cakeBuilder.allowsCandles()) {
-            cakeBuilder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                ResourceLocation type = CakeBuilder.SUPPORTED_CANDLES.get(candle);
-                generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCake.get()).with(BlockModelGenerators.createBooleanModelDispatch(BaseCandleCakeBlock.LIT,
-                        new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_cake_lit"),
-                        new ResourceLocation(type.getNamespace(), "block/" + type.getPath() + "candle_cake"))));
-            });
+            addCross(mapping, crossTexture);
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake, Variant.variant().with(VariantProperties.MODEL,
+                    new ModelTemplate(Optional.of(loc(parentModel)), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TOP_SIDE, LOWER_TOP, LOWER_SIDE, TextureSlot.CROSS)
+                            .create(cake, mapping, generators.modelOutput))));
         }
+    }
+
+    private void createThreeTieredCake(BlockModelGenerators generators, BaseCakeBlock cake, @Nullable ResourceLocation crossTexture) {
+        boolean addCross = crossTexture != null;
+        String parentModel = addCross ? "block/template_cross_three_tiered_cake" : "block/template_three_tiered_cake";
+        ResourceLocation bottom = getBlockTexture(cake, "_bottom");
+        ResourceLocation top = getBlockTexture(cake, "_top");
+        ResourceLocation topSide = getBlockTexture(cake, "_top_side");
+        ResourceLocation topInner = getBlockTexture(cake, "_top_inner");
+        ResourceLocation middleTop = getBlockTexture(cake, "_middle_top");
+        ResourceLocation middleSide = getBlockTexture(cake, "_middle_side");
+        ResourceLocation middleInner = getBlockTexture(cake, "_top_inner");
+        ResourceLocation lowerTop = getBlockTexture(cake, "_lower_top");
+        ResourceLocation lowerSide = getBlockTexture(cake, "_lower_side");
+        ResourceLocation lowerInner = getBlockTexture(cake, "_top_inner");
+
+        TextureMapping upperMapping = new TextureMapping()
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(TextureSlot.TOP, top)
+                .put(TOP_SIDE, topSide);
+        addCross(upperMapping, crossTexture);
+        Variant upperVariant = Variant.variant().with(VariantProperties.MODEL,
+                new ModelTemplate(Optional.of(loc(parentModel + "_upper")), Optional.of("_upper"), TextureSlot.BOTTOM, TextureSlot.TOP, TOP_SIDE, TextureSlot.CROSS)
+                        .create(cake, upperMapping, generators.modelOutput));
+
+        TextureMapping lowerMapping = new TextureMapping()
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(MIDDLE_TOP, middleTop)
+                .put(MIDDLE_SIDE, middleSide)
+                .put(LOWER_TOP, lowerTop)
+                .put(LOWER_SIDE, lowerSide);
+        addCross(lowerMapping, crossTexture);
+        Variant lowerVariant = Variant.variant().with(VariantProperties.MODEL,
+                new ModelTemplate(Optional.of(loc(parentModel + "_lower")), Optional.of("_lower"), TextureSlot.BOTTOM, MIDDLE_TOP, MIDDLE_SIDE, LOWER_TOP, LOWER_SIDE)
+                        .create(cake, lowerMapping, generators.modelOutput));
+
+        if (cake.getSlices() > 0) {
+            PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseThreeTieredCakeBlock.BITES);
+            dispatch.select(0, upperVariant);
+            dispatch.select(5, lowerVariant);
+
+            for (int i = 1; i < 5; i++) {
+                TextureMapping sliceMapping = new TextureMapping()
+                        .put(TextureSlot.BOTTOM, bottom)
+                        .put(TextureSlot.TOP, top)
+                        .put(TOP_SIDE, topSide)
+                        .put(TOP_INNER, topInner);
+
+                if (i < 3) {
+                    addCross(sliceMapping, crossTexture);
+                }
+
+                dispatch.select(i, Variant.variant().with(VariantProperties.MODEL,
+                        new ModelTemplate(Optional.of(loc(parentModel + "_slice" + i)), Optional.of("_slice" + i), TextureSlot.BOTTOM, TextureSlot.TOP, TOP_SIDE, TOP_INNER, TextureSlot.CROSS)
+                                .create(cake, sliceMapping, generators.modelOutput)));
+            }
+
+            for (int i = 1; i < 11; i++) {
+                TextureMapping sliceMapping = new TextureMapping()
+                        .put(TextureSlot.BOTTOM, bottom)
+                        .put(LOWER_TOP, lowerTop)
+                        .put(LOWER_SIDE, lowerSide);
+
+                if (i < 5) {
+                    sliceMapping.put(MIDDLE_TOP, middleTop)
+                            .put(MIDDLE_SIDE, middleSide)
+                            .put(MIDDLE_INNER, middleInner);
+                }
+                else if (i > 5) {
+                    sliceMapping.put(LOWER_INNER, lowerInner);
+                }
+
+                dispatch.select(i + 5, Variant.variant().with(VariantProperties.MODEL,
+                        new ModelTemplate(Optional.of(loc(parentModel + "_slice" + i)), Optional.of("_slice" + i), TextureSlot.BOTTOM, TextureSlot.TOP, TOP_SIDE, TOP_INNER, TextureSlot.CROSS)
+                                .create(cake, sliceMapping, generators.modelOutput)));
+            }
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(dispatch));
+        }
+        else {
+            PropertyDispatch.C1<DoubleBlockHalf> dispatch = PropertyDispatch.property(BaseThreeTieredCakeBlock.HALF);
+            dispatch.select(UPPER, upperVariant);
+            dispatch.select(LOWER, lowerVariant);
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(dispatch));
+        }
+    }
+
+    private static void addCross(TextureMapping mapping, @Nullable ResourceLocation texture) {
+        if (texture != null) {
+            mapping.put(TextureSlot.CROSS, texture);
+        }
+    }
+
+    private void createFromVanillaCake(BlockModelGenerators generators, BaseCakeBlock cake, int bites, ResourceLocation parentModel) {
+        if (cake.getSlices() > 0) {
+            PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseCakeBlock.BITES);
+
+            dispatch.select(0, Variant.variant().with(VariantProperties.MODEL, parentModel));
+
+            for (int i = 1; i < bites; i++) {
+                dispatch.select(i, Variant.variant().with(VariantProperties.MODEL, parentModel.withSuffix("_slice" + i)));
+            }
+
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake).with(dispatch));
+        }
+        else {
+            generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake, Variant.variant().with(VariantProperties.MODEL, parentModel)));
+        }
+    }
+
+    private void createFromVanillaCandleCake(PropertyDispatch.C1<Boolean> dispatch, ResourceLocation candleType, String modId, String name, boolean isLit) {
+        String litName = isLit ? "_lit" : "";
+        dispatch.select(isLit, Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(modId, "block/" + candleType.getPath() + "candle" + name + litName)));
+    }
+
+    private void createFromVanillaThreeTieredCandleCake(PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch, ResourceLocation candleType, DoubleBlockHalf half, boolean isLit) {
+        String litName = isLit ? "_lit" : "";
+        dispatch.select(isLit, half, Variant.variant().with(VariantProperties.MODEL, loc("block/" + candleType.getPath() + "candle_three_tiered_cake" + half + litName)));
     }
 }

@@ -175,22 +175,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void addThreeTieredVariant(VariantBlockStateBuilder builder, ResourceLocation candleType, String name, boolean isLit, DoubleBlockHalf half) {
         String litName = isLit ? "_lit" : "";
         String halfName = "_" + half;
-        String bottom = "block/" + name + "_bottom";
 
         BlockModelBuilder modelBuilder = models()
                 .withExistingParent(candleType.getPath() + "candle_" + name + halfName + litName, modLoc("template_three_tiered_candle_cake" + halfName))
-                .texture("candle", new ResourceLocation(candleType.getNamespace(), "block/" + candleType.getPath() + "candle" + litName));
+                .texture("candle", new ResourceLocation(candleType.getNamespace(), "block/" + candleType.getPath() + "candle" + litName))
+                .texture("bottom", "block/" + name + "_bottom");
 
         if (half == LOWER) {
-            modelBuilder.texture("bottom", bottom)
-                    .texture("middle_side", "block/" + name + "_middle_side")
+            modelBuilder.texture("middle_side", "block/" + name + "_middle_side")
                     .texture("middle_top", "block/" + name + "_middle_top")
                     .texture("lower_side", "block/" + name + "_lower_side")
                     .texture("lower_top", "block/" + name + "_lower_top");
         }
         else {
-            modelBuilder.texture("bottom", bottom)
-                    .texture("top_side", "block/" + name + "_top_side")
+            modelBuilder.texture("top_side", "block/" + name + "_top_side")
                     .texture("top", "block/" + name + "_top");
         }
 
@@ -216,7 +214,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .texture("top", top)
                     .texture("bottom", bottom);
 
-            addCrossTexture(addCross, modelBuilder, crossTexture);
+            addCrossTexture(modelBuilder, crossTexture);
             builder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(modelBuilder));
 
             for (int i = 1; i < 7; i++) {
@@ -227,7 +225,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .texture("inside", inside);
 
                 if (i < 4) {
-                    addCrossTexture(addCross, modelBuilder, crossTexture);
+                    addCrossTexture(modelBuilder, crossTexture);
                 }
 
                 builder.partialState().with(BaseCakeBlock.BITES, i).addModels(new ConfiguredModel(modelBuilder));
@@ -239,7 +237,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .texture("top", top)
                     .texture("bottom", bottom);
 
-            addCrossTexture(addCross, modelBuilder, crossTexture);
+            addCrossTexture(modelBuilder, crossTexture);
             simpleBlock(cake, modelBuilder);
         }
     }
@@ -248,7 +246,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         boolean addCross = crossTexture != null;
         String parentModel = addCross ? "template_cross_two_tiered_cake" : "template_two_tiered_cake";
         String top = "block/" + name + "_top";
-        String top_side = "block/" + name + "_top_side";
+        String topSide = "block/" + name + "_top_side";
         String lowerTop = "block/" + name + "_lower_top";
         String lowerSide = "block/" + name + "_lower_side";
         String bottom = "block/" + name + "_bottom";
@@ -258,12 +256,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
             VariantBlockStateBuilder builder = getVariantBuilder(cake);
             modelBuilder = models().withExistingParent(name, modLoc(parentModel))
                     .texture("top", top)
-                    .texture("top_side", top_side)
+                    .texture("top_side", topSide)
                     .texture("lower_side", lowerSide)
                     .texture("lower_top", lowerTop)
                     .texture("bottom", bottom);
 
-            addCrossTexture(addCross, modelBuilder, crossTexture);
+            addCrossTexture(modelBuilder, crossTexture);
             builder.partialState().with(BaseTwoTieredCakeBlock.BITES, 0).addModels(new ConfiguredModel(modelBuilder));
 
             for (int i = 1; i < 11; i++) {
@@ -274,7 +272,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
                 if (i < 5) {
                     modelBuilder.texture("top", top)
-                            .texture("top_side", top_side)
+                            .texture("top_side", topSide)
                             .texture("top_inner", "block/" + name + "_top_inner");
                 }
 
@@ -283,7 +281,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 }
 
                 if (i < 3) {
-                    addCrossTexture(addCross, modelBuilder, crossTexture);
+                    addCrossTexture(modelBuilder, crossTexture);
                 }
 
                 builder.partialState().with(BaseTwoTieredCakeBlock.BITES, i).addModels(new ConfiguredModel(modelBuilder));
@@ -292,12 +290,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         else {
             modelBuilder = models().withExistingParent(name, modLoc(parentModel))
                     .texture("top", top)
-                    .texture("top_side", top_side)
+                    .texture("top_side", topSide)
                     .texture("lower_side", lowerSide)
                     .texture("lower_top", lowerTop)
                     .texture("bottom", bottom);
 
-            addCrossTexture(addCross, modelBuilder, crossTexture);
+            addCrossTexture(modelBuilder, crossTexture);
             simpleBlock(cake, modelBuilder);
         }
     }
@@ -330,7 +328,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .texture("bottom", bottom);
 
                 if (i < 3) {
-                    addCrossTexture(addCross, modelBuilder, crossTexture);
+                    addCrossTexture(modelBuilder, crossTexture);
                 }
 
                 builder.partialState().with(BaseThreeTieredCakeBlock.BITES, i)
@@ -365,7 +363,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("top_side", topSide)
                 .texture("bottom", bottom);
 
-        addCrossTexture(addCross, upperModelBuilder, crossTexture);
+        addCrossTexture(upperModelBuilder, crossTexture);
         upperBuilder.addModels(new ConfiguredModel(upperModelBuilder));
 
         BlockModelBuilder lowerModelBuilder = models().withExistingParent(name + "_lower", modLoc(parentModel + "_lower"))
@@ -375,12 +373,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("lower_side", lowerSide)
                 .texture("bottom", bottom);
 
-        addCrossTexture(addCross, lowerModelBuilder, crossTexture);
         lowerBuilder.addModels(new ConfiguredModel(lowerModelBuilder));
     }
 
-    private void addCrossTexture(boolean should, BlockModelBuilder modelBuilder, @Nullable ResourceLocation texture) {
-        if (should) {
+    private void addCrossTexture(BlockModelBuilder modelBuilder, @Nullable ResourceLocation texture) {
+        if (texture != null) {
             modelBuilder.texture("cross", texture);
         }
     }

@@ -34,7 +34,7 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
         sortedCakes.forEach((cake, cakeBuilder) -> {
             getOrCreateTagBuilder(ModBlockTags.CAKES).add(cake.get());
 
-            if (cake != ModBlocks.THREE_TIERED_CAKE && cake != ModBlocks.TWO_TIERED_CAKE) {
+            if (cake.get().isBaseCake()) {
                 getOrCreateTagBuilder(ModBlockTags.CAKE_STAND_STORABLES).add(cake.get());
             }
 

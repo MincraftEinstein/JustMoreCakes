@@ -2,11 +2,11 @@ package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.Util;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -27,33 +27,39 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
 
         CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             Block cakeBlock = cake.get();
-            if (cake == ModBlocks.TWO_TIERED_CAKE) {
-                add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), Blocks.CAKE, 2));
+            CakeVariant variant = builder.getVariant();
 
-                builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                    add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), Blocks.CAKE, 2));
-                });
-                return;
+            switch (variant) {
+                case BASE -> {
+                    add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), cakeBlock));
+
+                    builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+                        add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), cakeBlock));
+                    });
+                }
+                case TWO_TIERED -> {
+                    Block baseCake = builder.getFamily().getBaseCake().get();
+                    add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 2));
+
+                    builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+                        add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), baseCake, 2));
+                    });
+                }
+                case THREE_TIERED -> {
+                    Block baseCake = builder.getFamily().getBaseCake().get();
+                    add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 3));
+
+                    builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+                        add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(
+                                LootTable.lootTable().withPool(
+                                        Util.addHalfConditionToPool(LootPool.lootPool()
+                                                .setRolls(ConstantValue.exactly(1))
+                                                .add(LootItem.lootTableItem(candle)), block)
+                                ), block, baseCake, 3, true
+                        ));
+                    });
+                }
             }
-            else if (cake == ModBlocks.THREE_TIERED_CAKE) {
-                add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), Blocks.CAKE, 3));
-
-                builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                    add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(
-                            LootTable.lootTable().withPool(
-                                    Util.addHalfConditionToPool(LootPool.lootPool()
-                                            .setRolls(ConstantValue.exactly(1))
-                                            .add(LootItem.lootTableItem(candle)), block)
-                            ), block, Blocks.CAKE, 3, true));
-                });
-                return;
-            }
-
-            add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), cakeBlock));
-
-            builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), cakeBlock));
-            });
         });
     }
 }
