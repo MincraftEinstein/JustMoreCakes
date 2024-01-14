@@ -21,6 +21,7 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -149,7 +150,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .with(AbstractCandleBlock.LIT, isLit)
                 .addModels(new ConfiguredModel(models()
                         .withExistingParent(candleType.getPath() + "candle_" + name + litName, mcLoc("template_cake_with_candle"))
-                        .texture("candle", new ResourceLocation(candleType.getNamespace(), "block/" + candleType.getPath() + "candle" + litName))
+                        .texture("candle", getCandleTexture(candleType, litName))
                         .texture("side", "block/" + name + "_side")
                         .texture("top", "block/" + name + "_top")
                         .texture("bottom", "block/" + name + "_bottom")
@@ -163,7 +164,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .with(BaseTwoTieredCandleCakeBlock.LIT, isLit)
                 .addModels(new ConfiguredModel(models()
                         .withExistingParent(candleType.getPath() + "candle_" + name + litName, modLoc("template_two_tiered_candle_cake"))
-                        .texture("candle", new ResourceLocation(candleType.getNamespace(), "block/" + candleType.getPath() + "candle" + litName))
+                        .texture("candle", getCandleTexture(candleType, litName))
                         .texture("bottom", "block/" + name + "_bottom")
                         .texture("top_side", "block/" + name + "_top_side")
                         .texture("top", "block/" + name + "_top")
@@ -178,7 +179,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         BlockModelBuilder modelBuilder = models()
                 .withExistingParent(candleType.getPath() + "candle_" + name + halfName + litName, modLoc("template_three_tiered_candle_cake" + halfName))
-                .texture("candle", new ResourceLocation(candleType.getNamespace(), "block/" + candleType.getPath() + "candle" + litName))
+                .texture("candle", getCandleTexture(candleType, litName))
                 .texture("bottom", "block/" + name + "_bottom");
 
         if (half == LOWER) {
@@ -196,6 +197,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .with(BaseThreeTieredCandleCakeBlock.LIT, isLit)
                 .with(BaseThreeTieredCandleCakeBlock.HALF, half)
                 .addModels(new ConfiguredModel(modelBuilder));
+    }
+
+    private static ResourceLocation getCandleTexture(ResourceLocation candleType, String litName) {
+        return new ResourceLocation(candleType.getNamespace(), "block/" + candleType.getPath() + "candle" + litName);
     }
 
     private void createCake(BaseCakeBlock cake, String name, @Nullable ResourceLocation crossTexture) {
@@ -247,8 +252,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         String parentModel = addCross ? "template_cross_two_tiered_cake" : "template_two_tiered_cake";
         String top = "block/" + name + "_top";
         String topSide = "block/" + name + "_top_side";
+        String topInner = "block/" + name + "_top_inner";
         String lowerTop = "block/" + name + "_lower_top";
         String lowerSide = "block/" + name + "_lower_side";
+        String lowerInner = "block/" + name + "_lower_inner";
         String bottom = "block/" + name + "_bottom";
         BlockModelBuilder modelBuilder;
 
@@ -273,11 +280,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 if (i < 5) {
                     modelBuilder.texture("top", top)
                             .texture("top_side", topSide)
-                            .texture("top_inner", "block/" + name + "_top_inner");
+                            .texture("top_inner", topInner);
                 }
 
                 if (i > 5) {
-                    modelBuilder.texture("lower_inner", "block/" + name + "_lower_inner");
+                    modelBuilder.texture("lower_inner", lowerInner);
                 }
 
                 if (i < 3) {
@@ -305,10 +312,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         String parentModel = addCross ? "template_cross_three_tiered_cake" : "template_three_tiered_cake";
         String top = "block/" + name + "_top";
         String topSide = "block/" + name + "_top_side";
+        String topInner = "block/" + name + "_top_inner";
         String middleTop = "block/" + name + "_middle_top";
         String middleSide = "block/" + name + "_middle_side";
+        String middleInner = "block/" + name + "_middle_inner";
         String lowerTop = "block/" + name + "_lower_top";
         String lowerSide = "block/" + name + "_lower_side";
+        String lowerInner = "block/" + name + "_lower_inner";
         String bottom = "block/" + name + "_bottom";
         VariantBlockStateBuilder builder = getVariantBuilder(cake);
 
@@ -324,7 +334,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 modelBuilder = models().withExistingParent(name + "_upper_slice" + i, modLoc(parentModel + "_upper_slice" + i))
                         .texture("top", top)
                         .texture("top_side", topSide)
-                        .texture("top_inner", "block/" + name + "_top_inner")
+                        .texture("top_inner", topInner)
                         .texture("bottom", bottom);
 
                 if (i < 3) {
@@ -338,15 +348,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
             for (int i = 1; i < 11; i++) {
                 modelBuilder = models().withExistingParent(name + "_lower_slice" + i, modLoc(parentModel + "_lower_slice" + i))
                         .texture("lower_top", lowerTop)
-                        .texture("lower_side", lowerSide);
+                        .texture("lower_side", lowerSide)
+                        .texture("bottom", bottom);
 
                 if (i < 5) {
                     modelBuilder.texture("middle_top", middleTop)
                             .texture("middle_side", middleSide)
-                            .texture("middle_inner", "block/" + name + "_middle_inner");
+                            .texture("middle_inner", middleInner);
                 }
                 else if (i > 5) {
-                    modelBuilder.texture("lower_inner", "block/" + name + "_lower_inner");
+                    modelBuilder.texture("lower_inner", lowerInner);
                 }
 
                 builder.partialState().with(BaseThreeTieredCakeBlock.BITES, i + 5)
