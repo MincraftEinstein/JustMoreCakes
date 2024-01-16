@@ -1,5 +1,5 @@
 {
-  "cake": "jmc:creeper_cake",
+  "block": "jmc:creeper_cake",
   "effects": [
     {
       "amplifier": 1,

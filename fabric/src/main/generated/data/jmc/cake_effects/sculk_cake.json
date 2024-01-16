@@ -1,5 +1,5 @@
 {
-  "cake": "jmc:sculk_cake",
+  "block": "jmc:sculk_cake",
   "effects": [
     {
       "duration": 600,

@@ -1,5 +1,5 @@
 {
-  "cake": "jmc:beetroot_cake",
+  "block": "jmc:beetroot_cake",
   "effects": [
     {
       "amplifier": 1,

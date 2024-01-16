@@ -1,5 +1,5 @@
 {
-  "cake": "jmc:ice_cake",
+  "block": "jmc:ice_cake",
   "effects": [
     {
       "duration": 2400,
