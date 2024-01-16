@@ -1,18 +1,22 @@
 package einstein.jmc.util;
 
+import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.effects.CakeEffects;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class CakeFamily {
+public class CakeFamily implements CakeEffectsHolder {
 
-    public static final List<CakeFamily> REGISTERED_CAKE_FAMILIES = new ArrayList<>();
+    public static final Map<ResourceLocation, CakeFamily> REGISTERED_CAKE_FAMILIES = new HashMap<>();
 
+    private final ResourceLocation registryKey;
     private final String baseCakeName;
     @Nullable
     protected CakeBuilder baseBuilder;
@@ -24,8 +28,10 @@ public class CakeFamily {
     protected int nutrition = BaseCakeBlock.DEFAULT_NUTRITION;
     protected float saturationModifier = BaseCakeBlock.DEFAULT_SATURATION_MODIFIER;
     protected CakeModel model = CakeModel.DEFAULT;
+    protected CakeEffects cakeEffects;
 
-    CakeFamily(String baseCakeName) {
+    CakeFamily(ResourceLocation registryKey, String baseCakeName) {
+        this.registryKey = registryKey;
         this.baseCakeName = baseCakeName;
 
         baseBuilder = new CakeBuilder(baseCakeName)
@@ -49,6 +55,10 @@ public class CakeFamily {
 
     public static Builder create(String flavorName) {
         return new Builder(flavorName);
+    }
+
+    public final ResourceLocation getRegistryKey() {
+        return registryKey;
     }
 
     public String getBaseCakeName() {
@@ -90,6 +100,22 @@ public class CakeFamily {
 
     public CakeModel getModel() {
         return model;
+    }
+
+    @Nullable
+    @Override
+    public CakeEffects justMoreCakes$getCakeEffects() {
+        return cakeEffects;
+    }
+
+    @Override
+    public void justMoreCakes$setCakeEffects(@Nullable CakeEffects effects) {
+        cakeEffects = effects;
+    }
+
+    @Override
+    public String toString() {
+        return "CakeFamily{" + getRegistryKey() + "}";
     }
 
     public static class Builder {
@@ -134,7 +160,7 @@ public class CakeFamily {
             family.baseCake = family.baseBuilder.build();
             family.twoTieredCake = family.twoTieredBuilder.noItem().build();
             family.threeTieredCake = family.threeTieredBuilder.noItem().build();
-            REGISTERED_CAKE_FAMILIES.add(family);
+            REGISTERED_CAKE_FAMILIES.put(family.getRegistryKey(), family);
             return family;
         }
     }

@@ -5,6 +5,7 @@ import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -74,9 +75,9 @@ public class CakeMixin implements CakeEffectsHolder {
     @Inject(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;eat(IF)V"))
     private static void eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<InteractionResult> cir) {
         CakeBlock cake = (CakeBlock) state.getBlock(); // Don't replace with a reference to Blocks.CAKE, so that this will work with inheritance
-        CakeEffects cakeEffects = ((CakeEffectsHolder) cake).getCakeEffects();
+        CakeEffects cakeEffects = ((CakeEffectsHolder) cake).justMoreCakes$getCakeEffects();
         if (!player.level().isClientSide && cakeEffects != null) {
-            for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {
+            for (MobEffectHolder holder : cakeEffects.mobEffects()) {
                 Util.applyEffectFromHolder(holder, player);
             }
         }
@@ -86,13 +87,14 @@ public class CakeMixin implements CakeEffectsHolder {
         }
     }
 
+    @Nullable
     @Override
-    public @Nullable CakeEffects getCakeEffects() {
+    public CakeEffects justMoreCakes$getCakeEffects() {
         return justMoreCakes$cakeEffects;
     }
 
     @Override
-    public void setCakeEffects(CakeEffects effects) {
+    public void justMoreCakes$setCakeEffects(CakeEffects effects) {
         justMoreCakes$cakeEffects = effects;
     }
 }

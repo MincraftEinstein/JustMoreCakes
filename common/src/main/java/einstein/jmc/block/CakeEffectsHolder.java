@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 public interface CakeEffectsHolder {
 
     @Nullable
-    CakeEffects getCakeEffects();
+    CakeEffects justMoreCakes$getCakeEffects();
 
-    void setCakeEffects(@Nullable CakeEffects effects);
+    void justMoreCakes$setCakeEffects(@Nullable CakeEffects effects);
 }

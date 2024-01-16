@@ -4,17 +4,12 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 
 import java.util.function.Supplier;
 
+import static einstein.jmc.JustMoreCakes.loc;
+
 public class DefaultCakeFamily extends CakeFamily {
 
-    private final String flavorName;
-
     DefaultCakeFamily(String flavorName) {
-        super(flavorName + "_cake");
-        this.flavorName = flavorName;
-    }
-
-    public String getFlavorName() {
-        return flavorName;
+        super(loc(flavorName), flavorName + "_cake");
     }
 
     @SuppressWarnings("unchecked")

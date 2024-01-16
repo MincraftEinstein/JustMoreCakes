@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.effects.CakeEffectsManager;
 import einstein.jmc.network.Packet;
+import einstein.jmc.util.CakeFamily;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -19,6 +20,9 @@ import static einstein.jmc.JustMoreCakes.LOGGER;
 
 public class ClientboundCakeEffectsPacket implements Packet {
 
+    private static final int BLOCK = 0;
+    private static final int FAMILY = 1;
+
     private final Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> effects = new HashMap<>();
 
     @Override
@@ -27,7 +31,23 @@ public class ClientboundCakeEffectsPacket implements Packet {
         buf.writeInt(cakeEffectsMap.size());
 
         cakeEffectsMap.forEach((holder, combinedEffects) -> {
-            buf.writeResourceLocation(BuiltInRegistries.BLOCK.getKey((Block) holder));
+            int type;
+            ResourceLocation key;
+
+            if (holder instanceof Block block) {
+                type = BLOCK;
+                key = BuiltInRegistries.BLOCK.getKey(block);
+            }
+            else if (holder instanceof CakeFamily family) {
+                type = FAMILY;
+                key = family.getRegistryKey();
+            }
+            else {
+                throw new NullPointerException("Attempted to send cake effects of an unknown type: " + holder);
+            }
+
+            buf.writeByte(type);
+            buf.writeResourceLocation(key);
             buf.writeInt(combinedEffects.size());
 
             combinedEffects.forEach((effect, pair) -> {
@@ -49,29 +69,39 @@ public class ClientboundCakeEffectsPacket implements Packet {
         int size = buf.readInt();
 
         for (int i = 0; i < size; i++) {
-            Block cake = BuiltInRegistries.BLOCK.get(buf.readResourceLocation());
-            if (cake instanceof CakeEffectsHolder holder) {
-                int combinedEffectsListSize = buf.readInt();
-                Map<MobEffect, Pair<Integer, Integer>> combinedEffects = new HashMap<>();
+            int type = buf.readByte();
+            ResourceLocation key = buf.readResourceLocation();
+            CakeEffectsHolder holder;
 
-                for (int i1 = 0; i1 < combinedEffectsListSize; i1++) {
-                    int duration = buf.readInt();
-                    int amplifier = buf.readInt();
-                    MobEffect effect = BuiltInRegistries.MOB_EFFECT.get(buf.readResourceLocation());
-
-                    if (effect != null) {
-                        combinedEffects.put(effect, Pair.of(duration, amplifier));
-                    }
-                    else {
-                        LOGGER.warn("Received unknown mob effect from server");
-                    }
-                }
-
-                effects.put(holder, combinedEffects);
+            if (type == BLOCK) {
+                holder = (CakeEffectsHolder) BuiltInRegistries.BLOCK.get(key);
+            }
+            else if (type == FAMILY) {
+                holder = CakeFamily.REGISTERED_CAKE_FAMILIES.get(key);
             }
             else {
-                LOGGER.warn("Received cake effects for unknown cake effect holder from server");
+                LOGGER.warn("Received cake effects for unknown type: " + type);
+                continue;
             }
+
+            int combinedEffectsListSize = buf.readInt();
+            Map<MobEffect, Pair<Integer, Integer>> combinedEffects = new HashMap<>();
+
+            for (int i1 = 0; i1 < combinedEffectsListSize; i1++) {
+                int duration = buf.readInt();
+                int amplifier = buf.readInt();
+                ResourceLocation effectId = buf.readResourceLocation();
+                MobEffect effect = BuiltInRegistries.MOB_EFFECT.get(effectId);
+
+                if (effect != null) {
+                    combinedEffects.put(effect, Pair.of(duration, amplifier));
+                }
+                else {
+                    LOGGER.warn("Received cake effects with unknown mob effect: " + effectId);
+                }
+            }
+
+            effects.put(holder, combinedEffects);
         }
     }
 

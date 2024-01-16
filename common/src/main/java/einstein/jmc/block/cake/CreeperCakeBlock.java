@@ -1,7 +1,7 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -19,7 +19,7 @@ public class CreeperCakeBlock extends BaseCakeBlock {
 
     @Override
     public void applyEffects(Player player) {
-        List<CakeEffects.MobEffectHolder> holders = getCakeEffects().mobEffects();
+        List<MobEffectHolder> holders = justMoreCakes$getCakeEffects().mobEffects();
         Util.applyEffectFromHolder(holders.get(player.getRandom().nextInt(holders.size())), player);
     }
 

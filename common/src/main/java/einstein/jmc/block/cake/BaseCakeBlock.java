@@ -7,10 +7,7 @@ import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModCommonConfigs;
 import einstein.jmc.platform.Services;
-import einstein.jmc.util.CakeBuilder;
-import einstein.jmc.util.CakeFamily;
-import einstein.jmc.util.CakeVariant;
-import einstein.jmc.util.Util;
+import einstein.jmc.util.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -194,7 +191,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public void applyEffects(Player player) {
-        for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {
+        for (MobEffectHolder holder : cakeEffects.mobEffects()) {
             applyEffectFromHolder(holder, player);
         }
     }
@@ -275,12 +272,20 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     @Nullable
     @Override
-    public CakeEffects getCakeEffects() {
-        return cakeEffects;
+    public CakeEffects justMoreCakes$getCakeEffects() {
+        if (cakeEffects != null) {
+            return cakeEffects;
+        }
+
+        if (getFamily() != null) {
+            return getFamily().justMoreCakes$getCakeEffects();
+        }
+
+        return null;
     }
 
     @Override
-    public void setCakeEffects(CakeEffects cakeEffects) {
+    public void justMoreCakes$setCakeEffects(CakeEffects cakeEffects) {
         this.cakeEffects = cakeEffects;
     }
 

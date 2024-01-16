@@ -5,6 +5,7 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.compat.jade.ModJadePlugin;
 import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.init.ModServerConfigs;
+import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
@@ -36,13 +37,13 @@ public class CakeEffectsProvider implements IBlockComponentProvider {
         CakeEffects cakeEffects = null;
 
         if (block instanceof CakeEffectsHolder holder) {
-            cakeEffects = holder.getCakeEffects();
+            cakeEffects = holder.justMoreCakes$getCakeEffects();
         }
         else if (block instanceof BaseCandleCakeBlock candleCake) {
-            cakeEffects = candleCake.getOriginalCake().getCakeEffects();
+            cakeEffects = candleCake.getOriginalCake().justMoreCakes$getCakeEffects();
         }
         else if (Util.getVanillaCandleCakes().contains(block)) {
-            cakeEffects = ((CakeEffectsHolder) Blocks.CAKE).getCakeEffects();
+            cakeEffects = ((CakeEffectsHolder) Blocks.CAKE).justMoreCakes$getCakeEffects();
         }
 
         if (cakeEffects != null) {
@@ -50,7 +51,7 @@ public class CakeEffectsProvider implements IBlockComponentProvider {
             IThemeHelper theme = IThemeHelper.get();
             ITooltip box = helper.tooltip();
 
-            for (CakeEffects.MobEffectHolder holder : cakeEffects.mobEffects()) {
+            for (MobEffectHolder holder : cakeEffects.mobEffects()) {
                 MobEffect effect = holder.effect();
                 MobEffectInstance instance = new MobEffectInstance(effect, holder.duration().orElse(0), holder.amplifier().orElse(0));
                 Component name = StatusEffectsProvider.getEffectName(instance);
