@@ -90,7 +90,15 @@ public class CakeMixin implements CakeEffectsHolder {
     @Nullable
     @Override
     public CakeEffects justMoreCakes$getCakeEffects() {
-        return justMoreCakes$cakeEffects;
+        if (justMoreCakes$cakeEffects != null) {
+            return justMoreCakes$cakeEffects;
+        }
+
+        if (justMoreCakes$me.equals(Blocks.CAKE)) {
+            return ModBlocks.VANILLA_CAKE_FAMILY.justMoreCakes$getCakeEffects();
+        }
+
+        return null;
     }
 
     @Override
