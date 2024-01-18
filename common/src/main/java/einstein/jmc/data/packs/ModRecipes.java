@@ -74,9 +74,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.EGG))
                 .save(output, JustMoreCakes.loc("cake_from_cake_oven"));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CARROT_CAKE.get(), 0.6F, 300, RecipeCategory.FOOD, Ingredient.of(Items.CARROT), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CARROT_CAKE_FAMILY, 0.6F, 300, RecipeCategory.FOOD, Ingredient.of(Items.CARROT), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Items.CARROT))
-                .save(output, cakeOvenLoc(ModBlocks.CARROT_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.CARROT_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CHEESECAKE.get(), 0.7F, 250, RecipeCategory.FOOD, Ingredient.of(ModItemTags.CHEESE), Ingredient.of(Items.EGG), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(ModItems.CREAM_CHEESE.get()))

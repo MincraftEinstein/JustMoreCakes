@@ -222,7 +222,7 @@ public class JustMoreCakesForge {
 
             apprentice.add(new ItemsForEmeralds(Blocks.CAKE.asItem(), 1, 1, 10));
             apprentice.add(new ItemsForEmeralds(Items.COCOA_BEANS, 3, 1, 5));
-            apprentice.add(new ItemsForEmeralds(ModBlocks.CARROT_CAKE.get().asItem(), 1, 1, 10));
+            apprentice.add(new ItemsForEmeralds(ModBlocks.CARROT_CAKE_FAMILY.getBaseCake().get(), 1, 1, 10));
 
             journeyman.add(new EmeraldsForItems(Items.COAL, 15, 1, 16, 10));
             journeyman.add(new EmeraldsForItems(Items.CARROT, 22, 1, 16, 20));

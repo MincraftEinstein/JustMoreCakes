@@ -1,0 +1,10 @@
+{
+  "parent": "jmc:block/template_two_tiered_cake",
+  "textures": {
+    "bottom": "jmc:block/carrot_cake_bottom",
+    "lower_side": "jmc:block/carrot_cake_side",
+    "lower_top": "jmc:block/carrot_cake_top_covered",
+    "top": "jmc:block/carrot_cake_medium_top",
+    "top_side": "jmc:block/carrot_cake_medium_side"
+  }
+}

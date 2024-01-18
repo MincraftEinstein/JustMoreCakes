@@ -107,7 +107,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 2, trades -> {
             trades.add(new ItemsForEmeralds(Blocks.CAKE.asItem(), 1, 1, 10));
             trades.add(new ItemsForEmeralds(Items.COCOA_BEANS, 3, 1, 5));
-            trades.add(new ItemsForEmeralds(ModBlocks.CARROT_CAKE.get().asItem(), 1, 1, 10));
+            trades.add(new ItemsForEmeralds(ModBlocks.CARROT_CAKE_FAMILY.getBaseCake().get(), 1, 1, 10));
         });
 
         // Journeyman (Gold tier)
