@@ -3,6 +3,7 @@ package einstein.jmc.data;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import einstein.jmc.init.ModRecipes;
+import einstein.jmc.util.CakeFamily;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
@@ -47,6 +48,10 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
         NonNullList<Ingredient> ingredientsList = NonNullList.create();
         Collections.addAll(ingredientsList, ingredients);
         return new CakeOvenRecipeBuilder(category, ingredientsList, result, experience, cookingTime);
+    }
+
+    public static CakeOvenRecipeBuilder cakeBaking(CakeFamily family, float experience, int cookingTime, RecipeCategory category, Ingredient... ingredients) {
+        return cakeBaking(family.getBaseCake().get(), experience, cookingTime, category, ingredients);
     }
 
     @Override
