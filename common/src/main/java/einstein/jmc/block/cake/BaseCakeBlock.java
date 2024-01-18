@@ -244,6 +244,15 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         return false;
     }
 
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
+        ItemStack stack = super.getCloneItemStack(getter, pos, state);
+        if (stack.isEmpty() && getFamily() != null) {
+            return new ItemStack(getFamily().getBaseCake().get());
+        }
+        return stack;
+    }
+
     @Nullable
     public IntegerProperty getBites() {
         return BITES;

@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -100,7 +99,11 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 
     @Override
     public ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
-        return new ItemStack(originalCake.asItem());
+        ItemStack stack = new ItemStack(originalCake.asItem());
+        if (stack.isEmpty() && originalCake.getFamily() != null) {
+            return new ItemStack(originalCake.getFamily().getBaseCake().get());
+        }
+        return stack;
     }
 
     @SuppressWarnings("deprecation")
