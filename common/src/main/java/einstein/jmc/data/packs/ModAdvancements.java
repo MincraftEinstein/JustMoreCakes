@@ -32,7 +32,7 @@ public class ModAdvancements {
 
         addCakes(Advancement.Builder.advancement()
                 .parent(craftCake)
-                .display(ModBlocks.CHOCOLATE_CAKE.get(), translatable("craft_all_cakes.title"), translatable("craft_all_cakes.description"), null, FrameType.CHALLENGE, true, true, false)
+                .display(ModBlocks.CHOCOLATE_CAKE_FAMILY.getBaseCake().get(), translatable("craft_all_cakes.title"), translatable("craft_all_cakes.description"), null, FrameType.CHALLENGE, true, true, false)
                 .rewards(AdvancementRewards.Builder.experience(100))
         ).save(consumer, JustMoreCakes.loc("husbandry/craft_all_cakes").toString());
 

@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 public class ModCreativeModeTabs {
 
     public static final Supplier<CreativeModeTab> JMC_TAB = Services.REGISTRY.registerCreativeModeTab("jmc_tab", builder ->
-            builder.icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE.get())).title(Component.translatable("itemGroup.jmc.jmc_tab"))
+            builder.icon(() -> new ItemStack(ModBlocks.CHOCOLATE_CAKE_FAMILY.getBaseCake().get())).title(Component.translatable("itemGroup.jmc.jmc_tab"))
                     .displayItems((displayParameters, output) ->
                             RegistryHelper.CREATIVE_TAB_ITEMS.forEach(cake -> output.accept(cake.get()))).build());
 

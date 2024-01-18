@@ -8,9 +8,7 @@ import einstein.jmc.block.cake.*;
 import einstein.jmc.block.cake.candle.*;
 import einstein.jmc.block.entity.GlowstoneCakeBlockEntity;
 import einstein.jmc.platform.Services;
-import einstein.jmc.util.CakeBuilder;
-import einstein.jmc.util.CakeModel;
-import einstein.jmc.util.VanillaCakeFamily;
+import einstein.jmc.util.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkSensorBlock;
@@ -26,10 +24,8 @@ import static einstein.jmc.JustMoreCakes.mcLoc;
 
 public class ModBlocks {
 
-//    public static final DefaultCakeFamily CHOCOLATE_CAKE_FAMILY = CakeFamily.create("chocolate").build();
     public static final VanillaCakeFamily VANILLA_CAKE_FAMILY = new VanillaCakeFamily();
-
-    public static final Supplier<BaseCakeBlock> CHOCOLATE_CAKE = new CakeBuilder("chocolate_cake").build();
+    public static final DefaultCakeFamily CHOCOLATE_CAKE_FAMILY = CakeFamily.create("chocolate").build();
     public static final Supplier<BaseCakeBlock> CARROT_CAKE = new CakeBuilder("carrot_cake").build();
     public static final Supplier<BaseCakeBlock> PUMPKIN_CAKE = new CakeBuilder("pumpkin_cake").build();
     public static final Supplier<BaseCakeBlock> MELON_CAKE = new CakeBuilder("melon_cake")
@@ -64,16 +60,6 @@ public class ModBlocks {
             .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> CHEESECAKE = new CakeBuilder("cheesecake").build();
-//    public static final Supplier<BaseCakeBlock> TWO_TIERED_CAKE = new CakeBuilder("two_tiered_cake")
-//            .setBothClasses(BaseTwoTieredCakeBlock::new, TwoTieredCandleCakeBlock::new)
-//            .customBlockModel()
-//            .customCandleCakeBlockModels()
-//            .build();
-//    public static final Supplier<BaseCakeBlock> THREE_TIERED_CAKE = new CakeBuilder("three_tiered_cake")
-//            .setBothClasses(BaseThreeTieredCakeBlock::new, ThreeTieredCandleCakeBlock::new)
-//            .customBlockModel()
-//            .customCandleCakeBlockModels()
-//            .build();
     public static final Supplier<BaseCakeBlock> SLIME_CAKE = new CakeBuilder("slime_cake")
             .setCakeProperties(cakeProperties().sound(SoundType.SLIME_BLOCK))
             .setCandleCakeProperties(candleCakeProperties().sound(SoundType.SLIME_BLOCK))

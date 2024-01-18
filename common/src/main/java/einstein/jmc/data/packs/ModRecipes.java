@@ -4,6 +4,7 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.data.CakeOvenRecipeBuilder;
+import einstein.jmc.util.CakeFamily;
 import einstein.jmc.util.Util;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -85,9 +86,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.SWEET_BERRIES))
                 .save(output, cakeOvenLoc(ModBlocks.SWEET_BERRY_CAKE));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CHOCOLATE_CAKE.get(), 0.6F, 250, RecipeCategory.FOOD, Ingredient.of(Items.COCOA_BEANS), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CHOCOLATE_CAKE_FAMILY, 0.6F, 250, RecipeCategory.FOOD, Ingredient.of(Items.COCOA_BEANS), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Items.COCOA_BEANS))
-                .save(output, cakeOvenLoc(ModBlocks.CHOCOLATE_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.CHOCOLATE_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.HONEY_CAKE.get(), 0.7F, 300, RecipeCategory.FOOD, Ingredient.of(Items.HONEY_BOTTLE), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Items.HONEY_BOTTLE))
@@ -200,5 +201,9 @@ public class ModRecipes {
 
     private static ResourceLocation cakeOvenLoc(Supplier<? extends ItemLike> item) {
         return JustMoreCakes.loc(Util.getItemId(item.get().asItem()).getPath() + "_from_cake_oven");
+    }
+
+    private static ResourceLocation cakeOvenLoc(CakeFamily family) {
+        return JustMoreCakes.loc(Util.getItemId(family.getBaseCake().get().asItem()).getPath() + "_from_cake_oven");
     }
 }
