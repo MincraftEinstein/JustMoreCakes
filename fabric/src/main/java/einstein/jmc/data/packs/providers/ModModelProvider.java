@@ -81,13 +81,14 @@ public class ModModelProvider extends FabricModelProvider {
             CakeModel cakeModel = builder.getCakeModel();
             CakeModel candleCakeModel = builder.getCandleCakeModel();
             String cakeName = builder.getCakeName();
+            String texturePrefix = builder.getFamily() != null ? builder.getFamily().getBaseCakeName() : builder.getCakeName();
 
             if (cakeModel != CakeModel.CUSTOM) {
                 if (cakeModel == CakeModel.DEFAULT) {
                     switch (variant) {
-                        case BASE -> createCake(generators, cakeBlock, null);
-                        case TWO_TIERED -> createTwoTieredCake(generators, cakeBlock, null);
-                        case THREE_TIERED -> createThreeTieredCake(generators, cakeBlock, null);
+                        case BASE -> createCake(generators, cakeBlock, texturePrefix, null);
+                        case TWO_TIERED -> createTwoTieredCake(generators, cakeBlock, texturePrefix, null);
+                        case THREE_TIERED -> createThreeTieredCake(generators, cakeBlock, texturePrefix, null);
                     }
                 }
                 else if (cakeModel == CakeModel.FROM_VANILLA) {
@@ -121,9 +122,9 @@ public class ModModelProvider extends FabricModelProvider {
                 }
                 else if (cakeModel instanceof CakeModel.CrossCakeModel crossModel) {
                     switch (variant) {
-                        case BASE -> createCake(generators, cakeBlock, crossModel.crossTexture());
-                        case TWO_TIERED -> createTwoTieredCake(generators, cakeBlock, crossModel.crossTexture());
-                        case THREE_TIERED -> createThreeTieredCake(generators, cakeBlock, crossModel.crossTexture());
+                        case BASE -> createCake(generators, cakeBlock, texturePrefix, crossModel.crossTexture());
+                        case TWO_TIERED -> createTwoTieredCake(generators, cakeBlock, texturePrefix, crossModel.crossTexture());
+                        case THREE_TIERED -> createThreeTieredCake(generators, cakeBlock, texturePrefix, crossModel.crossTexture());
                     }
                 }
             }
@@ -161,19 +162,19 @@ public class ModModelProvider extends FabricModelProvider {
                     else {
                         switch (variant) {
                             case BASE -> {
-                                addVariant(generators, dispatch, candleCakeBlock, candle, cakeName, true);
-                                addVariant(generators, dispatch, candleCakeBlock, candle, cakeName, false);
+                                addVariant(generators, dispatch, candleCakeBlock, candle, texturePrefix, true);
+                                addVariant(generators, dispatch, candleCakeBlock, candle, texturePrefix, false);
                             }
                             case TWO_TIERED -> {
-                                addTwoTieredVariant(generators, dispatch, candleCakeBlock, candle, cakeName, true);
-                                addTwoTieredVariant(generators, dispatch, candleCakeBlock, candle, cakeName, false);
+                                addTwoTieredVariant(generators, dispatch, candleCakeBlock, candle, texturePrefix, true);
+                                addTwoTieredVariant(generators, dispatch, candleCakeBlock, candle, texturePrefix, false);
                             }
                             case THREE_TIERED -> {
                                 PropertyDispatch.C2<Boolean, DoubleBlockHalf> threeTieredDispatch = PropertyDispatch.properties(BaseThreeTieredCandleCakeBlock.LIT, BaseThreeTieredCandleCakeBlock.HALF);
-                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, cakeName, true, LOWER);
-                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, cakeName, false, LOWER);
-                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, cakeName, true, UPPER);
-                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, cakeName, false, UPPER);
+                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, texturePrefix, true, LOWER);
+                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, texturePrefix, false, LOWER);
+                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, texturePrefix, true, UPPER);
+                                addThreeTieredVariant(generators, threeTieredDispatch, candleCakeBlock, candle, texturePrefix, false, UPPER);
                                 generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(candleCakeBlock).with(threeTieredDispatch));
                                 return;
                             }
@@ -185,14 +186,14 @@ public class ModModelProvider extends FabricModelProvider {
         });
     }
 
-    private void addVariant(BlockModelGenerators generators, PropertyDispatch.C1<Boolean> dispatch, Block candleCake, Block candle, String name, boolean lit) {
+    private void addVariant(BlockModelGenerators generators, PropertyDispatch.C1<Boolean> dispatch, Block candleCake, Block candle, String texturePrefix, boolean lit) {
         String litName = lit ? "_lit" : "";
-        ResourceLocation side = blockLoc(name + "_side");
+        ResourceLocation side = blockLoc(texturePrefix + "_side");
 
         TextureSet set = new TextureSet()
                 .add(TextureSlot.CANDLE, getBlockTexture(candle, litName))
-                .add(TextureSlot.BOTTOM, blockLoc(name + "_bottom"))
-                .add(TextureSlot.TOP, blockLoc(name + "_top"))
+                .add(TextureSlot.BOTTOM, blockLoc(texturePrefix + "_bottom"))
+                .add(TextureSlot.TOP, blockLoc(texturePrefix + "_top"))
                 .add(TextureSlot.SIDE, side)
                 .add(TextureSlot.PARTICLE, side);
 
@@ -203,16 +204,16 @@ public class ModModelProvider extends FabricModelProvider {
         ));
     }
 
-    private void addTwoTieredVariant(BlockModelGenerators generators, PropertyDispatch.C1<Boolean> dispatch, Block candleCake, Block candle, String name, boolean lit) {
+    private void addTwoTieredVariant(BlockModelGenerators generators, PropertyDispatch.C1<Boolean> dispatch, Block candleCake, Block candle, String texturePrefix, boolean lit) {
         String litName = lit ? "_lit" : "";
 
         TextureSet set = new TextureSet()
                 .add(TextureSlot.CANDLE, getBlockTexture(candle, litName))
-                .add(TextureSlot.BOTTOM, blockLoc(name + "_bottom"))
-                .add(TextureSlot.TOP, blockLoc(name + "_top"))
-                .add(TOP_SIDE, blockLoc(name + "_top_side"))
-                .add(LOWER_TOP, blockLoc(name + "_lower_top"))
-                .add(LOWER_SIDE, blockLoc(name + "_lower_side"));
+                .add(TextureSlot.BOTTOM, blockLoc(texturePrefix + "_bottom"))
+                .add(TextureSlot.TOP, blockLoc(texturePrefix + "_medium_top"))
+                .add(TOP_SIDE, blockLoc(texturePrefix + "_medium_side"))
+                .add(LOWER_TOP, blockLoc(texturePrefix + "_top_covered"))
+                .add(LOWER_SIDE, blockLoc(texturePrefix + "_side"));
 
         dispatch.select(lit, Variant.variant().with(VariantProperties.MODEL,
                 new ModelTemplate(Optional.of(blockLoc("template_two_tiered_candle_cake")), Optional.of(litName), set.getSlots())
@@ -220,23 +221,23 @@ public class ModModelProvider extends FabricModelProvider {
         ));
     }
 
-    private void addThreeTieredVariant(BlockModelGenerators generators, PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch, Block candleCake, Block candle, String name, boolean lit, DoubleBlockHalf half) {
+    private void addThreeTieredVariant(BlockModelGenerators generators, PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch, Block candleCake, Block candle, String texturePrefix, boolean lit, DoubleBlockHalf half) {
         String litName = lit ? "_lit" : "";
         String halfName = "_" + half;
 
         TextureSet set = new TextureSet()
-                .add(TextureSlot.BOTTOM, blockLoc(name + "_bottom"))
+                .add(TextureSlot.BOTTOM, blockLoc(texturePrefix + "_bottom"))
                 .add(TextureSlot.CANDLE, getBlockTexture(candle, litName));
 
         if (half == LOWER) {
-            set.add(MIDDLE_SIDE, blockLoc(name + "_middle_side"))
-                    .add(MIDDLE_TOP, blockLoc(name + "_middle_top"))
-                    .add(LOWER_SIDE, blockLoc(name + "_lower_side"))
-                    .add(LOWER_TOP, blockLoc(name + "_lower_top"));
+            set.add(MIDDLE_SIDE, blockLoc(texturePrefix + "_medium_side"))
+                    .add(MIDDLE_TOP, blockLoc(texturePrefix + "_medium_top_covered"))
+                    .add(LOWER_SIDE, blockLoc(texturePrefix + "_side"))
+                    .add(LOWER_TOP, blockLoc(texturePrefix + "_top_covered"));
         }
         else {
-            set.add(TOP_SIDE, blockLoc(name + "_top_side"))
-                    .add(TextureSlot.TOP, blockLoc(name + "_top"));
+            set.add(TOP_SIDE, blockLoc(texturePrefix + "_small_side"))
+                    .add(TextureSlot.TOP, blockLoc(texturePrefix + "_small_top"));
         }
 
         dispatch.select(lit, half, Variant.variant().with(VariantProperties.MODEL,
@@ -245,13 +246,13 @@ public class ModModelProvider extends FabricModelProvider {
         );
     }
 
-    private void createCake(BlockModelGenerators generators, BaseCakeBlock cake, @Nullable ResourceLocation crossTexture) {
+    private void createCake(BlockModelGenerators generators, BaseCakeBlock cake, String texturePrefix, @Nullable ResourceLocation crossTexture) {
         boolean addCross = crossTexture != null;
         String parentModel = addCross ? "block/template_cross_cake" : "block/template_cake";
-        ResourceLocation bottom = getBlockTexture(cake, "_bottom");
-        ResourceLocation top = getBlockTexture(cake, "_top");
-        ResourceLocation side = getBlockTexture(cake, "_side");
-        ResourceLocation inside = getBlockTexture(cake, "_inner");
+        ResourceLocation bottom = blockLoc(texturePrefix + "_bottom");
+        ResourceLocation top = blockLoc(texturePrefix + "_top");
+        ResourceLocation side = blockLoc(texturePrefix + "_side");
+        ResourceLocation inside = blockLoc(texturePrefix + "_inner");
 
         if (cake.getSlices() > 0) {
             PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseCakeBlock.BITES);
@@ -296,25 +297,25 @@ public class ModModelProvider extends FabricModelProvider {
         }
     }
 
-    private void createTwoTieredCake(BlockModelGenerators generators, BaseCakeBlock cake, @Nullable ResourceLocation crossTexture) {
+    private void createTwoTieredCake(BlockModelGenerators generators, BaseCakeBlock cake, String texturePrefix, @Nullable ResourceLocation crossTexture) {
         boolean addCross = crossTexture != null;
         String parentModel = addCross ? "block/template_cross_two_tiered_cake" : "block/template_two_tiered_cake";
-        ResourceLocation bottom = getBlockTexture(cake, "_bottom");
-        ResourceLocation top = getBlockTexture(cake, "_top");
-        ResourceLocation topSide = getBlockTexture(cake, "_top_side");
-        ResourceLocation topInner = getBlockTexture(cake, "_top_inner");
-        ResourceLocation lowerTop = getBlockTexture(cake, "_lower_top");
-        ResourceLocation lowerSide = getBlockTexture(cake, "_lower_side");
-        ResourceLocation lowerInner = getBlockTexture(cake, "_lower_inner");
+        ResourceLocation bottom = blockLoc(texturePrefix + "_bottom");
+        ResourceLocation mediumTop = blockLoc(texturePrefix + "_medium_top");
+        ResourceLocation mediumSide = blockLoc(texturePrefix + "_medium_side");
+        ResourceLocation mediumInner = blockLoc(texturePrefix + "_medium_inner");
+        ResourceLocation top = blockLoc(texturePrefix + "_top_covered");
+        ResourceLocation side = blockLoc(texturePrefix + "_side");
+        ResourceLocation inner = blockLoc(texturePrefix + "_inner_covered");
 
         if (cake.getSlices() > 0) {
             PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseTwoTieredCakeBlock.BITES);
             TextureSet set = new TextureSet()
                     .add(TextureSlot.BOTTOM, bottom)
-                    .add(TextureSlot.TOP, top)
-                    .add(TOP_SIDE, topSide)
-                    .add(LOWER_SIDE, lowerSide)
-                    .add(LOWER_TOP, lowerTop);
+                    .add(TextureSlot.TOP, mediumTop)
+                    .add(TOP_SIDE, mediumSide)
+                    .add(LOWER_SIDE, side)
+                    .add(LOWER_TOP, top);
 
             addCross(set, crossTexture);
             dispatch.select(0, Variant.variant().with(VariantProperties.MODEL,
@@ -324,17 +325,17 @@ public class ModModelProvider extends FabricModelProvider {
             for (int i = 1; i < 11; i++) {
                 TextureSet sliceSet = new TextureSet()
                         .add(TextureSlot.BOTTOM, bottom)
-                        .add(LOWER_SIDE, lowerSide)
-                        .add(LOWER_TOP, lowerTop);
+                        .add(LOWER_SIDE, side)
+                        .add(LOWER_TOP, top);
 
                 if (i < 5) {
-                    sliceSet.add(TextureSlot.TOP, top)
-                            .add(TOP_SIDE, topSide)
-                            .add(TOP_INNER, topInner);
+                    sliceSet.add(TextureSlot.TOP, mediumTop)
+                            .add(TOP_SIDE, mediumSide)
+                            .add(TOP_INNER, mediumInner);
                 }
 
                 if (i > 5) {
-                    sliceSet.add(LOWER_INNER, lowerInner);
+                    sliceSet.add(LOWER_INNER, inner);
                 }
 
                 if (i < 3) {
@@ -350,10 +351,10 @@ public class ModModelProvider extends FabricModelProvider {
         else {
             TextureSet set = new TextureSet()
                     .add(TextureSlot.BOTTOM, bottom)
-                    .add(TextureSlot.TOP, top)
-                    .add(TOP_SIDE, topSide)
-                    .add(LOWER_TOP, lowerTop)
-                    .add(LOWER_SIDE, lowerSide);
+                    .add(TextureSlot.TOP, mediumTop)
+                    .add(TOP_SIDE, mediumSide)
+                    .add(LOWER_TOP, top)
+                    .add(LOWER_SIDE, side);
 
             addCross(set, crossTexture);
             generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cake, Variant.variant().with(VariantProperties.MODEL,
@@ -362,24 +363,24 @@ public class ModModelProvider extends FabricModelProvider {
         }
     }
 
-    private void createThreeTieredCake(BlockModelGenerators generators, BaseCakeBlock cake, @Nullable ResourceLocation crossTexture) {
+    private void createThreeTieredCake(BlockModelGenerators generators, BaseCakeBlock cake, String texturePrefix, @Nullable ResourceLocation crossTexture) {
         boolean addCross = crossTexture != null;
         String parentModel = addCross ? "block/template_cross_three_tiered_cake" : "block/template_three_tiered_cake";
-        ResourceLocation bottom = getBlockTexture(cake, "_bottom");
-        ResourceLocation top = getBlockTexture(cake, "_top");
-        ResourceLocation topSide = getBlockTexture(cake, "_top_side");
-        ResourceLocation topInner = getBlockTexture(cake, "_top_inner");
-        ResourceLocation middleTop = getBlockTexture(cake, "_middle_top");
-        ResourceLocation middleSide = getBlockTexture(cake, "_middle_side");
-        ResourceLocation middleInner = getBlockTexture(cake, "_middle_inner");
-        ResourceLocation lowerTop = getBlockTexture(cake, "_lower_top");
-        ResourceLocation lowerSide = getBlockTexture(cake, "_lower_side");
-        ResourceLocation lowerInner = getBlockTexture(cake, "_lower_inner");
+        ResourceLocation bottom = blockLoc(texturePrefix + "_bottom");
+        ResourceLocation smallTop = blockLoc(texturePrefix + "_small_top");
+        ResourceLocation smallSide = blockLoc(texturePrefix + "_small_side");
+        ResourceLocation smallInner = blockLoc(texturePrefix + "_small_inner");
+        ResourceLocation mediumTop = blockLoc(texturePrefix + "_medium_top_covered");
+        ResourceLocation mediumSide = blockLoc(texturePrefix + "_medium_side");
+        ResourceLocation mediumInner = blockLoc(texturePrefix + "_medium_inner_covered");
+        ResourceLocation top = blockLoc(texturePrefix + "_top_covered");
+        ResourceLocation side = blockLoc(texturePrefix + "_side");
+        ResourceLocation inner = blockLoc(texturePrefix + "_inner_covered");
 
         TextureSet upperSet = new TextureSet()
                 .add(TextureSlot.BOTTOM, bottom)
-                .add(TextureSlot.TOP, top)
-                .add(TOP_SIDE, topSide);
+                .add(TextureSlot.TOP, smallTop)
+                .add(TOP_SIDE, smallSide);
         addCross(upperSet, crossTexture);
         Variant upperVariant = Variant.variant().with(VariantProperties.MODEL,
                 new ModelTemplate(Optional.of(loc(parentModel + "_upper")), Optional.of("_upper"), upperSet.getSlots())
@@ -387,10 +388,10 @@ public class ModModelProvider extends FabricModelProvider {
 
         TextureSet lowerSet = new TextureSet()
                 .add(TextureSlot.BOTTOM, bottom)
-                .add(MIDDLE_TOP, middleTop)
-                .add(MIDDLE_SIDE, middleSide)
-                .add(LOWER_TOP, lowerTop)
-                .add(LOWER_SIDE, lowerSide);
+                .add(MIDDLE_TOP, mediumTop)
+                .add(MIDDLE_SIDE, mediumSide)
+                .add(LOWER_TOP, top)
+                .add(LOWER_SIDE, side);
         addCross(lowerSet, crossTexture);
         Variant lowerVariant = Variant.variant().with(VariantProperties.MODEL,
                 new ModelTemplate(Optional.of(loc(parentModel + "_lower")), Optional.of("_lower"), lowerSet.getSlots())
@@ -404,9 +405,9 @@ public class ModModelProvider extends FabricModelProvider {
             for (int i = 1; i < 5; i++) {
                 TextureSet set = new TextureSet()
                         .add(TextureSlot.BOTTOM, bottom)
-                        .add(TextureSlot.TOP, top)
-                        .add(TOP_SIDE, topSide)
-                        .add(TOP_INNER, topInner);
+                        .add(TextureSlot.TOP, smallTop)
+                        .add(TOP_SIDE, smallSide)
+                        .add(TOP_INNER, smallInner);
 
                 if (i < 3) {
                     addCross(set, crossTexture);
@@ -420,16 +421,16 @@ public class ModModelProvider extends FabricModelProvider {
             for (int i = 1; i < 11; i++) {
                 TextureSet set = new TextureSet()
                         .add(TextureSlot.BOTTOM, bottom)
-                        .add(LOWER_TOP, lowerTop)
-                        .add(LOWER_SIDE, lowerSide);
+                        .add(LOWER_TOP, top)
+                        .add(LOWER_SIDE, side);
 
                 if (i < 5) {
-                    set.add(MIDDLE_TOP, middleTop)
-                            .add(MIDDLE_SIDE, middleSide)
-                            .add(MIDDLE_INNER, middleInner);
+                    set.add(MIDDLE_TOP, mediumTop)
+                            .add(MIDDLE_SIDE, mediumSide)
+                            .add(MIDDLE_INNER, mediumInner);
                 }
                 else if (i > 5) {
-                    set.add(LOWER_INNER, lowerInner);
+                    set.add(LOWER_INNER, inner);
                 }
 
                 dispatch.select(i + 5, Variant.variant().with(VariantProperties.MODEL,

@@ -1,11 +1,11 @@
 {
   "parent": "jmc:block/template_two_tiered_candle_cake",
   "textures": {
-    "bottom": "jmc:block/two_tiered_cake_bottom",
+    "bottom": "jmc:block/cake_bottom",
     "candle": "minecraft:block/lime_candle_lit",
-    "lower_side": "jmc:block/two_tiered_cake_lower_side",
-    "lower_top": "jmc:block/two_tiered_cake_lower_top",
-    "top": "jmc:block/two_tiered_cake_top",
-    "top_side": "jmc:block/two_tiered_cake_top_side"
+    "lower_side": "jmc:block/cake_side",
+    "lower_top": "jmc:block/cake_top_covered",
+    "top": "jmc:block/cake_medium_top",
+    "top_side": "jmc:block/cake_medium_side"
   }
 }
