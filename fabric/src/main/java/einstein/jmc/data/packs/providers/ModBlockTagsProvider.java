@@ -5,6 +5,7 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.Util;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -31,24 +32,31 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
 
         Map<Supplier<BaseCakeBlock>, CakeBuilder> sortedCakes = Util.createValueSortedMap(CakeBuilder.BUILDER_BY_CAKE, Comparator.comparing(CakeBuilder::getCakeName));
 
-        sortedCakes.forEach((cake, cakeBuilder) -> {
-            getOrCreateTagBuilder(ModBlockTags.CAKES).add(cake.get());
+        sortedCakes.forEach((cake, builder) -> {
+            CakeVariant variant = builder.getVariant();
 
-            if (cake.get().isBaseCake()) {
-                getOrCreateTagBuilder(ModBlockTags.CAKE_STAND_STORABLES).add(cake.get());
+            switch (variant) {
+                case BASE -> getOrCreateTagBuilder(ModBlockTags.BASE_CAKES).add(cake.get());
+                case TWO_TIERED -> getOrCreateTagBuilder(ModBlockTags.TWO_TIERED_CAKES).add(cake.get());
+                case THREE_TIERED -> getOrCreateTagBuilder(ModBlockTags.THREE_TIERED_CAKES).add(cake.get());
             }
 
-            Map<Block, Supplier<BaseCandleCakeBlock>> sortedCandleCakes = Util.createKeySortedMap(cakeBuilder.getCandleCakeByCandle(), Comparator.comparing(o -> o.getName().toString()));
+            Map<Block, Supplier<BaseCandleCakeBlock>> sortedCandleCakes = Util.createKeySortedMap(builder.getCandleCakeByCandle(), Comparator.comparing(o -> o.getName().toString()));
             sortedCandleCakes.forEach((candle, candleCake) -> {
-                getOrCreateTagBuilder(ModBlockTags.CANDLE_CAKES).add(candleCake.get());
+                switch (variant) {
+                    case BASE -> getOrCreateTagBuilder(ModBlockTags.BASE_CANDLE_CAKES).add(candleCake.get());
+                    case TWO_TIERED -> getOrCreateTagBuilder(ModBlockTags.TWO_TIERED_CANDLE_CAKES).add(candleCake.get());
+                    case THREE_TIERED -> getOrCreateTagBuilder(ModBlockTags.THREE_TIERED_CANDLE_CAKES).add(candleCake.get());
+                }
             });
         });
 
-        getOrCreateTagBuilder(ModBlockTags.CAKES);
+        getOrCreateTagBuilder(ModBlockTags.CAKES).addTag(ModBlockTags.BASE_CAKES).addTag(ModBlockTags.TWO_TIERED_CAKES).addTag(ModBlockTags.THREE_TIERED_CAKES);
+        getOrCreateTagBuilder(ModBlockTags.CANDLE_CAKES).addTag(ModBlockTags.BASE_CANDLE_CAKES).addTag(ModBlockTags.TWO_TIERED_CANDLE_CAKES).addTag(ModBlockTags.THREE_TIERED_CANDLE_CAKES);
         getOrCreateTagBuilder(ModBlockTags.C_CAKES).addTag(ModBlockTags.CAKES);
         getOrCreateTagBuilder(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE).addTag(ModBlockTags.C_CAKES).addTag(ModBlockTags.C_CANDLE_CAKES);
         Util.getVanillaCandleCakes().forEach(cake -> getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
-        getOrCreateTagBuilder(ModBlockTags.CAKE_STAND_STORABLES).add(Blocks.CAKE);
+        getOrCreateTagBuilder(ModBlockTags.CAKE_STAND_STORABLES).add(Blocks.CAKE).addTag(ModBlockTags.BASE_CAKES);
     }
 }

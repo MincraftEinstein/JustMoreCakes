@@ -9,7 +9,14 @@ import net.minecraft.world.level.block.Block;
 public class ModBlockTags {
 
     public static final TagKey<Block> CAKES = create("cakes");
+    public static final TagKey<Block> BASE_CAKES = create("base_cakes");
+    public static final TagKey<Block> TWO_TIERED_CAKES = create("two_tiered_cakes");
+    public static final TagKey<Block> THREE_TIERED_CAKES = create("three_tiered_cakes");
     public static final TagKey<Block> CANDLE_CAKES = create("candle_cakes");
+    public static final TagKey<Block> BASE_CANDLE_CAKES = create("base_candle_cakes");
+    public static final TagKey<Block> TWO_TIERED_CANDLE_CAKES = create("two_tiered_candle_cakes");
+    public static final TagKey<Block> THREE_TIERED_CANDLE_CAKES = create("three_tiered_candle_cakes");
+
     public static final TagKey<Block> C_CAKES = createC("cakes");
     public static final TagKey<Block> C_CANDLE_CAKES = createC("candle_cakes");
     public static final TagKey<Block> CAKE_SPATULA_USABLE = create("cake_spatula_usable");
