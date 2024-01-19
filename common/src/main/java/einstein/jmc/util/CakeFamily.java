@@ -27,30 +27,17 @@ public class CakeFamily implements CakeEffectsHolder {
     protected Supplier<BaseCakeBlock> threeTieredCake;
     protected int nutrition = BaseCakeBlock.DEFAULT_NUTRITION;
     protected float saturationModifier = BaseCakeBlock.DEFAULT_SATURATION_MODIFIER;
-    protected CakeModel model = CakeModel.DEFAULT;
+    protected CakeModel cakeModel = CakeModel.DEFAULT;
+    protected CakeModel candleCakeModel = CakeModel.DEFAULT;
     protected CakeEffects cakeEffects;
 
     CakeFamily(ResourceLocation registryKey, String baseCakeName) {
         this.registryKey = registryKey;
         this.baseCakeName = baseCakeName;
 
-        baseBuilder = new CakeBuilder(baseCakeName)
-                .setFamily(this)
-                .nutrition(nutrition)
-                .saturationModifier(saturationModifier)
-                .models(model, model);
-
-        twoTieredBuilder = new CakeBuilder("two_tiered_" + baseCakeName, CakeVariant.TWO_TIERED)
-                .setFamily(this)
-                .nutrition(nutrition)
-                .saturationModifier(saturationModifier)
-                .models(model, model);
-
-        threeTieredBuilder = new CakeBuilder("three_tiered_" + baseCakeName, CakeVariant.THREE_TIERED)
-                .setFamily(this)
-                .nutrition(nutrition)
-                .saturationModifier(saturationModifier)
-                .models(model, model);
+        baseBuilder = new CakeBuilder(baseCakeName).setFamily(this);
+        twoTieredBuilder = new CakeBuilder("two_tiered_" + baseCakeName, CakeVariant.TWO_TIERED).setFamily(this);
+        threeTieredBuilder = new CakeBuilder("three_tiered_" + baseCakeName, CakeVariant.THREE_TIERED).setFamily(this);
     }
 
     public static Builder create(String flavorName) {
@@ -98,8 +85,12 @@ public class CakeFamily implements CakeEffectsHolder {
         return saturationModifier;
     }
 
-    public CakeModel getModel() {
-        return model;
+    public CakeModel getCakeModel() {
+        return cakeModel;
+    }
+
+    public CakeModel getCandleCakeModel() {
+        return candleCakeModel;
     }
 
     @Nullable
@@ -152,14 +143,33 @@ public class CakeFamily implements CakeEffectsHolder {
         }
 
         public Builder model(CakeModel model) {
-            family.model = model;
+            return models(model, CakeModel.DEFAULT);
+        }
+
+        public Builder models(CakeModel cakeModel, CakeModel candleCakeModel) {
+            family.cakeModel = cakeModel;
+            family.candleCakeModel = candleCakeModel;
             return this;
         }
 
         public DefaultCakeFamily build() {
-            family.baseCake = family.baseBuilder.build();
-            family.twoTieredCake = family.twoTieredBuilder.noItem().build();
-            family.threeTieredCake = family.threeTieredBuilder.noItem().build();
+            family.baseCake = family.baseBuilder
+                    .nutrition(family.nutrition)
+                    .saturationModifier(family.saturationModifier)
+                    .models(family.cakeModel, family.candleCakeModel)
+                    .build();
+            family.twoTieredCake = family.twoTieredBuilder
+                    .noItem()
+                    .nutrition(family.nutrition)
+                    .saturationModifier(family.saturationModifier)
+                    .models(family.cakeModel, family.candleCakeModel)
+                    .build();
+            family.threeTieredCake = family.threeTieredBuilder
+                    .noItem()
+                    .nutrition(family.nutrition)
+                    .saturationModifier(family.saturationModifier)
+                    .models(family.cakeModel, family.candleCakeModel)
+                    .build();
             REGISTERED_CAKE_FAMILIES.put(family.getRegistryKey(), family);
             return family;
         }
