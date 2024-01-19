@@ -28,11 +28,11 @@ public class ModBlocks {
     public static final DefaultCakeFamily CHOCOLATE_CAKE_FAMILY = CakeFamily.create("chocolate").build();
     public static final DefaultCakeFamily CARROT_CAKE_FAMILY = CakeFamily.create("carrot").build();
     public static final DefaultCakeFamily PUMPKIN_CAKE_FAMILY = CakeFamily.create("pumpkin").build();
-    public static final DefaultCakeFamily DEFAULT_CAKE_FAMILY = CakeFamily.create("melon")
+    public static final DefaultCakeFamily MELON_CAKE_FAMILY = CakeFamily.create("melon")
             .nutrition(1)
             .saturationModifier(0.4F)
             .build();
-    public static final Supplier<BaseCakeBlock> APPLE_CAKE = new CakeBuilder("apple_cake").build();
+    public static final DefaultCakeFamily APPLE_CAKE_FAMILY = CakeFamily.create("apple").build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
