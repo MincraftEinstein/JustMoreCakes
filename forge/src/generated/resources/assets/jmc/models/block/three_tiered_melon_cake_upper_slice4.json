@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_three_tiered_cake_upper_slice4",
+  "textures": {
+    "bottom": "jmc:block/melon_cake_bottom",
+    "top": "jmc:block/melon_cake_small_top",
+    "top_inner": "jmc:block/melon_cake_small_inner",
+    "top_side": "jmc:block/melon_cake_small_side"
+  }
+}
