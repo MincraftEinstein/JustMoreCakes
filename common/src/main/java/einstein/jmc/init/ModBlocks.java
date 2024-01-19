@@ -33,11 +33,11 @@ public class ModBlocks {
             .saturationModifier(0.4F)
             .build();
     public static final DefaultCakeFamily APPLE_CAKE_FAMILY = CakeFamily.create("apple").build();
+    public static final DefaultCakeFamily COOKIE_CAKE_FAMILY = CakeFamily.create("cookie").build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
             .build();
-    public static final Supplier<BaseCakeBlock> COOKIE_CAKE = new CakeBuilder("cookie_cake").build();
     public static final Supplier<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake")
             .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)

@@ -142,9 +142,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.CHORUS_FRUIT))
                 .save(output, cakeOvenLoc(ModBlocks.CHORUS_CAKE));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.COOKIE_CAKE.get(), 0.6F, 200, RecipeCategory.FOOD, Ingredient.of(Items.COOKIE), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.EGG))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.COOKIE_CAKE_FAMILY, 0.6F, 200, RecipeCategory.FOOD, Ingredient.of(Items.COOKIE), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Items.COOKIE))
-                .save(output, cakeOvenLoc(ModBlocks.COOKIE_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.COOKIE_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.ENDER_CAKE.get(), 0.8F, 350, RecipeCategory.FOOD, Ingredient.of(Items.ENDER_PEARL), Ingredient.of(Items.WHEAT), Ingredient.of(Items.BLAZE_POWDER), Ingredient.of(Items.MILK_BUCKET))
                 .unlockedBy(has, RecipeProvider.has(Items.ENDER_PEARL))
