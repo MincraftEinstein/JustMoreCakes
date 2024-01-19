@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/purple_candle_two_tiered_pumpkin_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/purple_candle_two_tiered_pumpkin_cake_lit"
+    }
+  }
+}

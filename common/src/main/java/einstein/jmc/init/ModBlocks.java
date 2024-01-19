@@ -27,7 +27,7 @@ public class ModBlocks {
     public static final VanillaCakeFamily VANILLA_CAKE_FAMILY = new VanillaCakeFamily();
     public static final DefaultCakeFamily CHOCOLATE_CAKE_FAMILY = CakeFamily.create("chocolate").build();
     public static final DefaultCakeFamily CARROT_CAKE_FAMILY = CakeFamily.create("carrot").build();
-    public static final Supplier<BaseCakeBlock> PUMPKIN_CAKE = new CakeBuilder("pumpkin_cake").build();
+    public static final DefaultCakeFamily PUMPKIN_CAKE_FAMILY = CakeFamily.create("pumpkin").build();
     public static final Supplier<BaseCakeBlock> MELON_CAKE = new CakeBuilder("melon_cake")
             .nutrition(1)
             .saturationModifier(0.4F)
