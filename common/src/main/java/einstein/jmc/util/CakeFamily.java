@@ -27,6 +27,7 @@ public class CakeFamily implements CakeEffectsHolder {
     protected Supplier<BaseCakeBlock> threeTieredCake;
     protected int nutrition = BaseCakeBlock.DEFAULT_NUTRITION;
     protected float saturationModifier = BaseCakeBlock.DEFAULT_SATURATION_MODIFIER;
+    protected boolean canAlwaysEat;
     protected CakeModel cakeModel = CakeModel.DEFAULT;
     protected CakeModel candleCakeModel = CakeModel.DEFAULT;
     protected CakeEffects cakeEffects;
@@ -142,6 +143,11 @@ public class CakeFamily implements CakeEffectsHolder {
             return this;
         }
 
+        public Builder alwaysEat() {
+            family.canAlwaysEat = true;
+            return this;
+        }
+
         public Builder model(CakeModel model) {
             return models(model, CakeModel.DEFAULT);
         }
@@ -153,6 +159,12 @@ public class CakeFamily implements CakeEffectsHolder {
         }
 
         public DefaultCakeFamily build() {
+            if (family.canAlwaysEat) {
+                family.baseBuilder.alwaysEat();
+                family.twoTieredBuilder.alwaysEat();
+                family.threeTieredBuilder.alwaysEat();
+            }
+
             family.baseCake = family.baseBuilder
                     .nutrition(family.nutrition)
                     .saturationModifier(family.saturationModifier)
