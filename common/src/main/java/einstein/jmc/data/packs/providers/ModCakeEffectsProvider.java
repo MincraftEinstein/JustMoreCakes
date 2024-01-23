@@ -18,7 +18,7 @@ public class ModCakeEffectsProvider extends CakeEffectsProvider {
     protected void addCakeEffects() {
         add(ModBlocks.POISON_CAKE,
                 new MobEffectHolder(MobEffects.POISON, 300, 1));
-        add(ModBlocks.GOLDEN_APPLE_CAKE,
+        add(ModBlocks.GOLDEN_APPLE_CAKE_FAMILY,
                 new MobEffectHolder(MobEffects.REGENERATION, 200, 1),
                 new MobEffectHolder(MobEffects.DAMAGE_RESISTANCE, 3000),
                 new MobEffectHolder(MobEffects.ABSORPTION, 1200, 1));

@@ -1,5 +1,4 @@
 {
-  "block": "jmc:golden_apple_cake",
   "effects": [
     {
       "amplifier": 1,
@@ -15,5 +14,6 @@
       "duration": 1200,
       "mob_effect": "minecraft:absorption"
     }
-  ]
+  ],
+  "family": "jmc:golden_apple"
 }

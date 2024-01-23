@@ -1,4 +1,4 @@
-// 1.20.2	2024-01-19T16:36:10.2912136	Tags for minecraft:block mod id jmc
+// 1.20.2	2024-01-23T18:35:43.5870025	Tags for minecraft:block mod id jmc
 b309abc5734e51409824164bb4935186385e4b9b data/c/tags/blocks/cakes.json
 4d60c932f859099f6892e6554d664403f3724792 data/c/tags/blocks/candle_cakes.json
 b309abc5734e51409824164bb4935186385e4b9b data/forge/tags/blocks/cakes.json
@@ -9,9 +9,9 @@ b4be3c7a06d856dd45105a17f2dd01b2ff5ec34e data/jmc/tags/blocks/base_candle_cakes.
 561c97b557301534a18c46a15b9ac2d1f0cb233c data/jmc/tags/blocks/cake_spatula_usable.json
 efb96841812600815c99930917410d593b9bc773 data/jmc/tags/blocks/cake_stand_storables.json
 94f7ed9be8766f5ae51f2eab9b6ed6c56a3e7074 data/jmc/tags/blocks/candle_cakes.json
-781d14728546a5bbc1aaf8f8126a5128d2852de2 data/jmc/tags/blocks/three_tiered_cakes.json
-1780cc675d9485a58c611f94c659dfe0fe08887f data/jmc/tags/blocks/three_tiered_candle_cakes.json
-e8257bf326d5c444f06319a750a889878ceca35d data/jmc/tags/blocks/two_tiered_cakes.json
-2ee21bb93f15d96272d938b10cacb6c38e9bc837 data/jmc/tags/blocks/two_tiered_candle_cakes.json
+99e446be211a1fe5b2fed609d03309229bc806e4 data/jmc/tags/blocks/three_tiered_cakes.json
+c3b66768493e1d5c476d4d7de14c2366d4c2be90 data/jmc/tags/blocks/three_tiered_candle_cakes.json
+61eb9cafdf5a7730c23003740997a8cf5b1015e8 data/jmc/tags/blocks/two_tiered_cakes.json
+21f8b1b8b1fbd4d2c3854e9239c911412273d9fc data/jmc/tags/blocks/two_tiered_candle_cakes.json
 fdc1752e2f01592a62738e0b8978cc57e86b44c8 data/minecraft/tags/blocks/ice.json
 ed252a47dca08574e14d8e2d38480d6015097e2f data/minecraft/tags/blocks/mineable/pickaxe.json

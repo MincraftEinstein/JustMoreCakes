@@ -34,6 +34,11 @@ public class ModBlocks {
             .build();
     public static final DefaultCakeFamily APPLE_CAKE_FAMILY = CakeFamily.create("apple").build();
     public static final DefaultCakeFamily COOKIE_CAKE_FAMILY = CakeFamily.create("cookie").build();
+    public static final DefaultCakeFamily GOLDEN_APPLE_CAKE_FAMILY = CakeFamily.create("golden_apple")
+            .nutrition(4)
+            .saturationModifier(0.5F)
+            .alwaysEat()
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -42,11 +47,6 @@ public class ModBlocks {
             .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
-            .build();
-    public static final Supplier<BaseCakeBlock> GOLDEN_APPLE_CAKE = new CakeBuilder("golden_apple_cake")
-            .nutrition(4)
-            .saturationModifier(0.5F)
-            .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake")
             .model(new CakeModel.CrossCakeModel(mcLoc("block/red_mushroom")))

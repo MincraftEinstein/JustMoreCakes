@@ -154,9 +154,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.GLOWSTONE_DUST))
                 .save(output, cakeOvenLoc(ModBlocks.GLOWSTONE_CAKE));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.GOLDEN_APPLE_CAKE.get(), 0.8F, 400, RecipeCategory.FOOD, Ingredient.of(Items.GOLDEN_APPLE), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.GOLDEN_APPLE_CAKE_FAMILY, 0.8F, 400, RecipeCategory.FOOD, Ingredient.of(Items.GOLDEN_APPLE), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Items.GOLDEN_APPLE))
-                .save(output, cakeOvenLoc(ModBlocks.GOLDEN_APPLE_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.GOLDEN_APPLE_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.ICE_CAKE.get(), 0.5F, 250, RecipeCategory.FOOD, Ingredient.of(Items.ICE), Ingredient.of(Items.EGG), Ingredient.of(Items.WHEAT), Ingredient.of(Items.SUGAR))
                 .unlockedBy(has, RecipeProvider.has(Blocks.ICE))
