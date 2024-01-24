@@ -197,7 +197,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
-        if (equals(ModBlocks.FIREY_CAKE.get())) {
+        if (inFamily(ModBlocks.FIREY_CAKE_FAMILY)) {
             player.setSecondsOnFire(ModCommonConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
         }
         else if (equals(ModBlocks.ICE_CAKE.get())) {
@@ -310,6 +310,10 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             return builder.getSaturationModifier();
         }
         return DEFAULT_SATURATION_MODIFIER;
+    }
+
+    public boolean inFamily(CakeFamily family) {
+        return equals(family.getBaseCake().get()) || equals(family.getTwoTieredCake().get()) || equals(family.getThreeTieredCake().get());
     }
 
     public static boolean isUneaten(BlockState state, BlockPos pos, Level level) {

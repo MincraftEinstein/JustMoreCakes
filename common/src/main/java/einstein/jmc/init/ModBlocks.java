@@ -42,6 +42,7 @@ public class ModBlocks {
     public static final DefaultCakeFamily RED_MUSHROOM_CAKE_FAMILY = CakeFamily.create("red_mushroom")
             .model(new CakeModel.CrossCakeModel(mcLoc("block/red_mushroom")))
             .build();
+    public static final DefaultCakeFamily FIREY_CAKE_FAMILY = CakeFamily.create("firey").build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -51,7 +52,6 @@ public class ModBlocks {
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
             .build();
-    public static final Supplier<BaseCakeBlock> FIREY_CAKE = new CakeBuilder("firey_cake").build();
     public static final Supplier<BaseCakeBlock> REDSTONE_CAKE = new CakeBuilder("redstone_cake")
             .setBothClasses(RedstoneCakeBlock::new, RedstoneCandleCakeBlock::new)
             .build();

@@ -22,7 +22,7 @@ public class ModCakeEffectsProvider extends CakeEffectsProvider {
                 new MobEffectHolder(MobEffects.REGENERATION, 200, 1),
                 new MobEffectHolder(MobEffects.DAMAGE_RESISTANCE, 3000),
                 new MobEffectHolder(MobEffects.ABSORPTION, 1200, 1));
-        add(ModBlocks.FIREY_CAKE,
+        add(ModBlocks.FIREY_CAKE_FAMILY,
                 new MobEffectHolder(MobEffects.FIRE_RESISTANCE, 300, 1));
         add(ModBlocks.SLIME_CAKE,
                 new MobEffectHolder(MobEffects.JUMP, 1200, 0),

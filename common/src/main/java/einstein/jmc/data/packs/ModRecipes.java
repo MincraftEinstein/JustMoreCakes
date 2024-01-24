@@ -182,9 +182,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.LAVA_BUCKET))
                 .save(output, cakeOvenLoc(ModBlocks.LAVA_CAKE));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.FIREY_CAKE.get(), 0.5F, 200, RecipeCategory.FOOD, Ingredient.of(Items.MAGMA_CREAM), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.SUGAR))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.FIREY_CAKE_FAMILY, 0.5F, 200, RecipeCategory.FOOD, Ingredient.of(Items.MAGMA_CREAM), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.SUGAR))
                 .unlockedBy(has, RecipeProvider.has(Items.MAGMA_CREAM))
-                .save(output, cakeOvenLoc(ModBlocks.FIREY_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.FIREY_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.OBSIDIAN_CAKE.get(), 1, 800, RecipeCategory.FOOD, Ingredient.of(Blocks.OBSIDIAN), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Blocks.OBSIDIAN))
