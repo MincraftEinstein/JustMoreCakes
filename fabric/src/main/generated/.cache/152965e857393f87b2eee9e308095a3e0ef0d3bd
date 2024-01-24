@@ -1,4 +1,4 @@
-// 1.20.2	2024-01-23T21:15:11.6845977	Just More Cakes!/Recipes
+// 1.20.2	2024-01-24T14:59:36.1842906	Just More Cakes!/Recipes
 925c2e7a466607e318a13080b00bacdad4684726 data\jmc\advancements\recipes\food\cream_cheese_from_crafting.json
 392716976abcda275fefad628d6a6abd142775b9 data\jmc\recipes\red_mushroom_cake_from_cake_oven.json
 db6587af9aeee0913f5e07c7e0da90765d66580b data\jmc\recipes\glow_berry_cake_from_cake_oven.json
@@ -15,8 +15,8 @@ c579694daa12df8db501169d528ef1220f3f341b data\jmc\recipes\beetroot_cake_from_cak
 5c252023fb9aa7760adf4cfdca2d330e13fc7f9a data\jmc\advancements\recipes\food\slime_cake_from_cake_oven.json
 546325b265d70fd98f46ab7437fa3b9b0779f582 data\jmc\advancements\recipes\food\cheesecake_from_cake_oven.json
 92ae121e6a86062b0a351b54fda4c7a56ffebac1 data\jmc\advancements\recipes\food\red_velvet_cake_from_cake_oven.json
-ee054b4815faeaa1371a237b89092a4e291e7f3f data\jmc\advancements\recipes\food\firey_cake_from_cake_oven.json
 1fb100ade800b99170f921fe6d232e1438565e22 data\jmc\recipes\red_velvet_cake_from_cake_oven.json
+ee054b4815faeaa1371a237b89092a4e291e7f3f data\jmc\advancements\recipes\food\firey_cake_from_cake_oven.json
 0de67cd8105aab0d29d9cbb1bb5c7f3f10b03153 data\jmc\recipes\golden_apple_cake_from_cake_oven.json
 eea0fcf5fcb877378be5f1eeee33a3f8af6200ee data\jmc\advancements\recipes\food\ice_cake_from_cake_oven.json
 ffa4c550744ca7a5e4fea0367367918f2ed4a7d4 data\jmc\recipes\lava_cake_from_cake_oven.json
@@ -28,8 +28,8 @@ ba6bb5cfc226d48490de7b32a5ef849afa3249f1 data\jmc\recipes\chorus_cake_from_cake_
 da6802112bcfc4449fb786bd28c88af5b42a667f data\jmc\advancements\recipes\food\glowstone_cake_from_cake_oven.json
 ecbc87f84e1afcf4c214ee5564c05cda2038d364 data\jmc\recipes\obsidian_cake_from_cake_oven.json
 27db60dc7cd87cfaa093073cf7b942514d35b8b6 data\jmc\recipes\cake_stand_from_crafting.json
-7317127f3370c1f319939af5aad83f12989c0ed5 data\jmc\advancements\recipes\food\redstone_cake_from_cake_oven.json
 dce6f1055be2e75d3c33c07861647d4dc6a05402 data\jmc\advancements\recipes\food\pumpkin_cake_from_cake_oven.json
+7317127f3370c1f319939af5aad83f12989c0ed5 data\jmc\advancements\recipes\food\redstone_cake_from_cake_oven.json
 6eac659a9d89d29068b5a4106c29b669a570d20d data\jmc\advancements\recipes\food\cupcake_from_crafting.json
 7e1eb71c31a00a840cb607013c83747f5251b2f6 data\jmc\recipes\sweet_berry_cake_from_cake_oven.json
 d6a34083771b5b3f85014709856a438690b4bd0b data\jmc\recipes\cheesecake_from_cake_oven.json

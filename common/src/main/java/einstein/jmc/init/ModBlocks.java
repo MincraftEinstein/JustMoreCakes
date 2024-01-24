@@ -43,6 +43,11 @@ public class ModBlocks {
             .model(new CakeModel.CrossCakeModel(mcLoc("block/red_mushroom")))
             .build();
     public static final DefaultCakeFamily FIREY_CAKE_FAMILY = CakeFamily.create("firey").build();
+    public static final DefaultCakeFamily REDSTONE_CAKE_FAMILY = CakeFamily.create("redstone")
+            .modifyBaseBuilder(builder -> builder.setBothClasses(RedstoneCakeBlock::new, RedstoneCandleCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.setBothClasses(RedstoneTwoTieredCakeBlock::new, RedstoneCandleTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(RedStoneThreeTieredCakeBlock::new, RedstoneCandleThreeTieredCakeBlock::new))
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -51,9 +56,6 @@ public class ModBlocks {
             .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
-            .build();
-    public static final Supplier<BaseCakeBlock> REDSTONE_CAKE = new CakeBuilder("redstone_cake")
-            .setBothClasses(RedstoneCakeBlock::new, RedstoneCandleCakeBlock::new)
             .build();
     public static final Supplier<BaseCakeBlock> ENDER_CAKE = new CakeBuilder("ender_cake")
             .setBothClasses(EnderCakeBlock::new, EnderCandleCakeBlock::new)

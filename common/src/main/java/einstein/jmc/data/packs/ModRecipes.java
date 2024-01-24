@@ -126,9 +126,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Blocks.RED_MUSHROOM))
                 .save(output, cakeOvenLoc(ModBlocks.RED_MUSHROOM_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.REDSTONE_CAKE.get(), 0.5F, 200, RecipeCategory.FOOD, Ingredient.of(Items.REDSTONE), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.REDSTONE_CAKE_FAMILY, 0.5F, 200, RecipeCategory.FOOD, Ingredient.of(Items.REDSTONE), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET))
                 .unlockedBy(has, RecipeProvider.has(Items.REDSTONE))
-                .save(output, cakeOvenLoc(ModBlocks.REDSTONE_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.REDSTONE_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.SEED_CAKE.get(), 0.3F, 150, RecipeCategory.FOOD, Ingredient.of(ModItemTags.SEEDS), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.EGG), Ingredient.of(Items.SUGAR))
                 .unlockedBy(has, RecipeProvider.has(ModItemTags.SEEDS))

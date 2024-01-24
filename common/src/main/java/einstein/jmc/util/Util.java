@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import com.mojang.datafixers.util.Pair;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
+import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.init.ModPotions;
 import einstein.jmc.mixin.RecipeManagerAccessor;
@@ -16,6 +17,7 @@ import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -295,6 +297,17 @@ public class Util {
         if (vec3.y < 0) {
             double d0 = entity instanceof LivingEntity ? 0.5 : 0.3D;
             entity.setDeltaMovement(vec3.x, -vec3.y * d0, vec3.z);
+        }
+    }
+
+    public static void spawnRedstoneCakeParticles(Level level, BlockPos pos, RandomSource random) {
+        if (ModClientConfigs.REDSTONE_CAKE_PARTICLES.get()) {
+            for (int i = 0; i < 2; ++i) {
+                double x = pos.getX() + random.nextDouble();
+                double y = pos.getY() + random.nextDouble() * 0.5D + 0.25D;
+                double z = pos.getZ() + random.nextDouble();
+                level.addParticle(DustParticleOptions.REDSTONE, x, y, z, 0, 0, 0);
+            }
         }
     }
 }

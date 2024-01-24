@@ -1,10 +1,9 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -23,19 +22,12 @@ public class RedstoneCakeBlock extends BaseCakeBlock {
     }
 
     @Override
-    public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
-        return 7 - blockState.getValue(getBites());
+    public int getSignal(BlockState state, BlockGetter getter, BlockPos pos, Direction direction) {
+        return 7 - state.getValue(getBites());
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
-        if (ModClientConfigs.REDSTONE_CAKE_PARTICLES.get()) {
-            for (int i = 0; i < 2; ++i) {
-                double x = pos.getX() + rand.nextDouble();
-                double y = pos.getY() + rand.nextDouble() * 0.5D + 0.25D;
-                double z = pos.getZ() + rand.nextDouble();
-                level.addParticle(DustParticleOptions.REDSTONE, x, y, z, 0, 0, 0);
-            }
-        }
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        Util.spawnRedstoneCakeParticles(level, pos, random);
     }
 }
