@@ -11,6 +11,7 @@ import einstein.jmc.platform.Services;
 import einstein.jmc.util.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -269,6 +270,14 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 double YSpeed = (random.nextFloat() - 0.5D) * 0.125D;
                 double ZSpeed = (random.nextFloat() * zSign);
                 level.addParticle(ParticleTypes.PORTAL, x, y, z, XSpeed, YSpeed, ZSpeed);
+            }
+        }
+        else if (inFamily(ModBlocks.REDSTONE_CAKE_FAMILY) && ModClientConfigs.REDSTONE_CAKE_PARTICLES.get()) {
+            for (int i = 0; i < 2; ++i) {
+                double x = pos.getX() + random.nextDouble();
+                double y = pos.getY() + random.nextDouble() * 0.5D + 0.25D;
+                double z = pos.getZ() + random.nextDouble();
+                level.addParticle(DustParticleOptions.REDSTONE, x, y, z, 0, 0, 0);
             }
         }
     }
