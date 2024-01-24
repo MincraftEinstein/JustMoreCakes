@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cross_two_tiered_cake_slice7",
+  "textures": {
+    "bottom": "jmc:block/red_mushroom_cake_bottom",
+    "lower_inner": "jmc:block/red_mushroom_cake_inner_covered",
+    "lower_side": "jmc:block/red_mushroom_cake_side",
+    "lower_top": "jmc:block/red_mushroom_cake_top_covered"
+  }
+}

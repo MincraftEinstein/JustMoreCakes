@@ -7,6 +7,7 @@ import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.FabricNetworkHelper;
 import einstein.jmc.platform.services.NetworkHelper;
+import einstein.jmc.util.CakeFamily;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
@@ -73,7 +74,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     public void onInitializeClient() {
         MenuScreens.register(ModMenuTypes.CAKE_OVEN.get(), CakeOvenScreen::new);
 
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.RED_MUSHROOM_CAKE.get(), RenderType.cutout());
+        putFamilyRenderLayers(ModBlocks.RED_MUSHROOM_CAKE_FAMILY, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BROWN_MUSHROOM_CAKE.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CHORUS_CAKE.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CRIMSON_FUNGUS_CAKE.get(), RenderType.cutout());
@@ -83,6 +84,12 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         BlockEntityRenderers.register(ModBlockEntityTypes.CAKE_STAND.get(), CakeStandRenderer::new);
 
         FabricNetworkHelper.init(NetworkHelper.Direction.TO_CLIENT);
+    }
+
+    private static void putFamilyRenderLayers(CakeFamily family, RenderType type) {
+        BlockRenderLayerMap.INSTANCE.putBlock(family.getBaseCake().get(), type);
+        BlockRenderLayerMap.INSTANCE.putBlock(family.getTwoTieredCake().get(), type);
+        BlockRenderLayerMap.INSTANCE.putBlock(family.getThreeTieredCake().get(), type);
     }
 
     void onServerStarting() {

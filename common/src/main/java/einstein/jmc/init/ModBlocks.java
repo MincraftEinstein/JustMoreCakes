@@ -39,6 +39,9 @@ public class ModBlocks {
             .saturationModifier(0.5F)
             .alwaysEat()
             .build();
+    public static final DefaultCakeFamily RED_MUSHROOM_CAKE_FAMILY = CakeFamily.create("red_mushroom")
+            .model(new CakeModel.CrossCakeModel(mcLoc("block/red_mushroom")))
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -47,9 +50,6 @@ public class ModBlocks {
             .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
-            .build();
-    public static final Supplier<BaseCakeBlock> RED_MUSHROOM_CAKE = new CakeBuilder("red_mushroom_cake")
-            .model(new CakeModel.CrossCakeModel(mcLoc("block/red_mushroom")))
             .build();
     public static final Supplier<BaseCakeBlock> FIREY_CAKE = new CakeBuilder("firey_cake").build();
     public static final Supplier<BaseCakeBlock> REDSTONE_CAKE = new CakeBuilder("redstone_cake")
