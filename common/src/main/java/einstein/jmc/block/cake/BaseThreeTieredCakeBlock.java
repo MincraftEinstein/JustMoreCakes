@@ -109,6 +109,7 @@ public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
 
     @Override
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
+        state = super.eatActions(player, pos, state);
         if (state.getValue(HALF) == UPPER) {
             if (state.getValue(BITES) >= 4) {
                 return state.setValue(BITES, getSlices());
