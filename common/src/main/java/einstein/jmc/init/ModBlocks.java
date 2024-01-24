@@ -48,6 +48,9 @@ public class ModBlocks {
             .modifyTwoTieredBuilder(builder -> builder.setBothClasses(RedstoneTwoTieredCakeBlock::new, RedstoneCandleTwoTieredCakeBlock::new))
             .modifyThreeTieredBuilder(builder -> builder.setBothClasses(RedStoneThreeTieredCakeBlock::new, RedstoneCandleThreeTieredCakeBlock::new))
             .build();
+    public static final DefaultCakeFamily ENDER_CAKE_FAMILY = CakeFamily.create("ender")
+            .alwaysEat()
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -56,10 +59,6 @@ public class ModBlocks {
             .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
-            .build();
-    public static final Supplier<BaseCakeBlock> ENDER_CAKE = new CakeBuilder("ender_cake")
-            .setBothClasses(EnderCakeBlock::new, EnderCandleCakeBlock::new)
-            .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> CHEESECAKE = new CakeBuilder("cheesecake").build();
     public static final Supplier<BaseCakeBlock> SLIME_CAKE = new CakeBuilder("slime_cake")

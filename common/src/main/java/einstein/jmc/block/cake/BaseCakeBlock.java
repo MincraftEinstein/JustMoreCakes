@@ -5,16 +5,19 @@ import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.init.ModCommonConfigs;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -206,7 +209,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         else if (equals(ModBlocks.CHORUS_CAKE.get())) {
             Util.teleportRandomly(player, ModCommonConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get());
         }
-        else if (equals(ModBlocks.ENDER_CAKE.get())) {
+        else if (inFamily(ModBlocks.ENDER_CAKE_FAMILY)) {
             Util.teleportRandomly(player, ModCommonConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
             player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1, 1);
         }
@@ -251,6 +254,23 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             return new ItemStack(getFamily().getBaseCake().get());
         }
         return stack;
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (inFamily(ModBlocks.ENDER_CAKE_FAMILY) && ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
+            for (int i = 0; i < 3; ++i) {
+                int xSign = random.nextInt(2) * 2 - 1;
+                int zSign = random.nextInt(2) * 2 - 1;
+                double x = pos.getX() + 0.5D + 0.25D * xSign;
+                double y = pos.getY() + random.nextFloat();
+                double z = pos.getZ() + 0.5D + 0.25D * zSign;
+                double XSpeed = (random.nextFloat() * xSign);
+                double YSpeed = (random.nextFloat() - 0.5D) * 0.125D;
+                double ZSpeed = (random.nextFloat() * zSign);
+                level.addParticle(ParticleTypes.PORTAL, x, y, z, XSpeed, YSpeed, ZSpeed);
+            }
+        }
     }
 
     @Nullable
