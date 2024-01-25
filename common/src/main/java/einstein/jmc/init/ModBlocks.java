@@ -68,7 +68,7 @@ public class ModBlocks {
             .cakeProperties(cakeProperties().sound(SoundType.SLIME_BLOCK))
             .candleCakeProperties(candleCakeProperties().sound(SoundType.SLIME_BLOCK))
             .build();
-    public static final Supplier<BaseCakeBlock> BEETROOT_CAKE = new CakeBuilder("beetroot_cake")
+    public static final DefaultCakeFamily BEETROOT_CAKE_FAMILY = CakeFamily.create("beetroot")
             .nutrition(3)
             .saturationModifier(0.4F)
             .alwaysEat()

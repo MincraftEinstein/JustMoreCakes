@@ -1,0 +1,8 @@
+{
+  "parent": "jmc:block/template_two_tiered_cake_slice5",
+  "textures": {
+    "bottom": "jmc:block/beetroot_cake_bottom",
+    "lower_side": "jmc:block/beetroot_cake_side",
+    "lower_top": "jmc:block/beetroot_cake_top_covered"
+  }
+}

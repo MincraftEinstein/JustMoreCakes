@@ -28,7 +28,7 @@ public class ModCakeEffectsProvider extends CakeEffectsProvider {
                 new MobEffectHolder(MobEffects.JUMP, 1200, 0),
                 new MobEffectHolder(MobEffects.DAMAGE_RESISTANCE, 1200),
                 new MobEffectHolder(ModPotions.BOUNCING_EFFECT.get(), 1200));
-        add(ModBlocks.BEETROOT_CAKE,
+        add(ModBlocks.BEETROOT_CAKE_FAMILY,
                 new MobEffectHolder(MobEffects.REGENERATION, 100, 1));
         add(ModBlocks.LAVA_CAKE,
                 new MobEffectHolder(MobEffects.REGENERATION, 300, 1),

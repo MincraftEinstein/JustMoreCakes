@@ -174,9 +174,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.MELON_SLICE))
                 .save(output, cakeOvenLoc(ModBlocks.MELON_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.BEETROOT_CAKE.get(), 0.4F, 300, RecipeCategory.FOOD, Ingredient.of(Items.BEETROOT), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.BEETROOT_CAKE_FAMILY, 0.4F, 300, RecipeCategory.FOOD, Ingredient.of(Items.BEETROOT), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Items.BEETROOT))
-                .save(output, cakeOvenLoc(ModBlocks.BEETROOT_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.BEETROOT_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.LAVA_CAKE.get(), 0.4F, 200, RecipeCategory.FOOD, Ingredient.of(Items.LAVA_BUCKET), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.SUGAR))
                 .unlockedBy(has, RecipeProvider.has(Items.LAVA_BUCKET))
