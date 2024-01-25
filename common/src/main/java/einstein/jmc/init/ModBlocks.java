@@ -51,6 +51,7 @@ public class ModBlocks {
     public static final DefaultCakeFamily ENDER_CAKE_FAMILY = CakeFamily.create("ender")
             .alwaysEat()
             .build();
+    public static final DefaultCakeFamily CHEESECAKE_FAMILY = CakeFamily.create("cheesecake", true).build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -60,7 +61,6 @@ public class ModBlocks {
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
             .build();
-    public static final Supplier<BaseCakeBlock> CHEESECAKE = new CakeBuilder("cheesecake").build();
     public static final Supplier<BaseCakeBlock> SLIME_CAKE = new CakeBuilder("slime_cake")
             .setCakeProperties(cakeProperties().sound(SoundType.SLIME_BLOCK))
             .setCandleCakeProperties(candleCakeProperties().sound(SoundType.SLIME_BLOCK))

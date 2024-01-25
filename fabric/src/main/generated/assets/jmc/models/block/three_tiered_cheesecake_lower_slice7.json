@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_three_tiered_cake_lower_slice7",
+  "textures": {
+    "bottom": "jmc:block/cheesecake_bottom",
+    "lower_inner": "jmc:block/cheesecake_inner_covered",
+    "lower_side": "jmc:block/cheesecake_side",
+    "lower_top": "jmc:block/cheesecake_top_covered"
+  }
+}

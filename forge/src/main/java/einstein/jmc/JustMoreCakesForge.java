@@ -177,7 +177,7 @@ public class JustMoreCakesForge {
         }
 
         return switch (name) {
-            case "cheese_cake" -> ModBlocks.CHEESECAKE.get();
+            case "cheese_cake" -> ModBlocks.CHEESECAKE_FAMILY.getBaseCake().get();
             case "triple_decker_cake" -> ModBlocks.VANILLA_CAKE_FAMILY.getThreeTieredCake().get();
             case "birthday_cake" -> Blocks.CAKE;
             default -> null;

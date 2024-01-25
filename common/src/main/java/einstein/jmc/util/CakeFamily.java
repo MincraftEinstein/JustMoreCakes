@@ -42,7 +42,11 @@ public class CakeFamily implements CakeEffectsHolder {
     }
 
     public static Builder create(String flavorName) {
-        return new Builder(flavorName);
+        return create(flavorName, false);
+    }
+
+    public static Builder create(String flavorName, boolean noSuffix) {
+        return new Builder(flavorName, noSuffix);
     }
 
     public final ResourceLocation getRegistryKey() {
@@ -114,8 +118,8 @@ public class CakeFamily implements CakeEffectsHolder {
 
         private final DefaultCakeFamily family;
 
-        private Builder(String flavorName) {
-            family = new DefaultCakeFamily(flavorName);
+        private Builder(String flavorName, boolean noSuffix) {
+            family = new DefaultCakeFamily(flavorName, noSuffix);
         }
 
         public Builder modifyBaseBuilder(Consumer<CakeBuilder> consumer) {

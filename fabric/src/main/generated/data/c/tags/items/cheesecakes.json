@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "jmc:cheesecake"
+    "jmc:cheesecake",
+    "minecraft:air",
+    "minecraft:air"
   ]
 }

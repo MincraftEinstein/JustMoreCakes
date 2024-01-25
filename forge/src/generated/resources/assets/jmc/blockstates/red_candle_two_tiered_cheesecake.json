@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/red_candle_two_tiered_cheesecake"
+    },
+    "lit=true": {
+      "model": "jmc:block/red_candle_two_tiered_cheesecake_lit"
+    }
+  }
+}

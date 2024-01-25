@@ -34,8 +34,8 @@ public class ModItemTagsProvider extends FabricTagProvider.ItemTagProvider {
         });
         getOrCreateTagBuilder(ModItemTags.CHEESE).add(ModItems.CREAM_CHEESE.get());
         getOrCreateTagBuilder(ModItemTags.CHEESES).add(ModItems.CREAM_CHEESE.get());
-        getOrCreateTagBuilder(ModItemTags.CHEESE_CAKES).add(ModBlocks.CHEESECAKE.get().asItem());
-        getOrCreateTagBuilder(ModItemTags.CHEESECAKES).add(ModBlocks.CHEESECAKE.get().asItem());
+        getOrCreateTagBuilder(ModItemTags.CHEESE_CAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseCake().get().asItem(), ModBlocks.CHEESECAKE_FAMILY.getTwoTieredCake().get().asItem(), ModBlocks.CHEESECAKE_FAMILY.getThreeTieredCake().get().asItem());
+        getOrCreateTagBuilder(ModItemTags.CHEESECAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseCake().get().asItem(), ModBlocks.CHEESECAKE_FAMILY.getTwoTieredCake().get().asItem(), ModBlocks.CHEESECAKE_FAMILY.getThreeTieredCake().get().asItem());
         getOrCreateTagBuilder(ModItemTags.RED_DYE).addOptionalTag(ModItemTags.DYE_RED)
                 .addOptionalTag(ConventionalItemTags.RED_DYES);
         getOrCreateTagBuilder(ModItemTags.SEEDS).add(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);

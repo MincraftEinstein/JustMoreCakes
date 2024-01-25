@@ -8,8 +8,8 @@ import static einstein.jmc.JustMoreCakes.loc;
 
 public class DefaultCakeFamily extends CakeFamily {
 
-    DefaultCakeFamily(String flavorName) {
-        super(loc(flavorName), flavorName + "_cake");
+    DefaultCakeFamily(String flavorName, boolean noSuffix) {
+        super(loc(flavorName), flavorName + (noSuffix ? "" : "_cake"));
     }
 
     @SuppressWarnings("unchecked")
