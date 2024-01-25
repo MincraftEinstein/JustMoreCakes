@@ -12,9 +12,9 @@ import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.L
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER;
 
 @SuppressWarnings("deprecation")
-public class RedStoneThreeTieredCakeBlock extends BaseThreeTieredCakeBlock {
+public class RedstoneThreeTieredCakeBlock extends BaseThreeTieredCakeBlock {
 
-    public RedStoneThreeTieredCakeBlock(CakeBuilder builder) {
+    public RedstoneThreeTieredCakeBlock(CakeBuilder builder) {
         super(builder);
     }
 

@@ -46,7 +46,7 @@ public class ModBlocks {
     public static final DefaultCakeFamily REDSTONE_CAKE_FAMILY = CakeFamily.create("redstone")
             .modifyBaseBuilder(builder -> builder.setBothClasses(RedstoneCakeBlock::new, RedstoneCandleCakeBlock::new))
             .modifyTwoTieredBuilder(builder -> builder.setBothClasses(RedstoneTwoTieredCakeBlock::new, RedstoneCandleTwoTieredCakeBlock::new))
-            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(RedStoneThreeTieredCakeBlock::new, RedstoneCandleThreeTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(RedstoneThreeTieredCakeBlock::new, RedstoneCandleThreeTieredCakeBlock::new))
             .build();
     public static final DefaultCakeFamily ENDER_CAKE_FAMILY = CakeFamily.create("ender")
             .alwaysEat()
