@@ -75,7 +75,7 @@ public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
                         .setValue(BaseThreeTieredCakeBlock.BITES, 5));
                 Block.pushEntitiesUp(Blocks.AIR.defaultBlockState(), newState, level, abovePos);
                 level.gameEvent(player, GameEvent.BLOCK_CHANGE, abovePos);
-                level.playSound(null, abovePos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1, 1);
+                level.playSound(null, abovePos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);
                 player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
 
                 if (!player.isCreative()) {

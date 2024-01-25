@@ -128,7 +128,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.setBlockAndUpdate(pos, newState);
                 Block.pushEntitiesUp(state, newState, level, pos);
                 level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                level.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1, 1);
+                level.playSound(null, pos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);
                 player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
 
                 if (!player.isCreative()) {
