@@ -71,6 +71,11 @@ public class ModBlocks {
             .cakeProperties(cakeProperties().lightLevel(state -> 9))
             .candleCakeProperties(candleCakeProperties().lightLevel(state -> 9))
             .build();
+    public static final DefaultCakeFamily CREEPER_CAKE_FAMILY = CakeFamily.create("creeper")
+            .modifyBaseBuilder(builder -> builder.setCakeClass(CreeperCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.setCakeClass(CreeperTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.setCakeClass(CreeperThreeTieredCakeBlock::new))
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -79,9 +84,6 @@ public class ModBlocks {
             .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
-            .build();
-    public static final Supplier<BaseCakeBlock> CREEPER_CAKE = new CakeBuilder("creeper_cake")
-            .setCakeClass(CreeperCakeBlock::new)
             .build();
     public static final Supplier<BaseCakeBlock> SEED_CAKE = new CakeBuilder("seed_cake").build();
     public static final Supplier<BaseCakeBlock> CUPCAKE = new CakeBuilder("cupcake")

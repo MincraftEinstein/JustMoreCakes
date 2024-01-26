@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/orange_candle_two_tiered_creeper_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/orange_candle_two_tiered_creeper_cake_lit"
+    }
+  }
+}

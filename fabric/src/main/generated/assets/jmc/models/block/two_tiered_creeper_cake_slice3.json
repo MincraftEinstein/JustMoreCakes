@@ -1,0 +1,11 @@
+{
+  "parent": "jmc:block/template_two_tiered_cake_slice3",
+  "textures": {
+    "bottom": "jmc:block/creeper_cake_bottom",
+    "lower_side": "jmc:block/creeper_cake_side",
+    "lower_top": "jmc:block/creeper_cake_top_covered",
+    "top": "jmc:block/creeper_cake_medium_top",
+    "top_inner": "jmc:block/creeper_cake_medium_inner",
+    "top_side": "jmc:block/creeper_cake_medium_side"
+  }
+}

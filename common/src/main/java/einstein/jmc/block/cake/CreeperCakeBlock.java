@@ -26,6 +26,6 @@ public class CreeperCakeBlock extends BaseCakeBlock {
     @Override
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
         player.level().playSound(null, pos, SoundEvents.CREEPER_PRIMED, SoundSource.BLOCKS, 1, 0.5F);
-        return state;
+        return super.eatActions(player, pos, state);
     }
 }

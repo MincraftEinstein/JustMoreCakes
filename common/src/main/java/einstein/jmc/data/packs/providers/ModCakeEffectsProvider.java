@@ -43,7 +43,7 @@ public class ModCakeEffectsProvider extends CakeEffectsProvider {
                 new MobEffectHolder(MobEffects.GLOWING, 1800));
         add(ModBlocks.SCULK_CAKE,
                 new MobEffectHolder(ModPotions.STEALTH_EFFECT.get(), 600));
-        add(ModBlocks.CREEPER_CAKE,
+        add(ModBlocks.CREEPER_CAKE_FAMILY,
                 new MobEffectHolder(MobEffects.LUCK, 600, 1),
                 new MobEffectHolder(MobEffects.UNLUCK, 600, 1));
     }
