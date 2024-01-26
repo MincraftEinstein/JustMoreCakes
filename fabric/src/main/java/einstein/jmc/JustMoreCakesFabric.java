@@ -138,7 +138,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
 
         // Wandering trader
         TradeOfferHelper.registerWanderingTraderOffers(1, trades ->
-                trades.add(new ItemsForEmeralds(ModBlocks.SEED_CAKE.get().asItem(), 2, 1, 12)));
+                trades.add(new ItemsForEmeralds(ModBlocks.SEED_CAKE_FAMILY.getBaseCake().get().asItem(), 2, 1, 12)));
     }
 
     void modifyLootTables() {

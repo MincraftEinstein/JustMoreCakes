@@ -237,6 +237,6 @@ public class JustMoreCakesForge {
     }
 
     void onWanderingTradesEvent(final WandererTradesEvent event) {
-        event.getGenericTrades().add(new ItemsForEmeralds(ModBlocks.SEED_CAKE.get().asItem(), 2, 1, 12));
+        event.getGenericTrades().add(new ItemsForEmeralds(ModBlocks.SEED_CAKE_FAMILY.getBaseCake().get().asItem(), 2, 1, 12));
     }
 }

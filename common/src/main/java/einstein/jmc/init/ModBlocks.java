@@ -76,6 +76,7 @@ public class ModBlocks {
             .modifyTwoTieredBuilder(builder -> builder.setCakeClass(CreeperTwoTieredCakeBlock::new))
             .modifyThreeTieredBuilder(builder -> builder.setCakeClass(CreeperThreeTieredCakeBlock::new))
             .build();
+    public static final DefaultCakeFamily SEED_CAKE_FAMILY = CakeFamily.create("seed").build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -85,7 +86,6 @@ public class ModBlocks {
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
             .build();
-    public static final Supplier<BaseCakeBlock> SEED_CAKE = new CakeBuilder("seed_cake").build();
     public static final Supplier<BaseCakeBlock> CUPCAKE = new CakeBuilder("cupcake")
             .setCakeClass(CupcakeBlock::new)
             .model(CakeModel.CUSTOM)
