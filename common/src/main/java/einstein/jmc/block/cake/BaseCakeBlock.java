@@ -280,6 +280,14 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.addParticle(DustParticleOptions.REDSTONE, x, y, z, 0, 0, 0);
             }
         }
+        else if (inFamily(ModBlocks.LAVA_CAKE_FAMILY) && ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
+            if (random.nextInt(10) == 0) {
+                double x = pos.getX() + random.nextDouble();
+                double y = pos.getY() + 1;
+                double z = pos.getZ() + random.nextDouble();
+                level.addParticle(ParticleTypes.LAVA, x, y, z, 0, 0, 0);
+            }
+        }
     }
 
     @Nullable

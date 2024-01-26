@@ -52,15 +52,6 @@ public class ModBlocks {
             .alwaysEat()
             .build();
     public static final DefaultCakeFamily CHEESECAKE_FAMILY = CakeFamily.create("cheesecake", true).build();
-    public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
-            .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
-            .customItemModel()
-            .build();
-    public static final Supplier<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake")
-            .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
-            .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
-            .customItemModel()
-            .build();
     public static final DefaultCakeFamily SLIME_CAKE_FAMILY = CakeFamily.create("slime")
             .modifyBaseBuilder(builder -> builder.setBothClasses(SlimeCakeBlock::new, SlimeCandleCakeBlock::new))
             .modifyTwoTieredBuilder(builder -> builder.setBothClasses(SlimeTwoTieredCakeBlock::new, SlimeCandleTwoTieredCakeBlock::new))
@@ -73,10 +64,21 @@ public class ModBlocks {
             .saturationModifier(0.4F)
             .alwaysEat()
             .build();
-    public static final Supplier<BaseCakeBlock> LAVA_CAKE = new CakeBuilder("lava_cake")
-            .setBothClasses(LavaCakeBlock::new, LavaCandleCakeBlock::new)
-            .setCakeProperties(cakeProperties().lightLevel(state -> 9))
-            .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 9))
+    public static final DefaultCakeFamily LAVA_CAKE_FAMILY = CakeFamily.create("lava")
+            .modifyBaseBuilder(builder -> builder.setBothClasses(LavaCakeBlock::new, LavaCandleCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.setBothClasses(LavaTwoTieredCakeBlock::new, LavaCandleTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(LavaThreeTieredCakeBlock::new, LavaCandleThreeTieredCakeBlock::new))
+            .cakeProperties(cakeProperties().lightLevel(state -> 9))
+            .candleCakeProperties(candleCakeProperties().lightLevel(state -> 9))
+            .build();
+    public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
+            .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
+            .customItemModel()
+            .build();
+    public static final Supplier<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake")
+            .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
+            .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
+            .customItemModel()
             .build();
     public static final Supplier<BaseCakeBlock> CREEPER_CAKE = new CakeBuilder("creeper_cake")
             .setCakeClass(CreeperCakeBlock::new)

@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_two_tiered_cake_slice6",
+  "textures": {
+    "bottom": "jmc:block/lava_cake_bottom",
+    "lower_inner": "jmc:block/lava_cake_inner_covered",
+    "lower_side": "jmc:block/lava_cake_side",
+    "lower_top": "jmc:block/lava_cake_top_covered"
+  }
+}
