@@ -1,0 +1,11 @@
+{
+  "parent": "jmc:block/template_cross_three_tiered_cake_lower_slice4",
+  "textures": {
+    "bottom": "jmc:block/brown_mushroom_cake_bottom",
+    "lower_side": "jmc:block/brown_mushroom_cake_side",
+    "lower_top": "jmc:block/brown_mushroom_cake_top_covered",
+    "middle_inner": "jmc:block/brown_mushroom_cake_medium_inner_covered",
+    "middle_side": "jmc:block/brown_mushroom_cake_medium_side",
+    "middle_top": "jmc:block/brown_mushroom_cake_medium_top_covered"
+  }
+}

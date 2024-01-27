@@ -75,7 +75,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         MenuScreens.register(ModMenuTypes.CAKE_OVEN.get(), CakeOvenScreen::new);
 
         putFamilyRenderLayers(ModBlocks.RED_MUSHROOM_CAKE_FAMILY, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BROWN_MUSHROOM_CAKE.get(), RenderType.cutout());
+        putFamilyRenderLayers(ModBlocks.BROWN_MUSHROOM_CAKE_FAMILY, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CHORUS_CAKE.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CRIMSON_FUNGUS_CAKE.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ENCASING_ICE.get(), RenderType.translucent());

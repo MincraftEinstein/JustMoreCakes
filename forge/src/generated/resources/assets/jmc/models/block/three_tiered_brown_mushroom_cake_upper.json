@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cross_three_tiered_cake_upper",
+  "textures": {
+    "bottom": "jmc:block/brown_mushroom_cake_bottom",
+    "cross": "minecraft:block/brown_mushroom",
+    "top": "jmc:block/brown_mushroom_cake_small_top",
+    "top_side": "jmc:block/brown_mushroom_cake_small_side"
+  }
+}

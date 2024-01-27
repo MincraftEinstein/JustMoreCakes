@@ -77,6 +77,9 @@ public class ModBlocks {
             .modifyThreeTieredBuilder(builder -> builder.setCakeClass(CreeperThreeTieredCakeBlock::new))
             .build();
     public static final DefaultCakeFamily SEED_CAKE_FAMILY = CakeFamily.create("seed").build();
+    public static final DefaultCakeFamily BROWN_MUSHROOM_CAKE_FAMILY = CakeFamily.create("brown_mushroom")
+            .model(new CakeModel.CrossCakeModel(mcLoc("block/brown_mushroom")))
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -93,9 +96,6 @@ public class ModBlocks {
             .noItem()
             .nutrition(1)
             .saturationModifier(0.3F)
-            .build();
-    public static final Supplier<BaseCakeBlock> BROWN_MUSHROOM_CAKE = new CakeBuilder("brown_mushroom_cake")
-            .model(new CakeModel.CrossCakeModel(mcLoc("block/brown_mushroom")))
             .build();
     public static final Supplier<BaseCakeBlock> ICE_CAKE = new CakeBuilder("ice_cake").build();
     public static final Supplier<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake")
