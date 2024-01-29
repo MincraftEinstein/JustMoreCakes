@@ -207,7 +207,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         else if (inFamily(ModBlocks.ICE_CAKE_FAMILY)) {
             player.clearFire();
         }
-        else if (equals(ModBlocks.CHORUS_CAKE.get())) {
+        else if (inFamily(ModBlocks.CHORUS_CAKE)) {
             Util.teleportRandomly(player, ModCommonConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get());
         }
         else if (inFamily(ModBlocks.ENDER_CAKE_FAMILY)) {

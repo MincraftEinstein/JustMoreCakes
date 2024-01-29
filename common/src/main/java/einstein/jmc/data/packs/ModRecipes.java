@@ -138,7 +138,7 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(ModItemTags.SLIME_BALLS))
                 .save(output, cakeOvenLoc(ModBlocks.SLIME_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CHORUS_CAKE.get(), 0.7F, 250, RecipeCategory.FOOD, Ingredient.of(Items.CHORUS_FRUIT), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CHORUS_CAKE, 0.7F, 250, RecipeCategory.FOOD, Ingredient.of(Items.CHORUS_FRUIT), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Items.CHORUS_FRUIT))
                 .save(output, cakeOvenLoc(ModBlocks.CHORUS_CAKE));
 

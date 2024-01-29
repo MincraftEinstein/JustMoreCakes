@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cross_three_tiered_cake_upper_slice3",
+  "textures": {
+    "bottom": "jmc:block/chorus_cake_bottom",
+    "top": "jmc:block/chorus_cake_small_top",
+    "top_inner": "jmc:block/chorus_cake_small_inner",
+    "top_side": "jmc:block/chorus_cake_small_side"
+  }
+}
