@@ -80,6 +80,7 @@ public class ModBlocks {
     public static final DefaultCakeFamily BROWN_MUSHROOM_CAKE_FAMILY = CakeFamily.create("brown_mushroom")
             .model(new CakeModel.CrossCakeModel(mcLoc("block/brown_mushroom")))
             .build();
+    public static final DefaultCakeFamily ICE_CAKE_FAMILY = CakeFamily.create("ice").build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -97,7 +98,6 @@ public class ModBlocks {
             .nutrition(1)
             .saturationModifier(0.3F)
             .build();
-    public static final Supplier<BaseCakeBlock> ICE_CAKE = new CakeBuilder("ice_cake").build();
     public static final Supplier<BaseCakeBlock> CHORUS_CAKE = new CakeBuilder("chorus_cake")
             .model(new CakeModel.CrossCakeModel(JustMoreCakes.loc("block/chorus_cake_flower")))
             .alwaysEat()

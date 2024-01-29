@@ -204,7 +204,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         if (inFamily(ModBlocks.FIREY_CAKE_FAMILY)) {
             player.setSecondsOnFire(ModCommonConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
         }
-        else if (equals(ModBlocks.ICE_CAKE.get())) {
+        else if (inFamily(ModBlocks.ICE_CAKE_FAMILY)) {
             player.clearFire();
         }
         else if (equals(ModBlocks.CHORUS_CAKE.get())) {

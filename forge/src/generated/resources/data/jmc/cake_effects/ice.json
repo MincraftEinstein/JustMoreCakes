@@ -1,5 +1,4 @@
 {
-  "block": "jmc:ice_cake",
   "effects": [
     {
       "duration": 2400,
@@ -8,5 +7,6 @@
     {
       "mob_effect": "jmc:freezing"
     }
-  ]
+  ],
+  "family": "jmc:ice"
 }
