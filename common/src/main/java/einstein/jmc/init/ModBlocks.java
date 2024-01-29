@@ -85,6 +85,10 @@ public class ModBlocks {
             .model(new CakeModel.CrossCakeModel(JustMoreCakes.loc("block/chorus_cake_flower")))
             .alwaysEat()
             .build();
+    public static final DefaultCakeFamily SWEET_BERRY_CAKE_FAMILY = CakeFamily.create("sweet_berry")
+            .nutrition(1)
+            .saturationModifier(0.5F)
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -101,10 +105,6 @@ public class ModBlocks {
             .noItem()
             .nutrition(1)
             .saturationModifier(0.3F)
-            .build();
-    public static final Supplier<BaseCakeBlock> SWEET_BERRY_CAKE = new CakeBuilder("sweet_berry_cake")
-            .nutrition(1)
-            .saturationModifier(0.5F)
             .build();
     public static final Supplier<BaseCakeBlock> HONEY_CAKE = new CakeBuilder("honey_cake")
             .saturationModifier(0.4F)

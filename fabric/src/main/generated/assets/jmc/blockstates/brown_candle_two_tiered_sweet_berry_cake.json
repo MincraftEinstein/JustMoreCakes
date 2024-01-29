@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/brown_candle_two_tiered_sweet_berry_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/brown_candle_two_tiered_sweet_berry_cake_lit"
+    }
+  }
+}

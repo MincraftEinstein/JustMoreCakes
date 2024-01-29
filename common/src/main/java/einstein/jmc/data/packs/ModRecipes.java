@@ -82,9 +82,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(ModItems.CREAM_CHEESE.get()))
                 .save(output, cakeOvenLoc(ModBlocks.CHEESECAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.SWEET_BERRY_CAKE.get(), 0.5F, 200, RecipeCategory.FOOD, Ingredient.of(Items.SWEET_BERRIES), Ingredient.of(Items.WHEAT), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.SWEET_BERRY_CAKE_FAMILY, 0.5F, 200, RecipeCategory.FOOD, Ingredient.of(Items.SWEET_BERRIES), Ingredient.of(Items.WHEAT), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR))
                 .unlockedBy(has, RecipeProvider.has(Items.SWEET_BERRIES))
-                .save(output, cakeOvenLoc(ModBlocks.SWEET_BERRY_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.SWEET_BERRY_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CHOCOLATE_CAKE_FAMILY, 0.6F, 250, RecipeCategory.FOOD, Ingredient.of(Items.COCOA_BEANS), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Items.COCOA_BEANS))
