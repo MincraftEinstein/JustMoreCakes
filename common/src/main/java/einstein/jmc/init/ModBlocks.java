@@ -6,7 +6,6 @@ import einstein.jmc.block.CakeStandBlock;
 import einstein.jmc.block.EncasingIceBlock;
 import einstein.jmc.block.cake.*;
 import einstein.jmc.block.cake.candle.*;
-import einstein.jmc.block.entity.GlowstoneCakeBlockEntity;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.*;
 import net.minecraft.world.level.block.Block;
@@ -92,6 +91,13 @@ public class ModBlocks {
     public static final DefaultCakeFamily HONEY_CAKE = CakeFamily.create("honey")
             .saturationModifier(0.4F)
             .build();
+    public static final DefaultCakeFamily GLOWSTONE_CAKE = CakeFamily.create("glowstone")
+            .modifyBaseBuilder(builder -> builder.setBothClasses(GlowstoneCakeBlock::new, GlowstoneCandleCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.setBothClasses(GlowstoneTwoTieredCakeBlock::new, GlowstoneCandleTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(GlowstoneThreeTieredCakeBlock::new, GlowstoneCandleThreeTieredCakeBlock::new))
+            .cakeProperties(cakeProperties().lightLevel(state -> 12))
+            .candleCakeProperties(candleCakeProperties().lightLevel(state -> 12))
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -108,11 +114,6 @@ public class ModBlocks {
             .noItem()
             .nutrition(1)
             .saturationModifier(0.3F)
-            .build();
-    public static final Supplier<BaseCakeBlock> GLOWSTONE_CAKE = new CakeBuilder("glowstone_cake")
-            .setCakeProperties(cakeProperties().lightLevel(state -> 12))
-            .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 12))
-            .setBothClasses(GlowstoneCakeBlock::new, (originalCake, candle, properties) -> new BaseEntityCandleCakeBlock<>(originalCake, candle, properties, GlowstoneCakeBlockEntity::new))
             .build();
     public static final Supplier<BaseCakeBlock> CRIMSON_FUNGUS_CAKE = new CakeBuilder("crimson_fungus_cake")
             .model(new CakeModel.CrossCakeModel(mcLoc("block/crimson_fungus")))

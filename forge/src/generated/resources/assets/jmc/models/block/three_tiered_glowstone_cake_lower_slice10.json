@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_three_tiered_cake_lower_slice10",
+  "textures": {
+    "bottom": "jmc:block/glowstone_cake_bottom",
+    "lower_inner": "jmc:block/glowstone_cake_inner_covered",
+    "lower_side": "jmc:block/glowstone_cake_side",
+    "lower_top": "jmc:block/glowstone_cake_top_covered"
+  }
+}

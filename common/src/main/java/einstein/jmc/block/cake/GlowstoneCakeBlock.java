@@ -4,11 +4,12 @@ import einstein.jmc.block.entity.GlowstoneCakeBlockEntity;
 import einstein.jmc.util.CakeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class GlowstoneCakeBlock extends BaseEntityCakeBlock {
+public class GlowstoneCakeBlock extends BaseCakeBlock implements EntityBlock {
 
     public GlowstoneCakeBlock(CakeBuilder builder) {
         super(builder);
@@ -20,7 +21,7 @@ public class GlowstoneCakeBlock extends BaseEntityCakeBlock {
         if (blockEntity instanceof GlowstoneCakeBlockEntity glowstoneCakeBlockEntity) {
             glowstoneCakeBlockEntity.setGlowing();
         }
-        return state;
+        return super.eatActions(player, pos, state);
     }
 
     @Nullable
