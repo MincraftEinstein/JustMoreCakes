@@ -162,7 +162,7 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Blocks.ICE))
                 .save(output, cakeOvenLoc(ModBlocks.ICE_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CRIMSON_FUNGUS_CAKE.get(), 0.5F, 250, RecipeCategory.FOOD, Ingredient.of(Items.CRIMSON_FUNGUS), Ingredient.of(Items.SUGAR), Ingredient.of(Items.EGG), Ingredient.of(Items.WHEAT))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CRIMSON_FUNGUS_CAKE, 0.5F, 250, RecipeCategory.FOOD, Ingredient.of(Items.CRIMSON_FUNGUS), Ingredient.of(Items.SUGAR), Ingredient.of(Items.EGG), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Blocks.CRIMSON_FUNGUS))
                 .save(output, cakeOvenLoc(ModBlocks.CRIMSON_FUNGUS_CAKE));
 

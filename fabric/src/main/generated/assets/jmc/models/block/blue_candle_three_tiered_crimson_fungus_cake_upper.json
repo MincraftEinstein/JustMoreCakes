@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_three_tiered_candle_cake_upper",
+  "textures": {
+    "bottom": "jmc:block/crimson_fungus_cake_bottom",
+    "candle": "minecraft:block/blue_candle",
+    "top": "jmc:block/crimson_fungus_cake_small_top",
+    "top_side": "jmc:block/crimson_fungus_cake_small_side"
+  }
+}
