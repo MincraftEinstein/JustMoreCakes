@@ -89,6 +89,9 @@ public class ModBlocks {
             .nutrition(1)
             .saturationModifier(0.5F)
             .build();
+    public static final DefaultCakeFamily HONEY_CAKE = CakeFamily.create("honey")
+            .saturationModifier(0.4F)
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -105,9 +108,6 @@ public class ModBlocks {
             .noItem()
             .nutrition(1)
             .saturationModifier(0.3F)
-            .build();
-    public static final Supplier<BaseCakeBlock> HONEY_CAKE = new CakeBuilder("honey_cake")
-            .saturationModifier(0.4F)
             .build();
     public static final Supplier<BaseCakeBlock> GLOWSTONE_CAKE = new CakeBuilder("glowstone_cake")
             .setCakeProperties(cakeProperties().lightLevel(state -> 12))

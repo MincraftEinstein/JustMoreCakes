@@ -90,7 +90,7 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.COCOA_BEANS))
                 .save(output, cakeOvenLoc(ModBlocks.CHOCOLATE_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.HONEY_CAKE.get(), 0.7F, 300, RecipeCategory.FOOD, Ingredient.of(Items.HONEY_BOTTLE), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.HONEY_CAKE, 0.7F, 300, RecipeCategory.FOOD, Ingredient.of(Items.HONEY_BOTTLE), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Items.HONEY_BOTTLE))
                 .save(output, cakeOvenLoc(ModBlocks.HONEY_CAKE));
 
