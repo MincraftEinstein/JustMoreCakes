@@ -114,9 +114,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.COCOA_BEANS))
                 .save(output, cakeOvenLoc(ModBlocks.RED_VELVET_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.GLOW_BERRY_CAKE.get(), 0.5F, 350, RecipeCategory.FOOD, Ingredient.of(Items.GLOW_BERRIES), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.GLOW_BERRY_CAKE_FAMILY, 0.5F, 350, RecipeCategory.FOOD, Ingredient.of(Items.GLOW_BERRIES), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Items.GLOW_BERRIES))
-                .save(output, cakeOvenLoc(ModBlocks.GLOW_BERRY_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.GLOW_BERRY_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.BROWN_MUSHROOM_CAKE_FAMILY, 0.4F, 250, RecipeCategory.FOOD, Ingredient.of(Blocks.BROWN_MUSHROOM), Ingredient.of(Items.SUGAR), Ingredient.of(Items.EGG), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Blocks.BROWN_MUSHROOM))

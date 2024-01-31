@@ -1,5 +1,4 @@
 {
-  "block": "jmc:glow_berry_cake",
   "effects": [
     {
       "duration": 1200,
@@ -9,5 +8,6 @@
       "duration": 1800,
       "mob_effect": "minecraft:glowing"
     }
-  ]
+  ],
+  "family": "jmc:glow_berry"
 }

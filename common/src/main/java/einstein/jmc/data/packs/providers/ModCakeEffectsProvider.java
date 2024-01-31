@@ -38,7 +38,7 @@ public class ModCakeEffectsProvider extends CakeEffectsProvider {
                 new MobEffectHolder(ModPotions.FREEZING_EFFECT.get()));
         add(ModBlocks.CHORUS_CAKE_FAMILY,
                 new MobEffectHolder(MobEffects.LEVITATION, 300, 1));
-        add(ModBlocks.GLOW_BERRY_CAKE,
+        add(ModBlocks.GLOW_BERRY_CAKE_FAMILY,
                 new MobEffectHolder(MobEffects.NIGHT_VISION, 1200),
                 new MobEffectHolder(MobEffects.GLOWING, 1800));
         add(ModBlocks.SCULK_CAKE,

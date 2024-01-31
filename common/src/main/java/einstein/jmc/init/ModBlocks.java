@@ -103,6 +103,10 @@ public class ModBlocks {
             .build();
     public static final DefaultCakeFamily WARPED_FUNGUS_CAKE_FAMILY = CakeFamily.create("warped_fungus").build();
     public static final DefaultCakeFamily RED_VELVET_CAKE_FAMILY = CakeFamily.create("red_velvet").build();
+    public static final DefaultCakeFamily GLOW_BERRY_CAKE_FAMILY = CakeFamily.create("glow_berry")
+            .cakeProperties(cakeProperties().lightLevel(state -> 7))
+            .candleCakeProperties(candleCakeProperties().lightLevel(state -> 7))
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -119,10 +123,6 @@ public class ModBlocks {
             .noItem()
             .nutrition(1)
             .saturationModifier(0.3F)
-            .build();
-    public static final Supplier<BaseCakeBlock> GLOW_BERRY_CAKE = new CakeBuilder("glow_berry_cake")
-            .setCakeProperties(cakeProperties().lightLevel(state -> 7))
-            .setCandleCakeProperties(candleCakeProperties().lightLevel(state -> 7))
             .build();
     public static final Supplier<BaseCakeBlock> OBSIDIAN_CAKE = new CakeBuilder("obsidian_cake")
             .setCakeClass(ObsidianCakeBlock::new)
