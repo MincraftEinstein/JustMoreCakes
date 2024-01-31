@@ -110,9 +110,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Blocks.PUMPKIN))
                 .save(output, cakeOvenLoc(ModBlocks.PUMPKIN_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.RED_VELVET_CAKE.get(), 0.8F, 300, RecipeCategory.FOOD, Ingredient.of(ModItemTags.RED_DYE), Ingredient.of(Items.COCOA_BEANS), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.EGG))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.RED_VELVET_CAKE_FAMILY, 0.8F, 300, RecipeCategory.FOOD, Ingredient.of(ModItemTags.RED_DYE), Ingredient.of(Items.COCOA_BEANS), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Items.COCOA_BEANS))
-                .save(output, cakeOvenLoc(ModBlocks.RED_VELVET_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.RED_VELVET_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.GLOW_BERRY_CAKE.get(), 0.5F, 350, RecipeCategory.FOOD, Ingredient.of(Items.GLOW_BERRIES), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Items.GLOW_BERRIES))
