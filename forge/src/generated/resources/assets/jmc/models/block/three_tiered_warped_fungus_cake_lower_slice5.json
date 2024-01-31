@@ -1,0 +1,8 @@
+{
+  "parent": "jmc:block/template_three_tiered_cake_lower_slice5",
+  "textures": {
+    "bottom": "jmc:block/warped_fungus_cake_bottom",
+    "lower_side": "jmc:block/warped_fungus_cake_side",
+    "lower_top": "jmc:block/warped_fungus_cake_top_covered"
+  }
+}

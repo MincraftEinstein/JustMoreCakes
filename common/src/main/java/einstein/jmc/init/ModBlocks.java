@@ -101,6 +101,7 @@ public class ModBlocks {
     public static final DefaultCakeFamily CRIMSON_FUNGUS_CAKE_FAMILY = CakeFamily.create("crimson_fungus")
             .model(new CakeModel.CrossCakeModel(mcLoc("block/crimson_fungus")))
             .build();
+    public static final DefaultCakeFamily WARPED_FUNGUS_CAKE_FAMILY = CakeFamily.create("warped_fungus").build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -118,7 +119,6 @@ public class ModBlocks {
             .nutrition(1)
             .saturationModifier(0.3F)
             .build();
-    public static final Supplier<BaseCakeBlock> WARPED_FUNGUS_CAKE = new CakeBuilder("warped_fungus_cake").build();
     public static final Supplier<BaseCakeBlock> RED_VELVET_CAKE = new CakeBuilder("red_velvet_cake").build();
     public static final Supplier<BaseCakeBlock> GLOW_BERRY_CAKE = new CakeBuilder("glow_berry_cake")
             .setCakeProperties(cakeProperties().lightLevel(state -> 7))
