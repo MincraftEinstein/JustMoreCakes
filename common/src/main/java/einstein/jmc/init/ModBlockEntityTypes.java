@@ -19,7 +19,7 @@ import static einstein.jmc.platform.Services.REGISTRY;
 
 public class ModBlockEntityTypes {
 
-    public static final Supplier<BlockEntityType<GlowstoneCakeBlockEntity>> GLOWSTONE_CAKE = registerForFamily("glowstone_cake", GlowstoneCakeBlockEntity::new, ModBlocks.GLOWSTONE_CAKE);
+    public static final Supplier<BlockEntityType<GlowstoneCakeBlockEntity>> GLOWSTONE_CAKE = registerForFamily("glowstone_cake", GlowstoneCakeBlockEntity::new, ModBlocks.GLOWSTONE_CAKE_FAMILY);
     public static final Supplier<BlockEntityType<TNTCakeBlockEntity>> TNT_CAKE = registerForCake("tnt_cake", TNTCakeBlockEntity::new, ModBlocks.TNT_CAKE);
     public static final Supplier<BlockEntityType<CakeOvenBlockEntity>> CAKE_OVEN = register("cake_oven", CakeOvenBlockEntity::new, ModBlocks.CAKE_OVEN);
     public static final Supplier<BlockEntityType<CakeStandBlockEntity>> CAKE_STAND = register("cake_stand", CakeStandBlockEntity::new, ModBlocks.CAKE_STAND);

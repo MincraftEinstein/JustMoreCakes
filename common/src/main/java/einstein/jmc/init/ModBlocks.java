@@ -80,7 +80,7 @@ public class ModBlocks {
             .model(new CakeModel.CrossCakeModel(mcLoc("block/brown_mushroom")))
             .build();
     public static final DefaultCakeFamily ICE_CAKE_FAMILY = CakeFamily.create("ice").build();
-    public static final DefaultCakeFamily CHORUS_CAKE = CakeFamily.create("chorus")
+    public static final DefaultCakeFamily CHORUS_CAKE_FAMILY = CakeFamily.create("chorus")
             .model(new CakeModel.CrossCakeModel(JustMoreCakes.loc("block/chorus_cake_flower")))
             .alwaysEat()
             .build();
@@ -88,17 +88,17 @@ public class ModBlocks {
             .nutrition(1)
             .saturationModifier(0.5F)
             .build();
-    public static final DefaultCakeFamily HONEY_CAKE = CakeFamily.create("honey")
+    public static final DefaultCakeFamily HONEY_CAKE_FAMILY = CakeFamily.create("honey")
             .saturationModifier(0.4F)
             .build();
-    public static final DefaultCakeFamily GLOWSTONE_CAKE = CakeFamily.create("glowstone")
+    public static final DefaultCakeFamily GLOWSTONE_CAKE_FAMILY = CakeFamily.create("glowstone")
             .modifyBaseBuilder(builder -> builder.setBothClasses(GlowstoneCakeBlock::new, GlowstoneCandleCakeBlock::new))
             .modifyTwoTieredBuilder(builder -> builder.setBothClasses(GlowstoneTwoTieredCakeBlock::new, GlowstoneCandleTwoTieredCakeBlock::new))
             .modifyThreeTieredBuilder(builder -> builder.setBothClasses(GlowstoneThreeTieredCakeBlock::new, GlowstoneCandleThreeTieredCakeBlock::new))
             .cakeProperties(cakeProperties().lightLevel(state -> 12))
             .candleCakeProperties(candleCakeProperties().lightLevel(state -> 12))
             .build();
-    public static final DefaultCakeFamily CRIMSON_FUNGUS_CAKE = CakeFamily.create("crimson_fungus")
+    public static final DefaultCakeFamily CRIMSON_FUNGUS_CAKE_FAMILY = CakeFamily.create("crimson_fungus")
             .model(new CakeModel.CrossCakeModel(mcLoc("block/crimson_fungus")))
             .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")

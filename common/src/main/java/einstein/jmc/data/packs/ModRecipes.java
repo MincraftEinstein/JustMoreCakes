@@ -90,9 +90,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.COCOA_BEANS))
                 .save(output, cakeOvenLoc(ModBlocks.CHOCOLATE_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.HONEY_CAKE, 0.7F, 300, RecipeCategory.FOOD, Ingredient.of(Items.HONEY_BOTTLE), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.HONEY_CAKE_FAMILY, 0.7F, 300, RecipeCategory.FOOD, Ingredient.of(Items.HONEY_BOTTLE), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Items.HONEY_BOTTLE))
-                .save(output, cakeOvenLoc(ModBlocks.HONEY_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.HONEY_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.APPLE_CAKE_FAMILY, 0.5F, 200, RecipeCategory.FOOD, Ingredient.of(Items.APPLE), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Items.APPLE))
@@ -138,9 +138,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(ModItemTags.SLIME_BALLS))
                 .save(output, cakeOvenLoc(ModBlocks.SLIME_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CHORUS_CAKE, 0.7F, 250, RecipeCategory.FOOD, Ingredient.of(Items.CHORUS_FRUIT), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CHORUS_CAKE_FAMILY, 0.7F, 250, RecipeCategory.FOOD, Ingredient.of(Items.CHORUS_FRUIT), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Items.CHORUS_FRUIT))
-                .save(output, cakeOvenLoc(ModBlocks.CHORUS_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.CHORUS_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.COOKIE_CAKE_FAMILY, 0.6F, 200, RecipeCategory.FOOD, Ingredient.of(Items.COOKIE), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.EGG))
                 .unlockedBy(has, RecipeProvider.has(Items.COOKIE))
@@ -150,9 +150,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.ENDER_PEARL))
                 .save(output, cakeOvenLoc(ModBlocks.ENDER_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.GLOWSTONE_CAKE, 0.5F, 200, RecipeCategory.FOOD, Ingredient.of(Items.GLOWSTONE_DUST), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.GLOWSTONE_CAKE_FAMILY, 0.5F, 200, RecipeCategory.FOOD, Ingredient.of(Items.GLOWSTONE_DUST), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET))
                 .unlockedBy(has, RecipeProvider.has(Items.GLOWSTONE_DUST))
-                .save(output, cakeOvenLoc(ModBlocks.GLOWSTONE_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.GLOWSTONE_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.GOLDEN_APPLE_CAKE_FAMILY, 0.8F, 400, RecipeCategory.FOOD, Ingredient.of(Items.GOLDEN_APPLE), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Items.GOLDEN_APPLE))
@@ -162,9 +162,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Blocks.ICE))
                 .save(output, cakeOvenLoc(ModBlocks.ICE_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CRIMSON_FUNGUS_CAKE, 0.5F, 250, RecipeCategory.FOOD, Ingredient.of(Items.CRIMSON_FUNGUS), Ingredient.of(Items.SUGAR), Ingredient.of(Items.EGG), Ingredient.of(Items.WHEAT))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.CRIMSON_FUNGUS_CAKE_FAMILY, 0.5F, 250, RecipeCategory.FOOD, Ingredient.of(Items.CRIMSON_FUNGUS), Ingredient.of(Items.SUGAR), Ingredient.of(Items.EGG), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Blocks.CRIMSON_FUNGUS))
-                .save(output, cakeOvenLoc(ModBlocks.CRIMSON_FUNGUS_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.CRIMSON_FUNGUS_CAKE_FAMILY));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.WARPED_FUNGUS_CAKE.get(), 0.5F, 250, RecipeCategory.FOOD, Ingredient.of(Items.WARPED_FUNGUS), Ingredient.of(Items.SUGAR), Ingredient.of(Items.EGG), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Items.WARPED_FUNGUS))
