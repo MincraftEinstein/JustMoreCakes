@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "jmc:block/three_tiered_obsidian_cake_lower"
+    },
+    "half=upper": {
+      "model": "jmc:block/three_tiered_obsidian_cake_upper"
+    }
+  }
+}

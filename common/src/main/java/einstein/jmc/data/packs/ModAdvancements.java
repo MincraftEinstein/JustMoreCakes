@@ -38,8 +38,11 @@ public class ModAdvancements {
 
         Advancement.Builder.advancement()
                 .parent(craftCake)
-                .display(ModBlocks.OBSIDIAN_CAKE.get(), translatable("eat_obsidian_cake.title"), translatable("eat_obsidian_cake.description"), null, FrameType.TASK, true, true, false)
-                .addCriterion("obsidian_cake_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(Util.getBlockId(ModBlocks.OBSIDIAN_CAKE.get())))
+                .requirements(AdvancementRequirements.Strategy.OR)
+                .display(ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get(), translatable("eat_obsidian_cake.title"), translatable("eat_obsidian_cake.description"), null, FrameType.TASK, true, true, false)
+                .addCriterion("obsidian_cake_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(Util.getBlockId(ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get())))
+                .addCriterion("two_tried_obsidian_cake_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(Util.getBlockId(ModBlocks.OBSIDIAN_CAKE_FAMILY.getTwoTieredCake().get())))
+                .addCriterion("three_tried_obsidian_cake_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(Util.getBlockId(ModBlocks.OBSIDIAN_CAKE_FAMILY.getThreeTieredCake().get())))
                 .save(consumer, JustMoreCakes.loc("husbandry/eat_obsidian_cake").toString());
     }
 

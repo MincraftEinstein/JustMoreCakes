@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "jmc:candle_three_tiered_obsidian_cake",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "half": "upper"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:candle"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "jmc:candle_three_tiered_obsidian_cake",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "half": "upper"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "items": [
+                  "jmc:cake_spatula"
+                ]
+              }
+            }
+          ],
+          "name": "jmc:obsidian_cake"
+        }
+      ],
+      "rolls": 3.0
+    }
+  ],
+  "random_sequence": "jmc:blocks/candle_three_tiered_obsidian_cake"
+}

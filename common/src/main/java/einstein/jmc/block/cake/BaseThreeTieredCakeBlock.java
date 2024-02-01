@@ -34,7 +34,7 @@ public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
 
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 15);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-    private static final VoxelShape[] SHAPE_BY_BITE_UPPER = new VoxelShape[] {
+    protected static final VoxelShape[] SHAPE_BY_BITE_UPPER = new VoxelShape[] {
             Block.box(3, -1, 3, 13, 5, 13),
             Block.box(5, -1, 3, 13, 5, 13),
             Block.box(7, -1, 3, 13, 5, 13),
@@ -46,7 +46,7 @@ public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
             Shapes.block(), Shapes.block(),
     };
 
-    private static final VoxelShape[] SHAPE_BY_BITE_LOWER = new VoxelShape[] {
+    protected static final VoxelShape[] SHAPE_BY_BITE_LOWER = new VoxelShape[] {
             Shapes.block(), Shapes.block(), Shapes.block(),
             Shapes.block(), Shapes.block(),
             Shapes.or(Block.box(2, 8, 2, 14, 15, 14), //5

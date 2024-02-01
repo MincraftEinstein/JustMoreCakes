@@ -70,9 +70,7 @@ public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
                 BlockPos abovePos = pos.above();
 
                 level.setBlockAndUpdate(abovePos, newState);
-                level.setBlockAndUpdate(pos, newState
-                        .setValue(BaseThreeTieredCakeBlock.HALF, DoubleBlockHalf.LOWER)
-                        .setValue(BaseThreeTieredCakeBlock.BITES, 5));
+                level.setBlockAndUpdate(pos, BaseThreeTieredCakeBlock.createLowerState(newState.getBlock(), true));
                 Block.pushEntitiesUp(Blocks.AIR.defaultBlockState(), newState, level, abovePos);
                 level.gameEvent(player, GameEvent.BLOCK_CHANGE, abovePos);
                 level.playSound(null, abovePos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);

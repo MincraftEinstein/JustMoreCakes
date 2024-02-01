@@ -107,6 +107,16 @@ public class ModBlocks {
             .cakeProperties(cakeProperties().lightLevel(state -> 7))
             .candleCakeProperties(candleCakeProperties().lightLevel(state -> 7))
             .build();
+    public static final DefaultCakeFamily OBSIDIAN_CAKE_FAMILY = CakeFamily.create("obsidian")
+            .modifyBaseBuilder(builder -> builder.setCakeClass(ObsidianCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.setCakeClass(ObsidianTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.setCakeClass(ObsidianThreeTieredCakeBlock::new))
+            .cakeProperties(cakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
+            .candleCakeProperties(candleCakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
+            .nutrition(0)
+            .saturationModifier(0)
+            .alwaysEat()
+            .build();
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -123,14 +133,6 @@ public class ModBlocks {
             .noItem()
             .nutrition(1)
             .saturationModifier(0.3F)
-            .build();
-    public static final Supplier<BaseCakeBlock> OBSIDIAN_CAKE = new CakeBuilder("obsidian_cake")
-            .setCakeClass(ObsidianCakeBlock::new)
-            .setCakeProperties(cakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
-            .setCandleCakeProperties(candleCakeProperties().sound(SoundType.STONE).strength(12.5F, 300))
-            .nutrition(0)
-            .saturationModifier(0)
-            .alwaysEat()
             .build();
     public static final Supplier<BaseCakeBlock> SCULK_CAKE = new CakeBuilder("sculk_cake")
             .setCakeClass(SculkCakeBlock::new)

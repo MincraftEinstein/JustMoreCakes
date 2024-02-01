@@ -27,7 +27,12 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.CAKE_OVEN.get(), ModBlocks.OBSIDIAN_CAKE.get(), ModBlocks.CAKE_STAND.get());
+        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                ModBlocks.CAKE_OVEN.get(),
+                ModBlocks.CAKE_STAND.get(),
+                ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get(),
+                ModBlocks.OBSIDIAN_CAKE_FAMILY.getTwoTieredCake().get(),
+                ModBlocks.OBSIDIAN_CAKE_FAMILY.getThreeTieredCake().get());
         getOrCreateTagBuilder(BlockTags.ICE).add(ModBlocks.ENCASING_ICE.get());
 
         Map<Supplier<BaseCakeBlock>, CakeBuilder> sortedCakes = Util.createValueSortedMap(CakeBuilder.BUILDER_BY_CAKE, Comparator.comparing(CakeBuilder::getCakeName));
