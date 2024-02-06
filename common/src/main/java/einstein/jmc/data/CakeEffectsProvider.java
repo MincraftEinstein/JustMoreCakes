@@ -39,8 +39,8 @@ public abstract class CakeEffectsProvider implements DataProvider {
         Path folderPath = output.getOutputFolder(PackOutput.Target.DATA_PACK).resolve(modId).resolve("cake_effects");
         ImmutableList.Builder<CompletableFuture<?>> builder = new ImmutableList.Builder<>();
 
-        map.forEach((name, element) -> {
-            Path filePath = folderPath.resolve(name + ".json");
+        map.forEach((path, element) -> {
+            Path filePath = folderPath.resolve(path + ".json");
             builder.add(DataProvider.saveStable(cache, element, filePath));
         });
 
@@ -50,13 +50,13 @@ public abstract class CakeEffectsProvider implements DataProvider {
     public void add(Supplier<BaseCakeBlock> cake, MobEffectHolder... mobEffects) {
         JsonElement element = CakeEffects.BLOCK_CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(cake.get(), List.of(mobEffects))).getOrThrow(false, error -> {
         });
-        map.put(Util.getBlockId(cake.get()).getPath(), element);
+        map.put("blocks/" + Util.getBlockId(cake.get()).getPath(), element);
     }
 
     public void add(CakeFamily family, MobEffectHolder... mobEffects) {
         JsonElement element = CakeEffects.FAMILY_CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(family, List.of(mobEffects))).getOrThrow(false, error -> {
         });
-        map.put(family.getRegistryKey().getPath(), element);
+        map.put("families/" + family.getRegistryKey().getPath(), element);
     }
 
     @Override
