@@ -1,0 +1,11 @@
+{
+  "parent": "jmc:block/template_three_tiered_cake_lower_slice4",
+  "textures": {
+    "bottom": "jmc:block/sculk_cake_bottom",
+    "lower_side": "jmc:block/sculk_cake_side_active",
+    "lower_top": "jmc:block/sculk_cake_top_active_covered",
+    "middle_inner": "jmc:block/sculk_cake_medium_inner_active_covered",
+    "middle_side": "jmc:block/sculk_cake_medium_side_active",
+    "middle_top": "jmc:block/sculk_cake_medium_top_active_covered"
+  }
+}

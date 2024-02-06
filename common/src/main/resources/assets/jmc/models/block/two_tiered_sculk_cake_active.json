@@ -1,0 +1,10 @@
+{
+  "parent": "jmc:block/template_two_tiered_cake",
+  "textures": {
+    "bottom": "jmc:block/sculk_cake_bottom",
+    "lower_side": "jmc:block/sculk_cake_side_active",
+    "lower_top": "jmc:block/sculk_cake_top_active_covered",
+    "top": "jmc:block/sculk_cake_medium_top_active",
+    "top_side": "jmc:block/sculk_cake_medium_side_active"
+  }
+}

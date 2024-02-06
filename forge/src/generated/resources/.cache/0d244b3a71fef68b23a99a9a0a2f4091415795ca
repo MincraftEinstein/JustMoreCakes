@@ -1,4 +1,4 @@
-// 1.20.2	2024-01-31T16:35:32.1328821	JustMoreCakes cake effects
+// 1.20.2	2024-02-02T15:37:27.5108101	JustMoreCakes cake effects
 4a0cb18e6d9cfaac872450ff567f9d461eadcc60 data/jmc/cake_effects/beetroot.json
 7188dd22c0c54e660e86fc27ab7aac9d2c7ab8ab data/jmc/cake_effects/chorus.json
 f73bcf096b843f1ef00a163e41d790337b66298a data/jmc/cake_effects/creeper.json
@@ -8,5 +8,5 @@ ed8cf3aa55d6a4de9e94122d0f8093f72eb39b46 data/jmc/cake_effects/golden_apple.json
 9dea56fbd0bb1c0e5c36061444685437cf90e3bd data/jmc/cake_effects/ice.json
 54f41f3e619e40528888f6383bcc4b6821354300 data/jmc/cake_effects/lava.json
 c2710f1fb97bdd9bc9dddda73eecf6a73541c933 data/jmc/cake_effects/poison_cake.json
-0c5f014b8e2f5252b19a0b8533e7a4d61c4f2795 data/jmc/cake_effects/sculk_cake.json
+840546b0360ba7764c5d7ef1bd864780ea00a295 data/jmc/cake_effects/sculk.json
 20e84c012c7c220a5b1d94801a69cefa76c17a14 data/jmc/cake_effects/slime.json

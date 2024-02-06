@@ -11,6 +11,7 @@ import einstein.jmc.platform.Services;
 import einstein.jmc.util.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.DustColorTransitionOptions;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,15 +30,13 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CakeBlock;
-import net.minecraft.world.level.block.CandleBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.SculkSensorPhase;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -201,16 +200,16 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
-        if (inFamily(ModBlocks.FIREY_CAKE_FAMILY)) {
+        if (inFamily(state, ModBlocks.FIREY_CAKE_FAMILY)) {
             player.setSecondsOnFire(ModCommonConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
         }
-        else if (inFamily(ModBlocks.ICE_CAKE_FAMILY)) {
+        else if (inFamily(state, ModBlocks.ICE_CAKE_FAMILY)) {
             player.clearFire();
         }
-        else if (inFamily(ModBlocks.CHORUS_CAKE_FAMILY)) {
+        else if (inFamily(state, ModBlocks.CHORUS_CAKE_FAMILY)) {
             Util.teleportRandomly(player, ModCommonConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get());
         }
-        else if (inFamily(ModBlocks.ENDER_CAKE_FAMILY)) {
+        else if (inFamily(state, ModBlocks.ENDER_CAKE_FAMILY)) {
             Util.teleportRandomly(player, ModCommonConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
             player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1, 1);
         }
@@ -259,7 +258,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (inFamily(ModBlocks.ENDER_CAKE_FAMILY) && ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
+        if (inFamily(state, ModBlocks.ENDER_CAKE_FAMILY) && ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
             for (int i = 0; i < 3; ++i) {
                 int xSign = random.nextInt(2) * 2 - 1;
                 int zSign = random.nextInt(2) * 2 - 1;
@@ -272,7 +271,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.addParticle(ParticleTypes.PORTAL, x, y, z, XSpeed, YSpeed, ZSpeed);
             }
         }
-        else if (inFamily(ModBlocks.REDSTONE_CAKE_FAMILY) && ModClientConfigs.REDSTONE_CAKE_PARTICLES.get()) {
+        else if (inFamily(state, ModBlocks.REDSTONE_CAKE_FAMILY) && ModClientConfigs.REDSTONE_CAKE_PARTICLES.get()) {
             for (int i = 0; i < 2; ++i) {
                 double x = pos.getX() + random.nextDouble();
                 double y = pos.getY() + random.nextDouble() * 0.5D + 0.25D;
@@ -280,12 +279,24 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.addParticle(DustParticleOptions.REDSTONE, x, y, z, 0, 0, 0);
             }
         }
-        else if (inFamily(ModBlocks.LAVA_CAKE_FAMILY) && ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
+        else if (inFamily(state, ModBlocks.LAVA_CAKE_FAMILY) && ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
             if (random.nextInt(10) == 0) {
                 double x = pos.getX() + random.nextDouble();
                 double y = pos.getY() + 1;
                 double z = pos.getZ() + random.nextDouble();
                 level.addParticle(ParticleTypes.LAVA, x, y, z, 0, 0, 0);
+            }
+        }
+        else if (inFamily(state, ModBlocks.SCULK_CAKE_FAMILY)) {
+            if (SculkSensorBlock.getPhase(state) == SculkSensorPhase.ACTIVE) {
+                Direction direction = Direction.getRandom(random);
+                if (direction != Direction.UP && direction != Direction.DOWN) {
+                    double x = pos.getX() + 0.5 + (direction.getStepX() == 0 ? 0.5 - random.nextDouble() : direction.getStepX() * 0.6);
+                    double y = pos.getY() + 0.25;
+                    double z = pos.getZ() + 0.5 + (direction.getStepZ() == 0 ? 0.5 - random.nextDouble() : direction.getStepZ() * 0.6);
+                    double ySpeed = random.nextFloat() * 0.04;
+                    level.addParticle(DustColorTransitionOptions.SCULK_TO_REDSTONE, x, y, z, 0, ySpeed, 0);
+                }
             }
         }
     }
@@ -349,8 +360,9 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         return DEFAULT_SATURATION_MODIFIER;
     }
 
-    public boolean inFamily(CakeFamily family) {
-        return equals(family.getBaseCake().get()) || equals(family.getTwoTieredCake().get()) || equals(family.getThreeTieredCake().get());
+    public static boolean inFamily(BlockState state, CakeFamily family) {
+        Block block = state.getBlock();
+        return block.equals(family.getBaseCake().get()) || block.equals(family.getTwoTieredCake().get()) || block.equals(family.getThreeTieredCake().get());
     }
 
     public static boolean isUneaten(BlockState state, BlockPos pos, Level level) {

@@ -190,9 +190,9 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Blocks.OBSIDIAN))
                 .save(output, cakeOvenLoc(ModBlocks.OBSIDIAN_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.SCULK_CAKE.get(), 0.7F, 350, RecipeCategory.FOOD, Ingredient.of(Items.ECHO_SHARD), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.EGG), Ingredient.of(Items.SUGAR))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.SCULK_CAKE_FAMILY, 0.7F, 350, RecipeCategory.FOOD, Ingredient.of(Items.ECHO_SHARD), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.EGG), Ingredient.of(Items.SUGAR))
                 .unlockedBy(has, RecipeProvider.has(Items.ECHO_SHARD))
-                .save(output, cakeOvenLoc(ModBlocks.SCULK_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.SCULK_CAKE_FAMILY));
     }
 
     private static ResourceLocation craftingLoc(Supplier<? extends ItemLike> item) {

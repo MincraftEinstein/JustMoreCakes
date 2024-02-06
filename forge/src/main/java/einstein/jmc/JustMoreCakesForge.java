@@ -115,7 +115,9 @@ public class JustMoreCakesForge {
     }
 
     void onBlockBreak(BlockEvent.BreakEvent event) {
-        if (event.getState().is(ModBlocks.SCULK_CAKE.get())) {
+        if (event.getState().is(ModBlocks.SCULK_CAKE_FAMILY.getBaseCake().get())
+                || event.getState().is(ModBlocks.SCULK_CAKE_FAMILY.getTwoTieredCake().get())
+                || event.getState().is(ModBlocks.SCULK_CAKE_FAMILY.getThreeTieredCake().get())) {
             event.setExpToDrop(5);
         }
     }

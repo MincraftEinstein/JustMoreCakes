@@ -117,6 +117,16 @@ public class ModBlocks {
             .saturationModifier(0)
             .alwaysEat()
             .build();
+    public static final DefaultCakeFamily SCULK_CAKE_FAMILY = CakeFamily.create("sculk")
+            .modifyBaseBuilder(builder -> builder.setCakeClass(SculkCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.setCakeClass(SculkTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(SculkThreeTieredCakeBlock::new, SculkCandleThreeTieredCakeBlock::new))
+            .cakeProperties(cakeProperties().lightLevel(state -> 1)
+                    .emissiveRendering((state, getter, pos) -> SculkSensorBlock.getPhase(state) == SculkSensorPhase.ACTIVE))
+            .models(CakeModel.CUSTOM, CakeModel.DEFAULT)
+            .alwaysEat()
+            .build();
+
     public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
@@ -133,13 +143,6 @@ public class ModBlocks {
             .noItem()
             .nutrition(1)
             .saturationModifier(0.3F)
-            .build();
-    public static final Supplier<BaseCakeBlock> SCULK_CAKE = new CakeBuilder("sculk_cake")
-            .setCakeClass(SculkCakeBlock::new)
-            .setCakeProperties(cakeProperties().lightLevel(state -> 1)
-                    .emissiveRendering((state, getter, pos) -> SculkSensorBlock.getPhase(state) == SculkSensorPhase.ACTIVE))
-            .models(CakeModel.CUSTOM, CakeModel.DEFAULT)
-            .alwaysEat()
             .build();
 
     public static final Supplier<Block> ENCASING_ICE = register("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).friction(0.98F).randomTicks().strength(0.5F).sound(SoundType.GLASS).noLootTable().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never).pushReaction(PushReaction.NORMAL)), true);

@@ -1,0 +1,103 @@
+{
+  "variants": {
+    "bites=0,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake"
+    },
+    "bites=0,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_active"
+    },
+    "bites=0,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_active"
+    },
+    "bites=1,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice1"
+    },
+    "bites=1,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice1_active"
+    },
+    "bites=1,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice1_active"
+    },
+    "bites=10,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice10"
+    },
+    "bites=10,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice10_active"
+    },
+    "bites=10,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice10_active"
+    },
+    "bites=2,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice2"
+    },
+    "bites=2,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice2_active"
+    },
+    "bites=2,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice2_active"
+    },
+    "bites=3,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice3"
+    },
+    "bites=3,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice3_active"
+    },
+    "bites=3,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice3_active"
+    },
+    "bites=4,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice4"
+    },
+    "bites=4,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice4_active"
+    },
+    "bites=4,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice4_active"
+    },
+    "bites=5,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice5"
+    },
+    "bites=5,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice5_active"
+    },
+    "bites=5,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice5_active"
+    },
+    "bites=6,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice6"
+    },
+    "bites=6,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice6_active"
+    },
+    "bites=6,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice6_active"
+    },
+    "bites=7,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice7"
+    },
+    "bites=7,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice7_active"
+    },
+    "bites=7,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice7_active"
+    },
+    "bites=8,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice8"
+    },
+    "bites=8,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice8_active"
+    },
+    "bites=8,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice8_active"
+    },
+    "bites=9,sculk_sensor_phase=inactive": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice9"
+    },
+    "bites=9,sculk_sensor_phase=cooldown": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice9_active"
+    },
+    "bites=9,sculk_sensor_phase=active": {
+      "model": "jmc:block/two_tiered_sculk_cake_slice9_active"
+    }
+  }
+}

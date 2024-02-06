@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/lime_candle_two_tiered_sculk_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/lime_candle_two_tiered_sculk_cake_lit"
+    }
+  }
+}
