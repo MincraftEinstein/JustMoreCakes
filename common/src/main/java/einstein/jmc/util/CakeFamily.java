@@ -30,6 +30,7 @@ public abstract class CakeFamily implements CakeEffectsHolder {
     protected boolean canAlwaysEat;
     protected CakeModel cakeModel = CakeModel.DEFAULT;
     protected CakeModel candleCakeModel = CakeModel.DEFAULT;
+    @Nullable
     protected CakeEffects cakeEffects;
 
     public CakeFamily(ResourceLocation registryKey, String baseCakeName) {

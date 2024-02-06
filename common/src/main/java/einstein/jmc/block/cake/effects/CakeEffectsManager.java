@@ -1,6 +1,5 @@
 package einstein.jmc.block.cake.effects;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
@@ -17,18 +16,14 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.effect.MobEffect;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static einstein.jmc.JustMoreCakes.LOGGER;
 
 public class CakeEffectsManager {
 
-    private static final Map<ResourceLocation, CakeEffects> RAW_CAKE_EFFECTS = new HashMap<>();
+    private static final List<CakeEffects> RAW_CAKE_EFFECTS = new ArrayList<>();
     private static final Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> CAKE_EFFECTS = new HashMap<>();
 
     public static void syncToPlayer(ServerPlayer player) {
@@ -36,15 +31,15 @@ public class CakeEffectsManager {
     }
 
     public static void loadCakeEffects() {
-        CAKE_EFFECTS.clear();
-        RAW_CAKE_EFFECTS.forEach((location, cakeEffects) -> {
+        Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> newCakeEffects = new HashMap<>();
+        RAW_CAKE_EFFECTS.forEach((cakeEffects) -> {
             CakeEffectsHolder holder = cakeEffects.holder();
             cakeEffects.mobEffects().forEach(effectHolder -> {
                 MobEffect effect = effectHolder.effect();
                 int duration = effectHolder.duration().orElse(0);
                 int amplifier = effectHolder.amplifier().orElse(0);
-                if (CAKE_EFFECTS.containsKey(holder)) {
-                    Map<MobEffect, Pair<Integer, Integer>> combinedEffects = CAKE_EFFECTS.get(holder);
+                if (newCakeEffects.containsKey(holder)) {
+                    Map<MobEffect, Pair<Integer, Integer>> combinedEffects = newCakeEffects.get(holder);
                     if (combinedEffects.containsKey(effect)) {
                         Pair<Integer, Integer> pair = combinedEffects.get(effect);
                         int currentDuration = pair.getSecond();
@@ -59,17 +54,21 @@ public class CakeEffectsManager {
                     }
                 }
                 else {
-                    CAKE_EFFECTS.put(holder, new HashMap<>(Map.of(effect, Pair.of(duration, amplifier))));
+                    newCakeEffects.put(holder, new HashMap<>(Map.of(effect, Pair.of(duration, amplifier))));
                 }
             });
         });
 
         RAW_CAKE_EFFECTS.clear();
-        setEffectsOnHolders(CAKE_EFFECTS);
+        setEffectsOnHolders(newCakeEffects);
     }
 
-    public static void setEffectsOnHolders(Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> cakeEffects) {
-        cakeEffects.forEach((holder, effects) -> {
+    public static void setEffectsOnHolders(Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> newCakeEffects) {
+        CAKE_EFFECTS.forEach((holder, mobEffectPairMap) -> holder.clear());
+        CAKE_EFFECTS.clear();
+
+        newCakeEffects.forEach((holder, effects) -> {
+            CAKE_EFFECTS.put(holder, effects);
             List<MobEffectHolder> mobEffectHolders = new ArrayList<>();
 
             effects.forEach((mobEffect, pair) -> {
@@ -81,18 +80,16 @@ public class CakeEffectsManager {
     }
 
     public static void deserializeCakeEffects(ResourceManager manager) {
-        ImmutableMap.Builder<ResourceLocation, CakeEffects> builder = ImmutableMap.builder();
         Map<ResourceLocation, Resource> locations = manager.listResources("cake_effects", location -> location.getPath().endsWith(".json"));
 
         locations.forEach((location, resource) -> {
-            try (InputStream stream = resource.open();
-                 Reader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+            try (Reader reader = resource.openAsReader()) {
                 JsonObject object = GsonHelper.fromJson(Util.GSON, reader, JsonObject.class);
 
                 getCodec(object).ifPresentOrElse(codec ->
                         codec.parse(JsonOps.INSTANCE, object)
                                 .resultOrPartial(error -> decodingError(location, error))
-                                .ifPresent(entry -> builder.put(location, entry)),
+                                .ifPresent(RAW_CAKE_EFFECTS::add),
                         () -> decodingError(location, "Unknown type for cake effects. Must be either 'block' or 'family'"));
             }
             catch (Exception exception) {
@@ -100,7 +97,6 @@ public class CakeEffectsManager {
             }
         });
 
-        RAW_CAKE_EFFECTS.putAll(builder.buildOrThrow());
         LOGGER.info("Loaded {} cake effects", RAW_CAKE_EFFECTS.size());
     }
 

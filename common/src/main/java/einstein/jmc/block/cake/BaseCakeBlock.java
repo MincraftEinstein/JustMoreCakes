@@ -67,6 +67,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     private final boolean canAlwaysEat;
     private final int slices;
     private CakeBuilder builder;
+    @Nullable
     private CakeEffects cakeEffects;
 
     protected BaseCakeBlock(CakeBuilder builder, int slices) {
@@ -342,7 +343,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     @Override
-    public void justMoreCakes$setCakeEffects(CakeEffects cakeEffects) {
+    public void justMoreCakes$setCakeEffects(@Nullable CakeEffects cakeEffects) {
         this.cakeEffects = cakeEffects;
     }
 

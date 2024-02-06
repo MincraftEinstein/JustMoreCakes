@@ -9,4 +9,8 @@ public interface CakeEffectsHolder {
     CakeEffects justMoreCakes$getCakeEffects();
 
     void justMoreCakes$setCakeEffects(@Nullable CakeEffects effects);
+
+    default void clear() {
+        justMoreCakes$setCakeEffects(null);
+    }
 }

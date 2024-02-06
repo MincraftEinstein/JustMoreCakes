@@ -66,6 +66,7 @@ public class ClientboundCakeEffectsPacket implements Packet {
 
     @Override
     public void decode(FriendlyByteBuf buf) {
+        effects.clear();
         int size = buf.readInt();
 
         for (int i = 0; i < size; i++) {
