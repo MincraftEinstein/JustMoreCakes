@@ -30,12 +30,10 @@ public class ModBlockEntityTypes {
     private static <T extends BlockEntity> Supplier<BlockEntityType<T>> registerForFamily(String name, BlockEntitySupplier<T> supplier, DefaultCakeFamily family) {
         return REGISTRY.registerBlockEntity(name, () -> {
             List<Supplier<? extends Block>> cakes = new ArrayList<>();
-            cakes.add(family.getBaseCake());
-            cakes.addAll(family.getBaseCake().get().getBuilder().getCandleCakeByCandle().values());
-            cakes.add(family.getTwoTieredCake());
-            cakes.addAll(family.getTwoTieredCake().get().getBuilder().getCandleCakeByCandle().values());
-            cakes.add(family.getThreeTieredCake());
-            cakes.addAll(family.getThreeTieredCake().get().getBuilder().getCandleCakeByCandle().values());
+            family.forEach(cake -> {
+                cakes.add(cake);
+                cakes.addAll(cake.get().getBuilder().getCandleCakeByCandle().values());
+            });
             return REGISTRY.createBlockEntity(supplier, cakes.stream().map(Supplier::get).toArray(Block[]::new));
         });
     }

@@ -99,6 +99,12 @@ public class CakeFamily implements CakeEffectsHolder {
         return candleCakeModel;
     }
 
+    public void forEach(Consumer<Supplier<BaseCakeBlock>> consumer) {
+        consumer.accept(baseCake);
+        consumer.accept(twoTieredCake);
+        consumer.accept(threeTieredCake);
+    }
+
     @Nullable
     @Override
     public CakeEffects justMoreCakes$getCakeEffects() {

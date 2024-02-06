@@ -87,9 +87,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     }
 
     private static void putFamilyRenderLayers(CakeFamily family, RenderType type) {
-        BlockRenderLayerMap.INSTANCE.putBlock(family.getBaseCake().get(), type);
-        BlockRenderLayerMap.INSTANCE.putBlock(family.getTwoTieredCake().get(), type);
-        BlockRenderLayerMap.INSTANCE.putBlock(family.getThreeTieredCake().get(), type);
+        family.forEach(cake -> BlockRenderLayerMap.INSTANCE.putBlock(cake.get(), type));
     }
 
     void onServerStarting() {
