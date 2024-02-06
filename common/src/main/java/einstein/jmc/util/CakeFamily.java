@@ -5,7 +5,6 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.effects.CakeEffects;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -13,7 +12,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class CakeFamily implements CakeEffectsHolder {
+public abstract class CakeFamily implements CakeEffectsHolder {
 
     public static final Map<ResourceLocation, CakeFamily> REGISTERED_CAKE_FAMILIES = new HashMap<>();
 
@@ -33,21 +32,13 @@ public class CakeFamily implements CakeEffectsHolder {
     protected CakeModel candleCakeModel = CakeModel.DEFAULT;
     protected CakeEffects cakeEffects;
 
-    CakeFamily(ResourceLocation registryKey, String baseCakeName) {
+    public CakeFamily(ResourceLocation registryKey, String baseCakeName) {
         this.registryKey = registryKey;
         this.baseCakeName = baseCakeName;
 
         baseBuilder = new CakeBuilder(baseCakeName).setFamily(this);
         twoTieredBuilder = new CakeBuilder("two_tiered_" + baseCakeName, CakeVariant.TWO_TIERED).setFamily(this);
         threeTieredBuilder = new CakeBuilder("three_tiered_" + baseCakeName, CakeVariant.THREE_TIERED).setFamily(this);
-    }
-
-    public static Builder create(String flavorName) {
-        return create(flavorName, false);
-    }
-
-    public static Builder create(String flavorName, boolean noSuffix) {
-        return new Builder(flavorName, noSuffix);
     }
 
     public final ResourceLocation getRegistryKey() {
@@ -119,100 +110,5 @@ public class CakeFamily implements CakeEffectsHolder {
     @Override
     public String toString() {
         return "CakeFamily{" + getRegistryKey() + "}";
-    }
-
-    public static class Builder {
-
-        private final DefaultCakeFamily family;
-        private BlockBehaviour.Properties cakeProperties;
-        private BlockBehaviour.Properties candleCakeProperties;
-
-        private Builder(String flavorName, boolean noSuffix) {
-            family = new DefaultCakeFamily(flavorName, noSuffix);
-        }
-
-        public Builder modifyBaseBuilder(Consumer<CakeBuilder> consumer) {
-            consumer.accept(family.baseBuilder);
-            return this;
-        }
-
-        public Builder modifyTwoTieredBuilder(Consumer<CakeBuilder> consumer) {
-            consumer.accept(family.twoTieredBuilder);
-            return this;
-        }
-
-        public Builder modifyThreeTieredBuilder(Consumer<CakeBuilder> consumer) {
-            consumer.accept(family.threeTieredBuilder);
-            return this;
-        }
-
-        public Builder cakeProperties(BlockBehaviour.Properties properties) {
-            cakeProperties = properties;
-            return this;
-        }
-
-        public Builder candleCakeProperties(BlockBehaviour.Properties properties) {
-            candleCakeProperties = properties;
-            return this;
-        }
-
-        public Builder nutrition(int nutrition) {
-            family.nutrition = nutrition;
-            return this;
-        }
-
-        public Builder saturationModifier(float modifier) {
-            family.saturationModifier = modifier;
-            return this;
-        }
-
-        public Builder alwaysEat() {
-            family.canAlwaysEat = true;
-            return this;
-        }
-
-        public Builder model(CakeModel model) {
-            return models(model, CakeModel.DEFAULT);
-        }
-
-        public Builder models(CakeModel cakeModel, CakeModel candleCakeModel) {
-            family.cakeModel = cakeModel;
-            family.candleCakeModel = candleCakeModel;
-            return this;
-        }
-
-        public DefaultCakeFamily build() {
-            if (family.canAlwaysEat) {
-                family.baseBuilder.alwaysEat();
-                family.twoTieredBuilder.alwaysEat();
-                family.threeTieredBuilder.alwaysEat();
-            }
-
-            family.baseCake = family.baseBuilder
-                    .setCakeProperties(cakeProperties)
-                    .setCandleCakeProperties(candleCakeProperties)
-                    .nutrition(family.nutrition)
-                    .saturationModifier(family.saturationModifier)
-                    .models(family.cakeModel, family.candleCakeModel)
-                    .build();
-            family.twoTieredCake = family.twoTieredBuilder
-                    .noItem()
-                    .setCakeProperties(cakeProperties)
-                    .setCandleCakeProperties(candleCakeProperties)
-                    .nutrition(family.nutrition)
-                    .saturationModifier(family.saturationModifier)
-                    .models(family.cakeModel, family.candleCakeModel)
-                    .build();
-            family.threeTieredCake = family.threeTieredBuilder
-                    .noItem()
-                    .setCakeProperties(cakeProperties)
-                    .setCandleCakeProperties(candleCakeProperties)
-                    .nutrition(family.nutrition)
-                    .saturationModifier(family.saturationModifier)
-                    .models(family.cakeModel, family.candleCakeModel)
-                    .build();
-            REGISTERED_CAKE_FAMILIES.put(family.getRegistryKey(), family);
-            return family;
-        }
     }
 }
