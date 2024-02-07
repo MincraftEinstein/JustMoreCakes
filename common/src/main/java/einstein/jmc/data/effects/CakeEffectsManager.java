@@ -23,6 +23,7 @@ import static einstein.jmc.JustMoreCakes.LOGGER;
 
 public class CakeEffectsManager {
 
+    public static final String EFFECTS_DIRECTORY = "jmc/cake_effects";
     private static final List<CakeEffects> RAW_CAKE_EFFECTS = new ArrayList<>();
     private static final Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> CAKE_EFFECTS = new HashMap<>();
 
@@ -80,7 +81,7 @@ public class CakeEffectsManager {
     }
 
     public static void deserializeCakeEffects(ResourceManager manager) {
-        Map<ResourceLocation, Resource> locations = manager.listResources("cake_effects", location -> location.getPath().endsWith(".json"));
+        Map<ResourceLocation, Resource> locations = manager.listResources(EFFECTS_DIRECTORY, location -> location.getPath().endsWith(".json"));
 
         locations.forEach((location, resource) -> {
             try (Reader reader = resource.openAsReader()) {

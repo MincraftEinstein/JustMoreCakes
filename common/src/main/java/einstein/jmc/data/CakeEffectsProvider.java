@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.effects.CakeEffects;
+import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.util.CakeFamily;
 import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;
@@ -36,7 +37,7 @@ public abstract class CakeEffectsProvider implements DataProvider {
     public CompletableFuture<?> run(CachedOutput cache) {
         addCakeEffects();
 
-        Path folderPath = output.getOutputFolder(PackOutput.Target.DATA_PACK).resolve(modId).resolve("cake_effects");
+        Path folderPath = output.getOutputFolder(PackOutput.Target.DATA_PACK).resolve(modId).resolve(CakeEffectsManager.EFFECTS_DIRECTORY);
         ImmutableList.Builder<CompletableFuture<?>> builder = new ImmutableList.Builder<>();
 
         map.forEach((path, element) -> {
