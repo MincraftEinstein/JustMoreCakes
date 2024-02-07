@@ -203,7 +203,7 @@ public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
 
         if (hasBites) {
             BaseCakeBlock cakeBlock = ((BaseCakeBlock) block);
-            if (cakeBlock.getSlices() > 0) {
+            if (cakeBlock.hasBites()) {
                 newState = newState.setValue(cakeBlock.getBites(), 5);
             }
         }

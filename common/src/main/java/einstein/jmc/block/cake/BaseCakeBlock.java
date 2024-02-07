@@ -84,7 +84,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         this.allowsCandles = allowsCandles;
         this.canAlwaysEat = canAlwaysEat;
         this.slices = slices;
-        if (getSlices() > 0) {
+        if (hasBites()) {
             registerDefaultState(stateDefinition.any().setValue(getBites(), 0));
         }
     }
@@ -300,6 +300,10 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 }
             }
         }
+    }
+
+    public boolean hasBites() {
+        return getBites() != null && getSlices() > 0;
     }
 
     @Nullable

@@ -103,7 +103,7 @@ public class ModModelProvider extends FabricModelProvider {
                                 DoubleBlockHalf half = halfPair.getFirst();
                                 Variant propertyVariant = Variant.variant().with(VariantProperties.MODEL, loc("three_tiered_cake_" + half));
 
-                                if (cakeBlock.getSlices() > 0) {
+                                if (cakeBlock.hasBites()) {
                                     PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseThreeTieredCakeBlock.BITES);
 
                                     for (int i = 1; i < halfPair.getSecond(); i++) {
@@ -254,7 +254,7 @@ public class ModModelProvider extends FabricModelProvider {
         ResourceLocation side = blockLoc(texturePrefix + "_side");
         ResourceLocation inside = blockLoc(texturePrefix + "_inner");
 
-        if (cake.getSlices() > 0) {
+        if (cake.hasBites()) {
             PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseCakeBlock.BITES);
 
             TextureSet set = new TextureSet()
@@ -308,7 +308,7 @@ public class ModModelProvider extends FabricModelProvider {
         ResourceLocation side = blockLoc(texturePrefix + "_side");
         ResourceLocation inner = blockLoc(texturePrefix + "_inner_covered");
 
-        if (cake.getSlices() > 0) {
+        if (cake.hasBites()) {
             PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseTwoTieredCakeBlock.BITES);
             TextureSet set = new TextureSet()
                     .add(TextureSlot.BOTTOM, bottom)
@@ -397,7 +397,7 @@ public class ModModelProvider extends FabricModelProvider {
                 new ModelTemplate(Optional.of(loc(parentModel + "_lower")), Optional.of("_lower"), lowerSet.getSlots())
                         .create(cake, lowerSet.getMapping(), generators.modelOutput));
 
-        if (cake.getSlices() > 0) {
+        if (cake.hasBites()) {
             PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseThreeTieredCakeBlock.BITES);
             dispatch.select(0, upperVariant);
             dispatch.select(5, lowerVariant);
@@ -454,7 +454,7 @@ public class ModModelProvider extends FabricModelProvider {
     }
 
     private void createFromVanillaCake(BlockModelGenerators generators, BaseCakeBlock cake, int bites, ResourceLocation parentModel) {
-        if (cake.getSlices() > 0) {
+        if (cake.hasBites()) {
             PropertyDispatch.C1<Integer> dispatch = PropertyDispatch.property(BaseCakeBlock.BITES);
 
             dispatch.select(0, Variant.variant().with(VariantProperties.MODEL, parentModel));

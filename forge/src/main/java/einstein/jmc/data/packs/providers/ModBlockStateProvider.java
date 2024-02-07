@@ -69,7 +69,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                                 VariantBlockStateBuilder.PartialBlockstate halfBuilder = variantBuilder.partialState()
                                         .addModels(new ConfiguredModel(models().getExistingFile(modLoc("three_tiered_cake_" + half))));
 
-                                if (cakeBlock.getSlices() > 0) {
+                                if (cakeBlock.hasBites()) {
                                     halfBuilder.with(BaseThreeTieredCakeBlock.BITES, 0);
 
                                     for (int i = 1; i < halfPair.getSecond(); i++) {
@@ -212,7 +212,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         String inside = blockLoc(texturePrefix + "_inner");
         BlockModelBuilder modelBuilder;
 
-        if (cake.getSlices() > 0) {
+        if (cake.hasBites()) {
             VariantBlockStateBuilder builder = getVariantBuilder(cake);
             modelBuilder = models().withExistingParent(name, modLoc(parentModel))
                     .texture("side", side)
@@ -259,7 +259,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         String bottom = blockLoc(texturePrefix + "_bottom");
         BlockModelBuilder modelBuilder;
 
-        if (cake.getSlices() > 0) {
+        if (cake.hasBites()) {
             VariantBlockStateBuilder builder = getVariantBuilder(cake);
             modelBuilder = models().withExistingParent(name, modLoc(parentModel))
                     .texture("top", mediumTop)
@@ -325,7 +325,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         VariantBlockStateBuilder.PartialBlockstate upperBuilder = builder.partialState();
         VariantBlockStateBuilder.PartialBlockstate lowerBuilder = builder.partialState();
 
-        if (cake.getSlices() > 0) {
+        if (cake.hasBites()) {
             upperBuilder = upperBuilder.with(BaseThreeTieredCakeBlock.BITES, 0);
             lowerBuilder = lowerBuilder.with(BaseThreeTieredCakeBlock.BITES, 5);
             BlockModelBuilder modelBuilder;
@@ -394,7 +394,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private void createFromVanillaCake(BaseCakeBlock cake, int bites, ResourceLocation parentModel) {
-        if (cake.getSlices() > 0) {
+        if (cake.hasBites()) {
             VariantBlockStateBuilder variantBuilder = getVariantBuilder(cake);
             variantBuilder.partialState().with(BaseCakeBlock.BITES, 0).addModels(new ConfiguredModel(models().getExistingFile(parentModel)));
 
