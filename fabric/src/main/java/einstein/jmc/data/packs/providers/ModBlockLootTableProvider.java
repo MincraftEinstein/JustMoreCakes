@@ -42,12 +42,14 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                     add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 2));
 
                     builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                        add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), baseCake, 2));
+                        add(candleCake.get(), block ->
+                                addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), baseCake, 2));
                     });
                 }
                 case THREE_TIERED -> {
                     Block baseCake = builder.getFamily().getBaseCake().get();
-                    add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 3));
+                    add(cakeBlock, block ->
+                            addDropWhenCakeSpatulaPool(LootTable.lootTable(), block, baseCake, 3, true));
 
                     builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                         add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(

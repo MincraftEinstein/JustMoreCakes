@@ -21,7 +21,7 @@ import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
 
-    private static final List<Block> knownBlocks = new ArrayList<>();
+    private static final List<Block> KNOWN_BLOCKS = new ArrayList<>();
 
     public ModBlockLootTables() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
@@ -36,14 +36,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
             BaseCakeBlock cakeBlock = cake.get();
             CakeVariant variant = builder.getVariant();
 
-            knownBlocks.add(cakeBlock);
+            KNOWN_BLOCKS.add(cakeBlock);
             switch (variant) {
                 case BASE -> {
                     add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), cakeBlock));
 
                     builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                         add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), cakeBlock));
-                        knownBlocks.add(candleCake.get());
+                        KNOWN_BLOCKS.add(candleCake.get());
                     });
                 }
                 case TWO_TIERED -> {
@@ -51,13 +51,15 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                     add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 2));
 
                     builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                        add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), baseCake, 2));
-                        knownBlocks.add(candleCake.get());
+                        add(candleCake.get(), block ->
+                                addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), baseCake, 2));
+                        KNOWN_BLOCKS.add(candleCake.get());
                     });
                 }
                 case THREE_TIERED -> {
                     Block baseCake = builder.getFamily().getBaseCake().get();
-                    add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 3));
+                    add(cakeBlock, block ->
+                            addDropWhenCakeSpatulaPool(LootTable.lootTable(), block, baseCake, 3, true));
 
                     builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                         add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(
@@ -67,7 +69,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                                 .add(LootItem.lootTableItem(candle)), block)
                                 ), block, baseCake, 3, true
                         ));
-                        knownBlocks.add(candleCake.get());
+                        KNOWN_BLOCKS.add(candleCake.get());
                     });
                 }
             }
@@ -76,8 +78,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        knownBlocks.add(ModBlocks.CAKE_OVEN.get());
-        knownBlocks.add(ModBlocks.CAKE_STAND.get());
-        return knownBlocks;
+        KNOWN_BLOCKS.add(ModBlocks.CAKE_OVEN.get());
+        KNOWN_BLOCKS.add(ModBlocks.CAKE_STAND.get());
+        return KNOWN_BLOCKS;
     }
 }

@@ -3,6 +3,15 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "jmc:three_tiered_seed_cake",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "half": "upper"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
