@@ -1,5 +1,6 @@
 package einstein.jmc.block.cake;
 
+import einstein.jmc.block.cake.effects.CakeEffects;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;
@@ -18,8 +19,8 @@ public class CreeperTwoTieredCakeBlock extends BaseTwoTieredCakeBlock {
     }
 
     @Override
-    public void applyEffects(Player player) {
-        List<MobEffectHolder> holders = justMoreCakes$getCakeEffects().mobEffects();
+    public void applyEffects(Player player, CakeEffects effects) {
+        List<MobEffectHolder> holders = effects.mobEffects();
         Util.applyEffectFromHolder(holders.get(player.getRandom().nextInt(holders.size())), player);
     }
 

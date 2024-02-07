@@ -171,8 +171,9 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         state = eatActions(player, pos, state);
 
         if (!level.isClientSide()) {
-            if (justMoreCakes$getCakeEffects() != null) {
-                applyEffects(player);
+            CakeEffects effects = justMoreCakes$getCakeEffects();
+            if (effects != null) {
+                applyEffects(player, effects);
             }
         }
 
@@ -194,8 +195,8 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         return InteractionResult.SUCCESS;
     }
 
-    public void applyEffects(Player player) {
-        for (MobEffectHolder holder : justMoreCakes$getCakeEffects().mobEffects()) {
+    public void applyEffects(Player player, CakeEffects effects) {
+        for (MobEffectHolder holder : effects.mobEffects()) {
             applyEffectFromHolder(holder, player);
         }
     }
