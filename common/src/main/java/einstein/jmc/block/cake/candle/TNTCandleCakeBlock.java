@@ -5,15 +5,18 @@ import einstein.jmc.block.entity.TNTCakeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 import static einstein.jmc.block.cake.TNTCakeBlock.explodeIfAllowed;
 
 @SuppressWarnings("deprecation")
-public class TNTCandleCakeBlock extends BaseEntityCandleCakeBlock<TNTCakeBlockEntity> {
+public class TNTCandleCakeBlock extends BaseCandleCakeBlock implements EntityBlock {
 
     public TNTCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
-        super(originalCake, candle, properties, TNTCakeBlockEntity::new);
+        super(originalCake, candle, properties);
     }
 
     @Override
@@ -24,5 +27,11 @@ public class TNTCandleCakeBlock extends BaseEntityCandleCakeBlock<TNTCakeBlockEn
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         explodeIfAllowed(level, pos);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new TNTCakeBlockEntity(pos, state);
     }
 }
