@@ -66,20 +66,22 @@ public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
 
         if (family != null) {
             if (stack.is(family.getBaseCake().get().asItem()) && isUneaten(state, pos, level)) {
-                BlockState newState = family.getThreeTieredCake().get().defaultBlockState();
                 BlockPos abovePos = pos.above();
+                if (level.getBlockState(abovePos).canBeReplaced()) {
+                    BlockState newState = family.getThreeTieredCake().get().defaultBlockState();
 
-                level.setBlockAndUpdate(abovePos, newState);
-                level.setBlockAndUpdate(pos, BaseThreeTieredCakeBlock.createLowerState(newState.getBlock(), true));
-                Block.pushEntitiesUp(Blocks.AIR.defaultBlockState(), newState, level, abovePos);
-                level.gameEvent(player, GameEvent.BLOCK_CHANGE, abovePos);
-                level.playSound(null, abovePos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);
-                player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
+                    level.setBlockAndUpdate(abovePos, newState);
+                    level.setBlockAndUpdate(pos, BaseThreeTieredCakeBlock.createLowerState(newState.getBlock(), true));
+                    Block.pushEntitiesUp(Blocks.AIR.defaultBlockState(), newState, level, abovePos);
+                    level.gameEvent(player, GameEvent.BLOCK_CHANGE, abovePos);
+                    level.playSound(null, abovePos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);
+                    player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
 
-                if (!player.isCreative()) {
-                    stack.shrink(1);
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                    }
+                    return InteractionResult.SUCCESS;
                 }
-                return InteractionResult.SUCCESS;
             }
         }
         return super.use(state, level, pos, player, hand, hitResult);
