@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.block.cake.effects.CakeEffects;
+import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.util.CakeFamily;
 import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;

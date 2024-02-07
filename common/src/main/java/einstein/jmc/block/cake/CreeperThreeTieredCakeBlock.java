@@ -1,6 +1,6 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.block.cake.effects.CakeEffects;
+import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;

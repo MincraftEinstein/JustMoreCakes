@@ -1,4 +1,4 @@
-package einstein.jmc.block.cake.effects;
+package einstein.jmc.data.effects;
 
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;

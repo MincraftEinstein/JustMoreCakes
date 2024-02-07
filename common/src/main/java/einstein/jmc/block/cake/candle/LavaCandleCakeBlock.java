@@ -28,13 +28,13 @@ public class LavaCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
-        super.animateTick(state, level, pos, rand);
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        super.animateTick(state, level, pos, random);
         if (ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
-            if (rand.nextInt(10) == 0) {
-                double x = pos.getX() + rand.nextDouble();
+            if (random.nextInt(10) == 0) {
+                double x = pos.getX() + random.nextDouble();
                 double y = pos.getY() + 1;
-                double z = pos.getZ() + rand.nextDouble();
+                double z = pos.getZ() + random.nextDouble();
                 level.addParticle(ParticleTypes.LAVA, x, y, z, 0, 0, 0);
             }
         }

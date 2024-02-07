@@ -3,7 +3,7 @@ package einstein.jmc.block.cake;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
-import einstein.jmc.block.cake.effects.CakeEffects;
+import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.init.ModCommonConfigs;

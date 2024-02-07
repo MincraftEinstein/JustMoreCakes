@@ -3,7 +3,7 @@ package einstein.jmc.mixin;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.block.cake.effects.CakeEffects;
+import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;

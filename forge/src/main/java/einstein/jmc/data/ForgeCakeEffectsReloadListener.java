@@ -1,7 +1,7 @@
 package einstein.jmc.data;
 
 import com.google.gson.JsonElement;
-import einstein.jmc.block.cake.effects.CakeEffectsManager;
+import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.util.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;

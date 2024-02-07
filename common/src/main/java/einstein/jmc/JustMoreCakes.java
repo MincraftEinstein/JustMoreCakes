@@ -2,7 +2,7 @@ package einstein.jmc;
 
 import einstein.jmc.advancement.criterian.CakeEatenTrigger;
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.block.cake.effects.CakeEffectsManager;
+import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeBuilder;

@@ -2,7 +2,7 @@ package einstein.jmc.network.packet;
 
 import com.mojang.datafixers.util.Pair;
 import einstein.jmc.block.CakeEffectsHolder;
-import einstein.jmc.block.cake.effects.CakeEffectsManager;
+import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.network.Packet;
 import einstein.jmc.util.CakeFamily;
 import net.minecraft.core.registries.BuiltInRegistries;

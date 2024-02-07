@@ -1,4 +1,4 @@
-package einstein.jmc.block.cake.effects;
+package einstein.jmc.data.effects;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;

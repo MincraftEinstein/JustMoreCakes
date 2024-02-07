@@ -2,7 +2,7 @@ package einstein.jmc.util;
 
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.block.cake.effects.CakeEffects;
+import einstein.jmc.data.effects.CakeEffects;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
