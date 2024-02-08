@@ -26,7 +26,7 @@ public class ModLootModifiersProvider extends GlobalLootModifierProvider {
         for (Block cake : cakes) {
             add(Util.getBlockId(cake).getPath(), new AddItemLootModifier(new LootItemCondition[]{
                     new LootTableIdCondition.Builder(cake.getLootTable()).build(),
-                    Util.HAS_CAKE_SPATULA.build()
+                    Util.HAS_CAKE_SPATULA.get().build()
             }, Blocks.CAKE));
         }
     }

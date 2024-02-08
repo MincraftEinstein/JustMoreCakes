@@ -64,7 +64,7 @@ public class Util {
 
     public static final Gson GSON = new GsonBuilder().create();
     public static final Random RANDOM = new Random();
-    public static final LootItemCondition.Builder HAS_CAKE_SPATULA = MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModItems.CAKE_SPATULA.get()));
+    public static final Supplier<LootItemCondition.Builder> HAS_CAKE_SPATULA = () -> MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModItems.CAKE_SPATULA.get()));
     public static final ImmutableMap<Block, Block> VANILLA_CANDLE_CAKES_BY_CANDLE = new ImmutableMap.Builder<Block, Block>()
             .put(Blocks.CANDLE, Blocks.CANDLE_CAKE)
             .put(Blocks.WHITE_CANDLE, Blocks.WHITE_CANDLE_CAKE)
@@ -245,7 +245,7 @@ public class Util {
     public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, @Nullable Block block, Block dropped, int count, boolean addHalfCondition) {
         LootPool.Builder pool = LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(count))
-                .add(LootItem.lootTableItem(dropped).when(HAS_CAKE_SPATULA));
+                .add(LootItem.lootTableItem(dropped).when(HAS_CAKE_SPATULA.get()));
 
         if (addHalfCondition) {
             pool = addHalfConditionToPool(pool, block);
