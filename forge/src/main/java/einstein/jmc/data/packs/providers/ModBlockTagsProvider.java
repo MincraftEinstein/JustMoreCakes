@@ -6,7 +6,7 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
-import einstein.jmc.util.CakeVariant;
+import einstein.jmc.util.CakeStyle;
 import einstein.jmc.util.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -42,9 +42,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         Map<Supplier<BaseCakeBlock>, CakeBuilder> sortedCakes = Util.createValueSortedMap(CakeBuilder.BUILDER_BY_CAKE, Comparator.comparing(CakeBuilder::getCakeName));
 
         sortedCakes.forEach((cake, builder) -> {
-            CakeVariant variant = builder.getVariant();
+            CakeStyle style = builder.getStyle();
 
-            switch (variant) {
+            switch (style) {
                 case BASE -> tag(ModBlockTags.BASE_CAKES).add(cake.get());
                 case TWO_TIERED -> tag(ModBlockTags.TWO_TIERED_CAKES).add(cake.get());
                 case THREE_TIERED -> tag(ModBlockTags.THREE_TIERED_CAKES).add(cake.get());
@@ -52,7 +52,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
             Map<Block, Supplier<BaseCandleCakeBlock>> sortedCandleCakes = Util.createKeySortedMap(builder.getCandleCakeByCandle(), Comparator.comparing(o -> o.getName().toString()));
             sortedCandleCakes.forEach((candle, candleCake) -> {
-                switch (variant) {
+                switch (style) {
                     case BASE -> tag(ModBlockTags.BASE_CANDLE_CAKES).add(candleCake.get());
                     case TWO_TIERED -> tag(ModBlockTags.TWO_TIERED_CANDLE_CAKES).add(candleCake.get());
                     case THREE_TIERED -> tag(ModBlockTags.THREE_TIERED_CANDLE_CAKES).add(candleCake.get());

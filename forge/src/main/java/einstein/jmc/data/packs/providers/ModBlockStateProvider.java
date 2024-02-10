@@ -11,7 +11,7 @@ import einstein.jmc.block.cake.candle.BaseTwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
 import einstein.jmc.util.CakeModel;
-import einstein.jmc.util.CakeVariant;
+import einstein.jmc.util.CakeStyle;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.AbstractCandleBlock;
@@ -41,7 +41,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             BaseCakeBlock cakeBlock = cake.get();
-            CakeVariant variant = builder.getVariant();
+            CakeStyle style = builder.getStyle();
             CakeModel cakeModel = builder.getCakeModel();
             CakeModel candleCakeModel = builder.getCandleCakeModel();
             String cakeName = builder.getCakeName();
@@ -49,14 +49,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
             if (cakeModel != CakeModel.CUSTOM) {
                 if (cakeModel == CakeModel.DEFAULT) {
-                    switch (variant) {
+                    switch (style) {
                         case BASE -> createCake(cakeBlock, texturePrefix, cakeName, null);
                         case TWO_TIERED -> createTwoTieredCake(cakeBlock, texturePrefix, cakeName, null);
                         case THREE_TIERED -> createThreeTieredCake(cakeBlock, texturePrefix, cakeName, null);
                     }
                 }
                 else if (cakeModel == CakeModel.FROM_VANILLA) {
-                    switch (variant) {
+                    switch (style) {
                         case BASE -> createFromVanillaCake(cakeBlock, 7, mcLoc("cake"));
                         case TWO_TIERED -> createFromVanillaCake(cakeBlock, 10, modLoc("two_tiered_cake"));
                         case THREE_TIERED -> {
@@ -86,7 +86,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     }
                 }
                 else if (cakeModel instanceof CakeModel.CrossCakeModel crossModel) {
-                    switch (variant) {
+                    switch (style) {
                         case BASE -> createCake(cakeBlock, texturePrefix, cakeName, crossModel.crossTexture());
                         case TWO_TIERED -> createTwoTieredCake(cakeBlock, texturePrefix, cakeName, crossModel.crossTexture());
                         case THREE_TIERED -> createThreeTieredCake(cakeBlock, texturePrefix, cakeName, crossModel.crossTexture());
@@ -101,7 +101,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     VariantBlockStateBuilder variantBuilder = getVariantBuilder(candleCakeBlock);
 
                     if (candleCakeModel == CakeModel.FROM_VANILLA) {
-                        switch (variant) {
+                        switch (style) {
                             case BASE -> {
                                 createFromVanillaCandleCake(variantBuilder.partialState(), candleType, candleType.getNamespace(), "cake", true);
                                 createFromVanillaCandleCake(variantBuilder.partialState(), candleType, candleType.getNamespace(), "cake", false);
@@ -122,7 +122,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         throw new IllegalArgumentException("Cannot have a cross model candle cake");
                     }
                     else {
-                        switch (variant) {
+                        switch (style) {
                             case BASE -> {
                                 addVariant(variantBuilder, candleType, texturePrefix, cakeName, true);
                                 addVariant(variantBuilder, candleType, texturePrefix, cakeName, false);

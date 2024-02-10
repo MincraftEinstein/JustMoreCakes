@@ -3,7 +3,7 @@ package einstein.jmc.data.packs;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
-import einstein.jmc.util.CakeVariant;
+import einstein.jmc.util.CakeStyle;
 import einstein.jmc.util.Util;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -34,10 +34,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             BaseCakeBlock cakeBlock = cake.get();
-            CakeVariant variant = builder.getVariant();
+            CakeStyle style = builder.getStyle();
 
             KNOWN_BLOCKS.add(cakeBlock);
-            switch (variant) {
+            switch (style) {
                 case BASE -> {
                     add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), cakeBlock));
 

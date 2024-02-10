@@ -2,7 +2,7 @@ package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.CakeBuilder;
-import einstein.jmc.util.CakeVariant;
+import einstein.jmc.util.CakeStyle;
 import einstein.jmc.util.Util;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
@@ -27,9 +27,9 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
 
         CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
             Block cakeBlock = cake.get();
-            CakeVariant variant = builder.getVariant();
+            CakeStyle style = builder.getStyle();
 
-            switch (variant) {
+            switch (style) {
                 case BASE -> {
                     add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), cakeBlock));
 

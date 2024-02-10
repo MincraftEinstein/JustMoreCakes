@@ -47,7 +47,7 @@ public class CakeBuilder {
     });
 
     private final String cakeName;
-    private final CakeVariant variant;
+    private final CakeStyle style;
     private final Map<Block, Supplier<BaseCandleCakeBlock>> candleCakeByCandle = new HashMap<>();
     private boolean canAlwaysEat;
     private boolean allowsCandles = true;
@@ -64,12 +64,12 @@ public class CakeBuilder {
     private CakeFamily family;
 
     public CakeBuilder(String cakeName) {
-        this(cakeName, CakeVariant.BASE);
+        this(cakeName, CakeStyle.BASE);
     }
 
-    public CakeBuilder(String cakeName, CakeVariant variant) {
+    public CakeBuilder(String cakeName, CakeStyle style) {
         this.cakeName = cakeName;
-        this.variant = variant;
+        this.style = style;
     }
 
     public <T extends BaseCakeBlock> CakeBuilder setCakeClass(CakeClazzSupplier<T> clazz) {
@@ -145,7 +145,7 @@ public class CakeBuilder {
 
     public Supplier<BaseCakeBlock> build() {
         if (cakeClazz == null) {
-            cakeClazz = switch (variant) {
+            cakeClazz = switch (style) {
                 case BASE -> BaseCakeBlock::new;
                 case TWO_TIERED -> BaseTwoTieredCakeBlock::new;
                 case THREE_TIERED -> BaseThreeTieredCakeBlock::new;
@@ -160,7 +160,7 @@ public class CakeBuilder {
 
         if (allowsCandles) {
             if (candleCakeClazz == null) {
-                candleCakeClazz = switch (variant) {
+                candleCakeClazz = switch (style) {
                     case BASE -> BaseCandleCakeBlock::new;
                     case TWO_TIERED -> BaseTwoTieredCandleCakeBlock::new;
                     case THREE_TIERED -> BaseThreeTieredCandleCakeBlock::new;
@@ -186,8 +186,8 @@ public class CakeBuilder {
         return cakeName;
     }
 
-    public CakeVariant getVariant() {
-        return variant;
+    public CakeStyle getStyle() {
+        return style;
     }
 
     public Map<Block, Supplier<BaseCandleCakeBlock>> getCandleCakeByCandle() {

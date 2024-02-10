@@ -330,7 +330,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public boolean isBaseCake() {
-        return builder.getVariant() == CakeVariant.BASE;
+        return builder.getStyle() == CakeStyle.BASE;
     }
 
     @Nullable

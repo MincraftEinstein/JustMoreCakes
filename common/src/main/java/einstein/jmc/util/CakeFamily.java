@@ -38,8 +38,8 @@ public abstract class CakeFamily implements CakeEffectsHolder {
         this.baseCakeName = baseCakeName;
 
         baseBuilder = new CakeBuilder(baseCakeName).setFamily(this);
-        twoTieredBuilder = new CakeBuilder("two_tiered_" + baseCakeName, CakeVariant.TWO_TIERED).setFamily(this);
-        threeTieredBuilder = new CakeBuilder("three_tiered_" + baseCakeName, CakeVariant.THREE_TIERED).setFamily(this);
+        twoTieredBuilder = new CakeBuilder("two_tiered_" + baseCakeName, CakeStyle.TWO_TIERED).setFamily(this);
+        threeTieredBuilder = new CakeBuilder("three_tiered_" + baseCakeName, CakeStyle.THREE_TIERED).setFamily(this);
     }
 
     public final ResourceLocation getRegistryKey() {
