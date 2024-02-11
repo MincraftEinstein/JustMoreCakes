@@ -47,7 +47,7 @@ public class CakeVariant {
     });
 
     private final String cakeName;
-    private final CakeStyle style;
+    private final CakeVariantType type;
     private final Map<Block, Supplier<BaseCandleCakeBlock>> candleCakeByCandle = new HashMap<>();
     private boolean canAlwaysEat;
     private boolean allowsCandles = true;
@@ -62,25 +62,25 @@ public class CakeVariant {
     private CakeFamily family;
     private Supplier<BaseCakeBlock> cake;
 
-    private CakeVariant(String cakeName, CakeStyle style) {
+    private CakeVariant(String cakeName, CakeVariantType type) {
         this.cakeName = cakeName;
-        this.style = style;
+        this.type = type;
     }
 
     public static Builder create(String cakeName) {
-        return create(cakeName, CakeStyle.BASE);
+        return create(cakeName, CakeVariantType.BASE);
     }
 
-    public static Builder create(String cakeName, CakeStyle style) {
-        return new Builder(cakeName, style);
+    public static Builder create(String cakeName, CakeVariantType type) {
+        return new Builder(cakeName, type);
     }
 
     public String getCakeName() {
         return cakeName;
     }
 
-    public CakeStyle getStyle() {
-        return style;
+    public CakeVariantType getType() {
+        return type;
     }
 
     public Map<Block, Supplier<BaseCandleCakeBlock>> getCandleCakeByCandle() {
@@ -138,8 +138,8 @@ public class CakeVariant {
         private CakeClazzSupplier<?> cakeClazz;
         private CandleCakeClazzSupplier<?> candleCakeClazz;
 
-        private Builder(String cakeName, CakeStyle style) {
-            variant = new CakeVariant(cakeName, style);
+        private Builder(String cakeName, CakeVariantType type) {
+            variant = new CakeVariant(cakeName, type);
         }
 
         public <T extends BaseCakeBlock> Builder cakeClass(CakeClazzSupplier<T> clazz) {
@@ -215,7 +215,7 @@ public class CakeVariant {
 
         public CakeVariant build() {
             if (cakeClazz == null) {
-                cakeClazz = switch (variant.style) {
+                cakeClazz = switch (variant.type) {
                     case BASE -> BaseCakeBlock::new;
                     case TWO_TIERED -> BaseTwoTieredCakeBlock::new;
                     case THREE_TIERED -> BaseThreeTieredCakeBlock::new;
@@ -230,7 +230,7 @@ public class CakeVariant {
 
             if (variant.allowsCandles) {
                 if (candleCakeClazz == null) {
-                    candleCakeClazz = switch (variant.style) {
+                    candleCakeClazz = switch (variant.type) {
                         case BASE -> BaseCandleCakeBlock::new;
                         case TWO_TIERED -> BaseTwoTieredCandleCakeBlock::new;
                         case THREE_TIERED -> BaseThreeTieredCandleCakeBlock::new;

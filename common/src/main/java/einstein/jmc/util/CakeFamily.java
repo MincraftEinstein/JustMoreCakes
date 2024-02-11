@@ -119,8 +119,8 @@ public abstract class CakeFamily implements CakeEffectsHolder {
         protected Builder(T family) {
             this.family = family;
             baseVariantBuilder = CakeVariant.create(family.getBaseCakeName()).setFamily(family);
-            twoTieredVariantBuilder = CakeVariant.create("two_tiered_" + family.getBaseCakeName(), CakeStyle.TWO_TIERED).setFamily(family);
-            threeTieredVariantBuilder = CakeVariant.create("three_tiered_" + family.getBaseCakeName(), CakeStyle.THREE_TIERED).setFamily(family);
+            twoTieredVariantBuilder = CakeVariant.create("two_tiered_" + family.getBaseCakeName(), CakeVariantType.TWO_TIERED).setFamily(family);
+            threeTieredVariantBuilder = CakeVariant.create("three_tiered_" + family.getBaseCakeName(), CakeVariantType.THREE_TIERED).setFamily(family);
         }
 
         public T build() {

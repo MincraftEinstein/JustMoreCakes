@@ -121,7 +121,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             }
         }
 
-        if (family != null && isBaseCake()) {
+        if (family != null && isBaseVariant()) {
             if (stack.is(family.getBaseCake().get().asItem()) && isUneaten(state, pos, level)) {
                 BlockState newState = family.getTwoTieredCake().get().defaultBlockState();
 
@@ -329,8 +329,8 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         return variant.getFamily();
     }
 
-    public boolean isBaseCake() {
-        return variant.getStyle() == CakeStyle.BASE;
+    public boolean isBaseVariant() {
+        return variant.getType() == CakeVariantType.BASE;
     }
 
     @Nullable

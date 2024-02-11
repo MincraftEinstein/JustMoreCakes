@@ -1,6 +1,6 @@
 package einstein.jmc.util;
 
-public enum CakeStyle {
+public enum CakeVariantType {
     BASE,
     TWO_TIERED,
     THREE_TIERED

@@ -11,7 +11,7 @@ import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.CakeModel;
-import einstein.jmc.util.CakeStyle;
+import einstein.jmc.util.CakeVariantType;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -77,7 +77,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             BaseCakeBlock cakeBlock = cake.get();
-            CakeStyle style = variant.getStyle();
+            CakeVariantType variantType = variant.getType();
             CakeModel cakeModel = variant.getCakeModel();
             CakeModel candleCakeModel = variant.getCandleCakeModel();
             String cakeName = variant.getCakeName();
@@ -85,14 +85,14 @@ public class ModModelProvider extends FabricModelProvider {
 
             if (cakeModel != CakeModel.CUSTOM) {
                 if (cakeModel == CakeModel.DEFAULT) {
-                    switch (style) {
+                    switch (variantType) {
                         case BASE -> createCake(generators, cakeBlock, texturePrefix, null);
                         case TWO_TIERED -> createTwoTieredCake(generators, cakeBlock, texturePrefix, null);
                         case THREE_TIERED -> createThreeTieredCake(generators, cakeBlock, texturePrefix, null);
                     }
                 }
                 else if (cakeModel == CakeModel.FROM_VANILLA) {
-                    switch (style) {
+                    switch (variantType) {
                         case BASE -> createFromVanillaCake(generators, cakeBlock, 7, mcBlockLoc("cake"));
                         case TWO_TIERED ->
                                 createFromVanillaCake(generators, cakeBlock, 10, blockLoc("two_tiered_cake"));
@@ -121,7 +121,7 @@ public class ModModelProvider extends FabricModelProvider {
                     }
                 }
                 else if (cakeModel instanceof CakeModel.CrossCakeModel crossModel) {
-                    switch (style) {
+                    switch (variantType) {
                         case BASE -> createCake(generators, cakeBlock, texturePrefix, crossModel.crossTexture());
                         case TWO_TIERED -> createTwoTieredCake(generators, cakeBlock, texturePrefix, crossModel.crossTexture());
                         case THREE_TIERED -> createThreeTieredCake(generators, cakeBlock, texturePrefix, crossModel.crossTexture());
@@ -136,7 +136,7 @@ public class ModModelProvider extends FabricModelProvider {
                     PropertyDispatch.C1<Boolean> dispatch = PropertyDispatch.property(BaseCandleCakeBlock.LIT);
 
                     if (candleCakeModel == CakeModel.FROM_VANILLA) {
-                        switch (style) {
+                        switch (variantType) {
                             case BASE -> {
                                 createFromVanillaCandleCake(dispatch, candleType, candleType.getNamespace(), "cake", true);
                                 createFromVanillaCandleCake(dispatch, candleType, candleType.getNamespace(), "cake", false);
@@ -160,7 +160,7 @@ public class ModModelProvider extends FabricModelProvider {
                         throw new IllegalArgumentException("Cannot have a cross model candle cake");
                     }
                     else {
-                        switch (style) {
+                        switch (variantType) {
                             case BASE -> {
                                 addVariant(generators, dispatch, candleCakeBlock, candle, texturePrefix, true);
                                 addVariant(generators, dispatch, candleCakeBlock, candle, texturePrefix, false);

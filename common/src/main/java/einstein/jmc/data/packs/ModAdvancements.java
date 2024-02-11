@@ -51,7 +51,7 @@ public class ModAdvancements {
         set.addAll(CakeVariant.VARIANT_BY_CAKE.keySet());
 
         for (Supplier<BaseCakeBlock> cake : set) {
-            if (cake.get().isBaseCake()) {
+            if (cake.get().isBaseVariant()) {
                 Item cakeItem = ((ItemLike) cake.get()).asItem();
                 advancement.addCriterion(Util.getBlockId(cake.get()).getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(cakeItem).build()));
             }
