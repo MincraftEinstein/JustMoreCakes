@@ -1,7 +1,7 @@
 package einstein.jmc.block.cake;
 
 import einstein.jmc.block.entity.GlowstoneCakeBlockEntity;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.EntityBlock;
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class GlowstoneThreeTieredCakeBlock extends BaseThreeTieredCakeBlock implements EntityBlock {
 
-    public GlowstoneThreeTieredCakeBlock(CakeBuilder builder) {
+    public GlowstoneThreeTieredCakeBlock(CakeVariant builder) {
         super(builder);
     }
 

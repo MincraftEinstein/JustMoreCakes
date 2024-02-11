@@ -1,6 +1,6 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class SlimeCakeBlock extends BaseCakeBlock {
 
-    public SlimeCakeBlock(CakeBuilder builder) {
+    public SlimeCakeBlock(CakeVariant builder) {
         super(builder);
     }
 

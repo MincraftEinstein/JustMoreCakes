@@ -78,14 +78,14 @@ public class ModJadePlugin implements IWailaPlugin {
                 if (accessor instanceof BlockAccessor blockAccessor) {
                     Block block = blockAccessor.getBlock();
                     BlockState state = blockAccessor.getBlockState();
-                    if (block.equals(ModBlocks.TNT_CAKE.get()) || block.equals(ModBlocks.POISON_CAKE.get())) {
+                    if (block.equals(ModBlocks.TNT_CAKE_VARIANT.getCake().get()) || block.equals(ModBlocks.POISON_CAKE_VARIANT.getCake().get())) {
                         return registration.blockAccessor()
                                 .from(blockAccessor)
                                 .blockEntity(() -> null) // Required for TNT cake to be displayed (idk why)
                                 .blockState(Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, state.getValue(BaseCakeBlock.BITES)))
                                 .build();
                     }
-                    else if (isTrappedCandleCake(block, ModBlocks.TNT_CAKE.get()) || isTrappedCandleCake(block, ModBlocks.POISON_CAKE.get())) {
+                    else if (isTrappedCandleCake(block, ModBlocks.TNT_CAKE_VARIANT.getCake().get()) || isTrappedCandleCake(block, ModBlocks.POISON_CAKE_VARIANT.getCake().get())) {
                         return registration.blockAccessor()
                                 .from(blockAccessor)
                                 .blockEntity(() -> null)
@@ -108,7 +108,7 @@ public class ModJadePlugin implements IWailaPlugin {
 
     private static boolean isTrappedCandleCake(Block block, BaseCakeBlock cake) {
         if (block instanceof BaseCandleCakeBlock candleCake) {
-            return cake.getBuilder().getCandleCakeByCandle().values().stream().map(Supplier::get).toList().contains(candleCake);
+            return cake.getVariant().getCandleCakeByCandle().values().stream().map(Supplier::get).toList().contains(candleCake);
         }
         return false;
     }

@@ -1,6 +1,6 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -24,7 +24,7 @@ public class CupcakeBlock extends BaseCakeBlock {
                     Block.box(8, 5, 7, 9, 6, 9))
     };
 
-    public CupcakeBlock(CakeBuilder builder) {
+    public CupcakeBlock(CakeVariant builder) {
         super(builder, 1);
     }
 

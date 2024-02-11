@@ -2,7 +2,7 @@ package einstein.jmc.block.cake;
 
 import einstein.jmc.block.entity.TNTCakeBlockEntity;
 import einstein.jmc.init.ModCommonConfigs;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("deprecation")
 public class TNTCakeBlock extends BaseCakeBlock implements EntityBlock {
 
-    public TNTCakeBlock(CakeBuilder builder) {
+    public TNTCakeBlock(CakeVariant builder) {
         super(builder);
     }
 

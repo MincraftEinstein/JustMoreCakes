@@ -9,7 +9,7 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseTwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.CakeModel;
 import einstein.jmc.util.CakeStyle;
 import net.minecraft.data.PackOutput;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static einstein.jmc.util.CakeBuilder.SUPPORTED_CANDLES;
+import static einstein.jmc.util.CakeVariant.SUPPORTED_CANDLES;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER;
 
@@ -39,13 +39,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         simpleBlock(ModBlocks.ENCASING_ICE.get(), models().withExistingParent("encasing_ice", mcLoc("ice")).renderType("translucent"));
 
-        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
+        CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             BaseCakeBlock cakeBlock = cake.get();
-            CakeStyle style = builder.getStyle();
-            CakeModel cakeModel = builder.getCakeModel();
-            CakeModel candleCakeModel = builder.getCandleCakeModel();
-            String cakeName = builder.getCakeName();
-            String texturePrefix = builder.getFamily() != null ? builder.getFamily().getBaseCakeName() : builder.getCakeName();
+            CakeStyle style = variant.getStyle();
+            CakeModel cakeModel = variant.getCakeModel();
+            CakeModel candleCakeModel = variant.getCandleCakeModel();
+            String cakeName = variant.getCakeName();
+            String texturePrefix = variant.getFamily() != null ? variant.getFamily().getBaseCakeName() : variant.getCakeName();
 
             if (cakeModel != CakeModel.CUSTOM) {
                 if (cakeModel == CakeModel.DEFAULT) {
@@ -94,8 +94,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 }
             }
 
-            if (candleCakeModel != CakeModel.CUSTOM && builder.allowsCandles()) {
-                builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+            if (candleCakeModel != CakeModel.CUSTOM && variant.allowsCandles()) {
+                variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                     ResourceLocation candleType = SUPPORTED_CANDLES.get(candle);
                     BaseCandleCakeBlock candleCakeBlock = candleCake.get();
                     VariantBlockStateBuilder variantBuilder = getVariantBuilder(candleCakeBlock);

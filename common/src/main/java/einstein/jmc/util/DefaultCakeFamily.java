@@ -10,7 +10,7 @@ import static einstein.jmc.JustMoreCakes.loc;
 
 public class DefaultCakeFamily extends CakeFamily {
 
-    DefaultCakeFamily(String flavorName, boolean noSuffix) {
+    protected DefaultCakeFamily(String flavorName, boolean noSuffix) {
         super(loc(flavorName), flavorName + (noSuffix ? "" : "_cake"));
     }
 
@@ -28,28 +28,27 @@ public class DefaultCakeFamily extends CakeFamily {
         return (Supplier<BaseCakeBlock>) super.getBaseCake();
     }
 
-    public static class Builder {
+    public static class Builder extends CakeFamily.Builder<DefaultCakeFamily> {
 
-        private final DefaultCakeFamily family;
         private BlockBehaviour.Properties cakeProperties;
         private BlockBehaviour.Properties candleCakeProperties;
 
         private Builder(String flavorName, boolean noSuffix) {
-            family = new DefaultCakeFamily(flavorName, noSuffix);
+            super(new DefaultCakeFamily(flavorName, noSuffix));
         }
 
-        public Builder modifyBaseBuilder(Consumer<CakeBuilder> consumer) {
-            consumer.accept(family.baseBuilder);
+        public Builder modifyBaseBuilder(Consumer<CakeVariant.Builder> consumer) {
+            consumer.accept(baseVariantBuilder);
             return this;
         }
 
-        public Builder modifyTwoTieredBuilder(Consumer<CakeBuilder> consumer) {
-            consumer.accept(family.twoTieredBuilder);
+        public Builder modifyTwoTieredBuilder(Consumer<CakeVariant.Builder> consumer) {
+            consumer.accept(twoTieredVariantBuilder);
             return this;
         }
 
-        public Builder modifyThreeTieredBuilder(Consumer<CakeBuilder> consumer) {
-            consumer.accept(family.threeTieredBuilder);
+        public Builder modifyThreeTieredBuilder(Consumer<CakeVariant.Builder> consumer) {
+            consumer.accept(threeTieredVariantBuilder);
             return this;
         }
 
@@ -88,38 +87,39 @@ public class DefaultCakeFamily extends CakeFamily {
             return this;
         }
 
+        @Override
         public DefaultCakeFamily build() {
             if (family.canAlwaysEat) {
-                family.baseBuilder.alwaysEat();
-                family.twoTieredBuilder.alwaysEat();
-                family.threeTieredBuilder.alwaysEat();
+                baseVariantBuilder.alwaysEat();
+                twoTieredVariantBuilder.alwaysEat();
+                threeTieredVariantBuilder.alwaysEat();
             }
 
-            family.baseCake = family.baseBuilder
-                    .setCakeProperties(cakeProperties)
-                    .setCandleCakeProperties(candleCakeProperties)
+            family.baseVariant = baseVariantBuilder
+                    .cakeProperties(cakeProperties)
+                    .candleCakeProperties(candleCakeProperties)
                     .nutrition(family.nutrition)
                     .saturationModifier(family.saturationModifier)
                     .models(family.cakeModel, family.candleCakeModel)
                     .build();
-            family.twoTieredCake = family.twoTieredBuilder
+            family.twoTieredVariant = twoTieredVariantBuilder
                     .noItem()
-                    .setCakeProperties(cakeProperties)
-                    .setCandleCakeProperties(candleCakeProperties)
+                    .cakeProperties(cakeProperties)
+                    .candleCakeProperties(candleCakeProperties)
                     .nutrition(family.nutrition)
                     .saturationModifier(family.saturationModifier)
                     .models(family.cakeModel, family.candleCakeModel)
                     .build();
-            family.threeTieredCake = family.threeTieredBuilder
+            family.threeTieredVariant = threeTieredVariantBuilder
                     .noItem()
-                    .setCakeProperties(cakeProperties)
-                    .setCandleCakeProperties(candleCakeProperties)
+                    .cakeProperties(cakeProperties)
+                    .candleCakeProperties(candleCakeProperties)
                     .nutrition(family.nutrition)
                     .saturationModifier(family.saturationModifier)
                     .models(family.cakeModel, family.candleCakeModel)
                     .build();
-            REGISTERED_CAKE_FAMILIES.put(family.getRegistryKey(), family);
-            return family;
+
+            return super.build();
         }
     }
 }

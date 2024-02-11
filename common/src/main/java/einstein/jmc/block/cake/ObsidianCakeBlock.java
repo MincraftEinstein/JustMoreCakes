@@ -1,7 +1,7 @@
 package einstein.jmc.block.cake;
 
 import einstein.jmc.JustMoreCakes;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ObsidianCakeBlock extends BaseCakeBlock {
 
-    public ObsidianCakeBlock(CakeBuilder builder) {
+    public ObsidianCakeBlock(CakeVariant builder) {
         super(builder, 0);
     }
 

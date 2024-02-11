@@ -1,6 +1,6 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class LavaThreeTieredCakeBlock extends BaseThreeTieredCakeBlock {
 
-    public LavaThreeTieredCakeBlock(CakeBuilder builder) {
+    public LavaThreeTieredCakeBlock(CakeVariant builder) {
         super(builder);
     }
 

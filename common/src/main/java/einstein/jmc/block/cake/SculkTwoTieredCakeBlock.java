@@ -2,7 +2,7 @@ package einstein.jmc.block.cake;
 
 import einstein.jmc.init.ModGameEvents;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -27,7 +27,7 @@ public class SculkTwoTieredCakeBlock extends BaseTwoTieredCakeBlock {
 
     public static final EnumProperty<SculkSensorPhase> PHASE = BlockStateProperties.SCULK_SENSOR_PHASE;
 
-    public SculkTwoTieredCakeBlock(CakeBuilder builder) {
+    public SculkTwoTieredCakeBlock(CakeVariant builder) {
         super(builder);
         registerDefaultState(defaultBlockState().setValue(PHASE, SculkSensorPhase.INACTIVE));
     }

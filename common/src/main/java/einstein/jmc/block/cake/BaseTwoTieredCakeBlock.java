@@ -1,9 +1,8 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.CakeFamily;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
@@ -45,7 +43,7 @@ public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
             Block.box(11, 0, 1, 15, 8, 15) //10
     };
 
-    public BaseTwoTieredCakeBlock(CakeBuilder builder) {
+    public BaseTwoTieredCakeBlock(CakeVariant builder) {
         super(builder, 10);
     }
 

@@ -66,17 +66,17 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     private final boolean allowsCandles;
     private final boolean canAlwaysEat;
     private final int slices;
-    private CakeBuilder builder;
+    private CakeVariant variant;
     @Nullable
     private CakeEffects cakeEffects;
 
-    protected BaseCakeBlock(CakeBuilder builder, int slices) {
-        this(builder.getCakeProperties(), builder.allowsCandles(), builder.canAlwaysEat(), slices);
-        this.builder = builder;
+    protected BaseCakeBlock(CakeVariant variant, int slices) {
+        this(variant.getCakeProperties(), variant.allowsCandles(), variant.canAlwaysEat(), slices);
+        this.variant = variant;
     }
 
-    public BaseCakeBlock(CakeBuilder builder) {
-        this(builder, 6);
+    public BaseCakeBlock(CakeVariant variant) {
+        this(variant, 6);
     }
 
     public BaseCakeBlock(Properties properties, boolean allowsCandles, boolean canAlwaysEat, int slices) {
@@ -109,7 +109,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                     }
 
                     level.playSound(null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1, 1);
-                    BaseCandleCakeBlock candleCake = builder.getCandleCakeByCandle().get(block).get();
+                    BaseCandleCakeBlock candleCake = variant.getCandleCakeByCandle().get(block).get();
                     BlockState newState = candleCake.defaultBlockState();
                     level.setBlockAndUpdate(pos, newState);
                     level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
@@ -320,17 +320,17 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         return slices;
     }
 
-    public CakeBuilder getBuilder() {
-        return builder;
+    public CakeVariant getVariant() {
+        return variant;
     }
 
     @Nullable
     public CakeFamily getFamily() {
-        return builder.getFamily();
+        return variant.getFamily();
     }
 
     public boolean isBaseCake() {
-        return builder.getStyle() == CakeStyle.BASE;
+        return variant.getStyle() == CakeStyle.BASE;
     }
 
     @Nullable
@@ -353,15 +353,15 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public int getNutrition() {
-        if (builder != null) {
-            return builder.getNutrition();
+        if (variant != null) {
+            return variant.getNutrition();
         }
         return DEFAULT_NUTRITION;
     }
 
     public float getSaturationModifier() {
-        if (builder != null) {
-            return builder.getSaturationModifier();
+        if (variant != null) {
+            return variant.getSaturationModifier();
         }
         return DEFAULT_SATURATION_MODIFIER;
     }

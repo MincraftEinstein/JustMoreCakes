@@ -2,7 +2,7 @@ package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -30,8 +30,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         getBuilder("cake_oven").parent(getExistingFile(modLoc("block/cake_oven")));
         getBuilder("cake_stand").parent(getExistingFile(modLoc("block/cake_stand")));
 
-        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
-            if (builder.hasItem() && !builder.hasCustomItemModel()) {
+        CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
+            if (variant.hasItem() && !variant.hasCustomItemModel()) {
                 generatedItem(getItemName(cake), modLoc("item/" + Util.getItemId(cake.get().asItem()).getPath()));
             }
         });

@@ -23,7 +23,7 @@ import static einstein.jmc.JustMoreCakes.mcLoc;
 
 public class ModBlocks {
 
-    public static final VanillaCakeFamily VANILLA_CAKE_FAMILY = new VanillaCakeFamily();
+    public static final VanillaCakeFamily VANILLA_CAKE_FAMILY = new VanillaCakeFamily.Builder().build();
     public static final DefaultCakeFamily CHOCOLATE_CAKE_FAMILY = DefaultCakeFamily.create("chocolate").build();
     public static final DefaultCakeFamily CARROT_CAKE_FAMILY = DefaultCakeFamily.create("carrot").build();
     public static final DefaultCakeFamily PUMPKIN_CAKE_FAMILY = DefaultCakeFamily.create("pumpkin").build();
@@ -43,18 +43,18 @@ public class ModBlocks {
             .build();
     public static final DefaultCakeFamily FIREY_CAKE_FAMILY = DefaultCakeFamily.create("firey").build();
     public static final DefaultCakeFamily REDSTONE_CAKE_FAMILY = DefaultCakeFamily.create("redstone")
-            .modifyBaseBuilder(builder -> builder.setBothClasses(RedstoneCakeBlock::new, RedstoneCandleCakeBlock::new))
-            .modifyTwoTieredBuilder(builder -> builder.setBothClasses(RedstoneTwoTieredCakeBlock::new, RedstoneCandleTwoTieredCakeBlock::new))
-            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(RedstoneThreeTieredCakeBlock::new, RedstoneCandleThreeTieredCakeBlock::new))
+            .modifyBaseBuilder(builder -> builder.bothClasses(RedstoneCakeBlock::new, RedstoneCandleCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.bothClasses(RedstoneTwoTieredCakeBlock::new, RedstoneCandleTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.bothClasses(RedstoneThreeTieredCakeBlock::new, RedstoneCandleThreeTieredCakeBlock::new))
             .build();
     public static final DefaultCakeFamily ENDER_CAKE_FAMILY = DefaultCakeFamily.create("ender")
             .alwaysEat()
             .build();
     public static final DefaultCakeFamily CHEESECAKE_FAMILY = DefaultCakeFamily.create("cheesecake", true).build();
     public static final DefaultCakeFamily SLIME_CAKE_FAMILY = DefaultCakeFamily.create("slime")
-            .modifyBaseBuilder(builder -> builder.setBothClasses(SlimeCakeBlock::new, SlimeCandleCakeBlock::new))
-            .modifyTwoTieredBuilder(builder -> builder.setBothClasses(SlimeTwoTieredCakeBlock::new, SlimeCandleTwoTieredCakeBlock::new))
-            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(SlimeThreeTieredCakeBlock::new, SlimeCandleThreeTieredCakeBlock::new))
+            .modifyBaseBuilder(builder -> builder.bothClasses(SlimeCakeBlock::new, SlimeCandleCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.bothClasses(SlimeTwoTieredCakeBlock::new, SlimeCandleTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.bothClasses(SlimeThreeTieredCakeBlock::new, SlimeCandleThreeTieredCakeBlock::new))
             .cakeProperties(cakeProperties().sound(SoundType.SLIME_BLOCK))
             .candleCakeProperties(candleCakeProperties().sound(SoundType.SLIME_BLOCK))
             .build();
@@ -64,16 +64,16 @@ public class ModBlocks {
             .alwaysEat()
             .build();
     public static final DefaultCakeFamily LAVA_CAKE_FAMILY = DefaultCakeFamily.create("lava")
-            .modifyBaseBuilder(builder -> builder.setBothClasses(LavaCakeBlock::new, LavaCandleCakeBlock::new))
-            .modifyTwoTieredBuilder(builder -> builder.setBothClasses(LavaTwoTieredCakeBlock::new, LavaCandleTwoTieredCakeBlock::new))
-            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(LavaThreeTieredCakeBlock::new, LavaCandleThreeTieredCakeBlock::new))
+            .modifyBaseBuilder(builder -> builder.bothClasses(LavaCakeBlock::new, LavaCandleCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.bothClasses(LavaTwoTieredCakeBlock::new, LavaCandleTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.bothClasses(LavaThreeTieredCakeBlock::new, LavaCandleThreeTieredCakeBlock::new))
             .cakeProperties(cakeProperties().lightLevel(state -> 9))
             .candleCakeProperties(candleCakeProperties().lightLevel(state -> 9))
             .build();
     public static final DefaultCakeFamily CREEPER_CAKE_FAMILY = DefaultCakeFamily.create("creeper")
-            .modifyBaseBuilder(builder -> builder.setCakeClass(CreeperCakeBlock::new))
-            .modifyTwoTieredBuilder(builder -> builder.setCakeClass(CreeperTwoTieredCakeBlock::new))
-            .modifyThreeTieredBuilder(builder -> builder.setCakeClass(CreeperThreeTieredCakeBlock::new))
+            .modifyBaseBuilder(builder -> builder.cakeClass(CreeperCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.cakeClass(CreeperTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.cakeClass(CreeperThreeTieredCakeBlock::new))
             .build();
     public static final DefaultCakeFamily SEED_CAKE_FAMILY = DefaultCakeFamily.create("seed").build();
     public static final DefaultCakeFamily BROWN_MUSHROOM_CAKE_FAMILY = DefaultCakeFamily.create("brown_mushroom")
@@ -92,9 +92,9 @@ public class ModBlocks {
             .saturationModifier(0.4F)
             .build();
     public static final DefaultCakeFamily GLOWSTONE_CAKE_FAMILY = DefaultCakeFamily.create("glowstone")
-            .modifyBaseBuilder(builder -> builder.setBothClasses(GlowstoneCakeBlock::new, GlowstoneCandleCakeBlock::new))
-            .modifyTwoTieredBuilder(builder -> builder.setBothClasses(GlowstoneTwoTieredCakeBlock::new, GlowstoneCandleTwoTieredCakeBlock::new))
-            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(GlowstoneThreeTieredCakeBlock::new, GlowstoneCandleThreeTieredCakeBlock::new))
+            .modifyBaseBuilder(builder -> builder.bothClasses(GlowstoneCakeBlock::new, GlowstoneCandleCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.bothClasses(GlowstoneTwoTieredCakeBlock::new, GlowstoneCandleTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.bothClasses(GlowstoneThreeTieredCakeBlock::new, GlowstoneCandleThreeTieredCakeBlock::new))
             .cakeProperties(cakeProperties().lightLevel(state -> 12))
             .candleCakeProperties(candleCakeProperties().lightLevel(state -> 12))
             .build();
@@ -108,9 +108,9 @@ public class ModBlocks {
             .candleCakeProperties(candleCakeProperties().lightLevel(state -> 7))
             .build();
     public static final DefaultCakeFamily OBSIDIAN_CAKE_FAMILY = DefaultCakeFamily.create("obsidian")
-            .modifyBaseBuilder(builder -> builder.setCakeClass(ObsidianCakeBlock::new))
-            .modifyTwoTieredBuilder(builder -> builder.setCakeClass(ObsidianTwoTieredCakeBlock::new))
-            .modifyThreeTieredBuilder(builder -> builder.setCakeClass(ObsidianThreeTieredCakeBlock::new))
+            .modifyBaseBuilder(builder -> builder.cakeClass(ObsidianCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.cakeClass(ObsidianTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.cakeClass(ObsidianThreeTieredCakeBlock::new))
             .cakeProperties(cakeProperties().sound(SoundType.STONE).strength(12.5F, 300).pushReaction(PushReaction.BLOCK))
             .candleCakeProperties(candleCakeProperties().sound(SoundType.STONE).strength(12.5F, 300).pushReaction(PushReaction.BLOCK))
             .nutrition(0)
@@ -118,26 +118,26 @@ public class ModBlocks {
             .alwaysEat()
             .build();
     public static final DefaultCakeFamily SCULK_CAKE_FAMILY = DefaultCakeFamily.create("sculk")
-            .modifyBaseBuilder(builder -> builder.setCakeClass(SculkCakeBlock::new))
-            .modifyTwoTieredBuilder(builder -> builder.setCakeClass(SculkTwoTieredCakeBlock::new))
-            .modifyThreeTieredBuilder(builder -> builder.setBothClasses(SculkThreeTieredCakeBlock::new, SculkCandleThreeTieredCakeBlock::new))
+            .modifyBaseBuilder(builder -> builder.cakeClass(SculkCakeBlock::new))
+            .modifyTwoTieredBuilder(builder -> builder.cakeClass(SculkTwoTieredCakeBlock::new))
+            .modifyThreeTieredBuilder(builder -> builder.bothClasses(SculkThreeTieredCakeBlock::new, SculkCandleThreeTieredCakeBlock::new))
             .cakeProperties(cakeProperties().lightLevel(state -> 1)
                     .emissiveRendering((state, getter, pos) -> SculkSensorBlock.getPhase(state) == SculkSensorPhase.ACTIVE))
             .models(CakeModel.CUSTOM, CakeModel.DEFAULT)
             .alwaysEat()
             .build();
 
-    public static final Supplier<BaseCakeBlock> POISON_CAKE = new CakeBuilder("poison_cake")
+    public static final CakeVariant POISON_CAKE_VARIANT = CakeVariant.create("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
             .build();
-    public static final Supplier<BaseCakeBlock> TNT_CAKE = new CakeBuilder("tnt_cake")
-            .setBothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
+    public static final CakeVariant TNT_CAKE_VARIANT = CakeVariant.create("tnt_cake")
+            .bothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
             .customItemModel()
             .build();
-    public static final Supplier<BaseCakeBlock> CUPCAKE = new CakeBuilder("cupcake")
-            .setCakeClass(CupcakeBlock::new)
+    public static final CakeVariant CUPCAKE_VARIANT = CakeVariant.create("cupcake")
+            .cakeClass(CupcakeBlock::new)
             .model(CakeModel.CUSTOM)
             .disallowCandles()
             .noItem()

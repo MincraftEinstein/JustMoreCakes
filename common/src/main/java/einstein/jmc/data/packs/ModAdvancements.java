@@ -4,7 +4,7 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.advancement.criterian.CakeEatenTrigger;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -40,15 +40,15 @@ public class ModAdvancements {
                 .parent(craftCake)
                 .requirements(AdvancementRequirements.Strategy.OR)
                 .display(ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get(), translatable("eat_obsidian_cake.title"), translatable("eat_obsidian_cake.description"), null, FrameType.TASK, true, true, false);
-        ModBlocks.OBSIDIAN_CAKE_FAMILY.forEach(cake -> eatObsidianCakeBuilder.addCriterion(cake.get().getBuilder().getCakeName() + "_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(Util.getBlockId(cake.get()))));
+        ModBlocks.OBSIDIAN_CAKE_FAMILY.forEach(cake -> eatObsidianCakeBuilder.addCriterion(cake.get().getVariant().getCakeName() + "_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(Util.getBlockId(cake.get()))));
         eatObsidianCakeBuilder.save(consumer, JustMoreCakes.loc("husbandry/eat_obsidian_cake").toString());
     }
 
     private static Advancement.Builder addCakes(Advancement.Builder advancement) {
         advancement.addCriterion("cake", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(Blocks.CAKE).build()));
 
-        TreeSet<Supplier<BaseCakeBlock>> set = new TreeSet<>(Comparator.comparing(o -> o.get().getBuilder().getCakeName()));
-        set.addAll(CakeBuilder.BUILDER_BY_CAKE.keySet());
+        TreeSet<Supplier<BaseCakeBlock>> set = new TreeSet<>(Comparator.comparing(o -> o.get().getVariant().getCakeName()));
+        set.addAll(CakeVariant.VARIANT_BY_CAKE.keySet());
 
         for (Supplier<BaseCakeBlock> cake : set) {
             if (cake.get().isBaseCake()) {

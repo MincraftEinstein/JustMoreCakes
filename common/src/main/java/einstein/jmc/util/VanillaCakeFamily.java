@@ -9,18 +9,28 @@ import static einstein.jmc.JustMoreCakes.mcLoc;
 
 public class VanillaCakeFamily extends CakeFamily {
 
-    public VanillaCakeFamily() {
+    private VanillaCakeFamily() {
         super(mcLoc("default"), "cake");
-        baseBuilder = null;
-        baseCake = null;
-        twoTieredCake = twoTieredBuilder.build();
-        threeTieredCake = threeTieredBuilder.build();
-
-        REGISTERED_CAKE_FAMILIES.put(getRegistryKey(), this);
     }
 
     @Override
     public Supplier<? extends Block> getBaseCake() {
         return () -> Blocks.CAKE;
+    }
+
+    public static class Builder extends CakeFamily.Builder<VanillaCakeFamily> {
+
+        public Builder() {
+            super(new VanillaCakeFamily());
+        }
+
+        @Override
+        public VanillaCakeFamily build() {
+            family.baseCake = null;
+            family.baseVariant = null;
+            family.twoTieredVariant = twoTieredVariantBuilder.build();
+            family.threeTieredVariant = threeTieredVariantBuilder.build();
+            return super.build();
+        }
     }
 }

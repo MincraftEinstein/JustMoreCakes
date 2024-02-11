@@ -5,7 +5,7 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.resources.ResourceLocation;
@@ -46,13 +46,13 @@ public class JustMoreCakes {
         Items.CAKE.maxStackSize = 64;
         ModPotions.registerPotionRecipes();
 
-        for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
-            if (cake != ModBlocks.CUPCAKE) {
+        for (Supplier<BaseCakeBlock> cake : CakeVariant.VARIANT_BY_CAKE.keySet()) {
+            if (cake != ModBlocks.CUPCAKE_VARIANT) {
                 Services.HOOKS.registerCompostable(cake.get(), 1);
             }
         }
 
-        Services.HOOKS.registerCompostable(ModBlocks.CUPCAKE.get(), 0.25F);
+        Services.HOOKS.registerCompostable(ModBlocks.CUPCAKE_VARIANT.getCake().get(), 0.25F);
         Services.HOOKS.registerCompostable(ModItems.CREAM_CHEESE.get(), 0.65F);
     }
 

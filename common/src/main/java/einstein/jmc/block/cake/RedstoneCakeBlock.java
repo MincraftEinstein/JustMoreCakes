@@ -1,6 +1,6 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 @SuppressWarnings("deprecation")
 public class RedstoneCakeBlock extends BaseCakeBlock {
 
-    public RedstoneCakeBlock(CakeBuilder builder) {
+    public RedstoneCakeBlock(CakeVariant builder) {
         super(builder);
     }
 

@@ -1,7 +1,7 @@
 package einstein.jmc.block.cake;
 
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -67,7 +67,7 @@ public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
             Block.box(11, 0, 1, 15, 8, 15) //15
     };
 
-    public BaseThreeTieredCakeBlock(CakeBuilder builder) {
+    public BaseThreeTieredCakeBlock(CakeVariant builder) {
         super(builder, 15);
         registerDefaultState(defaultBlockState().setValue(HALF, UPPER));
     }

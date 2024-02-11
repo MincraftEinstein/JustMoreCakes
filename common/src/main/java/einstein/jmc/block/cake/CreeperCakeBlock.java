@@ -1,7 +1,7 @@
 package einstein.jmc.block.cake;
 
 import einstein.jmc.data.effects.CakeEffects;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CreeperCakeBlock extends BaseCakeBlock {
 
-    public CreeperCakeBlock(CakeBuilder builder) {
+    public CreeperCakeBlock(CakeVariant builder) {
         super(builder);
     }
 

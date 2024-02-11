@@ -215,7 +215,7 @@ public class Util {
 
     public static Predicate<ItemStack> isCake() {
         return stack -> {
-            for (Supplier<BaseCakeBlock> cake : CakeBuilder.BUILDER_BY_CAKE.keySet()) {
+            for (Supplier<BaseCakeBlock> cake : CakeVariant.VARIANT_BY_CAKE.keySet()) {
                 if (stack.is(cake.get().asItem())) {
                     return true;
                 }

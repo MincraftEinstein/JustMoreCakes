@@ -25,13 +25,13 @@ public class ModRecipes {
     }
 
     private static void craftingRecipes(RecipeOutput output) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModBlocks.CUPCAKE.get(), 4)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModBlocks.CUPCAKE_VARIANT.getCake().get(), 4)
                 .requires(Items.EGG)
                 .requires(Items.MILK_BUCKET)
                 .requires(Items.WHEAT)
                 .requires(Items.SUGAR)
                 .unlockedBy(has, RecipeProvider.has(Items.EGG))
-                .save(output, craftingLoc(ModBlocks.CUPCAKE));
+                .save(output, craftingLoc(ModBlocks.CUPCAKE_VARIANT.getCake()));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.CREAM_CHEESE.get(), 3)
                 .pattern("###")
@@ -98,13 +98,13 @@ public class ModRecipes {
                 .unlockedBy(has, RecipeProvider.has(Items.APPLE))
                 .save(output, cakeOvenLoc(ModBlocks.APPLE_CAKE_FAMILY));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.POISON_CAKE.get(), 0.5F, 300, RecipeCategory.FOOD, Ingredient.of(Items.SPIDER_EYE), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.POISON_CAKE_VARIANT.getCake().get(), 0.5F, 300, RecipeCategory.FOOD, Ingredient.of(Items.SPIDER_EYE), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET))
                 .unlockedBy(has, RecipeProvider.has(Items.SPIDER_EYE))
-                .save(output, cakeOvenLoc(ModBlocks.POISON_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.POISON_CAKE_VARIANT.getCake()));
 
-        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.TNT_CAKE.get(), 0.4F, 350, RecipeCategory.FOOD, Ingredient.of(Blocks.TNT), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET))
+        CakeOvenRecipeBuilder.cakeBaking(ModBlocks.TNT_CAKE_VARIANT.getCake().get(), 0.4F, 350, RecipeCategory.FOOD, Ingredient.of(Blocks.TNT), Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.MILK_BUCKET))
                 .unlockedBy(has, RecipeProvider.has(Blocks.TNT))
-                .save(output, cakeOvenLoc(ModBlocks.TNT_CAKE));
+                .save(output, cakeOvenLoc(ModBlocks.TNT_CAKE_VARIANT.getCake()));
 
         CakeOvenRecipeBuilder.cakeBaking(ModBlocks.PUMPKIN_CAKE_FAMILY, 0.6F, 250, RecipeCategory.FOOD, Ingredient.of(Blocks.PUMPKIN), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT))
                 .unlockedBy(has, RecipeProvider.has(Blocks.PUMPKIN))

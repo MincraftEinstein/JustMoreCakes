@@ -1,6 +1,6 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +14,7 @@ import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.U
 @SuppressWarnings("deprecation")
 public class RedstoneThreeTieredCakeBlock extends BaseThreeTieredCakeBlock {
 
-    public RedstoneThreeTieredCakeBlock(CakeBuilder builder) {
+    public RedstoneThreeTieredCakeBlock(CakeVariant builder) {
         super(builder);
     }
 

@@ -9,7 +9,7 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.CakeModel;
 import einstein.jmc.util.CakeStyle;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -33,7 +33,7 @@ import java.util.Optional;
 
 import static einstein.jmc.JustMoreCakes.loc;
 import static einstein.jmc.JustMoreCakes.mcLoc;
-import static einstein.jmc.util.CakeBuilder.SUPPORTED_CANDLES;
+import static einstein.jmc.util.CakeVariant.SUPPORTED_CANDLES;
 import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER;
@@ -57,15 +57,15 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerators generators) {
         generators.generateFlatItem(ModItems.CUPCAKE.get(), ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModItems.CREAM_CHEESE.get(), ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(ModBlocks.POISON_CAKE.get().asItem(), Items.CAKE, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(ModBlocks.TNT_CAKE.get().asItem(), Items.CAKE, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModBlocks.POISON_CAKE_VARIANT.getCake().get().asItem(), Items.CAKE, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModBlocks.TNT_CAKE_VARIANT.getCake().get().asItem(), Items.CAKE, ModelTemplates.FLAT_ITEM);
 
         generators.output.accept(loc("item/encasing_ice"), new DelegatedModel(mcBlockLoc("ice")));
         generators.output.accept(loc("item/cake_oven"), new DelegatedModel(blockLoc("cake_oven")));
         generators.output.accept(loc("item/cake_stand"), new DelegatedModel(blockLoc("cake_stand")));
 
-        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
-            if (builder.hasItem() && !builder.hasCustomItemModel()) {
+        CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
+            if (variant.hasItem() && !variant.hasCustomItemModel()) {
                 generators.generateFlatItem(cake.get().asItem(), ModelTemplates.FLAT_ITEM);
             }
         });
@@ -75,13 +75,13 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators generators) {
         generators.createTrivialBlock(ModBlocks.ENCASING_ICE.get(), new TextureMapping(), new ModelTemplate(Optional.of(mcBlockLoc("ice")), Optional.empty()));
 
-        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
+        CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             BaseCakeBlock cakeBlock = cake.get();
-            CakeStyle style = builder.getStyle();
-            CakeModel cakeModel = builder.getCakeModel();
-            CakeModel candleCakeModel = builder.getCandleCakeModel();
-            String cakeName = builder.getCakeName();
-            String texturePrefix = builder.getFamily() != null ? builder.getFamily().getBaseCakeName() : builder.getCakeName();
+            CakeStyle style = variant.getStyle();
+            CakeModel cakeModel = variant.getCakeModel();
+            CakeModel candleCakeModel = variant.getCandleCakeModel();
+            String cakeName = variant.getCakeName();
+            String texturePrefix = variant.getFamily() != null ? variant.getFamily().getBaseCakeName() : variant.getCakeName();
 
             if (cakeModel != CakeModel.CUSTOM) {
                 if (cakeModel == CakeModel.DEFAULT) {
@@ -129,8 +129,8 @@ public class ModModelProvider extends FabricModelProvider {
                 }
             }
 
-            if (candleCakeModel != CakeModel.CUSTOM && builder.allowsCandles()) {
-                builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+            if (candleCakeModel != CakeModel.CUSTOM && variant.allowsCandles()) {
+                variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                     ResourceLocation candleType = SUPPORTED_CANDLES.get(candle);
                     BaseCandleCakeBlock candleCakeBlock = candleCake.get();
                     PropertyDispatch.C1<Boolean> dispatch = PropertyDispatch.property(BaseCandleCakeBlock.LIT);

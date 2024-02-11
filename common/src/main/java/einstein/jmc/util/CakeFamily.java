@@ -19,9 +19,9 @@ public abstract class CakeFamily implements CakeEffectsHolder {
     private final ResourceLocation registryKey;
     private final String baseCakeName;
     @Nullable
-    protected CakeBuilder baseBuilder;
-    protected final CakeBuilder twoTieredBuilder;
-    protected final CakeBuilder threeTieredBuilder;
+    protected CakeVariant baseVariant;
+    protected CakeVariant twoTieredVariant;
+    protected CakeVariant threeTieredVariant;
     protected Supplier<BaseCakeBlock> baseCake;
     protected Supplier<BaseCakeBlock> twoTieredCake;
     protected Supplier<BaseCakeBlock> threeTieredCake;
@@ -36,10 +36,6 @@ public abstract class CakeFamily implements CakeEffectsHolder {
     public CakeFamily(ResourceLocation registryKey, String baseCakeName) {
         this.registryKey = registryKey;
         this.baseCakeName = baseCakeName;
-
-        baseBuilder = new CakeBuilder(baseCakeName).setFamily(this);
-        twoTieredBuilder = new CakeBuilder("two_tiered_" + baseCakeName, CakeStyle.TWO_TIERED).setFamily(this);
-        threeTieredBuilder = new CakeBuilder("three_tiered_" + baseCakeName, CakeStyle.THREE_TIERED).setFamily(this);
     }
 
     public final ResourceLocation getRegistryKey() {
@@ -51,16 +47,16 @@ public abstract class CakeFamily implements CakeEffectsHolder {
     }
 
     @Nullable
-    public CakeBuilder getBaseBuilder() {
-        return baseBuilder;
+    public CakeVariant getBaseVariant() {
+        return baseVariant;
     }
 
-    public CakeBuilder getTwoTieredBuilder() {
-        return twoTieredBuilder;
+    public CakeVariant getTwoTieredVariant() {
+        return twoTieredVariant;
     }
 
-    public CakeBuilder getThreeTieredBuilder() {
-        return threeTieredBuilder;
+    public CakeVariant getThreeTieredVariant() {
+        return threeTieredVariant;
     }
 
     public Supplier<? extends Block> getBaseCake() {
@@ -111,5 +107,31 @@ public abstract class CakeFamily implements CakeEffectsHolder {
     @Override
     public String toString() {
         return "CakeFamily{" + getRegistryKey() + "}";
+    }
+
+    protected abstract static class Builder<T extends CakeFamily> {
+
+        protected final T family;
+        protected final CakeVariant.Builder baseVariantBuilder;
+        protected final CakeVariant.Builder twoTieredVariantBuilder;
+        protected final CakeVariant.Builder threeTieredVariantBuilder;
+
+        protected Builder(T family) {
+            this.family = family;
+            baseVariantBuilder = CakeVariant.create(family.getBaseCakeName()).setFamily(family);
+            twoTieredVariantBuilder = CakeVariant.create("two_tiered_" + family.getBaseCakeName(), CakeStyle.TWO_TIERED).setFamily(family);
+            threeTieredVariantBuilder = CakeVariant.create("three_tiered_" + family.getBaseCakeName(), CakeStyle.THREE_TIERED).setFamily(family);
+        }
+
+        public T build() {
+            if (family.baseVariant != null) {
+                family.baseCake = family.baseVariant.getCake();
+            }
+
+            family.twoTieredCake = family.twoTieredVariant.getCake();
+            family.threeTieredCake = family.threeTieredVariant.getCake();
+            REGISTERED_CAKE_FAMILIES.put(family.getRegistryKey(), family);
+            return family;
+        }
     }
 }

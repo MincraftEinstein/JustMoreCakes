@@ -2,7 +2,7 @@ package einstein.jmc.data.packs;
 
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.CakeStyle;
 import einstein.jmc.util.Util;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -32,36 +32,36 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(ModBlocks.CAKE_OVEN.get());
         dropSelf(ModBlocks.CAKE_STAND.get());
 
-        CakeBuilder.BUILDER_BY_CAKE.forEach((cake, builder) -> {
+        CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             BaseCakeBlock cakeBlock = cake.get();
-            CakeStyle style = builder.getStyle();
+            CakeStyle style = variant.getStyle();
 
             KNOWN_BLOCKS.add(cakeBlock);
             switch (style) {
                 case BASE -> {
                     add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), cakeBlock));
 
-                    builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+                    variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                         add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), cakeBlock));
                         KNOWN_BLOCKS.add(candleCake.get());
                     });
                 }
                 case TWO_TIERED -> {
-                    Block baseCake = builder.getFamily().getBaseCake().get();
+                    Block baseCake = variant.getFamily().getBaseCake().get();
                     add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 2));
 
-                    builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+                    variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                         add(candleCake.get(), block ->
                                 addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), baseCake, 2));
                         KNOWN_BLOCKS.add(candleCake.get());
                     });
                 }
                 case THREE_TIERED -> {
-                    Block baseCake = builder.getFamily().getBaseCake().get();
+                    Block baseCake = variant.getFamily().getBaseCake().get();
                     add(cakeBlock, block ->
                             addDropWhenCakeSpatulaPool(LootTable.lootTable(), block, baseCake, 3, true));
 
-                    builder.getCandleCakeByCandle().forEach((candle, candleCake) -> {
+                    variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                         add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(
                                 LootTable.lootTable().withPool(
                                         Util.addHalfConditionToPool(LootPool.lootPool()

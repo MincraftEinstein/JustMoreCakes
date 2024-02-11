@@ -5,7 +5,7 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.packs.ModItemTags;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.util.CakeBuilder;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -35,9 +35,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        Map<Supplier<BaseCakeBlock>, CakeBuilder> sortedCakes = Util.createValueSortedMap(CakeBuilder.BUILDER_BY_CAKE, Comparator.comparing(CakeBuilder::getCakeName));
+        Map<Supplier<BaseCakeBlock>, CakeVariant> sortedCakes = Util.createValueSortedMap(CakeVariant.VARIANT_BY_CAKE, Comparator.comparing(CakeVariant::getCakeName));
 
-        sortedCakes.forEach((cake, cakeBuilder) -> {
+        sortedCakes.forEach((cake, variant) -> {
             if (!cake.get().asItem().equals(Items.AIR)) {
                 tag(ModItemTags.CAKES).add(cake.get().asItem());
             }

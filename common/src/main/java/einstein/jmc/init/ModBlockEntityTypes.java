@@ -20,7 +20,7 @@ import static einstein.jmc.platform.Services.REGISTRY;
 public class ModBlockEntityTypes {
 
     public static final Supplier<BlockEntityType<GlowstoneCakeBlockEntity>> GLOWSTONE_CAKE = registerForFamily("glowstone_cake", GlowstoneCakeBlockEntity::new, ModBlocks.GLOWSTONE_CAKE_FAMILY);
-    public static final Supplier<BlockEntityType<TNTCakeBlockEntity>> TNT_CAKE = registerForCake("tnt_cake", TNTCakeBlockEntity::new, ModBlocks.TNT_CAKE);
+    public static final Supplier<BlockEntityType<TNTCakeBlockEntity>> TNT_CAKE = registerForCake("tnt_cake", TNTCakeBlockEntity::new, ModBlocks.TNT_CAKE_VARIANT.getCake());
     public static final Supplier<BlockEntityType<CakeOvenBlockEntity>> CAKE_OVEN = register("cake_oven", CakeOvenBlockEntity::new, ModBlocks.CAKE_OVEN);
     public static final Supplier<BlockEntityType<CakeStandBlockEntity>> CAKE_STAND = register("cake_stand", CakeStandBlockEntity::new, ModBlocks.CAKE_STAND);
 
@@ -32,7 +32,7 @@ public class ModBlockEntityTypes {
             List<Supplier<? extends Block>> cakes = new ArrayList<>();
             family.forEach(cake -> {
                 cakes.add(cake);
-                cakes.addAll(cake.get().getBuilder().getCandleCakeByCandle().values());
+                cakes.addAll(cake.get().getVariant().getCandleCakeByCandle().values());
             });
             return REGISTRY.createBlockEntity(supplier, cakes.stream().map(Supplier::get).toArray(Block[]::new));
         });
@@ -40,7 +40,7 @@ public class ModBlockEntityTypes {
 
     private static <T extends BlockEntity> Supplier<BlockEntityType<T>> registerForCake(String name, BlockEntitySupplier<T> supplier, Supplier<? extends BaseCakeBlock> cake) {
         return REGISTRY.registerBlockEntity(name, () -> {
-            List<Supplier<? extends Block>> cakes = new ArrayList<>(cake.get().getBuilder().getCandleCakeByCandle().values());
+            List<Supplier<? extends Block>> cakes = new ArrayList<>(cake.get().getVariant().getCandleCakeByCandle().values());
             cakes.add(cake);
             return REGISTRY.createBlockEntity(supplier, cakes.stream().map(Supplier::get).toArray(Block[]::new));
         });
