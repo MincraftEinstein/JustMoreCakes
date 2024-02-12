@@ -2,6 +2,7 @@ package einstein.jmc.init;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
+import static einstein.jmc.init.ModCommonConfigs.categoryKey;
 import static einstein.jmc.init.ModCommonConfigs.key;
 
 public class ModClientConfigs {
@@ -9,7 +10,9 @@ public class ModClientConfigs {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
     static {
-        BUILDER.comment("Particle effects emitted from cakes").push("Cake Particles");
+        BUILDER.comment("Particle effects emitted from cakes")
+                .translation(categoryKey("cake_particles"))
+                .push("Cake Particles");
     }
 
     public static final ForgeConfigSpec.BooleanValue REDSTONE_CAKE_PARTICLES = BUILDER

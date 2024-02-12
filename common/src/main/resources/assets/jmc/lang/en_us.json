@@ -133,5 +133,7 @@
   "config.jmc.glowstone_cake_effect_radius": "Glowstone Cake Effect Radius",
   "config.jmc.disable_cake_crafting_recipes": "Disable Cake Crafting Recipes",
   "config.jmc.jade.allow_displaying_cake_effects": "Allow Displaying Cake Effects",
-  "config.jmc.jade.hide_trapped_cakes": "Hide Trapped Cakes"
+  "config.jmc.jade.hide_trapped_cakes": "Hide Trapped Cakes",
+  "config.category.jmc.cake_particles": "Cake Particles",
+  "config.category.jmc.jade_plugin": "Jade Plugin"
 }

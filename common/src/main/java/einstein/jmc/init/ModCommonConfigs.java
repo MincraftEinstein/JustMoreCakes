@@ -53,4 +53,8 @@ public class ModCommonConfigs {
     public static String key(String name) {
         return "config." + JustMoreCakes.MOD_ID + "." + name;
     }
+
+    public static String categoryKey(String name) {
+        return "config.category" + JustMoreCakes.MOD_ID + "." + name;
+    }
 }

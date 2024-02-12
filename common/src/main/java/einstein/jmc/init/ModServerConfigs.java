@@ -2,6 +2,7 @@ package einstein.jmc.init;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
+import static einstein.jmc.init.ModCommonConfigs.categoryKey;
 import static einstein.jmc.init.ModCommonConfigs.key;
 
 public class ModServerConfigs {
@@ -9,7 +10,9 @@ public class ModServerConfigs {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
     static {
-        BUILDER.comment("Configs relating to interactions with the Jade mod").push("Jade Plugin");
+        BUILDER.comment("Configs relating to interactions with the Jade mod")
+                .translation(categoryKey("jade_plugin"))
+                .push("Jade Plugin");
     }
 
     public static final ForgeConfigSpec.BooleanValue ALLOW_DISPLAYING_CAKE_EFFECTS = BUILDER
