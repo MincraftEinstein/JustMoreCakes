@@ -137,10 +137,16 @@ public class BaseThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+    public void spawnCandleFlames(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (state.getValue(HALF) == UPPER) {
-            super.animateTick(state, level, pos, random);
+            super.spawnCandleFlames(state, level, pos, random);
         }
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        spawnCandleFlames(state, level, pos, random);
+        getOriginalCake().animateTick(getOriginalCake().defaultBlockState().setValue(HALF, state.getValue(HALF)), level, pos, random);
     }
 
     @Override

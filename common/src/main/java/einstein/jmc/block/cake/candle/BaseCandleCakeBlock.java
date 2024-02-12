@@ -133,10 +133,14 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
         return false;
     }
 
+    public void spawnCandleFlames(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        super.animateTick(state, level, pos, random);
+    }
+
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        super.animateTick(state, level, pos, random);
-        originalCake.animateTick(state, level, pos, random);
+        spawnCandleFlames(state, level, pos, random);
+        originalCake.animateTick(originalCake.defaultBlockState(), level, pos, random);
     }
 
     protected double getCandleHeight() {
