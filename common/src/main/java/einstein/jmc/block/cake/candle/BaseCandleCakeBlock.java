@@ -4,8 +4,6 @@ import com.google.common.collect.ImmutableList;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -21,8 +19,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -60,30 +56,21 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!stack.is(Items.FLINT_AND_STEEL) && !stack.is(Items.FIRE_CHARGE)) {
-            if (candleHit(hitResult, state) && player.getItemInHand(hand).isEmpty() && state.getValue(LIT)) {
-                extinguish(player, state, level, pos);
-                return InteractionResult.sidedSuccess(level.isClientSide);
-            }
-
-            InteractionResult result = originalCake.eat(level, pos, originalCake.defaultBlockState(), player);
-            if (result.consumesAction()) {
-                dropResources(state, level, pos);
-                afterEaten(state, pos, level, player);
-            }
-            return result;
+        if (stack.is(Items.FLINT_AND_STEEL) || stack.is(Items.FIRE_CHARGE)) {
+            return InteractionResult.PASS;
         }
 
-        if (!state.getValue(LIT)) {
-            level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1, level.getRandom().nextFloat() * 0.4F + 0.8F);
-            level.setBlock(pos, defaultBlockState().setValue(BlockStateProperties.LIT, true), Block.UPDATE_ALL_IMMEDIATE);
-            level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-            stack.hurtAndBreak(1, player, broadcaster -> broadcaster.broadcastBreakEvent(player.getUsedItemHand()));
-
-            return InteractionResult.sidedSuccess(level.isClientSide());
+        if (candleHit(hitResult, state) && stack.isEmpty() && state.getValue(LIT)) {
+            extinguish(player, state, level, pos);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        return InteractionResult.PASS;
+        InteractionResult result = originalCake.eat(level, pos, originalCake.defaultBlockState(), player);
+        if (result.consumesAction()) {
+            dropResources(state, level, pos);
+            afterEaten(state, pos, level, player);
+        }
+        return result;
     }
 
     protected void afterEaten(BlockState state, BlockPos pos, Level level, Player player) {
