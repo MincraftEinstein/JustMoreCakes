@@ -23,6 +23,28 @@ import static einstein.jmc.JustMoreCakes.mcLoc;
 
 public class ModBlocks {
 
+    public static final Supplier<Block> ENCASING_ICE = register("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).friction(0.98F).randomTicks().strength(0.5F).sound(SoundType.GLASS).noLootTable().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never).pushReaction(PushReaction.NORMAL)), true);
+    public static final Supplier<Block> CAKE_OVEN = register("cake_oven", () -> new CakeOvenBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(Blocks.litBlockEmission(13))), true);
+    public static final Supplier<Block> CAKE_STAND = register("cake_stand", () -> new CakeStandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F).noOcclusion()), true);
+
+    public static final CakeVariant POISON_CAKE_VARIANT = CakeVariant.create("poison_cake")
+            .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
+            .customItemModel()
+            .build();
+    public static final CakeVariant TNT_CAKE_VARIANT = CakeVariant.create("tnt_cake")
+            .bothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
+            .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
+            .customItemModel()
+            .build();
+    public static final CakeVariant CUPCAKE_VARIANT = CakeVariant.create("cupcake")
+            .cakeClass(CupcakeBlock::new)
+            .model(CakeModel.CUSTOM)
+            .disallowCandles()
+            .noItem()
+            .nutrition(1)
+            .saturationModifier(0.3F)
+            .build();
+
     public static final VanillaCakeFamily VANILLA_CAKE_FAMILY = new VanillaCakeFamily.Builder().build();
     public static final DefaultCakeFamily CHOCOLATE_CAKE_FAMILY = DefaultCakeFamily.create("chocolate").build();
     public static final DefaultCakeFamily CARROT_CAKE_FAMILY = DefaultCakeFamily.create("carrot").build();
@@ -126,28 +148,6 @@ public class ModBlocks {
             .models(CakeModel.CUSTOM, CakeModel.DEFAULT)
             .alwaysEat()
             .build();
-
-    public static final CakeVariant POISON_CAKE_VARIANT = CakeVariant.create("poison_cake")
-            .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
-            .customItemModel()
-            .build();
-    public static final CakeVariant TNT_CAKE_VARIANT = CakeVariant.create("tnt_cake")
-            .bothClasses(TNTCakeBlock::new, TNTCandleCakeBlock::new)
-            .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)
-            .customItemModel()
-            .build();
-    public static final CakeVariant CUPCAKE_VARIANT = CakeVariant.create("cupcake")
-            .cakeClass(CupcakeBlock::new)
-            .model(CakeModel.CUSTOM)
-            .disallowCandles()
-            .noItem()
-            .nutrition(1)
-            .saturationModifier(0.3F)
-            .build();
-
-    public static final Supplier<Block> ENCASING_ICE = register("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).friction(0.98F).randomTicks().strength(0.5F).sound(SoundType.GLASS).noLootTable().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never).pushReaction(PushReaction.NORMAL)), true);
-    public static final Supplier<Block> CAKE_OVEN = register("cake_oven", () -> new CakeOvenBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(Blocks.litBlockEmission(13))), true);
-    public static final Supplier<Block> CAKE_STAND = register("cake_stand", () -> new CakeStandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F).noOcclusion()), true);
 
     public static <T extends Block> Supplier<T> register(String name, Supplier<T> block, boolean hasItem) {
         if (hasItem) {
