@@ -63,7 +63,10 @@
     },
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/gSsaFAvrBM"
+        "modmenu.modrinth": "https://modrinth.com/mod/just-more-cakes",
+        "modmenu.curseforge": "https://curseforge.com/minecraft/mc-mods/just-more-cakes",
+        "modmenu.discord": "https://discord.gg/gSsaFAvrBM",
+        "modmenu.kofi": "https://ko-fi.com/mincrafteinstein"
       }
     }
   }
