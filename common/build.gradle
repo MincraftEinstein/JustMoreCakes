@@ -21,8 +21,10 @@ dependencies {
 
     compileOnly group: 'com.electronwill.night-config', name: 'core', version: '3.6.3'
     compileOnly group: 'com.electronwill.night-config', name: 'toml', version: '3.6.3'
-    compileOnly group: 'fuzs.forgeconfigapiport', name: 'forgeconfigapiport-common', version: "${config_port_version}"
+    compileOnly group: 'fuzs.forgeconfigapiport', name: 'forgeconfigapiport-common-forgeapi', version: "${config_port_version}"
     compileOnly group: 'mezz.jei', name: "jei-${minecraft_version}-common-api", version: "${jei_version}"
+    compileOnly group: "dev.architectury", name: "architectury", version: "${architectury_version}"
+    compileOnly group: "me.shedaniel.cloth", name: "cloth-config", version: "${cloth_config_version}"
     compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-api-forge", version: "${rei_version}"
     compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-default-plugin-forge", version: "${rei_version}"
     compileOnly group: "maven.modrinth", name: "jade", version: "${forge_jade_version}"

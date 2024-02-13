@@ -79,7 +79,7 @@ dependencies {
 //    runtimeOnly fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_version}")
 //    runtimeOnly fg.deobf("curse.maven:configured-457570:${forge_configured_v}")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
-//    runtimeOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_v}")
+//    runtimeOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
 
     implementation fg.deobf("curse.maven:cake-chomps-307943:${forge_cake_chomps_version}")
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")

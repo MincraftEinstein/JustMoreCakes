@@ -24,14 +24,14 @@ A simple mod that adds 30+ new cakes to Minecraft
 [[dependencies.jmc]]
     modId = "forge"
     mandatory = true
-    versionRange = "[48.0.6,)"
+    versionRange = "[48.1.0,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.jmc]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "[1.20.2, 1.21]"
+    versionRange = "[1.20.2, 1.20.3]"
     ordering = "NONE"
     side = "BOTH"
 
@@ -52,6 +52,13 @@ A simple mod that adds 30+ new cakes to Minecraft
 [[dependencies.jmc]]
     modId = "roughlyenoughitems"
     mandatory = false
-    versionRange = "[13.0.661,)"
+    versionRange = "[13.0.685,)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.jmc]]
+    modId = "jade"
+    mandatory = false
+    versionRange = "[12.3.0,)"
     ordering = "NONE"
     side = "BOTH"
