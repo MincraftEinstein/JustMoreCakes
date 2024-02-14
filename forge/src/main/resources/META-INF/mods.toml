@@ -14,7 +14,7 @@ license = "All rights reserved"
     authors = "MincraftEinstein"
     displayTest = "MATCH_VERSION"
     description = '''
-A simple mod that adds 30+ new cakes to Minecraft
+Adds 30 new flavors of cake along with new improvements and mechanics for a better cake experience
 '''
 
 [modproperties.jmc]
