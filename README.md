@@ -1,4 +1,4 @@
-# Just More Cakes
+# Just More Cakes!
 
 ![Banner](https://i.imgur.com/OSN1fFh.png)
 
@@ -9,16 +9,21 @@
 [![Discord Invite](https://img.shields.io/badge/Discord-Einstein%27s%20Lab-blue?style=for-the-badge&logo=discord)](https://discord.gg/gSsaFAvrBM)
 
 ### **📘 Description**
-A simple mod that adds 30+ new cakes to Minecraft. Some have special properties and abilities ranging from exploding and poisoning to healing and teleporting (randomly). A new villager is in town as well, the Cake Baker will buy and sell cake ingredients which he uses in his Cake Oven to make cake. All cakes also allow candles to be placed on them and did I mention that all potion effects applied from eating a cake can be completely configured with a data pack? Well, they can.
+Just More Cakes makes improvements to the default Minecraft cake and introduces several new mechanics and, most importantly,
+30 new flavors of cake, each with unique abilities or properties. All cakes can be stacked two or three times to create tiered cakes.
+Abilities range from healing to preventing detection from a sculk sensor, and many of them can be configured using a datapack.
+<br><br>
+To obtain the new cakes, there is a new furnace type called the Cake Oven. Additionally,
+there is a new villager profession available that will buy and sell ingredients and, but also cake.
 
 Supports: [Cake Chomps](https://curseforge.com/minecraft/mc-mods/cake-chomps), [Just Enough Items (JEI)](https://curseforge.com/minecraft/mc-mods/jei), [Roughly Enough Items (REI)](https://curseforge.com/minecraft/mc-mods/roughly-enough-items), [Jade](https://curseforge.com/minecraft/mc-mods/jade)
 
-[Fabric API](https://modrinth.com/mod/fabric-api) and [Forge Config API Port](https://modrinth.com/mod/forge-config-api-port) required for Fabric version
+[Fabric API](https://modrinth.com/mod/fabric-api) and [Forge Config API Port](https://modrinth.com/mod/forge-config-api-port) are required for Fabric versions
 
 <br>
 <details>
 <summary><b>📜 Terms of Use</b></summary>
-  
+
 ```
 You may
 ✅ Use this mod as a reference to understand and or create something of your own, as long as it is not a copy or recreation
