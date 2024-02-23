@@ -10,6 +10,7 @@ import einstein.jmc.platform.ForgeRegistryHelper;
 import einstein.jmc.util.EmeraldsForItems;
 import einstein.jmc.util.ItemsForEmeralds;
 import einstein.jmc.util.Util;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -211,34 +212,16 @@ public class JustMoreCakesForge {
 
     void onVillagerTradesEvent(final VillagerTradesEvent event) {
         if (event.getType() == ModVillagers.CAKE_BAKER.get()) {
-            final List<VillagerTrades.ItemListing> novice = event.getTrades().get(1); // Stone tier
-            final List<VillagerTrades.ItemListing> apprentice = event.getTrades().get(2); // Iron tier
-            final List<VillagerTrades.ItemListing> journeyman = event.getTrades().get(3); // Gold tier
-            final List<VillagerTrades.ItemListing> expert = event.getTrades().get(4); // Emerald tier
-            final List<VillagerTrades.ItemListing> master = event.getTrades().get(5); // Diamond tier
-
-            novice.add(new EmeraldsForItems(Items.WHEAT, 20, 1, 16, 2));
-            novice.add(new EmeraldsForItems(Items.EGG, 5, 1, 16, 2));
-            novice.add(new ItemsForEmeralds(Items.SUGAR, 2, 4, 1));
-            novice.add(new ItemsForEmeralds(Items.MILK_BUCKET, 2, 1, 2));
-
-            apprentice.add(new ItemsForEmeralds(Blocks.CAKE.asItem(), 1, 1, 10));
-            apprentice.add(new ItemsForEmeralds(Items.COCOA_BEANS, 3, 1, 5));
-            apprentice.add(new ItemsForEmeralds(ModBlocks.CARROT_CAKE_FAMILY.getBaseCake().get(), 1, 1, 10));
-
-            journeyman.add(new EmeraldsForItems(Items.COAL, 15, 1, 16, 10));
-            journeyman.add(new EmeraldsForItems(Items.CARROT, 22, 1, 16, 20));
-            journeyman.add(new EmeraldsForItems(Items.SUGAR_CANE, 2, 1, 10));
-
-            expert.add(new EmeraldsForItems(ModItems.CREAM_CHEESE.get(), 1, 6, 30));
-            expert.add(new ItemsForEmeralds(ModItems.CUPCAKE.get(), 4, 1, 16, 15));
-
-            master.add(new ItemsForEmeralds(new ItemStack(ModItems.CAKE_SPATULA.get()), 6, 1, 3, 15, 0.2F));
-            master.add(new ItemsForEmeralds(ModBlocks.CREEPER_CAKE_FAMILY.getBaseCake().get().asItem(), 20, 1, 30));
+            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+            ModVillagers.noviceTrades(trades.get(1));
+            ModVillagers.apprenticeTrades(trades.get(2));
+            ModVillagers.journeymanTrades(trades.get(3));
+            ModVillagers.expertTrades(trades.get(4));
+            ModVillagers.masterTrades(trades.get(5));
         }
     }
 
     void onWanderingTradesEvent(final WandererTradesEvent event) {
-        event.getGenericTrades().add(new ItemsForEmeralds(ModBlocks.SEED_CAKE_FAMILY.getBaseCake().get().asItem(), 2, 1, 12));
+        ModVillagers.wanderingTraderTrades(event.getGenericTrades());
     }
 }

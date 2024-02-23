@@ -8,8 +8,6 @@ import einstein.jmc.init.*;
 import einstein.jmc.platform.FabricNetworkHelper;
 import einstein.jmc.platform.services.NetworkHelper;
 import einstein.jmc.util.CakeFamily;
-import einstein.jmc.util.EmeraldsForItems;
-import einstein.jmc.util.ItemsForEmeralds;
 import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
@@ -26,8 +24,6 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fml.config.ModConfig;
@@ -99,44 +95,12 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     }
 
     void addVillagerTrades() {
-
-        // Novice (Stone tier)
-        TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 1, trades -> {
-            trades.add(new EmeraldsForItems(Items.WHEAT, 20, 1, 16, 2));
-            trades.add(new EmeraldsForItems(Items.EGG, 5, 1, 16, 2));
-            trades.add(new ItemsForEmeralds(Items.SUGAR, 2, 4, 1));
-            trades.add(new ItemsForEmeralds(Items.MILK_BUCKET, 2, 1, 2));
-        });
-
-        // Apprentice (Iron tier)
-        TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 2, trades -> {
-            trades.add(new ItemsForEmeralds(Blocks.CAKE.asItem(), 1, 1, 10));
-            trades.add(new ItemsForEmeralds(Items.COCOA_BEANS, 3, 1, 5));
-            trades.add(new ItemsForEmeralds(ModBlocks.CARROT_CAKE_FAMILY.getBaseCake().get(), 1, 1, 10));
-        });
-
-        // Journeyman (Gold tier)
-        TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 3, trades -> {
-            trades.add(new EmeraldsForItems(Items.COAL, 15, 1, 16, 10));
-            trades.add(new EmeraldsForItems(Items.CARROT, 22, 1, 16, 20));
-            trades.add(new EmeraldsForItems(Items.SUGAR_CANE, 2, 1, 10));
-        });
-
-        // Expert (Emerald tier)
-        TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 4, trades -> {
-            trades.add(new EmeraldsForItems(ModItems.CREAM_CHEESE.get(), 1, 6, 30));
-            trades.add(new ItemsForEmeralds(ModItems.CUPCAKE.get(), 4, 1, 16, 15));
-        });
-
-        // Master (Diamond tier)
-        TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 5, trades -> {
-            trades.add(new ItemsForEmeralds(new ItemStack(ModItems.CAKE_SPATULA.get()), 6, 1, 3, 15, 0.2F));
-            trades.add(new ItemsForEmeralds(ModBlocks.CREEPER_CAKE_FAMILY.getBaseCake().get().asItem(), 20, 1, 30));
-        });
-
-        // Wandering trader
-        TradeOfferHelper.registerWanderingTraderOffers(1, trades ->
-                trades.add(new ItemsForEmeralds(ModBlocks.SEED_CAKE_FAMILY.getBaseCake().get().asItem(), 2, 1, 12)));
+        TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 1, ModVillagers::noviceTrades);
+        TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 2, ModVillagers::apprenticeTrades);
+        TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 3, ModVillagers::journeymanTrades);
+        TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 4, ModVillagers::expertTrades);
+        TradeOfferHelper.registerVillagerOffers(ModVillagers.CAKE_BAKER.get(), 5, ModVillagers::masterTrades);
+        TradeOfferHelper.registerWanderingTraderOffers(1, ModVillagers::wanderingTraderTrades);
     }
 
     void modifyLootTables() {
