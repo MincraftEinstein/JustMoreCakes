@@ -132,7 +132,7 @@ public class JustMoreCakesForge {
     }
 
     void commonSetup(final FMLCommonSetupEvent event) {
-        GiveGiftToHero.GIFTS.put(ModVillagers.CAKE_BAKER.get(), loc("gameplay/hero_of_the_village/cake_baker_gift"));
+        GiveGiftToHero.GIFTS.put(ModVillagers.CAKE_BAKER.get(), CAKE_BAKER_GIFT);
         JustMoreCakes.commonSetup();
     }
 
