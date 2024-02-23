@@ -1,10 +1,9 @@
 package einstein.jmc.compat.jade.providers;
 
-import com.mojang.datafixers.util.Pair;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
-import einstein.jmc.compat.jade.elements.FoodPointsSpriteElement;
 import einstein.jmc.compat.jade.ModJadePlugin;
+import einstein.jmc.compat.jade.elements.FoodPointsSpriteElement;
 import einstein.jmc.util.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -46,8 +45,8 @@ public class CakeNourishmentProvider implements IBlockComponentProvider {
 
         if (config.get(ModJadePlugin.SHOW_SATURATION)) {
             if (saturationModifier > 0 && nutrition > 0) {
-                if (config.getEnum(ModJadePlugin.DISPLAY_TYPE) == ModJadePlugin.CakeInfoDisplayType.PER_SLICE) {
-                    saturationModifier /= slices;
+                if (config.getEnum(ModJadePlugin.DISPLAY_TYPE) == ModJadePlugin.CakeInfoDisplayType.TOTAL) {
+                    saturationModifier *= slices;
                 }
                 tooltip.add(IElementHelper.get().text(Component.translatable("jade.plugin_jmc.saturation", FORMATTER.format(nutrition * saturationModifier * 2))));
             }
