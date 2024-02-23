@@ -1,5 +1,6 @@
 package einstein.jmc;
 
+import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
 import einstein.jmc.data.ForgeCakeEffectsReloadListener;
@@ -116,9 +117,7 @@ public class JustMoreCakesForge {
     }
 
     void onBlockBreak(BlockEvent.BreakEvent event) {
-        if (event.getState().is(ModBlocks.SCULK_CAKE_FAMILY.getBaseCake().get())
-                || event.getState().is(ModBlocks.SCULK_CAKE_FAMILY.getTwoTieredCake().get())
-                || event.getState().is(ModBlocks.SCULK_CAKE_FAMILY.getThreeTieredCake().get())) {
+        if (BaseCakeBlock.inFamily(event.getState(), ModBlocks.SCULK_CAKE_FAMILY)) {
             event.setExpToDrop(5);
         }
     }
