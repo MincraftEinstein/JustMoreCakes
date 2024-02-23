@@ -59,9 +59,10 @@ You may not
 Feel free to translate this mod into any language or update existing translations. To get your translation into the mod, make a pull request on GitHub with the translated language file
 
 All translators are credited in the list below
-- Chinese: [usamion](https://github.com/usamion)
-- Russian: [Telezhka-the-First](https://github.com/Telezhka-the-First)
+- Chinese: [usamion](https://github.com/usamion), [ddaodan](https://github.com/ddaodan)
+- Russian: [Telezhka-the-First](https://github.com/Telezhka-the-First), [Mikhail](https://github.com/Hacker1470)
 - German: [Cape-City](https://github.com/Cape-City)
+- Ukrainian: [Un roman](https://github.com/unroman)
 
 ---
 
