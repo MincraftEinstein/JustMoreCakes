@@ -206,24 +206,6 @@ public class Util {
         }
     }
 
-    public static Predicate<ItemEntity> pandaItems() {
-        return itemEntity -> {
-            ItemStack stack = itemEntity.getItem();
-            return (stack.is(Blocks.BAMBOO.asItem()) || stack.is(Blocks.CAKE.asItem()) || isCake().test(stack)) && itemEntity.isAlive() && !itemEntity.hasPickUpDelay();
-        };
-    }
-
-    public static Predicate<ItemStack> isCake() {
-        return stack -> {
-            for (Supplier<BaseCakeBlock> cake : CakeVariant.VARIANT_BY_CAKE.keySet()) {
-                if (stack.is(cake.get().asItem())) {
-                    return true;
-                }
-            }
-            return false;
-        };
-    }
-
     public static <K, V> Map<K, V> createKeySortedMap(Map<K, V> map, Comparator<K> comparator) {
         return map.entrySet().stream().sorted(Map.Entry.comparingByKey(comparator))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));

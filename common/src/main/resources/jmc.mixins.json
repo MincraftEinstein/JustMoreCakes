@@ -7,7 +7,6 @@
   "mixins": [
     "CakeMixin",
     "PandaMixin",
-    "PandaMixin$PandaSitGoalMixin",
     "PlayerListMixin",
     "RecipeManagerAccessor",
     "StructureTemplatePoolAccessor",
