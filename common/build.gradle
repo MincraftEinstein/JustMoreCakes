@@ -28,6 +28,7 @@ dependencies {
     compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-api-forge", version: "${rei_version}"
     compileOnly group: "me.shedaniel", name: "RoughlyEnoughItems-default-plugin-forge", version: "${rei_version}"
     compileOnly group: "maven.modrinth", name: "jade", version: "${forge_jade_version}"
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
 }
 
 publishing {
