@@ -13,7 +13,7 @@ import java.util.Map;
 public class ForgeCakeEffectsReloadListener extends SimpleJsonResourceReloadListener {
 
     public ForgeCakeEffectsReloadListener() {
-        super(Util.GSON, "cake_effects");
+        super(Util.GSON, CakeEffectsManager.EFFECTS_DIRECTORY);
     }
 
     @Override

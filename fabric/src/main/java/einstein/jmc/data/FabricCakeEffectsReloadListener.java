@@ -10,7 +10,7 @@ public class FabricCakeEffectsReloadListener implements SimpleSynchronousResourc
 
     @Override
     public ResourceLocation getFabricId() {
-        return JustMoreCakes.loc("cake_effects");
+        return JustMoreCakes.loc(CakeEffectsManager.EFFECTS_DIRECTORY);
     }
 
     @Override

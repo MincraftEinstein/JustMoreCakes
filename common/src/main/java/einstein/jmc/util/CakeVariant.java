@@ -243,8 +243,8 @@ public class CakeVariant {
 
                 for (Block candle : SUPPORTED_CANDLES.keySet()) {
                     String type = SUPPORTED_CANDLES.get(candle).getPath();
-                    Supplier<BaseCandleCakeBlock> coloredCandleCake = register(type + "candle_" + variant.cakeName, () -> candleCakeClazz.get(cake.get(), candle, variant.candleCakeProperties), false);
-                    variant.candleCakeByCandle.put(candle, coloredCandleCake);
+                    Supplier<BaseCandleCakeBlock> candleCake = register(type + "candle_" + variant.cakeName, () -> candleCakeClazz.get(cake.get(), candle, variant.candleCakeProperties), false);
+                    variant.candleCakeByCandle.put(candle, candleCake);
                 }
             }
 
