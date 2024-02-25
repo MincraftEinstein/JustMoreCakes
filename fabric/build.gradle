@@ -41,6 +41,8 @@ dependencies {
 
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}")
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
 }
 
 loom {
