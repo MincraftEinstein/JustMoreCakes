@@ -156,7 +156,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
-        if (!player.canEat(false) && !canAlwaysEat) {
+        if (!player.canEat(canAlwaysEat)) {
             return InteractionResult.PASS;
         }
 
