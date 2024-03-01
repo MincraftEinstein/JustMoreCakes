@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CakeBlock.class)
-public class CakeMixin implements CakeEffectsHolder {
+public class CakeBlockMixin implements CakeEffectsHolder {
 
     @Unique
     @Nullable
