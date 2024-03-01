@@ -84,9 +84,4 @@ public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
         }
         return super.use(state, level, pos, player, hand, hitResult);
     }
-
-    @Override
-    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return ((getSlices() + 1) - state.getValue(getBites()));
-    }
 }

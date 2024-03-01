@@ -47,6 +47,12 @@ public class ModCommonConfigs {
             .comment("Disables the game's default cake crafting recipe", "Requires resources to be reloaded")
             .translation(key("disable_cake_crafting_recipe"))
             .define("disableCakeCraftingRecipe", true);
+    public static final ForgeConfigSpec.BooleanValue DOUBLE_BASE_CAKE_COMPARATOR_OUTPUT = BUILDER
+            .comment("Should the comparator output signal for a base (non tiered) cake be doubled",
+                    "The vanilla behavior is to double the output",
+                    "NOTE: This will affect the default cake and some cakes from other mods"
+            ).translation(key("double_base_cake_comparator_output"))
+            .define("doubleBaseCakeComparatorOutput", false);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 

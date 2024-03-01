@@ -46,7 +46,7 @@ public class ObsidianThreeTieredCakeBlock extends BaseThreeTieredCakeBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return 14;
+        return 16;
     }
 
     @Override

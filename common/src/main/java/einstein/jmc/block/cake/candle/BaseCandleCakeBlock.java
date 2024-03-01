@@ -107,7 +107,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return 14;
+        return BaseCakeBlock.getComparatorOutput(originalCake.defaultBlockState());
     }
 
     @Override

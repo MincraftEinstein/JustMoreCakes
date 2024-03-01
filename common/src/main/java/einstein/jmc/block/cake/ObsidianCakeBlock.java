@@ -43,11 +43,6 @@ public class ObsidianCakeBlock extends BaseCakeBlock {
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return 14;
-    }
-
-    @Override
     public IntegerProperty getBites() {
         return null;
     }

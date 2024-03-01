@@ -88,6 +88,11 @@ public class CakeMixin implements CakeEffectsHolder {
         }
     }
 
+    @Inject(method = "getAnalogOutputSignal", at = @At("HEAD"), cancellable = true)
+    private void getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
+        cir.setReturnValue(BaseCakeBlock.getMultipliedSignal(true, 7));
+    }
+
     @Nullable
     @Override
     public CakeEffects justMoreCakes$getCakeEffects() {

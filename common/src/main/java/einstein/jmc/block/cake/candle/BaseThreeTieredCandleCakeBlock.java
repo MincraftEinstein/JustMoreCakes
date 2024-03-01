@@ -169,11 +169,6 @@ public class BaseThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return 16;
-    }
-
-    @Override
     public BaseThreeTieredCakeBlock getOriginalCake() {
         return (BaseThreeTieredCakeBlock) super.getOriginalCake();
     }

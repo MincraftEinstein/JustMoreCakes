@@ -236,7 +236,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return ((getSlices() + 1) - state.getValue(getBites())) * 2;
+        return getComparatorOutput(state);
     }
 
     @Override
@@ -385,7 +385,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             }
             return false;
         }
-        else if (block instanceof BaseCakeBlock cakeBlock && cakeBlock.getBites() != null) {
+        else if (block instanceof BaseCakeBlock cakeBlock && cakeBlock.hasBites()) {
             return isUneaten(state, cakeBlock);
         }
         return !(block instanceof CakeBlock) || state.getValue(CakeBlock.BITES) == 0;
@@ -393,5 +393,25 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     private static boolean isUneaten(BlockState state, BaseCakeBlock cakeBlock) {
         return cakeBlock.getSlices() <= 0 || state.getValue(cakeBlock.getBites()) == 0;
+    }
+
+    public static int getComparatorOutput(BlockState state) {
+        if (state.getBlock() instanceof BaseCakeBlock cakeBlock) {
+            if (cakeBlock.hasBites()) {
+                return getMultipliedSignal(cakeBlock.isBaseVariant(), (cakeBlock.getSlices() + 1) - state.getValue(cakeBlock.getBites()));
+            }
+
+            CakeVariantType variant = cakeBlock.getVariant().getType();
+            return getMultipliedSignal(cakeBlock.isBaseVariant(), switch (variant) {
+                case BASE -> 7;
+                case TWO_TIERED -> 11;
+                case THREE_TIERED -> 16;
+            });
+        }
+        return 0;
+    }
+
+    public static int getMultipliedSignal(boolean isBaseVariant, int signal) {
+        return signal * (ModCommonConfigs.DOUBLE_BASE_CAKE_COMPARATOR_OUTPUT.get() && isBaseVariant ? 2 : 1);
     }
 }
