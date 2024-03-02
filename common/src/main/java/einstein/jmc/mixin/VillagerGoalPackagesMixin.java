@@ -17,7 +17,7 @@ import java.util.ArrayList;
 @Mixin(VillagerGoalPackages.class)
 public class VillagerGoalPackagesMixin {
 
-    @ModifyExpressionValue(method = "getWorkPackage", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableList;of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList;"))
+    @ModifyExpressionValue(method = "getWorkPackage", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableList;of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList;", remap = false))
     private static ImmutableList<Pair<? extends BehaviorControl<Villager>, Integer>> runOne(ImmutableList<Pair<? extends BehaviorControl<Villager>, Integer>> original, VillagerProfession profession) {
         var list = new ArrayList<>(original);
         list.add(Pair.of(new HarvestSugarCane(), profession == ModVillagers.CAKE_BAKER.get() ? 2 : 5));
