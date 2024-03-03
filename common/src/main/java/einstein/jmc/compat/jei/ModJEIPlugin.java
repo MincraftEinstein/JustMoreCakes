@@ -16,7 +16,6 @@ import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 
 import java.util.Objects;
@@ -39,7 +38,7 @@ public class ModJEIPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
-        registration.addRecipes(CAKE_OVEN, recipeManager.getAllRecipesFor(ModRecipes.CAKE_OVEN_RECIPE.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(CAKE_OVEN, recipeManager.getAllRecipesFor(ModRecipes.CAKE_OVEN_RECIPE.get()));
     }
 
     @Override

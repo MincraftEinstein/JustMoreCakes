@@ -60,7 +60,7 @@ public class CakeEffectsProvider implements IBlockComponentProvider {
 
                 box.add(holder.effect().getCategory() != MobEffectCategory.HARMFUL ? theme.success(info) : theme.danger(info));
             }
-            tooltip.add(helper.box(box, BoxStyle.getNestedBox()));
+            tooltip.add(helper.box(box, BoxStyle.DEFAULT));
         }
     }
 

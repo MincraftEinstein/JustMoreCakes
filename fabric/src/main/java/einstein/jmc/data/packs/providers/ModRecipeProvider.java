@@ -3,7 +3,9 @@ package einstein.jmc.data.packs.providers;
 import einstein.jmc.data.packs.ModRecipes;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.FinishedRecipe;
+
+import java.util.function.Consumer;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
 
@@ -12,7 +14,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     @Override
-    public void buildRecipes(RecipeOutput output) {
-        ModRecipes.init(output);
+    public void buildRecipes(Consumer<FinishedRecipe> consumer) {
+        ModRecipes.init(consumer);
     }
 }

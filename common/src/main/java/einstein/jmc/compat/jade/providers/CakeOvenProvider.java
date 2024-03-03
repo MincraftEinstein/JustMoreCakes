@@ -12,6 +12,7 @@ import net.minecraft.world.phys.Vec2;
 import snownee.jade.api.*;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.IElementHelper;
+import snownee.jade.impl.ui.ProgressArrowElement;
 
 public class CakeOvenProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor>, CakeOvenConstants {
 
@@ -34,7 +35,7 @@ public class CakeOvenProvider implements IBlockComponentProvider, IServerDataPro
 
             tooltip.append(helper.item(items.get(FUEL_SLOT)));
             tooltip.append(helper.spacer(4, 0));
-            tooltip.append(helper.progress((float) cookTime / cookTimeTotal).translate(new Vec2(-2, 0)));
+            tooltip.append(new ProgressArrowElement((float) cookTime / cookTimeTotal).translate(new Vec2(-2, 0)));
             tooltip.append(helper.item(items.get(RESULT_SLOT)));
         }
     }

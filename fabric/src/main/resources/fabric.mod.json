@@ -46,16 +46,16 @@
   "depends": {
     "fabricloader": ">=0.15",
     "fabric": ">=0.91.0",
-    "minecraft": "1.20.2",
+    "minecraft": "1.20.1",
     "java": ">=17",
-    "forgeconfigapiport": ">=20.2.6"
+    "forgeconfigapiport": ">=8.0.0"
   },
   "suggests": {
-    "jei": ">=16.0.0.28",
+    "jei": ">=15.3.0.4",
     "configured": ">=2.0.2",
     "cakechomps": ">0",
-    "roughlyenoughitems": ">=13.0.685",
-    "jade": ">=12.3.0"
+    "roughlyenoughitems": ">=12.0.684",
+    "jade": ">=11.8.0"
   },
   "custom": {
     "catalogue": {

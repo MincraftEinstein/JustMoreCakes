@@ -26,7 +26,7 @@ public class ModGameEventTagsProvider extends GameEventTagsProvider {
                 GameEvent.TELEPORT, GameEvent.ITEM_INTERACT_START, GameEvent.ITEM_INTERACT_FINISH,
                 GameEvent.PROJECTILE_SHOOT, GameEvent.STEP, GameEvent.SWIM, GameEvent.SHEAR, GameEvent.SPLASH,
                 GameEvent.ENTITY_DAMAGE, GameEvent.ENTITY_DIE, GameEvent.ENTITY_DISMOUNT,
-                GameEvent.ENTITY_MOUNT, GameEvent.ENTITY_ACTION);
+                GameEvent.ENTITY_MOUNT, GameEvent.ENTITY_SHAKE);
         tag(GameEventTags.VIBRATIONS).add(ModGameEvents.SCULK_CAKE_EATEN.get());
         tag(GameEventTags.WARDEN_CAN_LISTEN).add(ModGameEvents.SCULK_CAKE_EATEN.get());
     }

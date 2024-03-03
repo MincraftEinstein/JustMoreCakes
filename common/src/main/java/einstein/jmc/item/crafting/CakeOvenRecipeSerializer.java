@@ -1,42 +1,69 @@
 package einstein.jmc.item.crafting;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class CakeOvenRecipeSerializer implements RecipeSerializer<CakeOvenRecipe>, CakeOvenConstants {
 
-    private static final Codec<CakeOvenRecipe> CODEC = RecordCodecBuilder.create(
-            instance -> instance.group(
-                    Ingredient.CODEC_NONEMPTY.listOf().fieldOf("ingredients").flatXmap(ingredients -> {
-                        Ingredient[] ingredients1 = ingredients.stream().filter(i -> !i.isEmpty()).toArray(Ingredient[]::new);
-                        if (ingredients1.length == 0) {
-                            return DataResult.error(() -> "No ingredients for cake oven recipe");
-                        }
-                        return ingredients1.length > INGREDIENT_SLOT_COUNT
-                                ? DataResult.error(() -> "Too many ingredients for cake oven recipe. The max is 4")
-                                : DataResult.success(NonNullList.of(Ingredient.EMPTY, ingredients1));
-                    }, DataResult::success).forGetter(t -> t.ingredients),
-                    BuiltInRegistries.ITEM.byNameCodec().xmap(ItemStack::new, ItemStack::getItem).fieldOf("result").forGetter(t -> t.result),
-                    Codec.FLOAT.fieldOf("experience").orElse(0F).forGetter(t -> t.experience),
-                    Codec.INT.fieldOf("cookingTime").orElse(DEFAULT_COOK_TIME).forGetter(t -> t.cookingTime)
-            ).apply(instance, CakeOvenRecipe::new)
-    );
-
     @Override
-    public Codec<CakeOvenRecipe> codec() {
-        return CODEC;
+    public CakeOvenRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+        NonNullList<Ingredient> ingredients = itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
+
+        if (ingredients.isEmpty()) {
+            throw new JsonParseException("No ingredients for cake oven recipe");
+        }
+        else if (ingredients.size() > INGREDIENT_SLOT_COUNT) {
+            throw new JsonParseException("Too many ingredients for cake oven recipe. The max is 4");
+        }
+        else {
+            String r = "result";
+            if (!json.has(r)) {
+                throw new JsonSyntaxException("Missing result, expected to find a string or object");
+            }
+
+            ItemStack resultStack;
+            if (json.get(r).isJsonObject()) {
+                resultStack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, r));
+            }
+            else {
+                String resultString = GsonHelper.getAsString(json, r);
+                ResourceLocation resourceLocation = new ResourceLocation(resultString);
+                resultStack = new ItemStack(BuiltInRegistries.ITEM.getOptional(resourceLocation).orElseThrow(
+                        () -> new IllegalStateException("Item: " + resultString + " does not exist")));
+            }
+
+            float experience = GsonHelper.getAsFloat(json, "experience", 0);
+            int cookingTime = GsonHelper.getAsInt(json, "cookingTime", DEFAULT_COOK_TIME);
+            return new CakeOvenRecipe(recipeId, ingredients, resultStack, experience, cookingTime);
+        }
+    }
+
+    private static NonNullList<Ingredient> itemsFromJson(JsonArray array) {
+        NonNullList<Ingredient> nonNullList = NonNullList.create();
+
+        for (int i = 0; i < array.size(); ++i) {
+            Ingredient ingredient = Ingredient.fromJson(array.get(i));
+            if (!ingredient.isEmpty()) {
+                nonNullList.add(ingredient);
+            }
+        }
+        return nonNullList;
     }
 
     @Override
-    public CakeOvenRecipe fromNetwork(FriendlyByteBuf buf) {
+    public CakeOvenRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buf) {
         ItemStack resultStack = buf.readItem();
         float experience = buf.readFloat();
         int cookTime = buf.readVarInt();
@@ -47,7 +74,7 @@ public class CakeOvenRecipeSerializer implements RecipeSerializer<CakeOvenRecipe
             ingredients.set(i, Ingredient.fromNetwork(buf));
         }
 
-        return new CakeOvenRecipe(ingredients, resultStack, experience, cookTime);
+        return new CakeOvenRecipe(recipeId, ingredients, resultStack, experience, cookTime);
     }
 
     @Override

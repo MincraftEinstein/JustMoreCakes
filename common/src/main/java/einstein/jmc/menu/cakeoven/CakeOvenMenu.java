@@ -120,18 +120,18 @@ public class CakeOvenMenu extends AbstractContainerMenu implements CakeOvenConst
         return Services.HOOKS.getBurnTime(stack) > 0;
     }
 
-    public float getBurnProgress() {
+    public int getBurnProgress() {
         int cookingProgress = data.get(2);
         int cookingTotalTime = data.get(3);
-        return cookingTotalTime != 0 && cookingProgress != 0 ? Mth.clamp((float) cookingProgress / cookingTotalTime, 0F, 1F) : 0;
+        return cookingTotalTime != 0 && cookingProgress != 0 ? cookingProgress * 24 / cookingTotalTime : 0;
     }
 
-    public float getLitProgress() {
+    public int getLitProgress() {
         int litDuration = data.get(1);
         if (litDuration == 0) {
             litDuration = DEFAULT_BURN_TIME;
         }
-        return Mth.clamp((float) data.get(0) / litDuration, 0F, 1F);
+        return data.get(0) * 13 / litDuration;
     }
 
     public boolean isLit() {

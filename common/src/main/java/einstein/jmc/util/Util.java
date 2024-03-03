@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.datafixers.util.Pair;
-import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.init.ModPotions;
@@ -29,11 +28,9 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -54,7 +51,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -248,8 +244,8 @@ public class Util {
 
     public static void removeRecipe(RecipeManager recipeManager, RecipeType<?> type, ResourceLocation id) {
         RecipeManagerAccessor manager = (RecipeManagerAccessor) recipeManager;
-        Map<RecipeType<?>, Map<ResourceLocation, RecipeHolder<?>>> recipesByType = new HashMap<>(manager.getRecipes());
-        Map<ResourceLocation, RecipeHolder<?>> recipes = new HashMap<>(recipesByType.get(type));
+        Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipesByType = new HashMap<>(manager.getRecipes());
+        Map<ResourceLocation, Recipe<?>> recipes = new HashMap<>(recipesByType.get(type));
 
         for (ResourceLocation recipeId : recipes.keySet()) {
             if (recipeId.equals(id)) {

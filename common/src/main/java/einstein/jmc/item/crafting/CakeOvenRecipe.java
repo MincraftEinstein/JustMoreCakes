@@ -6,6 +6,7 @@ import einstein.jmc.util.CakeOvenConstants;
 import einstein.jmc.util.RecipeMatcher;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,16 +21,23 @@ import java.util.List;
 
 public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 
+    protected final ResourceLocation id;
     protected final ItemStack result;
     protected final float experience;
     protected final int cookingTime;
     protected final NonNullList<Ingredient> ingredients;
 
-    public CakeOvenRecipe(NonNullList<Ingredient> ingredients, ItemStack result, float experience, int cookingTime) {
+    public CakeOvenRecipe(ResourceLocation id, NonNullList<Ingredient> ingredients, ItemStack result, float experience, int cookingTime) {
+        this.id = id;
         this.ingredients = ingredients;
         this.result = result;
         this.experience = experience;
         this.cookingTime = cookingTime;
+    }
+
+    @Override
+    public ResourceLocation getId() {
+        return id;
     }
 
     @Override

@@ -5,23 +5,25 @@ import com.google.gson.JsonObject;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.util.CakeFamily;
 import einstein.jmc.util.CakeOvenConstants;
-import net.minecraft.advancements.*;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.CriterionTriggerInstance;
+import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.function.Consumer;
 
 public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
 
@@ -30,7 +32,7 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
     private final NonNullList<Ingredient> ingredients;
     private final float experience;
     private final int cookingTime;
-    private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
+    private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
     private CakeOvenRecipeBuilder(RecipeCategory category, NonNullList<Ingredient> ingredients, ItemLike result, float experience, int cookingTime) {
         this.category = category;
@@ -55,8 +57,8 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
     }
 
     @Override
-    public RecipeBuilder unlockedBy(String name, Criterion<?> criterion) {
-        criteria.put(name, criterion);
+    public RecipeBuilder unlockedBy(String name, CriterionTriggerInstance trigger) {
+        advancement.addCriterion(name, trigger);
         return this;
     }
 
@@ -71,30 +73,25 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
     }
 
     @Override
-    public void save(RecipeOutput output, ResourceLocation id) {
-        ensureValid(id);
-        Advancement.Builder builder = output.advancement()
-                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
-                .rewards(AdvancementRewards.Builder.recipe(id))
-                .requirements(AdvancementRequirements.Strategy.OR);
-        criteria.forEach(builder::addCriterion);
-        output.accept(new Result(id, ingredients, result, experience, cookingTime, builder.build(id.withPrefix("recipes/" + category.getFolderName() + "/"))));
-    }
-
-    private void ensureValid(ResourceLocation recipeId) {
-        if (criteria.isEmpty()) {
+    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeId) {
+        if (advancement.getCriteria().isEmpty()) {
             throw new IllegalStateException("No way of obtaining recipe " + recipeId);
         }
+
+        advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId))
+                .requirements(RequirementsStrategy.OR);
+        consumer.accept(new Result(recipeId, ingredients, result, experience, cookingTime, recipeId.withPrefix("recipes/" + category.getFolderName() + "/"), advancement));
+
     }
 
-    public record Result(ResourceLocation id, NonNullList<Ingredient> ingredients, Item result, float experience, int cookingTime, AdvancementHolder advancement) implements FinishedRecipe {
+    public record Result(ResourceLocation id, NonNullList<Ingredient> ingredients, Item result, float experience, int cookingTime, ResourceLocation advancementId, Advancement.Builder advancementBuilder) implements FinishedRecipe {
 
         @Override
         public void serializeRecipeData(JsonObject json) {
             JsonArray jsonIngredients = new JsonArray(INGREDIENT_SLOT_COUNT);
 
             for (Ingredient ingredient : ingredients) {
-                jsonIngredients.add(ingredient.toJson(false));
+                jsonIngredients.add(ingredient.toJson());
             }
 
             json.add("ingredients", jsonIngredients);
@@ -103,8 +100,25 @@ public class CakeOvenRecipeBuilder implements RecipeBuilder, CakeOvenConstants {
             json.addProperty("cookingTime", cookingTime);
         }
 
+        @Nullable
         @Override
-        public RecipeSerializer<?> type() {
+        public JsonObject serializeAdvancement() {
+            return advancementBuilder.serializeToJson();
+        }
+
+        @Nullable
+        @Override
+        public ResourceLocation getAdvancementId() {
+            return advancementId;
+        }
+
+        @Override
+        public ResourceLocation getId() {
+            return id;
+        }
+
+        @Override
+        public RecipeSerializer<?> getType() {
             return ModRecipes.CAKE_OVEN_SERIALIZER.get();
         }
     }

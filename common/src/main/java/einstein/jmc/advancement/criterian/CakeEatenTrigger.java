@@ -13,6 +13,13 @@ import java.util.Optional;
 
 public class CakeEatenTrigger extends SimpleCriterionTrigger<CakeEatenTrigger.TriggerInstance> {
 
+    public static final ResourceLocation ID = JustMoreCakes.loc("cake_eaten");
+
+    @Override
+    public ResourceLocation getId() {
+        return ID;
+    }
+
     public void trigger(ServerPlayer player, ResourceLocation cake) {
         super.trigger(player, trigger -> trigger.test(cake));
     }
@@ -22,7 +29,7 @@ public class CakeEatenTrigger extends SimpleCriterionTrigger<CakeEatenTrigger.Tr
     }
 
     @Override
-    protected TriggerInstance createInstance(JsonObject json, Optional<ContextAwarePredicate> predicate, DeserializationContext context) {
+    protected TriggerInstance createInstance(JsonObject json, ContextAwarePredicate predicate, DeserializationContext context) {
         return new TriggerInstance(predicate, new ResourceLocation(json.get("cake").getAsString()));
     }
 
@@ -30,13 +37,13 @@ public class CakeEatenTrigger extends SimpleCriterionTrigger<CakeEatenTrigger.Tr
 
         private final ResourceLocation cake;
 
-        public TriggerInstance(Optional<ContextAwarePredicate> predicate, ResourceLocation cake) {
-            super(predicate);
+        public TriggerInstance(ContextAwarePredicate predicate, ResourceLocation cake) {
+            super(ID, predicate);
             this.cake = cake;
         }
 
-        public static Criterion<TriggerInstance> cakeEaten(ResourceLocation cake) {
-            return JustMoreCakes.CAKE_EATEN_TRIGGER.createCriterion(new TriggerInstance(Optional.empty(), cake));
+        public static TriggerInstance cakeEaten(ResourceLocation cake) {
+            return new TriggerInstance(ContextAwarePredicate.ANY, cake);
         }
 
         public boolean test(ResourceLocation cake) {
@@ -44,8 +51,8 @@ public class CakeEatenTrigger extends SimpleCriterionTrigger<CakeEatenTrigger.Tr
         }
 
         @Override
-        public JsonObject serializeToJson() {
-            JsonObject json = super.serializeToJson();
+        public JsonObject serializeToJson(SerializationContext context) {
+            JsonObject json = super.serializeToJson(context);
             json.addProperty("cake", cake.toString());
             return json;
         }

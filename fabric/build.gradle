@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'maven-publish'
-    id 'fabric-loom'
+    id 'fabric-loom' version '1.5-SNAPSHOT'
 }
 
 base {
@@ -22,7 +22,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}+${minecraft_version}"
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
-    implementation project(":common")
+    compileOnly project(":common")
 
 //    modRuntimeOnly("curse.maven:catalogue-fabric-667377:${fabric_catalogue_version}")
 //    modRuntimeOnly("curse.maven:configured-fabric-667378:${fabric_configured_v}")

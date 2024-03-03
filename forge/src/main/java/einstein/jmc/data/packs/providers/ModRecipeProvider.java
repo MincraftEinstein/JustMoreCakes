@@ -2,8 +2,10 @@ package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.data.packs.ModRecipes;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
+
+import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider {
 
@@ -12,7 +14,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output) {
-        ModRecipes.init(output);
+    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+        ModRecipes.init(consumer);
     }
 }

@@ -1,5 +1,6 @@
 package einstein.jmc.compat.jade.elements;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import einstein.jmc.compat.jade.ModJadePlugin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -13,14 +14,14 @@ import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.theme.IThemeHelper;
 import snownee.jade.api.ui.Element;
 import snownee.jade.api.ui.IDisplayHelper;
+import snownee.jade.overlay.DisplayHelper;
+import snownee.jade.overlay.OverlayRenderer;
 
 import static einstein.jmc.JustMoreCakes.mcLoc;
 
 public class FoodPointsSpriteElement extends Element {
 
-    private static final ResourceLocation FOOD_EMPTY_SPRITE = mcLoc("hud/food_empty");
-    private static final ResourceLocation FOOD_HALF_SPRITE = mcLoc("hud/food_half");
-    private static final ResourceLocation FOOD_FULL_SPRITE = mcLoc("hud/food_full");
+    private static final ResourceLocation ICONS = mcLoc("textures/gui/icons.png");
     private static final int SPRITE_SIZE = 9;
     private static final int SPACING = 10;
 
@@ -69,13 +70,13 @@ public class FoodPointsSpriteElement extends Element {
         int i = 1;
 
         if (!isEven) {
-            blitFoodPoint(guiGraphics, helper, FOOD_HALF_SPRITE, x + xOffset, y + yOffset);
+            blitFoodPoint(guiGraphics, 61, x + xOffset, y + yOffset);
             xOffset = SPRITE_SIZE;
             i++;
         }
 
         for (; i <= totalFoodPoints; ++i) {
-            blitFoodPoint(guiGraphics, helper, FOOD_FULL_SPRITE, x + xOffset, y + yOffset);
+            blitFoodPoint(guiGraphics, 52, x + xOffset, y + yOffset);
 
             xOffset += SPRITE_SIZE;
             if (i % foodPointsPerLine == 0) {
@@ -89,9 +90,14 @@ public class FoodPointsSpriteElement extends Element {
         }
     }
 
-    private static void blitFoodPoint(GuiGraphics guiGraphics, IDisplayHelper helper, ResourceLocation overlaySprite, float x, float y) {
-        helper.blitSprite(guiGraphics, FOOD_EMPTY_SPRITE, (int) x, (int) y, SPRITE_SIZE, SPRITE_SIZE);
-        helper.blitSprite(guiGraphics, overlaySprite, (int) x, (int) y, SPRITE_SIZE, SPRITE_SIZE);
+    private static void blitFoodPoint(GuiGraphics guiGraphics, int textureX, float x, float y) {
+        RenderSystem.setShaderColor(1, 1, 1, OverlayRenderer.alpha);
+        RenderSystem.setShaderTexture(0, ICONS);
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        DisplayHelper.drawTexturedModalRect(guiGraphics, x, y, 16, 27, 8, 8, SPRITE_SIZE, SPRITE_SIZE);
+        DisplayHelper.drawTexturedModalRect(guiGraphics, x, y, textureX, 27, 8, 8, SPRITE_SIZE, SPRITE_SIZE);
+        RenderSystem.setShaderColor(1, 1, 1, 1);
     }
 
     @Override

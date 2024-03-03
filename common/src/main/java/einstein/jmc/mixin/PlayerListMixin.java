@@ -4,7 +4,6 @@ import einstein.jmc.JustMoreCakes;
 import net.minecraft.network.Connection;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.CommonListenerCookie;
 import net.minecraft.server.players.PlayerList;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,11 +25,11 @@ public abstract class PlayerListMixin {
     public abstract List<ServerPlayer> getPlayers();
 
     @Inject(method = "placeNewPlayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundUpdateRecipesPacket;<init>(Ljava/util/Collection;)V", shift = At.Shift.BEFORE))
-    private void placeNewPlayer(Connection connection, ServerPlayer player, CommonListenerCookie cookie, CallbackInfo ci) {
+    private void placeNewPlayer(Connection connection, ServerPlayer player, CallbackInfo ci) {
         JustMoreCakes.onDatapackSync(player, server, true);
     }
 
-    @Inject(method = "reloadResources", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/common/ClientboundUpdateTagsPacket;<init>(Ljava/util/Map;)V"))
+    @Inject(method = "reloadResources", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundUpdateTagsPacket;<init>(Ljava/util/Map;)V"))
     private void reloadResources(CallbackInfo ci) {
         JustMoreCakes.onDatapackSync(null, server, false);
 
