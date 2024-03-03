@@ -8,7 +8,7 @@ import einstein.jmc.init.*;
 import einstein.jmc.platform.FabricNetworkHelper;
 import einstein.jmc.platform.services.NetworkHelper;
 import einstein.jmc.util.CakeFamily;
-import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
+import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;

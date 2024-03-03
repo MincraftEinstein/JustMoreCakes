@@ -18,6 +18,6 @@
     "minecraft:entity_die",
     "minecraft:entity_dismount",
     "minecraft:entity_mount",
-    "minecraft:entity_action"
+    "minecraft:entity_shake"
   ]
 }

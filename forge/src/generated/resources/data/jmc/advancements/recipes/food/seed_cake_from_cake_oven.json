@@ -20,8 +20,8 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_item"
+      "has_item",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
@@ -29,5 +29,5 @@
       "jmc:seed_cake_from_cake_oven"
     ]
   },
-  "sends_telemetry_event": false
+  "sends_telemetry_event": true
 }
