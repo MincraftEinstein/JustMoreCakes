@@ -128,11 +128,6 @@ public class Util {
         return level.getGameTime() % (ticks) == 0;
     }
 
-    /**
-     * Copied from com.illusivesoulworks.cakechomps.CakeChompsMod
-     * and slightly changed to work with JustMoreCakes
-     */
-
     public static void registerVillageBuilding(MinecraftServer server, String biome, String name, int weight) {
         String path = MOD_ID + ":village/" + biome + "/houses/" + biome + "_" + name;
 
