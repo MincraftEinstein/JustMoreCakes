@@ -3,6 +3,7 @@ package einstein.jmc.mixin;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.cake.BaseTwoTieredCakeBlock;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.util.MobEffectHolder;
@@ -52,10 +53,8 @@ public class CakeBlockMixin implements CakeEffectsHolder {
 
         if (justMoreCakes$me.equals(Blocks.CAKE)) {  // Need to check that this is the default cake, so that things won't break with inheritance
             if (stack.is(Items.CAKE)) {
-                InteractionResult result = Util.convertToTwoTieredCake(state, pos, level, player, stack);
-
-                if (result.consumesAction()) {
-                    cir.setReturnValue(result);
+                if (BaseTwoTieredCakeBlock.convertTo(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack).consumesAction()) {
+                    cir.setReturnValue(InteractionResult.SUCCESS);
                 }
             }
         }

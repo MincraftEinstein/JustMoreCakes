@@ -1,9 +1,12 @@
 package einstein.jmc.block.cake;
 
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
+import einstein.jmc.util.CakeFamily;
 import einstein.jmc.util.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -227,5 +231,28 @@ public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
                 dropResources(otherState, level, otherPos, otherBlockEntity, null, toolStack);
             }
         }
+    }
+
+    public static InteractionResult convertTo(CakeFamily family, BlockState state, BlockPos pos, Level level, Player player, ItemStack stack) {
+        if (isUneaten(state, pos, level)) {
+            BlockPos abovePos = pos.above();
+            if (level.getBlockState(abovePos).canBeReplaced()) {
+                BlockState newState = family.getThreeTieredCake().get().defaultBlockState();
+
+                level.setBlockAndUpdate(abovePos, newState);
+                level.setBlockAndUpdate(pos, BaseThreeTieredCakeBlock.createLowerState(newState.getBlock(), true));
+                pushEntitiesUp(Blocks.AIR.defaultBlockState(), newState, level, abovePos);
+                level.gameEvent(player, GameEvent.BLOCK_CHANGE, abovePos);
+                level.playSound(null, abovePos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);
+                player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                }
+
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return InteractionResult.PASS;
     }
 }

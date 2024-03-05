@@ -5,9 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.datafixers.util.Pair;
-import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
-import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.init.ModPotions;
 import einstein.jmc.mixin.RecipeManagerAccessor;
@@ -24,28 +22,21 @@ import net.minecraft.data.worldgen.ProcessorLists;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
@@ -278,24 +269,5 @@ public class Util {
             double d0 = entity instanceof LivingEntity ? 0.5 : 0.3D;
             entity.setDeltaMovement(vec3.x, -vec3.y * d0, vec3.z);
         }
-    }
-
-    public static InteractionResult convertToTwoTieredCake(BlockState state, BlockPos pos, Level level, Player player, ItemStack stack) {
-        if (BaseCakeBlock.isUneaten(state, pos, level)) {
-            BlockState newState = ModBlocks.VANILLA_CAKE_FAMILY.getTwoTieredCake().get().defaultBlockState();
-
-            level.setBlockAndUpdate(pos, newState);
-            Block.pushEntitiesUp(state, newState, level, pos);
-            level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-            level.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1, 1);
-            player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
-
-            if (!player.isCreative()) {
-                stack.shrink(1);
-            }
-
-            return InteractionResult.SUCCESS;
-        }
-        return InteractionResult.PASS;
     }
 }

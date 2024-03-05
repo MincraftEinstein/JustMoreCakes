@@ -25,7 +25,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -122,20 +121,10 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         }
 
         if (family != null && isBaseVariant()) {
-            if (stack.is(family.getBaseCake().get().asItem()) && isUneaten(state, pos, level)) {
-                BlockState newState = family.getTwoTieredCake().get().defaultBlockState();
-
-                level.setBlockAndUpdate(pos, newState);
-                Block.pushEntitiesUp(state, newState, level, pos);
-                level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                level.playSound(null, pos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);
-                player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
-
-                if (!player.isCreative()) {
-                    stack.shrink(1);
+            if (stack.is(family.getBaseCake().get().asItem())) {
+                if (BaseTwoTieredCakeBlock.convertTo(family, state, pos, level, player, stack).consumesAction()) {
+                    return InteractionResult.SUCCESS;
                 }
-
-                return InteractionResult.SUCCESS;
             }
         }
 

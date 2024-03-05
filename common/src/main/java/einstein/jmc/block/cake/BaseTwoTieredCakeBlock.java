@@ -9,10 +9,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -63,25 +61,31 @@ public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
         CakeFamily family = getFamily();
 
         if (family != null) {
-            if (stack.is(family.getBaseCake().get().asItem()) && isUneaten(state, pos, level)) {
-                BlockPos abovePos = pos.above();
-                if (level.getBlockState(abovePos).canBeReplaced()) {
-                    BlockState newState = family.getThreeTieredCake().get().defaultBlockState();
-
-                    level.setBlockAndUpdate(abovePos, newState);
-                    level.setBlockAndUpdate(pos, BaseThreeTieredCakeBlock.createLowerState(newState.getBlock(), true));
-                    Block.pushEntitiesUp(Blocks.AIR.defaultBlockState(), newState, level, abovePos);
-                    level.gameEvent(player, GameEvent.BLOCK_CHANGE, abovePos);
-                    level.playSound(null, abovePos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);
-                    player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
-
-                    if (!player.isCreative()) {
-                        stack.shrink(1);
-                    }
+            if (stack.is(family.getBaseCake().get().asItem())) {
+                if (BaseThreeTieredCakeBlock.convertTo(family, state, pos, level, player, stack).consumesAction()) {
                     return InteractionResult.SUCCESS;
                 }
             }
         }
         return super.use(state, level, pos, player, hand, hitResult);
+    }
+
+    public static InteractionResult convertTo(CakeFamily family, BlockState state, BlockPos pos, Level level, Player player, ItemStack stack) {
+        if (isUneaten(state, pos, level)) {
+            BlockState newState = family.getTwoTieredCake().get().defaultBlockState();
+
+            level.setBlockAndUpdate(pos, newState);
+            pushEntitiesUp(state, newState, level, pos);
+            level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+            level.playSound(null, pos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);
+            player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+
+            if (!player.isCreative()) {
+                stack.shrink(1);
+            }
+
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
     }
 }
