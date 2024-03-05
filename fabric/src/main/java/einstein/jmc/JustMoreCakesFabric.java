@@ -16,6 +16,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.VillagerInteractionRegistries;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fml.config.ModConfig;
 
 import static einstein.jmc.JustMoreCakes.MOD_ID;
+import static einstein.jmc.JustMoreCakes.loc;
 import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
 import static einstein.jmc.util.Util.getVanillaCandleCakes;
 
@@ -41,6 +43,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         onServerStarting();
         onAddReloadListeners();
         addVillagerTrades();
+        UseBlockCallback.EVENT.register(loc("before"), JustMoreCakes::blockClicked);
 
         ForgeConfigRegistry.INSTANCE.register(MOD_ID, ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
         ForgeConfigRegistry.INSTANCE.register(MOD_ID, ModConfig.Type.SERVER, ModServerConfigs.SPEC);

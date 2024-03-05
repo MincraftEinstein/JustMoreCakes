@@ -2,17 +2,27 @@ package einstein.jmc;
 
 import einstein.jmc.advancement.criterian.CakeEatenTrigger;
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.compat.AmendmentsCompat;
 import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,6 +90,20 @@ public class JustMoreCakes {
         if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
             Util.removeRecipe(server.getRecipeManager(), RecipeType.CRAFTING, mcLoc("cake"));
         }
+    }
+
+    public static InteractionResult blockClicked(Player player, Level level, InteractionHand hand, BlockHitResult hitResult) {
+        ItemStack stack = player.getItemInHand(hand);
+        BlockPos pos = hitResult.getBlockPos();
+        BlockState state = level.getBlockState(pos);
+        boolean canUse = !player.isSecondaryUseActive() || (player.getMainHandItem().isEmpty() && player.getOffhandItem().isEmpty());
+
+        if (stack.is(Blocks.CAKE.asItem()) && canUse) {
+            if (Services.PLATFORM.isModLoaded("amendments")) {
+                return AmendmentsCompat.cakeUsedOnBlock(player, level, hand, hitResult);
+            }
+        }
+        return InteractionResult.PASS;
     }
 
     public static ResourceLocation loc(String string) {

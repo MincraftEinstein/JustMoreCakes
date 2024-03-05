@@ -9,9 +9,6 @@ import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -23,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -55,20 +51,12 @@ public class CakeBlockMixin implements CakeEffectsHolder {
         }
 
         if (justMoreCakes$me.equals(Blocks.CAKE)) {  // Need to check that this is the default cake, so that things won't break with inheritance
-            if (stack.is(Items.CAKE) && BaseCakeBlock.isUneaten(state, pos, level)) {
-                BlockState newState = ModBlocks.VANILLA_CAKE_FAMILY.getTwoTieredCake().get().defaultBlockState();
+            if (stack.is(Items.CAKE)) {
+                InteractionResult result = Util.convertToTwoTieredCake(state, pos, level, player, stack);
 
-                level.setBlockAndUpdate(pos, newState);
-                Block.pushEntitiesUp(state, newState, level, pos);
-                level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-                level.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1, 1);
-                player.awardStat(Stats.ITEM_USED.get(Items.CAKE));
-
-                if (!player.isCreative()) {
-                    stack.shrink(1);
+                if (result.consumesAction()) {
+                    cir.setReturnValue(result);
                 }
-
-                cir.setReturnValue(InteractionResult.SUCCESS);
             }
         }
     }
