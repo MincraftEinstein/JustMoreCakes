@@ -62,3 +62,10 @@ Adds 30 new flavors of cake along with new improvements and mechanics for a bett
     versionRange = "[11.8.0,)"
     ordering = "NONE"
     side = "BOTH"
+
+[[depedendies.jmc]]
+    modId = "amendments"
+    madatory = false
+    versionRange = "[1.20-1.1.6)"
+    ordering = "NONE"
+    side = "BOTH"
