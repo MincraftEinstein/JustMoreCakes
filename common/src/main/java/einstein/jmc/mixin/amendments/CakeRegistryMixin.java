@@ -1,4 +1,4 @@
-package einstein.jmc.mixin.admendments;
+package einstein.jmc.mixin.amendments;
 
 import einstein.jmc.block.cake.BaseCakeBlock;
 import net.mehvahdjukaar.amendments.common.CakeRegistry;
@@ -11,10 +11,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
-@Mixin(CakeRegistry.class)
+@Mixin(value = CakeRegistry.class, remap = false)
 public class CakeRegistryMixin {
 
-    @Inject(method = "detectTypeFromBlock", at = @At("HEAD"), remap = false, cancellable = true)
+    @Inject(method = "detectTypeFromBlock", at = @At("HEAD"), cancellable = true)
     private void detectTypeFromBlock(Block block, ResourceLocation blockId, CallbackInfoReturnable<Optional<CakeRegistry.CakeType>> cir) {
         if (block instanceof BaseCakeBlock) {
             cir.setReturnValue(Optional.empty());

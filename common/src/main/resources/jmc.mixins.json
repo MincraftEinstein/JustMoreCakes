@@ -6,9 +6,9 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "CakeBlockMixin",
-    "admendments.CakeRegistryMixin",
+    "amendments.CakeRegistryMixin",
     "CandleCakeBlockMixin",
-    "admendments.InteractEventsMixin",
+    "amendments.InteractEventsMixin",
     "PandaMixin",
     "PandaMixin$PandaSitGoal",
     "PlayerListMixin",

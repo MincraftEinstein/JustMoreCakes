@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static einstein.jmc.JustMoreCakes.loc;
 
-@Mixin(AmendmentsFabric.class)
+@Mixin(value = AmendmentsFabric.class, remap = false)
 public class AmendmentsFabricMixin {
 
     @Inject(method = "shouldRemap", at = @At("HEAD"), cancellable = true)
