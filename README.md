@@ -63,6 +63,7 @@ All translators are credited in the list below
 - Russian: [Telezhka-the-First](https://github.com/Telezhka-the-First), [Mikhail](https://github.com/Hacker1470)
 - German: [Cape-City](https://github.com/Cape-City)
 - Ukrainian: [Un roman](https://github.com/unroman)
+- Arabic: [worstalive](https://github.com/worstalive)
 
 ---
 
