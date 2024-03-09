@@ -35,7 +35,7 @@ public class ModVillagers {
     public static void apprenticeTrades(List<VillagerTrades.ItemListing> listings) {
         listings.add(new ItemsForEmeralds(Blocks.CAKE.asItem(), 1, 1, 10));
         listings.add(new ItemsForEmeralds(Items.COCOA_BEANS, 3, 1, 5));
-        listings.add(new ItemsForEmeralds(ModBlocks.CARROT_CAKE_FAMILY.getBaseCake().get(), 1, 1, 10));
+        listings.add(new ItemsForEmeralds(ModBlocks.CARROT_CAKE_FAMILY.getBaseItem().get(), 1, 1, 10));
     }
 
     public static void journeymanTrades(List<VillagerTrades.ItemListing> listings) {
@@ -51,10 +51,10 @@ public class ModVillagers {
 
     public static void masterTrades(List<VillagerTrades.ItemListing> listings) {
         listings.add(new ItemsForEmeralds(new ItemStack(ModItems.CAKE_SPATULA.get()), 6, 1, 3, 15, 0.2F));
-        listings.add(new ItemsForEmeralds(ModBlocks.CREEPER_CAKE_FAMILY.getBaseCake().get().asItem(), 20, 1, 30));
+        listings.add(new ItemsForEmeralds(ModBlocks.CREEPER_CAKE_FAMILY.getBaseItem().get(), 20, 1, 30));
     }
 
     public static void wanderingTraderTrades(List<VillagerTrades.ItemListing> listings) {
-        listings.add(new ItemsForEmeralds(ModBlocks.SEED_CAKE_FAMILY.getBaseCake().get().asItem(), 2, 1, 12));
+        listings.add(new ItemsForEmeralds(ModBlocks.SEED_CAKE_FAMILY.getBaseItem().get(), 2, 1, 12));
     }
 }

@@ -21,15 +21,18 @@ public interface CommonHooks {
     void registerBrewingRecipe(Potion potion, Ingredient ingredient, Potion result);
 
     default void registerCompostable(ItemLike item, float chance) {
-        if (item != null && item != Items.AIR) {
-            if (chance > 0 && chance <= 1) {
-                registerCompostableInternal(item.asItem(), chance);
+        if (item != null) {
+            item = item.asItem();
+            if (item != Items.AIR) {
+                if (chance > 0 && chance <= 1) {
+                    registerCompostableInternal(item, chance);
+                    return;
+                }
+                JustMoreCakes.LOGGER.warn("Attempted to register {} with an invalid chance. Must be between 0 and 1", item.asItem());
                 return;
             }
-            JustMoreCakes.LOGGER.warn("Attempted to register {} with an invalid chance. Must be between 0 and 1", item.asItem());
-            return;
+            JustMoreCakes.LOGGER.warn("Attempted to register an invalid item as a compostable");
         }
-        JustMoreCakes.LOGGER.warn("Attempted to register an invalid item as a compostable");
     }
 
     void registerCompostableInternal(ItemLike item, float chance);

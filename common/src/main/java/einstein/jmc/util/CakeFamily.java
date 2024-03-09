@@ -4,6 +4,8 @@ import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.effects.CakeEffects;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
@@ -91,6 +93,13 @@ public abstract class CakeFamily implements CakeEffectsHolder {
         consumer.accept(baseCake);
         consumer.accept(twoTieredCake);
         consumer.accept(threeTieredCake);
+    }
+
+    public Supplier<Item> getBaseItem() {
+        if (baseVariant != null) {
+            return baseVariant.getItem();
+        }
+        return () -> Items.AIR;
     }
 
     @Nullable

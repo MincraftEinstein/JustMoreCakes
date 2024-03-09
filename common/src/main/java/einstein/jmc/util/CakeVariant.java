@@ -7,8 +7,12 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseTwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.platform.Services;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -19,7 +23,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import static einstein.jmc.JustMoreCakes.mcLoc;
-import static einstein.jmc.init.ModBlocks.register;
 
 public class CakeVariant {
 
@@ -61,6 +64,7 @@ public class CakeVariant {
     private CakeModel candleCakeModel = CakeModel.DEFAULT;
     private CakeFamily family;
     private Supplier<BaseCakeBlock> cake;
+    private Supplier<Item> item = () -> Items.AIR;
 
     private CakeVariant(String cakeName, CakeVariantType type) {
         this.cakeName = cakeName;
@@ -130,6 +134,10 @@ public class CakeVariant {
 
     public Supplier<BaseCakeBlock> getCake() {
         return cake;
+    }
+
+    public Supplier<Item> getItem() {
+        return item;
     }
 
     public static class Builder {
@@ -226,7 +234,11 @@ public class CakeVariant {
                 variant.cakeProperties = ModBlocks.cakeProperties();
             }
 
-            Supplier<BaseCakeBlock> cake = register(variant.cakeName, () -> cakeClazz.get(variant), variant.hasItem());
+            Supplier<BaseCakeBlock> cake = Services.REGISTRY.registerBlockNoItem(variant.cakeName, () -> cakeClazz.get(variant));
+
+            if (variant.hasItem()) {
+                variant.item = Services.REGISTRY.registerItem(variant.cakeName, () -> new BlockItem(cake.get(), new Item.Properties()));
+            }
 
             if (variant.allowsCandles) {
                 if (candleCakeClazz == null) {
@@ -243,7 +255,7 @@ public class CakeVariant {
 
                 for (Block candle : SUPPORTED_CANDLES.keySet()) {
                     String type = SUPPORTED_CANDLES.get(candle).getPath();
-                    Supplier<BaseCandleCakeBlock> candleCake = register(type + "candle_" + variant.cakeName, () -> candleCakeClazz.get(cake.get(), candle, variant.candleCakeProperties), false);
+                    Supplier<BaseCandleCakeBlock> candleCake = Services.REGISTRY.registerBlockNoItem(type + "candle_" + variant.cakeName, () -> candleCakeClazz.get(cake.get(), candle, variant.candleCakeProperties));
                     variant.candleCakeByCandle.put(candle, candleCake);
                 }
             }

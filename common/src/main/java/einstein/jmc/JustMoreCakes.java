@@ -1,7 +1,6 @@
 package einstein.jmc;
 
 import einstein.jmc.advancement.criterian.CakeEatenTrigger;
-import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.compat.AmendmentsCompat;
 import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.init.*;
@@ -26,8 +25,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.function.Supplier;
 
 import static einstein.jmc.init.ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT;
 import static einstein.jmc.util.Util.registerVillageBuilding;
@@ -57,9 +54,9 @@ public class JustMoreCakes {
         Items.CAKE.maxStackSize = 64;
         ModPotions.registerPotionRecipes();
 
-        for (Supplier<BaseCakeBlock> cake : CakeVariant.VARIANT_BY_CAKE.keySet()) {
-            if (cake != ModBlocks.CUPCAKE_VARIANT) {
-                Services.HOOKS.registerCompostable(cake.get(), 1);
+        for (CakeVariant variant : CakeVariant.VARIANT_BY_CAKE.values()) {
+            if (variant.hasItem()) {
+                Services.HOOKS.registerCompostable(variant.getItem().get(), 1);
             }
         }
 
