@@ -28,8 +28,8 @@ public class CakeNourishmentProvider implements IBlockComponentProvider {
             addNourishmentInfo(tooltip, config, cake.getSlices() + 1, cake.getNutrition(), cake.getSaturationModifier());
         }
         else if (block instanceof BaseCandleCakeBlock candleCake) {
-            BaseCakeBlock originalCake = candleCake.getOriginalCake();
-            addNourishmentInfo(tooltip, config, originalCake.getSlices() + 1, originalCake.getNutrition(), originalCake.getSaturationModifier());
+            BaseCakeBlock parentCake = candleCake.getParentCake();
+            addNourishmentInfo(tooltip, config, parentCake.getSlices() + 1, parentCake.getNutrition(), parentCake.getSaturationModifier());
         }
         else if (block == Blocks.CAKE || Util.getVanillaCandleCakes().contains(block)) {
             addNourishmentInfo(tooltip, config, 7, 2, 0.1F);

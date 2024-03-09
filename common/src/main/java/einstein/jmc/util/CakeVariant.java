@@ -275,6 +275,6 @@ public class CakeVariant {
     @FunctionalInterface
     public interface CandleCakeClazzSupplier<T extends BaseCandleCakeBlock> {
 
-        T get(BaseCakeBlock originalCake, Block candle, BlockBehaviour.Properties properties);
+        T get(BaseCakeBlock parentCake, Block candle, BlockBehaviour.Properties properties);
     }
 }

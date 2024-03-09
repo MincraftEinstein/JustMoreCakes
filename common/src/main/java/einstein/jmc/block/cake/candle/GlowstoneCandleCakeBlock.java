@@ -11,8 +11,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class GlowstoneCandleCakeBlock extends BaseCandleCakeBlock implements EntityBlock {
 
-    public GlowstoneCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
-        super(originalCake, candle, properties);
+    public GlowstoneCandleCakeBlock(BaseCakeBlock parentCake, Block candle, Properties properties) {
+        super(parentCake, candle, properties);
     }
 
     @Nullable

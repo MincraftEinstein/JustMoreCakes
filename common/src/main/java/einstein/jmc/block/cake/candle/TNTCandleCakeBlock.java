@@ -15,8 +15,8 @@ import static einstein.jmc.block.cake.TNTCakeBlock.explodeIfAllowed;
 @SuppressWarnings("deprecation")
 public class TNTCandleCakeBlock extends BaseCandleCakeBlock implements EntityBlock {
 
-    public TNTCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
-        super(originalCake, candle, properties);
+    public TNTCandleCakeBlock(BaseCakeBlock parentCake, Block candle, Properties properties) {
+        super(parentCake, candle, properties);
     }
 
     @Override

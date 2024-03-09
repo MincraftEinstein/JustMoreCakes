@@ -45,8 +45,8 @@ public class BaseThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
             box(2, 8, 2, 14, 15, 14) // Middle
     );
 
-    public BaseThreeTieredCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
-        super(originalCake, candle, properties);
+    public BaseThreeTieredCandleCakeBlock(BaseCakeBlock parentCake, Block candle, Properties properties) {
+        super(parentCake, candle, properties);
         registerDefaultState(defaultBlockState().setValue(HALF, UPPER));
     }
 
@@ -93,7 +93,7 @@ public class BaseThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     protected BlockState createLowerState() {
-        return BaseThreeTieredCakeBlock.createLowerState(getOriginalCake(), true);
+        return BaseThreeTieredCakeBlock.createLowerState(getParentCake(), true);
     }
 
     @Override
@@ -146,7 +146,7 @@ public class BaseThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         spawnCandleFlames(state, level, pos, random);
-        getOriginalCake().animateTick(getOriginalCake().defaultBlockState().setValue(HALF, state.getValue(HALF)), level, pos, random);
+        getParentCake().animateTick(getParentCake().defaultBlockState().setValue(HALF, state.getValue(HALF)), level, pos, random);
     }
 
     @Override
@@ -169,7 +169,7 @@ public class BaseThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
-    public BaseThreeTieredCakeBlock getOriginalCake() {
-        return (BaseThreeTieredCakeBlock) super.getOriginalCake();
+    public BaseThreeTieredCakeBlock getParentCake() {
+        return (BaseThreeTieredCakeBlock) super.getParentCake();
     }
 }

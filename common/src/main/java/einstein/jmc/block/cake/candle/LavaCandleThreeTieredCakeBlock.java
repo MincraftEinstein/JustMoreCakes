@@ -11,8 +11,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class LavaCandleThreeTieredCakeBlock extends BaseThreeTieredCandleCakeBlock {
 
-    public LavaCandleThreeTieredCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
-        super(originalCake, candle, properties);
+    public LavaCandleThreeTieredCakeBlock(BaseCakeBlock parentCake, Block candle, Properties properties) {
+        super(parentCake, candle, properties);
     }
 
     @Override

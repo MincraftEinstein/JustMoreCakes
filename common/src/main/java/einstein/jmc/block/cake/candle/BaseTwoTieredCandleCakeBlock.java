@@ -5,7 +5,6 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.BaseTwoTieredCakeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -21,8 +20,8 @@ public class BaseTwoTieredCandleCakeBlock extends BaseCandleCakeBlock {
             box(7, 15, 7, 9, 21, 9) // Candle
     );
 
-    public BaseTwoTieredCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
-        super(originalCake, candle, properties);
+    public BaseTwoTieredCandleCakeBlock(BaseCakeBlock parentCake, Block candle, Properties properties) {
+        super(parentCake, candle, properties);
     }
 
     @Override
@@ -41,7 +40,7 @@ public class BaseTwoTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
-    public BaseTwoTieredCakeBlock getOriginalCake() {
-        return (BaseTwoTieredCakeBlock) super.getOriginalCake();
+    public BaseTwoTieredCakeBlock getParentCake() {
+        return (BaseTwoTieredCakeBlock) super.getParentCake();
     }
 }

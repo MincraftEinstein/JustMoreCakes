@@ -40,7 +40,7 @@ public class CakeEffectsProvider implements IBlockComponentProvider {
             cakeEffects = holder.justMoreCakes$getCakeEffects();
         }
         else if (block instanceof BaseCandleCakeBlock candleCake) {
-            cakeEffects = candleCake.getOriginalCake().justMoreCakes$getCakeEffects();
+            cakeEffects = candleCake.getParentCake().justMoreCakes$getCakeEffects();
         }
         else if (Util.getVanillaCandleCakes().contains(block)) {
             cakeEffects = ((CakeEffectsHolder) Blocks.CAKE).justMoreCakes$getCakeEffects();

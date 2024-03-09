@@ -12,8 +12,8 @@ import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.L
 
 public class SculkCandleThreeTieredCakeBlock extends BaseThreeTieredCandleCakeBlock {
 
-    public SculkCandleThreeTieredCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
-        super(originalCake, candle, properties);
+    public SculkCandleThreeTieredCakeBlock(BaseCakeBlock parentCake, Block candle, Properties properties) {
+        super(parentCake, candle, properties);
     }
 
     @Override

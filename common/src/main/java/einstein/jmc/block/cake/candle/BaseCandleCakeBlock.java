@@ -33,12 +33,12 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
             Block.box(1, 0, 1, 15, 8, 15),
             Block.box(7, 8, 7, 9, 14, 9));
 
-    private final BaseCakeBlock originalCake;
+    private final BaseCakeBlock parentCake;
     private final Block candle;
 
-    public BaseCandleCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
+    public BaseCandleCakeBlock(BaseCakeBlock parentCake, Block candle, Properties properties) {
         super(properties);
-        this.originalCake = originalCake;
+        this.parentCake = parentCake;
         this.candle = candle;
         registerDefaultState(stateDefinition.any().setValue(LIT, false));
     }
@@ -65,7 +65,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        InteractionResult result = originalCake.eat(level, pos, originalCake.defaultBlockState(), player);
+        InteractionResult result = parentCake.eat(level, pos, parentCake.defaultBlockState(), player);
         if (result.consumesAction()) {
             dropResources(state, level, pos);
             afterEaten(state, pos, level, player);
@@ -87,9 +87,9 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 
     @Override
     public ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
-        ItemStack stack = new ItemStack(originalCake.asItem());
-        if (stack.isEmpty() && originalCake.getFamily() != null) {
-            return new ItemStack(originalCake.getFamily().getBaseCake().get());
+        ItemStack stack = new ItemStack(parentCake.asItem());
+        if (stack.isEmpty() && parentCake.getFamily() != null) {
+            return new ItemStack(parentCake.getFamily().getBaseCake().get());
         }
         return stack;
     }
@@ -107,7 +107,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return BaseCakeBlock.getComparatorOutput(originalCake.defaultBlockState());
+        return BaseCakeBlock.getComparatorOutput(parentCake.defaultBlockState());
     }
 
     @Override
@@ -127,15 +127,15 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         spawnCandleFlames(state, level, pos, random);
-        originalCake.animateTick(originalCake.defaultBlockState(), level, pos, random);
+        parentCake.animateTick(parentCake.defaultBlockState(), level, pos, random);
     }
 
     protected double getCandleHeight() {
         return 0.5D;
     }
 
-    public BaseCakeBlock getOriginalCake() {
-        return originalCake;
+    public BaseCakeBlock getParentCake() {
+        return parentCake;
     }
 
     public Block getCandle() {

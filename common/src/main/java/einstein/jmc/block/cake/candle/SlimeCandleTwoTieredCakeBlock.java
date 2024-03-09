@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
 @SuppressWarnings("deprecation")
 public class SlimeCandleTwoTieredCakeBlock extends BaseTwoTieredCandleCakeBlock {
 
-    public SlimeCandleTwoTieredCakeBlock(BaseCakeBlock originalCake, Block candle, Properties properties) {
-        super(originalCake, candle, properties);
+    public SlimeCandleTwoTieredCakeBlock(BaseCakeBlock parentCake, Block candle, Properties properties) {
+        super(parentCake, candle, properties);
     }
 
     @Override
