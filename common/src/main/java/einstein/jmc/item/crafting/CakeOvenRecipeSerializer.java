@@ -1,9 +1,6 @@
 package einstein.jmc.item.crafting;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -50,16 +47,16 @@ public class CakeOvenRecipeSerializer implements RecipeSerializer<CakeOvenRecipe
         }
     }
 
-    private static NonNullList<Ingredient> itemsFromJson(JsonArray array) {
-        NonNullList<Ingredient> nonNullList = NonNullList.create();
+    public static NonNullList<Ingredient> itemsFromJson(JsonArray array) {
+        NonNullList<Ingredient> ingredients = NonNullList.create();
 
-        for (int i = 0; i < array.size(); ++i) {
-            Ingredient ingredient = Ingredient.fromJson(array.get(i));
+        for (JsonElement element : array) {
+            Ingredient ingredient = Ingredient.fromJson(element);
             if (!ingredient.isEmpty()) {
-                nonNullList.add(ingredient);
+                ingredients.add(ingredient);
             }
         }
-        return nonNullList;
+        return ingredients;
     }
 
     @Override

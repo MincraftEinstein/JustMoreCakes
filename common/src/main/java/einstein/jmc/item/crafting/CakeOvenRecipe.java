@@ -54,6 +54,7 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
                 }
             }
         }
+
         return stackCount == ingredients.size() && RecipeMatcher.findMatches(inputs, ingredients) != null;
     }
 

@@ -1,5 +1,7 @@
 package einstein.jmc.util;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.BitSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +24,7 @@ public class RecipeMatcher {
      *
      * @return An array mapping inputs to tests. ret[x] = y means input[x] = test[y]
      */
-    public static <T> int[] findMatches(List<T> inputs, List<? extends Predicate<T>> tests) {
+    public static <T> int @Nullable [] findMatches(List<T> inputs, List<? extends Predicate<T>> tests) {
         int elements = inputs.size();
         if (elements != tests.size()) {
             return null; // There will not be a 1:1 mapping of inputs -> tests
