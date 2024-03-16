@@ -165,6 +165,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
 
     @Override
     public ItemStack removeItem(int slotIndex, int count) {
+        setUpdated();
         return ContainerHelper.removeItem(stacks, slotIndex, count);
     }
 
