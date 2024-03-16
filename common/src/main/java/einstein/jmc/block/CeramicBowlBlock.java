@@ -1,6 +1,7 @@
 package einstein.jmc.block;
 
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
+import einstein.jmc.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
@@ -58,7 +59,7 @@ public class CeramicBowlBlock extends BaseEntityBlock {
                     return InteractionResult.SUCCESS;
                 }
             }
-            else if (stack.is(Items.IRON_SHOVEL)) { // TODO change to whisk item
+            else if (stack.is(ModItems.WHISK.get())) {
                 if (ceramicBowlBlockEntity.tryCraft(player)) {
                     stack.hurtAndBreak(1, player, broadcaster -> broadcaster.broadcastBreakEvent(hand));
                     return InteractionResult.SUCCESS;

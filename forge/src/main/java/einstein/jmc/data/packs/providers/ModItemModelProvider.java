@@ -23,6 +23,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 	protected void registerModels() {
 		generatedItem(getItemName(ModItems.CUPCAKE), modLoc("item/" + getItemName(ModItems.CUPCAKE)));
 		generatedItem(getItemName(ModItems.CREAM_CHEESE), modLoc("item/" + getItemName(ModItems.CREAM_CHEESE)));
+        layeredItem(getItemName(ModItems.WHISK), mcLoc("handheld"), modLoc("item/" + getItemName(ModItems.WHISK)));
 		generatedItem("poison_cake", mcLoc("item/cake"));
 		generatedItem("tnt_cake", mcLoc("item/cake"));
 
@@ -38,12 +39,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         });
     }
 
-    private ItemModelBuilder generatedItem(String name, ResourceLocation... layers) {
-        ItemModelBuilder model = withExistingParent(name, "item/generated");
+    private void generatedItem(String name, ResourceLocation... layers) {
+        layeredItem(name, mcLoc("item/generated"), layers);
+    }
+
+    private void layeredItem(String name, ResourceLocation parent, ResourceLocation... layers) {
+        ItemModelBuilder model = withExistingParent(name, parent);
         for (int i = 0; i < layers.length; i++) {
             model = model.texture("layer" + i, layers[i]);
         }
-        return model;
     }
 
     private String getItemName(Supplier<? extends ItemLike> item) {
