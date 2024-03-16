@@ -67,6 +67,7 @@ public class CeramicBowlBlock extends BaseEntityBlock {
             else if (ceramicBowlBlockEntity.addItem(player, player.isCreative() ? stack.copy() : stack)) {
                 return InteractionResult.SUCCESS;
             }
+            return InteractionResult.CONSUME;
         }
         return super.use(state, level, pos, player, hand, hitResult);
     }
