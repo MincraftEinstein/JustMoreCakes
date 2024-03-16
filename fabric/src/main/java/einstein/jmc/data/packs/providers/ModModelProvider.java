@@ -63,6 +63,7 @@ public class ModModelProvider extends FabricModelProvider {
         generators.output.accept(loc("item/encasing_ice"), new DelegatedModel(mcBlockLoc("ice")));
         generators.output.accept(loc("item/cake_oven"), new DelegatedModel(blockLoc("cake_oven")));
         generators.output.accept(loc("item/cake_stand"), new DelegatedModel(blockLoc("cake_stand")));
+        generators.output.accept(loc("item/ceramic_bowl"), new DelegatedModel(blockLoc("ceramic_bowl")));
 
         CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             if (variant.hasItem() && !variant.hasCustomItemModel()) {

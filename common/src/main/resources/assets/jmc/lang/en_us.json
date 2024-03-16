@@ -43,6 +43,7 @@
   "block.jmc.encasing_ice": "Encasing Ice",
   "block.jmc.cake_oven": "Cake Oven",
   "block.jmc.cake_stand": "Cake Stand",
+  "block.jmc.ceramic_bowl": "Ceramic Bowl",
 
   "_comment": "Entities",
   "entity.minecraft.villager.jmc.cake_baker": "Cake Baker",

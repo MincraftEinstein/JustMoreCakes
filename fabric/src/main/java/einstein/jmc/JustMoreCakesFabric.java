@@ -2,6 +2,7 @@ package einstein.jmc;
 
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
+import einstein.jmc.client.renderers.blockentities.CeramicBowlRenderer;
 import einstein.jmc.data.FabricCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
@@ -23,6 +24,7 @@ import net.fabricmc.fabric.api.registry.VillagerInteractionRegistries;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
@@ -80,6 +82,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CAKE_STAND.get(), RenderType.cutout());
 
         BlockEntityRenderers.register(ModBlockEntityTypes.CAKE_STAND.get(), CakeStandRenderer::new);
+        BlockEntityRenderers.register(ModBlockEntityTypes.CERAMIC_BOWL.get(), CeramicBowlRenderer::new);
 
         FabricNetworkHelper.init(NetworkHelper.Direction.TO_CLIENT);
     }

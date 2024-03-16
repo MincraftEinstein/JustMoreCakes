@@ -29,6 +29,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         getBuilder("encasing_ice").parent(getExistingFile(mcLoc("block/ice")));
         getBuilder("cake_oven").parent(getExistingFile(modLoc("block/cake_oven")));
         getBuilder("cake_stand").parent(getExistingFile(modLoc("block/cake_stand")));
+        getBuilder("ceramic_bowl").parent(getExistingFile(modLoc("block/ceramic_bowl")));
 
         CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             if (variant.hasItem() && !variant.hasCustomItemModel()) {

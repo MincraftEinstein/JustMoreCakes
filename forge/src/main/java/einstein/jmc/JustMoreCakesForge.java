@@ -3,6 +3,7 @@ package einstein.jmc;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
+import einstein.jmc.client.renderers.blockentities.CeramicBowlRenderer;
 import einstein.jmc.data.ForgeCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
@@ -150,6 +151,7 @@ public class JustMoreCakesForge {
 
     void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntityTypes.CAKE_STAND.get(), CakeStandRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntityTypes.CERAMIC_BOWL.get(), CeramicBowlRenderer::new);
     }
 
     void missingMappings(MissingMappingsEvent event) {
