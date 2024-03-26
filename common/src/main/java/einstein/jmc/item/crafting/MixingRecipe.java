@@ -3,7 +3,6 @@ package einstein.jmc.item.crafting;
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModRecipes;
-import einstein.jmc.util.RecipeMatcher;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -14,16 +13,13 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
 
     protected final ResourceLocation id;
-    protected final NonNullList<Ingredient> ingredients;
+    protected final NonNullList<CountedIngredient> ingredients;
     protected final ItemStack result;
 
-    public MixingRecipe(ResourceLocation id, NonNullList<Ingredient> ingredients, ItemStack result) {
+    public MixingRecipe(ResourceLocation id, NonNullList<CountedIngredient> ingredients, ItemStack result) {
         this.id = id;
         this.ingredients = ingredients;
         this.result = result;
@@ -31,18 +27,19 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
 
     @Override
     public boolean matches(CeramicBowlBlockEntity container, Level level) {
-        List<ItemStack> inputs = new ArrayList<>();
-        int stackCount = 0;
+        int matches = 0;
 
         for (int i = 0; i < container.getContainerSize(); i++) {
             ItemStack stack = container.getItem(i);
             if (!stack.isEmpty()) {
-                stackCount++;
-                inputs.add(stack);
+                if (ingredients.stream().anyMatch(ingredient -> ingredient.ingredient().test(stack)
+                        && (!stack.isStackable() || ingredient.count() <= stack.getCount()))) {
+                    matches++;
+                }
             }
         }
 
-        return stackCount == ingredients.size() && RecipeMatcher.findMatches(inputs, ingredients) != null;
+        return matches == ingredients.size();
     }
 
     @Override
@@ -86,11 +83,13 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
     }
 
     public void consumeIngredients(CeramicBowlBlockEntity container) {
-        for (Ingredient ingredient : ingredients) {
+        for (CountedIngredient countedIngredient : ingredients) {
+            Ingredient ingredient = countedIngredient.ingredient();
+            int count = countedIngredient.count();
             for (int i = 0; i < container.getContainerSize(); i++) {
                 ItemStack stack = container.getItem(i);
                 if (!stack.isEmpty() && ingredient.test(stack)) {
-                    stack.shrink(1);
+                    stack.shrink(count);
                     if (stack.isEmpty()) {
                         container.setItem(i, ItemStack.EMPTY);
                     }

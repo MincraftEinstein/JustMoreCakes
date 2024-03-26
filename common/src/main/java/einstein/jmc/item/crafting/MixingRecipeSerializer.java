@@ -1,5 +1,7 @@
 package einstein.jmc.item.crafting;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
@@ -9,7 +11,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 
@@ -17,7 +18,7 @@ public class MixingRecipeSerializer implements RecipeSerializer<MixingRecipe> {
 
     @Override
     public MixingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-        NonNullList<Ingredient> ingredients = CakeOvenRecipeSerializer.itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
+        NonNullList<CountedIngredient> ingredients = itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
 
         if (ingredients.isEmpty()) {
             throw new JsonParseException("No Ingredients for mixing recipe");
@@ -43,14 +44,26 @@ public class MixingRecipeSerializer implements RecipeSerializer<MixingRecipe> {
         return new MixingRecipe(recipeId, ingredients, result);
     }
 
+    public static NonNullList<CountedIngredient> itemsFromJson(JsonArray array) {
+        NonNullList<CountedIngredient> ingredients = NonNullList.create();
+
+        for (JsonElement element : array) {
+            CountedIngredient ingredient = CountedIngredient.fromJson(element.getAsJsonObject());
+            if (!ingredient.isEmpty()) {
+                ingredients.add(ingredient);
+            }
+        }
+        return ingredients;
+    }
+
     @Override
     public MixingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buf) {
         ItemStack resultStack = buf.readItem();
         int ingredientCount = buf.readByte();
-        NonNullList<Ingredient> ingredients = NonNullList.withSize(ingredientCount, Ingredient.EMPTY);
+        NonNullList<CountedIngredient> ingredients = NonNullList.withSize(ingredientCount, CountedIngredient.EMPTY);
 
         for (int i = 0; i < ingredientCount; i++) {
-            ingredients.set(i, Ingredient.fromNetwork(buf));
+            ingredients.set(i, CountedIngredient.fromNetwork(buf));
         }
 
         return new MixingRecipe(recipeId, ingredients, resultStack);

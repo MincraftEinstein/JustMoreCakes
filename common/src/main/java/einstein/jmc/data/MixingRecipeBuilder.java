@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import einstein.jmc.init.ModRecipes;
+import einstein.jmc.item.crafting.CountedIngredient;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -21,28 +22,33 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.function.Consumer;
 
 public class MixingRecipeBuilder implements RecipeBuilder {
 
     private final RecipeCategory category;
-    private final NonNullList<Ingredient> ingredients;
+    private final NonNullList<CountedIngredient> ingredients;
     private final Item result;
     private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
 
-    public MixingRecipeBuilder(RecipeCategory category, NonNullList<Ingredient> ingredients, ItemLike result) {
+    public MixingRecipeBuilder(RecipeCategory category, NonNullList<CountedIngredient> ingredients, ItemLike result) {
         this.category = category;
         this.ingredients = ingredients;
         this.result = result.asItem();
     }
 
     public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, Ingredient... ingredients) {
+        return mixing(category, result, Arrays.stream(ingredients).map(ingredient -> new CountedIngredient(ingredient, 1)).toArray(CountedIngredient[]::new));
+    }
+
+    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, CountedIngredient... ingredients) {
         if (ingredients.length > CeramicBowlBlockEntity.SLOT_COUNT) {
             throw new IllegalStateException("Too many ingredients for mixing recipe. The max is 4");
         }
 
-        NonNullList<Ingredient> ingredientsList = NonNullList.create();
+        NonNullList<CountedIngredient> ingredientsList = NonNullList.create();
         Collections.addAll(ingredientsList, ingredients);
         return new MixingRecipeBuilder(category, ingredientsList, result);
     }
@@ -74,15 +80,15 @@ public class MixingRecipeBuilder implements RecipeBuilder {
         consumer.accept(new Result(recipeId, ingredients, result, recipeId.withPrefix("recipes/" + category.getFolderName() + "/"), advancement));
     }
 
-    public record Result(ResourceLocation recipeId, NonNullList<Ingredient> ingredients, Item result,
-                         ResourceLocation advancementId, Advancement.Builder advancement) implements FinishedRecipe{
+    public record Result(ResourceLocation recipeId, NonNullList<CountedIngredient> ingredients, Item result,
+                         ResourceLocation advancementId, Advancement.Builder advancement) implements FinishedRecipe {
 
         @Override
         public void serializeRecipeData(JsonObject json) {
             JsonArray jsonIngredients = new JsonArray(CeramicBowlBlockEntity.SLOT_COUNT);
 
-            for (Ingredient ingredient : ingredients) {
-                jsonIngredients.add(ingredient.toJson());
+            for (CountedIngredient ingredient : ingredients) {
+                ingredient.toJson(json);
             }
 
             json.add("ingredients", jsonIngredients);
