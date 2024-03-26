@@ -36,7 +36,7 @@ import java.util.Optional;
 public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
 
     public static final int SLOT_COUNT = 4;
-    public static final int MAX_PROGRESS = 5;
+    public static final int DEFAULT_MIXING_PROGRESS = 5;
     private final NonNullList<ItemStack> stacks = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
     private int mixingProgress;
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
@@ -53,7 +53,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
             MixingRecipe recipe = matchingRecipe.get();
             ItemStack resultStack = recipe.assemble(this, level.registryAccess());
             if (!resultStack.isEmpty()) {
-                if (mixingProgress < MAX_PROGRESS && !isEmpty()) {
+                if (mixingProgress < (recipe.getMixingTime() - 1) && !isEmpty()) {
                     mixingProgress++;
                     return true;
                 }

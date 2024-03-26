@@ -1,9 +1,6 @@
 package einstein.jmc.item.crafting;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -41,7 +38,12 @@ public class MixingRecipeSerializer implements RecipeSerializer<MixingRecipe> {
                     .orElseThrow(() -> new IllegalStateException("Item: " + resultString + " does not exist")));
         }
 
-        return new MixingRecipe(recipeId, ingredients, result);
+        int mixingTime = GsonHelper.getAsInt(json, "mixingTime", CeramicBowlBlockEntity.DEFAULT_MIXING_PROGRESS);
+        if (mixingTime < 1) {
+            throw new JsonSyntaxException("mixingTime must be a positive number for recipe: " + recipeId);
+        }
+
+        return new MixingRecipe(recipeId, ingredients, result, mixingTime);
     }
 
     public static NonNullList<CountedIngredient> itemsFromJson(JsonArray array) {
@@ -59,6 +61,7 @@ public class MixingRecipeSerializer implements RecipeSerializer<MixingRecipe> {
     @Override
     public MixingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buf) {
         ItemStack resultStack = buf.readItem();
+        int mixingTime = buf.readInt();
         int ingredientCount = buf.readByte();
         NonNullList<CountedIngredient> ingredients = NonNullList.withSize(ingredientCount, CountedIngredient.EMPTY);
 
@@ -66,12 +69,13 @@ public class MixingRecipeSerializer implements RecipeSerializer<MixingRecipe> {
             ingredients.set(i, CountedIngredient.fromNetwork(buf));
         }
 
-        return new MixingRecipe(recipeId, ingredients, resultStack);
+        return new MixingRecipe(recipeId, ingredients, resultStack, mixingTime);
     }
 
     @Override
     public void toNetwork(FriendlyByteBuf buf, MixingRecipe recipe) {
         buf.writeItem(recipe.result);
+        buf.writeInt(recipe.mixingTime);
         buf.writeByte(recipe.ingredients.size());
         recipe.ingredients.forEach(ingredient -> ingredient.toNetwork(buf));
     }

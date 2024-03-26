@@ -10,6 +10,10 @@ public record CountedIngredient(Ingredient ingredient, int count) {
 
     public static final CountedIngredient EMPTY = new CountedIngredient(Ingredient.EMPTY, 0);
 
+    public CountedIngredient(Ingredient ingredient) {
+        this(ingredient, 1);
+    }
+
     public boolean isEmpty() {
         return ingredient.isEmpty() || count == 0;
     }
