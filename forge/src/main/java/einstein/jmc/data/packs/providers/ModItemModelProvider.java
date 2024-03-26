@@ -24,6 +24,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 		generatedItem(getItemName(ModItems.CUPCAKE), modLoc("item/" + getItemName(ModItems.CUPCAKE)));
 		generatedItem(getItemName(ModItems.CREAM_CHEESE), modLoc("item/" + getItemName(ModItems.CREAM_CHEESE)));
         layeredItem(getItemName(ModItems.WHISK), mcLoc("handheld"), modLoc("item/" + getItemName(ModItems.WHISK)));
+        generatedItem(getItemName(ModItems.CAKE_DOUGH), modLoc("item/" + getItemName(ModItems.CAKE_DOUGH)));
+        generatedItem(getItemName(ModItems.CUPCAKE_DOUGH), modLoc("item/" + getItemName(ModItems.CUPCAKE_DOUGH)));
 		generatedItem("poison_cake", mcLoc("item/cake"));
 		generatedItem("tnt_cake", mcLoc("item/cake"));
 

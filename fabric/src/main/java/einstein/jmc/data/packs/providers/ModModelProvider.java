@@ -9,8 +9,8 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.CakeModel;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.CakeVariantType;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -58,6 +58,8 @@ public class ModModelProvider extends FabricModelProvider {
         generators.generateFlatItem(ModItems.CUPCAKE.get(), ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModItems.CREAM_CHEESE.get(), ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModItems.WHISK.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        generators.generateFlatItem(ModItems.CAKE_DOUGH.get(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModItems.CUPCAKE_DOUGH.get(), ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModBlocks.POISON_CAKE_VARIANT.getItem().get(), Items.CAKE, ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModBlocks.TNT_CAKE_VARIANT.getItem().get(), Items.CAKE, ModelTemplates.FLAT_ITEM);
 

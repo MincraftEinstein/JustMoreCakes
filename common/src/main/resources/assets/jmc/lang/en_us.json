@@ -5,6 +5,8 @@
   "item.jmc.cake_spatula": "Cake Spatula",
   "item.jmc.cake_spatula.desc": "(§oShift + Right-Click§r) an uneaten cake to collect it",
   "item.jmc.whisk": "Whisk",
+  "item.jmc.cake_dough": "Cake Dough",
+  "item.jmc.cupcake_dough": "Cupcake Dough",
 
   "_comment": "Blocks",
   "block.jmc.chocolate_cake": "Chocolate Cake",

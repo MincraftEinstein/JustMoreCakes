@@ -1,7 +1,8 @@
-// 1.20.1	2024-03-16T14:00:26.7000837	Item Models: jmc
+// 1.20.1	2024-03-26T14:40:33.0670254	Item Models: jmc
 e26168662503f6bf68944dc8a9698074be40a3c1 assets/jmc/models/item/apple_cake.json
 99f7f794c501eab38d68782e17e5dd37decfc434 assets/jmc/models/item/beetroot_cake.json
 d6a3b36f36fe2004277a7cbdcf3405980b8ecd84 assets/jmc/models/item/brown_mushroom_cake.json
+350184cdac62f26cf77ba8d2170eb9e04bc77850 assets/jmc/models/item/cake_dough.json
 9f64693739e3a6012069848fbedf9fe5ab5e8a3d assets/jmc/models/item/cake_oven.json
 e6fc3f93a5d42daf551dbe27d3783bcc7daa0505 assets/jmc/models/item/cake_stand.json
 7ebe1258db354f0932a6c349898813a15b15506e assets/jmc/models/item/carrot_cake.json
@@ -14,6 +15,7 @@ b2308f7f2741071d3a4351a0977c7e69976ee69f assets/jmc/models/item/cream_cheese.jso
 6afee707202fbb57314c8674064deea62b9652d4 assets/jmc/models/item/creeper_cake.json
 b2b5f48d3f34225c6179d7d4f0efe77bdf9bbfd8 assets/jmc/models/item/crimson_fungus_cake.json
 4a321303d919a7cc39dc875dc604f344a202acb0 assets/jmc/models/item/cupcake.json
+a5c5b0c5bd6a02aa32da459e32d5d1806d5cda95 assets/jmc/models/item/cupcake_dough.json
 03a61c4280fc479382b65fb5755d91b429dcfcdf assets/jmc/models/item/encasing_ice.json
 e198da113e189c17b5d132573d5336779f5de277 assets/jmc/models/item/ender_cake.json
 8f820e8259a636b620c6dc22b98b5c280ec3ba57 assets/jmc/models/item/firey_cake.json
