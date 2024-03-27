@@ -16,5 +16,7 @@
       "item": "minecraft:sugar"
     }
   ],
-  "result": "jmc:lava_cake"
+  "result": {
+    "item": "jmc:lava_cake"
+  }
 }

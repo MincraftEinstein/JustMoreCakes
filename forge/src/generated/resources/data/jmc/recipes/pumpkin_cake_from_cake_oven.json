@@ -16,5 +16,7 @@
       "item": "minecraft:wheat"
     }
   ],
-  "result": "jmc:pumpkin_cake"
+  "result": {
+    "item": "jmc:pumpkin_cake"
+  }
 }

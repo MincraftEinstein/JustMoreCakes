@@ -16,5 +16,7 @@
       "item": "minecraft:egg"
     }
   ],
-  "result": "jmc:red_velvet_cake"
+  "result": {
+    "item": "jmc:red_velvet_cake"
+  }
 }

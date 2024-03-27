@@ -16,5 +16,7 @@
       "item": "minecraft:egg"
     }
   ],
-  "result": "jmc:honey_cake"
+  "result": {
+    "item": "jmc:honey_cake"
+  }
 }

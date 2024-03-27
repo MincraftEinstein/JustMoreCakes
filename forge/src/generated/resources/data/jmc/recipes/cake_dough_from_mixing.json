@@ -21,5 +21,7 @@
     }
   ],
   "mixingTime": 5,
-  "result": "jmc:cake_dough"
+  "result": {
+    "item": "jmc:cake_dough"
+  }
 }

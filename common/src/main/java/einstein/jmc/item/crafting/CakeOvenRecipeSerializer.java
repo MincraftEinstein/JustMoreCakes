@@ -1,9 +1,11 @@
 package einstein.jmc.item.crafting;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -19,32 +21,16 @@ public class CakeOvenRecipeSerializer implements RecipeSerializer<CakeOvenRecipe
         NonNullList<Ingredient> ingredients = itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
 
         if (ingredients.isEmpty()) {
-            throw new JsonParseException("No ingredients for cake oven recipe");
+            throw new JsonSyntaxException("No ingredients found for cake oven recipe: " + recipeId);
         }
         else if (ingredients.size() > INGREDIENT_SLOT_COUNT) {
-            throw new JsonParseException("Too many ingredients for cake oven recipe. The max is 4");
+            throw new JsonSyntaxException("Too many ingredients for cake oven recipe: " + recipeId + ". The max is 4");
         }
-        else {
-            String r = "result";
-            if (!json.has(r)) {
-                throw new JsonSyntaxException("Missing result, expected to find a string or object");
-            }
 
-            ItemStack resultStack;
-            if (json.get(r).isJsonObject()) {
-                resultStack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, r));
-            }
-            else {
-                String resultString = GsonHelper.getAsString(json, r);
-                ResourceLocation resourceLocation = new ResourceLocation(resultString);
-                resultStack = new ItemStack(BuiltInRegistries.ITEM.getOptional(resourceLocation).orElseThrow(
-                        () -> new IllegalStateException("Item: " + resultString + " does not exist")));
-            }
-
-            float experience = GsonHelper.getAsFloat(json, "experience", 0);
-            int cookingTime = GsonHelper.getAsInt(json, "cookingTime", DEFAULT_COOK_TIME);
-            return new CakeOvenRecipe(recipeId, ingredients, resultStack, experience, cookingTime);
-        }
+        ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+        float experience = GsonHelper.getAsFloat(json, "experience", 0);
+        int cookingTime = GsonHelper.getAsInt(json, "cookingTime", DEFAULT_COOK_TIME);
+        return new CakeOvenRecipe(recipeId, ingredients, result, experience, cookingTime);
     }
 
     public static NonNullList<Ingredient> itemsFromJson(JsonArray array) {

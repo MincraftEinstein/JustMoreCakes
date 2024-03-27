@@ -16,5 +16,7 @@
       "item": "minecraft:milk_bucket"
     }
   ],
-  "result": "jmc:poison_cake"
+  "result": {
+    "item": "jmc:poison_cake"
+  }
 }

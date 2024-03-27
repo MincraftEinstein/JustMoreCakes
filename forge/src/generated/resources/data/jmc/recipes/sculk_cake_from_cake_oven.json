@@ -16,5 +16,7 @@
       "item": "minecraft:sugar"
     }
   ],
-  "result": "jmc:sculk_cake"
+  "result": {
+    "item": "jmc:sculk_cake"
+  }
 }

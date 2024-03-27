@@ -16,5 +16,7 @@
       "item": "minecraft:milk_bucket"
     }
   ],
-  "result": "jmc:redstone_cake"
+  "result": {
+    "item": "jmc:redstone_cake"
+  }
 }

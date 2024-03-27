@@ -15,5 +15,7 @@
     }
   ],
   "mixingTime": 7,
-  "result": "jmc:frosting"
+  "result": {
+    "item": "jmc:frosting"
+  }
 }

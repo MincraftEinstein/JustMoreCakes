@@ -13,5 +13,7 @@
       "item": "minecraft:egg"
     }
   ],
-  "result": "jmc:cookie_cake"
+  "result": {
+    "item": "jmc:cookie_cake"
+  }
 }

@@ -16,5 +16,7 @@
       "item": "minecraft:milk_bucket"
     }
   ],
-  "result": "jmc:glowstone_cake"
+  "result": {
+    "item": "jmc:glowstone_cake"
+  }
 }

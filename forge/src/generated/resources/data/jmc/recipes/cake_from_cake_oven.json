@@ -16,5 +16,7 @@
       "item": "minecraft:egg"
     }
   ],
-  "result": "minecraft:cake"
+  "result": {
+    "item": "minecraft:cake"
+  }
 }

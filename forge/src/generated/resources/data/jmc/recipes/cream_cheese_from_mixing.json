@@ -27,5 +27,7 @@
     }
   ],
   "mixingTime": 10,
-  "result": "jmc:cream_cheese"
+  "result": {
+    "item": "jmc:cream_cheese"
+  }
 }

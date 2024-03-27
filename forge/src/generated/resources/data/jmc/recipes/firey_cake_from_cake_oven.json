@@ -16,5 +16,7 @@
       "item": "minecraft:sugar"
     }
   ],
-  "result": "jmc:firey_cake"
+  "result": {
+    "item": "jmc:firey_cake"
+  }
 }

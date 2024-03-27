@@ -16,5 +16,7 @@
       "item": "minecraft:egg"
     }
   ],
-  "result": "jmc:beetroot_cake"
+  "result": {
+    "item": "jmc:beetroot_cake"
+  }
 }

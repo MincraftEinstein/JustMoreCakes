@@ -1,9 +1,11 @@
 package einstein.jmc.item.crafting;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -18,25 +20,13 @@ public class MixingRecipeSerializer implements RecipeSerializer<MixingRecipe> {
         NonNullList<CountedIngredient> ingredients = itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
 
         if (ingredients.isEmpty()) {
-            throw new JsonParseException("No Ingredients for mixing recipe");
+            throw new JsonSyntaxException("No Ingredients found for mixing recipe: " + recipeId);
         }
         else if (ingredients.size() > CeramicBowlBlockEntity.SLOT_COUNT) {
-            throw new JsonParseException("Too many ingredients for mixing recipe. The max is 4");
+            throw new JsonSyntaxException("Too many ingredients for mixing recipe: " + recipeId + ". The max is 4");
         }
 
-        if (!json.has("result")) {
-            throw new JsonParseException("Missing result, expected to find a string or object");
-        }
-
-        ItemStack result;
-        if (json.get("result").isJsonObject()) {
-            result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-        }
-        else {
-            String resultString = GsonHelper.getAsString(json, "result");
-            result = new ItemStack(BuiltInRegistries.ITEM.getOptional(new ResourceLocation(resultString))
-                    .orElseThrow(() -> new IllegalStateException("Item: " + resultString + " does not exist")));
-        }
+        ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 
         int mixingTime = GsonHelper.getAsInt(json, "mixingTime", CeramicBowlBlockEntity.DEFAULT_MIXING_PROGRESS);
         if (mixingTime < 1) {

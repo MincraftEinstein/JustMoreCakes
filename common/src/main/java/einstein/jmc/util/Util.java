@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
 import einstein.jmc.init.ModItems;
@@ -269,5 +270,16 @@ public class Util {
             double d0 = entity instanceof LivingEntity ? 0.5 : 0.3D;
             entity.setDeltaMovement(vec3.x, -vec3.y * d0, vec3.z);
         }
+    }
+
+    public static void serializeResult(JsonObject json, Item item, int count) {
+        JsonObject object = new JsonObject();
+        object.addProperty("item", BuiltInRegistries.ITEM.getKey(item).toString());
+
+        if (count > 1) {
+            object.addProperty("count", count);
+        }
+
+        json.add("result", object);
     }
 }

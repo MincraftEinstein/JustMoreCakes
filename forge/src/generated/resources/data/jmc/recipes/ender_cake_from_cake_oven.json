@@ -16,5 +16,7 @@
       "item": "minecraft:milk_bucket"
     }
   ],
-  "result": "jmc:ender_cake"
+  "result": {
+    "item": "jmc:ender_cake"
+  }
 }

@@ -16,5 +16,7 @@
       "item": "minecraft:milk_bucket"
     }
   ],
-  "result": "jmc:tnt_cake"
+  "result": {
+    "item": "jmc:tnt_cake"
+  }
 }

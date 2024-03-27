@@ -16,5 +16,7 @@
       "item": "minecraft:wheat"
     }
   ],
-  "result": "jmc:warped_fungus_cake"
+  "result": {
+    "item": "jmc:warped_fungus_cake"
+  }
 }

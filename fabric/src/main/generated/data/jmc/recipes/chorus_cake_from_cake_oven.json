@@ -16,5 +16,7 @@
       "item": "minecraft:egg"
     }
   ],
-  "result": "jmc:chorus_cake"
+  "result": {
+    "item": "jmc:chorus_cake"
+  }
 }

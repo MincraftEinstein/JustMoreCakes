@@ -16,5 +16,7 @@
       "item": "minecraft:wheat"
     }
   ],
-  "result": "jmc:cheesecake"
+  "result": {
+    "item": "jmc:cheesecake"
+  }
 }

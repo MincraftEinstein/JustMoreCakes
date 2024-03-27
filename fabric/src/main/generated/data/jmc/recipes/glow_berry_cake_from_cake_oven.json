@@ -16,5 +16,7 @@
       "item": "minecraft:wheat"
     }
   ],
-  "result": "jmc:glow_berry_cake"
+  "result": {
+    "item": "jmc:glow_berry_cake"
+  }
 }
