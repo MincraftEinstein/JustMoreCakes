@@ -42,7 +42,7 @@ public class MixingRecipeBuilder implements RecipeBuilder {
     }
 
     public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, int mixingTime, Ingredient... ingredients) {
-        return mixing(category, result, mixingTime, Arrays.stream(ingredients).map(ingredient -> new CountedIngredient(ingredient, 1)).toArray(CountedIngredient[]::new));
+        return mixing(category, result, mixingTime, Arrays.stream(ingredients).map(CountedIngredient::new).toArray(CountedIngredient[]::new));
     }
 
     public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, int mixingTime, CountedIngredient... ingredients) {
@@ -95,7 +95,7 @@ public class MixingRecipeBuilder implements RecipeBuilder {
             JsonArray jsonIngredients = new JsonArray(CeramicBowlBlockEntity.SLOT_COUNT);
 
             for (CountedIngredient ingredient : ingredients) {
-                ingredient.toJson(json);
+                jsonIngredients.add(ingredient.toJson());
             }
 
             json.add("ingredients", jsonIngredients);

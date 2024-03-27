@@ -1,0 +1,25 @@
+{
+  "type": "jmc:mixing",
+  "ingredients": [
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "minecraft:wheat"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:egg"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    }
+  ],
+  "mixingTime": 5,
+  "result": "jmc:cake_dough"
+}
