@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-26T22:38:21.4388939	Recipes
+// 1.20.1	2024-03-27T14:07:37.0989811	Recipes
 5519dbe5d882ca3d853aeb53678fc21c52f8f601 data/jmc/advancements/recipes/decorations/cake_oven_from_crafting.json
 ed489c005d76f9f34d4a5bb7310a19bb0671d27e data/jmc/advancements/recipes/food/apple_cake_from_cake_oven.json
 502d1fb7953647089b5e4b886e36df779ae1f581 data/jmc/advancements/recipes/food/beetroot_cake_from_cake_oven.json
@@ -17,6 +17,7 @@ c9201d4d85f0e7d3c67b7b5e0471295b34fdd4b3 data/jmc/advancements/recipes/food/crim
 663c86ae74357994e78d6edc7b11fe2075f86df4 data/jmc/advancements/recipes/food/cupcake_from_crafting.json
 cf29fc2386b5752f75082a81cc530c885faf8a4d data/jmc/advancements/recipes/food/ender_cake_from_cake_oven.json
 ab34a0c7e079584889f6c5620e7e8b0c89f9a103 data/jmc/advancements/recipes/food/firey_cake_from_cake_oven.json
+e9276cbe9e816be2d33d2664be5728a31b208f36 data/jmc/advancements/recipes/food/frosting_from_mixing.json
 f7aaed4fb8221bb1bfe1fc73365f5bf14bdb6cd0 data/jmc/advancements/recipes/food/glowstone_cake_from_cake_oven.json
 1c989a245190a9f4e3164864a105c2d025b2d3be data/jmc/advancements/recipes/food/glow_berry_cake_from_cake_oven.json
 780e622e64af9ee78543c463b7a62c69d373f001 data/jmc/advancements/recipes/food/golden_apple_cake_from_cake_oven.json
@@ -58,6 +59,7 @@ f8cc3bdf221923399667a30b917a65cd4b1834d8 data/jmc/recipes/crimson_fungus_cake_fr
 ed678a0429971fdffada90dc130e7492b269fa4a data/jmc/recipes/cupcake_from_crafting.json
 6ac7d411a478bcb1917daaf37171df19fe1d741f data/jmc/recipes/ender_cake_from_cake_oven.json
 312d8b7984ec15ac8946f9169f3cf9540fe55ead data/jmc/recipes/firey_cake_from_cake_oven.json
+67a267fe5fcc1ff3e598f31542ae80bd83cb2387 data/jmc/recipes/frosting_from_mixing.json
 54e5a3f1dd492a5a85d5e8be67cc7e4e29ea0b0b data/jmc/recipes/glowstone_cake_from_cake_oven.json
 db6587af9aeee0913f5e07c7e0da90765d66580b data/jmc/recipes/glow_berry_cake_from_cake_oven.json
 0de67cd8105aab0d29d9cbb1bb5c7f3f10b03153 data/jmc/recipes/golden_apple_cake_from_cake_oven.json

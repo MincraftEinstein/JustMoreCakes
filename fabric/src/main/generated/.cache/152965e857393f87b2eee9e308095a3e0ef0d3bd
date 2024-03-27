@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-26T22:42:20.8483045	Just More Cakes!/Recipes
+// 1.20.1	2024-03-27T14:11:52.8610346	Just More Cakes!/Recipes
 b83d5cb670d9fffcf19090a77c942fd85e8b1e70 data\jmc\advancements\recipes\food\cream_cheese_from_crafting.json
 392716976abcda275fefad628d6a6abd142775b9 data\jmc\recipes\red_mushroom_cake_from_cake_oven.json
 db6587af9aeee0913f5e07c7e0da90765d66580b data\jmc\recipes\glow_berry_cake_from_cake_oven.json
@@ -6,6 +6,7 @@ f8cc3bdf221923399667a30b917a65cd4b1834d8 data\jmc\recipes\crimson_fungus_cake_fr
 6544707256b4cc36560fdac5d4337ec6db2f0d31 data\jmc\recipes\apple_cake_from_cake_oven.json
 ca4260485e9cbc5b40d3baef6e4ae18e3d94dd7f data\jmc\advancements\recipes\food\brown_mushroom_cake_from_cake_oven.json
 0fc77300a9baa29d4a0670ba2425d644709c42ff data\jmc\advancements\recipes\food\melon_cake_from_cake_oven.json
+67a267fe5fcc1ff3e598f31542ae80bd83cb2387 data\jmc\recipes\frosting_from_mixing.json
 b90b953442a1340964f56cbb3aa94c2ad831f3a8 data\jmc\recipes\sculk_cake_from_cake_oven.json
 1c989a245190a9f4e3164864a105c2d025b2d3be data\jmc\advancements\recipes\food\glow_berry_cake_from_cake_oven.json
 b1349d4207a91a592762d54fc0cfbc2323cd0b23 data\jmc\advancements\recipes\tools\cake_spatula_from_crafting.json
@@ -21,8 +22,8 @@ ab34a0c7e079584889f6c5620e7e8b0c89f9a103 data\jmc\advancements\recipes\food\fire
 0de67cd8105aab0d29d9cbb1bb5c7f3f10b03153 data\jmc\recipes\golden_apple_cake_from_cake_oven.json
 868fd72768e19bc7fde0e768a0e52a1130a7afa9 data\jmc\advancements\recipes\food\ice_cake_from_cake_oven.json
 ffa4c550744ca7a5e4fea0367367918f2ed4a7d4 data\jmc\recipes\lava_cake_from_cake_oven.json
-e4b0eab0d3b3d4d09ebd074c6b794be766f35d2f data\jmc\recipes\chocolate_cake_from_cake_oven.json
 cc57c9b1ec6c8f7e7c4c6ebf0eae09d7246f5840 data\jmc\advancements\recipes\food\chocolate_cake_from_cake_oven.json
+e4b0eab0d3b3d4d09ebd074c6b794be766f35d2f data\jmc\recipes\chocolate_cake_from_cake_oven.json
 3ebcfebcf82cd3ae920cf72a57f207300699adc6 data\jmc\advancements\recipes\food\seed_cake_from_cake_oven.json
 97f982c59ab1ef4c30d681766b074b15c3b963e0 data\jmc\recipes\cupcake_dough_from_mixing.json
 ba6bb5cfc226d48490de7b32a5ef849afa3249f1 data\jmc\recipes\chorus_cake_from_cake_oven.json
@@ -75,5 +76,6 @@ c34a5bd08366a5ecde65ed88db1ae937eb57b962 data\jmc\advancements\recipes\misc\cake
 f5e5e941c36f5e2de9c5f5f990038402018b6bb6 data\jmc\recipes\seed_cake_from_cake_oven.json
 83b57c1745bb12271840f34c170723b442ee378b data\jmc\advancements\recipes\food\cookie_cake_from_cake_oven.json
 f7093996fd840da9e64b3739fdcd2008769c1e78 data\jmc\recipes\honey_cake_from_cake_oven.json
+e9276cbe9e816be2d33d2664be5728a31b208f36 data\jmc\advancements\recipes\food\frosting_from_mixing.json
 01d038f7c72c2766204c90a0b16522b6015008aa data\jmc\recipes\cake_from_cake_oven.json
 c4e25bf994b261b70f6b8fa187edb4b563abf89b data\jmc\recipes\melon_cake_from_cake_oven.json

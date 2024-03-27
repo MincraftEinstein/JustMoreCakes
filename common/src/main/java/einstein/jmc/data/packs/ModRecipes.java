@@ -216,6 +216,10 @@ public class ModRecipes {
         mixing(RecipeCategory.FOOD, ModItems.CREAM_CHEESE.get(), 10, Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.MILK_BUCKET))
                 .unlockedBy(HAS, has(Items.MILK_BUCKET))
                 .save(consumer, mixingLoc(ModItems.CREAM_CHEESE));
+
+        mixing(RecipeCategory.FOOD, ModItems.FROSTING.get(), 7, Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR))
+                .unlockedBy(HAS, has(Items.MILK_BUCKET))
+                .save(consumer, mixingLoc(ModItems.FROSTING));
     }
 
     private static ResourceLocation craftingLoc(Supplier<? extends ItemLike> item) {

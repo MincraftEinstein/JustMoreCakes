@@ -17,6 +17,7 @@ public class ModItems {
     public static final Supplier<Item> WHISK = Services.REGISTRY.registerItem("whisk", () -> new Item(new Item.Properties().stacksTo(1).durability(100)));
     public static final Supplier<Item> CAKE_DOUGH = Services.REGISTRY.registerItem("cake_dough", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.4F).build())));
     public static final Supplier<Item> CUPCAKE_DOUGH = Services.REGISTRY.registerItem("cupcake_dough", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(0.4F).build())));
+    public static final Supplier<Item> FROSTING = Services.REGISTRY.registerItem("frosting", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2F).fast().build())));
 
     public static void init() {
     }

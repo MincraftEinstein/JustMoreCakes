@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-26T14:40:33.0670254	Item Models: jmc
+// 1.20.1	2024-03-27T14:12:20.0969419	Item Models: jmc
 e26168662503f6bf68944dc8a9698074be40a3c1 assets/jmc/models/item/apple_cake.json
 99f7f794c501eab38d68782e17e5dd37decfc434 assets/jmc/models/item/beetroot_cake.json
 d6a3b36f36fe2004277a7cbdcf3405980b8ecd84 assets/jmc/models/item/brown_mushroom_cake.json
@@ -19,6 +19,7 @@ a5c5b0c5bd6a02aa32da459e32d5d1806d5cda95 assets/jmc/models/item/cupcake_dough.js
 03a61c4280fc479382b65fb5755d91b429dcfcdf assets/jmc/models/item/encasing_ice.json
 e198da113e189c17b5d132573d5336779f5de277 assets/jmc/models/item/ender_cake.json
 8f820e8259a636b620c6dc22b98b5c280ec3ba57 assets/jmc/models/item/firey_cake.json
+ba84b517b13605a8e96c4804e2b8521e85fa8d6d assets/jmc/models/item/frosting.json
 121387903db641062194cf5e2ca1d619b8ddffc1 assets/jmc/models/item/glowstone_cake.json
 44f71cfb5d3d0c38bb15a4f7b628826064d80fed assets/jmc/models/item/glow_berry_cake.json
 3ae3ba04b8b95222a23a04f030ed7b487f7b775c assets/jmc/models/item/golden_apple_cake.json
