@@ -21,6 +21,7 @@ import net.minecraft.world.inventory.RecipeHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.Block;
@@ -82,23 +83,34 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
 
     public boolean addItem(Player player, ItemStack stack) {
         if (mixingProgress <= 0) {
+            boolean foundMatch = false;
+            int emptySlot = -1;
             for (int i = 0; i < stacks.size(); i++) {
                 ItemStack currentStack = getItem(i);
                 if (CakeOvenBlockEntity.canAddToStack(stack, currentStack, getMaxStackSize(), 1)) {
-                    if (currentStack.isEmpty()) {
-                        stacks.set(i, stack.copyWithCount(1));
-                    }
-                    else if (currentStack.is(stack.getItem())) {
+                    if (currentStack.is(stack.getItem())) {
                         currentStack.grow(1);
+                        foundMatch = true;
+                        break;
                     }
-
-                    if (!player.isCreative()) {
-                        stack.shrink(1);
+                    else if (currentStack.isEmpty() && emptySlot == -1) {
+                        emptySlot = i;
                     }
-
-                    itemsChanged(player);
-                    return true;
                 }
+            }
+
+            if (!foundMatch && emptySlot > -1) {
+                stacks.set(emptySlot, stack.copyWithCount(1));
+                foundMatch = true;
+            }
+
+            if (foundMatch) {
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                }
+
+                itemsChanged(player);
+                return true;
             }
         }
         return false;
