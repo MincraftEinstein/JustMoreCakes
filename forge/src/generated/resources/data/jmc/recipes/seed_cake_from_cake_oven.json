@@ -4,16 +4,16 @@
   "experience": 0.3,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:frosting"
+    },
+    {
       "tag": "c:seeds"
     },
     {
-      "item": "minecraft:milk_bucket"
-    },
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "item": "minecraft:sugar"
+      "tag": "c:seeds"
     }
   ],
   "result": {

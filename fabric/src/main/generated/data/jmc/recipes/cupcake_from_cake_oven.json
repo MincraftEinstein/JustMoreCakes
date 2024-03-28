@@ -4,16 +4,14 @@
   "experience": 0.5,
   "ingredients": [
     {
-      "item": "jmc:cake_dough"
+      "item": "jmc:cupcake_dough"
     },
     {
       "item": "jmc:frosting"
-    },
-    {
-      "item": "minecraft:apple"
     }
   ],
   "result": {
-    "item": "jmc:apple_cake"
+    "count": 2,
+    "item": "jmc:cupcake"
   }
 }

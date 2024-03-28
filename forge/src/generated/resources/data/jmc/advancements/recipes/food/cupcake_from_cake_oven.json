@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "minecraft:milk_bucket"
+              "minecraft:egg"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jmc:cream_cheese_from_crafting"
+        "recipe": "jmc:cupcake_from_cake_oven"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,8 +28,8 @@
   ],
   "rewards": {
     "recipes": [
-      "jmc:cream_cheese_from_crafting"
+      "jmc:cupcake_from_cake_oven"
     ]
   },
-  "sends_telemetry_event": false
+  "sends_telemetry_event": true
 }

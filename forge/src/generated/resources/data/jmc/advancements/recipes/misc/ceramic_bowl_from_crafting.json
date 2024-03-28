@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "minecraft:egg"
+              "minecraft:terracotta"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jmc:cupcake_from_crafting"
+        "recipe": "jmc:ceramic_bowl_from_crafting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "jmc:cupcake_from_crafting"
+      "jmc:ceramic_bowl_from_crafting"
     ]
   },
   "sends_telemetry_event": false

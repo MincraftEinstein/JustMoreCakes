@@ -4,16 +4,13 @@
   "experience": 0.5,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:frosting"
+    },
+    {
       "item": "minecraft:sweet_berries"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:milk_bucket"
-    },
-    {
-      "item": "minecraft:sugar"
     }
   ],
   "result": {
