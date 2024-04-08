@@ -18,12 +18,14 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
     protected final ResourceLocation id;
     protected final NonNullList<CountedIngredient> ingredients;
     protected final ItemStack result;
+    protected final ResourceLocation contentsId;
     protected final int mixingTime;
 
-    public MixingRecipe(ResourceLocation id, NonNullList<CountedIngredient> ingredients, ItemStack result, int mixingTime) {
+    public MixingRecipe(ResourceLocation id, NonNullList<CountedIngredient> ingredients, ItemStack result, ResourceLocation contentsId, int mixingTime) {
         this.id = id;
         this.ingredients = ingredients;
         this.result = result;
+        this.contentsId = contentsId;
         this.mixingTime = mixingTime;
     }
 
@@ -86,6 +88,10 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
 
     public int getMixingTime() {
         return mixingTime;
+    }
+
+    public ResourceLocation getContentsId() {
+        return contentsId;
     }
 
     public void consumeIngredients(CeramicBowlBlockEntity container) {

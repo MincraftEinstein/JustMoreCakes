@@ -11,8 +11,12 @@ import einstein.jmc.init.ModItems;
 import einstein.jmc.init.ModPotions;
 import einstein.jmc.mixin.RecipeManagerAccessor;
 import einstein.jmc.mixin.StructureTemplatePoolAccessor;
+import einstein.jmc.platform.Services;
+import einstein.jmc.platform.services.IPlatformHelper;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -281,5 +285,21 @@ public class Util {
         }
 
         json.add("result", object);
+    }
+
+    public static RegistryAccess getRegistryAccess() {
+        MinecraftServer server = Services.HOOKS.getCurrentServer();
+        if (server != null) {
+            return server.registryAccess();
+        }
+
+        if (Services.PLATFORM.getPhysicalSide() == IPlatformHelper.PhysicalSide.CLIENT) {
+            ClientLevel level = Minecraft.getInstance().level;
+            if (level != null) {
+                return level.registryAccess();
+            }
+            throw new UnsupportedOperationException("Failed to get registry access. Level was null");
+        }
+        throw new UnsupportedOperationException("Failed to get registry access. Server was null");
     }
 }

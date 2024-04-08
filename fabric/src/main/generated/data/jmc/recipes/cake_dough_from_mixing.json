@@ -1,5 +1,6 @@
 {
   "type": "jmc:mixing",
+  "contents": "jmc:cake_dough",
   "ingredients": [
     {
       "count": 3,

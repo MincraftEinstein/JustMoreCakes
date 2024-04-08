@@ -3,6 +3,7 @@ package einstein.jmc;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
 import einstein.jmc.client.renderers.blockentities.CeramicBowlRenderer;
+import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.FabricCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
@@ -18,31 +19,34 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.VillagerInteractionRegistries;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fml.config.ModConfig;
 
-import static einstein.jmc.JustMoreCakes.MOD_ID;
-import static einstein.jmc.JustMoreCakes.loc;
+import static einstein.jmc.JustMoreCakes.*;
 import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
 import static einstein.jmc.util.Util.getVanillaCandleCakes;
 
 public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer, DataGeneratorEntrypoint {
+
+    private static MinecraftServer CURRENT_SERVER;
 
     @Override
     public void onInitialize() {
         JustMoreCakes.init();
         FabricNetworkHelper.init(NetworkHelper.Direction.TO_SERVER);
         onServerStarting();
+        onServerStopped();
         onAddReloadListeners();
         addVillagerTrades();
         UseBlockCallback.EVENT.register(loc("before"), JustMoreCakes::blockClicked);
@@ -54,6 +58,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         VillagerInteractionRegistries.registerGiftLootTable(ModVillagers.CAKE_BAKER.get(), JustMoreCakes.CAKE_BAKER_GIFT);
         JustMoreCakes.commonSetup();
         modifyLootTables();
+        DynamicRegistries.registerSynced(BowlContents.REGISTRY_KEY, BowlContents.CODEC);
     }
 
     @Override
@@ -92,7 +97,14 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     }
 
     void onServerStarting() {
-        ServerLifecycleEvents.SERVER_STARTING.register(JustMoreCakes::onServerStarting);
+        ServerLifecycleEvents.SERVER_STARTING.register(server -> {
+            JustMoreCakes.onServerStarting(server);
+            CURRENT_SERVER = server;
+        });
+    }
+
+    void onServerStopped() {
+        ServerLifecycleEvents.SERVER_STOPPED.register(server -> CURRENT_SERVER = null);
     }
 
     void onAddReloadListeners() {
@@ -120,5 +132,9 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
                 }
             }
         });
+    }
+
+    public static MinecraftServer getCurrentServer() {
+        return CURRENT_SERVER;
     }
 }

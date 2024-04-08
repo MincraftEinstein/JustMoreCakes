@@ -4,13 +4,11 @@ import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import einstein.jmc.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -18,6 +16,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -34,9 +34,11 @@ public class CeramicBowlBlock extends BaseEntityBlock {
             Block.box(2, 0, 3, 3, 9, 13),
             Block.box(13, 0, 3, 14, 9, 13)
     );
+    public static final IntegerProperty FILL_LEVEL = IntegerProperty.create("fill_level", 0, 4);
 
     public CeramicBowlBlock(Properties properties) {
         super(properties);
+        registerDefaultState(stateDefinition.any().setValue(FILL_LEVEL, 0));
     }
 
     @Override
@@ -52,6 +54,10 @@ public class CeramicBowlBlock extends BaseEntityBlock {
 
             if (level.isClientSide) {
                 return InteractionResult.CONSUME;
+            }
+
+            if (state.getValue(FILL_LEVEL) == 4) {
+                return ceramicBowlBlockEntity.takeResult(player) ? InteractionResult.SUCCESS : InteractionResult.PASS;
             }
 
             if (stack.isEmpty()) {
@@ -74,7 +80,7 @@ public class CeramicBowlBlock extends BaseEntityBlock {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState $$0) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
@@ -84,12 +90,17 @@ public class CeramicBowlBlock extends BaseEntityBlock {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof CeramicBowlBlockEntity ceramicBowlBlockEntity) {
                 if (level instanceof ServerLevel) {
-                    Containers.dropContents(level, pos, ceramicBowlBlockEntity);
+                    ceramicBowlBlockEntity.dropItems(level, pos);
                 }
                 level.updateNeighbourForOutputSignal(pos, this);
             }
             super.onRemove(state, level, pos, newState, movedByPiston);
         }
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FILL_LEVEL);
     }
 
     @Override

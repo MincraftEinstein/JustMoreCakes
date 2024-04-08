@@ -31,31 +31,33 @@ public class MixingRecipeBuilder implements RecipeBuilder {
     private final RecipeCategory category;
     private final NonNullList<CountedIngredient> ingredients;
     private final Item result;
+    private final ResourceLocation contents;
     private final int count;
     private final int mixingTime;
     private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
 
-    public MixingRecipeBuilder(RecipeCategory category, NonNullList<CountedIngredient> ingredients, ItemLike result, int count, int mixingTime) {
+    private MixingRecipeBuilder(RecipeCategory category, NonNullList<CountedIngredient> ingredients, ItemLike result, ResourceLocation contents, int count, int mixingTime) {
         this.category = category;
         this.ingredients = ingredients;
         this.result = result.asItem();
+        this.contents = contents;
         this.count = count;
         this.mixingTime = mixingTime;
     }
 
-    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, int mixingTime, Ingredient... ingredients) {
-        return mixing(category, result, 1, mixingTime, ingredients);
+    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, ResourceLocation contents, int mixingTime, Ingredient... ingredients) {
+        return mixing(category, result, contents, 1, mixingTime, ingredients);
     }
 
-    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, int count, int mixingTime, Ingredient... ingredients) {
-        return mixing(category, result, count, mixingTime, Arrays.stream(ingredients).map(CountedIngredient::new).toArray(CountedIngredient[]::new));
+    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, ResourceLocation contents, int count, int mixingTime, Ingredient... ingredients) {
+        return mixing(category, result, contents, count, mixingTime, Arrays.stream(ingredients).map(CountedIngredient::new).toArray(CountedIngredient[]::new));
     }
 
-    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, int mixingTime, CountedIngredient... ingredients) {
-        return mixing(category, result, 1, mixingTime, ingredients);
+    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, ResourceLocation contents, int mixingTime, CountedIngredient... ingredients) {
+        return mixing(category, result, contents, 1, mixingTime, ingredients);
     }
 
-    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, int count, int mixingTime, CountedIngredient... ingredients) {
+    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, ResourceLocation contents, int count, int mixingTime, CountedIngredient... ingredients) {
         if (mixingTime < 1) {
             throw new IllegalStateException("mixingTime must be a positive number");
         }
@@ -66,7 +68,7 @@ public class MixingRecipeBuilder implements RecipeBuilder {
 
         NonNullList<CountedIngredient> ingredientsList = NonNullList.create();
         Collections.addAll(ingredientsList, ingredients);
-        return new MixingRecipeBuilder(category, ingredientsList, result, count, mixingTime);
+        return new MixingRecipeBuilder(category, ingredientsList, result, contents, count, mixingTime);
     }
 
     @Override
@@ -109,6 +111,7 @@ public class MixingRecipeBuilder implements RecipeBuilder {
 
             json.add("ingredients", jsonIngredients);
             json.addProperty("mixingTime", builder.mixingTime);
+            json.addProperty("contents", builder.contents.toString());
             Util.serializeResult(json, builder.result, builder.count);
         }
 

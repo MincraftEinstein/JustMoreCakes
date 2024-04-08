@@ -2,6 +2,7 @@ package einstein.jmc;
 
 import einstein.jmc.advancement.criterian.CakeEatenTrigger;
 import einstein.jmc.compat.AmendmentsCompat;
+import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
@@ -82,6 +83,7 @@ public class JustMoreCakes {
         }
         else {
             CakeEffectsManager.loadCakeEffects();
+            BowlContents.EMPTY.clear();
         }
 
         if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
