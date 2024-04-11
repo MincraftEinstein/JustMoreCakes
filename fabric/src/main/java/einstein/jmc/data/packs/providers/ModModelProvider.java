@@ -60,7 +60,8 @@ public class ModModelProvider extends FabricModelProvider {
         generators.generateFlatItem(ModItems.WHISK.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         generators.generateFlatItem(ModItems.CAKE_DOUGH.get(), ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModItems.CUPCAKE_DOUGH.get(), ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(ModItems.FROSTING.get(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModItems.CAKE_FROSTING.get(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModItems.CUPCAKE_FROSTING.get(), ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModBlocks.POISON_CAKE_VARIANT.getItem().get(), Items.CAKE, ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModBlocks.TNT_CAKE_VARIANT.getItem().get(), Items.CAKE, ModelTemplates.FLAT_ITEM);
 

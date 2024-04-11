@@ -7,7 +7,8 @@
   "item.jmc.whisk": "Whisk",
   "item.jmc.cake_dough": "Cake Dough",
   "item.jmc.cupcake_dough": "Cupcake Dough",
-  "item.jmc.frosting": "Frosting",
+  "item.jmc.cake_frosting": "Cake Frosting",
+  "item.jmc.cupcake_frosting": "Cupcake Frosting",
 
   "_comment": "Blocks",
   "block.jmc.chocolate_cake": "Chocolate Cake",

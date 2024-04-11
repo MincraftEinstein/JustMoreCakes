@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "jmc:item/frosting"
+    "layer0": "jmc:item/cupcake_frosting"
   }
 }

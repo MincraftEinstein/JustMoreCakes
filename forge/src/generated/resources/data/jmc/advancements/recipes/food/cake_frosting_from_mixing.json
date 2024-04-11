@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "jmc:frosting_from_mixing"
+        "recipe": "jmc:cake_frosting_from_mixing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "jmc:frosting_from_mixing"
+      "jmc:cake_frosting_from_mixing"
     ]
   },
   "sends_telemetry_event": false

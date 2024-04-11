@@ -1,0 +1,16 @@
+{
+  "type": "jmc:mixing",
+  "contents": "jmc:frosting",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "mixingTime": 7,
+  "result": {
+    "item": "jmc:cupcake_frosting"
+  }
+}
