@@ -3,11 +3,11 @@ package einstein.jmc.item.crafting;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.util.CakeOvenConstants;
-import einstein.jmc.util.RecipeMatcher;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -15,9 +15,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 
@@ -42,20 +39,20 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
 
     @Override
     public boolean matches(Container container, Level level) {
-        List<ItemStack> inputs = new ArrayList<>();
-        int stackCount = 0;
+        StackedContents contents = new StackedContents();
+        int stacks = 0;
 
         for (int i = 0; i < container.getContainerSize(); i++) {
             if (i != RESULT_SLOT && i != FUEL_SLOT) {
                 ItemStack stack = container.getItem(i);
                 if (!stack.isEmpty()) {
-                    stackCount++;
-                    inputs.add(stack);
+                    stacks++;
+                    contents.accountStack(stack, 1);
                 }
             }
         }
 
-        return stackCount == ingredients.size() && RecipeMatcher.findMatches(inputs, ingredients) != null;
+        return stacks == ingredients.size() && contents.canCraft(this, null);
     }
 
     @Override

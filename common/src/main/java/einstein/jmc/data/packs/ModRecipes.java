@@ -1,9 +1,7 @@
 package einstein.jmc.data.packs;
 
-import einstein.jmc.data.MixingRecipeBuilder;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.item.crafting.CountedIngredient;
 import einstein.jmc.util.CakeFamily;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -211,19 +209,19 @@ public class ModRecipes {
     }
 
     private static void mixingRecipes(Consumer<FinishedRecipe> consumer) {
-        mixing(RecipeCategory.FOOD, ModItems.CAKE_DOUGH.get(), loc("cake_dough"), 5, CountedIngredient.of(3, Items.WHEAT), CountedIngredient.of(Items.EGG), CountedIngredient.of(2, Items.SUGAR))
+        mixing(RecipeCategory.FOOD, ModItems.CAKE_DOUGH.get(), loc("cake_dough"), 5, Items.WHEAT, Items.WHEAT, Items.EGG, Items.SUGAR)
                 .unlockedBy(HAS, has(Items.EGG))
                 .save(consumer, mixingLoc(ModItems.CAKE_DOUGH));
 
-        mixing(RecipeCategory.FOOD, ModItems.CUPCAKE_DOUGH.get(), loc("cake_dough"), 2, 5, Ingredient.of(Items.WHEAT), Ingredient.of(Items.EGG), Ingredient.of(Items.SUGAR))
+        mixing(RecipeCategory.FOOD, ModItems.CUPCAKE_DOUGH.get(), loc("cake_dough"), 2, 5, Items.WHEAT, Items.EGG, Items.SUGAR)
                 .unlockedBy(HAS, has(Items.EGG))
                 .save(consumer, mixingLoc(ModItems.CUPCAKE_DOUGH));
 
-        mixing(RecipeCategory.FOOD, ModItems.CREAM_CHEESE.get(), loc("cream_cheese"), 2, 10, Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.MILK_BUCKET))
+        mixing(RecipeCategory.FOOD, ModItems.CREAM_CHEESE.get(), loc("cream_cheese"), 2, 10, Items.MILK_BUCKET, Items.MILK_BUCKET, Items.MILK_BUCKET, Items.MILK_BUCKET)
                 .unlockedBy(HAS, has(Items.MILK_BUCKET))
                 .save(consumer, mixingLoc(ModItems.CREAM_CHEESE));
 
-        mixing(RecipeCategory.FOOD, ModItems.FROSTING.get(), loc("frosting"), 7, Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.MILK_BUCKET), Ingredient.of(Items.SUGAR))
+        mixing(RecipeCategory.FOOD, ModItems.FROSTING.get(), loc("frosting"), 7, Items.MILK_BUCKET, Items.MILK_BUCKET, Items.SUGAR)
                 .unlockedBy(HAS, has(Items.MILK_BUCKET))
                 .save(consumer, mixingLoc(ModItems.FROSTING));
     }

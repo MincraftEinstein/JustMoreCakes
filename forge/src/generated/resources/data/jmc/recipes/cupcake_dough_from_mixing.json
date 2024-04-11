@@ -3,22 +3,13 @@
   "contents": "jmc:cake_dough",
   "ingredients": [
     {
-      "count": 1,
-      "ingredient": {
-        "item": "minecraft:wheat"
-      }
+      "item": "minecraft:wheat"
     },
     {
-      "count": 1,
-      "ingredient": {
-        "item": "minecraft:egg"
-      }
+      "item": "minecraft:egg"
     },
     {
-      "count": 1,
-      "ingredient": {
-        "item": "minecraft:sugar"
-      }
+      "item": "minecraft:sugar"
     }
   ],
   "mixingTime": 5,

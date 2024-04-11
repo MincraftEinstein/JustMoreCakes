@@ -3,22 +3,13 @@
   "contents": "jmc:frosting",
   "ingredients": [
     {
-      "count": 1,
-      "ingredient": {
-        "item": "minecraft:milk_bucket"
-      }
+      "item": "minecraft:milk_bucket"
     },
     {
-      "count": 1,
-      "ingredient": {
-        "item": "minecraft:milk_bucket"
-      }
+      "item": "minecraft:milk_bucket"
     },
     {
-      "count": 1,
-      "ingredient": {
-        "item": "minecraft:sugar"
-      }
+      "item": "minecraft:sugar"
     }
   ],
   "mixingTime": 7,

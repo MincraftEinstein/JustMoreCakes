@@ -24,7 +24,6 @@ import org.joml.Matrix4f;
 public class CeramicBowlRenderer implements BlockEntityRenderer<CeramicBowlBlockEntity> {
 
     public static final float ITEM_SCALE = 0.375F;
-    public static final double OFFSET = 0.0625 * ITEM_SCALE;
     public static final float CENTER_X = (10 / 16F) / 2;
     private final ItemRenderer itemRenderer;
 
@@ -95,22 +94,15 @@ public class CeramicBowlRenderer implements BlockEntityRenderer<CeramicBowlBlock
             for (int i = 0; i < blockEntity.getContainerSize(); i++) {
                 ItemStack stack = blockEntity.getItem(i);
 
-                for (int i2 = 0; i2 < getRenderedItemCount(stack); i2++) {
-                    poseStack.pushPose();
-                    poseStack.translate(0.5, (OFFSET * i2 * 2) + (i * 0.0001), 0.5);
-                    poseStack.mulPose(Axis.YP.rotationDegrees(90 * i));
-                    poseStack.mulPose(Axis.XP.rotationDegrees(90));
-                    poseStack.translate(-0.125, 0, -0.125);
-                    poseStack.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE);
-                    itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, level, seed + i);
-                    poseStack.popPose();
-                }
+                poseStack.pushPose();
+                poseStack.translate(0.5, i * 0.0001, 0.5);
+                poseStack.mulPose(Axis.YP.rotationDegrees(90 * i));
+                poseStack.mulPose(Axis.XP.rotationDegrees(90));
+                poseStack.translate(-0.125, 0, -0.125);
+                poseStack.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE);
+                itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, level, seed + i);
+                poseStack.popPose();
             }
         }
-    }
-
-    private int getRenderedItemCount(ItemStack stack) {
-        int count = stack.getCount();
-        return count > 48 ? 5 : count > 32 ? 4 : count > 16 ? 3 : count > 1 ? 2 : 1;
     }
 }

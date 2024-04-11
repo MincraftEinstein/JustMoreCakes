@@ -6,6 +6,7 @@ import einstein.jmc.init.ModRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -16,12 +17,12 @@ import net.minecraft.world.level.Level;
 public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
 
     protected final ResourceLocation id;
-    protected final NonNullList<CountedIngredient> ingredients;
+    protected final NonNullList<Ingredient> ingredients;
     protected final ItemStack result;
     protected final ResourceLocation contentsId;
     protected final int mixingTime;
 
-    public MixingRecipe(ResourceLocation id, NonNullList<CountedIngredient> ingredients, ItemStack result, ResourceLocation contentsId, int mixingTime) {
+    public MixingRecipe(ResourceLocation id, NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation contentsId, int mixingTime) {
         this.id = id;
         this.ingredients = ingredients;
         this.result = result;
@@ -31,19 +32,18 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
 
     @Override
     public boolean matches(CeramicBowlBlockEntity container, Level level) {
-        int matches = 0;
+        StackedContents contents = new StackedContents();
+        int stacks = 0;
 
         for (int i = 0; i < container.getContainerSize(); i++) {
             ItemStack stack = container.getItem(i);
             if (!stack.isEmpty()) {
-                if (ingredients.stream().anyMatch(ingredient -> ingredient.ingredient().test(stack)
-                        && (!stack.isStackable() || ingredient.count() <= stack.getCount()))) {
-                    matches++;
-                }
+                stacks++;
+                contents.accountStack(stack, 1);
             }
         }
 
-        return matches == ingredients.size();
+        return stacks == ingredients.size() && contents.canCraft(this, null);
     }
 
     @Override
@@ -54,6 +54,11 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
     @Override
     public boolean canCraftInDimensions(int x, int y) {
         return true;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     @Override
@@ -78,7 +83,7 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
 
     @Override
     public ItemStack getToastSymbol() {
-        return new ItemStack(ModBlocks.CERAMIC_BOWL.get()); // TODO change to whisk?
+        return new ItemStack(ModBlocks.CERAMIC_BOWL.get());
     }
 
     @Override
@@ -95,16 +100,11 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
     }
 
     public void consumeIngredients(CeramicBowlBlockEntity container) {
-        for (CountedIngredient countedIngredient : ingredients) {
-            Ingredient ingredient = countedIngredient.ingredient();
-            int count = countedIngredient.count();
+        for (Ingredient ingredient : ingredients) {
             for (int i = 0; i < container.getContainerSize(); i++) {
                 ItemStack stack = container.getItem(i);
                 if (!stack.isEmpty() && ingredient.test(stack)) {
-                    stack.shrink(count);
-                    if (stack.isEmpty()) {
-                        container.setItem(i, ItemStack.EMPTY);
-                    }
+                    container.setItem(i, ItemStack.EMPTY);
                 }
             }
         }

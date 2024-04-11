@@ -92,13 +92,13 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
 
     public boolean addItem(Player player, ItemStack stack) {
         if (mixingProgress <= 0) {
-            if (addToStackList(stack, stacks, getMaxStackSize())) {
-                if (!player.isCreative()) {
-                    stack.shrink(1);
+            for (int i = 0; i < stacks.size(); i++) {
+                ItemStack currentStack = getItem(i);
+                if (currentStack.isEmpty()) {
+                    stacks.set(i, stack.split(1));
+                    contentsChanged(player);
+                    return true;
                 }
-
-                contentsChanged(player);
-                return true;
             }
         }
         return false;
@@ -131,7 +131,8 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
             for (int i = stacks.size() - 1; i > -1; i--) {
                 ItemStack currentStack = getItem(i);
                 if (!currentStack.isEmpty()) {
-                    Block.popResourceFromFace(level, worldPosition, Direction.UP, removeItem(i, currentStack.getCount()));
+                    Block.popResourceFromFace(level, worldPosition, Direction.UP, currentStack);
+                    stacks.set(i, ItemStack.EMPTY);
                     contentsChanged(player);
                     return true;
                 }
@@ -175,6 +176,11 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
         Containers.dropContents(level, pos, stacks);
         Containers.dropContents(level, pos, remainingItems);
         remainingItems.clear();
+    }
+
+    @Override
+    public int getMaxStackSize() {
+        return 1;
     }
 
     @Override

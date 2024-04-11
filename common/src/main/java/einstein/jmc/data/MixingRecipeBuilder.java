@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import einstein.jmc.init.ModRecipes;
-import einstein.jmc.item.crafting.CountedIngredient;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -29,14 +28,14 @@ import java.util.function.Consumer;
 public class MixingRecipeBuilder implements RecipeBuilder {
 
     private final RecipeCategory category;
-    private final NonNullList<CountedIngredient> ingredients;
+    private final NonNullList<Ingredient> ingredients;
     private final Item result;
     private final ResourceLocation contents;
     private final int count;
     private final int mixingTime;
     private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
 
-    private MixingRecipeBuilder(RecipeCategory category, NonNullList<CountedIngredient> ingredients, ItemLike result, ResourceLocation contents, int count, int mixingTime) {
+    private MixingRecipeBuilder(RecipeCategory category, NonNullList<Ingredient> ingredients, ItemLike result, ResourceLocation contents, int count, int mixingTime) {
         this.category = category;
         this.ingredients = ingredients;
         this.result = result.asItem();
@@ -45,19 +44,19 @@ public class MixingRecipeBuilder implements RecipeBuilder {
         this.mixingTime = mixingTime;
     }
 
+    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, ResourceLocation contents, int mixingTime, ItemLike... ingredients) {
+        return mixing(category, result, contents, 1, mixingTime, ingredients);
+    }
+
+    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, ResourceLocation contents, int count, int mixingTime, ItemLike... ingredients) {
+        return mixing(category, result, contents, count, mixingTime, Arrays.stream(ingredients).map(Ingredient::of).toArray(Ingredient[]::new));
+    }
+
     public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, ResourceLocation contents, int mixingTime, Ingredient... ingredients) {
         return mixing(category, result, contents, 1, mixingTime, ingredients);
     }
 
     public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, ResourceLocation contents, int count, int mixingTime, Ingredient... ingredients) {
-        return mixing(category, result, contents, count, mixingTime, Arrays.stream(ingredients).map(CountedIngredient::new).toArray(CountedIngredient[]::new));
-    }
-
-    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, ResourceLocation contents, int mixingTime, CountedIngredient... ingredients) {
-        return mixing(category, result, contents, 1, mixingTime, ingredients);
-    }
-
-    public static MixingRecipeBuilder mixing(RecipeCategory category, ItemLike result, ResourceLocation contents, int count, int mixingTime, CountedIngredient... ingredients) {
         if (mixingTime < 1) {
             throw new IllegalStateException("mixingTime must be a positive number");
         }
@@ -66,7 +65,7 @@ public class MixingRecipeBuilder implements RecipeBuilder {
             throw new IllegalStateException("Too many ingredients for mixing recipe. The max is 4");
         }
 
-        NonNullList<CountedIngredient> ingredientsList = NonNullList.create();
+        NonNullList<Ingredient> ingredientsList = NonNullList.create();
         Collections.addAll(ingredientsList, ingredients);
         return new MixingRecipeBuilder(category, ingredientsList, result, contents, count, mixingTime);
     }
@@ -105,7 +104,7 @@ public class MixingRecipeBuilder implements RecipeBuilder {
         public void serializeRecipeData(JsonObject json) {
             JsonArray jsonIngredients = new JsonArray(CeramicBowlBlockEntity.SLOT_COUNT);
 
-            for (CountedIngredient ingredient : builder.ingredients) {
+            for (Ingredient ingredient : builder.ingredients) {
                 jsonIngredients.add(ingredient.toJson());
             }
 
