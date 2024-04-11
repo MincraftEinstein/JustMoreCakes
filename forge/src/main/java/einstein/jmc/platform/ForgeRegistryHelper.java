@@ -2,6 +2,8 @@ package einstein.jmc.platform;
 
 import einstein.jmc.block.entity.CakeOvenBlockEntity;
 import einstein.jmc.block.entity.CakeOvenTransferBlockEntity;
+import einstein.jmc.block.entity.CeramicBlockTransferBlockEntity;
+import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.util.BlockEntitySupplier;
 import einstein.jmc.util.MenuTypeSupplier;
@@ -68,6 +70,9 @@ public class ForgeRegistryHelper implements RegistryHelper {
             T t = supplier.create(pos, state);
             if (t instanceof CakeOvenBlockEntity) {
                 return (T) new CakeOvenTransferBlockEntity(pos, state);
+            }
+            else if (t instanceof CeramicBowlBlockEntity) {
+                return (T) new CeramicBlockTransferBlockEntity(pos, state);
             }
             return t;
         }, blocks).build(null);
