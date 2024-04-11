@@ -5,6 +5,7 @@ import einstein.jmc.data.BowlContents;
 import einstein.jmc.init.ModBlockEntityTypes;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.item.crafting.MixingRecipe;
+import it.unimi.dsi.fastutil.Function;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -37,6 +38,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
 
@@ -71,10 +74,12 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
                     return true;
                 }
 
-                for (ItemStack stack : stacks) {
-                    Item item = stack.getItem();
-                    if (item.hasCraftingRemainingItem()) {
-                        addToStackList(new ItemStack(item.getCraftingRemainingItem()), remainingItems, getMaxStackSize());
+                for (int i = 0; i < stacks.size(); i++) {
+                    if (i != RESULT_SLOT) {
+                        Item item = stacks.get(i).getItem();
+                        if (item.hasCraftingRemainingItem()) {
+                            addToStackList(new ItemStack(item.getCraftingRemainingItem()), remainingItems, getMaxStackSize());
+                        }
                     }
                 }
 
@@ -94,11 +99,13 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     public boolean addItem(Player player, ItemStack stack) {
         if (mixingProgress <= 0) {
             for (int i = 0; i < stacks.size(); i++) {
-                ItemStack currentStack = getItem(i);
-                if (currentStack.isEmpty()) {
-                    stacks.set(i, stack.split(1));
-                    contentsChanged(player);
-                    return true;
+                if (i != RESULT_SLOT) {
+                    ItemStack currentStack = getItem(i);
+                    if (currentStack.isEmpty()) {
+                        stacks.set(i, stack.split(1));
+                        contentsChanged(player);
+                        return true;
+                    }
                 }
             }
         }
@@ -130,12 +137,14 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     public boolean takeItem(Player player) {
         if (!isEmpty() && mixingProgress <= 0) {
             for (int i = stacks.size() - 1; i > -1; i--) {
-                ItemStack currentStack = getItem(i);
-                if (!currentStack.isEmpty()) {
-                    Block.popResourceFromFace(level, worldPosition, Direction.UP, currentStack);
-                    stacks.set(i, ItemStack.EMPTY);
-                    contentsChanged(player);
-                    return true;
+                if (i != RESULT_SLOT) {
+                    ItemStack currentStack = getItem(i);
+                    if (!currentStack.isEmpty()) {
+                        Block.popResourceFromFace(level, worldPosition, Direction.UP, currentStack);
+                        stacks.set(i, ItemStack.EMPTY);
+                        contentsChanged(player);
+                        return true;
+                    }
                 }
             }
         }
