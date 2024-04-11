@@ -92,16 +92,18 @@ public class CeramicBowlRenderer implements BlockEntityRenderer<CeramicBowlBlock
             int seed = (int) blockEntity.getBlockPos().asLong();
 
             for (int i = 0; i < blockEntity.getContainerSize(); i++) {
-                ItemStack stack = blockEntity.getItem(i);
+                if (i != CeramicBowlBlockEntity.RESULT_SLOT) {
+                    ItemStack stack = blockEntity.getItem(i);
 
-                poseStack.pushPose();
-                poseStack.translate(0.5, i * 0.0001, 0.5);
-                poseStack.mulPose(Axis.YP.rotationDegrees(90 * i));
-                poseStack.mulPose(Axis.XP.rotationDegrees(90));
-                poseStack.translate(-0.125, 0, -0.125);
-                poseStack.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE);
-                itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, level, seed + i);
-                poseStack.popPose();
+                    poseStack.pushPose();
+                    poseStack.translate(0.5, i * 0.0001, 0.5);
+                    poseStack.mulPose(Axis.YP.rotationDegrees(90 * i));
+                    poseStack.mulPose(Axis.XP.rotationDegrees(90));
+                    poseStack.translate(-0.125, 0, -0.125);
+                    poseStack.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE);
+                    itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, level, seed + i);
+                    poseStack.popPose();
+                }
             }
         }
     }

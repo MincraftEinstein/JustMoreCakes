@@ -61,7 +61,7 @@ public class MixingRecipeBuilder implements RecipeBuilder {
             throw new IllegalStateException("mixingTime must be a positive number");
         }
 
-        if (ingredients.length > CeramicBowlBlockEntity.SLOT_COUNT) {
+        if (ingredients.length > CeramicBowlBlockEntity.INGREDIENT_SLOT_COUNT) {
             throw new IllegalStateException("Too many ingredients for mixing recipe. The max is 4");
         }
 
@@ -102,7 +102,7 @@ public class MixingRecipeBuilder implements RecipeBuilder {
 
         @Override
         public void serializeRecipeData(JsonObject json) {
-            JsonArray jsonIngredients = new JsonArray(CeramicBowlBlockEntity.SLOT_COUNT);
+            JsonArray jsonIngredients = new JsonArray(CeramicBowlBlockEntity.INGREDIENT_SLOT_COUNT);
 
             for (Ingredient ingredient : builder.ingredients) {
                 jsonIngredients.add(ingredient.toJson());

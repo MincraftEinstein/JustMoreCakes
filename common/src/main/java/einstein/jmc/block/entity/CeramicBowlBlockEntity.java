@@ -40,14 +40,15 @@ import java.util.Optional;
 
 public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
 
-    public static final int SLOT_COUNT = 4;
+    public static final int INGREDIENT_SLOT_COUNT = 4;
+    public static final int SLOT_COUNT = 5;
     public static final int DEFAULT_MIXING_PROGRESS = 5;
+    public static final int RESULT_SLOT = 4;
     private final NonNullList<ItemStack> stacks = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
-    private final NonNullList<ItemStack> remainingItems = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
+    private final NonNullList<ItemStack> remainingItems = NonNullList.withSize(INGREDIENT_SLOT_COUNT, ItemStack.EMPTY);
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
     private final RecipeManager.CachedCheck<CeramicBowlBlockEntity, MixingRecipe> quickCheck = RecipeManager.createCheck(ModRecipes.MIXING_RECIPE.get());
     private int mixingProgress;
-    private ItemStack result = ItemStack.EMPTY;
     private Holder<BowlContents> contentsHolder = BowlContents.EMPTY.getHolder();
 
     public CeramicBowlBlockEntity(BlockPos pos, BlockState state) {
@@ -77,7 +78,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
                     }
                 }
 
-                result = resultStack;
+                setResult(resultStack);
                 recipe.consumeIngredients(this);
                 level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(CeramicBowlBlock.FILL_LEVEL, 4));
                 contentsChanged(player);
@@ -142,9 +143,9 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     }
 
     public boolean takeResult(Player player) {
+        ItemStack result = getResult();
         if (!result.isEmpty()) {
-            mixingProgress = 0;
-            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(CeramicBowlBlock.FILL_LEVEL, 0));
+            clear(false);
             result.onCraftedBy(level, player, result.getCount());
             Block.popResourceFromFace(level, worldPosition, Direction.UP, result);
 
@@ -153,12 +154,21 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
             }
 
             remainingItems.clear();
-            result = ItemStack.EMPTY;
-            contentsHolder = BowlContents.EMPTY.getHolder();
+            setResult(ItemStack.EMPTY);
             contentsChanged(player);
             return true;
         }
         return false;
+    }
+
+    private void clear(boolean update) {
+        level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(CeramicBowlBlock.FILL_LEVEL, 0));
+        contentsHolder = BowlContents.EMPTY.getHolder();
+        mixingProgress = 0;
+
+        if (update) {
+            setChanged();
+        }
     }
 
     private void contentsChanged(Player player) {
@@ -172,7 +182,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     }
 
     public void dropItems(Level level, BlockPos pos) {
-        Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), result);
+        Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), getResult());
         Containers.dropContents(level, pos, stacks);
         Containers.dropContents(level, pos, remainingItems);
         remainingItems.clear();
@@ -185,6 +195,9 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
 
     @Override
     public int[] getSlotsForFace(Direction direction) {
+        if (direction == Direction.DOWN) {
+            return new int[] {RESULT_SLOT};
+        }
         return new int[] {0, 1, 2, 3};
     }
 
@@ -210,7 +223,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
                 return false;
             }
         }
-        return result.isEmpty();
+        return true;
     }
 
     @Override
@@ -220,8 +233,11 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
 
     @Override
     public ItemStack removeItem(int slotIndex, int count) {
-        setUpdated();
-        return ContainerHelper.removeItem(stacks, slotIndex, count);
+        ItemStack stack = ContainerHelper.removeItem(stacks, slotIndex, count);
+        if (!stack.isEmpty() && hasLevel()) {
+            clear(true);
+        }
+        return stack;
     }
 
     @Override
@@ -251,12 +267,15 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
 
     @Override
     public boolean canPlaceItem(int slotIndex, ItemStack stack) {
-        return true;
+        return stacks.get(slotIndex).isEmpty();
     }
 
     @Override
     public void clearContent() {
         stacks.clear();
+        if (hasLevel()) {
+            clear(true);
+        }
     }
 
     @Nullable
@@ -276,10 +295,10 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        clearContent();
+        stacks.clear();
         ContainerHelper.loadAllItems(tag, stacks);
         ContainerHelper.loadAllItems(tag.getCompound("RemainingItems"), remainingItems);
-        result = ItemStack.of(tag.getCompound("ResultStack"));
+        setResult(ItemStack.of(tag.getCompound("ResultStack")));
         Optional.ofNullable(ResourceLocation.tryParse(tag.getString("Contents")))
                 .map(id -> BowlContents.getHolder(level, id))
                 .ifPresent(holder -> contentsHolder = holder);
@@ -299,7 +318,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
         ContainerHelper.saveAllItems(remainingItemsTag, remainingItems);
         tag.put("RemainingItems", remainingItemsTag);
         CompoundTag resultTag = new CompoundTag();
-        result.save(resultTag);
+        getResult().save(resultTag);
         tag.put("ResultStack", resultTag);
         contentsHolder.unwrapKey().ifPresent(key -> tag.putString("Contents", key.location().toString()));
         tag.putInt("MixingProgress", mixingProgress);
@@ -349,5 +368,13 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
 
     public Holder<BowlContents> getContents() {
         return contentsHolder;
+    }
+
+    public ItemStack getResult() {
+        return stacks.get(RESULT_SLOT);
+    }
+
+    public void setResult(ItemStack result) {
+        stacks.set(RESULT_SLOT, result);
     }
 }

@@ -36,10 +36,12 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
         int stacks = 0;
 
         for (int i = 0; i < container.getContainerSize(); i++) {
-            ItemStack stack = container.getItem(i);
-            if (!stack.isEmpty()) {
-                stacks++;
-                contents.accountStack(stack, 1);
+            if (i != CeramicBowlBlockEntity.RESULT_SLOT) {
+                ItemStack stack = container.getItem(i);
+                if (!stack.isEmpty()) {
+                    stacks++;
+                    contents.accountStack(stack, 1);
+                }
             }
         }
 
@@ -102,9 +104,11 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
     public void consumeIngredients(CeramicBowlBlockEntity container) {
         for (Ingredient ingredient : ingredients) {
             for (int i = 0; i < container.getContainerSize(); i++) {
-                ItemStack stack = container.getItem(i);
-                if (!stack.isEmpty() && ingredient.test(stack)) {
-                    container.setItem(i, ItemStack.EMPTY);
+                if (i != CeramicBowlBlockEntity.RESULT_SLOT) {
+                    ItemStack stack = container.getItem(i);
+                    if (!stack.isEmpty() && ingredient.test(stack)) {
+                        container.setItem(i, ItemStack.EMPTY);
+                    }
                 }
             }
         }

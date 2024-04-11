@@ -21,7 +21,7 @@ public class MixingRecipeSerializer implements RecipeSerializer<MixingRecipe> {
         if (ingredients.isEmpty()) {
             throw new JsonSyntaxException("No Ingredients found for mixing recipe: " + recipeId);
         }
-        else if (ingredients.size() > CeramicBowlBlockEntity.SLOT_COUNT) {
+        else if (ingredients.size() > CeramicBowlBlockEntity.INGREDIENT_SLOT_COUNT) {
             throw new JsonSyntaxException("Too many ingredients for mixing recipe: " + recipeId + ". The max is 4");
         }
 
