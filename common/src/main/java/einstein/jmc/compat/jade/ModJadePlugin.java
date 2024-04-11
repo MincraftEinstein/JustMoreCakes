@@ -1,9 +1,11 @@
 package einstein.jmc.compat.jade;
 
 import einstein.jmc.block.CakeOvenBlock;
+import einstein.jmc.block.CeramicBowlBlock;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.entity.CakeOvenBlockEntity;
+import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import einstein.jmc.compat.jade.providers.*;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModServerConfigs;
@@ -29,6 +31,7 @@ public class ModJadePlugin implements IWailaPlugin {
     public static final CakeOvenProvider CAKE_OVEN_PROVIDER = new CakeOvenProvider();
     public static final ItemStorageRemoverProvider ITEM_STORAGE_REMOVER_PROVIDER = new ItemStorageRemoverProvider();
     public static final CandleTypeProvider CANDLE_TYPE_PROVIDER = new CandleTypeProvider();
+    public static final CeramicBowlProvider CERAMIC_BOWL_PROVIDER = new CeramicBowlProvider();
 
     // Features
     public static final ResourceLocation CAKE_NOURISHMENT = loc("cake_nourishment");
@@ -36,6 +39,7 @@ public class ModJadePlugin implements IWailaPlugin {
     public static final ResourceLocation CAKE_OVEN = loc("cake_oven");
     public static final ResourceLocation ITEM_STORAGE_REMOVER = loc("cake_oven.item_storage_remover");
     public static final ResourceLocation CANDLE_TYPE = loc("candle_type");
+    public static final ResourceLocation CERAMIC_BOWL = loc("ceramic_bowl");
 
     // Configs
     public static final ResourceLocation DISPLAY_TYPE = loc("cake_nourishment.display_type");
@@ -47,6 +51,7 @@ public class ModJadePlugin implements IWailaPlugin {
     @Override
     public void register(IWailaCommonRegistration registration) {
         registration.registerBlockDataProvider(CAKE_OVEN_PROVIDER, CakeOvenBlockEntity.class);
+        registration.registerBlockDataProvider(CERAMIC_BOWL_PROVIDER, CeramicBowlBlockEntity.class);
     }
 
     @Override
@@ -72,6 +77,8 @@ public class ModJadePlugin implements IWailaPlugin {
 
         registration.registerBlockComponent(CAKE_OVEN_PROVIDER, CakeOvenBlock.class);
         registration.registerBlockComponent(ITEM_STORAGE_REMOVER_PROVIDER, CakeOvenBlock.class);
+
+        registration.registerBlockComponent(CERAMIC_BOWL_PROVIDER, CeramicBowlBlock.class);
 
         registration.addRayTraceCallback((hitResult, accessor, unmodifiedAccessor) -> {
             if (ModServerConfigs.HIDE_TRAPPED_CAKES.get() || IWailaConfig.get().getPlugin().get(HIDE_TRAPPED_CAKES)) {

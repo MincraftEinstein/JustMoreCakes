@@ -5,7 +5,6 @@ import einstein.jmc.data.BowlContents;
 import einstein.jmc.init.ModBlockEntityTypes;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.item.crafting.MixingRecipe;
-import it.unimi.dsi.fastutil.Function;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -38,8 +37,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 
 public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
 
@@ -59,7 +56,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     }
 
     public boolean tryCraft(Player player) {
-        Optional<MixingRecipe> matchingRecipe = quickCheck.getRecipeFor(this, level);
+        Optional<MixingRecipe> matchingRecipe = getMatchingRecipe();
 
         if (matchingRecipe.isPresent()) {
             MixingRecipe recipe = matchingRecipe.get();
@@ -385,5 +382,13 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
 
     public void setResult(ItemStack result) {
         stacks.set(RESULT_SLOT, result);
+    }
+
+    public int getMixingProgress() {
+        return mixingProgress;
+    }
+
+    public Optional<MixingRecipe> getMatchingRecipe() {
+        return quickCheck.getRecipeFor(this, level);
     }
 }
