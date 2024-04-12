@@ -51,11 +51,6 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
     }
 
     @Override
-    public @Nullable ResourceLocation getRegistryName(CakeOvenRecipe recipe) {
-        return getRecipeType().getUid();
-    }
-
-    @Override
     public RecipeType<CakeOvenRecipe> getRecipeType() {
         return ModJEIPlugin.CAKE_OVEN;
     }
