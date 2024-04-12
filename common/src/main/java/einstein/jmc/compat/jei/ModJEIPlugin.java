@@ -6,6 +6,7 @@ import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModMenuTypes;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
+import einstein.jmc.item.crafting.MixingRecipe;
 import einstein.jmc.menu.cakeoven.CakeOvenMenu;
 import einstein.jmc.util.CakeOvenConstants;
 import mezz.jei.api.IModPlugin;
@@ -23,7 +24,9 @@ import java.util.Objects;
 @JeiPlugin
 public class ModJEIPlugin implements IModPlugin {
 
+    public static final ResourceLocation TEXTURE = JustMoreCakes.loc("textures/gui/jei_gui.png");
     public static final RecipeType<CakeOvenRecipe> CAKE_OVEN = RecipeType.create(JustMoreCakes.MOD_ID, "cake_oven", CakeOvenRecipe.class);
+    public static final RecipeType<MixingRecipe> MIXING_RECIPE = RecipeType.create(JustMoreCakes.MOD_ID, "mixing", MixingRecipe.class);
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -33,17 +36,20 @@ public class ModJEIPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new CakeOvenRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new MixingRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
         registration.addRecipes(CAKE_OVEN, recipeManager.getAllRecipesFor(ModRecipes.CAKE_OVEN_RECIPE.get()));
+        registration.addRecipes(MIXING_RECIPE, recipeManager.getAllRecipesFor(ModRecipes.MIXING_RECIPE.get()));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CAKE_OVEN.get()), CAKE_OVEN, RecipeTypes.FUELING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.CERAMIC_BOWL.get()), MIXING_RECIPE);
     }
 
     @Override

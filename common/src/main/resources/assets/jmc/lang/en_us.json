@@ -84,6 +84,8 @@
   "gui.jei.jmc.category.cake_oven": "Cake Baking",
   "gui.jei.jmc.category.cake_oven.experience": "%s XP",
   "gui.jei.jmc.category.cake_oven.time.seconds": "%ss",
+  "gui.jei.jmc.category.mixing": "Mixing",
+  "gui.jei.jmc.category.mixing.uses": "Uses: %s",
 
   "_comment": "REI",
   "category.rei.jmc.cake_oven": "Cake Baking",

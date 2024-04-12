@@ -3,7 +3,6 @@ package einstein.jmc.compat.jei;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
 import einstein.jmc.util.CakeOvenConstants;
@@ -31,7 +30,6 @@ import java.util.Objects;
 
 public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, CakeOvenConstants {
 
-    private static final ResourceLocation TEXTURE = JustMoreCakes.loc("textures/gui/jei_cake_oven_gui.png"); // Image must be 256x256 px
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawableAnimated flame;
@@ -39,15 +37,15 @@ public class CakeOvenRecipeCategory implements IRecipeCategory<CakeOvenRecipe>, 
     private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
 
     public CakeOvenRecipeCategory(IGuiHelper guiHelper) {
-        background = guiHelper.createDrawable(TEXTURE, /*ImageX*/ 0, /*ImageY*/ 0, /*Width*/ 133, /*Height*/ 44);
+        background = guiHelper.createDrawable(ModJEIPlugin.TEXTURE, /*ImageX*/ 0, /*ImageY*/ 0, /*Width*/ 133, /*Height*/ 44);
         icon = guiHelper.createDrawableItemStack(new ItemStack(ModBlocks.CAKE_OVEN.get()));
         title = Component.translatable("gui.jei.jmc.category.cake_oven");
-        flame = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(TEXTURE, /*ImageX*/ 133, /*ImageY*/ 0, /*Width*/ 14, /*Height*/ 14), /*AnimationTime*/ 300, StartDirection.TOP, true);
+        flame = guiHelper.createAnimatedDrawable(guiHelper.createDrawable(ModJEIPlugin.TEXTURE, /*ImageX*/ 133, /*ImageY*/ 0, /*Width*/ 14, /*Height*/ 14), /*AnimationTime*/ 300, StartDirection.TOP, true);
         cachedArrows = CacheBuilder.newBuilder().maximumSize(25L).build(new CacheLoader<>() {
 
             @Override
             public IDrawableAnimated load(Integer cookTime) {
-                return guiHelper.drawableBuilder(TEXTURE, /*ImageX*/ 133, /*ImageY*/ 14, /*Width*/ 24, /*Height*/ 17).buildAnimated(/*AnimationTime*/ cookTime, StartDirection.LEFT, false);
+                return guiHelper.drawableBuilder(ModJEIPlugin.TEXTURE, /*ImageX*/ 133, /*ImageY*/ 14, /*Width*/ 24, /*Height*/ 17).buildAnimated(/*AnimationTime*/ cookTime, StartDirection.LEFT, false);
             }
         });
     }
