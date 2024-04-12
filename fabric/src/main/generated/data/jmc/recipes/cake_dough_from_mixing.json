@@ -15,7 +15,7 @@
       "item": "minecraft:sugar"
     }
   ],
-  "mixingTime": 5,
+  "mixingTime": 12,
   "result": {
     "item": "jmc:cake_dough"
   }

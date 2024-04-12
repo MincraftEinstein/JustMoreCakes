@@ -12,7 +12,7 @@
       "item": "minecraft:sugar"
     }
   ],
-  "mixingTime": 7,
+  "mixingTime": 12,
   "result": {
     "item": "jmc:cake_frosting"
   }

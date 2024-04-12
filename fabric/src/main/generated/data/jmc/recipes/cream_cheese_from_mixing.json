@@ -15,7 +15,7 @@
       "item": "minecraft:milk_bucket"
     }
   ],
-  "mixingTime": 10,
+  "mixingTime": 9,
   "result": {
     "count": 2,
     "item": "jmc:cream_cheese"
