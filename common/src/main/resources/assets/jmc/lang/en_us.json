@@ -90,6 +90,8 @@
   "_comment": "REI",
   "category.rei.jmc.cake_oven": "Cake Baking",
   "category.rei.jmc.cake_oven.time&xp": "%s XP in %s sec",
+  "category.rei.jmc.mixing": "Mixing",
+  "category.rei.jmc.mixing.uses": "Uses: %s",
 
   "_comment": "ModMenu",
   "modmenu.descriptionTranslation.jmc": "A simple mod that adds 30+ new cakes to Minecraft",
