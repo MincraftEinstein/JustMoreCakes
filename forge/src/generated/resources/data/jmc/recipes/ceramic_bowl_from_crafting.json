@@ -3,16 +3,15 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:milk_bucket"
+      "item": "minecraft:terracotta"
     }
   },
   "pattern": [
-    "###",
+    "# #",
     "###"
   ],
   "result": {
-    "count": 3,
-    "item": "jmc:cream_cheese"
+    "item": "jmc:ceramic_bowl"
   },
   "show_notification": true
 }

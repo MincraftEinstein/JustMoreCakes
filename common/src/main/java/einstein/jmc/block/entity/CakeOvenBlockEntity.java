@@ -163,19 +163,24 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
                 return false;
             }
 
-            ItemStack resultStack = slotItems.get(RESULT_SLOT);
-            if (resultStack.isEmpty()) {
-                return true;
-            }
-            else if (!ItemStack.isSameItem(resultStack, stack)) {
-                return false;
-            }
-            else if (resultStack.getCount() + stack.getCount() <= maxStackSize && resultStack.getCount() + stack.getCount() <= resultStack.getMaxStackSize()) {
-                return true;
-            }
-            return resultStack.getCount() + stack.getCount() <= stack.getMaxStackSize();
+            return canAddToStack(stack, slotItems.get(RESULT_SLOT), maxStackSize, stack.getCount());
         }
         return false;
+    }
+
+    public static boolean canAddToStack(ItemStack stack, ItemStack currentStack, int maxStackSize, int growSize) {
+        if (currentStack.isEmpty()) {
+            return true;
+        }
+        else if (!ItemStack.isSameItemSameTags(currentStack, stack)) {
+            return false;
+        }
+
+        int combinedCount = currentStack.getCount() + growSize;
+        if (combinedCount <= maxStackSize && combinedCount <= currentStack.getMaxStackSize()) {
+            return true;
+        }
+        return combinedCount <= stack.getMaxStackSize();
     }
 
     private boolean smeltRecipe(RegistryAccess access, @Nullable CakeOvenRecipe recipe, NonNullList<ItemStack> slotItems, int maxStackSize) {
@@ -227,8 +232,8 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 
     @Override
     public void setItem(int slotIndex, ItemStack stack) {
-        ItemStack stack1 = items.get(slotIndex);
-        boolean flag = !stack.isEmpty() && ItemStack.isSameItemSameTags(stack, stack1);
+        ItemStack currentStack = items.get(slotIndex);
+        boolean isSameStack = !stack.isEmpty() && ItemStack.isSameItemSameTags(stack, currentStack);
         items.set(slotIndex, stack);
 
         if (stack.getCount() > getMaxStackSize()) {
@@ -236,7 +241,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
         }
 
         if ((slotIndex == INGREDIENT_SLOT_1 || slotIndex == INGREDIENT_SLOT_2 || slotIndex == INGREDIENT_SLOT_3 ||
-                slotIndex == INGREDIENT_SLOT_4) && !flag) {
+                slotIndex == INGREDIENT_SLOT_4) && !isSameStack) {
             cookingTotalTime = getTotalCookTime(level, this);
             cookingProgress = 0;
             setChanged();
@@ -252,7 +257,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
         if (level.getBlockEntity(worldPosition) != this) {
             return false;
         }
-        return player.distanceToSqr(worldPosition.getX() + 0.5D, worldPosition.getY() + 0.5D, worldPosition.getZ() + 0.5D) <= 64;
+        return player.distanceToSqr(worldPosition.getCenter()) <= 64;
     }
 
     @Override
@@ -288,10 +293,10 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
         cookingProgress = tag.getInt("CookTime");
         cookingTotalTime = tag.getInt("CookTimeTotal");
         litDuration = getBurnDuration(items.get(FUEL_SLOT));
-        CompoundTag usedRecipes = tag.getCompound("RecipesUsed");
+        CompoundTag recipesUsed = tag.getCompound("RecipesUsed");
 
-        for (String recipe : usedRecipes.getAllKeys()) {
-            recipesUsed.put(new ResourceLocation(recipe), usedRecipes.getInt(recipe));
+        for (String recipeId : recipesUsed.getAllKeys()) {
+            this.recipesUsed.put(new ResourceLocation(recipeId), recipesUsed.getInt(recipeId));
         }
     }
 

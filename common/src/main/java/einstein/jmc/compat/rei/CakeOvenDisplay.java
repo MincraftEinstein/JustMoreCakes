@@ -38,7 +38,7 @@ public class CakeOvenDisplay extends BasicDisplay implements SimpleGridMenuDispl
         this.cookingTime = cookingTime;
     }
 
-    private static List<EntryIngredient> fillWithEmpty(List<EntryIngredient> inputs) {
+    public static List<EntryIngredient> fillWithEmpty(List<EntryIngredient> inputs) {
         if (inputs.size() == CakeOvenConstants.INGREDIENT_SLOT_COUNT) {
             return inputs;
         }

@@ -4,17 +4,19 @@
   "experience": 0.8,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
       "tag": "c:slime_balls"
     },
     {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:egg"
+      "tag": "c:slime_balls"
     }
   ],
-  "result": "jmc:slime_cake"
+  "result": {
+    "item": "jmc:slime_cake"
+  }
 }

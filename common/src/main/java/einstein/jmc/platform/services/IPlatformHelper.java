@@ -23,4 +23,11 @@ public interface IPlatformHelper {
      * @return True if in a development environment, false otherwise.
      */
     boolean isDevelopmentEnvironment();
+
+    PhysicalSide getPhysicalSide();
+
+    enum PhysicalSide {
+        CLIENT,
+        SERVER;
+    }
 }

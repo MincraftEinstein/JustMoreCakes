@@ -4,6 +4,7 @@ import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.item.crafting.CakeOvenRecipe;
+import einstein.jmc.item.crafting.MixingRecipe;
 import einstein.jmc.menu.cakeoven.CakeOvenMenu;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
@@ -16,19 +17,23 @@ import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
 
 import static einstein.jmc.compat.rei.ModREICommonPlugin.CAKE_OVEN;
+import static einstein.jmc.compat.rei.ModREICommonPlugin.MIXING;
 
 public class ModREIClientPlugin implements REIClientPlugin {
 
     @Override
     public void registerCategories(CategoryRegistry registry) {
         registry.add(new CakeOvenRecipeCategory());
+        registry.add(new MixingRecipeCategory());
         registry.addWorkstations(CAKE_OVEN, EntryStacks.of(ModBlocks.CAKE_OVEN.get()));
         registry.addWorkstations(BuiltinPlugin.FUEL, EntryStacks.of(ModBlocks.CAKE_OVEN.get()));
+        registry.addWorkstations(MIXING, EntryStacks.of(ModBlocks.CERAMIC_BOWL.get()));
     }
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
         registry.registerRecipeFiller(CakeOvenRecipe.class, ModRecipes.CAKE_OVEN_RECIPE.get(), CakeOvenDisplay::new);
+        registry.registerRecipeFiller(MixingRecipe.class, ModRecipes.MIXING_RECIPE.get(), MixingDisplay::new);
     }
 
     @Override

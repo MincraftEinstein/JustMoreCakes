@@ -4,17 +4,19 @@
   "experience": 0.8,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
       "item": "minecraft:ender_pearl"
     },
     {
-      "item": "minecraft:wheat"
-    },
-    {
       "item": "minecraft:blaze_powder"
-    },
-    {
-      "item": "minecraft:milk_bucket"
     }
   ],
-  "result": "jmc:ender_cake"
+  "result": {
+    "item": "jmc:ender_cake"
+  }
 }

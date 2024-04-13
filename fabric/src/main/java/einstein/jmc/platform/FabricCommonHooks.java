@@ -1,11 +1,13 @@
 package einstein.jmc.platform;
 
+import einstein.jmc.JustMoreCakesFabric;
 import einstein.jmc.menu.FabricMenuDataProvider;
 import einstein.jmc.menu.MenuDataProvider;
 import einstein.jmc.platform.services.CommonHooks;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -39,5 +41,10 @@ public class FabricCommonHooks implements CommonHooks {
     @Override
     public void registerCompostableInternal(ItemLike item, float chance) {
         CompostingChanceRegistry.INSTANCE.add(item, chance);
+    }
+
+    @Override
+    public MinecraftServer getCurrentServer() {
+        return JustMoreCakesFabric.getCurrentServer();
     }
 }

@@ -4,17 +4,16 @@
   "experience": 0.7,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
       "item": "minecraft:echo_shard"
-    },
-    {
-      "item": "minecraft:milk_bucket"
-    },
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "item": "minecraft:sugar"
     }
   ],
-  "result": "jmc:sculk_cake"
+  "result": {
+    "item": "jmc:sculk_cake"
+  }
 }

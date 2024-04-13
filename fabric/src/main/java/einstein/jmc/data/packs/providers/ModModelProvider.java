@@ -9,8 +9,8 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.CakeModel;
+import einstein.jmc.util.CakeVariant;
 import einstein.jmc.util.CakeVariantType;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -57,12 +57,18 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerators generators) {
         generators.generateFlatItem(ModItems.CUPCAKE.get(), ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModItems.CREAM_CHEESE.get(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModItems.WHISK.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        generators.generateFlatItem(ModItems.CAKE_DOUGH.get(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModItems.CUPCAKE_DOUGH.get(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModItems.CAKE_FROSTING.get(), ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(ModItems.CUPCAKE_FROSTING.get(), ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModBlocks.POISON_CAKE_VARIANT.getItem().get(), Items.CAKE, ModelTemplates.FLAT_ITEM);
         generators.generateFlatItem(ModBlocks.TNT_CAKE_VARIANT.getItem().get(), Items.CAKE, ModelTemplates.FLAT_ITEM);
 
         generators.output.accept(loc("item/encasing_ice"), new DelegatedModel(mcBlockLoc("ice")));
         generators.output.accept(loc("item/cake_oven"), new DelegatedModel(blockLoc("cake_oven")));
         generators.output.accept(loc("item/cake_stand"), new DelegatedModel(blockLoc("cake_stand")));
+        generators.output.accept(loc("item/ceramic_bowl"), new DelegatedModel(blockLoc("ceramic_bowl")));
 
         CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             if (variant.hasItem() && !variant.hasCustomItemModel()) {

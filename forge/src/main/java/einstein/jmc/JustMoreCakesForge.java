@@ -3,6 +3,8 @@ package einstein.jmc;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
+import einstein.jmc.client.renderers.blockentities.CeramicBowlRenderer;
+import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.ForgeCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
@@ -42,9 +44,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.MissingMappingsEvent;
+import net.minecraftforge.registries.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -66,6 +66,7 @@ public class JustMoreCakesForge {
         modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::generateData);
         modEventBus.addListener(this::registerEntityRenderers);
+        modEventBus.addListener(this::createNewDatapackRegistries);
         ForgeRegistryHelper.ITEMS.register(modEventBus);
         ForgeRegistryHelper.BLOCKS.register(modEventBus);
         ForgeRegistryHelper.BLOCK_ENTITIES.register(modEventBus);
@@ -131,6 +132,10 @@ public class JustMoreCakesForge {
         }
     }
 
+    void createNewDatapackRegistries(DataPackRegistryEvent.NewRegistry event) {
+        event.dataPackRegistry(BowlContents.REGISTRY_KEY, BowlContents.CODEC, BowlContents.CODEC);
+    }
+
     void onAddReloadListeners(AddReloadListenerEvent event) {
         event.addListener(new ForgeCakeEffectsReloadListener());
     }
@@ -150,6 +155,7 @@ public class JustMoreCakesForge {
 
     void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntityTypes.CAKE_STAND.get(), CakeStandRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntityTypes.CERAMIC_BOWL.get(), CeramicBowlRenderer::new);
     }
 
     void missingMappings(MissingMappingsEvent event) {

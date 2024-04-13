@@ -4,6 +4,11 @@
   "item.jmc.cupcake": "Cupcake",
   "item.jmc.cake_spatula": "Cake Spatula",
   "item.jmc.cake_spatula.desc": "(§oShift + Right-Click§r) an uneaten cake to collect it",
+  "item.jmc.whisk": "Whisk",
+  "item.jmc.cake_dough": "Cake Dough",
+  "item.jmc.cupcake_dough": "Cupcake Dough",
+  "item.jmc.cake_frosting": "Cake Frosting",
+  "item.jmc.cupcake_frosting": "Cupcake Frosting",
 
   "_comment": "Blocks",
   "block.jmc.chocolate_cake": "Chocolate Cake",
@@ -43,6 +48,7 @@
   "block.jmc.encasing_ice": "Encasing Ice",
   "block.jmc.cake_oven": "Cake Oven",
   "block.jmc.cake_stand": "Cake Stand",
+  "block.jmc.ceramic_bowl": "Ceramic Bowl",
 
   "_comment": "Entities",
   "entity.minecraft.villager.jmc.cake_baker": "Cake Baker",
@@ -78,10 +84,14 @@
   "gui.jei.jmc.category.cake_oven": "Cake Baking",
   "gui.jei.jmc.category.cake_oven.experience": "%s XP",
   "gui.jei.jmc.category.cake_oven.time.seconds": "%ss",
+  "gui.jei.jmc.category.mixing": "Mixing",
+  "gui.jei.jmc.category.mixing.uses": "Uses: %s",
 
   "_comment": "REI",
   "category.rei.jmc.cake_oven": "Cake Baking",
   "category.rei.jmc.cake_oven.time&xp": "%s XP in %s sec",
+  "category.rei.jmc.mixing": "Mixing",
+  "category.rei.jmc.mixing.uses": "Uses: %s",
 
   "_comment": "ModMenu",
   "modmenu.descriptionTranslation.jmc": "A simple mod that adds 30+ new cakes to Minecraft",
@@ -103,8 +113,10 @@
   "config.jade.plugin_jmc.cake_oven.item_storage_remover_desc": "Removes the default item storage provider from the Cake Oven. Turning this off and leaving Cake Oven Contents on will cause duplicate items to display, this is not a bug",
   "config.jade.plugin_jmc.hide_trapped_cakes": "Hide Trapped Cakes",
   "config.jade.plugin_jmc.candle_type": "Candle Type",
+  "config.jade.plugin_jmc.ceramic_bowl": "Ceramic Bowl",
   "jade.plugin_jmc.count": "x%s",
   "jade.plugin_jmc.saturation": "Saturation: %s",
+  "jade.plugin_jmc.progress": "Progress: %s / %s",
   "narration.jade.jmc.nutrition": "Nutrition: %s",
 
   "_comment": "Creative Tabs",

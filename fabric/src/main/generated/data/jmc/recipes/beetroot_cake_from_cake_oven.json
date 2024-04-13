@@ -4,17 +4,16 @@
   "experience": 0.4,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
       "item": "minecraft:beetroot"
-    },
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:egg"
     }
   ],
-  "result": "jmc:beetroot_cake"
+  "result": {
+    "item": "jmc:beetroot_cake"
+  }
 }

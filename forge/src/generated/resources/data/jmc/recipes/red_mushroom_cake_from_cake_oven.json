@@ -4,17 +4,19 @@
   "experience": 0.4,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
       "item": "minecraft:red_mushroom"
     },
     {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "item": "minecraft:wheat"
+      "item": "minecraft:red_mushroom"
     }
   ],
-  "result": "jmc:red_mushroom_cake"
+  "result": {
+    "item": "jmc:red_mushroom_cake"
+  }
 }

@@ -4,17 +4,16 @@
   "experience": 0.5,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
       "item": "minecraft:apple"
-    },
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "item": "minecraft:milk_bucket"
-    },
-    {
-      "item": "minecraft:wheat"
     }
   ],
-  "result": "jmc:apple_cake"
+  "result": {
+    "item": "jmc:apple_cake"
+  }
 }

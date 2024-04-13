@@ -1,7 +1,9 @@
 package einstein.jmc.platform;
 
 import einstein.jmc.platform.services.IPlatformHelper;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.metadata.ModEnvironment;
 
 public class FabricPlatformHelper implements IPlatformHelper {
 
@@ -18,5 +20,10 @@ public class FabricPlatformHelper implements IPlatformHelper {
     @Override
     public boolean isDevelopmentEnvironment() {
         return FabricLoader.getInstance().isDevelopmentEnvironment();
+    }
+
+    @Override
+    public PhysicalSide getPhysicalSide() {
+        return FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT ? PhysicalSide.CLIENT : PhysicalSide.SERVER;
     }
 }

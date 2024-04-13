@@ -4,17 +4,19 @@
   "experience": 0.5,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
       "item": "minecraft:warped_fungus"
     },
     {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "item": "minecraft:wheat"
+      "item": "minecraft:warped_fungus"
     }
   ],
-  "result": "jmc:warped_fungus_cake"
+  "result": {
+    "item": "jmc:warped_fungus_cake"
+  }
 }

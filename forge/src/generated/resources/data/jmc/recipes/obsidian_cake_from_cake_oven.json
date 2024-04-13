@@ -4,17 +4,16 @@
   "experience": 1.0,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
       "item": "minecraft:obsidian"
-    },
-    {
-      "item": "minecraft:milk_bucket"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:egg"
     }
   ],
-  "result": "jmc:obsidian_cake"
+  "result": {
+    "item": "jmc:obsidian_cake"
+  }
 }

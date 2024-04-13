@@ -4,17 +4,16 @@
   "experience": 0.7,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
       "item": "minecraft:chorus_fruit"
-    },
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:egg"
     }
   ],
-  "result": "jmc:chorus_cake"
+  "result": {
+    "item": "jmc:chorus_cake"
+  }
 }

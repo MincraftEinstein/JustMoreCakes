@@ -4,17 +4,13 @@
   "experience": 0.4,
   "ingredients": [
     {
+      "item": "jmc:cake_dough"
+    },
+    {
       "item": "minecraft:lava_bucket"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "item": "minecraft:sugar"
     }
   ],
-  "result": "jmc:lava_cake"
+  "result": {
+    "item": "jmc:lava_cake"
+  }
 }

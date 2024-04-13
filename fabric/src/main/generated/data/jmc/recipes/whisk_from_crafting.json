@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "$": {
+      "item": "minecraft:iron_nugget"
+    },
+    "~": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "#",
+    "$",
+    "~"
+  ],
+  "result": {
+    "item": "jmc:whisk"
+  },
+  "show_notification": true
+}

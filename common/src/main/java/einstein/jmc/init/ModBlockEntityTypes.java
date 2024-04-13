@@ -1,10 +1,7 @@
 package einstein.jmc.init;
 
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.block.entity.CakeOvenBlockEntity;
-import einstein.jmc.block.entity.CakeStandBlockEntity;
-import einstein.jmc.block.entity.GlowstoneCakeBlockEntity;
-import einstein.jmc.block.entity.TNTCakeBlockEntity;
+import einstein.jmc.block.entity.*;
 import einstein.jmc.util.BlockEntitySupplier;
 import einstein.jmc.util.DefaultCakeFamily;
 import net.minecraft.world.level.block.Block;
@@ -23,6 +20,7 @@ public class ModBlockEntityTypes {
     public static final Supplier<BlockEntityType<TNTCakeBlockEntity>> TNT_CAKE = registerForCake("tnt_cake", TNTCakeBlockEntity::new, ModBlocks.TNT_CAKE_VARIANT.getCake());
     public static final Supplier<BlockEntityType<CakeOvenBlockEntity>> CAKE_OVEN = register("cake_oven", CakeOvenBlockEntity::new, ModBlocks.CAKE_OVEN);
     public static final Supplier<BlockEntityType<CakeStandBlockEntity>> CAKE_STAND = register("cake_stand", CakeStandBlockEntity::new, ModBlocks.CAKE_STAND);
+    public static final Supplier<BlockEntityType<CeramicBowlBlockEntity>> CERAMIC_BOWL = register("ceramic_bowl", CeramicBowlBlockEntity::new, ModBlocks.CERAMIC_BOWL);
 
     public static void init() {
     }

@@ -3,11 +3,15 @@ package einstein.jmc.init;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeOvenBlock;
 import einstein.jmc.block.CakeStandBlock;
+import einstein.jmc.block.CeramicBowlBlock;
 import einstein.jmc.block.EncasingIceBlock;
 import einstein.jmc.block.cake.*;
 import einstein.jmc.block.cake.candle.*;
 import einstein.jmc.platform.Services;
-import einstein.jmc.util.*;
+import einstein.jmc.util.CakeModel;
+import einstein.jmc.util.CakeVariant;
+import einstein.jmc.util.DefaultCakeFamily;
+import einstein.jmc.util.VanillaCakeFamily;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkSensorBlock;
@@ -26,6 +30,7 @@ public class ModBlocks {
     public static final Supplier<Block> ENCASING_ICE = register("encasing_ice", () -> new EncasingIceBlock(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).friction(0.98F).randomTicks().strength(0.5F).sound(SoundType.GLASS).noLootTable().noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(Blocks::never).isSuffocating(Blocks::never).isViewBlocking(Blocks::never).pushReaction(PushReaction.NORMAL)), true);
     public static final Supplier<Block> CAKE_OVEN = register("cake_oven", () -> new CakeOvenBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(Blocks.litBlockEmission(13))), true);
     public static final Supplier<Block> CAKE_STAND = register("cake_stand", () -> new CakeStandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F).noOcclusion()), true);
+    public static final Supplier<Block> CERAMIC_BOWL = register("ceramic_bowl", () -> new CeramicBowlBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).pushReaction(PushReaction.DESTROY).instabreak().noOcclusion()), true);
 
     public static final CakeVariant POISON_CAKE_VARIANT = CakeVariant.create("poison_cake")
             .models(CakeModel.FROM_VANILLA, CakeModel.FROM_VANILLA)

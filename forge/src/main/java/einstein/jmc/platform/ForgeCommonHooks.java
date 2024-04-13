@@ -3,6 +3,7 @@ package einstein.jmc.platform;
 import einstein.jmc.menu.MenuDataProvider;
 import einstein.jmc.platform.services.CommonHooks;
 import einstein.jmc.platform.services.NetworkHelper;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -16,6 +17,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.server.ServerLifecycleHooks;
 
 public class ForgeCommonHooks implements CommonHooks {
 
@@ -42,5 +44,10 @@ public class ForgeCommonHooks implements CommonHooks {
     @Override
     public void registerCompostableInternal(ItemLike item, float chance) {
         ComposterBlock.COMPOSTABLES.put(item, chance);
+    }
+
+    @Override
+    public MinecraftServer getCurrentServer() {
+        return ServerLifecycleHooks.getCurrentServer();
     }
 }

@@ -2,6 +2,7 @@ package einstein.jmc.platform.services;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.menu.MenuDataProvider;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -36,4 +37,6 @@ public interface CommonHooks {
     }
 
     void registerCompostableInternal(ItemLike item, float chance);
+
+    MinecraftServer getCurrentServer();
 }
