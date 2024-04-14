@@ -6,13 +6,14 @@ import einstein.jmc.block.CeramicBowlBlock;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.entity.CakeOvenBlockEntity;
-import einstein.jmc.block.entity.CakeStandBlockEntity;
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import einstein.jmc.compat.jade.providers.*;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.util.Util;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CakeBlock;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.block.CandleCakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import snownee.jade.api.*;
 import snownee.jade.api.config.IWailaConfig;
+import snownee.jade.api.ui.IElementHelper;
 
 import java.util.function.Supplier;
 
@@ -125,6 +127,19 @@ public class ModJadePlugin implements IWailaPlugin {
             return cake.getVariant().getCandleCakeByCandle().values().stream().map(Supplier::get).toList().contains(candleCake);
         }
         return false;
+    }
+
+    public static void addItemToTooltip(ITooltip tooltip, Block block) {
+        IElementHelper helper = IElementHelper.get();
+        ItemStack stack = new ItemStack(block);
+
+        if (!stack.isEmpty()) {
+            tooltip.add(helper.smallItem(stack).clearCachedMessage());
+            tooltip.append(helper.text(Component.literal(" ").append(block.getName())));
+            return;
+        }
+
+        tooltip.add(helper.text(block.getName()));
     }
 
     public enum CakeInfoDisplayType {
