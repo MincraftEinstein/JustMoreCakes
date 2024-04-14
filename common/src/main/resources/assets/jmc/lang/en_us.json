@@ -114,6 +114,7 @@
   "config.jade.plugin_jmc.hide_trapped_cakes": "Hide Trapped Cakes",
   "config.jade.plugin_jmc.candle_type": "Candle Type",
   "config.jade.plugin_jmc.ceramic_bowl": "Ceramic Bowl",
+  "config.jade.plugin_jmc.cake_stand": "Cake Stand",
   "jade.plugin_jmc.count": "x%s",
   "jade.plugin_jmc.saturation": "Saturation: %s",
   "jade.plugin_jmc.progress": "Progress: %s / %s",
