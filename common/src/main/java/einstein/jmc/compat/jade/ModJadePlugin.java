@@ -1,10 +1,12 @@
 package einstein.jmc.compat.jade;
 
 import einstein.jmc.block.CakeOvenBlock;
+import einstein.jmc.block.CakeStandBlock;
 import einstein.jmc.block.CeramicBowlBlock;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.entity.CakeOvenBlockEntity;
+import einstein.jmc.block.entity.CakeStandBlockEntity;
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import einstein.jmc.compat.jade.providers.*;
 import einstein.jmc.init.ModBlocks;
@@ -32,6 +34,7 @@ public class ModJadePlugin implements IWailaPlugin {
     public static final ItemStorageRemoverProvider ITEM_STORAGE_REMOVER_PROVIDER = new ItemStorageRemoverProvider();
     public static final CandleTypeProvider CANDLE_TYPE_PROVIDER = new CandleTypeProvider();
     public static final CeramicBowlProvider CERAMIC_BOWL_PROVIDER = new CeramicBowlProvider();
+    public static final CakeStandProvider CAKE_STAND_PROVIDER = new CakeStandProvider();
 
     // Features
     public static final ResourceLocation CAKE_NOURISHMENT = loc("cake_nourishment");
@@ -40,6 +43,7 @@ public class ModJadePlugin implements IWailaPlugin {
     public static final ResourceLocation ITEM_STORAGE_REMOVER = loc("cake_oven.item_storage_remover");
     public static final ResourceLocation CANDLE_TYPE = loc("candle_type");
     public static final ResourceLocation CERAMIC_BOWL = loc("ceramic_bowl");
+    public static final ResourceLocation CAKE_STAND = loc("cake_stand");
 
     // Configs
     public static final ResourceLocation DISPLAY_TYPE = loc("cake_nourishment.display_type");
@@ -80,6 +84,8 @@ public class ModJadePlugin implements IWailaPlugin {
 
         registration.registerBlockComponent(CERAMIC_BOWL_PROVIDER, CeramicBowlBlock.class);
 
+        registration.registerBlockComponent(CAKE_STAND_PROVIDER, CakeStandBlock.class);
+
         registration.addRayTraceCallback((hitResult, accessor, unmodifiedAccessor) -> {
             if (ModServerConfigs.HIDE_TRAPPED_CAKES.get() || IWailaConfig.get().getPlugin().get(HIDE_TRAPPED_CAKES)) {
                 if (accessor instanceof BlockAccessor blockAccessor) {
@@ -111,6 +117,7 @@ public class ModJadePlugin implements IWailaPlugin {
         registration.markAsClientFeature(SHOW_SATURATION);
         registration.markAsClientFeature(HIDE_TRAPPED_CAKES);
         registration.markAsClientFeature(CANDLE_TYPE);
+        registration.markAsClientFeature(CAKE_STAND);
     }
 
     private static boolean isTrappedCandleCake(Block block, BaseCakeBlock cake) {
