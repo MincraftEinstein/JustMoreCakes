@@ -6,7 +6,7 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.BaseTwoTieredCakeBlock;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.util.MobEffectHolder;
+import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -65,8 +65,8 @@ public class CakeBlockMixin implements CakeEffectsHolder {
         CakeBlock cake = (CakeBlock) state.getBlock(); // Don't replace with a reference to Blocks.CAKE, so that this will work with inheritance
         CakeEffects cakeEffects = ((CakeEffectsHolder) cake).justMoreCakes$getCakeEffects();
         if (!player.level().isClientSide && cakeEffects != null) {
-            for (MobEffectHolder holder : cakeEffects.mobEffects()) {
-                Util.applyEffectFromHolder(holder, player);
+            for (SerializableMobEffectInstance holder : cakeEffects.mobEffects()) {
+                Util.applyEffectFromInstance(holder, player);
             }
         }
 

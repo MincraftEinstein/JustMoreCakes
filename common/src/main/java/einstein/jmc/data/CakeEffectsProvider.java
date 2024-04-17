@@ -7,7 +7,6 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.util.CakeFamily;
-import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -48,14 +47,14 @@ public abstract class CakeEffectsProvider implements DataProvider {
         return CompletableFuture.allOf(builder.build().toArray(CompletableFuture[]::new));
     }
 
-    public void add(Supplier<BaseCakeBlock> cake, MobEffectHolder... mobEffects) {
-        JsonElement element = CakeEffects.BLOCK_CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(cake.get(), List.of(mobEffects))).getOrThrow(false, error -> {
+    public void add(Supplier<BaseCakeBlock> cake, SerializableMobEffectInstance... effectInstances) {
+        JsonElement element = CakeEffects.BLOCK_CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(cake.get(), List.of(effectInstances))).getOrThrow(false, error -> {
         });
         map.put("blocks/" + Util.getBlockId(cake.get()).getPath(), element);
     }
 
-    public void add(CakeFamily family, MobEffectHolder... mobEffects) {
-        JsonElement element = CakeEffects.FAMILY_CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(family, List.of(mobEffects))).getOrThrow(false, error -> {
+    public void add(CakeFamily family, SerializableMobEffectInstance... effectInstances) {
+        JsonElement element = CakeEffects.FAMILY_CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(family, List.of(effectInstances))).getOrThrow(false, error -> {
         });
         map.put("families/" + family.getRegistryKey().getPath(), element);
     }

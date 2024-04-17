@@ -1,8 +1,8 @@
 package einstein.jmc.block.cake;
 
+import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.util.CakeVariant;
-import einstein.jmc.util.MobEffectHolder;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -20,8 +20,8 @@ public class CreeperCakeBlock extends BaseCakeBlock {
 
     @Override
     public void applyEffects(Player player, CakeEffects effects) {
-        List<MobEffectHolder> holders = effects.mobEffects();
-        Util.applyEffectFromHolder(holders.get(player.getRandom().nextInt(holders.size())), player);
+        List<SerializableMobEffectInstance> effectInstances = effects.mobEffects();
+        Util.applyEffectFromInstance(effectInstances.get(player.getRandom().nextInt(effectInstances.size())), player);
     }
 
     @Override

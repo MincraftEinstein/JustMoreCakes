@@ -3,12 +3,16 @@ package einstein.jmc.block.cake;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
+import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.init.ModCommonConfigs;
 import einstein.jmc.platform.Services;
-import einstein.jmc.util.*;
+import einstein.jmc.util.CakeFamily;
+import einstein.jmc.util.CakeVariant;
+import einstein.jmc.util.CakeVariantType;
+import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustColorTransitionOptions;
@@ -44,7 +48,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import static einstein.jmc.util.Util.RANDOM;
-import static einstein.jmc.util.Util.applyEffectFromHolder;
+import static einstein.jmc.util.Util.applyEffectFromInstance;
 
 @SuppressWarnings("deprecation")
 public class BaseCakeBlock extends Block implements CakeEffectsHolder {
@@ -185,8 +189,8 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public void applyEffects(Player player, CakeEffects effects) {
-        for (MobEffectHolder holder : effects.mobEffects()) {
-            applyEffectFromHolder(holder, player);
+        for (SerializableMobEffectInstance effectInstance : effects.mobEffects()) {
+            applyEffectFromInstance(effectInstance, player);
         }
     }
 

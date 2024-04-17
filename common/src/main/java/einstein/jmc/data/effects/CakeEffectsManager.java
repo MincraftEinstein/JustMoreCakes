@@ -7,7 +7,7 @@ import com.mojang.serialization.JsonOps;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.init.ModPackets;
 import einstein.jmc.platform.Services;
-import einstein.jmc.util.MobEffectHolder;
+import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.util.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -70,13 +70,13 @@ public class CakeEffectsManager {
 
         newCakeEffects.forEach((holder, effects) -> {
             CAKE_EFFECTS.put(holder, effects);
-            List<MobEffectHolder> mobEffectHolders = new ArrayList<>();
+            List<SerializableMobEffectInstance> serializableMobEffectInstances = new ArrayList<>();
 
             effects.forEach((mobEffect, pair) -> {
-                mobEffectHolders.add(new MobEffectHolder(mobEffect, pair.getFirst(), pair.getSecond()));
+                serializableMobEffectInstances.add(new SerializableMobEffectInstance(mobEffect, pair.getFirst(), pair.getSecond()));
             });
 
-            holder.justMoreCakes$setCakeEffects(new CakeEffects(holder, mobEffectHolders));
+            holder.justMoreCakes$setCakeEffects(new CakeEffects(holder, serializableMobEffectInstances));
         });
     }
 

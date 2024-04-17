@@ -4,7 +4,7 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.data.CakeEffectsProvider;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModPotions;
-import einstein.jmc.util.MobEffectHolder;
+import einstein.jmc.data.SerializableMobEffectInstance;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.effect.MobEffects;
 
@@ -17,35 +17,35 @@ public class ModCakeEffectsProvider extends CakeEffectsProvider {
     @Override
     protected void addCakeEffects() {
         add(ModBlocks.POISON_CAKE_VARIANT.getCake(),
-                new MobEffectHolder(MobEffects.POISON, 300, 1));
+                new SerializableMobEffectInstance(MobEffects.POISON, 300, 1));
         add(ModBlocks.GOLDEN_APPLE_CAKE_FAMILY,
-                new MobEffectHolder(MobEffects.REGENERATION, 200, 1),
-                new MobEffectHolder(MobEffects.DAMAGE_RESISTANCE, 3000),
-                new MobEffectHolder(MobEffects.ABSORPTION, 1200, 1));
+                new SerializableMobEffectInstance(MobEffects.REGENERATION, 200, 1),
+                new SerializableMobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3000),
+                new SerializableMobEffectInstance(MobEffects.ABSORPTION, 1200, 1));
         add(ModBlocks.FIREY_CAKE_FAMILY,
-                new MobEffectHolder(MobEffects.FIRE_RESISTANCE, 300, 1));
+                new SerializableMobEffectInstance(MobEffects.FIRE_RESISTANCE, 300, 1));
         add(ModBlocks.SLIME_CAKE_FAMILY,
-                new MobEffectHolder(MobEffects.JUMP, 1200, 0),
-                new MobEffectHolder(MobEffects.DAMAGE_RESISTANCE, 1200),
-                new MobEffectHolder(ModPotions.BOUNCING_EFFECT.get(), 1200));
+                new SerializableMobEffectInstance(MobEffects.JUMP, 1200, 0),
+                new SerializableMobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1200),
+                new SerializableMobEffectInstance(ModPotions.BOUNCING_EFFECT.get(), 1200));
         add(ModBlocks.BEETROOT_CAKE_FAMILY,
-                new MobEffectHolder(MobEffects.REGENERATION, 100, 1));
+                new SerializableMobEffectInstance(MobEffects.REGENERATION, 100, 1));
         add(ModBlocks.LAVA_CAKE_FAMILY,
-                new MobEffectHolder(MobEffects.REGENERATION, 300, 1),
-                new MobEffectHolder(MobEffects.DAMAGE_BOOST, 300, 1));
+                new SerializableMobEffectInstance(MobEffects.REGENERATION, 300, 1),
+                new SerializableMobEffectInstance(MobEffects.DAMAGE_BOOST, 300, 1));
         add(ModBlocks.ICE_CAKE_FAMILY,
-                new MobEffectHolder(MobEffects.NIGHT_VISION, 2400),
-                new MobEffectHolder(ModPotions.FREEZING_EFFECT.get()));
+                new SerializableMobEffectInstance(MobEffects.NIGHT_VISION, 2400),
+                new SerializableMobEffectInstance(ModPotions.FREEZING_EFFECT.get()));
         add(ModBlocks.CHORUS_CAKE_FAMILY,
-                new MobEffectHolder(MobEffects.LEVITATION, 300, 1));
+                new SerializableMobEffectInstance(MobEffects.LEVITATION, 300, 1));
         add(ModBlocks.GLOW_BERRY_CAKE_FAMILY,
-                new MobEffectHolder(MobEffects.NIGHT_VISION, 1200),
-                new MobEffectHolder(MobEffects.GLOWING, 1800));
+                new SerializableMobEffectInstance(MobEffects.NIGHT_VISION, 1200),
+                new SerializableMobEffectInstance(MobEffects.GLOWING, 1800));
         add(ModBlocks.SCULK_CAKE_FAMILY,
-                new MobEffectHolder(ModPotions.STEALTH_EFFECT.get(), 600));
+                new SerializableMobEffectInstance(ModPotions.STEALTH_EFFECT.get(), 600));
         add(ModBlocks.CREEPER_CAKE_FAMILY,
-                new MobEffectHolder(MobEffects.LUCK, 600, 1),
-                new MobEffectHolder(MobEffects.UNLUCK, 600, 1));
+                new SerializableMobEffectInstance(MobEffects.LUCK, 600, 1),
+                new SerializableMobEffectInstance(MobEffects.UNLUCK, 600, 1));
     }
 
     @Override

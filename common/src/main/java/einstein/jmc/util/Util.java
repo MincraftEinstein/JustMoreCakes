@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
+import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.init.ModPotions;
 import einstein.jmc.mixin.RecipeManagerAccessor;
@@ -258,8 +259,8 @@ public class Util {
         manager.setRecipes(recipesByType);
     }
 
-    public static void applyEffectFromHolder(MobEffectHolder holder, LivingEntity entity) {
-        MobEffectInstance instance = new MobEffectInstance(holder.effect(), holder.duration().orElse(0), holder.amplifier().orElse(0));
+    public static void applyEffectFromInstance(SerializableMobEffectInstance holder, LivingEntity entity) {
+        MobEffectInstance instance = holder.toInstance();
         if (holder.effect().isInstantenous()) {
             instance.getEffect().applyInstantenousEffect(entity, entity, entity, instance.getAmplifier(), 1);
         }
