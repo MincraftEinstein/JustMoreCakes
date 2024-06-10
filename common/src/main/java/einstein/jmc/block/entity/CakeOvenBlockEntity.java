@@ -254,10 +254,7 @@ public class CakeOvenBlockEntity extends BaseContainerBlockEntity implements Men
 
     @Override
     public boolean stillValid(Player player) {
-        if (level.getBlockEntity(worldPosition) != this) {
-            return false;
-        }
-        return player.distanceToSqr(worldPosition.getCenter()) <= 64;
+        return Container.stillValidBlockEntity(this, player);
     }
 
     @Override

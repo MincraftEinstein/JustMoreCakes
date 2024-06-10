@@ -16,6 +16,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.WorldlyContainer;
@@ -268,7 +269,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
 
     @Override
     public boolean stillValid(Player player) {
-        return true;
+        return Container.stillValidBlockEntity(this, player);
     }
 
     @Override
