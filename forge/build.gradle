@@ -87,6 +87,7 @@ dependencies {
     implementation fg.deobf("maven.modrinth:jade:${forge_jade_version}")
     implementation fg.deobf("maven.modrinth:moonlight:${forge_moonlight_version}")
     implementation fg.deobf("maven.modrinth:amendments:${forge_amendments_version}")
+    implementation fg.deobf("mysticdrew:common-networking-forge:${networking_version}-${minecraft_version}")
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.5")) {
         jarJar.ranged(it, "[0.3.5,)")

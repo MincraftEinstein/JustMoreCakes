@@ -36,6 +36,13 @@ Adds 30 new flavors of cake along with new improvements and mechanics for a bett
     side = "BOTH"
 
 [[dependencies.jmc]]
+    modId = "commonnetworking"
+    mandatory = true
+    versionRange = "[1.0.3-1.20.1,)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.jmc]]
     modId = "jei"
     mandatory = false
     versionRange = "[15.3.0.4,)"

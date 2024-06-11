@@ -1,13 +1,14 @@
 package einstein.jmc.data.effects;
 
 import com.google.gson.JsonObject;
+import com.mojang.authlib.GameProfile;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
+import commonnetwork.api.Dispatcher;
 import einstein.jmc.block.CakeEffectsHolder;
-import einstein.jmc.init.ModPackets;
-import einstein.jmc.platform.Services;
 import einstein.jmc.data.SerializableMobEffectInstance;
+import einstein.jmc.network.clientbound.ClientboundCakeEffectsPacket;
 import einstein.jmc.util.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,7 +29,9 @@ public class CakeEffectsManager {
     private static final Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> CAKE_EFFECTS = new HashMap<>();
 
     public static void syncToPlayer(ServerPlayer player) {
-        Services.NETWORK.toClient(ModPackets.CLIENTBOUND_CAKE_EFFECTS, player);
+        Dispatcher.sendToClient(new ClientboundCakeEffectsPacket(CAKE_EFFECTS), player);
+        GameProfile profile = player.getGameProfile();
+        LOGGER.info("Sending cake effects to {} ({})", profile.getName(), profile.getId());
     }
 
     public static void loadCakeEffects() {
@@ -113,9 +116,5 @@ public class CakeEffectsManager {
             return Optional.of(CakeEffects.FAMILY_CODEC);
         }
         return Optional.empty();
-    }
-
-    public static Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> getCakeEffects() {
-        return CAKE_EFFECTS;
     }
 }

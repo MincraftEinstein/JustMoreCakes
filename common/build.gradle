@@ -31,6 +31,7 @@ dependencies {
     compileOnly "maven.modrinth:moonlight:${forge_moonlight_version}"
     compileOnly "maven.modrinth:amendments:${forge_amendments_version}"
     compileOnly "io.github.llamalad7:mixinextras-common:0.3.5"
+    compileOnly "mysticdrew:common-networking-common:${networking_version}-${minecraft_version}"
 }
 
 publishing {

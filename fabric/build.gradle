@@ -37,6 +37,7 @@ dependencies {
     modImplementation("maven.modrinth:jade:${fabric_jade_version}")
     modImplementation("maven.modrinth:moonlight:${fabric_moonlight_version}")
     modImplementation("maven.modrinth:amendments:${fabric_amendments_version}")
+    modImplementation("mysticdrew:common-networking-fabric:${networking_version}-${minecraft_version}")
 
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}")

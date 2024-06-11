@@ -1,36 +1,39 @@
-package einstein.jmc.network.packet;
+package einstein.jmc.network.clientbound;
 
 import com.mojang.datafixers.util.Pair;
+import commonnetwork.networking.data.PacketContext;
+import commonnetwork.networking.data.Side;
+import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.data.effects.CakeEffectsManager;
-import einstein.jmc.network.Packet;
 import einstein.jmc.util.CakeFamily;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.block.Block;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
 import static einstein.jmc.JustMoreCakes.LOGGER;
 
-public class ClientboundCakeEffectsPacket implements Packet {
+public class ClientboundCakeEffectsPacket {
 
+    public static final ResourceLocation CHANNEL = JustMoreCakes.loc("cake_effects");
     private static final int BLOCK = 0;
     private static final int FAMILY = 1;
 
-    private final Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> effects = new HashMap<>();
+    private final Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> effects;
 
-    @Override
+    public ClientboundCakeEffectsPacket(Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> effects) {
+        this.effects = effects;
+    }
+
     public void encode(FriendlyByteBuf buf) {
-        Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> cakeEffectsMap = CakeEffectsManager.getCakeEffects();
-        buf.writeInt(cakeEffectsMap.size());
+        buf.writeInt(effects.size());
 
-        cakeEffectsMap.forEach((holder, combinedEffects) -> {
+        effects.forEach((holder, combinedEffects) -> {
             int type;
             ResourceLocation key;
 
@@ -64,9 +67,8 @@ public class ClientboundCakeEffectsPacket implements Packet {
         });
     }
 
-    @Override
-    public void decode(FriendlyByteBuf buf) {
-        effects.clear();
+    public static ClientboundCakeEffectsPacket decode(FriendlyByteBuf buf) {
+        Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> effects = new HashMap<>();
         int size = buf.readInt();
 
         for (int i = 0; i < size; i++) {
@@ -81,7 +83,7 @@ public class ClientboundCakeEffectsPacket implements Packet {
                 holder = CakeFamily.REGISTERED_CAKE_FAMILIES.get(key);
             }
             else {
-                LOGGER.warn("Received cake effects for unknown type: " + type);
+                LOGGER.warn("Received cake effects for unknown type: {}", type);
                 continue;
             }
 
@@ -98,17 +100,19 @@ public class ClientboundCakeEffectsPacket implements Packet {
                     combinedEffects.put(effect, Pair.of(duration, amplifier));
                 }
                 else {
-                    LOGGER.warn("Received cake effects with unknown mob effect: " + effectId);
+                    LOGGER.warn("Received cake effects with unknown mob effect: {}", effectId);
                 }
             }
 
             effects.put(holder, combinedEffects);
         }
+        return new ClientboundCakeEffectsPacket(effects);
     }
 
-    @Override
-    public void handle(@Nullable ServerPlayer player) {
-        CakeEffectsManager.setEffectsOnHolders(effects);
-        LOGGER.info("Received cake effects from server");
+    public static void handle(PacketContext<ClientboundCakeEffectsPacket> context) {
+        if (context.side().equals(Side.CLIENT)) {
+            CakeEffectsManager.setEffectsOnHolders(context.message().effects);
+            LOGGER.info("Received cake effects from server");
+        }
     }
 }

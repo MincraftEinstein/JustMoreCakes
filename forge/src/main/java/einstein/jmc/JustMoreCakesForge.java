@@ -8,7 +8,6 @@ import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.ForgeCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
-import einstein.jmc.platform.ForgeNetworkHelper;
 import einstein.jmc.platform.ForgeRegistryHelper;
 import einstein.jmc.util.CakeFamily;
 import einstein.jmc.util.Util;
@@ -44,7 +43,10 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.*;
+import net.minecraftforge.registries.DataPackRegistryEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.MissingMappingsEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -60,7 +62,6 @@ public class JustMoreCakesForge {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         JustMoreCakes.init();
-        ForgeNetworkHelper.init();
         modEventBus.register(this);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);

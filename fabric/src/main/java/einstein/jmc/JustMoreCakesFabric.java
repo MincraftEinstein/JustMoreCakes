@@ -7,8 +7,6 @@ import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.FabricCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
-import einstein.jmc.platform.FabricNetworkHelper;
-import einstein.jmc.platform.services.NetworkHelper;
 import einstein.jmc.util.CakeFamily;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -44,7 +42,6 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     @Override
     public void onInitialize() {
         JustMoreCakes.init();
-        FabricNetworkHelper.init(NetworkHelper.Direction.TO_SERVER);
         onServerStarting();
         onServerStopped();
         onAddReloadListeners();
@@ -88,8 +85,6 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
 
         BlockEntityRenderers.register(ModBlockEntityTypes.CAKE_STAND.get(), CakeStandRenderer::new);
         BlockEntityRenderers.register(ModBlockEntityTypes.CERAMIC_BOWL.get(), CeramicBowlRenderer::new);
-
-        FabricNetworkHelper.init(NetworkHelper.Direction.TO_CLIENT);
     }
 
     private static void putFamilyRenderLayers(CakeFamily family, RenderType type) {
