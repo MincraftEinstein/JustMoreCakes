@@ -4,8 +4,8 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.util.CakeVariant;
-import einstein.jmc.util.CakeVariantType;
+import einstein.jmc.util.CakeUtil;
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.util.Util;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -35,7 +35,7 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
         Map<Supplier<BaseCakeBlock>, CakeVariant> sortedCakes = Util.createValueSortedMap(CakeVariant.VARIANT_BY_CAKE, Comparator.comparing(CakeVariant::getCakeName));
 
         sortedCakes.forEach((cake, variant) -> {
-            CakeVariantType variantType = variant.getType();
+            CakeVariant.Type variantType = variant.getType();
 
             switch (variantType) {
                 case BASE -> getOrCreateTagBuilder(ModBlockTags.BASE_CAKES).add(cake.get());
@@ -58,7 +58,7 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(ModBlockTags.C_CAKES).addTag(ModBlockTags.CAKES);
         getOrCreateTagBuilder(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE).addTag(ModBlockTags.C_CAKES).addTag(ModBlockTags.C_CANDLE_CAKES);
-        Util.getVanillaCandleCakes().forEach(cake -> getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
+        CakeUtil.getVanillaCandleCakes().forEach(cake -> getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
         getOrCreateTagBuilder(ModBlockTags.CAKE_STAND_STORABLES).add(Blocks.CAKE).addTag(ModBlockTags.BASE_CAKES);
         getOrCreateTagBuilder(BlockTags.CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
     }

@@ -2,7 +2,7 @@ package einstein.jmc.block.cake;
 
 import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.data.effects.CakeEffects;
-import einstein.jmc.util.CakeVariant;
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;

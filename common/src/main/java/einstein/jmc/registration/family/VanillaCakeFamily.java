@@ -1,4 +1,4 @@
-package einstein.jmc.util;
+package einstein.jmc.registration.family;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;

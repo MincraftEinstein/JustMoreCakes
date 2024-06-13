@@ -6,7 +6,7 @@ import einstein.jmc.compat.jade.ModJadePlugin;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.data.SerializableMobEffectInstance;
-import einstein.jmc.util.Util;
+import einstein.jmc.util.CakeUtil;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -42,7 +42,7 @@ public class CakeEffectsProvider implements IBlockComponentProvider {
         else if (block instanceof BaseCandleCakeBlock candleCake) {
             cakeEffects = candleCake.getParentCake().justMoreCakes$getCakeEffects();
         }
-        else if (Util.getVanillaCandleCakes().contains(block)) {
+        else if (CakeUtil.getVanillaCandleCakes().contains(block)) {
             cakeEffects = ((CakeEffectsHolder) Blocks.CAKE).justMoreCakes$getCakeEffects();
         }
 

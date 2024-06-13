@@ -1,6 +1,5 @@
 package einstein.jmc;
 
-import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
 import einstein.jmc.client.renderers.blockentities.CeramicBowlRenderer;
@@ -9,7 +8,8 @@ import einstein.jmc.data.ForgeCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.ForgeRegistryHelper;
-import einstein.jmc.util.CakeFamily;
+import einstein.jmc.registration.family.CakeFamily;
+import einstein.jmc.util.CakeUtil;
 import einstein.jmc.util.Util;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -120,7 +120,7 @@ public class JustMoreCakesForge {
     }
 
     void onBlockBreak(BlockEvent.BreakEvent event) {
-        if (BaseCakeBlock.inFamily(event.getState(), ModBlocks.SCULK_CAKE_FAMILY)) {
+        if (CakeUtil.inFamily(event.getState(), ModBlocks.SCULK_CAKE_FAMILY)) {
             event.setExpToDrop(5);
         }
     }
@@ -235,11 +235,11 @@ public class JustMoreCakesForge {
     }
 
     void onEntityJump(final LivingEvent.LivingJumpEvent event) {
-        Util.livingEntityJump(event.getEntity());
+        livingEntityJump(event.getEntity());
     }
 
     void onEntityTick(final LivingEvent.LivingTickEvent event) {
-        Util.livingEntityTick(event.getEntity().level(), event.getEntity());
+        livingEntityTick(event.getEntity().level(), event.getEntity());
     }
 
     void onVillagerTradesEvent(final VillagerTradesEvent event) {

@@ -1,6 +1,8 @@
-package einstein.jmc.util;
+package einstein.jmc.registration.family;
 
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.data.CakeModel;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.function.Consumer;

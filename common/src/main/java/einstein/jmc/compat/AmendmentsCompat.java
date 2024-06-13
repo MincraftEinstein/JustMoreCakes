@@ -1,8 +1,7 @@
 package einstein.jmc.compat;
 
-import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
-import einstein.jmc.block.cake.BaseTwoTieredCakeBlock;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.util.CakeUtil;
 import net.mehvahdjukaar.amendments.common.CakeRegistry;
 import net.mehvahdjukaar.amendments.common.block.DirectionalCakeBlock;
 import net.mehvahdjukaar.amendments.common.block.DoubleCakeBlock;
@@ -26,12 +25,12 @@ public class AmendmentsCompat {
 
         if (block instanceof DoubleCakeBlock doubleCake) {
             if (doubleCake.type.equals(CakeRegistry.VANILLA)) {
-                return BaseThreeTieredCakeBlock.convertTo(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack);
+                return CakeUtil.convertToThreeTiered(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack);
             }
         }
         else if (block instanceof DirectionalCakeBlock directionalCake) {
             if (directionalCake.type.equals(CakeRegistry.VANILLA)) {
-                return BaseTwoTieredCakeBlock.convertTo(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack);
+                return CakeUtil.convertToTwoTiered(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack);
             }
         }
 

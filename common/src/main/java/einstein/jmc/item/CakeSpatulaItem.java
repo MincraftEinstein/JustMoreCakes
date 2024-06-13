@@ -1,9 +1,9 @@
 package einstein.jmc.item;
 
-import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
 import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
+import einstein.jmc.util.CakeUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -40,13 +40,13 @@ public class CakeSpatulaItem extends Item {
             ItemStack stack = context.getItemInHand();
             Block block = state.getBlock();
             if (state.is(ModBlockTags.CAKE_SPATULA_USABLE)) {
-                if (!BaseCakeBlock.isUneaten(state, pos, level)) {
+                if (!CakeUtil.isUneaten(state, pos, level)) {
                     return InteractionResult.PASS;
                 }
 
                 if (!level.isClientSide) {
                     if (block instanceof BaseThreeTieredCakeBlock || block instanceof BaseThreeTieredCandleCakeBlock) {
-                        BaseThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, stack, !player.isCreative());
+                        CakeUtil.destroyOppositeHalf(state, pos, level, stack, !player.isCreative());
                     }
 
                     // Can't drop resources here because a tool needs to be provided to the loot table

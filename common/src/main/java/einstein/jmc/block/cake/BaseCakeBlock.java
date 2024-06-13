@@ -1,6 +1,8 @@
 package einstein.jmc.block.cake;
 
 import einstein.jmc.JustMoreCakes;
+import einstein.jmc.registration.family.CakeFamily;
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.data.SerializableMobEffectInstance;
@@ -9,10 +11,7 @@ import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.init.ModCommonConfigs;
 import einstein.jmc.platform.Services;
-import einstein.jmc.util.CakeFamily;
-import einstein.jmc.util.CakeVariant;
-import einstein.jmc.util.CakeVariantType;
-import einstein.jmc.util.Util;
+import einstein.jmc.util.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustColorTransitionOptions;
@@ -33,11 +32,13 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CandleBlock;
+import net.minecraft.world.level.block.SculkSensorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.SculkSensorPhase;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -53,8 +54,6 @@ import static einstein.jmc.util.Util.applyEffectFromInstance;
 @SuppressWarnings("deprecation")
 public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
-    public static final int DEFAULT_NUTRITION = 2;
-    public static final float DEFAULT_SATURATION_MODIFIER = 0.1F;
     public static final IntegerProperty BITES = BlockStateProperties.BITES;
     protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[] {
             Block.box(1, 0, 1, 15, 8, 15),
@@ -104,7 +103,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         CakeFamily family = getFamily();
 
         if (allowsCandles) {
-            if (stack.is(ItemTags.CANDLES) && isUneaten(state, pos, level)) {
+            if (stack.is(ItemTags.CANDLES) && CakeUtil.isUneaten(state, pos, level)) {
                 Block block = Block.byItem(item);
                 if (block instanceof CandleBlock) {
                     if (!player.isCreative()) {
@@ -126,7 +125,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
         if (family != null && isBaseVariant()) {
             if (stack.is(family.getBaseCake().get().asItem())) {
-                if (BaseTwoTieredCakeBlock.convertTo(family, state, pos, level, player, stack).consumesAction()) {
+                if (CakeUtil.convertToTwoTiered(family, state, pos, level, player, stack).consumesAction()) {
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -195,16 +194,16 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
-        if (inFamily(state, ModBlocks.FIREY_CAKE_FAMILY)) {
+        if (CakeUtil.inFamily(state, ModBlocks.FIREY_CAKE_FAMILY)) {
             player.setSecondsOnFire(ModCommonConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
         }
-        else if (inFamily(state, ModBlocks.ICE_CAKE_FAMILY)) {
+        else if (CakeUtil.inFamily(state, ModBlocks.ICE_CAKE_FAMILY)) {
             player.clearFire();
         }
-        else if (inFamily(state, ModBlocks.CHORUS_CAKE_FAMILY)) {
+        else if (CakeUtil.inFamily(state, ModBlocks.CHORUS_CAKE_FAMILY)) {
             Util.teleportRandomly(player, ModCommonConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get());
         }
-        else if (inFamily(state, ModBlocks.ENDER_CAKE_FAMILY)) {
+        else if (CakeUtil.inFamily(state, ModBlocks.ENDER_CAKE_FAMILY)) {
             Util.teleportRandomly(player, ModCommonConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
             player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1, 1);
         }
@@ -229,7 +228,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return getComparatorOutput(state);
+        return CakeUtil.getComparatorOutput(state);
     }
 
     @Override
@@ -253,7 +252,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (inFamily(state, ModBlocks.ENDER_CAKE_FAMILY) && ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
+        if (CakeUtil.inFamily(state, ModBlocks.ENDER_CAKE_FAMILY) && ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
             for (int i = 0; i < 3; ++i) {
                 int xSign = random.nextInt(2) * 2 - 1;
                 int zSign = random.nextInt(2) * 2 - 1;
@@ -266,7 +265,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.addParticle(ParticleTypes.PORTAL, x, y, z, XSpeed, YSpeed, ZSpeed);
             }
         }
-        else if (inFamily(state, ModBlocks.REDSTONE_CAKE_FAMILY) && ModClientConfigs.REDSTONE_CAKE_PARTICLES.get()) {
+        else if (CakeUtil.inFamily(state, ModBlocks.REDSTONE_CAKE_FAMILY) && ModClientConfigs.REDSTONE_CAKE_PARTICLES.get()) {
             for (int i = 0; i < 2; ++i) {
                 double x = pos.getX() + random.nextDouble();
                 double y = pos.getY() + random.nextDouble() * 0.5D + 0.25D;
@@ -274,7 +273,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.addParticle(DustParticleOptions.REDSTONE, x, y, z, 0, 0, 0);
             }
         }
-        else if (inFamily(state, ModBlocks.LAVA_CAKE_FAMILY) && ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
+        else if (CakeUtil.inFamily(state, ModBlocks.LAVA_CAKE_FAMILY) && ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
             if (random.nextInt(10) == 0) {
                 double x = pos.getX() + random.nextDouble();
                 double y = pos.getY() + 1;
@@ -282,7 +281,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.addParticle(ParticleTypes.LAVA, x, y, z, 0, 0, 0);
             }
         }
-        else if (inFamily(state, ModBlocks.SCULK_CAKE_FAMILY)) {
+        else if (CakeUtil.inFamily(state, ModBlocks.SCULK_CAKE_FAMILY)) {
             if (SculkSensorBlock.getPhase(state) == SculkSensorPhase.ACTIVE) {
                 Direction direction = Direction.getRandom(random);
                 if (direction != Direction.UP && direction != Direction.DOWN) {
@@ -323,7 +322,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public boolean isBaseVariant() {
-        return variant.getType() == CakeVariantType.BASE;
+        return variant.getType() == CakeVariant.Type.BASE;
     }
 
     @Nullable
@@ -349,62 +348,13 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         if (variant != null) {
             return variant.getNutrition();
         }
-        return DEFAULT_NUTRITION;
+        return CakeUtil.DEFAULT_NUTRITION;
     }
 
     public float getSaturationModifier() {
         if (variant != null) {
             return variant.getSaturationModifier();
         }
-        return DEFAULT_SATURATION_MODIFIER;
-    }
-
-    public static boolean inFamily(BlockState state, CakeFamily family) {
-        Block block = state.getBlock();
-        return block.equals(family.getBaseCake().get()) || block.equals(family.getTwoTieredCake().get()) || block.equals(family.getThreeTieredCake().get());
-    }
-
-    public static boolean isUneaten(BlockState state, BlockPos pos, Level level) {
-        Block block = state.getBlock();
-        if (block instanceof BaseThreeTieredCakeBlock threeTieredCakeBlock) {
-            if (state.getValue(BaseThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
-                return isUneaten(state, threeTieredCakeBlock);
-            }
-
-            BlockState aboveState = level.getBlockState(pos.above());
-            if (aboveState.getBlock() instanceof BaseThreeTieredCakeBlock aboveThreeTieredCakeBlock
-                    && aboveState.getValue(BaseThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
-                return isUneaten(aboveState, aboveThreeTieredCakeBlock);
-            }
-            return false;
-        }
-        else if (block instanceof BaseCakeBlock cakeBlock && cakeBlock.hasBites()) {
-            return isUneaten(state, cakeBlock);
-        }
-        return !(block instanceof CakeBlock) || state.getValue(CakeBlock.BITES) == 0;
-    }
-
-    private static boolean isUneaten(BlockState state, BaseCakeBlock cakeBlock) {
-        return cakeBlock.getSlices() <= 0 || state.getValue(cakeBlock.getBites()) == 0;
-    }
-
-    public static int getComparatorOutput(BlockState state) {
-        if (state.getBlock() instanceof BaseCakeBlock cakeBlock) {
-            if (cakeBlock.hasBites()) {
-                return getMultipliedSignal(cakeBlock.isBaseVariant(), (cakeBlock.getSlices() + 1) - state.getValue(cakeBlock.getBites()));
-            }
-
-            CakeVariantType variant = cakeBlock.getVariant().getType();
-            return getMultipliedSignal(cakeBlock.isBaseVariant(), switch (variant) {
-                case BASE -> 7;
-                case TWO_TIERED -> 11;
-                case THREE_TIERED -> 16;
-            });
-        }
-        return 0;
-    }
-
-    public static int getMultipliedSignal(boolean isBaseVariant, int signal) {
-        return signal * (ModCommonConfigs.DOUBLE_BASE_CAKE_COMPARATOR_OUTPUT.get() && isBaseVariant ? 2 : 1);
+        return CakeUtil.DEFAULT_SATURATION_MODIFIER;
     }
 }

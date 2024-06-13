@@ -6,15 +6,22 @@ import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
-import einstein.jmc.util.CakeVariant;
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -103,6 +110,40 @@ public class JustMoreCakes {
             }
         }
         return InteractionResult.PASS;
+    }
+
+    public static void livingEntityJump(Entity entity) {
+        if (entity instanceof Player player) {
+            if (player.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
+                player.push(0, 0.15F, 0);
+            }
+        }
+    }
+
+    public static void livingEntityTick(Level level, LivingEntity entity) {
+        RandomSource random = entity.getRandom();
+        if (entity.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
+            if (entity.verticalCollision && entity.onGround() && !entity.isSleeping()) {
+                float f = 0.65F;
+
+                if (entity.hasEffect(MobEffects.JUMP)) {
+                    f += 0.1F * (entity.getEffect(MobEffects.JUMP).getAmplifier() + 1);
+                }
+
+                entity.push(0, f, 0);
+                entity.playSound(SoundEvents.SLIME_SQUISH, 1, 1);
+
+                if (level.isClientSide) {
+                    for (int i = 0; i < 8; ++i) {
+                        float f1 = random.nextFloat() * ((float) Math.PI * 2F);
+                        float f2 = random.nextFloat() * 0.5F + 0.5F;
+                        float f3 = Mth.sin(f1) * 1 * 0.5F * f2;
+                        float f4 = Mth.cos(f1) * 1 * 0.5F * f2;
+                        level.addParticle(ParticleTypes.ITEM_SLIME, entity.getX() + f3, entity.getY(), entity.getZ() + f4, 0, 0, 0);
+                    }
+                }
+            }
+        }
     }
 
     public static ResourceLocation loc(String string) {

@@ -2,6 +2,7 @@ package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.loot.AddItemLootModifier;
+import einstein.jmc.util.CakeUtil;
 import einstein.jmc.util.Util;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -21,7 +22,7 @@ public class ModLootModifiersProvider extends GlobalLootModifierProvider {
 
     @Override
     protected void start() {
-        List<Block> cakes = new ArrayList<>(Util.getVanillaCandleCakes());
+        List<Block> cakes = new ArrayList<>(CakeUtil.getVanillaCandleCakes());
         cakes.add(Blocks.CAKE);
         for (Block cake : cakes) {
             add(Util.getBlockId(cake).getPath(), new AddItemLootModifier(new LootItemCondition[]{

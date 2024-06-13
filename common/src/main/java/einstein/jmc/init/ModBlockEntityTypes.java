@@ -3,7 +3,7 @@ package einstein.jmc.init;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.entity.*;
 import einstein.jmc.util.BlockEntitySupplier;
-import einstein.jmc.util.DefaultCakeFamily;
+import einstein.jmc.registration.family.DefaultCakeFamily;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;

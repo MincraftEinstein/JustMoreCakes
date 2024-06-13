@@ -6,7 +6,7 @@ import commonnetwork.networking.data.Side;
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.data.effects.CakeEffectsManager;
-import einstein.jmc.util.CakeFamily;
+import einstein.jmc.registration.family.CakeFamily;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

@@ -3,6 +3,7 @@ package einstein.jmc.block.cake.candle;
 import com.google.common.collect.ImmutableList;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
+import einstein.jmc.util.CakeUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -93,13 +94,13 @@ public class BaseThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     protected BlockState createLowerState() {
-        return BaseThreeTieredCakeBlock.createLowerState(getParentCake(), true);
+        return CakeUtil.createLowerState(getParentCake(), true);
     }
 
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide()) {
-            BaseThreeTieredCakeBlock.destroyOppositeHalf(state, pos, level, ItemStack.EMPTY, !player.isCreative());
+            CakeUtil.destroyOppositeHalf(state, pos, level, ItemStack.EMPTY, !player.isCreative());
         }
 
         super.playerWillDestroy(level, pos, state, player);

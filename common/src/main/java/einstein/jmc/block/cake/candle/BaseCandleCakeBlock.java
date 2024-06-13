@@ -2,6 +2,7 @@ package einstein.jmc.block.cake.candle;
 
 import com.google.common.collect.ImmutableList;
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.util.CakeUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -107,7 +108,7 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return BaseCakeBlock.getComparatorOutput(parentCake.defaultBlockState());
+        return CakeUtil.getComparatorOutput(parentCake.defaultBlockState());
     }
 
     @Override

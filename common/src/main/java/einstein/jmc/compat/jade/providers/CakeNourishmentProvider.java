@@ -4,7 +4,7 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.compat.jade.ModJadePlugin;
 import einstein.jmc.compat.jade.elements.FoodPointsSpriteElement;
-import einstein.jmc.util.Util;
+import einstein.jmc.util.CakeUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -31,7 +31,7 @@ public class CakeNourishmentProvider implements IBlockComponentProvider {
             BaseCakeBlock parentCake = candleCake.getParentCake();
             addNourishmentInfo(tooltip, config, parentCake.getSlices() + 1, parentCake.getNutrition(), parentCake.getSaturationModifier());
         }
-        else if (block == Blocks.CAKE || Util.getVanillaCandleCakes().contains(block)) {
+        else if (block == Blocks.CAKE || CakeUtil.getVanillaCandleCakes().contains(block)) {
             addNourishmentInfo(tooltip, config, 7, 2, 0.1F);
         }
     }

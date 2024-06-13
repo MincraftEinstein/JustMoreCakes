@@ -1,5 +1,6 @@
-package einstein.jmc.util;
+package einstein.jmc.registration;
 
+import einstein.jmc.registration.family.CakeFamily;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
 import einstein.jmc.block.cake.BaseTwoTieredCakeBlock;
@@ -8,13 +9,12 @@ import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseTwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.platform.Services;
-import net.minecraft.Util;
-import net.minecraft.resources.ResourceLocation;
+import einstein.jmc.data.CakeModel;
+import einstein.jmc.util.CakeUtil;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,42 +22,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static einstein.jmc.JustMoreCakes.mcLoc;
-
 public class CakeVariant {
 
     public static final Map<Supplier<BaseCakeBlock>, CakeVariant> VARIANT_BY_CAKE = new HashMap<>();
-    public static final Map<Block, ResourceLocation> SUPPORTED_CANDLES = Util.make(new HashMap<>(), map -> {
-        // Not using a for loop to prevent modded colors from being added,
-        // the main reason for this is so unsupported candles won't create candle cakes with missing assets
-        map.put(Blocks.CANDLE, mcLoc(""));
-        map.put(Blocks.WHITE_CANDLE, mcLoc("white_"));
-        map.put(Blocks.ORANGE_CANDLE, mcLoc("orange_"));
-        map.put(Blocks.MAGENTA_CANDLE, mcLoc("magenta_"));
-        map.put(Blocks.LIGHT_BLUE_CANDLE, mcLoc("light_blue_"));
-        map.put(Blocks.YELLOW_CANDLE, mcLoc("yellow_"));
-        map.put(Blocks.LIME_CANDLE, mcLoc("lime_"));
-        map.put(Blocks.PINK_CANDLE, mcLoc("pink_"));
-        map.put(Blocks.GRAY_CANDLE, mcLoc("gray_"));
-        map.put(Blocks.LIGHT_GRAY_CANDLE, mcLoc("light_gray_"));
-        map.put(Blocks.CYAN_CANDLE, mcLoc("cyan_"));
-        map.put(Blocks.PURPLE_CANDLE, mcLoc("purple_"));
-        map.put(Blocks.BLUE_CANDLE, mcLoc("blue_"));
-        map.put(Blocks.BROWN_CANDLE, mcLoc("brown_"));
-        map.put(Blocks.GREEN_CANDLE, mcLoc("green_"));
-        map.put(Blocks.RED_CANDLE, mcLoc("red_"));
-        map.put(Blocks.BLACK_CANDLE, mcLoc("black_"));
-    });
 
     private final String cakeName;
-    private final CakeVariantType type;
+    private final Type type;
     private final Map<Block, Supplier<BaseCandleCakeBlock>> candleCakeByCandle = new HashMap<>();
     private boolean canAlwaysEat;
     private boolean allowsCandles = true;
     private boolean noItem = false;
     private boolean customItemModel;
-    private int nutrition = BaseCakeBlock.DEFAULT_NUTRITION;
-    private float saturationModifier = BaseCakeBlock.DEFAULT_SATURATION_MODIFIER;
+    private int nutrition = CakeUtil.DEFAULT_NUTRITION;
+    private float saturationModifier = CakeUtil.DEFAULT_SATURATION_MODIFIER;
     private BlockBehaviour.Properties cakeProperties;
     private BlockBehaviour.Properties candleCakeProperties;
     private CakeModel cakeModel = CakeModel.DEFAULT;
@@ -66,16 +43,16 @@ public class CakeVariant {
     private Supplier<BaseCakeBlock> cake;
     private Supplier<Item> item = () -> Items.AIR;
 
-    private CakeVariant(String cakeName, CakeVariantType type) {
+    private CakeVariant(String cakeName, Type type) {
         this.cakeName = cakeName;
         this.type = type;
     }
 
     public static Builder create(String cakeName) {
-        return create(cakeName, CakeVariantType.BASE);
+        return create(cakeName, Type.BASE);
     }
 
-    public static Builder create(String cakeName, CakeVariantType type) {
+    public static Builder create(String cakeName, Type type) {
         return new Builder(cakeName, type);
     }
 
@@ -83,7 +60,7 @@ public class CakeVariant {
         return cakeName;
     }
 
-    public CakeVariantType getType() {
+    public Type getType() {
         return type;
     }
 
@@ -146,7 +123,7 @@ public class CakeVariant {
         private CakeClazzSupplier<?> cakeClazz;
         private CandleCakeClazzSupplier<?> candleCakeClazz;
 
-        private Builder(String cakeName, CakeVariantType type) {
+        private Builder(String cakeName, Type type) {
             variant = new CakeVariant(cakeName, type);
         }
 
@@ -216,7 +193,7 @@ public class CakeVariant {
             return this;
         }
 
-        Builder setFamily(CakeFamily family) {
+        public Builder setFamily(CakeFamily family) {
             variant.family = family;
             return this;
         }
@@ -234,7 +211,7 @@ public class CakeVariant {
                 variant.cakeProperties = ModBlocks.cakeProperties();
             }
 
-            Supplier<BaseCakeBlock> cake = Services.REGISTRY.registerBlockNoItem(variant.cakeName, () -> cakeClazz.get(variant));
+            Supplier<BaseCakeBlock> cake = Services.REGISTRY.registerBlockNoItem(variant.cakeName, () -> cakeClazz.create(variant));
 
             if (variant.hasItem()) {
                 variant.item = Services.REGISTRY.registerItem(variant.cakeName, () -> new BlockItem(cake.get(), new Item.Properties()));
@@ -253,9 +230,9 @@ public class CakeVariant {
                     variant.candleCakeProperties = ModBlocks.candleCakeProperties();
                 }
 
-                for (Block candle : SUPPORTED_CANDLES.keySet()) {
-                    String type = SUPPORTED_CANDLES.get(candle).getPath();
-                    Supplier<BaseCandleCakeBlock> candleCake = Services.REGISTRY.registerBlockNoItem(type + "candle_" + variant.cakeName, () -> candleCakeClazz.get(cake.get(), candle, variant.candleCakeProperties));
+                for (Block candle : CakeUtil.SUPPORTED_CANDLES.keySet()) {
+                    String type = CakeUtil.SUPPORTED_CANDLES.get(candle).getPath();
+                    Supplier<BaseCandleCakeBlock> candleCake = Services.REGISTRY.registerBlockNoItem(type + "candle_" + variant.cakeName, () -> candleCakeClazz.create(cake.get(), candle, variant.candleCakeProperties));
                     variant.candleCakeByCandle.put(candle, candleCake);
                 }
             }
@@ -269,12 +246,18 @@ public class CakeVariant {
     @FunctionalInterface
     public interface CakeClazzSupplier<T extends BaseCakeBlock> {
 
-        T get(CakeVariant variant);
+        T create(CakeVariant variant);
     }
 
     @FunctionalInterface
     public interface CandleCakeClazzSupplier<T extends BaseCandleCakeBlock> {
 
-        T get(BaseCakeBlock parentCake, Block candle, BlockBehaviour.Properties properties);
+        T create(BaseCakeBlock parentCake, Block candle, BlockBehaviour.Properties properties);
+    }
+
+    public enum Type {
+        BASE,
+        TWO_TIERED,
+        THREE_TIERED
     }
 }

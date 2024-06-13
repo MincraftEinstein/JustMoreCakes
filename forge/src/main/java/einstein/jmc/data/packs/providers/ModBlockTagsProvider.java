@@ -5,8 +5,8 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.util.CakeVariant;
-import einstein.jmc.util.CakeVariantType;
+import einstein.jmc.util.CakeUtil;
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -42,7 +42,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         Map<Supplier<BaseCakeBlock>, CakeVariant> sortedCakes = Util.createValueSortedMap(CakeVariant.VARIANT_BY_CAKE, Comparator.comparing(CakeVariant::getCakeName));
 
         sortedCakes.forEach((cake, variant) -> {
-            CakeVariantType variantType = variant.getType();
+            CakeVariant.Type variantType = variant.getType();
 
             switch (variantType) {
                 case BASE -> tag(ModBlockTags.BASE_CAKES).add(cake.get());
@@ -67,7 +67,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(F_CAKES).addTag(ModBlockTags.CAKES);
         tag(F_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         tag(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE).addTag(F_CAKES).addTag(F_CANDLE_CAKES);
-        Util.getVanillaCandleCakes().forEach(cake -> tag(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
+        CakeUtil.getVanillaCandleCakes().forEach(cake -> tag(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
         tag(ModBlockTags.CAKE_STAND_STORABLES).add(Blocks.CAKE).addTag(ModBlockTags.BASE_CAKES);
         tag(BlockTags.CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
     }

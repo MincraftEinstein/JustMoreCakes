@@ -2,7 +2,7 @@ package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.util.CakeVariant;
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;

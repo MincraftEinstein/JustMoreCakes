@@ -9,9 +9,8 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.util.CakeModel;
-import einstein.jmc.util.CakeVariant;
-import einstein.jmc.util.CakeVariantType;
+import einstein.jmc.data.CakeModel;
+import einstein.jmc.registration.CakeVariant;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -33,7 +32,7 @@ import java.util.Optional;
 
 import static einstein.jmc.JustMoreCakes.loc;
 import static einstein.jmc.JustMoreCakes.mcLoc;
-import static einstein.jmc.util.CakeVariant.SUPPORTED_CANDLES;
+import static einstein.jmc.util.CakeUtil.SUPPORTED_CANDLES;
 import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER;
@@ -83,7 +82,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             BaseCakeBlock cakeBlock = cake.get();
-            CakeVariantType variantType = variant.getType();
+            CakeVariant.Type variantType = variant.getType();
             CakeModel cakeModel = variant.getCakeModel();
             CakeModel candleCakeModel = variant.getCandleCakeModel();
             String cakeName = variant.getCakeName();

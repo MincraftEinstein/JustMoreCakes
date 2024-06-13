@@ -1,6 +1,6 @@
 package einstein.jmc.mixin;
 
-import einstein.jmc.util.Util;
+import einstein.jmc.JustMoreCakes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,11 +19,11 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(at = @At("HEAD"), method = "tick()V")
     public void tick(CallbackInfo info) {
-        Util.livingEntityTick(level(), (LivingEntity) (Object) this);
+        JustMoreCakes.livingEntityTick(level(), (LivingEntity) (Object) this);
     }
 
     @Inject(at = @At("RETURN"), method = "jumpFromGround()V")
     public void jumpFromGround(CallbackInfo info) {
-        Util.livingEntityJump((LivingEntity) (Object) this);
+        JustMoreCakes.livingEntityJump((LivingEntity) (Object) this);
     }
 }

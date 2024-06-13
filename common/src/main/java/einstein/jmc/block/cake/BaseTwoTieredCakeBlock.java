@@ -1,10 +1,9 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.util.CakeVariant;
-import einstein.jmc.util.CakeFamily;
+import einstein.jmc.registration.family.CakeFamily;
+import einstein.jmc.util.CakeUtil;
+import einstein.jmc.registration.CakeVariant;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -13,7 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -62,30 +60,11 @@ public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
 
         if (family != null) {
             if (stack.is(family.getBaseCake().get().asItem())) {
-                if (BaseThreeTieredCakeBlock.convertTo(family, state, pos, level, player, stack).consumesAction()) {
+                if (CakeUtil.convertToThreeTiered(family, state, pos, level, player, stack).consumesAction()) {
                     return InteractionResult.SUCCESS;
                 }
             }
         }
         return super.use(state, level, pos, player, hand, hitResult);
-    }
-
-    public static InteractionResult convertTo(CakeFamily family, BlockState state, BlockPos pos, Level level, Player player, ItemStack stack) {
-        if (isUneaten(state, pos, level)) {
-            BlockState newState = family.getTwoTieredCake().get().defaultBlockState();
-
-            level.setBlockAndUpdate(pos, newState);
-            pushEntitiesUp(state, newState, level, pos);
-            level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-            level.playSound(null, pos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);
-            player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
-
-            if (!player.isCreative()) {
-                stack.shrink(1);
-            }
-
-            return InteractionResult.SUCCESS;
-        }
-        return InteractionResult.PASS;
     }
 }

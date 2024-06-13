@@ -7,7 +7,7 @@ import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.FabricCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
-import einstein.jmc.util.CakeFamily;
+import einstein.jmc.registration.family.CakeFamily;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
@@ -33,7 +33,7 @@ import net.minecraftforge.fml.config.ModConfig;
 
 import static einstein.jmc.JustMoreCakes.*;
 import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
-import static einstein.jmc.util.Util.getVanillaCandleCakes;
+import static einstein.jmc.util.CakeUtil.getVanillaCandleCakes;
 
 public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer, DataGeneratorEntrypoint {
 

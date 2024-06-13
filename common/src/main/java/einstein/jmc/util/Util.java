@@ -1,7 +1,5 @@
 package einstein.jmc.util;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -9,7 +7,6 @@ import com.mojang.datafixers.util.Pair;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
 import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.init.ModPotions;
 import einstein.jmc.mixin.RecipeManagerAccessor;
 import einstein.jmc.mixin.StructureTemplatePoolAccessor;
 import einstein.jmc.platform.Services;
@@ -21,20 +18,14 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.ProcessorLists;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -67,25 +58,6 @@ public class Util {
     public static final Gson GSON = new GsonBuilder().create();
     public static final Random RANDOM = new Random();
     public static final Supplier<LootItemCondition.Builder> HAS_CAKE_SPATULA = () -> MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModItems.CAKE_SPATULA.get()));
-    public static final ImmutableMap<Block, Block> VANILLA_CANDLE_CAKES_BY_CANDLE = new ImmutableMap.Builder<Block, Block>()
-            .put(Blocks.CANDLE, Blocks.CANDLE_CAKE)
-            .put(Blocks.WHITE_CANDLE, Blocks.WHITE_CANDLE_CAKE)
-            .put(Blocks.ORANGE_CANDLE, Blocks.ORANGE_CANDLE_CAKE)
-            .put(Blocks.MAGENTA_CANDLE, Blocks.MAGENTA_CANDLE_CAKE)
-            .put(Blocks.LIGHT_BLUE_CANDLE, Blocks.LIGHT_BLUE_CANDLE_CAKE)
-            .put(Blocks.YELLOW_CANDLE, Blocks.YELLOW_CANDLE_CAKE)
-            .put(Blocks.LIME_CANDLE, Blocks.LIME_CANDLE_CAKE)
-            .put(Blocks.PINK_CANDLE, Blocks.PINK_CANDLE_CAKE)
-            .put(Blocks.GRAY_CANDLE, Blocks.GRAY_CANDLE_CAKE)
-            .put(Blocks.LIGHT_GRAY_CANDLE, Blocks.LIGHT_GRAY_CANDLE_CAKE)
-            .put(Blocks.CYAN_CANDLE, Blocks.CYAN_CANDLE_CAKE)
-            .put(Blocks.PURPLE_CANDLE, Blocks.PURPLE_CANDLE_CAKE)
-            .put(Blocks.BLUE_CANDLE, Blocks.BLUE_CANDLE_CAKE)
-            .put(Blocks.BROWN_CANDLE, Blocks.BROWN_CANDLE_CAKE)
-            .put(Blocks.GREEN_CANDLE, Blocks.GREEN_CANDLE_CAKE)
-            .put(Blocks.RED_CANDLE, Blocks.RED_CANDLE_CAKE)
-            .put(Blocks.BLACK_CANDLE, Blocks.BLACK_CANDLE_CAKE)
-            .buildOrThrow();
 
     public static <T extends Item> ResourceLocation getItemId(T item) {
         return BuiltInRegistries.ITEM.getKey(item);
@@ -142,7 +114,7 @@ public class Util {
         }
 
         if (weight > 150) {
-            LOGGER.error("Failed to register village building: " + path + " - weight must be less than 150");
+            LOGGER.error("Failed to register village building: {} - weight must be less than 150", path);
             return;
         }
 
@@ -153,7 +125,7 @@ public class Util {
         StructureTemplatePool templatePool = templatePoolRegistry.get(mcLoc("village/" + biome + "/houses"));
 
         if (templatePool == null) {
-            LOGGER.warn("Failed to register village building: " + path + "  - template pool is null");
+            LOGGER.warn("Failed to register village building: {}  - template pool is null", path);
             return;
         }
 
@@ -167,40 +139,6 @@ public class Util {
         List<Pair<StructurePoolElement, Integer>> rawTemplates = new ArrayList<>(templateAccessor.getRawTemplates());
         rawTemplates.add(Pair.of(structure, weight));
         templateAccessor.setRawTemplates(rawTemplates);
-    }
-
-    public static void livingEntityJump(Entity entity) {
-        if (entity instanceof Player player) {
-            if (player.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
-                player.push(0, 0.15F, 0);
-            }
-        }
-    }
-
-    public static void livingEntityTick(Level level, LivingEntity entity) {
-        RandomSource random = entity.getRandom();
-        if (entity.hasEffect(ModPotions.BOUNCING_EFFECT.get())) {
-            if (entity.verticalCollision && entity.onGround() && !entity.isSleeping()) {
-                float f = 0.65F;
-
-                if (entity.hasEffect(MobEffects.JUMP)) {
-                    f += 0.1F * (entity.getEffect(MobEffects.JUMP).getAmplifier() + 1);
-                }
-
-                entity.push(0, f, 0);
-                entity.playSound(SoundEvents.SLIME_SQUISH, 1, 1);
-
-                if (level.isClientSide) {
-                    for (int i = 0; i < 8; ++i) {
-                        float f1 = random.nextFloat() * ((float) Math.PI * 2F);
-                        float f2 = random.nextFloat() * 0.5F + 0.5F;
-                        float f3 = Mth.sin(f1) * 1 * 0.5F * f2;
-                        float f4 = Mth.cos(f1) * 1 * 0.5F * f2;
-                        level.addParticle(ParticleTypes.ITEM_SLIME, entity.getX() + f3, entity.getY(), entity.getZ() + f4, 0, 0, 0);
-                    }
-                }
-            }
-        }
     }
 
     public static <K, V> Map<K, V> createKeySortedMap(Map<K, V> map, Comparator<K> comparator) {
@@ -237,10 +175,6 @@ public class Util {
         return builder.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                 .setProperties(StatePropertiesPredicate.Builder.properties()
                         .hasProperty(BaseThreeTieredCakeBlock.HALF, DoubleBlockHalf.UPPER)));
-    }
-
-    public static ImmutableList<Block> getVanillaCandleCakes() {
-        return VANILLA_CANDLE_CAKES_BY_CANDLE.values().asList();
     }
 
     public static void removeRecipe(RecipeManager recipeManager, RecipeType<?> type, ResourceLocation id) {

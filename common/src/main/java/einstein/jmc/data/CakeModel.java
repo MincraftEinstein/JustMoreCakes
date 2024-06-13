@@ -1,4 +1,4 @@
-package einstein.jmc.util;
+package einstein.jmc.data;
 
 import net.minecraft.resources.ResourceLocation;
 

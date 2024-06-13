@@ -1,8 +1,11 @@
-package einstein.jmc.util;
+package einstein.jmc.registration.family;
 
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.effects.CakeEffects;
+import einstein.jmc.data.CakeModel;
+import einstein.jmc.util.CakeUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -27,8 +30,8 @@ public abstract class CakeFamily implements CakeEffectsHolder {
     protected Supplier<BaseCakeBlock> baseCake;
     protected Supplier<BaseCakeBlock> twoTieredCake;
     protected Supplier<BaseCakeBlock> threeTieredCake;
-    protected int nutrition = BaseCakeBlock.DEFAULT_NUTRITION;
-    protected float saturationModifier = BaseCakeBlock.DEFAULT_SATURATION_MODIFIER;
+    protected int nutrition = CakeUtil.DEFAULT_NUTRITION;
+    protected float saturationModifier = CakeUtil.DEFAULT_SATURATION_MODIFIER;
     protected boolean canAlwaysEat;
     protected CakeModel cakeModel = CakeModel.DEFAULT;
     protected CakeModel candleCakeModel = CakeModel.DEFAULT;
@@ -128,8 +131,8 @@ public abstract class CakeFamily implements CakeEffectsHolder {
         protected Builder(T family) {
             this.family = family;
             baseVariantBuilder = CakeVariant.create(family.getBaseCakeName()).setFamily(family);
-            twoTieredVariantBuilder = CakeVariant.create("two_tiered_" + family.getBaseCakeName(), CakeVariantType.TWO_TIERED).setFamily(family);
-            threeTieredVariantBuilder = CakeVariant.create("three_tiered_" + family.getBaseCakeName(), CakeVariantType.THREE_TIERED).setFamily(family);
+            twoTieredVariantBuilder = CakeVariant.create("two_tiered_" + family.getBaseCakeName(), CakeVariant.Type.TWO_TIERED).setFamily(family);
+            threeTieredVariantBuilder = CakeVariant.create("three_tiered_" + family.getBaseCakeName(), CakeVariant.Type.THREE_TIERED).setFamily(family);
         }
 
         public T build() {

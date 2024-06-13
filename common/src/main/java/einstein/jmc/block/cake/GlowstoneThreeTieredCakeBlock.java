@@ -1,7 +1,7 @@
 package einstein.jmc.block.cake;
 
 import einstein.jmc.block.entity.GlowstoneCakeBlockEntity;
-import einstein.jmc.util.CakeVariant;
+import einstein.jmc.registration.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.EntityBlock;

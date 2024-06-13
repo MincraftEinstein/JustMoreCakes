@@ -2,7 +2,7 @@ package einstein.jmc.data.packs;
 
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.util.CakeFamily;
+import einstein.jmc.registration.family.CakeFamily;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;

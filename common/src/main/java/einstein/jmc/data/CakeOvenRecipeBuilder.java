@@ -3,7 +3,7 @@ package einstein.jmc.data;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import einstein.jmc.init.ModRecipes;
-import einstein.jmc.util.CakeFamily;
+import einstein.jmc.registration.family.CakeFamily;
 import einstein.jmc.util.CakeOvenConstants;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.Advancement;

@@ -10,7 +10,7 @@ import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import einstein.jmc.compat.jade.providers.*;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModServerConfigs;
-import einstein.jmc.util.Util;
+import einstein.jmc.util.CakeUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -104,7 +104,7 @@ public class ModJadePlugin implements IWailaPlugin {
                         return registration.blockAccessor()
                                 .from(blockAccessor)
                                 .blockEntity(() -> null)
-                                .blockState(Util.VANILLA_CANDLE_CAKES_BY_CANDLE.get(((BaseCandleCakeBlock) block).getCandle()).defaultBlockState().setValue(CandleCakeBlock.LIT, state.getValue(BaseCandleCakeBlock.LIT)))
+                                .blockState(CakeUtil.VANILLA_CANDLE_CAKES_BY_CANDLE.get(((BaseCandleCakeBlock) block).getCandle()).defaultBlockState().setValue(CandleCakeBlock.LIT, state.getValue(BaseCandleCakeBlock.LIT)))
                                 .build();
                     }
                 }

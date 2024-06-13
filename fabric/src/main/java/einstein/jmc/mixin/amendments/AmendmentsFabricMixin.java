@@ -1,7 +1,7 @@
 package einstein.jmc.mixin.amendments;
 
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.util.CakeFamily;
+import einstein.jmc.registration.family.CakeFamily;
 import net.mehvahdjukaar.amendments.Amendments;
 import net.mehvahdjukaar.amendments.fabric.AmendmentsFabric;
 import net.minecraft.resources.ResourceLocation;

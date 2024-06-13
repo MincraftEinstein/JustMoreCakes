@@ -2,11 +2,10 @@ package einstein.jmc.mixin;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
-import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.block.cake.BaseTwoTieredCakeBlock;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.data.SerializableMobEffectInstance;
+import einstein.jmc.util.CakeUtil;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -53,7 +52,7 @@ public class CakeBlockMixin implements CakeEffectsHolder {
 
         if (justMoreCakes$me.equals(Blocks.CAKE)) {  // Need to check that this is the default cake, so that things won't break with inheritance
             if (stack.is(Items.CAKE)) {
-                if (BaseTwoTieredCakeBlock.convertTo(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack).consumesAction()) {
+                if (CakeUtil.convertToTwoTiered(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack).consumesAction()) {
                     cir.setReturnValue(InteractionResult.SUCCESS);
                 }
             }
@@ -77,7 +76,7 @@ public class CakeBlockMixin implements CakeEffectsHolder {
 
     @Inject(method = "getAnalogOutputSignal", at = @At("HEAD"), cancellable = true)
     private void getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(BaseCakeBlock.getMultipliedSignal(true, 7));
+        cir.setReturnValue(CakeUtil.getMultipliedSignal(true, 7));
     }
 
     @Nullable

@@ -2,7 +2,7 @@ package einstein.jmc.block.cake;
 
 import einstein.jmc.block.entity.TNTCakeBlockEntity;
 import einstein.jmc.init.ModCommonConfigs;
-import einstein.jmc.util.CakeVariant;
+import einstein.jmc.registration.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;

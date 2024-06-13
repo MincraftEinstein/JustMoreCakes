@@ -4,7 +4,7 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.advancement.criterian.CakeEatenTrigger;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.util.CakeVariant;
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;

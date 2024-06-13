@@ -6,7 +6,7 @@ import com.mojang.serialization.JsonOps;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.data.effects.CakeEffectsManager;
-import einstein.jmc.util.CakeFamily;
+import einstein.jmc.registration.family.CakeFamily;
 import einstein.jmc.util.Util;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;

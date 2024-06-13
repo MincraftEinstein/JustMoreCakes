@@ -9,9 +9,8 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseTwoTieredCandleCakeBlock;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.util.CakeVariant;
-import einstein.jmc.util.CakeModel;
-import einstein.jmc.util.CakeVariantType;
+import einstein.jmc.registration.CakeVariant;
+import einstein.jmc.data.CakeModel;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.AbstractCandleBlock;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static einstein.jmc.util.CakeVariant.SUPPORTED_CANDLES;
+import static einstein.jmc.util.CakeUtil.SUPPORTED_CANDLES;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER;
 
@@ -41,7 +40,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             BaseCakeBlock cakeBlock = cake.get();
-            CakeVariantType variantType = variant.getType();
+            CakeVariant.Type variantType = variant.getType();
             CakeModel cakeModel = variant.getCakeModel();
             CakeModel candleCakeModel = variant.getCandleCakeModel();
             String cakeName = variant.getCakeName();
