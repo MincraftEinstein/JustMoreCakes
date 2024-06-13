@@ -120,26 +120,26 @@ public class CakeVariant {
     public static class Builder {
 
         private final CakeVariant variant;
-        private CakeClazzSupplier<?> cakeClazz;
-        private CandleCakeClazzSupplier<?> candleCakeClazz;
+        private CakeSupplier<?> cakeSupplier;
+        private CandleCakeSupplier<?> candleCakeSupplier;
 
         private Builder(String cakeName, Type type) {
             variant = new CakeVariant(cakeName, type);
         }
 
-        public <T extends BaseCakeBlock> Builder cakeClass(CakeClazzSupplier<T> clazz) {
-            cakeClazz = clazz;
+        public <T extends BaseCakeBlock> Builder cakeSupplier(CakeSupplier<T> supplier) {
+            cakeSupplier = supplier;
             return this;
         }
 
-        public <T extends BaseCandleCakeBlock> Builder candleCakeClass(CandleCakeClazzSupplier<T> clazz) {
-            candleCakeClazz = clazz;
+        public <T extends BaseCandleCakeBlock> Builder candleCakeSupplier(CandleCakeSupplier<T> supplier) {
+            candleCakeSupplier = supplier;
             return this;
         }
 
-        public <T extends BaseCakeBlock, V extends BaseCandleCakeBlock> Builder bothClasses(CakeClazzSupplier<T> cakeClazz, CandleCakeClazzSupplier<V> candleCakeClazz) {
-            this.cakeClazz = cakeClazz;
-            this.candleCakeClazz = candleCakeClazz;
+        public <T extends BaseCakeBlock, V extends BaseCandleCakeBlock> Builder bothSuppliers(CakeSupplier<T> cakeSupplier, CandleCakeSupplier<V> candleCakeSupplier) {
+            this.cakeSupplier = cakeSupplier;
+            this.candleCakeSupplier = candleCakeSupplier;
             return this;
         }
 
@@ -199,8 +199,8 @@ public class CakeVariant {
         }
 
         public CakeVariant build() {
-            if (cakeClazz == null) {
-                cakeClazz = switch (variant.type) {
+            if (cakeSupplier == null) {
+                cakeSupplier = switch (variant.type) {
                     case BASE -> BaseCakeBlock::new;
                     case TWO_TIERED -> BaseTwoTieredCakeBlock::new;
                     case THREE_TIERED -> BaseThreeTieredCakeBlock::new;
@@ -211,15 +211,15 @@ public class CakeVariant {
                 variant.cakeProperties = ModBlocks.cakeProperties();
             }
 
-            Supplier<BaseCakeBlock> cake = Services.REGISTRY.registerBlockNoItem(variant.cakeName, () -> cakeClazz.create(variant));
+            Supplier<BaseCakeBlock> cake = Services.REGISTRY.registerBlockNoItem(variant.cakeName, () -> cakeSupplier.create(variant));
 
             if (variant.hasItem()) {
                 variant.item = Services.REGISTRY.registerItem(variant.cakeName, () -> new BlockItem(cake.get(), new Item.Properties()));
             }
 
             if (variant.allowsCandles) {
-                if (candleCakeClazz == null) {
-                    candleCakeClazz = switch (variant.type) {
+                if (candleCakeSupplier == null) {
+                    candleCakeSupplier = switch (variant.type) {
                         case BASE -> BaseCandleCakeBlock::new;
                         case TWO_TIERED -> BaseTwoTieredCandleCakeBlock::new;
                         case THREE_TIERED -> BaseThreeTieredCandleCakeBlock::new;
@@ -232,7 +232,7 @@ public class CakeVariant {
 
                 for (Block candle : CakeUtil.SUPPORTED_CANDLES.keySet()) {
                     String type = CakeUtil.SUPPORTED_CANDLES.get(candle).getPath();
-                    Supplier<BaseCandleCakeBlock> candleCake = Services.REGISTRY.registerBlockNoItem(type + "candle_" + variant.cakeName, () -> candleCakeClazz.create(cake.get(), candle, variant.candleCakeProperties));
+                    Supplier<BaseCandleCakeBlock> candleCake = Services.REGISTRY.registerBlockNoItem(type + "candle_" + variant.cakeName, () -> candleCakeSupplier.create(cake.get(), candle, variant.candleCakeProperties));
                     variant.candleCakeByCandle.put(candle, candleCake);
                 }
             }
@@ -244,13 +244,13 @@ public class CakeVariant {
     }
 
     @FunctionalInterface
-    public interface CakeClazzSupplier<T extends BaseCakeBlock> {
+    public interface CakeSupplier<T extends BaseCakeBlock> {
 
         T create(CakeVariant variant);
     }
 
     @FunctionalInterface
-    public interface CandleCakeClazzSupplier<T extends BaseCandleCakeBlock> {
+    public interface CandleCakeSupplier<T extends BaseCandleCakeBlock> {
 
         T create(BaseCakeBlock parentCake, Block candle, BlockBehaviour.Properties properties);
     }
