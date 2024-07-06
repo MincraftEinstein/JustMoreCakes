@@ -1,0 +1,10 @@
+{
+  "effects": [
+    {
+      "amplifier": 0,
+      "duration": 600,
+      "mob_effect": "jmc:stealth"
+    }
+  ],
+  "family": "jmc:sculk"
+}

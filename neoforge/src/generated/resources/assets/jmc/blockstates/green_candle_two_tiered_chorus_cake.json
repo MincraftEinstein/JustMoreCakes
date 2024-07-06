@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/green_candle_two_tiered_chorus_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/green_candle_two_tiered_chorus_cake_lit"
+    }
+  }
+}

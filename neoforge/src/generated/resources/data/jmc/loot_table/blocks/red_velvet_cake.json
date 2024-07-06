@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "items": "jmc:cake_spatula"
+              }
+            }
+          ],
+          "name": "jmc:red_velvet_cake"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "jmc:blocks/red_velvet_cake"
+}

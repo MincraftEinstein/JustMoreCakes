@@ -1,0 +1,10 @@
+{
+  "effects": [
+    {
+      "amplifier": 1,
+      "duration": 300,
+      "mob_effect": "minecraft:levitation"
+    }
+  ],
+  "family": "jmc:chorus"
+}

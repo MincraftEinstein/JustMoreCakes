@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cross_three_tiered_cake_upper",
+  "textures": {
+    "bottom": "jmc:block/crimson_fungus_cake_bottom",
+    "cross": "minecraft:block/crimson_fungus",
+    "top": "jmc:block/crimson_fungus_cake_small_top",
+    "top_side": "jmc:block/crimson_fungus_cake_small_side"
+  }
+}

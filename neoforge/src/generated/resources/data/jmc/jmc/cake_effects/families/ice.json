@@ -1,0 +1,15 @@
+{
+  "effects": [
+    {
+      "amplifier": 0,
+      "duration": 2400,
+      "mob_effect": "minecraft:night_vision"
+    },
+    {
+      "amplifier": 0,
+      "duration": 0,
+      "mob_effect": "jmc:freezing"
+    }
+  ],
+  "family": "jmc:ice"
+}

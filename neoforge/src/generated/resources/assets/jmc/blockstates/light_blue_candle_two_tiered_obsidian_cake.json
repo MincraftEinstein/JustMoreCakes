@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/light_blue_candle_two_tiered_obsidian_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/light_blue_candle_two_tiered_obsidian_cake_lit"
+    }
+  }
+}

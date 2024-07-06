@@ -1,0 +1,43 @@
+{
+  "parent": "jmc:husbandry/craft_cake",
+  "criteria": {
+    "obsidian_cake_eaten": {
+      "conditions": {
+        "cake": "jmc:obsidian_cake"
+      },
+      "trigger": "jmc:cake_eaten"
+    },
+    "three_tiered_obsidian_cake_eaten": {
+      "conditions": {
+        "cake": "jmc:three_tiered_obsidian_cake"
+      },
+      "trigger": "jmc:cake_eaten"
+    },
+    "two_tiered_obsidian_cake_eaten": {
+      "conditions": {
+        "cake": "jmc:two_tiered_obsidian_cake"
+      },
+      "trigger": "jmc:cake_eaten"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.husbandry.jmc.eat_obsidian_cake.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "jmc:obsidian_cake"
+    },
+    "title": {
+      "translate": "advancements.husbandry.jmc.eat_obsidian_cake.title"
+    }
+  },
+  "requirements": [
+    [
+      "obsidian_cake_eaten",
+      "two_tiered_obsidian_cake_eaten",
+      "three_tiered_obsidian_cake_eaten"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

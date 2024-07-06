@@ -1,0 +1,109 @@
+{
+  "values": {
+    "jmc:apple_cake": {
+      "chance": 1.0
+    },
+    "jmc:beetroot_cake": {
+      "chance": 1.0
+    },
+    "jmc:brown_mushroom_cake": {
+      "chance": 1.0
+    },
+    "jmc:carrot_cake": {
+      "chance": 1.0
+    },
+    "jmc:cheesecake": {
+      "chance": 1.0
+    },
+    "jmc:chocolate_cake": {
+      "chance": 1.0
+    },
+    "jmc:chorus_cake": {
+      "chance": 1.0
+    },
+    "jmc:cookie_cake": {
+      "chance": 1.0
+    },
+    "jmc:cream_cheese": {
+      "chance": 0.65
+    },
+    "jmc:creeper_cake": {
+      "chance": 1.0
+    },
+    "jmc:crimson_fungus_cake": {
+      "chance": 1.0
+    },
+    "jmc:cupcake": {
+      "chance": 0.25
+    },
+    "jmc:ender_cake": {
+      "chance": 1.0
+    },
+    "jmc:firey_cake": {
+      "chance": 1.0
+    },
+    "jmc:glow_berry_cake": {
+      "chance": 1.0
+    },
+    "jmc:glowstone_cake": {
+      "chance": 1.0
+    },
+    "jmc:golden_apple_cake": {
+      "chance": 1.0
+    },
+    "jmc:honey_cake": {
+      "chance": 1.0
+    },
+    "jmc:ice_cake": {
+      "chance": 1.0
+    },
+    "jmc:lava_cake": {
+      "chance": 1.0
+    },
+    "jmc:melon_cake": {
+      "chance": 1.0
+    },
+    "jmc:obsidian_cake": {
+      "chance": 1.0
+    },
+    "jmc:poison_cake": {
+      "chance": 1.0
+    },
+    "jmc:pumpkin_cake": {
+      "chance": 1.0
+    },
+    "jmc:red_mushroom_cake": {
+      "chance": 1.0
+    },
+    "jmc:red_velvet_cake": {
+      "chance": 1.0
+    },
+    "jmc:redstone_cake": {
+      "chance": 1.0
+    },
+    "jmc:sculk_cake": {
+      "chance": 1.0
+    },
+    "jmc:seed_cake": {
+      "chance": 1.0
+    },
+    "jmc:slime_cake": {
+      "chance": 1.0
+    },
+    "jmc:sweet_berry_cake": {
+      "chance": 1.0
+    },
+    "jmc:three_tiered_cake": {
+      "chance": 1.0
+    },
+    "jmc:tnt_cake": {
+      "chance": 1.0
+    },
+    "jmc:two_tiered_cake": {
+      "chance": 1.0
+    },
+    "jmc:warped_fungus_cake": {
+      "chance": 1.0
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "jmc:block/template_cake",
+  "textures": {
+    "bottom": "jmc:block/beetroot_cake_bottom",
+    "side": "jmc:block/beetroot_cake_side",
+    "top": "jmc:block/beetroot_cake_top"
+  }
+}

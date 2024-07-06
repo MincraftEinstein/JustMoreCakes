@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/brown_candle_two_tiered_ender_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/brown_candle_two_tiered_ender_cake_lit"
+    }
+  }
+}

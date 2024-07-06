@@ -1,0 +1,7 @@
+{
+  "values": {
+    "jmc:cake_baker": {
+      "loot_table": "jmc:gameplay/hero_of_the_village/cake_baker_gift"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_three_tiered_cake_upper_slice2",
+  "textures": {
+    "bottom": "jmc:block/sweet_berry_cake_bottom",
+    "top": "jmc:block/sweet_berry_cake_small_top",
+    "top_inner": "jmc:block/sweet_berry_cake_small_inner",
+    "top_side": "jmc:block/sweet_berry_cake_small_side"
+  }
+}

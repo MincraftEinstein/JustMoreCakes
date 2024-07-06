@@ -1,0 +1,16 @@
+{
+  "type": "jmc:cake_baking",
+  "cookingTime": 200,
+  "experience": 0.5,
+  "ingredients": [
+    {
+      "item": "jmc:cupcake_dough"
+    },
+    {
+      "item": "jmc:cupcake_frosting"
+    }
+  ],
+  "result": {
+    "id": "jmc:cupcake"
+  }
+}

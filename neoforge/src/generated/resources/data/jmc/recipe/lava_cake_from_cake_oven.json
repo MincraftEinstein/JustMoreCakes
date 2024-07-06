@@ -1,0 +1,16 @@
+{
+  "type": "jmc:cake_baking",
+  "cookingTime": 200,
+  "experience": 0.4,
+  "ingredients": [
+    {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    }
+  ],
+  "result": {
+    "id": "jmc:lava_cake"
+  }
+}

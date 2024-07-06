@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "half=lower,lit=false": {
+      "model": "jmc:block/lime_candle_three_tiered_lava_cake_lower"
+    },
+    "half=lower,lit=true": {
+      "model": "jmc:block/lime_candle_three_tiered_lava_cake_lower_lit"
+    },
+    "half=upper,lit=false": {
+      "model": "jmc:block/lime_candle_three_tiered_lava_cake_upper"
+    },
+    "half=upper,lit=true": {
+      "model": "jmc:block/lime_candle_three_tiered_lava_cake_upper_lit"
+    }
+  }
+}

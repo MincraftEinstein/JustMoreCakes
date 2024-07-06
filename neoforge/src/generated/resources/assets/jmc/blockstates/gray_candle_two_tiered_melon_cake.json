@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "jmc:block/gray_candle_two_tiered_melon_cake"
+    },
+    "lit=true": {
+      "model": "jmc:block/gray_candle_two_tiered_melon_cake_lit"
+    }
+  }
+}

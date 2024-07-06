@@ -24,7 +24,7 @@ runs {
     }
 
     data {
-        programArguments.addAll '--mod', project.mod_id, '--client', '--dev', '--reports', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', project(":common").file('src/main/resources/').getAbsolutePath()
     }
 }
 

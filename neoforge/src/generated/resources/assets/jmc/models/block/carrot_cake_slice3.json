@@ -1,0 +1,9 @@
+{
+  "parent": "jmc:block/template_cake_slice3",
+  "textures": {
+    "bottom": "jmc:block/carrot_cake_bottom",
+    "inside": "jmc:block/carrot_cake_inner",
+    "side": "jmc:block/carrot_cake_side",
+    "top": "jmc:block/carrot_cake_top"
+  }
+}

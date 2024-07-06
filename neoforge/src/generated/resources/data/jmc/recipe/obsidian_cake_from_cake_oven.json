@@ -1,0 +1,19 @@
+{
+  "type": "jmc:cake_baking",
+  "cookingTime": 800,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
+      "item": "minecraft:obsidian"
+    }
+  ],
+  "result": {
+    "id": "jmc:obsidian_cake"
+  }
+}

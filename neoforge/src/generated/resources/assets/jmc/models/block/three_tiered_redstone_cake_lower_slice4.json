@@ -1,0 +1,11 @@
+{
+  "parent": "jmc:block/template_three_tiered_cake_lower_slice4",
+  "textures": {
+    "bottom": "jmc:block/redstone_cake_bottom",
+    "lower_side": "jmc:block/redstone_cake_side",
+    "lower_top": "jmc:block/redstone_cake_top_covered",
+    "middle_inner": "jmc:block/redstone_cake_medium_inner_covered",
+    "middle_side": "jmc:block/redstone_cake_medium_side",
+    "middle_top": "jmc:block/redstone_cake_medium_top_covered"
+  }
+}
