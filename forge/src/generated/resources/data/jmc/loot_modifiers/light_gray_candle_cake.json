@@ -8,9 +8,7 @@
     {
       "condition": "minecraft:match_tool",
       "predicate": {
-        "items": [
-          "jmc:cake_spatula"
-        ]
+        "items": "jmc:cake_spatula"
       }
     }
   ],

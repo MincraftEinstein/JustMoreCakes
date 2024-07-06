@@ -1,0 +1,19 @@
+{
+  "type": "jmc:cake_baking",
+  "cookingTime": 350,
+  "experience": 0.7,
+  "ingredients": [
+    {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    }
+  ],
+  "result": {
+    "id": "jmc:sculk_cake"
+  }
+}
