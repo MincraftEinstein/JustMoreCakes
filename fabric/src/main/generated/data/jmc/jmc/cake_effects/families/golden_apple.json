@@ -6,6 +6,7 @@
       "mob_effect": "minecraft:regeneration"
     },
     {
+      "amplifier": 0,
       "duration": 3000,
       "mob_effect": "minecraft:resistance"
     },

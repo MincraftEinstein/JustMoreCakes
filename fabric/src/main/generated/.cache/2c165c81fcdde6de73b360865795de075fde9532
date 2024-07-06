@@ -1,10 +1,10 @@
-// 1.20.1	2024-04-12T17:37:14.715926	Just More Cakes!/Tags for minecraft:item
-abd07c2fb504aaa1c3e81844a88849945909ad5f data\c\tags\items\red_dye.json
-ae63090c29bc848a0d9f25201cd7ed80eb253b2c data\c\tags\items\slime_balls.json
-de80d19db5e0e3ab565497abd9a03167f083a61a data\jmc\tags\items\cakes.json
-1d671c47ac8dcf818e79203c1e656c38e4cb353a data\c\tags\items\cheese_cakes.json
-8ea4905c5506130ae13634ed233972a025659f79 data\c\tags\items\cakes.json
-0490737f2e32237f37e5fb0f6624504dbad0c83d data\c\tags\items\cheese.json
-cdcba25cad23510a73b7a029a38766d0f7234730 data\c\tags\items\seeds.json
-1d671c47ac8dcf818e79203c1e656c38e4cb353a data\c\tags\items\cheesecakes.json
-0490737f2e32237f37e5fb0f6624504dbad0c83d data\c\tags\items\cheeses.json
+// 1.21	2024-07-06T13:46:55.1812954	Just More Cakes!/Tags for minecraft:item
+baff2e4766328d0d89e55e50611c81f97f8a203a data\c\tags\item\cheese.json
+a1f97725d9623397dda0bea6326160041ef84892 data\c\tags\item\cheesecakes.json
+a1f97725d9623397dda0bea6326160041ef84892 data\c\tags\item\cheese_cakes.json
+22309e53a04c10ace1e4db7b4ff71b52960c0ad6 data\c\tags\item\seeds.json
+d40e015550bbcd944ec4ccc8ae1d6d0497443af2 data\c\tags\item\red_dye.json
+105727dc444ddc319293c250e6c64f197b4ba151 data\c\tags\item\slime_balls.json
+b309abc5734e51409824164bb4935186385e4b9b data\c\tags\item\cakes.json
+8b9e917dcada7af21195ecb752672975f7335aa3 data\jmc\tags\item\cakes.json
+baff2e4766328d0d89e55e50611c81f97f8a203a data\c\tags\item\cheeses.json

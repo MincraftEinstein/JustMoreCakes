@@ -1,0 +1,19 @@
+{
+  "type": "jmc:cake_baking",
+  "cookingTime": 250,
+  "experience": 0.6,
+  "ingredients": [
+    {
+      "item": "jmc:cake_dough"
+    },
+    {
+      "item": "jmc:cake_frosting"
+    },
+    {
+      "item": "minecraft:pumpkin"
+    }
+  ],
+  "result": {
+    "id": "jmc:pumpkin_cake"
+  }
+}
