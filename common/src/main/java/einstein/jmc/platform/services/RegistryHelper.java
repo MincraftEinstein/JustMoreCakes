@@ -2,6 +2,8 @@ package einstein.jmc.platform.services;
 
 import einstein.jmc.util.BlockEntitySupplier;
 import einstein.jmc.util.MenuTypeSupplier;
+import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -41,9 +43,9 @@ public interface RegistryHelper {
 
     <T extends BlockEntity> BlockEntityType<T> createBlockEntity(BlockEntitySupplier<T> supplier, Block... blocks);
 
-    <T extends Potion> Supplier<T> registerPotion(String name, Supplier<T> type);
+    Supplier<Holder<Potion>> registerPotion(String name, Supplier<Potion> type);
 
-    <T extends MobEffect> Supplier<T> registerMobEffect(String name, Supplier<T> type);
+    Supplier<Holder<MobEffect>> registerMobEffect(String name, Supplier<MobEffect> type);
 
     <T extends RecipeSerializer<?>> Supplier<T> registerRecipeSerializer(String name, Supplier<T> type);
 
@@ -59,5 +61,7 @@ public interface RegistryHelper {
 
     <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String name, Function<CreativeModeTab.Builder, T> type);
 
-    <T extends GameEvent> Supplier<GameEvent> registerGameEvent(String name, Supplier<T> type);
+    Supplier<Holder<GameEvent>> registerGameEvent(String name, Supplier<GameEvent> type);
+
+    <T extends CriterionTrigger<?>> Supplier<T> registerTriggerType(String name, Supplier<T> type);
 }

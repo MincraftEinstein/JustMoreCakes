@@ -48,14 +48,12 @@ public abstract class CakeEffectsProvider implements DataProvider {
     }
 
     public void add(Supplier<BaseCakeBlock> cake, SerializableMobEffectInstance... effectInstances) {
-        JsonElement element = CakeEffects.BLOCK_CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(cake.get(), List.of(effectInstances))).getOrThrow(false, error -> {
-        });
+        JsonElement element = CakeEffects.BLOCK_CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(cake.get(), List.of(effectInstances))).getOrThrow();
         map.put("blocks/" + Util.getBlockId(cake.get()).getPath(), element);
     }
 
     public void add(CakeFamily family, SerializableMobEffectInstance... effectInstances) {
-        JsonElement element = CakeEffects.FAMILY_CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(family, List.of(effectInstances))).getOrThrow(false, error -> {
-        });
+        JsonElement element = CakeEffects.FAMILY_CODEC.encodeStart(JsonOps.INSTANCE, new CakeEffects(family, List.of(effectInstances))).getOrThrow();
         map.put("families/" + family.getRegistryKey().getPath(), element);
     }
 

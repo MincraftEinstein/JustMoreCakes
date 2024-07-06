@@ -8,6 +8,7 @@ import einstein.jmc.init.ModServerConfigs;
 import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.util.CakeUtil;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringUtil;
@@ -52,15 +53,15 @@ public class CakeEffectsProvider implements IBlockComponentProvider {
             ITooltip box = helper.tooltip();
 
             for (SerializableMobEffectInstance effectInstance : cakeEffects.mobEffects()) {
-                MobEffect effect = effectInstance.effect();
+                Holder<MobEffect> effect = effectInstance.effect();
                 MobEffectInstance instance = new MobEffectInstance(effect, effectInstance.duration().orElse(0), effectInstance.amplifier().orElse(0));
                 Component name = StatusEffectsProvider.getEffectName(instance);
-                String duration = instance.isInfiniteDuration() ? I18n.get("effect.duration.infinite") : StringUtil.formatTickDuration(instance.getDuration());
-                Component info = effect.isInstantenous() ? name : Component.translatable("jade.potion", name, duration);
+                String duration = instance.isInfiniteDuration() ? I18n.get("effect.duration.infinite") : StringUtil.formatTickDuration(instance.getDuration(), accessor.tickRate());
+                Component info = effectInstance.getEffect().isInstantenous() ? name : Component.translatable("jade.potion", name, duration);
 
-                box.add(effectInstance.effect().getCategory() != MobEffectCategory.HARMFUL ? theme.success(info) : theme.danger(info));
+                box.add(effectInstance.getEffect().getCategory() != MobEffectCategory.HARMFUL ? theme.success(info) : theme.danger(info));
             }
-            tooltip.add(helper.box(box, BoxStyle.DEFAULT));
+            tooltip.add(helper.box(box, BoxStyle.getNestedBox()));
         }
     }
 

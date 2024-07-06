@@ -1,71 +1,63 @@
 package einstein.jmc.item.crafting;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.core.NonNullList;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class CakeOvenRecipeSerializer implements RecipeSerializer<CakeOvenRecipe>, CakeOvenConstants {
 
-    @Override
-    public CakeOvenRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-        NonNullList<Ingredient> ingredients = itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
+    private static final MapCodec<CakeOvenRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Ingredient.CODEC_NONEMPTY.listOf().fieldOf("ingredients").flatXmap(ingredients -> {
+                Ingredient[] filteredIngredients = ingredients.stream()
+                        .filter(ingredient -> !ingredient.isEmpty())
+                        .toArray(Ingredient[]::new);
 
-        if (ingredients.isEmpty()) {
-            throw new JsonSyntaxException("No ingredients found for cake oven recipe: " + recipeId);
-        }
-        else if (ingredients.size() > INGREDIENT_SLOT_COUNT) {
-            throw new JsonSyntaxException("Too many ingredients for cake oven recipe: " + recipeId + ". The max is 4");
-        }
+                if (filteredIngredients.length == 0) {
+                    return DataResult.error(() -> "No ingredients for cake oven recipe");
+                }
+                return filteredIngredients.length > 4 ? DataResult.error(() -> "Too many ingredients for cake oven recipe. The max is 4")
+                        : DataResult.success(NonNullList.of(Ingredient.EMPTY, filteredIngredients));
+            }, DataResult::success).forGetter(recipe -> recipe.ingredients),
+            ItemStack.STRICT_SINGLE_ITEM_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+            ExtraCodecs.POSITIVE_FLOAT.fieldOf("experience").orElse(0F).forGetter(recipe -> recipe.experience),
+            ExtraCodecs.POSITIVE_INT.fieldOf("cookingTime").orElse(DEFAULT_COOK_TIME).forGetter(recipe -> recipe.cookingTime)
+    ).apply(instance, CakeOvenRecipe::new));
 
-        ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-        float experience = GsonHelper.getAsFloat(json, "experience", 0);
-        int cookingTime = GsonHelper.getAsInt(json, "cookingTime", DEFAULT_COOK_TIME);
-        return new CakeOvenRecipe(recipeId, ingredients, result, experience, cookingTime);
-    }
+    private static final StreamCodec<RegistryFriendlyByteBuf, CakeOvenRecipe> STREAM_CODEC = StreamCodec.of(
+            (buf, recipe) -> {
+                ItemStack.STREAM_CODEC.encode(buf, recipe.result);
+                buf.writeFloat(recipe.experience);
+                buf.writeVarInt(recipe.cookingTime);
+                buf.writeByte(recipe.ingredients.size());
+                recipe.ingredients.forEach(ingredient -> Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ingredient));
+            }, buf -> {
+                ItemStack resultStack = ItemStack.STREAM_CODEC.decode(buf);
+                float experience = buf.readFloat();
+                int cookTime = buf.readVarInt();
+                int ingredientCount = buf.readByte();
+                NonNullList<Ingredient> ingredients = NonNullList.withSize(ingredientCount, Ingredient.EMPTY);
 
-    public static NonNullList<Ingredient> itemsFromJson(JsonArray array) {
-        NonNullList<Ingredient> ingredients = NonNullList.create();
-
-        for (JsonElement element : array) {
-            Ingredient ingredient = Ingredient.fromJson(element);
-            if (!ingredient.isEmpty()) {
-                ingredients.add(ingredient);
+                ingredients.replaceAll(ingredient -> Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
+                return new CakeOvenRecipe(ingredients, resultStack, experience, cookTime);
             }
-        }
-        return ingredients;
+    );
+
+    @Override
+    public MapCodec<CakeOvenRecipe> codec() {
+        return CODEC;
     }
 
     @Override
-    public CakeOvenRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buf) {
-        ItemStack resultStack = buf.readItem();
-        float experience = buf.readFloat();
-        int cookTime = buf.readVarInt();
-        int ingredientCount = buf.readByte();
-        NonNullList<Ingredient> ingredients = NonNullList.withSize(ingredientCount, Ingredient.EMPTY);
-
-        for (int i = 0; i < ingredientCount; i++) {
-            ingredients.set(i, Ingredient.fromNetwork(buf));
-        }
-
-        return new CakeOvenRecipe(recipeId, ingredients, resultStack, experience, cookTime);
-    }
-
-    @Override
-    public void toNetwork(FriendlyByteBuf buf, CakeOvenRecipe recipe) {
-        buf.writeItem(recipe.result);
-        buf.writeFloat(recipe.experience);
-        buf.writeVarInt(recipe.cookingTime);
-        buf.writeByte(recipe.ingredients.size());
-        recipe.ingredients.forEach(ingredient -> ingredient.toNetwork(buf));
+    public StreamCodec<RegistryFriendlyByteBuf, CakeOvenRecipe> streamCodec() {
+        return STREAM_CODEC;
     }
 }

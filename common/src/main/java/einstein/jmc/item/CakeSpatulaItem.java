@@ -10,7 +10,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -52,7 +54,7 @@ public class CakeSpatulaItem extends Item {
                     // Can't drop resources here because a tool needs to be provided to the loot table
                     level.destroyBlock(pos, false, player);
 
-                    stack.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(context.getHand()));
+                    stack.hurtAndBreak(1, player, context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
                     CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, pos, stack);
 
                     if (!player.isCreative()) {
@@ -69,8 +71,8 @@ public class CakeSpatulaItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, level, tooltip, flag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltip, flag);
         tooltip.add(Component.translatable("item.jmc.cake_spatula.desc").withStyle(ChatFormatting.GRAY));
     }
 }

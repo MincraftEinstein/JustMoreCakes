@@ -1,7 +1,7 @@
 package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.data.packs.ModAdvancements;
-import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -20,7 +20,7 @@ public class ModAdvancementProvider extends ForgeAdvancementProvider {
     public static class JMCAdvancements implements AdvancementGenerator {
 
         @Override
-        public void generate(HolderLookup.Provider provider, Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
+        public void generate(HolderLookup.Provider provider, Consumer<AdvancementHolder> consumer, ExistingFileHelper fileHelper) {
             ModAdvancements.generate(consumer);
         }
     }

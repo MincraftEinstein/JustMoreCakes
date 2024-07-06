@@ -1,5 +1,6 @@
 package einstein.jmc.block;
 
+import com.mojang.serialization.MapCodec;
 import einstein.jmc.block.entity.CakeStandBlockEntity;
 import einstein.jmc.data.packs.ModBlockTags;
 import net.minecraft.core.BlockPos;
@@ -9,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -28,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("deprecation")
 public class CakeStandBlock extends BaseEntityBlock {
 
+    private static final MapCodec<CakeStandBlock> CODEC = simpleCodec(CakeStandBlock::new);
     private static final VoxelShape SHAPE = Shapes.or(
             Block.box(7, 15, 7, 9, 16, 9),
             Block.box(1, 6, 1, 15, 15, 15),
@@ -46,20 +49,20 @@ public class CakeStandBlock extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof CakeStandBlockEntity cakeStandBlockEntity) {
-            ItemStack stack = player.getItemInHand(hand);
 
+        if (blockEntity instanceof CakeStandBlockEntity cakeStandBlockEntity) {
             if (cakeStandBlockEntity.isEmpty()) {
                 if (!stack.isEmpty() && stack.getItem() instanceof BlockItem blockItem) {
                     Block block = blockItem.getBlock();
                     BlockState storedState = block.defaultBlockState();
+
                     if (storedState.is(ModBlockTags.CAKE_STAND_STORABLES)) {
                         if (level.isClientSide) {
                             SoundType soundType = storedState.getSoundType();
                             playBlockSound(level, pos, player, soundType.getPlaceSound(), soundType);
-                            return InteractionResult.CONSUME;
+                            return ItemInteractionResult.CONSUME;
                         }
 
                         if (!player.isCreative()) {
@@ -68,12 +71,20 @@ public class CakeStandBlock extends BaseEntityBlock {
 
                         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
                         cakeStandBlockEntity.setStoredBlock(block);
-                        return InteractionResult.SUCCESS;
+                        return ItemInteractionResult.SUCCESS;
                     }
                 }
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
             }
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
 
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+
+        if (blockEntity instanceof CakeStandBlockEntity cakeStandBlockEntity) {
             if (level.isClientSide) {
                 if (!cakeStandBlockEntity.isEmpty()) {
                     SoundType soundType = cakeStandBlockEntity.getStoredBlock().defaultBlockState().getSoundType();
@@ -133,5 +144,10 @@ public class CakeStandBlock extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CakeStandBlockEntity(pos, state);
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 }

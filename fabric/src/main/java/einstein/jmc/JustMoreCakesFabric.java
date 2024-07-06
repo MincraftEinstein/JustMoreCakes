@@ -8,7 +8,7 @@ import einstein.jmc.data.FabricCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.registration.family.CakeFamily;
-import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
+import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -20,6 +20,7 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.fabric.api.registry.VillagerInteractionRegistries;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -56,6 +57,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         JustMoreCakes.commonSetup();
         modifyLootTables();
         DynamicRegistries.registerSynced(BowlContents.REGISTRY_KEY, BowlContents.CODEC);
+        FabricBrewingRecipeRegistryBuilder.BUILD.register(ModPotions::registerPotionRecipes);
     }
 
     @Override
@@ -116,14 +118,14 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     }
 
     void modifyLootTables() {
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            if (Blocks.CAKE.getLootTable().equals(id) && source.isBuiltin()) {
-                addDropWhenCakeSpatulaPool(tableBuilder, Blocks.CAKE);
+        LootTableEvents.MODIFY.register((key, builder, source) -> {
+            if (Blocks.CAKE.getLootTable().equals(key) && source.isBuiltin()) {
+                addDropWhenCakeSpatulaPool(builder, Blocks.CAKE);
             }
 
             for (Block candleCake : getVanillaCandleCakes()) {
-                if (candleCake.getLootTable().equals(id) && source.isBuiltin()) {
-                    addDropWhenCakeSpatulaPool(tableBuilder, Blocks.CAKE);
+                if (candleCake.getLootTable().equals(key) && source.isBuiltin()) {
+                    addDropWhenCakeSpatulaPool(builder, Blocks.CAKE);
                 }
             }
         });

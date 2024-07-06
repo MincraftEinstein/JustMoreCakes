@@ -1,7 +1,8 @@
 package einstein.jmc.advancement.criterian;
 
-import com.google.gson.JsonObject;
-import einstein.jmc.JustMoreCakes;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import einstein.jmc.init.ModTriggerTypes;
 import einstein.jmc.util.Util;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
@@ -13,15 +14,13 @@ import java.util.Optional;
 
 public class CakeEatenTrigger extends SimpleCriterionTrigger<CakeEatenTrigger.TriggerInstance> {
 
-    public static final ResourceLocation ID = JustMoreCakes.loc("cake_eaten");
-
-    @Override
-    public ResourceLocation getId() {
-        return ID;
-    }
+    public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::predicate),
+            ResourceLocation.CODEC.fieldOf("cake").forGetter(TriggerInstance::cake)
+    ).apply(instance, TriggerInstance::new));
 
     public void trigger(ServerPlayer player, ResourceLocation cake) {
-        super.trigger(player, trigger -> trigger.test(cake));
+        super.trigger(player, trigger -> trigger.matches(cake));
     }
 
     public void trigger(ServerPlayer player, Block block) {
@@ -29,32 +28,23 @@ public class CakeEatenTrigger extends SimpleCriterionTrigger<CakeEatenTrigger.Tr
     }
 
     @Override
-    protected TriggerInstance createInstance(JsonObject json, ContextAwarePredicate predicate, DeserializationContext context) {
-        return new TriggerInstance(predicate, new ResourceLocation(json.get("cake").getAsString()));
+    public Codec<TriggerInstance> codec() {
+        return CODEC;
     }
 
-    public static class TriggerInstance extends AbstractCriterionTriggerInstance {
+    public record TriggerInstance(Optional<ContextAwarePredicate> predicate, ResourceLocation cake) implements SimpleInstance {
 
-        private final ResourceLocation cake;
-
-        public TriggerInstance(ContextAwarePredicate predicate, ResourceLocation cake) {
-            super(ID, predicate);
-            this.cake = cake;
+        public static Criterion<TriggerInstance> cakeEaten(ResourceLocation cake) {
+            return ModTriggerTypes.CAKE_EATEN.get().createCriterion(new TriggerInstance(Optional.empty(), cake));
         }
 
-        public static TriggerInstance cakeEaten(ResourceLocation cake) {
-            return new TriggerInstance(ContextAwarePredicate.ANY, cake);
-        }
-
-        public boolean test(ResourceLocation cake) {
+        public boolean matches(ResourceLocation cake) {
             return this.cake.equals(cake);
         }
 
         @Override
-        public JsonObject serializeToJson(SerializationContext context) {
-            JsonObject json = super.serializeToJson(context);
-            json.addProperty("cake", cake.toString());
-            return json;
+        public Optional<ContextAwarePredicate> player() {
+            return predicate;
         }
     }
 }

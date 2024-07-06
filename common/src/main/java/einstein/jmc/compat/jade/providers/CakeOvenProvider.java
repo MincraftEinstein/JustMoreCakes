@@ -4,15 +4,18 @@ import einstein.jmc.block.entity.CakeOvenBlockEntity;
 import einstein.jmc.compat.jade.ModJadePlugin;
 import einstein.jmc.util.CakeOvenConstants;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
-import snownee.jade.api.*;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.IBlockComponentProvider;
+import snownee.jade.api.IServerDataProvider;
+import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.IElementHelper;
-import snownee.jade.impl.ui.ProgressArrowElement;
 
 public class CakeOvenProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor>, CakeOvenConstants {
 
@@ -25,8 +28,8 @@ public class CakeOvenProvider implements IBlockComponentProvider, IServerDataPro
             NonNullList<ItemStack> items = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
             IElementHelper helper = IElementHelper.get();
 
-            ContainerHelper.loadAllItems(tag, items);
-            tooltip.add(helper.item(items.get(0))); // First item is appended here so the 'add' method can be used
+            ContainerHelper.loadAllItems(tag, items, accessor.getLevel().registryAccess());
+            tooltip.add(helper.item(items.getFirst())); // First item is appended here so the 'add' method can be used
 
             // Starts at 1 to skip the first item, since it is already appended above
             for (int i = 1; i < INGREDIENT_SLOT_COUNT; i++) {
@@ -35,7 +38,7 @@ public class CakeOvenProvider implements IBlockComponentProvider, IServerDataPro
 
             tooltip.append(helper.item(items.get(FUEL_SLOT)));
             tooltip.append(helper.spacer(4, 0));
-            tooltip.append(new ProgressArrowElement((float) cookTime / cookTimeTotal).translate(new Vec2(-2, 0)));
+            tooltip.append(helper.progress((float) cookTime / cookTimeTotal).translate(new Vec2(-2, 0)));
             tooltip.append(helper.item(items.get(RESULT_SLOT)));
         }
     }
@@ -45,8 +48,9 @@ public class CakeOvenProvider implements IBlockComponentProvider, IServerDataPro
         CakeOvenBlockEntity blockEntity = (CakeOvenBlockEntity) accessor.getBlockEntity();
 
         if (!blockEntity.isEmpty()) {
-            ContainerHelper.saveAllItems(tag, blockEntity.getItems());
-            CompoundTag savedTag = blockEntity.saveWithoutMetadata();
+            RegistryAccess registryAccess = accessor.getLevel().registryAccess();
+            ContainerHelper.saveAllItems(tag, blockEntity.getItems(), registryAccess);
+            CompoundTag savedTag = blockEntity.saveWithoutMetadata(registryAccess);
             tag.putInt("CookTime", savedTag.getInt("CookTime"));
             tag.putInt("CookTimeTotal", savedTag.getInt("CookTimeTotal"));
         }

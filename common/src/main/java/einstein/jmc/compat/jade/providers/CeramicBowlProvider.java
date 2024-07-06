@@ -33,7 +33,7 @@ public class CeramicBowlProvider implements IBlockComponentProvider, IServerData
 
         if (mixingProgress > 0) {
             tag.putInt("MixingProgress", mixingProgress);
-            blockEntity.getMatchingRecipe().ifPresent(recipe -> tag.putInt("MixingTime", recipe.getMixingTime()));
+            blockEntity.getMatchingRecipe().ifPresent(holder -> tag.putInt("MixingTime", holder.value().getMixingTime()));
         }
     }
 

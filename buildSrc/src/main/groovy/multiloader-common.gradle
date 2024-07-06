@@ -1,0 +1,137 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+base {
+    archivesName = "${mod_name}-${project.name}-${minecraft_version}"
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(java_version)
+}
+
+repositories {
+    mavenCentral()
+    // https://docs.gradle.org/current/userguide/declaring_repositories.html#declaring_content_exclusively_found_in_one_repository
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Sponge'
+                url = 'https://repo.spongepowered.org/repository/maven-public'
+            }
+        }
+        filter { includeGroupAndSubgroups("org.spongepowered") }
+    }
+
+    maven {
+        name = 'BlameJared'
+        url = 'https://maven.blamejared.com'
+    }
+
+    maven {
+        url = "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+
+    maven {
+        name = "Fuzs Mod Resources"
+        url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+    }
+
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
+
+    maven {
+        url = "https://maven.shedaniel.me/"
+    }
+
+    maven {
+        url = "https://maven.architectury.dev/"
+    }
+
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
+
+    maven {
+        url = "https://jm.gserv.me/repository/maven-public/"
+    }
+}
+
+// Declare capabilities on the outgoing configurations.
+// Read more about capabilities here: https://docs.gradle.org/current/userguide/component_capabilities.html#sec:declaring-additional-capabilities-for-a-local-component
+['apiElements', 'runtimeElements'].each { variant ->
+    configurations."$variant".outgoing {
+        capability("$group:${base.archivesName.get()}:$version")
+        capability("$group:$mod_id-${project.name}-${minecraft_version}:$version")
+        capability("$group:$mod_id:$version")
+    }
+
+    publishing.publications.configureEach {
+        suppressPomMetadataWarningsFor(variant)
+    }
+}
+
+jar {
+    manifest {
+        attributes([
+                'Specification-Title'   : mod_name,
+                'Specification-Vendor'  : mod_author,
+                'Specification-Version' : project.jar.archiveVersion,
+                'Implementation-Title'  : project.name,
+                'Implementation-Version': project.jar.archiveVersion,
+                'Implementation-Vendor' : mod_author,
+                'Built-On-Minecraft'    : minecraft_version
+        ])
+    }
+}
+
+processResources {
+    def expandProps = [
+            "version"                      : version,
+            "group"                        : project.group, //Else we target the task's group.
+            "java_version"                 : java_version,
+            "minecraft_version"            : minecraft_version,
+            "minecraft_version_range"      : minecraft_version_range,
+            "fabric_version"               : fabric_version,
+            "fabric_api_version"           : fabric_api_version,
+            "forge_version"                : forge_version,
+            "forge_loader_version_range"   : forge_loader_version_range,
+            "neoforge_version"             : neoforge_version,
+            "neoforge_loader_version_range": neoforge_loader_version_range,
+            "mod_name"                     : mod_name,
+            "mod_author"                   : mod_author,
+            "mod_id"                       : mod_id,
+            "description"                  : project.description,
+            "networking_version"           : networking_version,
+            "config_port_version"          : config_port_version
+    ]
+
+    filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml']) {
+        expand expandProps
+    }
+
+    inputs.properties(expandProps)
+
+    exclude('.cache/')
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            artifactId base.archivesName.get()
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url System.getenv("local_maven_url")
+        }
+    }
+}

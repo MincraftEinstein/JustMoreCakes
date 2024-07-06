@@ -1,6 +1,5 @@
 package einstein.jmc.client.gui.screens.inventory;
 
-import einstein.jmc.JustMoreCakes;
 import einstein.jmc.menu.cakeoven.CakeOvenMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -13,7 +12,12 @@ import static einstein.jmc.JustMoreCakes.loc;
 
 public class CakeOvenScreen extends AbstractContainerScreen<CakeOvenMenu> {
 
-    private static final ResourceLocation TEXTURE = JustMoreCakes.loc("textures/gui/container/cake_oven.png");
+    private static final ResourceLocation TEXTURE = loc("textures/gui/container/cake_oven.png");
+    private static final ResourceLocation LIT_PROGRESS_SPRITE = loc("container/cake_oven/lit_progress");
+    private static final ResourceLocation BURN_PROGRESS_SPRITE = loc("container/cake_oven/burn_progress");
+    private static final int LIT_SIZE = 14;
+    private static final int BURN_WIDTH = 24;
+    private static final int BURN_HEIGHT = 16;
 
     public CakeOvenScreen(CakeOvenMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
@@ -27,7 +31,7 @@ public class CakeOvenScreen extends AbstractContainerScreen<CakeOvenMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        renderBackground(guiGraphics);
+        renderBackground(guiGraphics, mouseX, mouseY, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         renderTooltip(guiGraphics, mouseX, mouseY);
     }
@@ -37,9 +41,11 @@ public class CakeOvenScreen extends AbstractContainerScreen<CakeOvenMenu> {
         guiGraphics.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
 
         if (menu.isLit()) {
-            guiGraphics.blit(TEXTURE, leftPos + 19, topPos + 25 + 12 - menu.getLitProgress(), 176, 12 - menu.getLitProgress(), 14, menu.getLitProgress() + 1);
+            int litProgress = Mth.ceil(menu.getLitProgress() * 13) + 1;
+            guiGraphics.blitSprite(LIT_PROGRESS_SPRITE, LIT_SIZE, LIT_SIZE, 0, LIT_SIZE - litProgress, leftPos + 19, topPos + 25 + LIT_SIZE - litProgress, LIT_SIZE, litProgress);
         }
 
-        guiGraphics.blit(TEXTURE, leftPos + 93, topPos + 34, 176, 14, menu.getBurnProgress() + 1, 16);
+        int burnProgress = Mth.ceil(menu.getBurnProgress() * BURN_WIDTH);
+        guiGraphics.blitSprite(BURN_PROGRESS_SPRITE, BURN_WIDTH, BURN_HEIGHT, 0, 0, leftPos + 93, topPos + 34, burnProgress, BURN_HEIGHT);
     }
 }

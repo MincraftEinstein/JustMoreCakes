@@ -25,8 +25,8 @@ import java.util.function.Supplier;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {
 
-    public static final TagKey<Block> F_CAKES = BlockTags.create(new ResourceLocation("forge", "cakes"));
-    public static final TagKey<Block> F_CANDLE_CAKES = BlockTags.create(new ResourceLocation("forge", "candle_cakes"));
+    public static final TagKey<Block> F_CAKES = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "cakes"));
+    public static final TagKey<Block> F_CANDLE_CAKES = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "candle_cakes"));
 
     public ModBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, JustMoreCakes.MOD_ID, existingFileHelper);

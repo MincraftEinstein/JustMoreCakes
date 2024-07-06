@@ -162,11 +162,11 @@ public class ModBlocks {
     }
 
     public static BlockBehaviour.Properties cakeProperties() {
-        return BlockBehaviour.Properties.copy(Blocks.CAKE);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE);
     }
 
     public static BlockBehaviour.Properties candleCakeProperties() {
-        return BlockBehaviour.Properties.copy(Blocks.CANDLE_CAKE);
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.CANDLE_CAKE);
     }
 
     public static void init() {

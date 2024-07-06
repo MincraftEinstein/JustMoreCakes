@@ -29,6 +29,7 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.brewing.BrewingRecipeRegisterEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
@@ -80,6 +81,7 @@ public class JustMoreCakesForge {
         ForgeRegistryHelper.POTIONS.register(modEventBus);
         ForgeRegistryHelper.CREATIVE_MODE_TABS.register(modEventBus);
         ForgeRegistryHelper.GAME_EVENTS.register(modEventBus);
+        ForgeRegistryHelper.TRIGGER_TYPES.register(modEventBus);
         ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         MinecraftForge.EVENT_BUS.addListener(this::missingMappings);
         MinecraftForge.EVENT_BUS.addListener(this::onEntityJump);
@@ -89,6 +91,7 @@ public class JustMoreCakesForge {
         MinecraftForge.EVENT_BUS.addListener(this::onVillagerTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onWanderingTradesEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onBlockBreak);
+        MinecraftForge.EVENT_BUS.addListener(this::registerBrewingRecipes);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, this::onBlockClicked);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.SPEC);
@@ -99,24 +102,24 @@ public class JustMoreCakesForge {
     void generateData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
-        ExistingFileHelper helper = event.getExistingFileHelper();
+        ExistingFileHelper fileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         // Server providers
-        generator.addProvider(event.includeServer(), new ModRecipeProvider(output));
-        BlockTagsProvider blockTags = new ModBlockTagsProvider(output, lookupProvider, helper);
+        generator.addProvider(event.includeServer(), new ModRecipeProvider(output, lookupProvider));
+        BlockTagsProvider blockTags = new ModBlockTagsProvider(output, lookupProvider, fileHelper);
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ModItemTagsProvider(output, lookupProvider, blockTags.contentsGetter(), helper));
-        generator.addProvider(event.includeServer(), new ModPOITagsProvider(output, lookupProvider, helper));
-        generator.addProvider(event.includeServer(), new ModGameEventTagsProvider(output, lookupProvider, helper));
-        generator.addProvider(event.includeServer(), new ModAdvancementProvider(output, lookupProvider, helper));
-        generator.addProvider(event.includeServer(), new ModLootTableProvider(output));
+        generator.addProvider(event.includeServer(), new ModItemTagsProvider(output, lookupProvider, blockTags.contentsGetter(), fileHelper));
+        generator.addProvider(event.includeServer(), new ModPOITagsProvider(output, lookupProvider, fileHelper));
+        generator.addProvider(event.includeServer(), new ModGameEventTagsProvider(output, lookupProvider, fileHelper));
+        generator.addProvider(event.includeServer(), new ModAdvancementProvider(output, lookupProvider, fileHelper));
+        generator.addProvider(event.includeServer(), new ModLootTableProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ModCakeEffectsProvider(output));
-        generator.addProvider(event.includeServer(), new ModLootModifiersProvider(output));
+        generator.addProvider(event.includeServer(), new ModLootModifiersProvider(output, lookupProvider));
 
         // Client providers
-        generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, helper));
-        generator.addProvider(event.includeClient(), new ModItemModelProvider(output, helper));
+        generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, fileHelper));
+        generator.addProvider(event.includeClient(), new ModItemModelProvider(output, fileHelper));
     }
 
     void onBlockBreak(BlockEvent.BreakEvent event) {
@@ -228,7 +231,7 @@ public class JustMoreCakesForge {
                 mapping.remap(value);
             }
             else {
-                LOGGER.warn("Failed to remap (" + mapping.getKey().toString() + ") of registry (" + registry.getRegistryName() + ")");
+                LOGGER.warn("Failed to remap ({}) of registry ({})", mapping.getKey().toString(), registry.getRegistryName());
                 mapping.fail();
             }
         }
@@ -255,5 +258,9 @@ public class JustMoreCakesForge {
 
     void onWanderingTradesEvent(final WandererTradesEvent event) {
         ModVillagers.wanderingTraderTrades(event.getGenericTrades());
+    }
+
+    void registerBrewingRecipes(BrewingRecipeRegisterEvent event) {
+        ModPotions.registerPotionRecipes(event.getBuilder());
     }
 }

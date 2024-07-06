@@ -16,7 +16,7 @@ public class LavaTwoTieredCakeBlock extends BaseTwoTieredCakeBlock {
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        if (!entity.fireImmune() && entity instanceof LivingEntity livingEntity && !EnchantmentHelper.hasFrostWalker(livingEntity)) {
+        if (!entity.fireImmune() && entity instanceof LivingEntity livingEntity) {
             livingEntity.hurt(level.damageSources().hotFloor(), 1);
         }
 

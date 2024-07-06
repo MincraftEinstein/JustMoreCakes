@@ -15,32 +15,31 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ModAdvancements {
 
-    private static final Advancement PLANT_SEEDS_DUMMY = new Advancement(JustMoreCakes.mcLoc("husbandry/plant_seed"), null, null, AdvancementRewards.EMPTY, new HashMap<>(), null, false);
+    private static final AdvancementHolder PLANT_SEEDS_DUMMY = new AdvancementHolder(JustMoreCakes.mcLoc("husbandry/plant_seed"), null);
 
-    public static void generate(Consumer<Advancement> consumer) {
-        Advancement craftCake = addCakes(Advancement.Builder.advancement()
+    public static void generate(Consumer<AdvancementHolder> consumer) {
+        AdvancementHolder craftCake = addCakes(Advancement.Builder.advancement()
                 .parent(PLANT_SEEDS_DUMMY)
-                .requirements(RequirementsStrategy.OR)
-                .display(Blocks.CAKE.asItem(), translatable("craft_cake.title"), translatable("craft_cake.description"), null, FrameType.TASK, true, true, false)
+                .requirements(AdvancementRequirements.Strategy.OR)
+                .display(Blocks.CAKE.asItem(), translatable("craft_cake.title"), translatable("craft_cake.description"), null, AdvancementType.TASK, true, true, false)
         ).save(consumer, JustMoreCakes.loc("husbandry/craft_cake").toString());
 
         addCakes(Advancement.Builder.advancement()
                 .parent(craftCake)
-                .display(ModBlocks.CHOCOLATE_CAKE_FAMILY.getBaseCake().get(), translatable("craft_all_cakes.title"), translatable("craft_all_cakes.description"), null, FrameType.CHALLENGE, true, true, false)
+                .display(ModBlocks.CHOCOLATE_CAKE_FAMILY.getBaseCake().get(), translatable("craft_all_cakes.title"), translatable("craft_all_cakes.description"), null, AdvancementType.CHALLENGE, true, true, false)
                 .rewards(AdvancementRewards.Builder.experience(100))
         ).save(consumer, JustMoreCakes.loc("husbandry/craft_all_cakes").toString());
 
         Advancement.Builder eatObsidianCakeBuilder = Advancement.Builder.advancement()
                 .parent(craftCake)
-                .requirements(RequirementsStrategy.OR)
-                .display(ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get(), translatable("eat_obsidian_cake.title"), translatable("eat_obsidian_cake.description"), null, FrameType.TASK, true, true, false);
+                .requirements(AdvancementRequirements.Strategy.OR)
+                .display(ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get(), translatable("eat_obsidian_cake.title"), translatable("eat_obsidian_cake.description"), null, AdvancementType.TASK, true, true, false);
         ModBlocks.OBSIDIAN_CAKE_FAMILY.forEach(cake -> eatObsidianCakeBuilder.addCriterion(cake.get().getVariant().getCakeName() + "_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(Util.getBlockId(cake.get()))));
         eatObsidianCakeBuilder.save(consumer, JustMoreCakes.loc("husbandry/eat_obsidian_cake").toString());
     }

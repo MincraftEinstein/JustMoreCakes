@@ -5,6 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 
@@ -41,6 +42,6 @@ public class ItemsForEmeralds implements VillagerTrades.ItemListing {
 
     @Override
     public MerchantOffer getOffer(final Entity entity, final RandomSource random) {
-        return new MerchantOffer(new ItemStack(Items.EMERALD, receivedCount), new ItemStack(givenStack.getItem(), givenCount), maxTrades, givenExp, priceMultiplier);
+        return new MerchantOffer(new ItemCost(Items.EMERALD, receivedCount), new ItemStack(givenStack.getItem(), givenCount), maxTrades, givenExp, priceMultiplier);
     }
 }

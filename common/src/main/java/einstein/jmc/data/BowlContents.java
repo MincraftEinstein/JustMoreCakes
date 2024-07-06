@@ -33,7 +33,12 @@ public record BowlContents(ResourceLocation texture) {
 
     public static Registry<BowlContents> getRegistry(@Nullable Level level) {
         RegistryAccess access = level != null ? level.registryAccess() : Util.getRegistryAccess();
-        return access.registryOrThrow(REGISTRY_KEY);
+        try {
+            return access.registryOrThrow(REGISTRY_KEY);
+        }
+        catch (Exception e) {
+            return Util.getRegistryAccess().registryOrThrow(REGISTRY_KEY);
+        }
     }
 
     public static class EmptyBowlContentsSupplier implements Supplier<BowlContents> {

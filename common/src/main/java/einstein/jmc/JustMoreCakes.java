@@ -1,6 +1,5 @@
 package einstein.jmc;
 
-import einstein.jmc.advancement.criterian.CakeEatenTrigger;
 import einstein.jmc.compat.AmendmentsCompat;
 import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.effects.CakeEffectsManager;
@@ -8,9 +7,10 @@ import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
 import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.util.Util;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,6 +29,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -42,8 +43,7 @@ public class JustMoreCakes {
     public static final String MOD_ID = "jmc";
     public static final String MOD_NAME = "Just More Cakes!";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
-    public static final CakeEatenTrigger CAKE_EATEN_TRIGGER = CriteriaTriggers.register(new CakeEatenTrigger());
-    public static final ResourceLocation CAKE_BAKER_GIFT = loc("gameplay/hero_of_the_village/cake_baker_gift");
+    public static final ResourceKey<LootTable> CAKE_BAKER_GIFT = ResourceKey.create(Registries.LOOT_TABLE, loc("gameplay/hero_of_the_village/cake_baker_gift"));
 
     public static void init() {
         ModItems.init();
@@ -56,12 +56,10 @@ public class JustMoreCakes {
         ModCreativeModeTabs.init();
         ModGameEvents.init();
         ModPackets.init();
+        ModTriggerTypes.init();
     }
 
     public static void commonSetup() {
-        Items.CAKE.maxStackSize = 64;
-        ModPotions.registerPotionRecipes();
-
         for (CakeVariant variant : CakeVariant.VARIANT_BY_CAKE.values()) {
             if (variant.hasItem()) {
                 Services.HOOKS.registerCompostable(variant.getItem().get(), 1);
@@ -85,17 +83,17 @@ public class JustMoreCakes {
     }
 
     public static void onDatapackSync(@Nullable ServerPlayer player, MinecraftServer server, boolean playerUpdate) {
-        if (playerUpdate) {
-            CakeEffectsManager.syncToPlayer(player);
-        }
-        else {
-            CakeEffectsManager.loadCakeEffects();
-            BowlContents.EMPTY.clear();
+        if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
+            Util.removeRecipe(server.getRecipeManager(), mcLoc("cake"));
         }
 
-        if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
-            Util.removeRecipe(server.getRecipeManager(), RecipeType.CRAFTING, mcLoc("cake"));
+        if (playerUpdate) {
+            CakeEffectsManager.syncToPlayer(player);
+            return;
         }
+
+        CakeEffectsManager.loadCakeEffects();
+        BowlContents.EMPTY.clear();
     }
 
     public static InteractionResult blockClicked(Player player, Level level, InteractionHand hand, BlockHitResult hitResult) {
@@ -147,10 +145,10 @@ public class JustMoreCakes {
     }
 
     public static ResourceLocation loc(String string) {
-        return new ResourceLocation(MOD_ID, string);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, string);
     }
 
     public static ResourceLocation mcLoc(String string) {
-        return new ResourceLocation("minecraft", string);
+        return ResourceLocation.withDefaultNamespace(string);
     }
 }

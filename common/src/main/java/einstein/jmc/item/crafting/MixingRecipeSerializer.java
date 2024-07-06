@@ -1,66 +1,65 @@
 package einstein.jmc.item.crafting;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
-import einstein.jmc.block.entity.CeramicBowlBlockEntity;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class MixingRecipeSerializer implements RecipeSerializer<MixingRecipe> {
 
+    public static final MapCodec<MixingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Ingredient.CODEC_NONEMPTY.listOf().fieldOf("ingredients").flatXmap(ingredients -> {
+                Ingredient[] filteredIngredients = ingredients.stream()
+                        .filter(ingredient -> !ingredient.isEmpty())
+                        .toArray(Ingredient[]::new);
+
+                if (filteredIngredients.length == 0) {
+                    return DataResult.error(() -> "No ingredients found for mixing recipe");
+                }
+                return filteredIngredients.length > 4 ? DataResult.error(() -> "Too many ingredients for mixing recipe. The max is 4")
+                        : DataResult.success(NonNullList.of(Ingredient.EMPTY, filteredIngredients));
+            }, DataResult::success).forGetter(MixingRecipe::getIngredients),
+            ItemStack.STRICT_SINGLE_ITEM_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+            ResourceLocation.CODEC.fieldOf("contents").forGetter(MixingRecipe::getContentsId),
+            ExtraCodecs.POSITIVE_INT.fieldOf("mixingTime").forGetter(MixingRecipe::getMixingTime)
+    ).apply(instance, MixingRecipe::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, MixingRecipe> STREAM_CODEC = StreamCodec.of(
+            (buf, recipe) -> {
+                ItemStack.STREAM_CODEC.encode(buf, recipe.result);
+                buf.writeResourceLocation(recipe.contentsId);
+                buf.writeInt(recipe.mixingTime);
+                buf.writeByte(recipe.ingredients.size());
+                recipe.ingredients.forEach(ingredient -> Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ingredient));
+            }, buf -> {
+                ItemStack resultStack = ItemStack.STREAM_CODEC.decode(buf);
+                ResourceLocation contentsId = buf.readResourceLocation();
+                int mixingTime = buf.readInt();
+                int ingredientCount = buf.readByte();
+                NonNullList<Ingredient> ingredients = NonNullList.withSize(ingredientCount, Ingredient.EMPTY);
+
+                for (int i = 0; i < ingredientCount; i++) {
+                    ingredients.set(i, Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
+                }
+
+                return new MixingRecipe(ingredients, resultStack, contentsId, mixingTime);
+            }
+    );
+
     @Override
-    public MixingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-        NonNullList<Ingredient> ingredients = CakeOvenRecipeSerializer.itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
-
-        if (ingredients.isEmpty()) {
-            throw new JsonSyntaxException("No Ingredients found for mixing recipe: " + recipeId);
-        }
-        else if (ingredients.size() > CeramicBowlBlockEntity.INGREDIENT_SLOT_COUNT) {
-            throw new JsonSyntaxException("Too many ingredients for mixing recipe: " + recipeId + ". The max is 4");
-        }
-
-        ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-        ResourceLocation contentsId = ResourceLocation.tryParse(GsonHelper.getAsString(json, "contents"));
-
-        if (contentsId == null) {
-            throw new JsonSyntaxException("Invalid contents for mixing recipe: " + recipeId);
-        }
-
-        int mixingTime = GsonHelper.getAsInt(json, "mixingTime", CeramicBowlBlockEntity.DEFAULT_MIXING_PROGRESS);
-        if (mixingTime < 1) {
-            throw new JsonSyntaxException("mixingTime must be a positive number for recipe: " + recipeId);
-        }
-
-        return new MixingRecipe(recipeId, ingredients, result, contentsId, mixingTime);
+    public MapCodec<MixingRecipe> codec() {
+        return CODEC;
     }
 
     @Override
-    public MixingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buf) {
-        ItemStack resultStack = buf.readItem();
-        ResourceLocation contentsId = buf.readResourceLocation();
-        int mixingTime = buf.readInt();
-        int ingredientCount = buf.readByte();
-        NonNullList<Ingredient> ingredients = NonNullList.withSize(ingredientCount, Ingredient.EMPTY);
-
-        for (int i = 0; i < ingredientCount; i++) {
-            ingredients.set(i, Ingredient.fromNetwork(buf));
-        }
-
-        return new MixingRecipe(recipeId, ingredients, resultStack, contentsId, mixingTime);
-    }
-
-    @Override
-    public void toNetwork(FriendlyByteBuf buf, MixingRecipe recipe) {
-        buf.writeItem(recipe.result);
-        buf.writeResourceLocation(recipe.contentsId);
-        buf.writeInt(recipe.mixingTime);
-        buf.writeByte(recipe.ingredients.size());
-        recipe.ingredients.forEach(ingredient -> ingredient.toNetwork(buf));
+    public StreamCodec<RegistryFriendlyByteBuf, MixingRecipe> streamCodec() {
+        return STREAM_CODEC;
     }
 }

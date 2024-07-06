@@ -10,6 +10,7 @@ import me.shedaniel.rei.api.common.registry.RecipeManagerContext;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,19 +22,19 @@ public class CakeOvenDisplay extends BasicDisplay implements SimpleGridMenuDispl
     private final float experience;
     private final int cookingTime;
 
-    public CakeOvenDisplay(CakeOvenRecipe recipe) {
-        this(EntryIngredients.ofIngredients(recipe.getIngredients()),
-                Collections.singletonList(EntryIngredients.of(recipe.getResultItem(registryAccess()))),
-                recipe, recipe.getExperience(), recipe.getCookingTime());
+    public CakeOvenDisplay(RecipeHolder<CakeOvenRecipe> holder) {
+        this(EntryIngredients.ofIngredients(holder.value().getIngredients()),
+                Collections.singletonList(EntryIngredients.of(holder.value().getResultItem(registryAccess()))),
+                holder, holder.value().getExperience(), holder.value().getCookingTime());
     }
 
     public CakeOvenDisplay(List<EntryIngredient> ingredients, List<EntryIngredient> results, CompoundTag tag) {
-        this(ingredients, results, (CakeOvenRecipe) RecipeManagerContext.getInstance()
+        this(ingredients, results, RecipeManagerContext.getInstance()
                 .byId(tag, "location"), tag.getFloat("experience"), tag.getInt("cookingTime"));
     }
 
-    public CakeOvenDisplay(List<EntryIngredient> ingredients, List<EntryIngredient> results, CakeOvenRecipe recipe, float experience, int cookingTime) {
-        super(fillWithEmpty(ingredients), results, Optional.ofNullable(recipe).map(CakeOvenRecipe::getId));
+    public CakeOvenDisplay(List<EntryIngredient> ingredients, List<EntryIngredient> results, RecipeHolder<?> holder, float experience, int cookingTime) {
+        super(fillWithEmpty(ingredients), results, Optional.ofNullable(holder).map(RecipeHolder::id));
         this.experience = experience;
         this.cookingTime = cookingTime;
     }

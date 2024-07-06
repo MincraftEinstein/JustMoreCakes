@@ -477,7 +477,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     private void createFromVanillaCandleCake(PropertyDispatch.C1<Boolean> dispatch, ResourceLocation candleType, String modId, String name, boolean isLit) {
         String litName = isLit ? "_lit" : "";
-        dispatch.select(isLit, Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(modId, "block/" + candleType.getPath() + "candle_" + name + litName)));
+        dispatch.select(isLit, Variant.variant().with(VariantProperties.MODEL, ResourceLocation.fromNamespaceAndPath(modId, "block/" + candleType.getPath() + "candle_" + name + litName)));
     }
 
     private void createFromVanillaThreeTieredCandleCake(PropertyDispatch.C2<Boolean, DoubleBlockHalf> dispatch, ResourceLocation candleType, DoubleBlockHalf half, boolean isLit) {

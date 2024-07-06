@@ -43,7 +43,6 @@ public class CeramicBowlRenderer implements BlockEntityRenderer<CeramicBowlBlock
 
             PoseStack.Pose last = poseStack.last();
             Matrix4f pose = last.pose();
-            Matrix3f normal = last.normal();
             VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.solid());
 
             float minU = sprite.getU(3);
@@ -52,37 +51,33 @@ public class CeramicBowlRenderer implements BlockEntityRenderer<CeramicBowlBlock
             float maxV = sprite.getV(13);
             float y = 0.1875F + fillLevel * 0.0625F;
 
-            vertexConsumer.vertex(pose, -CENTER_X, y, -CENTER_X)
-                    .color(0xFF, 0xFF, 0xFF, 1)
-                    .uv(minU, minV)
-                    .overlayCoords(OverlayTexture.NO_OVERLAY)
-                    .uv2(packedLight)
-                    .normal(normal, 0, 1, 0)
-                    .endVertex();
+            vertexConsumer.addVertex(pose, -CENTER_X, y, -CENTER_X)
+                    .setColor(0xFF, 0xFF, 0xFF, 1)
+                    .setUv(minU, minV)
+                    .setOverlay(OverlayTexture.NO_OVERLAY)
+                    .setLight(packedLight)
+                    .setNormal(last, 0, 1, 0);
 
-            vertexConsumer.vertex(pose, -CENTER_X, y, CENTER_X)
-                    .color(0xFF, 0xFF, 0xFF, 1)
-                    .uv(minU, maxV)
-                    .overlayCoords(OverlayTexture.NO_OVERLAY)
-                    .uv2(packedLight)
-                    .normal(normal, 0, 1, 0)
-                    .endVertex();
+            vertexConsumer.addVertex(pose, -CENTER_X, y, CENTER_X)
+                    .setColor(0xFF, 0xFF, 0xFF, 1)
+                    .setUv(minU, maxV)
+                    .setOverlay(OverlayTexture.NO_OVERLAY)
+                    .setLight(packedLight)
+                    .setNormal(last, 0, 1, 0);
 
-            vertexConsumer.vertex(pose, CENTER_X, y, CENTER_X)
-                    .color(0xFF, 0xFF, 0xFF, 1)
-                    .uv(maxU, maxV)
-                    .overlayCoords(OverlayTexture.NO_OVERLAY)
-                    .uv2(packedLight)
-                    .normal(normal, 0, 1, 0)
-                    .endVertex();
+            vertexConsumer.addVertex(pose, CENTER_X, y, CENTER_X)
+                    .setColor(0xFF, 0xFF, 0xFF, 1)
+                    .setUv(maxU, maxV)
+                    .setOverlay(OverlayTexture.NO_OVERLAY)
+                    .setLight(packedLight)
+                    .setNormal(last, 0, 1, 0);
 
-            vertexConsumer.vertex(pose, CENTER_X, y, -CENTER_X)
-                    .color(0xFF, 0xFF, 0xFF, 1)
-                    .uv(maxU, minV)
-                    .overlayCoords(OverlayTexture.NO_OVERLAY)
-                    .uv2(packedLight)
-                    .normal(normal, 0, 1, 0)
-                    .endVertex();
+            vertexConsumer.addVertex(pose, CENTER_X, y, -CENTER_X)
+                    .setColor(0xFF, 0xFF, 0xFF, 1)
+                    .setUv(maxU, minV)
+                    .setOverlay(OverlayTexture.NO_OVERLAY)
+                    .setLight(packedLight)
+                    .setNormal(last, 0, 1, 0);
 
             poseStack.popPose();
         }

@@ -1,12 +1,7 @@
 plugins {
-    id 'idea'
-    id 'maven-publish'
+    id 'multiloader-loader'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
-}
-
-base {
-    archivesName = "${mod_name}-forge-${minecraft_version}"
 }
 
 mixin {
@@ -23,46 +18,39 @@ minecraft {
 
     copyIdeResources = true
 
+    reobf = false
+
     runs {
         client {
-            workingDirectory project.file('run')
+            workingDirectory file('runs/client')
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Client'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 modClientRun {
                     source sourceSets.main
-                    source project(":common").sourceSets.main
                 }
             }
         }
 
         server {
-            workingDirectory project.file('run')
+            workingDirectory file('runs/server')
             ideaModule "${rootProject.name}.${project.name}.main"
             taskName 'Server'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 modServerRun {
                     source sourceSets.main
-                    source project(":common").sourceSets.main
                 }
             }
         }
 
         data {
-            workingDirectory project.file('run')
+            workingDirectory file('runs/data')
             ideaModule "${rootProject.name}.${project.name}.main"
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', project(":common").file('src/main/resources/')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             taskName 'Data'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 modDataRun {
                     source sourceSets.main
-                    source project(":common").sourceSets.main
                 }
             }
         }
@@ -72,61 +60,40 @@ minecraft {
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    compileOnly project(":common")
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    minecraft("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
+    annotationProcessor('org.spongepowered:mixin:0.8.5:processor')
+    implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
 
-//    runtimeOnly fg.deobf("curse.maven:catalogue-459701:${forge_catalogue_version}")
-//    runtimeOnly fg.deobf("curse.maven:configured-457570:${forge_configured_v}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
-//    runtimeOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
+    runtimeOnly("curse.maven:catalogue-459701:${forge_catalogue_version}")
+    runtimeOnly("curse.maven:configured-457570:${forge_configured_version}")
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+//    runtimeOnly("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
 
-    implementation fg.deobf("curse.maven:cake-chomps-307943:${forge_cake_chomps_version}")
-    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
-    implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
-    implementation fg.deobf("maven.modrinth:jade:${forge_jade_version}")
-    implementation fg.deobf("maven.modrinth:moonlight:${forge_moonlight_version}")
-    implementation fg.deobf("maven.modrinth:amendments:${forge_amendments_version}")
-    implementation fg.deobf("mysticdrew:common-networking-forge:${networking_version}-${minecraft_version}")
-    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.5")) {
+    implementation("curse.maven:cake-chomps-307943:${forge_cake_chomps_version}")
+//    implementation("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
+//    implementation("dev.architectury:architectury-forge:${architectury_version}")
+
+    // TODO change these back to implementations once updated
+    compileOnly("maven.modrinth:jade:${neoforge_jade_version}") // TODO change back to forge version once updated
+    compileOnly("maven.modrinth:moonlight:${forge_moonlight_version}")
+    compileOnly("maven.modrinth:amendments:${forge_amendments_version}")
+    implementation("mysticdrew:common-networking-forge:${networking_version}-${minecraft_version}")
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.5") {
         jarJar.ranged(it, "[0.3.5,)")
-    }
+    })
 
-    compileOnly(testCompileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")))
-    compileOnly(testCompileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")))
-    compileOnly(testCompileOnly(fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")))
-}
-
-tasks.withType(JavaCompile).configureEach {
-    source(project(":common").sourceSets.main.allSource)
+    compileOnly(testCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
+    compileOnly(testCompileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
+    compileOnly(testCompileOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}")) // TODO change back to forge version once updated
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
 }
 
 processResources {
-    from project(":common").sourceSets.main.resources
-
     exclude("${mod_id}.accesswidener")
-
-    inputs.property("version", version)
-
-    filesMatching("META-INF/mods.toml") {
-        expand("version": version)
-    }
 }
 
-jar.finalizedBy('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId base.archivesName.get()
-            from components.java
-            fg.component(it)
-        }
-    }
-    repositories {
-        maven {
-            url "file://" + System.getenv("local_maven")
-        }
-    }
+sourceSets.each {
+    def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
+    it.output.resourcesDir = dir
+    it.java.destinationDirectory = dir
 }

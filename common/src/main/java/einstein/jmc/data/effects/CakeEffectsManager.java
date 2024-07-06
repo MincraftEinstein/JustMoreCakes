@@ -10,6 +10,9 @@ import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.network.clientbound.ClientboundCakeEffectsPacket;
 import einstein.jmc.util.Util;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.Resource;
@@ -26,7 +29,7 @@ public class CakeEffectsManager {
 
     public static final String EFFECTS_DIRECTORY = "jmc/cake_effects";
     private static final List<CakeEffects> RAW_CAKE_EFFECTS = new ArrayList<>();
-    private static final Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> CAKE_EFFECTS = new HashMap<>();
+    private static final Map<CakeEffectsHolder, Map<Holder<MobEffect>, Pair<Integer, Integer>>> CAKE_EFFECTS = new HashMap<>();
 
     public static void syncToPlayer(ServerPlayer player) {
         Dispatcher.sendToClient(new ClientboundCakeEffectsPacket(CAKE_EFFECTS), player);
@@ -35,15 +38,15 @@ public class CakeEffectsManager {
     }
 
     public static void loadCakeEffects() {
-        Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> newCakeEffects = new HashMap<>();
+        Map<CakeEffectsHolder, Map<Holder<MobEffect>, Pair<Integer, Integer>>> newCakeEffects = new HashMap<>();
         RAW_CAKE_EFFECTS.forEach((cakeEffects) -> {
             CakeEffectsHolder holder = cakeEffects.holder();
             cakeEffects.mobEffects().forEach(effectHolder -> {
-                MobEffect effect = effectHolder.effect();
+                Holder<MobEffect> effect = effectHolder.effect();
                 int duration = effectHolder.duration().orElse(0);
                 int amplifier = effectHolder.amplifier().orElse(0);
                 if (newCakeEffects.containsKey(holder)) {
-                    Map<MobEffect, Pair<Integer, Integer>> combinedEffects = newCakeEffects.get(holder);
+                    Map<Holder<MobEffect>, Pair<Integer, Integer>> combinedEffects = newCakeEffects.get(holder);
                     if (combinedEffects.containsKey(effect)) {
                         Pair<Integer, Integer> pair = combinedEffects.get(effect);
                         int currentDuration = pair.getSecond();
@@ -67,7 +70,7 @@ public class CakeEffectsManager {
         setEffectsOnHolders(newCakeEffects);
     }
 
-    public static void setEffectsOnHolders(Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> newCakeEffects) {
+    public static void setEffectsOnHolders(Map<CakeEffectsHolder, Map<Holder<MobEffect>, Pair<Integer, Integer>>> newCakeEffects) {
         CAKE_EFFECTS.forEach((holder, mobEffectPairMap) -> holder.clear());
         CAKE_EFFECTS.clear();
 

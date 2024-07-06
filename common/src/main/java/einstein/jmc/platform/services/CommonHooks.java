@@ -7,8 +7,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
 public interface CommonHooks {
@@ -18,8 +16,6 @@ public interface CommonHooks {
     void fireSmeltEvent(Player player, ItemStack stack);
 
     void openMenu(ServerPlayer player, MenuDataProvider provider);
-
-    void registerBrewingRecipe(Potion potion, Ingredient ingredient, Potion result);
 
     default void registerCompostable(ItemLike item, float chance) {
         if (item != null) {

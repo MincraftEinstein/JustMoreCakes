@@ -7,6 +7,7 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.registry.RecipeManagerContext;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,18 +17,18 @@ public class MixingDisplay extends BasicDisplay {
 
     private final int mixingTime;
 
-    public MixingDisplay(MixingRecipe recipe) {
-        this(EntryIngredients.ofIngredients(recipe.getIngredients()),
-                Collections.singletonList(EntryIngredients.of(recipe.getResultItem(registryAccess()))),
-                recipe, recipe.getMixingTime());
+    public MixingDisplay(RecipeHolder<MixingRecipe> holder) {
+        this(EntryIngredients.ofIngredients(holder.value().getIngredients()),
+                Collections.singletonList(EntryIngredients.of(holder.value().getResultItem(registryAccess()))),
+                holder, holder.value().getMixingTime());
     }
 
     public MixingDisplay(List<EntryIngredient> ingredients, List<EntryIngredient> results, CompoundTag tag) {
-        this(ingredients, results, (MixingRecipe) RecipeManagerContext.getInstance().byId(tag, "location"), tag.getInt("MixingTime"));
+        this(ingredients, results, RecipeManagerContext.getInstance().byId(tag, "location"), tag.getInt("MixingTime"));
     }
 
-    public MixingDisplay(List<EntryIngredient> ingredients, List<EntryIngredient> results, MixingRecipe recipe, int mixingTime) {
-        super(CakeOvenDisplay.fillWithEmpty(ingredients), results, Optional.ofNullable(recipe).map(MixingRecipe::getId));
+    public MixingDisplay(List<EntryIngredient> ingredients, List<EntryIngredient> results, RecipeHolder<?> holder, int mixingTime) {
+        super(CakeOvenDisplay.fillWithEmpty(ingredients), results, Optional.ofNullable(holder).map(RecipeHolder::id));
         this.mixingTime = mixingTime;
     }
 

@@ -9,7 +9,7 @@ public class ItemStorageRemoverProvider implements IBlockComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
-        tooltip.remove(Identifiers.UNIVERSAL_ITEM_STORAGE);
+        tooltip.remove(JadeIds.UNIVERSAL_ITEM_STORAGE);
     }
 
     @Override

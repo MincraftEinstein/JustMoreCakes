@@ -1,10 +1,10 @@
 package einstein.jmc.mixin;
 
-import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
+import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.data.SerializableMobEffectInstance;
+import einstein.jmc.init.ModTriggerTypes;
 import einstein.jmc.util.CakeUtil;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -38,22 +39,21 @@ public class CakeBlockMixin implements CakeEffectsHolder {
     @Unique
     private final CakeBlock justMoreCakes$me = (CakeBlock) (Object) this;
 
-    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
-        ItemStack stack = player.getItemInHand(hand);
+    @Inject(method = "useItemOn", at = @At("HEAD"), cancellable = true)
+    private void use(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<ItemInteractionResult> cir) {
         Item item = stack.getItem();
 
         if (stack.is(ItemTags.CANDLES) && state.getValue(CakeBlock.BITES) == 0) {
             Block block = Block.byItem(item);
-            if (block instanceof CandleBlock) {
-                Block.pushEntitiesUp(state, CandleCakeBlock.byCandle(block), level, pos);
+            if (block instanceof CandleBlock candleBlock) {
+                Block.pushEntitiesUp(state, CandleCakeBlock.byCandle(candleBlock), level, pos);
             }
         }
 
         if (justMoreCakes$me.equals(Blocks.CAKE)) {  // Need to check that this is the default cake, so that things won't break with inheritance
             if (stack.is(Items.CAKE)) {
                 if (CakeUtil.convertToTwoTiered(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack).consumesAction()) {
-                    cir.setReturnValue(InteractionResult.SUCCESS);
+                    cir.setReturnValue(ItemInteractionResult.SUCCESS);
                 }
             }
         }
@@ -70,7 +70,7 @@ public class CakeBlockMixin implements CakeEffectsHolder {
         }
 
         if (player instanceof ServerPlayer serverPlayer) {
-            JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, cake);
+            ModTriggerTypes.CAKE_EATEN.get().trigger(serverPlayer, cake);
         }
     }
 

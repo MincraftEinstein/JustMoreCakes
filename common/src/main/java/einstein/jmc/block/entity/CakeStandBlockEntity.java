@@ -2,6 +2,7 @@ package einstein.jmc.block.entity;
 
 import einstein.jmc.init.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -29,15 +30,15 @@ public class CakeStandBlockEntity extends BlockEntity {
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
         CompoundTag tag = new CompoundTag();
         saveStoredBlock(tag);
         return tag;
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         ResourceLocation blockKey = ResourceLocation.tryParse(tag.getString("StoredBlock"));
         if (blockKey != null) {
             storedBlock = BuiltInRegistries.BLOCK.get(blockKey);
@@ -46,8 +47,8 @@ public class CakeStandBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
         saveStoredBlock(tag);
     }
 

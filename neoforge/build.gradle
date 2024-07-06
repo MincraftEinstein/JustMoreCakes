@@ -1,0 +1,57 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.gradle.userdev' version '7.0.145'
+}
+
+minecraft.accessTransformers.file('src/main/resources/META-INF/accesstransformer.cfg')
+
+runs {
+    configureEach {
+        modSource project.sourceSets.main
+    }
+
+    client {
+        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    server {
+        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        programArgument '--nogui'
+    }
+
+    gameTestServer {
+        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    data {
+        programArguments.addAll '--mod', project.mod_id, '--client', '--dev', '--reports', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neoforge_version}"
+
+    runtimeOnly("curse.maven:catalogue-459701:${neoforge_catalogue_version}")
+    runtimeOnly("curse.maven:configured-457570:${neoforge_configured_version}")
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+//    runtimeOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}")
+
+    implementation("curse.maven:cake-chomps-307943:${neoforge_cake_chomps_version}")
+    implementation("me.shedaniel.cloth:cloth-config-neoforge:${cloth_config_version}")
+    implementation("dev.architectury:architectury-neoforge:${architectury_version}")
+    implementation("fuzs.forgeconfigapiport:forgeconfigapiport-neoforge:${config_port_version}")
+    implementation("maven.modrinth:jade:${neoforge_jade_version}")
+    compileOnly("maven.modrinth:moonlight:${neoforge_moonlight_version}")
+    compileOnly("maven.modrinth:amendments:${neoforge_amendments_version}")
+    implementation("mysticdrew:common-networking-neoforge:${networking_version}-${minecraft_version}")
+
+    compileOnly(testCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
+    compileOnly(testCompileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"))
+    compileOnly(testCompileOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"))
+}
+
+processResources {
+    exclude("${mod_id}.accesswidener")
+}

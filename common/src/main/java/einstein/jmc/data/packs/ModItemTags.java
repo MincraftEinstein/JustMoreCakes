@@ -22,7 +22,7 @@ public class ModItemTags {
     public static final TagKey<Item> C_CAKES = createC("cakes");
 
     private static TagKey<Item> createC(String string) {
-        return TagKey.create(Registries.ITEM, new ResourceLocation("c", string));
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", string));
     }
 
     private static TagKey<Item> create(String string) {

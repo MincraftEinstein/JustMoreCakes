@@ -5,18 +5,21 @@ import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.util.Util;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
+import java.util.concurrent.CompletableFuture;
+
 import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
 
 public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
 
-    public ModBlockLootTableProvider(FabricDataOutput output) {
-        super(output);
+    public ModBlockLootTableProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider);
     }
 
     @Override

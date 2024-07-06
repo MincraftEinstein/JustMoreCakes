@@ -3,9 +3,11 @@ package einstein.jmc.item.crafting;
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModRecipes;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -14,16 +16,14 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
+public class MixingRecipe implements Recipe<ContainerRecipeInput> {
 
-    protected final ResourceLocation id;
     protected final NonNullList<Ingredient> ingredients;
     protected final ItemStack result;
     protected final ResourceLocation contentsId;
     protected final int mixingTime;
 
-    public MixingRecipe(ResourceLocation id, NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation contentsId, int mixingTime) {
-        this.id = id;
+    public MixingRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation contentsId, int mixingTime) {
         this.ingredients = ingredients;
         this.result = result;
         this.contentsId = contentsId;
@@ -31,13 +31,13 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
     }
 
     @Override
-    public boolean matches(CeramicBowlBlockEntity container, Level level) {
+    public boolean matches(ContainerRecipeInput input, Level level) {
         StackedContents contents = new StackedContents();
         int stacks = 0;
 
-        for (int i = 0; i < container.getContainerSize(); i++) {
+        for (int i = 0; i < input.size(); i++) {
             if (i != CeramicBowlBlockEntity.RESULT_SLOT) {
-                ItemStack stack = container.getItem(i);
+                ItemStack stack = input.getItem(i);
                 if (!stack.isEmpty()) {
                     stacks++;
                     contents.accountStack(stack, 1);
@@ -49,7 +49,7 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
     }
 
     @Override
-    public ItemStack assemble(CeramicBowlBlockEntity container, RegistryAccess access) {
+    public ItemStack assemble(ContainerRecipeInput input, HolderLookup.Provider provider) {
         return result.copy();
     }
 
@@ -64,13 +64,8 @@ public class MixingRecipe implements Recipe<CeramicBowlBlockEntity> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess access) {
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         return result;
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return id;
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
 import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.init.ModItems;
@@ -28,6 +30,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -177,10 +180,9 @@ public class Util {
                         .hasProperty(BaseThreeTieredCakeBlock.HALF, DoubleBlockHalf.UPPER)));
     }
 
-    public static void removeRecipe(RecipeManager recipeManager, RecipeType<?> type, ResourceLocation id) {
+    public static void removeRecipe(RecipeManager recipeManager, ResourceLocation id) {
         RecipeManagerAccessor manager = (RecipeManagerAccessor) recipeManager;
-        Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipesByType = new HashMap<>(manager.getRecipes());
-        Map<ResourceLocation, Recipe<?>> recipes = new HashMap<>(recipesByType.get(type));
+        Map<ResourceLocation, RecipeHolder<?>> recipes = new HashMap<>(manager.getRecipes());
 
         for (ResourceLocation recipeId : recipes.keySet()) {
             if (recipeId.equals(id)) {
@@ -189,18 +191,16 @@ public class Util {
             }
         }
 
-        recipesByType.replace(type, recipes);
-        manager.setRecipes(recipesByType);
+        manager.setRecipes(recipes);
     }
 
     public static void applyEffectFromInstance(SerializableMobEffectInstance holder, LivingEntity entity) {
         MobEffectInstance instance = holder.toInstance();
-        if (holder.effect().isInstantenous()) {
-            instance.getEffect().applyInstantenousEffect(entity, entity, entity, instance.getAmplifier(), 1);
+        if (holder.getEffect().isInstantenous()) {
+            instance.getEffect().value().applyInstantenousEffect(entity, entity, entity, instance.getAmplifier(), 1);
+            return;
         }
-        else {
-            entity.addEffect(instance);
-        }
+        entity.addEffect(instance);
     }
 
     public static void bounceUp(Entity entity) {
@@ -236,5 +236,20 @@ public class Util {
             throw new UnsupportedOperationException("Failed to get registry access. Level was null");
         }
         throw new UnsupportedOperationException("Failed to get registry access. Server was null");
+    }
+
+    public static <T extends Block> Codec<T> blockOfTypeCodec(Class<T> clazz) {
+        return BuiltInRegistries.BLOCK.byNameCodec().flatXmap(
+                block -> checkInstanceOf(block, clazz, "block"),
+                t -> checkInstanceOf(t, clazz, "block")
+        );
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T, V extends T> DataResult<V> checkInstanceOf(T object, Class<V> clazz, String msg) {
+        if (clazz.isInstance(object)) {
+            return (DataResult<V>) DataResult.success(object);
+        }
+        return DataResult.error(() -> "Expected " + msg + " to be of " + clazz + " was " + object.getClass());
     }
 }

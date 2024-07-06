@@ -26,8 +26,8 @@ import java.util.function.Supplier;
 
 public class ModItemTagsProvider extends ItemTagsProvider {
 
-    public static final TagKey<Item> F_CHEESE = ItemTags.create(new ResourceLocation("forge", "cheese"));
-    public static final TagKey<Item> F_CAKES = ItemTags.create(new ResourceLocation("forge", "cakes"));
+    public static final TagKey<Item> F_CHEESE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "cheese"));
+    public static final TagKey<Item> F_CAKES = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "cakes"));
 
     public ModItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTags, JustMoreCakes.MOD_ID, existingFileHelper);

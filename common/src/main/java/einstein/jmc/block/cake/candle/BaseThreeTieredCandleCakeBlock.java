@@ -9,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +31,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.UPPER;
@@ -57,15 +61,27 @@ public class BaseThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        return preformUse(state, level, pos, (aboveState, abovePos) -> aboveState.useItemOn(stack, level, player, hand, hitResult.withPosition(abovePos)),
+                () -> super.useItemOn(stack, state, level, pos, player, hand, hitResult));
+    }
+
+    @Override
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        return preformUse(state, level, pos, (aboveState, abovePos) -> aboveState.useWithoutItem(level, player, hitResult.withPosition(abovePos)),
+                () -> super.useWithoutItem(state, level, pos, player, hitResult));
+    }
+
+    private <T> T preformUse(BlockState state, Level level, BlockPos pos, BiFunction<BlockState, BlockPos, T> call, Supplier<T> superResult) {
         if (state.getValue(HALF) == LOWER) {
             BlockPos abovePos = pos.above();
             BlockState aboveState = level.getBlockState(abovePos);
+
             if (aboveState.is(this) && aboveState.getValue(HALF) == UPPER) {
-                return aboveState.use(level, player, hand, hitResult.withPosition(abovePos));
+                return call.apply(aboveState, abovePos);
             }
         }
-        return super.use(state, level, pos, player, hand, hitResult);
+        return superResult.get();
     }
 
     @Override
@@ -98,12 +114,13 @@ public class BaseThreeTieredCandleCakeBlock extends BaseCandleCakeBlock {
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide()) {
             CakeUtil.destroyOppositeHalf(state, pos, level, ItemStack.EMPTY, !player.isCreative());
         }
 
         super.playerWillDestroy(level, pos, state, player);
+        return state;
     }
 
     @Nullable

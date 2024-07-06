@@ -1,29 +1,27 @@
 package einstein.jmc.data;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import einstein.jmc.block.entity.CeramicBowlBlockEntity;
-import einstein.jmc.init.ModRecipes;
-import einstein.jmc.util.Util;
+import einstein.jmc.item.crafting.MixingRecipe;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.NonNullList;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.function.Consumer;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class MixingRecipeBuilder implements RecipeBuilder {
 
@@ -33,7 +31,7 @@ public class MixingRecipeBuilder implements RecipeBuilder {
     private final ResourceLocation contents;
     private final int count;
     private final int mixingTime;
-    private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
+    private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
     private MixingRecipeBuilder(RecipeCategory category, NonNullList<Ingredient> ingredients, ItemLike result, ResourceLocation contents, int count, int mixingTime) {
         this.category = category;
@@ -71,8 +69,8 @@ public class MixingRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public RecipeBuilder unlockedBy(String name, CriterionTriggerInstance trigger) {
-        advancement.addCriterion(name, trigger);
+    public RecipeBuilder unlockedBy(String name, Criterion<?> criterion) {
+        criteria.put(name, criterion);
         return this;
     }
 
@@ -87,53 +85,21 @@ public class MixingRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeId) {
-        if (advancement.getCriteria().isEmpty()) {
+    public void save(RecipeOutput output, ResourceLocation recipeId) {
+        if (criteria.isEmpty()) {
             throw new IllegalStateException("No way of obtaining recipe: " + recipeId);
         }
 
-        advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId))
-                .rewards(AdvancementRewards.Builder.recipe(recipeId)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new Result(recipeId, this, recipeId.withPrefix("recipes/" + category.getFolderName() + "/")));
-    }
+        Advancement.Builder builder = output.advancement()
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId))
+                .rewards(AdvancementRewards.Builder.recipe(recipeId))
+                .requirements(AdvancementRequirements.Strategy.OR);
 
-    public record Result(ResourceLocation recipeId, MixingRecipeBuilder builder,
-                         ResourceLocation advancementId) implements FinishedRecipe {
+        criteria.forEach(builder::addCriterion);
 
-        @Override
-        public void serializeRecipeData(JsonObject json) {
-            JsonArray jsonIngredients = new JsonArray(CeramicBowlBlockEntity.INGREDIENT_SLOT_COUNT);
-
-            for (Ingredient ingredient : builder.ingredients) {
-                jsonIngredients.add(ingredient.toJson());
-            }
-
-            json.add("ingredients", jsonIngredients);
-            json.addProperty("mixingTime", builder.mixingTime);
-            json.addProperty("contents", builder.contents.toString());
-            Util.serializeResult(json, builder.result, builder.count);
-        }
-
-        @Override
-        public ResourceLocation getId() {
-            return recipeId;
-        }
-
-        @Override
-        public RecipeSerializer<?> getType() {
-            return ModRecipes.MIXING_SERIALIZER.get();
-        }
-
-        @Nullable
-        @Override
-        public JsonObject serializeAdvancement() {
-            return builder.advancement.serializeToJson();
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getAdvancementId() {
-            return advancementId;
-        }
+        output.accept(recipeId,
+                new MixingRecipe(ingredients, new ItemStack(result, count), contents, mixingTime),
+                builder.build(recipeId.withPrefix("recipes/" + category.getFolderName() + "/"))
+        );
     }
 }

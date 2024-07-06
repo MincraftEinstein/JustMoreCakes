@@ -4,13 +4,12 @@ import einstein.jmc.block.CeramicBowlBlock;
 import einstein.jmc.data.BowlContents;
 import einstein.jmc.init.ModBlockEntityTypes;
 import einstein.jmc.init.ModRecipes;
+import einstein.jmc.item.crafting.ContainerRecipeInput;
 import einstein.jmc.item.crafting.MixingRecipe;
+import einstein.jmc.util.Util;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
-import net.minecraft.core.NonNullList;
+import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -22,11 +21,11 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
-import net.minecraft.world.inventory.RecipeHolder;
+import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -39,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
+public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible {
 
     public static final int INGREDIENT_SLOT_COUNT = 4;
     public static final int SLOT_COUNT = 5;
@@ -48,7 +47,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     private final NonNullList<ItemStack> stacks = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
     private final NonNullList<ItemStack> remainingItems = NonNullList.withSize(INGREDIENT_SLOT_COUNT, ItemStack.EMPTY);
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
-    private final RecipeManager.CachedCheck<CeramicBowlBlockEntity, MixingRecipe> quickCheck = RecipeManager.createCheck(ModRecipes.MIXING_RECIPE.get());
+    private final RecipeManager.CachedCheck<ContainerRecipeInput, MixingRecipe> quickCheck = RecipeManager.createCheck(ModRecipes.MIXING_RECIPE.get());
     private int mixingProgress;
     private Holder<BowlContents> contentsHolder = BowlContents.EMPTY.getHolder();
 
@@ -57,11 +56,13 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     }
 
     public boolean tryCraft(Player player) {
-        Optional<MixingRecipe> matchingRecipe = getMatchingRecipe();
+        Optional<RecipeHolder<MixingRecipe>> matchingRecipe = getMatchingRecipe();
 
         if (matchingRecipe.isPresent()) {
-            MixingRecipe recipe = matchingRecipe.get();
-            ItemStack resultStack = recipe.assemble(this, level.registryAccess());
+            RecipeHolder<MixingRecipe> recipeHolder = matchingRecipe.get();
+            MixingRecipe recipe = recipeHolder.value();
+            ItemStack resultStack = recipe.assemble(new ContainerRecipeInput(this), level.registryAccess());
+
             if (!resultStack.isEmpty()) {
                 if (mixingProgress < (recipe.getMixingTime() - 1) && !isEmpty()) {
                     mixingProgress++;
@@ -85,7 +86,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
                 recipe.consumeIngredients(this);
                 level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(CeramicBowlBlock.FILL_LEVEL, 4));
                 contentsChanged(player);
-                setRecipeUsed(recipe);
+                setRecipeUsed(recipeHolder);
                 awardUsedRecipes(player, stacks);
                 return true;
             }
@@ -255,7 +256,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     @Override
     public void setItem(int slotIndex, ItemStack stack) {
         ItemStack currentStack = stacks.get(slotIndex);
-        boolean isSameStack = !stack.isEmpty() && ItemStack.isSameItemSameTags(stack, currentStack);
+        boolean isSameStack = !stack.isEmpty() && ItemStack.isSameItemSameComponents(stack, currentStack);
         stacks.set(slotIndex, stack);
 
         if (stack.getCount() > getMaxStackSize()) {
@@ -292,41 +293,40 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
         CompoundTag tag = new CompoundTag();
-        ContainerHelper.saveAllItems(tag, stacks);
+        ContainerHelper.saveAllItems(tag, stacks, provider);
         contentsHolder.unwrapKey().ifPresent(key -> tag.putString("Contents", key.location().toString()));
         return tag;
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         stacks.clear();
-        ContainerHelper.loadAllItems(tag, stacks);
-        ContainerHelper.loadAllItems(tag.getCompound("RemainingItems"), remainingItems);
-        setResult(ItemStack.of(tag.getCompound("ResultStack")));
+        ContainerHelper.loadAllItems(tag, stacks, provider);
+        ContainerHelper.loadAllItems(tag.getCompound("RemainingItems"), remainingItems, provider);
+        setResult(ItemStack.parseOptional(provider, tag.getCompound("ResultStack")));
+        var v = Util.getRegistryAccess();
         Optional.ofNullable(ResourceLocation.tryParse(tag.getString("Contents")))
                 .map(id -> BowlContents.getHolder(level, id))
                 .ifPresent(holder -> contentsHolder = holder);
         mixingProgress = tag.getInt("MixingProgress");
-        CompoundTag recipesUsed = tag.getCompound("RecipesUsed");
+        CompoundTag usedRecipes = tag.getCompound("RecipesUsed");
 
-        for (String recipeId : recipesUsed.getAllKeys()) {
-            this.recipesUsed.put(new ResourceLocation(recipeId), recipesUsed.getInt(recipeId));
+        for (String recipeId : usedRecipes.getAllKeys()) {
+            recipesUsed.put(ResourceLocation.parse(recipeId), usedRecipes.getInt(recipeId));
         }
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, stacks);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
+        ContainerHelper.saveAllItems(tag, stacks, provider);
         CompoundTag remainingItemsTag = new CompoundTag();
-        ContainerHelper.saveAllItems(remainingItemsTag, remainingItems);
+        ContainerHelper.saveAllItems(remainingItemsTag, remainingItems, provider);
         tag.put("RemainingItems", remainingItemsTag);
-        CompoundTag resultTag = new CompoundTag();
-        getResult().save(resultTag);
-        tag.put("ResultStack", resultTag);
+        tag.put("ResultStack", getResult().saveOptional(provider));
         contentsHolder.unwrapKey().ifPresent(key -> tag.putString("Contents", key.location().toString()));
         tag.putInt("MixingProgress", mixingProgress);
         CompoundTag recipesUsed = new CompoundTag();
@@ -335,15 +335,15 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
     }
 
     @Override
-    public void setRecipeUsed(@Nullable Recipe<?> recipe) {
+    public void setRecipeUsed(@Nullable RecipeHolder<?> recipe) {
         if (recipe != null) {
-            recipesUsed.addTo(recipe.getId(), 1);
+            recipesUsed.addTo(recipe.id(), 1);
         }
     }
 
     @Nullable
     @Override
-    public Recipe<?> getRecipeUsed() {
+    public RecipeHolder<?> getRecipeUsed() {
         return null;
     }
 
@@ -353,16 +353,16 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
             return;
         }
 
-        List<Recipe<?>> recipes = new ArrayList<>();
+        List<RecipeHolder<?>> recipeHolders = new ArrayList<>();
 
         for (Object2IntMap.Entry<ResourceLocation> entry : recipesUsed.object2IntEntrySet()) {
-            level.getRecipeManager().byKey(entry.getKey()).ifPresent(recipe -> {
-                recipes.add(recipe);
-                player.triggerRecipeCrafted(recipe, stacks);
+            level.getRecipeManager().byKey(entry.getKey()).ifPresent(holder -> {
+                recipeHolders.add(holder);
+                player.triggerRecipeCrafted(holder, stacks);
             });
         }
 
-        player.awardRecipes(recipes);
+        player.awardRecipes(recipeHolders);
         recipesUsed.clear();
     }
 
@@ -389,7 +389,7 @@ public class CeramicBowlBlockEntity extends BlockEntity implements WorldlyContai
         return mixingProgress;
     }
 
-    public Optional<MixingRecipe> getMatchingRecipe() {
-        return quickCheck.getRecipeFor(this, level);
+    public Optional<RecipeHolder<MixingRecipe>> getMatchingRecipe() {
+        return quickCheck.getRecipeFor(new ContainerRecipeInput(this), level);
     }
 }

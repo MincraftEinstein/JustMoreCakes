@@ -1,6 +1,7 @@
 package einstein.jmc.block.cake;
 
 import einstein.jmc.JustMoreCakes;
+import einstein.jmc.init.ModTriggerTypes;
 import einstein.jmc.registration.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -33,7 +34,7 @@ public class ObsidianThreeTieredCakeBlock extends BaseThreeTieredCakeBlock {
         level.setBlockAndUpdate(pos, state);
 
         if (player instanceof ServerPlayer serverPlayer) {
-            JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, this);
+            ModTriggerTypes.CAKE_EATEN.get().trigger(serverPlayer, this);
         }
 
         return InteractionResult.SUCCESS;

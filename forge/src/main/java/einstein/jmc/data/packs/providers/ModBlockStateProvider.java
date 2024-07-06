@@ -199,7 +199,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private static ResourceLocation getCandleTexture(ResourceLocation candleType, String litName) {
-        return new ResourceLocation(candleType.getNamespace(), blockLoc(candleType.getPath() + "candle" + litName));
+        return ResourceLocation.fromNamespaceAndPath(candleType.getNamespace(), blockLoc(candleType.getPath() + "candle" + litName));
     }
 
     private void createCake(BaseCakeBlock cake, String texturePrefix, String name, @Nullable ResourceLocation crossTexture) {
@@ -409,7 +409,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void createFromVanillaCandleCake(VariantBlockStateBuilder.PartialBlockstate partialState, ResourceLocation candleType, String modId, String name, boolean isLit) {
         String litName = isLit ? "_lit" : "";
         partialState.with(AbstractCandleBlock.LIT, isLit)
-                .addModels(new ConfiguredModel(models().getExistingFile(new ResourceLocation(modId, candleType.getPath() + "candle_" + name + litName))));
+                .addModels(new ConfiguredModel(models().getExistingFile(ResourceLocation.fromNamespaceAndPath(modId, candleType.getPath() + "candle_" + name + litName))));
     }
 
     private void createFromVanillaThreeTieredCandleCake(VariantBlockStateBuilder.PartialBlockstate partialState, ResourceLocation candleType, DoubleBlockHalf half, boolean isLit) {

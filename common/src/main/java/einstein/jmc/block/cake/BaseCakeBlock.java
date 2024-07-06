@@ -1,8 +1,5 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.JustMoreCakes;
-import einstein.jmc.registration.family.CakeFamily;
-import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.data.SerializableMobEffectInstance;
@@ -10,8 +7,12 @@ import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModClientConfigs;
 import einstein.jmc.init.ModCommonConfigs;
+import einstein.jmc.init.ModTriggerTypes;
 import einstein.jmc.platform.Services;
-import einstein.jmc.util.*;
+import einstein.jmc.registration.CakeVariant;
+import einstein.jmc.registration.family.CakeFamily;
+import einstein.jmc.util.CakeUtil;
+import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustColorTransitionOptions;
@@ -25,6 +26,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -97,8 +99,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        ItemStack stack = player.getItemInHand(hand);
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         Item item = stack.getItem();
         CakeFamily family = getFamily();
 
@@ -118,7 +119,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                     player.awardStat(Stats.ITEM_USED.get(item));
                     afterCandlePlaced(level, state, pos, candleCake);
                     Block.pushEntitiesUp(state, newState, level, pos);
-                    return InteractionResult.SUCCESS;
+                    return ItemInteractionResult.SUCCESS;
                 }
             }
         }
@@ -126,25 +127,30 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         if (family != null && isBaseVariant()) {
             if (stack.is(family.getBaseCake().get().asItem())) {
                 if (CakeUtil.convertToTwoTiered(family, state, pos, level, player, stack).consumesAction()) {
-                    return InteractionResult.SUCCESS;
+                    return ItemInteractionResult.SUCCESS;
                 }
             }
         }
 
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    public void afterCandlePlaced(Level level, BlockState state, BlockPos pos, BaseCandleCakeBlock candleCake) {
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (level.isClientSide) {
             if (eat(level, pos, state, player).consumesAction()) {
                 return InteractionResult.SUCCESS;
             }
 
-            if (stack.isEmpty()) {
+            if (player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()) {
                 return InteractionResult.CONSUME;
             }
         }
 
         return eat(level, pos, state, player);
-    }
-
-    public void afterCandlePlaced(Level level, BlockState state, BlockPos pos, BaseCandleCakeBlock candleCake) {
     }
 
     public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
@@ -170,7 +176,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         }
 
         if (player instanceof ServerPlayer serverPlayer) {
-            JustMoreCakes.CAKE_EATEN_TRIGGER.trigger(serverPlayer, this);
+            ModTriggerTypes.CAKE_EATEN.get().trigger(serverPlayer, this);
         }
 
         int bite = state.getValue(getBites());
@@ -195,7 +201,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
         if (CakeUtil.inFamily(state, ModBlocks.FIREY_CAKE_FAMILY)) {
-            player.setSecondsOnFire(ModCommonConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
+            player.setRemainingFireTicks(ModCommonConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
         }
         else if (CakeUtil.inFamily(state, ModBlocks.ICE_CAKE_FAMILY)) {
             player.clearFire();
@@ -237,13 +243,13 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     @Override
-    public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType computation) {
+    public boolean isPathfindable(BlockState state, PathComputationType computationType) {
         return false;
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
-        ItemStack stack = super.getCloneItemStack(getter, pos, state);
+    public ItemStack getCloneItemStack(LevelReader reader, BlockPos pos, BlockState state) {
+        ItemStack stack = super.getCloneItemStack(reader, pos, state);
         if (stack.isEmpty() && getFamily() != null) {
             return new ItemStack(getFamily().getBaseCake().get());
         }

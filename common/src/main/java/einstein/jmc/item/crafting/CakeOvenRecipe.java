@@ -3,6 +3,7 @@ package einstein.jmc.item.crafting;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModRecipes;
 import einstein.jmc.util.CakeOvenConstants;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -16,16 +17,14 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
+public class CakeOvenRecipe implements Recipe<ContainerRecipeInput>, CakeOvenConstants {
 
-    protected final ResourceLocation id;
     protected final ItemStack result;
     protected final float experience;
     protected final int cookingTime;
     protected final NonNullList<Ingredient> ingredients;
 
-    public CakeOvenRecipe(ResourceLocation id, NonNullList<Ingredient> ingredients, ItemStack result, float experience, int cookingTime) {
-        this.id = id;
+    public CakeOvenRecipe(NonNullList<Ingredient> ingredients, ItemStack result, float experience, int cookingTime) {
         this.ingredients = ingredients;
         this.result = result;
         this.experience = experience;
@@ -33,18 +32,13 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
     }
 
     @Override
-    public ResourceLocation getId() {
-        return id;
-    }
-
-    @Override
-    public boolean matches(Container container, Level level) {
+    public boolean matches(ContainerRecipeInput input, Level level) {
         StackedContents contents = new StackedContents();
         int stacks = 0;
 
-        for (int i = 0; i < container.getContainerSize(); i++) {
+        for (int i = 0; i < input.size(); i++) {
             if (i != RESULT_SLOT && i != FUEL_SLOT) {
-                ItemStack stack = container.getItem(i);
+                ItemStack stack = input.getItem(i);
                 if (!stack.isEmpty()) {
                     stacks++;
                     contents.accountStack(stack, 1);
@@ -56,7 +50,7 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
     }
 
     @Override
-    public ItemStack assemble(Container container, RegistryAccess access) {
+    public ItemStack assemble(ContainerRecipeInput input, HolderLookup.Provider provider) {
         return result.copy();
     }
 
@@ -71,7 +65,7 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess access) {
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         return result;
     }
 
@@ -118,7 +112,7 @@ public class CakeOvenRecipe implements Recipe<Container>, CakeOvenConstants {
                         for (int i3 = 0; i3 < remainingItems.size(); i3++) {
                             ItemStack remainingItem = remainingItems.get(i3);
                             if (!remainingItem.isEmpty()) {
-                                if (ItemStack.isSameItemSameTags(remainingStack, remainingItem)) {
+                                if (ItemStack.isSameItemSameComponents(remainingStack, remainingItem)) {
                                     remainingItem.grow(remainingStack.getCount());
                                     remainingItems.set(i3, remainingItem);
                                     remainingStack = remainingItems.get(i3);

@@ -7,6 +7,7 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.registration.family.CakeFamily;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static einstein.jmc.JustMoreCakes.LOGGER;
 
@@ -24,9 +26,9 @@ public class ClientboundCakeEffectsPacket {
     private static final int BLOCK = 0;
     private static final int FAMILY = 1;
 
-    private final Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> effects;
+    private final Map<CakeEffectsHolder, Map<Holder<MobEffect>, Pair<Integer, Integer>>> effects;
 
-    public ClientboundCakeEffectsPacket(Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> effects) {
+    public ClientboundCakeEffectsPacket(Map<CakeEffectsHolder, Map<Holder<MobEffect>, Pair<Integer, Integer>>> effects) {
         this.effects = effects;
     }
 
@@ -56,7 +58,7 @@ public class ClientboundCakeEffectsPacket {
             combinedEffects.forEach((effect, pair) -> {
                 buf.writeInt(pair.getFirst());
                 buf.writeInt(pair.getSecond());
-                ResourceLocation mobEffectId = BuiltInRegistries.MOB_EFFECT.getKey(effect);
+                ResourceLocation mobEffectId = BuiltInRegistries.MOB_EFFECT.getKey(effect.value());
                 if (mobEffectId != null) {
                     buf.writeResourceLocation(mobEffectId);
                 }
@@ -68,7 +70,7 @@ public class ClientboundCakeEffectsPacket {
     }
 
     public static ClientboundCakeEffectsPacket decode(FriendlyByteBuf buf) {
-        Map<CakeEffectsHolder, Map<MobEffect, Pair<Integer, Integer>>> effects = new HashMap<>();
+        Map<CakeEffectsHolder, Map<Holder<MobEffect>, Pair<Integer, Integer>>> effects = new HashMap<>();
         int size = buf.readInt();
 
         for (int i = 0; i < size; i++) {
@@ -88,16 +90,16 @@ public class ClientboundCakeEffectsPacket {
             }
 
             int combinedEffectsListSize = buf.readInt();
-            Map<MobEffect, Pair<Integer, Integer>> combinedEffects = new HashMap<>();
+            Map<Holder<MobEffect>, Pair<Integer, Integer>> combinedEffects = new HashMap<>();
 
             for (int i1 = 0; i1 < combinedEffectsListSize; i1++) {
                 int duration = buf.readInt();
                 int amplifier = buf.readInt();
                 ResourceLocation effectId = buf.readResourceLocation();
-                MobEffect effect = BuiltInRegistries.MOB_EFFECT.get(effectId);
+                Optional<Holder.Reference<MobEffect>> effect = BuiltInRegistries.MOB_EFFECT.getHolder(effectId);
 
-                if (effect != null) {
-                    combinedEffects.put(effect, Pair.of(duration, amplifier));
+                if (effect.isPresent()) {
+                    combinedEffects.put(effect.get(), Pair.of(duration, amplifier));
                 }
                 else {
                     LOGGER.warn("Received cake effects with unknown mob effect: {}", effectId);

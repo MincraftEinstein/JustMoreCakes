@@ -1,0 +1,48 @@
+modLoader = "javafml"
+loaderVersion = "${neoforge_loader_version_range}"
+license = "All right reserved"
+issueTrackerURL="https://github.com/MincraftEinstein/JustMoreCakes/issues"
+
+[[mods]]
+    modId = "jmc"
+    version = "${version}"
+    displayName = "Just More Cakes!"
+    #updateJSONURL="https://change.me.example.invalid/updates.json"
+    displayURL = "https://www.curseforge.com/minecraft/mc-mods/just-more-cakes"
+    logoFile = "pack.png"
+    authors = "${mod_author}"
+    description = "${description}"
+
+[[accessTransformers]]
+    file = "META-INF/accesstransformer.cfg"
+
+[[mixins]]
+    config = "${mod_id}.mixins.json"
+
+[[dependencies.jmc]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "[${neoforge_version},)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.jmc]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "${minecraft_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.jmc]]
+    modId = "commonnetworking"
+    type = "required"
+    versionRange = "[${networking_version},)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.jmc]]
+    modId = "forgeconfigapiport"
+    type = "required"
+    versionRange = "[${config_port_version},)"
+    ordering = "NONE"
+    side = "BOTH"

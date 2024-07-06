@@ -1,6 +1,7 @@
 modLoader = "javafml"
-loaderVersion = "[47,)"
+loaderVersion = "${forge_loader_version_range}"
 license = "All rights reserved"
+issueTrackerURL = "https://github.com/MincraftEinstein/JustMoreCakes/issues"
 
 [[mods]]
     modId = "jmc"
@@ -8,14 +9,11 @@ license = "All rights reserved"
     displayName = "Just More Cakes!"
     #updateJSONURL="http://myurl.me/"
     displayURL = "https://www.curseforge.com/minecraft/mc-mods/just-more-cakes"
-    issueTrackerURL = "https://github.com/MincraftEinstein/JustMoreCakes/issues"
     logoFile = "pack.png"
     credits = "Me the mod author"
-    authors = "MincraftEinstein"
+    authors = "${mod_author}"
     displayTest = "MATCH_VERSION"
-    description = '''
-Adds 30 new flavors of cake along with new improvements and mechanics for a better cake experience
-'''
+    description = "${description}"
 
 [modproperties.jmc]
     catalogueImageIcon = "pack.png"
@@ -24,21 +22,21 @@ Adds 30 new flavors of cake along with new improvements and mechanics for a bett
 [[dependencies.jmc]]
     modId = "forge"
     mandatory = true
-    versionRange = "[47.2.0,)"
+    versionRange = "[${forge_version},)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.jmc]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "[1.20.1, 1.20.2]"
+    versionRange = "${minecraft_version_range}"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.jmc]]
     modId = "commonnetworking"
     mandatory = true
-    versionRange = "[1.0.3-1.20.1,)"
+    versionRange = "[${networking_version},)"
     ordering = "NONE"
     side = "BOTH"
 
