@@ -8,6 +8,7 @@ import einstein.jmc.data.NeoForgeCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.NeoForgeRegistryHelper;
+import einstein.jmc.util.CakeUtil;
 import fuzs.forgeconfigapiport.neoforge.api.forge.v4.ForgeConfigRegistry;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.HolderLookup;
@@ -32,6 +33,7 @@ import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
@@ -75,7 +77,7 @@ public class JustMoreCakesNeoForge {
         NeoForge.EVENT_BUS.addListener(this::onServerStarting);
         NeoForge.EVENT_BUS.addListener(this::onVillagerTradesEvent);
         NeoForge.EVENT_BUS.addListener(this::onWanderingTradesEvent);
-//        NeoForge.EVENT_BUS.addListener(this::onBlockBreak); // TODO
+        NeoForge.EVENT_BUS.addListener(this::onBlockDrops);
         NeoForge.EVENT_BUS.addListener(this::registerBrewingRecipes);
         NeoForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, this::onBlockClicked);
 
@@ -108,12 +110,11 @@ public class JustMoreCakesNeoForge {
         generator.addProvider(event.includeClient(), new ModItemModelProvider(output, fileHelper));
     }
 
-    // TODO
-//    void onBlockBreak(BlockEvent.BreakEvent event) {
-//        if (CakeUtil.inFamily(event.getState(), ModBlocks.SCULK_CAKE_FAMILY)) {
-//            event.setExpToDrop(5);
-//        }
-//    }
+    void onBlockDrops(BlockDropsEvent event) {
+        if (CakeUtil.inFamily(event.getState(), ModBlocks.SCULK_CAKE_FAMILY)) {
+            event.setDroppedExperience(5);
+        }
+    }
 
     void onBlockClicked(PlayerInteractEvent.RightClickBlock event) {
         InteractionResult result = JustMoreCakes.blockClicked(event.getEntity(), event.getLevel(), event.getHand(), event.getHitVec());
