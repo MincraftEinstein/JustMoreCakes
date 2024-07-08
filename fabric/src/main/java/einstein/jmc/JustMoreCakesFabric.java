@@ -18,7 +18,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.fabric.api.registry.VillagerInteractionRegistries;
@@ -32,9 +32,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fml.config.ModConfig;
 
-import static einstein.jmc.JustMoreCakes.*;
-import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
+import static einstein.jmc.JustMoreCakes.MOD_ID;
+import static einstein.jmc.JustMoreCakes.loc;
 import static einstein.jmc.util.CakeUtil.getVanillaCandleCakes;
+import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
 
 public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer, DataGeneratorEntrypoint {
 
@@ -118,7 +119,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     }
 
     void modifyLootTables() {
-        LootTableEvents.MODIFY.register((key, builder, source) -> {
+        LootTableEvents.MODIFY.register((key, builder, source, provider) -> {
             if (Blocks.CAKE.getLootTable().equals(key) && source.isBuiltin()) {
                 addDropWhenCakeSpatulaPool(builder, Blocks.CAKE);
             }
