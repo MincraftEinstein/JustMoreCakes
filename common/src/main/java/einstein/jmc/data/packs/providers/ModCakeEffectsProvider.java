@@ -2,20 +2,23 @@ package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.data.CakeEffectsProvider;
+import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModPotions;
-import einstein.jmc.data.SerializableMobEffectInstance;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.effect.MobEffects;
 
+import java.util.concurrent.CompletableFuture;
+
 public class ModCakeEffectsProvider extends CakeEffectsProvider {
 
-    public ModCakeEffectsProvider(PackOutput output) {
-        super(output, JustMoreCakes.MOD_ID);
+    public ModCakeEffectsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, JustMoreCakes.MOD_ID, lookupProvider);
     }
 
     @Override
-    protected void addCakeEffects() {
+    protected void generate() {
         add(ModBlocks.POISON_CAKE_VARIANT.getCake(),
                 new SerializableMobEffectInstance(MobEffects.POISON, 300, 1));
         add(ModBlocks.GOLDEN_APPLE_CAKE_FAMILY,
@@ -46,10 +49,5 @@ public class ModCakeEffectsProvider extends CakeEffectsProvider {
         add(ModBlocks.CREEPER_CAKE_FAMILY,
                 new SerializableMobEffectInstance(MobEffects.LUCK, 600, 1),
                 new SerializableMobEffectInstance(MobEffects.UNLUCK, 600, 1));
-    }
-
-    @Override
-    public String getName() {
-        return "JustMoreCakes cake effects";
     }
 }
