@@ -149,5 +149,15 @@
   "config.jmc.jade.allow_displaying_cake_effects": "Allow Displaying Cake Effects",
   "config.jmc.jade.hide_trapped_cakes": "Hide Trapped Cakes",
   "config.category.jmc.cake_particles": "Cake Particles",
-  "config.category.jmc.jade_plugin": "Jade Plugin"
+  "config.category.jmc.jade_plugin": "Jade Plugin",
+
+  "tag.item.jmc.cakes": "Cakes",
+  "tag.item.c.cakes": "Cakes",
+  "tag.item.c.cheese": "Cheese",
+  "tag.item.c.cheese_cakes": "Cheese Cakes",
+  "tag.item.c.cheesecakes": "Cheesecakes",
+  "tag.item.c.cheeses": "Cheeses",
+  "tag.item.c.red_dye": "Red Dye",
+  "tag.item.c.seeds": "Seeds",
+  "tag.item.c.slime_balls": "Slime Balls"
 }
