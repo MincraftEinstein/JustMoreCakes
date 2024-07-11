@@ -19,6 +19,9 @@ issueTrackerURL="https://github.com/MincraftEinstein/JustMoreCakes/issues"
 [[mixins]]
     config = "${mod_id}.mixins.json"
 
+[[mixins]]
+    config = "${mod_id}.neoforge.mixins.json"
+
 [[dependencies.jmc]]
     modId = "neoforge"
     type = "required"
