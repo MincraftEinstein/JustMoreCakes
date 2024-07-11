@@ -23,7 +23,7 @@ import static einstein.jmc.util.TradesHelper.forItems;
 public class ModVillagers {
 
     public static final Supplier<PoiType> CAKE_BAKER_POI = Services.REGISTRY.registerPOIType("cake_baker", () ->
-            new PoiType(PoiTypes.getBlockStates(ModBlocks.CAKE_OVEN.get()), 1, 1));
+            new PoiType(ImmutableSet.copyOf(ModBlocks.CAKE_OVEN.get().getStateDefinition().getPossibleStates()), 1, 1));
     public static final Predicate<Holder<PoiType>> CAKE_BAKER_HOLDER_PREDICATE = holder -> holder.is(JustMoreCakes.loc("cake_baker"));
     public static final Supplier<VillagerProfession> CAKE_BAKER = Services.REGISTRY.registerVillagerProfession("cake_baker", () ->
             new VillagerProfession("cake_baker",

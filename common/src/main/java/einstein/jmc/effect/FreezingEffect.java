@@ -12,8 +12,8 @@ import net.minecraft.world.phys.AABB;
 
 public class FreezingEffect extends InstantenousMobEffect {
 
-    public FreezingEffect(MobEffectCategory type, int liquidColor) {
-        super(type, liquidColor);
+    public FreezingEffect(MobEffectCategory type, int color) {
+        super(type, color);
     }
 
     @Override
