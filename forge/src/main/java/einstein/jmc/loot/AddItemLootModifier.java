@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 public class AddItemLootModifier extends LootModifier {
 
     public static final Supplier<MapCodec<AddItemLootModifier>> CODEC = Suppliers.memoize(() -> RecordCodecBuilder.mapCodec(instance -> codecStart(instance).and(
-            ForgeRegistries.ITEMS.getCodec().fieldOf("item").forGetter(m -> m.item)
+            ForgeRegistries.ITEMS.getCodec().fieldOf("item").forGetter(modifier -> modifier.item)
     ).apply(instance, AddItemLootModifier::new)));
 
     private final Item item;
