@@ -5,7 +5,7 @@
       "required": false
     },
     {
-      "id": "#c:red_dyes",
+      "id": "#c:dyes/red",
       "required": false
     }
   ]
