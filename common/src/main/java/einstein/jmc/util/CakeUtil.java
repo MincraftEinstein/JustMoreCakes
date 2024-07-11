@@ -2,11 +2,12 @@ package einstein.jmc.util;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import einstein.jmc.registration.family.CakeFamily;
-import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
+import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
 import einstein.jmc.init.ModCommonConfigs;
+import einstein.jmc.registration.CakeVariant;
+import einstein.jmc.registration.family.CakeFamily;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -26,6 +27,8 @@ import net.minecraft.world.level.gameevent.GameEvent;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 import static einstein.jmc.JustMoreCakes.mcLoc;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER;
@@ -142,6 +145,7 @@ public class CakeUtil {
         boolean isLower = state.getValue(BaseThreeTieredCakeBlock.HALF) == LOWER;
         BlockPos otherPos = isLower ? pos.above() : pos.below();
         BlockState otherState = level.getBlockState(otherPos);
+
         if (otherState.is(state.getBlock()) && otherState.getValue(BaseThreeTieredCakeBlock.HALF) == (isLower ? UPPER : LOWER)) {
             level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 19); // 19 ignores block shape updates
             level.levelEvent(2001, otherPos, Block.getId(otherState));
@@ -200,5 +204,17 @@ public class CakeUtil {
 
     public static ImmutableList<Block> getVanillaCandleCakes() {
         return VANILLA_CANDLE_CAKES_BY_CANDLE.values().asList();
+    }
+
+    public static <T> T redirectUse(Block block, BlockState state, Level level, BlockPos pos, BiFunction<BlockState, BlockPos, T> aboveResult, Supplier<T> superResult) {
+        if (state.getValue(BaseThreeTieredCandleCakeBlock.HALF) == LOWER) {
+            BlockPos abovePos = pos.above();
+            BlockState aboveState = level.getBlockState(abovePos);
+
+            if (aboveState.is(block) && aboveState.getValue(BaseThreeTieredCandleCakeBlock.HALF) == UPPER) {
+                return aboveResult.apply(aboveState, abovePos);
+            }
+        }
+        return superResult.get();
     }
 }
