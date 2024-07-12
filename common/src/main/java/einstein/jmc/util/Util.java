@@ -7,7 +7,6 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
-import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.mixin.RecipeManagerAccessor;
 import einstein.jmc.mixin.StructureTemplatePoolAccessor;
@@ -25,14 +24,13 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.ProcessorLists;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -194,10 +192,10 @@ public class Util {
         manager.setRecipes(recipes);
     }
 
-    public static void applyEffectFromInstance(SerializableMobEffectInstance holder, LivingEntity entity) {
-        MobEffectInstance instance = holder.toInstance();
-        if (holder.getEffect().isInstantenous()) {
-            instance.getEffect().value().applyInstantenousEffect(entity, entity, entity, instance.getAmplifier(), 1);
+    public static void applyEffect(MobEffectInstance instance, LivingEntity entity) {
+        MobEffect effect = instance.getEffect().value();
+        if (effect.isInstantenous()) {
+            effect.applyInstantenousEffect(entity, entity, entity, instance.getAmplifier(), 1);
             return;
         }
         entity.addEffect(instance);

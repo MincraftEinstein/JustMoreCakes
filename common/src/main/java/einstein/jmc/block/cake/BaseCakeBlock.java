@@ -2,7 +2,6 @@ package einstein.jmc.block.cake;
 
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
-import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModClientConfigs;
@@ -27,6 +26,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -51,7 +51,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import static einstein.jmc.util.Util.RANDOM;
-import static einstein.jmc.util.Util.applyEffectFromInstance;
+import static einstein.jmc.util.Util.applyEffect;
 
 @SuppressWarnings("deprecation")
 public class BaseCakeBlock extends Block implements CakeEffectsHolder {
@@ -194,8 +194,8 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public void applyEffects(Player player, CakeEffects effects) {
-        for (SerializableMobEffectInstance effectInstance : effects.mobEffects()) {
-            applyEffectFromInstance(effectInstance, player);
+        for (MobEffectInstance effectInstance : effects.mobEffects()) {
+            applyEffect(effectInstance, player);
         }
     }
 

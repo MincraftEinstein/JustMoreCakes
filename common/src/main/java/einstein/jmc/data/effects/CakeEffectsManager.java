@@ -3,31 +3,31 @@ package einstein.jmc.data.effects;
 import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import commonnetwork.api.Dispatcher;
 import einstein.jmc.block.CakeEffectsHolder;
-import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.network.clientbound.ClientboundCakeEffectsPacket;
 import einstein.jmc.util.Util;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 
 import java.io.Reader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static einstein.jmc.JustMoreCakes.LOGGER;
 
 public class CakeEffectsManager {
 
-    public static final String EFFECTS_DIRECTORY = "jmc/cake_effects";
+    public static final String EFFECTS_DIRECTORY = "jmc/cake_effect";
     private static final List<CakeEffects> RAW_CAKE_EFFECTS = new ArrayList<>();
     private static final Map<CakeEffectsHolder, Map<Holder<MobEffect>, Pair<Integer, Integer>>> CAKE_EFFECTS = new HashMap<>();
 
@@ -42,9 +42,10 @@ public class CakeEffectsManager {
         RAW_CAKE_EFFECTS.forEach((cakeEffects) -> {
             CakeEffectsHolder holder = cakeEffects.holder();
             cakeEffects.mobEffects().forEach(effectHolder -> {
-                Holder<MobEffect> effect = effectHolder.effect();
-                int duration = effectHolder.duration().orElse(0);
-                int amplifier = effectHolder.amplifier().orElse(0);
+                Holder<MobEffect> effect = effectHolder.getEffect();
+                int duration = effectHolder.getDuration();
+                int amplifier = effectHolder.getAmplifier();
+
                 if (newCakeEffects.containsKey(holder)) {
                     Map<Holder<MobEffect>, Pair<Integer, Integer>> combinedEffects = newCakeEffects.get(holder);
                     if (combinedEffects.containsKey(effect)) {
@@ -76,13 +77,13 @@ public class CakeEffectsManager {
 
         newCakeEffects.forEach((holder, effects) -> {
             CAKE_EFFECTS.put(holder, effects);
-            List<SerializableMobEffectInstance> serializableMobEffectInstances = new ArrayList<>();
+            List<MobEffectInstance> instances = new ArrayList<>();
 
             effects.forEach((mobEffect, pair) -> {
-                serializableMobEffectInstances.add(new SerializableMobEffectInstance(mobEffect, pair.getFirst(), pair.getSecond()));
+                instances.add(new MobEffectInstance(mobEffect, pair.getFirst(), pair.getSecond()));
             });
 
-            holder.justMoreCakes$setCakeEffects(new CakeEffects(holder, serializableMobEffectInstances));
+            holder.justMoreCakes$setCakeEffects(new CakeEffects(holder, instances));
         });
     }
 
@@ -93,11 +94,9 @@ public class CakeEffectsManager {
             try (Reader reader = resource.openAsReader()) {
                 JsonObject object = GsonHelper.fromJson(Util.GSON, reader, JsonObject.class);
 
-                getCodec(object).ifPresentOrElse(codec ->
-                        codec.parse(JsonOps.INSTANCE, object)
-                                .resultOrPartial(error -> decodingError(location, error))
-                                .ifPresent(RAW_CAKE_EFFECTS::add),
-                        () -> decodingError(location, "Unknown type for cake effects. Must be either 'block' or 'family'"));
+                CakeEffects.CODEC.parse(JsonOps.INSTANCE, object)
+                        .resultOrPartial(error -> LOGGER.error("Failed to decode cake effect with json id {} - Error: {}", location, error))
+                        .ifPresent(RAW_CAKE_EFFECTS::add);
             }
             catch (Exception exception) {
                 LOGGER.error("Error occurred while loading resource json {}", location, exception);
@@ -105,19 +104,5 @@ public class CakeEffectsManager {
         });
 
         LOGGER.info("Loaded {} cake effects", RAW_CAKE_EFFECTS.size());
-    }
-
-    private static void decodingError(ResourceLocation location, String error) {
-        LOGGER.error("Failed to decode cake effect with json id {} - Error: {}", location, error);
-    }
-
-    private static Optional<Codec<CakeEffects>> getCodec(JsonObject object) {
-        if (object.has("block")) {
-            return Optional.of(CakeEffects.BLOCK_CODEC);
-        }
-        else if (object.has("family")) {
-            return Optional.of(CakeEffects.FAMILY_CODEC);
-        }
-        return Optional.empty();
     }
 }

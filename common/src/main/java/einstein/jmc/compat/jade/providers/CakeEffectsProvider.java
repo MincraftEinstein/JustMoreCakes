@@ -5,7 +5,6 @@ import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.compat.jade.ModJadePlugin;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModServerConfigs;
-import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.util.CakeUtil;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
@@ -52,14 +51,15 @@ public class CakeEffectsProvider implements IBlockComponentProvider {
             IThemeHelper theme = IThemeHelper.get();
             ITooltip box = helper.tooltip();
 
-            for (SerializableMobEffectInstance effectInstance : cakeEffects.mobEffects()) {
-                Holder<MobEffect> effect = effectInstance.effect();
-                MobEffectInstance instance = new MobEffectInstance(effect, effectInstance.duration().orElse(0), effectInstance.amplifier().orElse(0));
+            for (MobEffectInstance effectInstance : cakeEffects.mobEffects()) {
+                Holder<MobEffect> effectHolder = effectInstance.getEffect();
+                MobEffect effect = effectHolder.value();
+                MobEffectInstance instance = new MobEffectInstance(effectHolder, effectInstance.getDuration(), effectInstance.getAmplifier());
                 Component name = StatusEffectsProvider.getEffectName(instance);
                 String duration = instance.isInfiniteDuration() ? I18n.get("effect.duration.infinite") : StringUtil.formatTickDuration(instance.getDuration(), accessor.tickRate());
-                Component info = effectInstance.getEffect().isInstantenous() ? name : Component.translatable("jade.potion", name, duration);
+                Component info = effect.isInstantenous() ? name : Component.translatable("jade.potion", name, duration);
 
-                box.add(effectInstance.getEffect().getCategory() != MobEffectCategory.HARMFUL ? theme.success(info) : theme.danger(info));
+                box.add(effect.getCategory() != MobEffectCategory.HARMFUL ? theme.success(info) : theme.danger(info));
             }
             tooltip.add(helper.box(box, BoxStyle.getNestedBox()));
         }

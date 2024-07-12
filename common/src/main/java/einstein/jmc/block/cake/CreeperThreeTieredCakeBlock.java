@@ -2,11 +2,11 @@ package einstein.jmc.block.cake;
 
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.registration.CakeVariant;
-import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -20,8 +20,8 @@ public class CreeperThreeTieredCakeBlock extends BaseThreeTieredCakeBlock {
 
     @Override
     public void applyEffects(Player player, CakeEffects effects) {
-        List<SerializableMobEffectInstance> effectInstances = effects.mobEffects();
-        Util.applyEffectFromInstance(effectInstances.get(player.getRandom().nextInt(effectInstances.size())), player);
+        List<MobEffectInstance> effectInstances = effects.mobEffects();
+        Util.applyEffect(effectInstances.get(player.getRandom().nextInt(effectInstances.size())), player);
     }
 
     @Override

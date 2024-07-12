@@ -1,7 +1,6 @@
 package einstein.jmc.mixin;
 
 import einstein.jmc.block.CakeEffectsHolder;
-import einstein.jmc.data.SerializableMobEffectInstance;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModTriggerTypes;
@@ -13,6 +12,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -64,8 +64,8 @@ public class CakeBlockMixin implements CakeEffectsHolder {
         CakeBlock cake = (CakeBlock) state.getBlock(); // Don't replace with a reference to Blocks.CAKE, so that this will work with inheritance
         CakeEffects cakeEffects = ((CakeEffectsHolder) cake).justMoreCakes$getCakeEffects();
         if (!player.level().isClientSide && cakeEffects != null) {
-            for (SerializableMobEffectInstance holder : cakeEffects.mobEffects()) {
-                Util.applyEffectFromInstance(holder, player);
+            for (MobEffectInstance holder : cakeEffects.mobEffects()) {
+                Util.applyEffect(holder, player);
             }
         }
 

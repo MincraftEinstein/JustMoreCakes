@@ -2,23 +2,22 @@ package einstein.jmc.data;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonElement;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
-import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.registration.family.CakeFamily;
-import einstein.jmc.util.Util;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.RegistryOps;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.level.block.Block;
 
 import java.nio.file.Path;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
@@ -48,7 +47,7 @@ public abstract class CakeEffectsProvider implements DataProvider {
             RegistryOps<JsonElement> ops = provider.createSerializationContext(JsonOps.INSTANCE);
 
             toSerialize.forEach((path, cakeEffects) -> {
-                JsonElement element = getCodec(cakeEffects).encodeStart(ops, cakeEffects).getOrThrow();
+                JsonElement element = CakeEffects.CODEC.encodeStart(ops, cakeEffects).getOrThrow();
                 Path filePath = folderPath.resolve(path + ".json");
                 builder.add(DataProvider.saveStable(cache, element, filePath));
             });
@@ -57,23 +56,16 @@ public abstract class CakeEffectsProvider implements DataProvider {
         });
     }
 
-    private Codec<CakeEffects> getCodec(CakeEffects cakeEffects) {
-        if (cakeEffects.holder() instanceof CakeFamily) {
-            return CakeEffects.FAMILY_CODEC;
-        }
-
-        if (cakeEffects.holder() instanceof Block) {
-            return CakeEffects.BLOCK_CODEC;
-        }
-        throw new IllegalStateException();
+    public <T extends Block & CakeEffectsHolder> void add(Supplier<T> block, MobEffectInstance... instances) {
+        add("block/" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), new CakeEffects(block, instances));
     }
 
-    public void add(Supplier<BaseCakeBlock> cake, SerializableMobEffectInstance... effects) {
-        toSerialize.put("blocks/" + Util.getBlockId(cake.get()).getPath(), new CakeEffects(cake.get(), List.of(effects)));
+    public void add(CakeFamily family, MobEffectInstance... instances) {
+        add("family/" + family.getRegistryKey().getPath(), new CakeEffects(family, instances));
     }
 
-    public void add(CakeFamily family, SerializableMobEffectInstance... effects) {
-        toSerialize.put("families/" + family.getRegistryKey().getPath(), new CakeEffects(family, List.of(effects)));
+    public void add(String path, CakeEffects cakeEffects) {
+        toSerialize.put(path, cakeEffects);
     }
 
     @Override
