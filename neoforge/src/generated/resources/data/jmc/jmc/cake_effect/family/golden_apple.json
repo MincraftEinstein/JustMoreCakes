@@ -1,0 +1,34 @@
+{
+  "effects": [
+    {
+      "amplifier": 1,
+      "duration": 200,
+      "id": "minecraft:regeneration",
+      "neoforge:cures": [
+        "milk",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    },
+    {
+      "duration": 3000,
+      "id": "minecraft:resistance",
+      "neoforge:cures": [
+        "milk",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    },
+    {
+      "amplifier": 1,
+      "duration": 1200,
+      "id": "minecraft:absorption",
+      "neoforge:cures": [
+        "milk",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    }
+  ],
+  "family": "jmc:golden_apple"
+}

@@ -1,0 +1,16 @@
+{
+  "block": "jmc:poison_cake",
+  "effects": [
+    {
+      "amplifier": 1,
+      "duration": 300,
+      "id": "minecraft:poison",
+      "neoforge:cures": [
+        "milk",
+        "honey",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    }
+  ]
+}

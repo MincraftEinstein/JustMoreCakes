@@ -1,0 +1,10 @@
+{
+  "effects": [
+    {
+      "duration": 600,
+      "id": "jmc:stealth",
+      "show_icon": true
+    }
+  ],
+  "family": "jmc:sculk"
+}

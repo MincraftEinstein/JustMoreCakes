@@ -1,0 +1,14 @@
+{
+  "effects": [
+    {
+      "duration": 600,
+      "id": "jmc:stealth",
+      "neoforge:cures": [
+        "milk",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    }
+  ],
+  "family": "jmc:sculk"
+}

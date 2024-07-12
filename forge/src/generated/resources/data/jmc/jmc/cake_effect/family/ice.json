@@ -1,0 +1,14 @@
+{
+  "effects": [
+    {
+      "duration": 2400,
+      "id": "minecraft:night_vision",
+      "show_icon": true
+    },
+    {
+      "id": "jmc:freezing",
+      "show_icon": true
+    }
+  ],
+  "family": "jmc:ice"
+}

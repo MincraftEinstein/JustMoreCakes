@@ -1,0 +1,15 @@
+{
+  "effects": [
+    {
+      "amplifier": 1,
+      "duration": 100,
+      "id": "minecraft:regeneration",
+      "neoforge:cures": [
+        "milk",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    }
+  ],
+  "family": "jmc:beetroot"
+}

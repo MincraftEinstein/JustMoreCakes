@@ -1,0 +1,11 @@
+{
+  "effects": [
+    {
+      "amplifier": 1,
+      "duration": 300,
+      "id": "minecraft:levitation",
+      "show_icon": true
+    }
+  ],
+  "family": "jmc:chorus"
+}

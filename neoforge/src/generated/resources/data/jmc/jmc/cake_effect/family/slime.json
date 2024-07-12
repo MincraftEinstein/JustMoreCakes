@@ -1,0 +1,32 @@
+{
+  "effects": [
+    {
+      "duration": 1200,
+      "id": "minecraft:jump_boost",
+      "neoforge:cures": [
+        "milk",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    },
+    {
+      "duration": 1200,
+      "id": "minecraft:resistance",
+      "neoforge:cures": [
+        "milk",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    },
+    {
+      "duration": 1200,
+      "id": "jmc:bouncing",
+      "neoforge:cures": [
+        "milk",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    }
+  ],
+  "family": "jmc:slime"
+}

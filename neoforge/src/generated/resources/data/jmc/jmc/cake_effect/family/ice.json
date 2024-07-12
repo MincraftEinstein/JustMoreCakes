@@ -1,0 +1,22 @@
+{
+  "effects": [
+    {
+      "duration": 2400,
+      "id": "minecraft:night_vision",
+      "neoforge:cures": [
+        "milk",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    },
+    {
+      "id": "jmc:freezing",
+      "neoforge:cures": [
+        "milk",
+        "protected_by_totem"
+      ],
+      "show_icon": true
+    }
+  ],
+  "family": "jmc:ice"
+}
