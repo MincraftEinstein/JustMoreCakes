@@ -29,7 +29,7 @@ public class CakeEffectsManager {
 
     public static final String EFFECTS_DIRECTORY = "jmc/cake_effect";
     private static final List<CakeEffects> RAW_CAKE_EFFECTS = new ArrayList<>();
-    private static final Map<CakeEffectsHolder, Map<Holder<MobEffect>, Pair<Integer, Integer>>> CAKE_EFFECTS = new HashMap<>();
+    private static final List<CakeEffects> CAKE_EFFECTS = new ArrayList<>();
 
     public static void syncToPlayer(ServerPlayer player) {
         Dispatcher.sendToClient(new ClientboundCakeEffectsPacket(CAKE_EFFECTS), player);
@@ -68,23 +68,21 @@ public class CakeEffectsManager {
         });
 
         RAW_CAKE_EFFECTS.clear();
-        setEffectsOnHolders(newCakeEffects);
-    }
-
-    public static void setEffectsOnHolders(Map<CakeEffectsHolder, Map<Holder<MobEffect>, Pair<Integer, Integer>>> newCakeEffects) {
-        CAKE_EFFECTS.forEach((holder, mobEffectPairMap) -> holder.clear());
         CAKE_EFFECTS.clear();
 
         newCakeEffects.forEach((holder, effects) -> {
-            CAKE_EFFECTS.put(holder, effects);
             List<MobEffectInstance> instances = new ArrayList<>();
 
-            effects.forEach((mobEffect, pair) -> {
-                instances.add(new MobEffectInstance(mobEffect, pair.getFirst(), pair.getSecond()));
-            });
+            effects.forEach((mobEffect, pair) ->
+                    instances.add(new MobEffectInstance(mobEffect, pair.getFirst(), pair.getSecond())));
 
-            holder.justMoreCakes$setCakeEffects(new CakeEffects(holder, instances));
+            setEffectsOnHolder(new CakeEffects(holder, instances));
         });
+    }
+
+    public static void setEffectsOnHolder(CakeEffects cakeEffects) {
+        cakeEffects.holder().justMoreCakes$setCakeEffects(cakeEffects);
+        CAKE_EFFECTS.add(cakeEffects);
     }
 
     public static void deserializeCakeEffects(ResourceManager manager) {
