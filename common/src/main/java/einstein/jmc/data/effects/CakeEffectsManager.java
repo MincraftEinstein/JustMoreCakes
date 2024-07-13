@@ -68,7 +68,7 @@ public class CakeEffectsManager {
         });
 
         RAW_CAKE_EFFECTS.clear();
-        CAKE_EFFECTS.clear();
+        clearCakeEffects();
 
         newCakeEffects.forEach((holder, effects) -> {
             List<MobEffectInstance> instances = new ArrayList<>();
@@ -78,6 +78,11 @@ public class CakeEffectsManager {
 
             setEffectsOnHolder(new CakeEffects(holder, instances));
         });
+    }
+
+    public static void clearCakeEffects() {
+        CAKE_EFFECTS.forEach(cakeEffects -> cakeEffects.holder().clear());
+        CAKE_EFFECTS.clear();
     }
 
     public static void setEffectsOnHolder(CakeEffects cakeEffects) {

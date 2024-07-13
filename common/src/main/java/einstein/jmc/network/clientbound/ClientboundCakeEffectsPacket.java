@@ -40,6 +40,7 @@ public class ClientboundCakeEffectsPacket {
 
     public static void handle(PacketContext<ClientboundCakeEffectsPacket> context) {
         if (context.side().equals(Side.CLIENT)) {
+            CakeEffectsManager.clearCakeEffects();
             context.message().cakeEffects.forEach(CakeEffectsManager::setEffectsOnHolder);
             LOGGER.info("Received cake effects from server");
         }
