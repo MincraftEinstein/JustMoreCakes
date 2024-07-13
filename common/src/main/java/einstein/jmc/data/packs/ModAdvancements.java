@@ -40,7 +40,7 @@ public class ModAdvancements {
                 .parent(craftCake)
                 .requirements(AdvancementRequirements.Strategy.OR)
                 .display(ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get(), translatable("eat_obsidian_cake.title"), translatable("eat_obsidian_cake.description"), null, AdvancementType.TASK, true, true, false);
-        ModBlocks.OBSIDIAN_CAKE_FAMILY.forEach(cake -> eatObsidianCakeBuilder.addCriterion(cake.get().getVariant().getCakeName() + "_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(Util.getBlockId(cake.get()))));
+        ModBlocks.OBSIDIAN_CAKE_FAMILY.forEach(cake -> eatObsidianCakeBuilder.addCriterion(cake.get().getVariant().getCakeName() + "_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(cake.get())));
         eatObsidianCakeBuilder.save(consumer, JustMoreCakes.loc("husbandry/eat_obsidian_cake").toString());
     }
 

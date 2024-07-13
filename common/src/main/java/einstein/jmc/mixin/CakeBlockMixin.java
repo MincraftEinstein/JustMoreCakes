@@ -62,15 +62,17 @@ public class CakeBlockMixin implements CakeEffectsHolder {
     @Inject(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;eat(IF)V"))
     private static void eat(LevelAccessor accessor, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<InteractionResult> cir) {
         CakeBlock cake = (CakeBlock) state.getBlock(); // Don't replace with a reference to Blocks.CAKE, so that this will work with inheritance
-        CakeEffects cakeEffects = ((CakeEffectsHolder) cake).justMoreCakes$getCakeEffects();
+        CakeEffectsHolder holder = (CakeEffectsHolder) cake;
+        CakeEffects cakeEffects = holder.justMoreCakes$getCakeEffects();
+
         if (!player.level().isClientSide && cakeEffects != null) {
-            for (MobEffectInstance holder : cakeEffects.mobEffects()) {
-                Util.applyEffect(holder, player);
+            for (MobEffectInstance instance : cakeEffects.mobEffects()) {
+                Util.applyEffect(instance, player);
             }
         }
 
         if (player instanceof ServerPlayer serverPlayer) {
-            ModTriggerTypes.CAKE_EATEN.get().trigger(serverPlayer, cake);
+            ModTriggerTypes.CAKE_EATEN.get().trigger(serverPlayer, holder);
         }
     }
 

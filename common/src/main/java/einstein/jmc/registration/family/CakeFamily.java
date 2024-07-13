@@ -1,10 +1,12 @@
 package einstein.jmc.registration.family;
 
-import einstein.jmc.registration.CakeVariant;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.data.CakeModel;
+import einstein.jmc.data.effects.CakeEffects;
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.util.CakeUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -20,6 +22,12 @@ import java.util.function.Supplier;
 public abstract class CakeFamily implements CakeEffectsHolder {
 
     public static final Map<ResourceLocation, CakeFamily> REGISTERED_CAKE_FAMILIES = new HashMap<>();
+    public static final Codec<CakeFamily> CODEC = ResourceLocation.CODEC.flatXmap(key -> {
+        if (REGISTERED_CAKE_FAMILIES.containsKey(key)) {
+            return DataResult.success(REGISTERED_CAKE_FAMILIES.get(key));
+        }
+        return DataResult.error(() -> "Could not find cake family with registry key: {" + key + "}");
+    }, family -> DataResult.success(family.getRegistryKey()));
 
     private final ResourceLocation registryKey;
     private final String baseCakeName;
