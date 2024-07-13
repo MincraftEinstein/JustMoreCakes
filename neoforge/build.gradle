@@ -34,7 +34,7 @@ dependencies {
     implementation "net.neoforged:neoforge:${neoforge_version}"
 
     runtimeOnly("curse.maven:catalogue-459701:${neoforge_catalogue_version}")
-    runtimeOnly("curse.maven:configured-457570:${neoforge_configured_version}")
+//    runtimeOnly("curse.maven:configured-457570:${neoforge_configured_version}")
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 //    runtimeOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}")
 
