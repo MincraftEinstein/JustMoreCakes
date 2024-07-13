@@ -159,7 +159,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             return InteractionResult.PASS;
         }
 
-        if (Services.PLATFORM.isModLoaded("cakechomps")) {
+        if (Services.PLATFORM.isModLoaded("cakechomps") && !BITES.equals(getBites())) {
             ItemStack stack = state.getBlock().getCloneItemStack(level, pos, state);
             player.spawnItemParticles(stack, 16);
             player.playSound(player.getEatingSound(stack), 0.5F + 0.5F * RANDOM.nextInt(2), (RANDOM.nextFloat() - RANDOM.nextFloat()) * 0.2F + 1.0F);
