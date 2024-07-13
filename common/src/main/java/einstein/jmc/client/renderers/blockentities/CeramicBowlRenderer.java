@@ -45,10 +45,10 @@ public class CeramicBowlRenderer implements BlockEntityRenderer<CeramicBowlBlock
             Matrix4f pose = last.pose();
             VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.solid());
 
-            float minU = sprite.getU(3);
-            float maxU = sprite.getU(13);
-            float minV = sprite.getV(3);
-            float maxV = sprite.getV(13);
+            float minU = sprite.getU(0.1875F);
+            float maxU = sprite.getU(0.8125F);
+            float minV = sprite.getV(0.1875F);
+            float maxV = sprite.getV(0.8125F);
             float y = 0.1875F + fillLevel * 0.0625F;
 
             vertexConsumer.addVertex(pose, -CENTER_X, y, -CENTER_X)
