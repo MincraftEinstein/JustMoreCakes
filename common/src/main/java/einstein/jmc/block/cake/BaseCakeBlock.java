@@ -50,6 +50,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
+import static einstein.jmc.util.CakeUtil.inFamily;
 import static einstein.jmc.util.Util.RANDOM;
 import static einstein.jmc.util.Util.applyEffect;
 
@@ -200,23 +201,23 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
     }
 
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
-        if (CakeUtil.inFamily(state, ModBlocks.FIREY_CAKE_FAMILY)) {
+        if (inFamily(state, ModBlocks.FIREY_CAKE_FAMILY)) {
             player.setRemainingFireTicks(ModCommonConfigs.FIREY_CAKE_ON_FIRE_DUR.get());
         }
-        else if (CakeUtil.inFamily(state, ModBlocks.ICE_CAKE_FAMILY)) {
+        else if (inFamily(state, ModBlocks.ICE_CAKE_FAMILY)) {
             player.clearFire();
         }
-        else if (CakeUtil.inFamily(state, ModBlocks.CHORUS_CAKE_FAMILY)) {
-            Util.teleportRandomly(player, ModCommonConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get());
+        else if (inFamily(state, ModBlocks.CHORUS_CAKE_FAMILY)) {
+            Util.teleportRandomly(player, ModCommonConfigs.CHORUS_CAKE_TELEPORT_RADIUS.get(), false);
         }
-        else if (CakeUtil.inFamily(state, ModBlocks.ENDER_CAKE_FAMILY)) {
-            Util.teleportRandomly(player, ModCommonConfigs.ENDER_CAKE_TELEPORT_RADIUS.get());
-            player.playSound(SoundEvents.ENDERMAN_TELEPORT, 1, 1);
+        else if (inFamily(state, ModBlocks.ENDER_CAKE_FAMILY)) {
+            if (Util.teleportRandomly(player, ModCommonConfigs.ENDER_CAKE_TELEPORT_RADIUS.get(), ModClientConfigs.ENDER_CAKE_PARTICLES.get())) {
+                player.playSound(SoundEvents.PLAYER_TELEPORT, 1, 1);
+            }
         }
         return state;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor accessor, BlockPos pos, BlockPos neighborPos) {
         return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, accessor, pos, neighborPos);
@@ -258,7 +259,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (CakeUtil.inFamily(state, ModBlocks.ENDER_CAKE_FAMILY) && ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
+        if (inFamily(state, ModBlocks.ENDER_CAKE_FAMILY) && ModClientConfigs.ENDER_CAKE_PARTICLES.get()) {
             for (int i = 0; i < 3; ++i) {
                 int xSign = random.nextInt(2) * 2 - 1;
                 int zSign = random.nextInt(2) * 2 - 1;
@@ -271,7 +272,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.addParticle(ParticleTypes.PORTAL, x, y, z, XSpeed, YSpeed, ZSpeed);
             }
         }
-        else if (CakeUtil.inFamily(state, ModBlocks.REDSTONE_CAKE_FAMILY) && ModClientConfigs.REDSTONE_CAKE_PARTICLES.get()) {
+        else if (inFamily(state, ModBlocks.REDSTONE_CAKE_FAMILY) && ModClientConfigs.REDSTONE_CAKE_PARTICLES.get()) {
             for (int i = 0; i < 2; ++i) {
                 double x = pos.getX() + random.nextDouble();
                 double y = pos.getY() + random.nextDouble() * 0.5D + 0.25D;
@@ -279,7 +280,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.addParticle(DustParticleOptions.REDSTONE, x, y, z, 0, 0, 0);
             }
         }
-        else if (CakeUtil.inFamily(state, ModBlocks.LAVA_CAKE_FAMILY) && ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
+        else if (inFamily(state, ModBlocks.LAVA_CAKE_FAMILY) && ModClientConfigs.LAVA_CAKE_PARTICLES.get()) {
             if (random.nextInt(10) == 0) {
                 double x = pos.getX() + random.nextDouble();
                 double y = pos.getY() + 1;
@@ -287,7 +288,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
                 level.addParticle(ParticleTypes.LAVA, x, y, z, 0, 0, 0);
             }
         }
-        else if (CakeUtil.inFamily(state, ModBlocks.SCULK_CAKE_FAMILY)) {
+        else if (inFamily(state, ModBlocks.SCULK_CAKE_FAMILY)) {
             if (SculkSensorBlock.getPhase(state) == SculkSensorPhase.ACTIVE) {
                 Direction direction = Direction.getRandom(random);
                 if (direction != Direction.UP && direction != Direction.DOWN) {

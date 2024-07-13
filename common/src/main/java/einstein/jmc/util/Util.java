@@ -75,19 +75,20 @@ public class Util {
         level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, size, Level.ExplosionInteraction.TNT);
     }
 
-    public static boolean teleportRandomly(final LivingEntity entity, final double radius) {
-        int attempts;
-        int tries;
-        boolean teleported;
+    public static boolean teleportRandomly(LivingEntity entity, double radius, boolean spawnParticles) {
+        boolean sucess = false;
+        int maxAttempts = 20;
+        int attempts = 0;
         double x;
         double y;
         double z;
-        for (attempts = 20, tries = 0, teleported = false; !teleported && tries++ <= attempts; teleported = entity.randomTeleport(x, y, z, true)) {
+
+        for (; !sucess && attempts++ <= maxAttempts; sucess = entity.randomTeleport(x, y, z, spawnParticles)) {
             x = entity.xo + (RANDOM.nextDouble() - RANDOM.nextDouble()) * radius;
             y = entity.yo + (RANDOM.nextDouble() - RANDOM.nextDouble()) * radius;
             z = entity.zo + (RANDOM.nextDouble() - RANDOM.nextDouble()) * radius;
         }
-        return teleported;
+        return sucess;
     }
 
     public static Block getBlock(ResourceLocation location) {
