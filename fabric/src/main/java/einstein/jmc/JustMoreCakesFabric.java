@@ -30,7 +30,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.fml.config.ModConfig;
+import net.neoforged.fml.config.ModConfig;
 
 import static einstein.jmc.JustMoreCakes.MOD_ID;
 import static einstein.jmc.JustMoreCakes.loc;
