@@ -1,12 +1,12 @@
-// 1.21	2024-07-12T00:01:32.4583548	Cake Effects
-5d25aa652d1169dab767ec716ba78e3993f21a98 data/jmc/jmc/cake_effect/block/poison_cake.json
-eaefb37fbb4ad33b3fccd01f1c9dff50961c7ea8 data/jmc/jmc/cake_effect/family/beetroot.json
-280fb707c96230d21cd280102cc033427c8a0df4 data/jmc/jmc/cake_effect/family/chorus.json
-a5416c337b94c7b378f5abeb266da7a0e816235e data/jmc/jmc/cake_effect/family/creeper.json
-dd91cc022022f6b50be3919fd69015822762aef6 data/jmc/jmc/cake_effect/family/firey.json
-a03f47bcaadbdfb0283c564ff887faea3719a500 data/jmc/jmc/cake_effect/family/glow_berry.json
-634d0ea6bb8121bb7a3e6afeb9b1664cdbddc95f data/jmc/jmc/cake_effect/family/golden_apple.json
-e8690b53b1d1bc87fc208ca80905307511475358 data/jmc/jmc/cake_effect/family/ice.json
-4950a65e41cc4c104d18846dffcde8f2a64925c9 data/jmc/jmc/cake_effect/family/lava.json
-1524939c2974fdb8819790d2f8aa7fa8949f406d data/jmc/jmc/cake_effect/family/sculk.json
-b616f7f192d96ece7a02acc16ba0ec3ff9f2037a data/jmc/jmc/cake_effect/family/slime.json
+// 1.21	2024-07-13T16:37:16.3118205	Cake Effects
+12f4a7a9157e8a401b7d3735cd7cf5dc0977c6ec data/jmc/jmc/cake_effect/block/poison_cake.json
+a9adced133201454af5f3553cd7c5071b6694a35 data/jmc/jmc/cake_effect/family/beetroot.json
+924bee7dc452d88a5438edd82764a8e1c895940e data/jmc/jmc/cake_effect/family/chorus.json
+dbc00bfe02f9b4a67ce7eebb9602e5dbaaaf4900 data/jmc/jmc/cake_effect/family/creeper.json
+4d8f6bc55aa6d1944942df226d4c0c38f38fe388 data/jmc/jmc/cake_effect/family/firey.json
+99633d320997c5148e0b1b079363a6c04ecf26e1 data/jmc/jmc/cake_effect/family/glow_berry.json
+95a8ee0bc7c3dea17c56ee2826ab683e7faa24fb data/jmc/jmc/cake_effect/family/golden_apple.json
+b0b4330d024591a01ae03137a5769cc35b2f76f6 data/jmc/jmc/cake_effect/family/ice.json
+f16ff707ed2da959ada3b2111c051cd4622ee961 data/jmc/jmc/cake_effect/family/lava.json
+405a8cbb221e237edec60373bca0210435abac57 data/jmc/jmc/cake_effect/family/sculk.json
+7268eb319e70a9fd35a3a395b5bb62eb863d8ed3 data/jmc/jmc/cake_effect/family/slime.json

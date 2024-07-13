@@ -4,8 +4,8 @@
       "duration": 600,
       "id": "jmc:stealth",
       "neoforge:cures": [
-        "milk",
-        "protected_by_totem"
+        "protected_by_totem",
+        "milk"
       ],
       "show_icon": true
     }

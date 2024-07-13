@@ -3,19 +3,7 @@
   "criteria": {
     "obsidian_cake_eaten": {
       "conditions": {
-        "cake": "jmc:obsidian_cake"
-      },
-      "trigger": "jmc:cake_eaten"
-    },
-    "three_tiered_obsidian_cake_eaten": {
-      "conditions": {
-        "cake": "jmc:three_tiered_obsidian_cake"
-      },
-      "trigger": "jmc:cake_eaten"
-    },
-    "two_tiered_obsidian_cake_eaten": {
-      "conditions": {
-        "cake": "jmc:two_tiered_obsidian_cake"
+        "family": "jmc:obsidian"
       },
       "trigger": "jmc:cake_eaten"
     }
@@ -34,9 +22,7 @@
   },
   "requirements": [
     [
-      "obsidian_cake_eaten",
-      "two_tiered_obsidian_cake_eaten",
-      "three_tiered_obsidian_cake_eaten"
+      "obsidian_cake_eaten"
     ]
   ],
   "sends_telemetry_event": true

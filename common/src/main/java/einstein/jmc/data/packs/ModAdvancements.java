@@ -36,24 +36,26 @@ public class ModAdvancements {
                 .rewards(AdvancementRewards.Builder.experience(100))
         ).save(consumer, JustMoreCakes.loc("husbandry/craft_all_cakes").toString());
 
-        Advancement.Builder eatObsidianCakeBuilder = Advancement.Builder.advancement()
+        Advancement.Builder.advancement()
                 .parent(craftCake)
                 .requirements(AdvancementRequirements.Strategy.OR)
-                .display(ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get(), translatable("eat_obsidian_cake.title"), translatable("eat_obsidian_cake.description"), null, AdvancementType.TASK, true, true, false);
-        ModBlocks.OBSIDIAN_CAKE_FAMILY.forEach(cake -> eatObsidianCakeBuilder.addCriterion(cake.get().getVariant().getCakeName() + "_eaten", CakeEatenTrigger.TriggerInstance.cakeEaten(cake.get())));
-        eatObsidianCakeBuilder.save(consumer, JustMoreCakes.loc("husbandry/eat_obsidian_cake").toString());
+                .display(ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get(), translatable("eat_obsidian_cake.title"), translatable("eat_obsidian_cake.description"), null, AdvancementType.TASK, true, true, false)
+                .addCriterion(ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCakeName() + "_eaten",
+                        CakeEatenTrigger.TriggerInstance.cakeEaten(ModBlocks.OBSIDIAN_CAKE_FAMILY))
+                .save(consumer, JustMoreCakes.loc("husbandry/eat_obsidian_cake").toString());
     }
 
     private static Advancement.Builder addCakes(Advancement.Builder advancement) {
         advancement.addCriterion("cake", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(Blocks.CAKE).build()));
 
-        TreeSet<Supplier<BaseCakeBlock>> set = new TreeSet<>(Comparator.comparing(o -> o.get().getVariant().getCakeName()));
-        set.addAll(CakeVariant.VARIANT_BY_CAKE.keySet());
+        TreeSet<Supplier<BaseCakeBlock>> cakes = new TreeSet<>(Comparator.comparing(o -> o.get().getVariant().getCakeName()));
+        cakes.addAll(CakeVariant.VARIANT_BY_CAKE.keySet());
 
-        for (Supplier<BaseCakeBlock> cake : set) {
-            if (cake.get().isBaseVariant()) {
-                Item cakeItem = ((ItemLike) cake.get()).asItem();
-                advancement.addCriterion(Util.getBlockId(cake.get()).getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(cakeItem).build()));
+        for (Supplier<BaseCakeBlock> cake : cakes) {
+            BaseCakeBlock cakeBlock = cake.get();
+            if (cakeBlock.isBaseVariant()) {
+                Item cakeItem = ((ItemLike) cakeBlock).asItem();
+                advancement.addCriterion(Util.getBlockId(cakeBlock).getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(cakeItem).build()));
             }
         }
 
