@@ -194,6 +194,7 @@ public class Util {
     }
 
     public static void applyEffect(MobEffectInstance instance, LivingEntity entity) {
+        instance = new MobEffectInstance(instance);
         MobEffect effect = instance.getEffect().value();
         if (effect.isInstantenous()) {
             effect.applyInstantenousEffect(entity, entity, entity, instance.getAmplifier(), 1);

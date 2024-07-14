@@ -41,10 +41,10 @@ public class CakeEffectsManager {
         Map<CakeEffectsHolder, Map<Holder<MobEffect>, Pair<Integer, Integer>>> newCakeEffects = new HashMap<>();
         RAW_CAKE_EFFECTS.forEach((cakeEffects) -> {
             CakeEffectsHolder holder = cakeEffects.holder();
-            cakeEffects.mobEffects().forEach(effectHolder -> {
-                Holder<MobEffect> effect = effectHolder.getEffect();
-                int duration = effectHolder.getDuration();
-                int amplifier = effectHolder.getAmplifier();
+            cakeEffects.mobEffects().forEach(effectInstance -> {
+                Holder<MobEffect> effect = effectInstance.getEffect();
+                int duration = effectInstance.getDuration();
+                int amplifier = effectInstance.getAmplifier();
 
                 if (newCakeEffects.containsKey(holder)) {
                     Map<Holder<MobEffect>, Pair<Integer, Integer>> combinedEffects = newCakeEffects.get(holder);
