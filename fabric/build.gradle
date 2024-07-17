@@ -14,7 +14,7 @@ dependencies {
     mappings loom.officialMojangMappings()
 
     modRuntimeOnly("curse.maven:catalogue-459701:${fabric_catalogue_version}")
-    modRuntimeOnly("curse.maven:configured-457570:${fabric_configured_version}")
+//    modRuntimeOnly("curse.maven:configured-457570:${fabric_configured_version}")
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
 //    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}")
 

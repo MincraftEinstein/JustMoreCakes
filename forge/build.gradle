@@ -65,7 +65,7 @@ dependencies {
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
 
     runtimeOnly("curse.maven:catalogue-459701:${forge_catalogue_version}")
-    runtimeOnly("curse.maven:configured-457570:${forge_configured_version}")
+//    runtimeOnly("curse.maven:configured-457570:${forge_configured_version}")
     runtimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 //    runtimeOnly("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
 
