@@ -1,5 +1,6 @@
 package einstein.jmc.mixin;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -13,8 +14,14 @@ import java.util.Map;
 public interface RecipeManagerAccessor {
 
     @Accessor("byName")
-    Map<ResourceLocation, RecipeHolder<?>> getRecipes();
+    Map<ResourceLocation, RecipeHolder<?>> getRecipesByName();
 
     @Accessor("byName")
-    void setRecipes(Map<ResourceLocation, RecipeHolder<?>> recipes);
+    void setRecipesByName(Map<ResourceLocation, RecipeHolder<?>> recipesByName);
+
+    @Accessor("byType")
+    Multimap<RecipeType<?>, RecipeHolder<?>> getRecipesByType();
+
+    @Accessor("byType")
+    void setRecipesByType(Multimap<RecipeType<?>, RecipeHolder<?>> recipesByType);
 }

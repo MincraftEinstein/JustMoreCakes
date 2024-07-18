@@ -1,5 +1,7 @@
 package einstein.jmc.util;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -31,6 +33,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -179,18 +182,37 @@ public class Util {
                         .hasProperty(BaseThreeTieredCakeBlock.HALF, DoubleBlockHalf.UPPER)));
     }
 
-    public static void removeRecipe(RecipeManager recipeManager, ResourceLocation id) {
+    public static void removeRecipe(RecipeManager recipeManager, ResourceLocation id, RecipeType<?> type) {
         RecipeManagerAccessor manager = (RecipeManagerAccessor) recipeManager;
-        Map<ResourceLocation, RecipeHolder<?>> recipes = new HashMap<>(manager.getRecipes());
+        Map<ResourceLocation, RecipeHolder<?>> recipesByName = new HashMap<>(manager.getRecipesByName());
+        Multimap<RecipeType<?>, RecipeHolder<?>> recipesByType = HashMultimap.create(manager.getRecipesByType());
 
-        for (ResourceLocation recipeId : recipes.keySet()) {
+        for (ResourceLocation recipeId : recipesByName.keySet()) {
             if (recipeId.equals(id)) {
-                recipes.remove(recipeId);
+                recipesByName.remove(recipeId);
                 break;
             }
         }
 
-        manager.setRecipes(recipes);
+        boolean success = false;
+        for (RecipeType<?> recipeType : recipesByType.keySet()) {
+            if (recipeType.equals(type)) {
+                for (RecipeHolder<?> holder : recipesByType.get(recipeType)) {
+                    if (holder.id().equals(id)) {
+                        recipesByType.remove(recipeType, holder);
+                        success = true;
+                        break;
+                    }
+                }
+
+                if (success) {
+                    break;
+                }
+            }
+        }
+
+        manager.setRecipesByName(recipesByName);
+        manager.setRecipesByType(recipesByType);
     }
 
     public static void applyEffect(MobEffectInstance instance, LivingEntity entity) {

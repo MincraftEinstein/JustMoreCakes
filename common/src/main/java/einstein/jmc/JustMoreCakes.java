@@ -32,6 +32,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -94,10 +95,6 @@ public class JustMoreCakes {
     }
 
     public static void onDatapackSync(@Nullable ServerPlayer player, MinecraftServer server, boolean playerUpdate) {
-        if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
-            Util.removeRecipe(server.getRecipeManager(), mcLoc("cake"));
-        }
-
         if (playerUpdate) {
             CakeEffectsManager.syncToPlayer(player);
             return;
@@ -105,6 +102,10 @@ public class JustMoreCakes {
 
         CakeEffectsManager.loadCakeEffects();
         BowlContents.EMPTY.clear();
+
+        if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
+            Util.removeRecipe(server.getRecipeManager(), mcLoc("cake"), RecipeType.CRAFTING);
+        }
 
         if (ModCommonConfigs.MODIFY_BIRTHDAY_SONG.get()) {
             modifyBirthdaySongAdvancement(server);

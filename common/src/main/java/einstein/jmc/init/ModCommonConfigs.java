@@ -44,7 +44,7 @@ public class ModCommonConfigs {
             .translation(key("glowstone_cake_effect_radius"))
             .defineInRange("glowstoneCakeEffectRadius", 20, 0, 100);
     public static final ForgeConfigSpec.BooleanValue DISABLE_DEFAULT_CAKE_RECIPE = BUILDER
-            .comment("Disables the game's default cake crafting recipe", "Requires resources to be reloaded")
+            .comment("Will forcefully disable the game's default cake crafting recipe", "Requires data packs to be reloaded")
             .translation(key("disable_cake_crafting_recipe"))
             .define("disableCakeCraftingRecipe", true);
     public static final ForgeConfigSpec.BooleanValue DOUBLE_BASE_CAKE_COMPARATOR_OUTPUT = BUILDER
@@ -53,7 +53,6 @@ public class ModCommonConfigs {
                     "NOTE: This will affect the default cake and some cakes from other mods"
             ).translation(key("double_base_cake_comparator_output"))
             .define("doubleBaseCakeComparatorOutput", false);
-
     public static final ForgeConfigSpec.BooleanValue MODIFY_BIRTHDAY_SONG = BUILDER
             .comment("Modifies the Birthday Song advancement to allow the use of JMC cakes as well as the default cake")
             .translation(key("modify_birthday_song_advancement"))
