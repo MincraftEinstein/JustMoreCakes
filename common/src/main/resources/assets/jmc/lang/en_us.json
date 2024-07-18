@@ -146,6 +146,7 @@
   "config.jmc.glowstone_cake_effect_radius": "Glowstone Cake Effect Radius",
   "config.jmc.disable_cake_crafting_recipes": "Disable Cake Crafting Recipes",
   "config.jmc.double_base_cake_comparator_output": "Double Base Cake Comparator Output",
+  "config.jmc.modify_birthday_song_advancement": "Modify Birthday Song Advancement",
   "config.jmc.jade.allow_displaying_cake_effects": "Allow Displaying Cake Effects",
   "config.jmc.jade.hide_trapped_cakes": "Hide Trapped Cakes",
   "config.category.jmc.cake_particles": "Cake Particles",

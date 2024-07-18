@@ -54,6 +54,11 @@ public class ModCommonConfigs {
             ).translation(key("double_base_cake_comparator_output"))
             .define("doubleBaseCakeComparatorOutput", false);
 
+    public static final ForgeConfigSpec.BooleanValue MODIFY_BIRTHDAY_SONG = BUILDER
+            .comment("Modifies the Birthday Song advancement to allow the use of JMC cakes as well as the default cake")
+            .translation(key("modify_birthday_song_advancement"))
+            .define("modifyBirthdaySongAdvancement", true);
+
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static String key(String name) {

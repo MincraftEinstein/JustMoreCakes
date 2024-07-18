@@ -4,9 +4,17 @@ import einstein.jmc.compat.AmendmentsCompat;
 import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.effects.CakeEffectsManager;
 import einstein.jmc.init.*;
+import einstein.jmc.mixin.AdvancementAccessor;
+import einstein.jmc.mixin.AdvancementRequirementsAccessor;
 import einstein.jmc.platform.Services;
 import einstein.jmc.registration.CakeVariant;
+import einstein.jmc.registration.family.CakeFamily;
 import einstein.jmc.util.Util;
+import net.minecraft.advancements.*;
+import net.minecraft.advancements.critereon.BlockPredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
+import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -32,6 +40,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static einstein.jmc.init.ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT;
 import static einstein.jmc.util.Util.registerVillageBuilding;
@@ -92,6 +105,37 @@ public class JustMoreCakes {
 
         CakeEffectsManager.loadCakeEffects();
         BowlContents.EMPTY.clear();
+
+        if (ModCommonConfigs.MODIFY_BIRTHDAY_SONG.get()) {
+            modifyBirthdaySongAdvancement(server);
+        }
+    }
+
+    private static void modifyBirthdaySongAdvancement(MinecraftServer server) {
+        AdvancementHolder holder = server.getAdvancements().get(mcLoc("husbandry/allay_deliver_cake_to_note_block"));
+        if (holder != null) {
+            Advancement advancement = holder.value();
+            Map<String, Criterion<?>> criteria = new HashMap<>(advancement.criteria());
+            AdvancementRequirements requirements = advancement.requirements();
+            List<List<String>> requirementsList = new ArrayList<>(requirements.requirements());
+            List<String> requirement = new ArrayList<>(requirementsList.getFirst());
+            LocationPredicate.Builder locationPredicate = LocationPredicate.Builder.location().setBlock(
+                    BlockPredicate.Builder.block().of(Blocks.NOTE_BLOCK));
+
+            CakeFamily.REGISTERED_CAKE_FAMILIES.forEach((location, family) -> {
+                String criteria_id = location.toString();
+                criteria.put(criteria_id, new Criterion<>(CriteriaTriggers.ALLAY_DROP_ITEM_ON_BLOCK,
+                        ItemUsedOnLocationTrigger.TriggerInstance.allayDropItemOnBlock(locationPredicate,
+                                ItemPredicate.Builder.item().of(family.getBaseItem().get())
+                        ).triggerInstance()
+                ));
+                requirement.add(criteria_id);
+            });
+
+            requirementsList.set(0, requirement);
+            ((AdvancementRequirementsAccessor) (Object) requirements).setRequirements(requirementsList);
+            ((AdvancementAccessor) (Object) advancement).setCriteria(criteria);
+        }
     }
 
     public static InteractionResult blockClicked(Player player, Level level, InteractionHand hand, BlockHitResult hitResult) {
