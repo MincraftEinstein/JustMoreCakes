@@ -4,13 +4,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 
-public class ContainerRecipeInput implements RecipeInput {
-
-    private final Container container;
-
-    public ContainerRecipeInput(Container container) {
-        this.container = container;
-    }
+public record ContainerRecipeInput(Container container) implements RecipeInput {
 
     @Override
     public ItemStack getItem(int index) {
