@@ -1,6 +1,5 @@
 package einstein.jmc.block.cake;
 
-import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModTriggerTypes;
 import einstein.jmc.registration.CakeVariant;
 import net.minecraft.core.BlockPos;
@@ -30,7 +29,7 @@ public class ObsidianThreeTieredCakeBlock extends BaseThreeTieredCakeBlock {
 
     @Override
     public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
-        player.hurt(player.damageSources().generic(), 2);
+        ObsidianCakeBlock.damage(level, player);
         level.setBlockAndUpdate(pos, state);
 
         if (player instanceof ServerPlayer serverPlayer) {

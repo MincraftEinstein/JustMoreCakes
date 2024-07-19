@@ -27,6 +27,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -56,6 +57,7 @@ public class JustMoreCakes {
     public static final String MOD_NAME = "Just More Cakes!";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
     public static final ResourceKey<LootTable> CAKE_BAKER_GIFT = ResourceKey.create(Registries.LOOT_TABLE, loc("gameplay/hero_of_the_village/cake_baker_gift"));
+    public static final ResourceKey<DamageType> OBSIDIAN_CAKE_DAMAGE_TYPE = ResourceKey.create(Registries.DAMAGE_TYPE, JustMoreCakes.loc("obsidian_cake"));
 
     public static void init() {
         ModItems.init();

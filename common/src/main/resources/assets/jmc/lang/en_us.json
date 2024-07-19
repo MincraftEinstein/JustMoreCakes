@@ -152,6 +152,7 @@
   "config.category.jmc.cake_particles": "Cake Particles",
   "config.category.jmc.jade_plugin": "Jade Plugin",
 
+  "_comment": "Item Tags",
   "tag.item.jmc.cakes": "Cakes",
   "tag.item.c.cakes": "Cakes",
   "tag.item.c.cheese": "Cheese",
@@ -160,5 +161,9 @@
   "tag.item.c.cheeses": "Cheeses",
   "tag.item.c.red_dye": "Red Dye",
   "tag.item.c.seeds": "Seeds",
-  "tag.item.c.slime_balls": "Slime Balls"
+  "tag.item.c.slime_balls": "Slime Balls",
+
+  "_comment": "Damage Types",
+  "death.attack.jmc.obsidian_cake": "%s didn't have diamond teeth",
+  "death.attack.jmc.obsidian_cake.block": "%s broke their teeth on an %s"
 }
