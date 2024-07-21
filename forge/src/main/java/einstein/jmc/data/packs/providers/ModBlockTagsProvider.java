@@ -60,14 +60,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             });
         });
 
-        tag(ModBlockTags.CAKES).addTag(ModBlockTags.BASE_CAKES).addTag(ModBlockTags.TWO_TIERED_CAKES).addTag(ModBlockTags.THREE_TIERED_CAKES);
-        tag(ModBlockTags.CANDLE_CAKES).addTag(ModBlockTags.BASE_CANDLE_CAKES).addTag(ModBlockTags.TWO_TIERED_CANDLE_CAKES).addTag(ModBlockTags.THREE_TIERED_CANDLE_CAKES);
-        tag(ModBlockTags.C_CAKES).addTag(ModBlockTags.CAKES);
-        tag(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
         tag(F_CAKES).addTag(ModBlockTags.CAKES);
         tag(F_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
-        tag(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE).addTag(F_CAKES).addTag(F_CANDLE_CAKES);
-        CakeUtil.getVanillaCandleCakes().forEach(cake -> tag(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
+        tag(ModBlockTags.CAKES).addTag(ModBlockTags.BASE_CAKES).addTag(ModBlockTags.TWO_TIERED_CAKES).addTag(ModBlockTags.THREE_TIERED_CAKES);
+        tag(ModBlockTags.CANDLE_CAKES).addTag(ModBlockTags.BASE_CANDLE_CAKES).addTag(ModBlockTags.TWO_TIERED_CANDLE_CAKES).addTag(ModBlockTags.THREE_TIERED_CANDLE_CAKES);
+        tag(ModBlockTags.C_CAKES).add(Blocks.CAKE).addTag(ModBlockTags.CAKES).addTag(F_CAKES);
+        tag(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES).addTag(BlockTags.CANDLE_CAKES).addTag(F_CANDLE_CAKES);
+        tag(ModBlockTags.CAKE_SPATULA_USABLE).addTag(ModBlockTags.C_CAKES).addTag(ModBlockTags.C_CANDLE_CAKES);
         tag(ModBlockTags.CAKE_STAND_STORABLES).add(Blocks.CAKE).addTag(ModBlockTags.BASE_CAKES);
         tag(BlockTags.CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
     }

@@ -55,10 +55,9 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(ModBlockTags.CAKES).addTag(ModBlockTags.BASE_CAKES).addTag(ModBlockTags.TWO_TIERED_CAKES).addTag(ModBlockTags.THREE_TIERED_CAKES);
         getOrCreateTagBuilder(ModBlockTags.CANDLE_CAKES).addTag(ModBlockTags.BASE_CANDLE_CAKES).addTag(ModBlockTags.TWO_TIERED_CANDLE_CAKES).addTag(ModBlockTags.THREE_TIERED_CANDLE_CAKES);
-        getOrCreateTagBuilder(ModBlockTags.C_CAKES).addTag(ModBlockTags.CAKES);
-        getOrCreateTagBuilder(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
-        getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(Blocks.CAKE).addTag(ModBlockTags.C_CAKES).addTag(ModBlockTags.C_CANDLE_CAKES);
-        CakeUtil.getVanillaCandleCakes().forEach(cake -> getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).add(cake));
+        getOrCreateTagBuilder(ModBlockTags.C_CAKES).add(Blocks.CAKE).addTag(ModBlockTags.CAKES);
+        getOrCreateTagBuilder(ModBlockTags.C_CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES).addTag(BlockTags.CANDLE_CAKES);
+        getOrCreateTagBuilder(ModBlockTags.CAKE_SPATULA_USABLE).addTag(ModBlockTags.C_CAKES).addTag(ModBlockTags.C_CANDLE_CAKES);
         getOrCreateTagBuilder(ModBlockTags.CAKE_STAND_STORABLES).add(Blocks.CAKE).addTag(ModBlockTags.BASE_CAKES);
         getOrCreateTagBuilder(BlockTags.CANDLE_CAKES).addTag(ModBlockTags.CANDLE_CAKES);
     }

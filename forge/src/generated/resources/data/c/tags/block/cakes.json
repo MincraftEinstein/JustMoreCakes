@@ -1,5 +1,7 @@
 {
   "values": [
-    "#jmc:cakes"
+    "minecraft:cake",
+    "#jmc:cakes",
+    "#forge:cakes"
   ]
 }
