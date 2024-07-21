@@ -33,11 +33,8 @@ public class ModItemTagsProvider extends FabricTagProvider.ItemTagProvider {
             }
         });
 
-        ModBlocks.CHEESECAKE_FAMILY.forEach(cake -> {
-            getOrCreateTagBuilder(ModItemTags.CHEESE_CAKES).add(cake.get().asItem());
-            getOrCreateTagBuilder(ModItemTags.CHEESECAKES).add(cake.get().asItem());
-        });
-
+        getOrCreateTagBuilder(ModItemTags.CHEESE_CAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
+        getOrCreateTagBuilder(ModItemTags.CHEESECAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
         getOrCreateTagBuilder(ModItemTags.CHEESE).add(ModItems.CREAM_CHEESE.get());
         getOrCreateTagBuilder(ModItemTags.CHEESES).add(ModItems.CREAM_CHEESE.get());
         getOrCreateTagBuilder(ModItemTags.RED_DYE).addOptionalTag(ModItemTags.DYE_RED)

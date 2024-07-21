@@ -43,11 +43,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             }
         });
 
-        ModBlocks.CHEESECAKE_FAMILY.forEach(cake -> {
-            tag(ModItemTags.CHEESE_CAKES).add(cake.get().asItem());
-            tag(ModItemTags.CHEESECAKES).add(cake.get().asItem());
-        });
-
+        tag(ModItemTags.CHEESE_CAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
+        tag(ModItemTags.CHEESECAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
         tag(F_CHEESE).add(ModItems.CREAM_CHEESE.get());
         tag(ModItemTags.CHEESE).add(ModItems.CREAM_CHEESE.get());
         tag(ModItemTags.CHEESES).add(ModItems.CREAM_CHEESE.get());
