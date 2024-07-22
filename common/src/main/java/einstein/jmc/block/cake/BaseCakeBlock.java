@@ -127,7 +127,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
 
         if (family != null && isBaseVariant()) {
             if (stack.is(family.getBaseCake().get().asItem())) {
-                if (CakeUtil.convertToTwoTiered(family, state, pos, level, player, stack).consumesAction()) {
+                if (CakeUtil.convertToTwoTiered(family, state, pos, level, player, stack, false).consumesAction()) {
                     return ItemInteractionResult.SUCCESS;
                 }
             }

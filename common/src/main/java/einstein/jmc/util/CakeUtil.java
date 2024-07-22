@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 import java.util.HashMap;
@@ -87,13 +86,13 @@ public class CakeUtil {
     public static boolean isUneaten(BlockState state, BlockPos pos, Level level) {
         Block block = state.getBlock();
         if (block instanceof BaseThreeTieredCakeBlock threeTieredCakeBlock) {
-            if (state.getValue(BaseThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
+            if (state.getValue(BaseThreeTieredCakeBlock.HALF) == UPPER) {
                 return isUneaten(state, threeTieredCakeBlock);
             }
 
             BlockState aboveState = level.getBlockState(pos.above());
             if (aboveState.getBlock() instanceof BaseThreeTieredCakeBlock aboveThreeTieredCakeBlock
-                    && aboveState.getValue(BaseThreeTieredCakeBlock.HALF) == DoubleBlockHalf.UPPER) {
+                    && aboveState.getValue(BaseThreeTieredCakeBlock.HALF) == UPPER) {
                 return isUneaten(aboveState, aboveThreeTieredCakeBlock);
             }
             return false;
@@ -160,8 +159,8 @@ public class CakeUtil {
         }
     }
 
-    public static InteractionResult convertToThreeTiered(CakeFamily family, BlockState state, BlockPos pos, Level level, Player player, ItemStack stack) {
-        if (isUneaten(state, pos, level)) {
+    public static InteractionResult convertToThreeTiered(CakeFamily family, BlockState state, BlockPos pos, Level level, Player player, ItemStack stack, boolean ignoreUneaten) {
+        if (ignoreUneaten || isUneaten(state, pos, level)) {
             BlockPos abovePos = pos.above();
             if (level.getBlockState(abovePos).canBeReplaced()) {
                 BlockState newState = family.getThreeTieredCake().get().defaultBlockState();
@@ -183,8 +182,8 @@ public class CakeUtil {
         return InteractionResult.PASS;
     }
 
-    public static InteractionResult convertToTwoTiered(CakeFamily family, BlockState state, BlockPos pos, Level level, Player player, ItemStack stack) {
-        if (isUneaten(state, pos, level)) {
+    public static InteractionResult convertToTwoTiered(CakeFamily family, BlockState state, BlockPos pos, Level level, Player player, ItemStack stack, boolean ignoreUneaten) {
+        if (ignoreUneaten || isUneaten(state, pos, level)) {
             BlockState newState = family.getTwoTieredCake().get().defaultBlockState();
 
             level.setBlockAndUpdate(pos, newState);

@@ -52,7 +52,7 @@ public class CakeBlockMixin implements CakeEffectsHolder {
 
         if (justMoreCakes$me.equals(Blocks.CAKE)) {  // Need to check that this is the default cake, so that things won't break with inheritance
             if (stack.is(Items.CAKE)) {
-                if (CakeUtil.convertToTwoTiered(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack).consumesAction()) {
+                if (CakeUtil.convertToTwoTiered(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack, false).consumesAction()) {
                     cir.setReturnValue(ItemInteractionResult.SUCCESS);
                 }
             }

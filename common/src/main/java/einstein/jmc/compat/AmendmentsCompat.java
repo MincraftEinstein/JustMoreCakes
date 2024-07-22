@@ -25,12 +25,12 @@ public class AmendmentsCompat {
 
         if (block instanceof DoubleCakeBlock doubleCake) {
             if (doubleCake.type.equals(CakeRegistry.VANILLA)) {
-                return CakeUtil.convertToThreeTiered(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack);
+                return CakeUtil.convertToThreeTiered(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack, false);
             }
         }
         else if (block instanceof DirectionalCakeBlock directionalCake) {
             if (directionalCake.type.equals(CakeRegistry.VANILLA)) {
-                return CakeUtil.convertToTwoTiered(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack);
+                return CakeUtil.convertToTwoTiered(ModBlocks.VANILLA_CAKE_FAMILY, state, pos, level, player, stack, false);
             }
         }
 

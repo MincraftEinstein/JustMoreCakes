@@ -2,6 +2,7 @@ package einstein.jmc.block.cake;
 
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.registration.CakeVariant;
+import einstein.jmc.registration.family.CakeFamily;
 import einstein.jmc.util.CakeUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -75,6 +76,27 @@ public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (state.getValue(HALF) == LOWER) {
+            CakeFamily family = getFamily();
+
+            if (family != null) {
+                if (stack.is(family.getBaseCake().get().asItem())) {
+                    int bites = state.getValue(getBites());
+
+                    if (bites == 5) {
+                        if (CakeUtil.convertToThreeTiered(family, state, pos, level, player, stack, true).consumesAction()) {
+                            return ItemInteractionResult.SUCCESS;
+                        }
+                    }
+                    else if (bites == 10) {
+                        if (CakeUtil.convertToTwoTiered(family, state, pos, level, player, stack, true).consumesAction()) {
+                            return ItemInteractionResult.SUCCESS;
+                        }
+                    }
+                }
+            }
+        }
+
         return CakeUtil.redirectUse(this, state, level, pos, (aboveState, abovePos) -> aboveState.useItemOn(stack, level, player, hand, hitResult.withPosition(abovePos)),
                 () -> super.useItemOn(stack, state, level, pos, player, hand, hitResult));
     }

@@ -60,8 +60,13 @@ public class BaseTwoTieredCakeBlock extends BaseCakeBlock {
 
         if (family != null) {
             if (stack.is(family.getBaseCake().get().asItem())) {
-                if (CakeUtil.convertToThreeTiered(family, state, pos, level, player, stack).consumesAction()) {
+                if (CakeUtil.convertToThreeTiered(family, state, pos, level, player, stack, false).consumesAction()) {
                     return ItemInteractionResult.SUCCESS;
+                }
+                else if (state.getValue(getBites()) == 5) {
+                    if (CakeUtil.convertToTwoTiered(family, state, pos, level, player, stack, true).consumesAction()) {
+                        return ItemInteractionResult.SUCCESS;
+                    }
                 }
             }
         }
