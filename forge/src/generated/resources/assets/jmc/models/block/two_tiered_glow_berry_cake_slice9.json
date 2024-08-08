@@ -1,9 +1,0 @@
-{
-  "parent": "jmc:block/template_two_tiered_cake_slice9",
-  "textures": {
-    "bottom": "jmc:block/glow_berry_cake_bottom",
-    "lower_inner": "jmc:block/glow_berry_cake_inner_covered",
-    "lower_side": "jmc:block/glow_berry_cake_side",
-    "lower_top": "jmc:block/glow_berry_cake_top_covered"
-  }
-}

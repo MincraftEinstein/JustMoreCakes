@@ -1,9 +1,0 @@
-{
-  "parent": "jmc:block/template_cross_cake_slice5",
-  "textures": {
-    "bottom": "jmc:block/chorus_cake_bottom",
-    "inside": "jmc:block/chorus_cake_inner",
-    "side": "jmc:block/chorus_cake_side",
-    "top": "jmc:block/chorus_cake_top"
-  }
-}

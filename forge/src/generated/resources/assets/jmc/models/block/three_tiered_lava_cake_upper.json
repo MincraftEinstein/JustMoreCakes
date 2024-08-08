@@ -1,8 +1,0 @@
-{
-  "parent": "jmc:block/template_three_tiered_cake_upper",
-  "textures": {
-    "bottom": "jmc:block/lava_cake_bottom",
-    "top": "jmc:block/lava_cake_small_top",
-    "top_side": "jmc:block/lava_cake_small_side"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "parent": "jmc:block/template_two_tiered_cake_slice8",
-  "textures": {
-    "bottom": "jmc:block/redstone_cake_bottom",
-    "lower_inner": "jmc:block/redstone_cake_inner_covered",
-    "lower_side": "jmc:block/redstone_cake_side",
-    "lower_top": "jmc:block/redstone_cake_top_covered"
-  }
-}

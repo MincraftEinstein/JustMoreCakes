@@ -101,8 +101,6 @@ processResources {
             "minecraft_version_range"      : minecraft_version_range,
             "fabric_version"               : fabric_version,
             "fabric_api_version"           : fabric_api_version,
-            "forge_version"                : forge_version,
-            "forge_loader_version_range"   : forge_loader_version_range,
             "neoforge_version"             : neoforge_version,
             "neoforge_loader_version_range": neoforge_loader_version_range,
             "mod_name"                     : mod_name,
@@ -113,7 +111,7 @@ processResources {
             "config_port_version"          : config_port_version
     ]
 
-    filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml']) {
+    filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/neoforge.mods.toml']) {
         expand expandProps
     }
 
