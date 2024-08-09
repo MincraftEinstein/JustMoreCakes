@@ -47,7 +47,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ModItemTags.RED_DYE).addOptionalTag(ModItemTags.DYE_RED.location())
                 .addOptionalTag(ModItemTags.RED_DYES.location())
                 .addOptionalTag(Tags.Items.DYES_RED.location());
-        tag(ModItemTags.SLIME_BALLS).addTag(Tags.Items.SLIMEBALLS);
         tag(ModItemTags.C_CAKES).addTag(ModItemTags.CAKES);
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.CAKE_SPATULA.get(), ModItems.WHISK.get());
     }
