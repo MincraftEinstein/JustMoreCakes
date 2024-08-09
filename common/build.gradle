@@ -1,16 +1,23 @@
 plugins {
     id 'multiloader-common'
-    id 'org.spongepowered.gradle.vanilla' version '0.2.1-SNAPSHOT'
+    id 'net.neoforged.moddev'
 }
 
-minecraft {
-    version(minecraft_version)
+neoForge {
+    neoFormVersion = neo_form_version
 
-    accessWideners(file("src/main/resources/${mod_id}.accesswidener"))
+    accessTransformers.from('src/main/resources/META-INF/accesstransformer.cfg')
+
+    parchment {
+        minecraftVersion = parchment_minecraft_version
+        mappingsVersion = parchment_version
+    }
 }
 
 dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+    compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
+    annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
 
     compileOnly group: 'fuzs.forgeconfigapiport', name: 'forgeconfigapiport-common-forgeapi', version: "${config_port_version}"
     compileOnly group: 'mezz.jei', name: "jei-${minecraft_version}-common-api", version: "${jei_version}"
@@ -21,7 +28,6 @@ dependencies {
     compileOnly group: "maven.modrinth", name: "jade", version: "${neoforge_jade_version}"
     compileOnly "maven.modrinth:moonlight:${neoforge_moonlight_version}"
     compileOnly "maven.modrinth:amendments:${neoforge_amendments_version}"
-    compileOnly "io.github.llamalad7:mixinextras-common:0.3.5"
     compileOnly "mysticdrew:common-networking-common:${networking_version}-${minecraft_version}"
 }
 

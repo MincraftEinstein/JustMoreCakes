@@ -1,6 +1,6 @@
 plugins {
     id 'multiloader-loader'
-    id 'fabric-loom' version '1.7-SNAPSHOT'
+    id 'fabric-loom'
 }
 
 repositories {
@@ -11,7 +11,10 @@ repositories {
 
 dependencies {
     minecraft("com.mojang:minecraft:${minecraft_version}")
-    mappings loom.officialMojangMappings()
+    mappings loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${parchment_minecraft_version}:${parchment_version}@zip")
+    }
 
     modRuntimeOnly("curse.maven:catalogue-459701:${fabric_catalogue_version}")
 //    modRuntimeOnly("curse.maven:configured-457570:${fabric_configured_version}")
@@ -55,12 +58,14 @@ loom {
             ideConfigGenerated(true)
             runDir("runs/client")
         }
+
         server {
             server()
             setConfigName("Fabric Server")
             ideConfigGenerated(true)
             runDir("runs/server")
         }
+
         data {
             inherit client
             setConfigName("Fabric Data")
