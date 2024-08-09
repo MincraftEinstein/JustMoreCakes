@@ -1,4 +1,4 @@
-// 1.21	2024-07-21T00:15:14.3783644	Tags for minecraft:item mod id jmc
+// 1.21	2024-08-08T23:32:22.3393411	Tags for minecraft:item mod id jmc
 b309abc5734e51409824164bb4935186385e4b9b data/c/tags/item/cakes.json
 baff2e4766328d0d89e55e50611c81f97f8a203a data/c/tags/item/cheese.json
 3f1a666a9752e3dca076126e9069598bd157ee2f data/c/tags/item/cheesecakes.json
@@ -7,3 +7,4 @@ baff2e4766328d0d89e55e50611c81f97f8a203a data/c/tags/item/cheeses.json
 7a46330840d6b455151808022e8da51ba9281650 data/c/tags/item/red_dye.json
 fcd574ff1db021427ff76cb7e93a1b8d94711f46 data/c/tags/item/slime_balls.json
 8b9e917dcada7af21195ecb752672975f7335aa3 data/jmc/tags/item/cakes.json
+e25955b907f21ebe746fb43c2d0208d80ff17a97 data/minecraft/tags/item/enchantable/durability.json

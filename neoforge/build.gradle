@@ -31,6 +31,7 @@ neoForge {
 
         data {
             data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', project.project(":common").file('src/main/resources/').getAbsolutePath()
         }
 
         server {

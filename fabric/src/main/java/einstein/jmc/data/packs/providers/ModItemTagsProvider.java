@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 
 import java.util.Comparator;
@@ -42,5 +43,6 @@ public class ModItemTagsProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ModItemTags.SEEDS).add(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
         getOrCreateTagBuilder(ModItemTags.SLIME_BALLS).add(Items.SLIME_BALL);
         getOrCreateTagBuilder(ModItemTags.C_CAKES).addTag(ModItemTags.CAKES);
+        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.CAKE_SPATULA.get(), ModItems.WHISK.get());
     }
 }
