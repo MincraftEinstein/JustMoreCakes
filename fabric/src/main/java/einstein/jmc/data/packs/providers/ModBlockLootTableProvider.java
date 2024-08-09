@@ -26,6 +26,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
     public void generate() {
         add(ModBlocks.CAKE_OVEN.get(), createSingleItemTable(ModBlocks.CAKE_OVEN.get()));
         add(ModBlocks.CAKE_STAND.get(), createSingleItemTable(ModBlocks.CAKE_STAND.get()));
+        add(ModBlocks.CERAMIC_BOWL.get(), createSingleItemTable(ModBlocks.CERAMIC_BOWL.get()));
 
         CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             Block cakeBlock = cake.get();

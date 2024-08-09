@@ -1,4 +1,4 @@
-// 1.21	2024-07-06T14:20:03.1990821	Loot Tables
+// 1.21	2024-08-08T23:41:42.0988743	Loot Tables
 6295c48be25da9307ca6041cf62af81a4ec39e3d data/jmc/loot_table/blocks/apple_cake.json
 344feb0fd26b519fd5e245156c9d6e23b571db55 data/jmc/loot_table/blocks/beetroot_cake.json
 88cb31ad491a5755bed4bc2a37e71b46ffbc04b3 data/jmc/loot_table/blocks/black_candle_apple_cake.json
@@ -369,6 +369,7 @@ a20e49d555c9bdcdd46fc956ce37ee4388419174 data/jmc/loot_table/blocks/candle_two_t
 4b46ab8b09a0a707466008d3850e311c2bae5715 data/jmc/loot_table/blocks/candle_two_tiered_warped_fungus_cake.json
 7de31b8ba9669030679db9c3d203a0d496f0f9da data/jmc/loot_table/blocks/candle_warped_fungus_cake.json
 d56eeb85c3e3ecaa0fec085335d492971e5322d5 data/jmc/loot_table/blocks/carrot_cake.json
+e0337418409be0ac24525cc1dc99ee37bbd27f11 data/jmc/loot_table/blocks/ceramic_bowl.json
 468b7e1e501f4d9248e714e9c4048cf323faec30 data/jmc/loot_table/blocks/cheesecake.json
 5dd7f75968976bba8dfcb0dcc20429faab9a9bf2 data/jmc/loot_table/blocks/chocolate_cake.json
 0dc0d22b30cbdb170111b69bbc7c406fa647b204 data/jmc/loot_table/blocks/chorus_cake.json

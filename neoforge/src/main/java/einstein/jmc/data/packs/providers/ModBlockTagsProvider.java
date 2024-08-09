@@ -29,7 +29,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.CAKE_OVEN.get(), ModBlocks.CAKE_STAND.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.CAKE_OVEN.get(), ModBlocks.CAKE_STAND.get(), ModBlocks.CERAMIC_BOWL.get());
         ModBlocks.OBSIDIAN_CAKE_FAMILY.forEach(cake -> tag(BlockTags.MINEABLE_WITH_PICKAXE).add(cake.get()));
 
         tag(BlockTags.ICE).add(ModBlocks.ENCASING_ICE.get());

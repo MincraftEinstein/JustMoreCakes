@@ -31,6 +31,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(ModBlocks.CAKE_OVEN.get());
         dropSelf(ModBlocks.CAKE_STAND.get());
+        dropSelf(ModBlocks.CERAMIC_BOWL.get());
 
         CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             BaseCakeBlock cakeBlock = cake.get();
@@ -80,6 +81,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected Iterable<Block> getKnownBlocks() {
         KNOWN_BLOCKS.add(ModBlocks.CAKE_OVEN.get());
         KNOWN_BLOCKS.add(ModBlocks.CAKE_STAND.get());
+        KNOWN_BLOCKS.add(ModBlocks.CERAMIC_BOWL.get());
         return KNOWN_BLOCKS;
     }
 }

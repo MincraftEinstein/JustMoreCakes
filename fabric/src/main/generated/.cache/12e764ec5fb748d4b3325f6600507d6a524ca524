@@ -1,4 +1,4 @@
-// 1.21	2024-08-08T23:32:05.3739025	Just More Cakes!/Block Loot Tables
+// 1.21	2024-08-08T23:41:12.3078717	Just More Cakes!/Block Loot Tables
 2a44e213f571ad1235ec02b336a2aa5135d3d515 data\jmc\loot_table\blocks\pink_candle_two_tiered_ice_cake.json
 c68d21ef90fdb17aad63e816e650f67ed091d534 data\jmc\loot_table\blocks\green_candle_chorus_cake.json
 09d42925be5de66ef11c5f524217baf7f9151a44 data\jmc\loot_table\blocks\magenta_candle_two_tiered_obsidian_cake.json
@@ -680,6 +680,7 @@ e5cce856eac9024fc90156389f82db9eb965f455 data\jmc\loot_table\blocks\magenta_cand
 3c7d5bd2d463e9678c3a69764e1b4d717b37f89e data\jmc\loot_table\blocks\gray_candle_three_tiered_warped_fungus_cake.json
 410c7f1dc92ca2da83b0d9a4675b70ded616e3f7 data\jmc\loot_table\blocks\glowstone_cake.json
 b75075a0d5c319f64ae1bb50808192c6fa75e79e data\jmc\loot_table\blocks\pink_candle_three_tiered_firey_cake.json
+089fe708cc5c453e68c0a5b1e8333980de39a4f8 data\jmc\loot_table\blocks\ceramic_bowl.json
 ac0f2d6b5e7aba4482f279f025fe301cab113779 data\jmc\loot_table\blocks\gray_candle_three_tiered_chocolate_cake.json
 d4479d586faf1a772135cc3a124aa77dd4fd89aa data\jmc\loot_table\blocks\yellow_candle_three_tiered_crimson_fungus_cake.json
 80fb183f4aeb4d28968e13fcb93586a6fa88e31a data\jmc\loot_table\blocks\green_candle_slime_cake.json

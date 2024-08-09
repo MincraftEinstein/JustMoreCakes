@@ -1,4 +1,4 @@
-// 1.21	2024-07-21T00:45:15.0207092	Tags for minecraft:block mod id jmc
+// 1.21	2024-08-08T23:41:42.1238735	Tags for minecraft:block mod id jmc
 ac48ef4af1ed09717e8dd7e433a9606f46d7933d data/c/tags/block/cakes.json
 2dece2accc644d3f77c36a8ed7a044e358180c6d data/c/tags/block/candle_cakes.json
 f414ec37b8f056b4b449fdf02fbf22231b3d0f00 data/jmc/tags/block/base_cakes.json
@@ -13,4 +13,4 @@ efb96841812600815c99930917410d593b9bc773 data/jmc/tags/block/cake_stand_storable
 60159f46388bd24c24742e997fbdacd3c60b3d39 data/jmc/tags/block/two_tiered_candle_cakes.json
 4d60c932f859099f6892e6554d664403f3724792 data/minecraft/tags/block/candle_cakes.json
 fdc1752e2f01592a62738e0b8978cc57e86b44c8 data/minecraft/tags/block/ice.json
-635315e3afe11b4f6e5fc88707f49a67065b9ac4 data/minecraft/tags/block/mineable/pickaxe.json
+44242fca707a4d8f57063f3bdfba203190505c75 data/minecraft/tags/block/mineable/pickaxe.json
