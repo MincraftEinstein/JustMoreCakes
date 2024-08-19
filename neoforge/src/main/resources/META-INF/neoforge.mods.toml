@@ -32,7 +32,7 @@ issueTrackerURL="https://github.com/MincraftEinstein/JustMoreCakes/issues"
 [[dependencies.jmc]]
     modId = "minecraft"
     type = "required"
-    versionRange = "${minecraft_version_range}"
+    versionRange = "[${minecraft_version}, ${max_minecraft_version})"
     ordering = "NONE"
     side = "BOTH"
 

@@ -112,7 +112,7 @@ processResources {
             "group"                        : project.group, //Else we target the task's group.
             "java_version"                 : java_version,
             "minecraft_version"            : minecraft_version,
-            "minecraft_version_range"      : minecraft_version_range,
+            "max_minecraft_version"        : max_minecraft_version,
             "fabric_version"               : fabric_version,
             "fabric_api_version"           : fabric_api_version,
             "neoforge_version"             : neoforge_version,
