@@ -3,10 +3,8 @@ package einstein.jmc.block.cake;
 import einstein.jmc.block.CakeEffectsHolder;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.data.effects.CakeEffects;
-import einstein.jmc.init.ModBlocks;
-import einstein.jmc.init.ModClientConfigs;
-import einstein.jmc.init.ModCommonConfigs;
-import einstein.jmc.init.ModTriggerTypes;
+import einstein.jmc.data.packs.ModItemTags;
+import einstein.jmc.init.*;
 import einstein.jmc.platform.Services;
 import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.registration.family.CakeFamily;
@@ -27,6 +25,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -89,6 +88,7 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         this.allowsCandles = allowsCandles;
         this.canAlwaysEat = canAlwaysEat;
         this.slices = slices;
+
         if (hasBites()) {
             registerDefaultState(stateDefinition.any().setValue(getBites(), 0));
         }
@@ -125,6 +125,10 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             }
         }
 
+        if (cutSlice(level, pos, state, player, stack)) {
+            return ItemInteractionResult.SUCCESS;
+        }
+
         if (family != null && isBaseVariant()) {
             if (stack.is(family.getBaseCake().get().asItem())) {
                 if (CakeUtil.convertToTwoTiered(family, state, pos, level, player, stack, false).consumesAction()) {
@@ -134,6 +138,34 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
         }
 
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    public boolean cutSlice(Level level, BlockPos pos, BlockState state, Player player, ItemStack stack) {
+        if (!level.enabledFeatures().contains(ModFeatureFlags.FD_SUPPORT)) {
+            return false;
+        }
+
+        ItemStack sliceStack = new ItemStack(variant.getSliceItem().get());
+        if (!hasBites() || sliceStack.isEmpty() || !stack.is(ModItemTags.FD_KNIVES)) {
+            return false;
+        }
+
+        if (!removeSlice(level, pos, state, player)) {
+            level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+        }
+
+        Direction direction = player.getDirection().getOpposite();
+        level.addFreshEntity(new ItemEntity(level,
+                pos.getX() + 0.5,
+                pos.getY() + 0.3,
+                pos.getZ() + 0.5,
+                sliceStack,
+                direction.getStepX() * 0.15,
+                0.05,
+                direction.getStepZ() * 0.15)
+        );
+        level.playSound(null, pos, getSoundType(state).getBreakSound(), SoundSource.BLOCKS, 0.8F, 0.8F);
+        return true;
     }
 
     public void afterCandlePlaced(Level level, BlockState state, BlockPos pos, BaseCandleCakeBlock candleCake) {
@@ -180,18 +212,21 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             ModTriggerTypes.CAKE_EATEN.get().trigger(serverPlayer, this);
         }
 
-        int bite = state.getValue(getBites());
         level.gameEvent(player, GameEvent.EAT, pos);
+        removeSlice(level, pos, state, player);
+        return InteractionResult.SUCCESS;
+    }
 
+    protected boolean removeSlice(Level level, BlockPos pos, BlockState state, Player player) {
+        int bite = state.getValue(getBites());
         if (bite < getSlices()) {
             level.setBlockAndUpdate(pos, state.setValue(getBites(), bite + 1));
-        }
-        else {
-            level.removeBlock(pos, false);
-            level.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
+            return false;
         }
 
-        return InteractionResult.SUCCESS;
+        level.removeBlock(pos, false);
+        level.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
+        return true;
     }
 
     public void applyEffects(Player player, CakeEffects effects) {

@@ -102,6 +102,21 @@ public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
     }
 
     @Override
+    public boolean cutSlice(Level level, BlockPos pos, BlockState state, Player player, ItemStack stack) {
+        state = setUpperToLastSlice(state);
+
+        boolean success = super.cutSlice(level, pos, state, player, stack);
+        BlockPos belowPos = pos.below();
+        BlockState belowState = level.getBlockState(belowPos);
+
+        if (belowState.is(this) && belowState.getValue(HALF) == LOWER) {
+            level.updateNeighbourForOutputSignal(belowPos, belowState.getBlock());
+        }
+
+        return success;
+    }
+
+    @Override
     public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         return CakeUtil.redirectUse(this, state, level, pos, (aboveState, abovePos) -> aboveState.useWithoutItem(level, player, hitResult.withPosition(abovePos)),
                 () -> super.useWithoutItem(state, level, pos, player, hitResult));
@@ -120,9 +135,9 @@ public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
     @Override
     public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
         InteractionResult result = super.eat(level, pos, state, player);
-
         BlockPos belowPos = pos.below();
         BlockState belowState = level.getBlockState(belowPos);
+
         if (belowState.is(this) && belowState.getValue(HALF) == LOWER) {
             level.updateNeighbourForOutputSignal(belowPos, belowState.getBlock());
         }
@@ -132,7 +147,10 @@ public class BaseThreeTieredCakeBlock extends BaseCakeBlock {
 
     @Override
     public BlockState eatActions(Player player, BlockPos pos, BlockState state) {
-        state = super.eatActions(player, pos, state);
+        return setUpperToLastSlice(super.eatActions(player, pos, state));
+    }
+
+    private BlockState setUpperToLastSlice(BlockState state) {
         if (state.getValue(HALF) == UPPER) {
             if (state.getValue(BITES) >= 4) {
                 return state.setValue(BITES, getSlices());

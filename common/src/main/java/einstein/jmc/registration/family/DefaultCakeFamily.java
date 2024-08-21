@@ -1,8 +1,13 @@
 package einstein.jmc.registration.family;
 
-import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.CakeModel;
+import einstein.jmc.init.ModFeatureFlags;
+import einstein.jmc.item.CakeSliceItem;
+import einstein.jmc.platform.Services;
+import einstein.jmc.registration.CakeVariant;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.function.Consumer;
@@ -91,18 +96,26 @@ public class DefaultCakeFamily extends CakeFamily {
 
         @Override
         public DefaultCakeFamily build() {
+            FoodProperties.Builder builder = new FoodProperties.Builder()
+                    .nutrition(family.nutrition)
+                    .saturationModifier(family.saturationModifier);
+
             if (family.canAlwaysEat) {
+                builder.alwaysEdible();
                 baseVariantBuilder.alwaysEat();
                 twoTieredVariantBuilder.alwaysEat();
                 threeTieredVariantBuilder.alwaysEat();
             }
 
+            family.sliceItem = Services.REGISTRY.registerItem(family.getBaseCakeName() + "_slice",
+                    () -> new CakeSliceItem(new Item.Properties().food(builder.build()).requiredFeatures(ModFeatureFlags.FD_SUPPORT), family));
             family.baseVariant = baseVariantBuilder
                     .cakeProperties(cakeProperties)
                     .candleCakeProperties(candleCakeProperties)
                     .nutrition(family.nutrition)
                     .saturationModifier(family.saturationModifier)
                     .models(family.cakeModel, family.candleCakeModel)
+                    .sliceItem(family.sliceItem)
                     .build();
             family.twoTieredVariant = twoTieredVariantBuilder
                     .noItem()
@@ -111,6 +124,7 @@ public class DefaultCakeFamily extends CakeFamily {
                     .nutrition(family.nutrition)
                     .saturationModifier(family.saturationModifier)
                     .models(family.cakeModel, family.candleCakeModel)
+                    .sliceItem(family.sliceItem)
                     .build();
             family.threeTieredVariant = threeTieredVariantBuilder
                     .noItem()
@@ -119,6 +133,7 @@ public class DefaultCakeFamily extends CakeFamily {
                     .nutrition(family.nutrition)
                     .saturationModifier(family.saturationModifier)
                     .models(family.cakeModel, family.candleCakeModel)
+                    .sliceItem(family.sliceItem)
                     .build();
 
             return super.build();

@@ -1,5 +1,6 @@
 package einstein.jmc.registration.family;
 
+import einstein.jmc.init.ModItems;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -26,6 +27,7 @@ public class VanillaCakeFamily extends CakeFamily {
 
         @Override
         public VanillaCakeFamily build() {
+            family.sliceItem = ModItems.CAKE_SLICE;
             family.baseCake = null;
             family.baseVariant = null;
             family.twoTieredVariant = twoTieredVariantBuilder.build();

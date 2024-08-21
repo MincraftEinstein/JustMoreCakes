@@ -45,6 +45,7 @@ public abstract class CakeFamily implements CakeEffectsHolder {
     protected CakeModel candleCakeModel = CakeModel.DEFAULT;
     @Nullable
     protected CakeEffects cakeEffects;
+    protected Supplier<Item> sliceItem = () -> Items.AIR;
 
     public CakeFamily(ResourceLocation registryKey, String baseCakeName) {
         this.registryKey = registryKey;
@@ -98,6 +99,10 @@ public abstract class CakeFamily implements CakeEffectsHolder {
 
     public CakeModel getCandleCakeModel() {
         return candleCakeModel;
+    }
+
+    public Supplier<Item> getSliceItem() {
+        return sliceItem;
     }
 
     public void forEach(Consumer<Supplier<BaseCakeBlock>> consumer) {

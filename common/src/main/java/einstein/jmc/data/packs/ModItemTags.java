@@ -5,7 +5,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 
 public class ModItemTags {
 
@@ -20,12 +19,17 @@ public class ModItemTags {
     public static final TagKey<Item> SLIME_BALLS = createC("slime_balls");
     public static final TagKey<Item> CAKES = create("cakes");
     public static final TagKey<Item> C_CAKES = createC("cakes");
+    public static final TagKey<Item> FD_KNIVES = create(ResourceLocation.fromNamespaceAndPath(JustMoreCakes.FARMERS_DELIGHT_MOD_ID, "tools/knives"));
 
-    private static TagKey<Item> createC(String string) {
-        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", string));
+    private static TagKey<Item> createC(String name) {
+        return create(ResourceLocation.fromNamespaceAndPath("c", name));
     }
 
-    private static TagKey<Item> create(String string) {
-        return TagKey.create(Registries.ITEM, JustMoreCakes.loc(string));
+    private static TagKey<Item> create(String name) {
+        return create(JustMoreCakes.loc(name));
+    }
+
+    private static TagKey<Item> create(ResourceLocation location) {
+        return TagKey.create(Registries.ITEM, location);
     }
 }

@@ -48,6 +48,7 @@ public class ModBlocks {
             .noItem()
             .nutrition(1)
             .saturationModifier(0.3F)
+            .sliceItem(ModItems.CAKE_SLICE)
             .build();
 
     public static final VanillaCakeFamily VANILLA_CAKE_FAMILY = new VanillaCakeFamily.Builder().build();

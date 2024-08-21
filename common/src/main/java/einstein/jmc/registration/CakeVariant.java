@@ -42,6 +42,7 @@ public class CakeVariant {
     private CakeFamily family;
     private Supplier<BaseCakeBlock> cake;
     private Supplier<Item> item = () -> Items.AIR;
+    private Supplier<Item> sliceItem = () -> Items.AIR;
 
     private CakeVariant(String cakeName, Type type) {
         this.cakeName = cakeName;
@@ -117,6 +118,10 @@ public class CakeVariant {
         return item;
     }
 
+    public Supplier<Item> getSliceItem() {
+        return sliceItem;
+    }
+
     public static class Builder {
 
         private final CakeVariant variant;
@@ -190,6 +195,11 @@ public class CakeVariant {
         public Builder models(CakeModel cakeModel, CakeModel candleCakeModel) {
             variant.cakeModel = cakeModel;
             variant.candleCakeModel = candleCakeModel;
+            return this;
+        }
+
+        public Builder sliceItem(Supplier<Item> item) {
+            variant.sliceItem = item;
             return this;
         }
 
