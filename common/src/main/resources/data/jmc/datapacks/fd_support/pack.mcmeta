@@ -1,0 +1,13 @@
+{
+  "pack": {
+    "description": {
+      "translate": "datapack.jmc.fd_support.description"
+    },
+    "pack_format": 48
+  },
+  "features": {
+    "enabled": [
+      "jmc:fd_support"
+    ]
+  }
+}

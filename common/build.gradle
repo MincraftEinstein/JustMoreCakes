@@ -29,6 +29,7 @@ dependencies {
     compileOnly "maven.modrinth:moonlight:${neoforge_moonlight_version}"
     compileOnly "maven.modrinth:amendments:${neoforge_amendments_version}"
     compileOnly "mysticdrew:common-networking-common:${networking_version}-${minecraft_version}"
+    compileOnly "curse.maven:farmers-delight-398521:${neoforge_farmers_delight_version}"
 }
 
 configurations {

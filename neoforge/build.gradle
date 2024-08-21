@@ -62,6 +62,7 @@ dependencies {
     compileOnly("maven.modrinth:moonlight:${neoforge_moonlight_version}")
     compileOnly("maven.modrinth:amendments:${neoforge_amendments_version}")
     implementation("mysticdrew:common-networking-neoforge:${networking_version}-${minecraft_version}")
+    implementation("curse.maven:farmers-delight-398521:${neoforge_farmers_delight_version}")
 
     compileOnly(testCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
     compileOnly(testCompileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"))

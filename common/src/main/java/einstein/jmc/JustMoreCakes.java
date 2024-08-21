@@ -22,6 +22,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -33,6 +34,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -58,6 +60,9 @@ public class JustMoreCakes {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
     public static final ResourceKey<LootTable> CAKE_BAKER_GIFT = ResourceKey.create(Registries.LOOT_TABLE, loc("gameplay/hero_of_the_village/cake_baker_gift"));
     public static final ResourceKey<DamageType> OBSIDIAN_CAKE_DAMAGE_TYPE = ResourceKey.create(Registries.DAMAGE_TYPE, JustMoreCakes.loc("obsidian_cake"));
+    public static final String AMENDMENTS_MOD_ID = "amendments";
+    public static final String FARMERS_DELIGHT_MOD_ID = "farmersdelight";
+    public static final String FD_SUPPORT_ID = "jmc:fd_support";
 
     public static void init() {
         ModItems.init();
@@ -85,6 +90,14 @@ public class JustMoreCakes {
     }
 
     public static void onServerStarting(MinecraftServer server) {
+        if (Services.PLATFORM.isModLoaded(FARMERS_DELIGHT_MOD_ID)) {
+            LOGGER.info("Enabling datapack for Farmers Delight support");
+            PackRepository repository = server.getPackRepository();
+            List<String> selectedIds = new ArrayList<>(repository.getSelectedIds());
+            selectedIds.add(FD_SUPPORT_ID);
+            repository.setSelected(selectedIds);
+        }
+
         registerVillageBuilding(server, "plains", "bakery_1", CAKE_BAKERY_GENERATION_WEIGHT.get());
         registerVillageBuilding(server, "plains", "bakery_2", CAKE_BAKERY_GENERATION_WEIGHT.get());
         registerVillageBuilding(server, "desert", "bakery_1", CAKE_BAKERY_GENERATION_WEIGHT.get());
@@ -106,7 +119,12 @@ public class JustMoreCakes {
         BowlContents.EMPTY.clear();
 
         if (ModCommonConfigs.DISABLE_DEFAULT_CAKE_RECIPE.get()) {
-            Util.removeRecipe(server.getRecipeManager(), mcLoc("cake"), RecipeType.CRAFTING);
+            RecipeManager recipeManager = server.getRecipeManager();
+            Util.removeRecipe(recipeManager, mcLoc("cake"), RecipeType.CRAFTING);
+
+            if (Services.PLATFORM.isModLoaded(FARMERS_DELIGHT_MOD_ID)) {
+                Util.removeRecipe(recipeManager, ResourceLocation.fromNamespaceAndPath(FARMERS_DELIGHT_MOD_ID, "cake_from_milk_bottle"), RecipeType.CRAFTING);
+            }
         }
 
         if (ModCommonConfigs.MODIFY_BIRTHDAY_SONG.get()) {
@@ -148,7 +166,7 @@ public class JustMoreCakes {
         boolean canUse = !player.isSecondaryUseActive() || (player.getMainHandItem().isEmpty() && player.getOffhandItem().isEmpty());
 
         if (stack.is(Blocks.CAKE.asItem()) && canUse) {
-            if (Services.PLATFORM.isModLoaded("amendments")) {
+            if (Services.PLATFORM.isModLoaded(AMENDMENTS_MOD_ID)) {
                 return AmendmentsCompat.cakeUsedOnBlock(player, level, hand, hitResult);
             }
         }

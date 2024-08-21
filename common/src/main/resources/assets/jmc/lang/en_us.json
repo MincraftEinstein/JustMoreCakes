@@ -165,5 +165,9 @@
 
   "_comment": "Damage Types",
   "death.attack.jmc.obsidian_cake": "%s didn't have diamond teeth",
-  "death.attack.jmc.obsidian_cake.block": "%s broke their teeth on an %s"
+  "death.attack.jmc.obsidian_cake.block": "%s broke their teeth on an %s",
+
+  "_comment": "Data Packs",
+  "datapack.jmc.fd_support.name": "JMC Farmers Delight Support",
+  "datapack.jmc.fd_support.description": "Enables JMC's support for Farmers Delight"
 }

@@ -1,5 +1,7 @@
 package einstein.jmc.platform.services;
 
+import java.nio.file.Path;
+
 public interface IPlatformHelper {
 
     /**
@@ -25,6 +27,10 @@ public interface IPlatformHelper {
     boolean isDevelopmentEnvironment();
 
     PhysicalSide getPhysicalSide();
+
+    String getVersion();
+
+    Path getRootPath();
 
     enum PhysicalSide {
         CLIENT,
