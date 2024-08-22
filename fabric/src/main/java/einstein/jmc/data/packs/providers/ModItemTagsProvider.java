@@ -45,7 +45,8 @@ public class ModItemTagsProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(SLIME_BALLS).add(Items.SLIME_BALL);
         getOrCreateTagBuilder(C_CAKES).addTag(CAKES);
         getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.CAKE_SPATULA.get(), ModItems.WHISK.get());
-        getOrCreateTagBuilder(C_FOOD_MILK).addTag(C_MILKS).add(Items.MILK_BUCKET);
+        getOrCreateTagBuilder(C_MILKS).add(Items.MILK_BUCKET);
+        getOrCreateTagBuilder(C_FOOD_MILK).addTag(C_MILKS);
         getOrCreateTagBuilder(ConventionalItemTags.EDIBLE_WHEN_PLACED_FOODS).addTag(C_CAKES);
     }
 }

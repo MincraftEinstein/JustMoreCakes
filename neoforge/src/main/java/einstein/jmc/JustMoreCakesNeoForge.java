@@ -103,7 +103,7 @@ public class JustMoreCakesNeoForge {
         generator.addProvider(event.includeServer(), new ModCakeEffectsProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ModLootModifiersProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ModDataMapProvider(output, lookupProvider));
-        createFDSupportPack(generator, lookupProvider, blockTags.contentsGetter());
+        createFDSupportPack(generator, lookupProvider, generator.getBuiltinDatapack(true, ""));
 
         // Client providers
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, fileHelper));

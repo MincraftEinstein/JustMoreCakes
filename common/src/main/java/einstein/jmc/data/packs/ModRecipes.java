@@ -1,5 +1,6 @@
 package einstein.jmc.data.packs;
 
+import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.registration.family.CakeFamily;
@@ -246,6 +247,10 @@ public class ModRecipes {
         builder.save(output, craftingLoc(vectorwing.farmersdelight.common.registry.ModItems.SWEET_BERRY_CHEESECAKE));
 
         CakeFamily.REGISTERED_CAKE_FAMILIES.forEach((id, family) -> {
+            if (family.equals(ModBlocks.VANILLA_CAKE_FAMILY)) {
+                return;
+            }
+
             Supplier<Item> sliceItem = family.getSliceItem();
             Supplier<? extends Block> cakeBlock = family.getBaseCake();
 
@@ -273,6 +278,6 @@ public class ModRecipes {
     }
 
     private static ResourceLocation getLocation(Supplier<? extends ItemLike> item, String recipeType) {
-        return getItemId(item.get().asItem()).withSuffix("_from_" + recipeType);
+        return JustMoreCakes.loc(getItemId(item.get().asItem()).getPath()).withSuffix("_from_" + recipeType);
     }
 }

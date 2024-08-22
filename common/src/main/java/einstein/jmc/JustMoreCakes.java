@@ -3,7 +3,6 @@ package einstein.jmc;
 import einstein.jmc.compat.AmendmentsCompat;
 import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.effects.CakeEffectsManager;
-import einstein.jmc.data.packs.providers.farmers_delight.FDSupportItemTagsProvider;
 import einstein.jmc.data.packs.providers.farmers_delight.FDSupportRecipeProvider;
 import einstein.jmc.init.*;
 import einstein.jmc.mixin.AdvancementAccessor;
@@ -25,7 +24,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.metadata.PackMetadataGenerator;
-import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -47,7 +45,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -75,7 +72,7 @@ public class JustMoreCakes {
     public static final ResourceKey<DamageType> OBSIDIAN_CAKE_DAMAGE_TYPE = ResourceKey.create(Registries.DAMAGE_TYPE, JustMoreCakes.loc("obsidian_cake"));
     public static final String AMENDMENTS_MOD_ID = "amendments";
     public static final String FARMERS_DELIGHT_MOD_ID = "farmersdelight";
-    public static final String FD_SUPPORT_ID = "mod/jmc_fd_support";
+    public static final String FD_SUPPORT_ID = "jmc_fd_support";
     public static final Component FD_SUPPORT_NAME = Component.translatable("datapack.jmc.fd_support.name");
     public static final Component FD_SUPPORT_DESCRIPTION = Component.translatable("datapack.jmc.fd_support.description");
 
@@ -222,14 +219,12 @@ public class JustMoreCakes {
         }
     }
 
-    public static void createFDSupportPack(DataGenerator generator, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagsProvider.TagLookup<Block>> blockTags) {
+    public static void createFDSupportPack(DataGenerator generator, CompletableFuture<HolderLookup.Provider> lookupProvider, DataGenerator.PackGenerator pack) {
         Path path = generator.vanillaPackOutput.getOutputFolder(PackOutput.Target.DATA_PACK).resolve(MOD_ID).resolve("datapacks").resolve(FD_SUPPORT_ID);
-        DataGenerator.PackGenerator pack = generator.getBuiltinDatapack(true, "");
         PackGeneratorAccessor accessor = (PackGeneratorAccessor) pack;
         accessor.setProviderPrefix(FD_SUPPORT_ID);
         accessor.setOutput(new PackOutput(path));
         pack.addProvider(packOutput -> new FDSupportRecipeProvider(packOutput, lookupProvider));
-        pack.addProvider(packOutput -> new FDSupportItemTagsProvider(packOutput, lookupProvider, blockTags));
         pack.addProvider(packOutput -> PackMetadataGenerator.forFeaturePack(packOutput, FD_SUPPORT_DESCRIPTION, FeatureFlagSet.of(ModFeatureFlags.FD_SUPPORT)));
     }
 

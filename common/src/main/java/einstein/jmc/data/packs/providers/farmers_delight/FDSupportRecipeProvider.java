@@ -15,7 +15,7 @@ public class FDSupportRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output) {
+    public void buildRecipes(RecipeOutput output) {
         ModRecipes.fdSupportRecipes(output);
     }
 }

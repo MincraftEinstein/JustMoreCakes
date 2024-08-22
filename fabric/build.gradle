@@ -34,6 +34,9 @@ dependencies {
     modCompileOnly("maven.modrinth:moonlight:${fabric_moonlight_version}")
     modCompileOnly("maven.modrinth:amendments:${fabric_amendments_version}")
     modCompileOnly("curse.maven:farmers-delight-refabricated-993166:${fabric_farmers_delight_version}")
+    // Temporary implementation of FD neoforge so fabric will compile
+    // TODO remove when FD refabricated is updated
+    modCompileOnly("curse.maven:farmers-delight-398521:${neoforge_farmers_delight_version}")
     modImplementation("mysticdrew:common-networking-fabric:${networking_version}-${minecraft_version}")
 
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")

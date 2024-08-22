@@ -4,8 +4,8 @@
       "duration": 1200,
       "id": "minecraft:jump_boost",
       "neoforge:cures": [
-        "protected_by_totem",
-        "milk"
+        "milk",
+        "protected_by_totem"
       ],
       "show_icon": true
     },
@@ -13,8 +13,8 @@
       "duration": 1200,
       "id": "minecraft:resistance",
       "neoforge:cures": [
-        "protected_by_totem",
-        "milk"
+        "milk",
+        "protected_by_totem"
       ],
       "show_icon": true
     },
@@ -22,8 +22,8 @@
       "duration": 1200,
       "id": "jmc:bouncing",
       "neoforge:cures": [
-        "protected_by_totem",
-        "milk"
+        "milk",
+        "protected_by_totem"
       ],
       "show_icon": true
     }

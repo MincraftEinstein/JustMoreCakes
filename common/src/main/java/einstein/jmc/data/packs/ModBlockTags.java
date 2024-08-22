@@ -16,17 +16,21 @@ public class ModBlockTags {
     public static final TagKey<Block> BASE_CANDLE_CAKES = create("base_candle_cakes");
     public static final TagKey<Block> TWO_TIERED_CANDLE_CAKES = create("two_tiered_candle_cakes");
     public static final TagKey<Block> THREE_TIERED_CANDLE_CAKES = create("three_tiered_candle_cakes");
-
     public static final TagKey<Block> C_CAKES = createC("cakes");
     public static final TagKey<Block> C_CANDLE_CAKES = createC("candle_cakes");
     public static final TagKey<Block> CAKE_SPATULA_USABLE = create("cake_spatula_usable");
     public static final TagKey<Block> CAKE_STAND_STORABLES = create("cake_stand_storables");
+    public static final TagKey<Block> FD_MINEABLE_KNIVES = create(JustMoreCakes.fdLoc("mineable/knives"));
 
     private static TagKey<Block> createC(String string) {
-        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", string));
+        return create(ResourceLocation.fromNamespaceAndPath("c", string));
     }
 
     private static TagKey<Block> create(String string) {
-        return TagKey.create(Registries.BLOCK, JustMoreCakes.loc(string));
+        return create(JustMoreCakes.loc(string));
+    }
+
+    private static TagKey<Block> create(ResourceLocation location) {
+        return TagKey.create(Registries.BLOCK, location);
     }
 }

@@ -76,7 +76,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         pack.addProvider(ModModelProvider::new);
         pack.addProvider(ModBlockLootTableProvider::new);
         pack.addProvider(ModCakeEffectsProvider::new);
-        createFDSupportPack(generator, lookupProvider, blockTags.contentsGetter());
+        createFDSupportPack(generator, lookupProvider, generator.createPack());
     }
 
     @Override

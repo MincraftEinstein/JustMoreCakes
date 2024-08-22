@@ -1,6 +1,5 @@
 package einstein.jmc.mixin;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
@@ -36,7 +35,7 @@ public class ServerPacksSourceMixin {
                                 PackSource.FEATURE, Optional.of(
                                 new KnownPack(PLATFORM.getPlatformName(), FD_SUPPORT_ID, version)
                         )),
-                        new PathPackResources.PathResourcesSupplier(path.resolve("data/jmc/datapacks/fd_support")), PackType.SERVER_DATA,
+                        new PathPackResources.PathResourcesSupplier(path.resolve("data/jmc/datapacks/" + FD_SUPPORT_ID)), PackType.SERVER_DATA,
                         new PackSelectionConfig(PLATFORM.isModLoaded(FARMERS_DELIGHT_MOD_ID), Pack.Position.TOP, false)
                 )
         ));
