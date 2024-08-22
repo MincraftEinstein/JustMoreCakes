@@ -32,7 +32,7 @@ public class ServerPacksSourceMixin {
 
         repositorySources.add(consumer -> consumer.accept(
                 Pack.readMetaAndCreate(
-                        new PackLocationInfo(FD_SUPPORT_ID, Component.translatable("datapack.jmc.fd_support.name"),
+                        new PackLocationInfo(FD_SUPPORT_ID, FD_SUPPORT_NAME,
                                 PackSource.FEATURE, Optional.of(
                                 new KnownPack(PLATFORM.getPlatformName(), FD_SUPPORT_ID, version)
                         )),

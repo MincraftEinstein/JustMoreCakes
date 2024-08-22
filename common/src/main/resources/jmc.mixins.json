@@ -9,6 +9,7 @@
     "AdvancementRequirementsAccessor",
     "CakeBlockMixin",
     "CandleCakeBlockMixin",
+    "PackGeneratorAccessor",
     "FeatureFlagsMixin",
     "ItemsMixin",
     "PandaMixin",

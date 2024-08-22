@@ -2,7 +2,6 @@ package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.data.packs.ModItemTags;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.registration.CakeVariant;
@@ -10,10 +9,7 @@ import einstein.jmc.util.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -23,6 +19,8 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
+
+import static einstein.jmc.data.packs.ModItemTags.*;
 
 public class ModItemTagsProvider extends ItemTagsProvider {
 
@@ -36,18 +34,20 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         sortedCakes.forEach((cake, variant) -> {
             if (!cake.get().asItem().equals(Items.AIR)) {
-                tag(ModItemTags.CAKES).add(cake.get().asItem());
+                tag(CAKES).add(cake.get().asItem());
             }
         });
 
-        tag(ModItemTags.CHEESE_CAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
-        tag(ModItemTags.CHEESECAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
-        tag(ModItemTags.CHEESE).add(ModItems.CREAM_CHEESE.get());
-        tag(ModItemTags.CHEESES).add(ModItems.CREAM_CHEESE.get());
-        tag(ModItemTags.RED_DYE).addOptionalTag(ModItemTags.DYE_RED.location())
-                .addOptionalTag(ModItemTags.RED_DYES.location())
+        tag(CHEESE_CAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
+        tag(CHEESECAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
+        tag(CHEESE).add(ModItems.CREAM_CHEESE.get());
+        tag(CHEESES).add(ModItems.CREAM_CHEESE.get());
+        tag(RED_DYE).addOptionalTag(DYE_RED.location())
+                .addOptionalTag(RED_DYES.location())
                 .addOptionalTag(Tags.Items.DYES_RED.location());
-        tag(ModItemTags.C_CAKES).addTag(ModItemTags.CAKES);
+        tag(C_CAKES).addTag(CAKES);
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.CAKE_SPATULA.get(), ModItems.WHISK.get());
+        tag(C_FOOD_MILK).addTag(C_MILKS).add(Items.MILK_BUCKET);
+        tag(Tags.Items.FOODS_EDIBLE_WHEN_PLACED).addTag(C_CAKES);
     }
 }

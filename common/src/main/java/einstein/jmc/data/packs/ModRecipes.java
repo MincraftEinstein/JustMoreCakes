@@ -5,11 +5,15 @@ import einstein.jmc.init.ModItems;
 import einstein.jmc.registration.family.CakeFamily;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
 import java.util.function.Supplier;
 
@@ -229,19 +233,46 @@ public class ModRecipes {
                 .save(output, mixingLoc(ModItems.CUPCAKE_FROSTING));
     }
 
-    private static ResourceLocation craftingLoc(Supplier<? extends ItemLike> item) {
-        return getItemId(item.get().asItem()).withSuffix("_from_crafting");
+    public static void fdSupportRecipes(RecipeOutput output) {
+        ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, vectorwing.farmersdelight.common.registry.ModItems.SWEET_BERRY_CHEESECAKE.get())
+                .unlockedBy(HAS, has(vectorwing.farmersdelight.common.registry.ModItems.PIE_CRUST.get()))
+                .requires(vectorwing.farmersdelight.common.registry.ModItems.PIE_CRUST.get())
+                .requires(ModItems.CREAM_CHEESE.get());
+
+        for (int i = 0; i < 6; i++) {
+            builder.requires(Items.SWEET_BERRIES);
+        }
+
+        builder.save(output, craftingLoc(vectorwing.farmersdelight.common.registry.ModItems.SWEET_BERRY_CHEESECAKE));
+
+        CakeFamily.REGISTERED_CAKE_FAMILIES.forEach((id, family) -> {
+            Supplier<Item> sliceItem = family.getSliceItem();
+            Supplier<? extends Block> cakeBlock = family.getBaseCake();
+
+            CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(cakeBlock.get()), Ingredient.of(ModItemTags.FD_KNIVES), sliceItem.get(), 7)
+                    .group("cake_slices")
+                    .unlockedBy(HAS, has(cakeBlock.get()))
+                    .save(output, getLocation(sliceItem, "cutting"));
+        });
     }
 
-    private static ResourceLocation cakeOvenLoc(Supplier<? extends ItemLike> item) {
-        return getItemId(item.get().asItem()).withSuffix("_from_cake_oven");
+    private static ResourceLocation craftingLoc(Supplier<? extends ItemLike> item) {
+        return getLocation(item, "crafting");
     }
 
     private static ResourceLocation cakeOvenLoc(CakeFamily family) {
         return cakeOvenLoc(family.getBaseItem());
     }
 
+    private static ResourceLocation cakeOvenLoc(Supplier<? extends ItemLike> item) {
+        return getLocation(item, "cake_oven");
+    }
+
     private static ResourceLocation mixingLoc(Supplier<? extends ItemLike> item) {
-        return getItemId(item.get().asItem()).withSuffix("_from_mixing");
+        return getLocation(item, "mixing");
+    }
+
+    private static ResourceLocation getLocation(Supplier<? extends ItemLike> item, String recipeType) {
+        return getItemId(item.get().asItem()).withSuffix("_from_" + recipeType);
     }
 }

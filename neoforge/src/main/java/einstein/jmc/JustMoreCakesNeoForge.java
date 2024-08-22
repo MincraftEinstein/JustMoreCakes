@@ -43,8 +43,7 @@ import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import static einstein.jmc.JustMoreCakes.livingEntityJump;
-import static einstein.jmc.JustMoreCakes.livingEntityTick;
+import static einstein.jmc.JustMoreCakes.*;
 
 @Mod(JustMoreCakes.MOD_ID)
 public class JustMoreCakesNeoForge {
@@ -104,6 +103,7 @@ public class JustMoreCakesNeoForge {
         generator.addProvider(event.includeServer(), new ModCakeEffectsProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ModLootModifiersProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ModDataMapProvider(output, lookupProvider));
+        createFDSupportPack(generator, lookupProvider, blockTags.contentsGetter());
 
         // Client providers
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, fileHelper));

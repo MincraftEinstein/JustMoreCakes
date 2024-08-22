@@ -1,7 +1,6 @@
 package einstein.jmc.data.packs.providers;
 
 import einstein.jmc.block.cake.BaseCakeBlock;
-import einstein.jmc.data.packs.ModItemTags;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.registration.CakeVariant;
@@ -18,6 +17,8 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
+import static einstein.jmc.data.packs.ModItemTags.*;
+
 public class ModItemTagsProvider extends FabricTagProvider.ItemTagProvider {
 
     public ModItemTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, BlockTagProvider blockTags) {
@@ -30,19 +31,21 @@ public class ModItemTagsProvider extends FabricTagProvider.ItemTagProvider {
 
         sortedCakes.forEach((cake, variant) -> {
             if (!cake.get().asItem().equals(Items.AIR)) {
-                getOrCreateTagBuilder(ModItemTags.CAKES).add(cake.get().asItem());
+                getOrCreateTagBuilder(CAKES).add(cake.get().asItem());
             }
         });
 
-        getOrCreateTagBuilder(ModItemTags.CHEESE_CAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
-        getOrCreateTagBuilder(ModItemTags.CHEESECAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
-        getOrCreateTagBuilder(ModItemTags.CHEESE).add(ModItems.CREAM_CHEESE.get());
-        getOrCreateTagBuilder(ModItemTags.CHEESES).add(ModItems.CREAM_CHEESE.get());
-        getOrCreateTagBuilder(ModItemTags.RED_DYE).addOptionalTag(ModItemTags.DYE_RED)
+        getOrCreateTagBuilder(CHEESE_CAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
+        getOrCreateTagBuilder(CHEESECAKES).add(ModBlocks.CHEESECAKE_FAMILY.getBaseItem().get());
+        getOrCreateTagBuilder(CHEESE).add(ModItems.CREAM_CHEESE.get());
+        getOrCreateTagBuilder(CHEESES).add(ModItems.CREAM_CHEESE.get());
+        getOrCreateTagBuilder(RED_DYE).addOptionalTag(DYE_RED)
                 .addOptionalTag(ConventionalItemTags.RED_DYES);
-        getOrCreateTagBuilder(ModItemTags.SEEDS).add(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
-        getOrCreateTagBuilder(ModItemTags.SLIME_BALLS).add(Items.SLIME_BALL);
-        getOrCreateTagBuilder(ModItemTags.C_CAKES).addTag(ModItemTags.CAKES);
+        getOrCreateTagBuilder(SEEDS).add(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS);
+        getOrCreateTagBuilder(SLIME_BALLS).add(Items.SLIME_BALL);
+        getOrCreateTagBuilder(C_CAKES).addTag(CAKES);
         getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.CAKE_SPATULA.get(), ModItems.WHISK.get());
+        getOrCreateTagBuilder(C_FOOD_MILK).addTag(C_MILKS).add(Items.MILK_BUCKET);
+        getOrCreateTagBuilder(ConventionalItemTags.EDIBLE_WHEN_PLACED_FOODS).addTag(C_CAKES);
     }
 }

@@ -2,6 +2,7 @@ accessWidener	v1 named
 
 # Fields
 accessible field net/minecraft/world/entity/animal/Panda PANDA_ITEMS Ljava/util/function/Predicate;
+accessible field net/minecraft/data/DataGenerator vanillaPackOutput Lnet/minecraft/data/PackOutput;
 
 # Methods
 accessible method net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity createExperience (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;IF)V

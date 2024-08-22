@@ -26,14 +26,16 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.fml.config.ModConfig;
 
-import static einstein.jmc.JustMoreCakes.MOD_ID;
-import static einstein.jmc.JustMoreCakes.loc;
+import java.util.concurrent.CompletableFuture;
+
+import static einstein.jmc.JustMoreCakes.*;
 import static einstein.jmc.util.CakeUtil.getVanillaCandleCakes;
 import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
 
@@ -65,6 +67,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
         FabricDataGenerator.Pack pack = generator.createPack();
         FabricTagProvider.BlockTagProvider blockTags = pack.addProvider(ModBlockTagsProvider::new);
+        CompletableFuture<HolderLookup.Provider> lookupProvider = generator.getRegistries();
         pack.addProvider((output, registriesFuture) -> new ModItemTagsProvider(output, registriesFuture, blockTags));
         pack.addProvider(ModPOITagsProvider::new);
         pack.addProvider(ModGameEventTagsProvider::new);
@@ -73,6 +76,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         pack.addProvider(ModModelProvider::new);
         pack.addProvider(ModBlockLootTableProvider::new);
         pack.addProvider(ModCakeEffectsProvider::new);
+        createFDSupportPack(generator, lookupProvider, blockTags.contentsGetter());
     }
 
     @Override
