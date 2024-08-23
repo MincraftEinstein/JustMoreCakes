@@ -7,12 +7,13 @@ import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
 import einstein.jmc.block.cake.BaseTwoTieredCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.block.cake.candle.BaseThreeTieredCandleCakeBlock;
+import einstein.jmc.data.CakeModel;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
-import einstein.jmc.data.CakeModel;
 import einstein.jmc.registration.CakeVariant;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.blockstates.MultiVariantGenerator;
@@ -21,6 +22,7 @@ import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -29,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import static einstein.jmc.JustMoreCakes.loc;
 import static einstein.jmc.JustMoreCakes.mcLoc;
@@ -71,7 +74,15 @@ public class ModModelProvider extends FabricModelProvider {
 
         CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             if (variant.hasItem() && !variant.hasCustomItemModel()) {
-                generators.generateFlatItem(cake.get().asItem(), ModelTemplates.FLAT_ITEM);
+                JustMoreCakes.LOGGER.info("Generating item for: {}", BuiltInRegistries.ITEM.getKey(variant.getItem().get()));
+                generators.generateFlatItem(variant.getItem().get(), ModelTemplates.FLAT_ITEM);
+            }
+
+            if (cake.get().isBaseVariant()) {
+                Supplier<Item> sliceItem = variant.getSliceItem();
+                if (sliceItem.get() != null && sliceItem.get() != Items.AIR && !sliceItem.get().equals(ModItems.CAKE_SLICE.get())) {
+                    generators.generateFlatItem(sliceItem.get(), ModelTemplates.FLAT_ITEM);
+                }
             }
         });
     }
