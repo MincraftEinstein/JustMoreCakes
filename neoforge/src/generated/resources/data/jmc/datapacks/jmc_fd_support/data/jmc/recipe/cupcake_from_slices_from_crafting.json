@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "cakes_from_slices",
+  "ingredients": [
+    {
+      "item": "farmersdelight:cake_slice"
+    },
+    {
+      "item": "farmersdelight:cake_slice"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "jmc:cupcake"
+  }
+}

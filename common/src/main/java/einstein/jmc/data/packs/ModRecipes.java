@@ -246,6 +246,18 @@ public class ModRecipes {
 
         builder.save(output, craftingLoc(vectorwing.farmersdelight.common.registry.ModItems.SWEET_BERRY_CHEESECAKE));
 
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.CUPCAKE.get()), Ingredient.of(ModItemTags.FD_KNIVES), ModItems.CAKE_SLICE.get(), 2)
+                .group("cake_slices")
+                .unlockedBy(HAS,  has(ModItems.CUPCAKE.get()))
+                .save(output, getLocation(ModItems.CAKE_SLICE, "cupcake_from_cutting"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.CUPCAKE.get())
+                .requires(ModItems.CAKE_SLICE.get())
+                .requires(ModItems.CAKE_SLICE.get())
+                .group("cakes_from_slices")
+                .unlockedBy(HAS, has(ModItems.CUPCAKE.get()))
+                .save(output, getLocation(ModItems.CUPCAKE, "slices_from_crafting"));
+
         CakeFamily.REGISTERED_CAKE_FAMILIES.forEach((id, family) -> {
             if (family.equals(ModBlocks.VANILLA_CAKE_FAMILY)) {
                 return;
@@ -257,7 +269,16 @@ public class ModRecipes {
             CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(cakeBlock.get()), Ingredient.of(ModItemTags.FD_KNIVES), sliceItem.get(), 7)
                     .group("cake_slices")
                     .unlockedBy(HAS, has(cakeBlock.get()))
-                    .save(output, getLocation(sliceItem, "cutting"));
+                    .save(output, cuttingLoc(sliceItem));
+
+            shaped(RecipeCategory.FOOD, family.getBaseItem().get())
+                    .pattern("###")
+                    .pattern("###")
+                    .pattern("###")
+                    .define('#', sliceItem.get())
+                    .group("cakes_from_slices")
+                    .unlockedBy(HAS, has(sliceItem.get()))
+                    .save(output, getLocation(family.getBaseItem(), "slices_from_crafting"));
         });
     }
 
@@ -275,6 +296,10 @@ public class ModRecipes {
 
     private static ResourceLocation mixingLoc(Supplier<? extends ItemLike> item) {
         return getLocation(item, "mixing");
+    }
+
+    private static ResourceLocation cuttingLoc(Supplier<Item> item) {
+        return getLocation(item, "cutting");
     }
 
     private static ResourceLocation getLocation(Supplier<? extends ItemLike> item, String recipeType) {

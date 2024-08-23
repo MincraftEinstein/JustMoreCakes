@@ -5,8 +5,8 @@
       "duration": 600,
       "id": "minecraft:luck",
       "neoforge:cures": [
-        "milk",
-        "protected_by_totem"
+        "protected_by_totem",
+        "milk"
       ],
       "show_icon": true
     },
@@ -15,8 +15,8 @@
       "duration": 600,
       "id": "minecraft:unluck",
       "neoforge:cures": [
-        "milk",
-        "protected_by_totem"
+        "protected_by_totem",
+        "milk"
       ],
       "show_icon": true
     }

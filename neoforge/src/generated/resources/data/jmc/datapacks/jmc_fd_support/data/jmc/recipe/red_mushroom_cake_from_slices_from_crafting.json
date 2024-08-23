@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "cakes_from_slices",
+  "key": {
+    "#": {
+      "item": "jmc:red_mushroom_cake_slice"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jmc:red_mushroom_cake"
+  }
+}

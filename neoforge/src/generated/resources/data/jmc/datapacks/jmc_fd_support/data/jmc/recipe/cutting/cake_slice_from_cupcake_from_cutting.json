@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "jmc:cupcake"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "farmersdelight:cake_slice"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "farmersdelight:tools/knives"
+  }
+}
