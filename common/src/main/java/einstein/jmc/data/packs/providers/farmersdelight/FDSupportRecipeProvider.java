@@ -1,4 +1,4 @@
-package einstein.jmc.data.packs.providers.farmers_delight;
+package einstein.jmc.data.packs.providers.farmersdelight;
 
 import einstein.jmc.data.packs.ModRecipes;
 import net.minecraft.core.HolderLookup;

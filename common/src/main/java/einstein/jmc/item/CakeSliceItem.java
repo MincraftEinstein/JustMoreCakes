@@ -3,8 +3,8 @@ package einstein.jmc.item;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.registration.family.CakeFamily;
-import einstein.jmc.util.Util;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -27,11 +27,13 @@ public class CakeSliceItem extends Item {
             cakeBlock = family.getBaseVariant().getCake();
         }
 
-        CakeEffects cakeEffects = cakeBlock.get().justMoreCakes$getCakeEffects();
-        if (cakeEffects != null) {
-            cakeEffects.mobEffects().forEach(instance -> Util.applyEffect(instance, entity));
-        }
+        if (entity instanceof Player player) {
+            CakeEffects effects = cakeBlock.get().justMoreCakes$getCakeEffects();
 
+            if (effects != null) {
+                cakeBlock.get().applyEffects(player, effects);
+            }
+        }
         return super.finishUsingItem(stack, level, entity);
     }
 }

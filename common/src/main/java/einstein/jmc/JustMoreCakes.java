@@ -3,7 +3,7 @@ package einstein.jmc;
 import einstein.jmc.compat.AmendmentsCompat;
 import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.effects.CakeEffectsManager;
-import einstein.jmc.data.packs.providers.farmers_delight.FDSupportRecipeProvider;
+import einstein.jmc.data.packs.providers.farmersdelight.FDSupportRecipeProvider;
 import einstein.jmc.init.*;
 import einstein.jmc.mixin.AdvancementAccessor;
 import einstein.jmc.mixin.AdvancementRequirementsAccessor;
