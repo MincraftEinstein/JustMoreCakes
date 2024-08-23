@@ -48,7 +48,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(C_CAKES).addTag(CAKES);
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.CAKE_SPATULA.get(), ModItems.WHISK.get());
         tag(C_MILKS).add(Items.MILK_BUCKET);
-        tag(C_FOOD_MILK).addTag(C_MILKS);
+        tag(C_FOODS_MILK).addTag(C_MILKS);
         tag(Tags.Items.FOODS_EDIBLE_WHEN_PLACED).addTag(C_CAKES);
     }
 }

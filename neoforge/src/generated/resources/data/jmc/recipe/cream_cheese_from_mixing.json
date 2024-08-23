@@ -3,16 +3,16 @@
   "contents": "jmc:cream_cheese",
   "ingredients": [
     {
-      "item": "minecraft:milk_bucket"
+      "tag": "c:foods/milk"
     },
     {
-      "item": "minecraft:milk_bucket"
+      "tag": "c:foods/milk"
     },
     {
-      "item": "minecraft:milk_bucket"
+      "tag": "c:foods/milk"
     },
     {
-      "item": "minecraft:milk_bucket"
+      "tag": "c:foods/milk"
     }
   ],
   "mixingTime": 9,

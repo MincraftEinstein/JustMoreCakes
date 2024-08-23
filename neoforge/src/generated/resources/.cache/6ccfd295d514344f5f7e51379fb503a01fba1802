@@ -1,11 +1,11 @@
-// 1.21	2024-08-22T18:36:52.1765268	Tags for minecraft:item mod id jmc
+// 1.21	2024-08-22T21:27:26.9771037	Tags for minecraft:item mod id jmc
 b309abc5734e51409824164bb4935186385e4b9b data/c/tags/item/cakes.json
 baff2e4766328d0d89e55e50611c81f97f8a203a data/c/tags/item/cheese.json
 3f1a666a9752e3dca076126e9069598bd157ee2f data/c/tags/item/cheesecakes.json
 baff2e4766328d0d89e55e50611c81f97f8a203a data/c/tags/item/cheeses.json
 3f1a666a9752e3dca076126e9069598bd157ee2f data/c/tags/item/cheese_cakes.json
 9ecdcefc5fffdc1eaeef911f0cb95fd88f16e3cb data/c/tags/item/foods/edible_when_placed.json
-0f594f77cd4d6161299809c26445ff5338103bc4 data/c/tags/item/food/milk.json
+0f594f77cd4d6161299809c26445ff5338103bc4 data/c/tags/item/foods/milk.json
 edb5947f84984a39ab47c98c6fb0b3c3a9a8cc39 data/c/tags/item/milks.json
 7a46330840d6b455151808022e8da51ba9281650 data/c/tags/item/red_dye.json
 8b9e917dcada7af21195ecb752672975f7335aa3 data/jmc/tags/item/cakes.json

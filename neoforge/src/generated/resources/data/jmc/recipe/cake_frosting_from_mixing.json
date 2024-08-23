@@ -3,10 +3,10 @@
   "contents": "jmc:frosting",
   "ingredients": [
     {
-      "item": "minecraft:milk_bucket"
+      "tag": "c:foods/milk"
     },
     {
-      "item": "minecraft:milk_bucket"
+      "tag": "c:foods/milk"
     },
     {
       "item": "minecraft:sugar"

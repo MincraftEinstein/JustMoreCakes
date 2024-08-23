@@ -221,16 +221,16 @@ public class ModRecipes {
                 .unlockedBy(HAS, has(Items.EGG))
                 .save(output, mixingLoc(ModItems.CUPCAKE_DOUGH));
 
-        mixing(RecipeCategory.FOOD, ModItems.CREAM_CHEESE.get(), loc("cream_cheese"), 2, 9, Items.MILK_BUCKET, Items.MILK_BUCKET, Items.MILK_BUCKET, Items.MILK_BUCKET)
-                .unlockedBy(HAS, has(Items.MILK_BUCKET))
+        mixing(RecipeCategory.FOOD, ModItems.CREAM_CHEESE.get(), loc("cream_cheese"), 2, 9, Ingredient.of(ModItemTags.C_FOODS_MILK), Ingredient.of(ModItemTags.C_FOODS_MILK), Ingredient.of(ModItemTags.C_FOODS_MILK), Ingredient.of(ModItemTags.C_FOODS_MILK))
+                .unlockedBy(HAS, has(ModItemTags.C_FOODS_MILK))
                 .save(output, mixingLoc(ModItems.CREAM_CHEESE));
 
-        mixing(RecipeCategory.FOOD, ModItems.CAKE_FROSTING.get(), loc("frosting"), 12, Items.MILK_BUCKET, Items.MILK_BUCKET, Items.SUGAR)
-                .unlockedBy(HAS, has(Items.MILK_BUCKET))
+        mixing(RecipeCategory.FOOD, ModItems.CAKE_FROSTING.get(), loc("frosting"), 12, Ingredient.of(ModItemTags.C_FOODS_MILK), Ingredient.of(ModItemTags.C_FOODS_MILK), Ingredient.of(Items.SUGAR))
+                .unlockedBy(HAS, has(ModItemTags.C_FOODS_MILK))
                 .save(output, mixingLoc(ModItems.CAKE_FROSTING));
 
-        mixing(RecipeCategory.FOOD, ModItems.CUPCAKE_FROSTING.get(), loc("frosting"), 2, 7, Items.MILK_BUCKET, Items.SUGAR)
-                .unlockedBy(HAS, has(Items.MILK_BUCKET))
+        mixing(RecipeCategory.FOOD, ModItems.CUPCAKE_FROSTING.get(), loc("frosting"), 2, 7, Ingredient.of(ModItemTags.C_FOODS_MILK), Ingredient.of(Items.SUGAR))
+                .unlockedBy(HAS, has(ModItemTags.C_FOODS_MILK))
                 .save(output, mixingLoc(ModItems.CUPCAKE_FROSTING));
     }
 

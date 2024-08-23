@@ -20,7 +20,7 @@ public class ModItemTags {
     public static final TagKey<Item> CAKES = create("cakes");
     public static final TagKey<Item> C_CAKES = createC("cakes");
     public static final TagKey<Item> FD_KNIVES = create(JustMoreCakes.fdLoc("tools/knives"));
-    public static final TagKey<Item> C_FOOD_MILK = createC("food/milk");
+    public static final TagKey<Item> C_FOODS_MILK = createC("foods/milk");
     public static final TagKey<Item> C_MILKS = createC("milks");
 
     private static TagKey<Item> createC(String name) {
