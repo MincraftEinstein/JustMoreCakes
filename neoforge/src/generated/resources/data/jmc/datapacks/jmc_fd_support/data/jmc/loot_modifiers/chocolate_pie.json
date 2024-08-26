@@ -1,0 +1,16 @@
+{
+  "type": "jmc:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "farmersdelight:blocks/chocolate_pie"
+    },
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "items": "jmc:cake_spatula"
+      }
+    }
+  ],
+  "item": "farmersdelight:chocolate_pie"
+}

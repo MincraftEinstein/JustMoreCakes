@@ -27,10 +27,18 @@ public class ModLootModifiersProvider extends GlobalLootModifierProvider {
         List<Block> cakes = new ArrayList<>(CakeUtil.getVanillaCandleCakes());
         cakes.add(Blocks.CAKE);
         for (Block cake : cakes) {
-            add(Util.getBlockId(cake).getPath(), new AddItemLootModifier(new LootItemCondition[]{
-                    new LootTableIdCondition.Builder(cake.getLootTable().location()).build(),
-                    Util.HAS_CAKE_SPATULA.get().build()
-            }, Blocks.CAKE));
+            add(Util.getBlockId(cake).getPath(), addCakeSpatulaDrop(cake, Blocks.CAKE));
         }
+    }
+
+    public static AddItemLootModifier addCakeSpatulaDrop(Block block) {
+        return addCakeSpatulaDrop(block, block);
+    }
+
+    public static AddItemLootModifier addCakeSpatulaDrop(Block block, Block dropped) {
+        return new AddItemLootModifier(new LootItemCondition[]{
+                new LootTableIdCondition.Builder(block.getLootTable().location()).build(),
+                Util.HAS_CAKE_SPATULA.get().build()
+        }, dropped);
     }
 }

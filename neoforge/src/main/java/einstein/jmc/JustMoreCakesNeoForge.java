@@ -6,6 +6,7 @@ import einstein.jmc.client.renderers.blockentities.CeramicBowlRenderer;
 import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.NeoForgeCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
+import einstein.jmc.data.packs.providers.farmersdelight.FDSupportLootModifiers;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.NeoForgeRegistryHelper;
 import einstein.jmc.util.CakeUtil;
@@ -103,7 +104,11 @@ public class JustMoreCakesNeoForge {
         generator.addProvider(event.includeServer(), new ModCakeEffectsProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ModLootModifiersProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ModDataMapProvider(output, lookupProvider));
-        createFDSupportPack(generator, lookupProvider, generator.getBuiltinDatapack(true, ""));
+
+        // FD Support data pack
+        DataGenerator.PackGenerator pack = generator.getBuiltinDatapack(true, "");
+        createFDSupportPack(generator, lookupProvider, pack);
+        pack.addProvider(packOutput -> new FDSupportLootModifiers(packOutput, lookupProvider));
 
         // Client providers
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, fileHelper));
