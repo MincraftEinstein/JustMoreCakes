@@ -19,9 +19,4 @@ public class FeatureFlagsMixin {
     private static void clInit(CallbackInfo ci, @Local FeatureFlagRegistry.Builder builder) {
         ModFeatureFlags.init(builder);
     }
-
-    @Redirect(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/flag/FeatureFlagSet;of(Lnet/minecraft/world/flag/FeatureFlag;)Lnet/minecraft/world/flag/FeatureFlagSet;"))
-    private static FeatureFlagSet of(FeatureFlag flag) {
-        return FeatureFlagSet.of(flag, ModFeatureFlags.FD_SUPPORT);
-    }
 }

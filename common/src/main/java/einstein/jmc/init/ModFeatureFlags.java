@@ -2,7 +2,6 @@ package einstein.jmc.init;
 
 import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.flag.FeatureFlagRegistry;
-import net.minecraft.world.flag.FeatureFlagSet;
 
 import static einstein.jmc.JustMoreCakes.loc;
 
