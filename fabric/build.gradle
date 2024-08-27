@@ -7,6 +7,23 @@ repositories {
     maven {
         url = "https://maven.terraformersmc.com/releases/"
     }
+
+    maven {
+        name = "Greenhouse Maven"
+        url = 'https://repo.greenhouse.house/releases/'
+    }
+
+    maven {
+        name = "Greenhouse Maven (Snapshots)" // Temporary Porting Lib Fork for 1.21
+        url = 'https://repo.greenhouse.house/snapshots/'
+    }
+
+    maven {
+        url "https://jitpack.io/" // Fabric ASM
+        content {
+            excludeGroup "io.github.fabricators_of_create"
+        }
+    }
 }
 
 dependencies {
@@ -33,11 +50,18 @@ dependencies {
     // TODO change these back to implementations once they update
     modCompileOnly("maven.modrinth:moonlight:${fabric_moonlight_version}")
     modCompileOnly("maven.modrinth:amendments:${fabric_amendments_version}")
-    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:${fabric_farmers_delight_version}") // Migrate to official maven later
+    modImplementation("vectorwing:FarmersDelight:${fabric_farmers_delight_version}") {
+        exclude(group: "net.fabricmc")
+        exclude(group: "io.github.fabricators_of_create.Porting-Lib")
+    }
     // Temporary implementation of FD neoforge so fabric will compile
     // TODO remove when FD refabricated has added data gen
     modCompileOnly("curse.maven:farmers-delight-398521:${neoforge_farmers_delight_version}")
     modImplementation("mysticdrew:common-networking-fabric:${networking_version}-${minecraft_version}")
+
+    for (String module in porting_lib_modules.split(",")) {
+        modRuntimeOnly("io.github.fabricators_of_create.Porting-Lib:$module:$porting_lib_version")
+    }
 
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}")
