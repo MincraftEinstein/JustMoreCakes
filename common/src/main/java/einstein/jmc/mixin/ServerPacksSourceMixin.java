@@ -29,16 +29,22 @@ public class ServerPacksSourceMixin {
         Path path = PLATFORM.getRootPath();
         String version = PLATFORM.getVersion();
 
-        repositorySources.add(consumer -> consumer.accept(
-                Pack.readMetaAndCreate(
-                        new PackLocationInfo(FD_SUPPORT_ID, FD_SUPPORT_NAME,
-                                PackSource.FEATURE, Optional.of(
-                                new KnownPack(PLATFORM.getPlatformName(), FD_SUPPORT_ID, version)
-                        )),
-                        new PathPackResources.PathResourcesSupplier(path.resolve("data/jmc/datapacks/" + FD_SUPPORT_ID)), PackType.SERVER_DATA,
-                        new PackSelectionConfig(PLATFORM.isModLoaded(FARMERS_DELIGHT_MOD_ID), Pack.Position.TOP, false)
-                )
-        ));
+        Pack pack = Pack.readMetaAndCreate(
+                new PackLocationInfo(FD_SUPPORT_ID, FD_SUPPORT_NAME,
+                        PackSource.FEATURE, Optional.of(
+                        new KnownPack(PLATFORM.getPlatformName(), FD_SUPPORT_ID, version)
+                )),
+                new PathPackResources.PathResourcesSupplier(path.resolve("data/jmc/datapacks/" + FD_SUPPORT_ID)), PackType.SERVER_DATA,
+                new PackSelectionConfig(PLATFORM.isModLoaded(FARMERS_DELIGHT_MOD_ID), Pack.Position.TOP, false)
+        );
+
+        if (pack != null) {
+            repositorySources.add(consumer -> consumer.accept(pack));
+        }
+        else {
+            LOGGER.error("Failed to load datapack for Farmers Delight support");
+        }
+
         return repositorySources.toArray(RepositorySource[]::new);
     }
 }
