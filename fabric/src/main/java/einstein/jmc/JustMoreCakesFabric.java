@@ -27,6 +27,7 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Block;
@@ -126,11 +127,21 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         LootTableEvents.MODIFY.register((key, builder, source, provider) -> {
             if (Blocks.CAKE.getLootTable().equals(key) && source.isBuiltin()) {
                 addDropWhenCakeSpatulaPool(builder, Blocks.CAKE);
+                return;
             }
 
             for (Block candleCake : getVanillaCandleCakes()) {
                 if (candleCake.getLootTable().equals(key) && source.isBuiltin()) {
                     addDropWhenCakeSpatulaPool(builder, Blocks.CAKE);
+                    return;
+                }
+            }
+
+            for (String name : new String[] {"sweet_berry_cheesecake", "apple_pie", "chocolate_pie"}) {
+                Block block = BuiltInRegistries.BLOCK.get(fdLoc(name));
+                if (block.getLootTable().equals(key)) {
+                    addDropWhenCakeSpatulaPool(builder, block);
+                    return;
                 }
             }
         });
