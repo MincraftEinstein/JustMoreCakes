@@ -48,10 +48,17 @@
               }
             }
           ],
+          "functions": [
+            {
+              "add": false,
+              "count": 7.0,
+              "function": "minecraft:set_count"
+            }
+          ],
           "name": "jmc:slime_cake_slice"
         }
       ],
-      "rolls": 7.0
+      "rolls": 1.0
     }
   ],
   "random_sequence": "jmc:blocks/light_blue_candle_slime_cake"

@@ -24,10 +24,48 @@
               }
             }
           ],
+          "functions": [
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
           "name": "jmc:cookie_cake"
         }
       ],
-      "rolls": 2.0
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:feature_enabled",
+              "features": [
+                "jmc:fd_support"
+              ]
+            },
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "items": "#farmersdelight:tools/knives"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 11.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "jmc:cookie_cake_slice"
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }

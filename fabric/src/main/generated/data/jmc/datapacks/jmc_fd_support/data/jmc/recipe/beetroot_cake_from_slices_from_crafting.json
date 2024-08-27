@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "cakes_from_slices",
+  "key": {
+    "#": {
+      "item": "jmc:beetroot_cake_slice"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jmc:beetroot_cake"
+  }
+}

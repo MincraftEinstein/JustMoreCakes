@@ -24,10 +24,17 @@
               }
             }
           ],
+          "functions": [
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
           "name": "jmc:apple_cake"
         }
       ],
-      "rolls": 2.0
+      "rolls": 1.0
     },
     {
       "bonus_rolls": 0.0,
@@ -48,10 +55,17 @@
               }
             }
           ],
+          "functions": [
+            {
+              "add": false,
+              "count": 11.0,
+              "function": "minecraft:set_count"
+            }
+          ],
           "name": "jmc:apple_cake_slice"
         }
       ],
-      "rolls": 11.0
+      "rolls": 1.0
     }
   ],
   "random_sequence": "jmc:blocks/cyan_candle_two_tiered_apple_cake"

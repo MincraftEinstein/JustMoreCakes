@@ -48,10 +48,17 @@
               }
             }
           ],
+          "functions": [
+            {
+              "add": false,
+              "count": 7.0,
+              "function": "minecraft:set_count"
+            }
+          ],
           "name": "jmc:ender_cake_slice"
         }
       ],
-      "rolls": 7.0
+      "rolls": 1.0
     }
   ],
   "random_sequence": "jmc:blocks/black_candle_ender_cake"

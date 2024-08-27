@@ -5,8 +5,8 @@
       "duration": 300,
       "id": "minecraft:regeneration",
       "neoforge:cures": [
-        "protected_by_totem",
-        "milk"
+        "milk",
+        "protected_by_totem"
       ],
       "show_icon": true
     },
@@ -15,8 +15,8 @@
       "duration": 300,
       "id": "minecraft:strength",
       "neoforge:cures": [
-        "protected_by_totem",
-        "milk"
+        "milk",
+        "protected_by_totem"
       ],
       "show_icon": true
     }

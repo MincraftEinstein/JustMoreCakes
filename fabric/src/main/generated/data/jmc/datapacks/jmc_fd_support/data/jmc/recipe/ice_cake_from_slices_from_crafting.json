@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "cakes_from_slices",
+  "key": {
+    "#": {
+      "item": "jmc:ice_cake_slice"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jmc:ice_cake"
+  }
+}

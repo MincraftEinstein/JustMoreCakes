@@ -42,10 +42,17 @@
               }
             }
           ],
+          "functions": [
+            {
+              "add": false,
+              "count": 3.0,
+              "function": "minecraft:set_count"
+            }
+          ],
           "name": "jmc:red_mushroom_cake"
         }
       ],
-      "rolls": 3.0
+      "rolls": 1.0
     },
     {
       "bonus_rolls": 0.0,
@@ -66,10 +73,17 @@
               }
             }
           ],
+          "functions": [
+            {
+              "add": false,
+              "count": 16.0,
+              "function": "minecraft:set_count"
+            }
+          ],
           "name": "jmc:red_mushroom_cake_slice"
         }
       ],
-      "rolls": 16.0
+      "rolls": 1.0
     }
   ],
   "random_sequence": "jmc:blocks/light_blue_candle_three_tiered_red_mushroom_cake"

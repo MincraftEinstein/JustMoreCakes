@@ -196,13 +196,13 @@ public class Util {
     public static LootTable.Builder addDropWhenItemPool(LootTable.Builder builder, LootItemCondition.Builder itemCondition,
                                                         @Nullable Block block, LootPoolSingletonContainer.Builder<?> entryBuilder,
                                                         int count, boolean addHalfCondition) {
-        LootPool.Builder pool = LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1))
-                .add(entryBuilder.when(itemCondition));
-
         if (count > 1) {
             entryBuilder.apply(SetItemCountFunction.setCount(ConstantValue.exactly(count)));
         }
+
+        LootPool.Builder pool = LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .add(entryBuilder.when(itemCondition));
 
         if (addHalfCondition) {
             pool = addHalfConditionToPool(pool, block);

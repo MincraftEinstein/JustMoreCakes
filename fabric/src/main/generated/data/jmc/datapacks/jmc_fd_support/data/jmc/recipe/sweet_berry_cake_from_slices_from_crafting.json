@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "cakes_from_slices",
+  "key": {
+    "#": {
+      "item": "jmc:sweet_berry_cake_slice"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jmc:sweet_berry_cake"
+  }
+}

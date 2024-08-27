@@ -48,10 +48,17 @@
               }
             }
           ],
+          "functions": [
+            {
+              "add": false,
+              "count": 7.0,
+              "function": "minecraft:set_count"
+            }
+          ],
           "name": "jmc:pumpkin_cake_slice"
         }
       ],
-      "rolls": 7.0
+      "rolls": 1.0
     }
   ],
   "random_sequence": "jmc:blocks/lime_candle_pumpkin_cake"
