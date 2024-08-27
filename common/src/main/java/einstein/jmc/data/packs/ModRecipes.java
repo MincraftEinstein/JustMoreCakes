@@ -24,6 +24,7 @@ import static einstein.jmc.data.MixingRecipeBuilder.mixing;
 import static einstein.jmc.util.Util.getItemId;
 import static net.minecraft.data.recipes.RecipeProvider.has;
 import static net.minecraft.data.recipes.ShapedRecipeBuilder.shaped;
+import static net.minecraft.data.recipes.ShapelessRecipeBuilder.shapeless;
 
 public class ModRecipes {
 
@@ -235,23 +236,23 @@ public class ModRecipes {
     }
 
     public static void fdSupportRecipes(RecipeOutput output) {
-        ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, vectorwing.farmersdelight.common.registry.ModItems.SWEET_BERRY_CHEESECAKE.get())
+        ShapelessRecipeBuilder sweetBerryCheeseCake = shapeless(RecipeCategory.FOOD, vectorwing.farmersdelight.common.registry.ModItems.SWEET_BERRY_CHEESECAKE.get())
                 .unlockedBy(HAS, has(vectorwing.farmersdelight.common.registry.ModItems.PIE_CRUST.get()))
                 .requires(vectorwing.farmersdelight.common.registry.ModItems.PIE_CRUST.get())
                 .requires(ModItems.CREAM_CHEESE.get());
 
         for (int i = 0; i < 6; i++) {
-            builder.requires(Items.SWEET_BERRIES);
+            sweetBerryCheeseCake.requires(Items.SWEET_BERRIES);
         }
 
-        builder.save(output, craftingLoc(vectorwing.farmersdelight.common.registry.ModItems.SWEET_BERRY_CHEESECAKE));
+        sweetBerryCheeseCake.save(output, craftingLoc(vectorwing.farmersdelight.common.registry.ModItems.SWEET_BERRY_CHEESECAKE));
 
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.CUPCAKE.get()), Ingredient.of(ModItemTags.FD_KNIVES), ModItems.CAKE_SLICE.get(), 2)
                 .group("cake_slices")
-                .unlockedBy(HAS,  has(ModItems.CUPCAKE.get()))
+                .unlockedBy(HAS, has(ModItems.CUPCAKE.get()))
                 .save(output, getLocation(ModItems.CAKE_SLICE, "cupcake_from_cutting"));
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.CUPCAKE.get())
+        shapeless(RecipeCategory.FOOD, ModItems.CUPCAKE.get())
                 .requires(ModItems.CAKE_SLICE.get())
                 .requires(ModItems.CAKE_SLICE.get())
                 .group("cakes_from_slices")
@@ -271,14 +272,15 @@ public class ModRecipes {
                     .unlockedBy(HAS, has(cakeBlock.get()))
                     .save(output, cuttingLoc(sliceItem));
 
-            shaped(RecipeCategory.FOOD, family.getBaseItem().get())
-                    .pattern("###")
-                    .pattern("###")
-                    .pattern("###")
-                    .define('#', sliceItem.get())
+            ShapelessRecipeBuilder cakeFromSlices = shapeless(RecipeCategory.FOOD, family.getBaseItem().get())
                     .group("cakes_from_slices")
-                    .unlockedBy(HAS, has(sliceItem.get()))
-                    .save(output, getLocation(family.getBaseItem(), "slices_from_crafting"));
+                    .unlockedBy(HAS, has(sliceItem.get()));
+
+            for (int i = 0; i < 7; i++) {
+                cakeFromSlices.requires(sliceItem.get());
+            }
+
+            cakeFromSlices.save(output, getLocation(family.getBaseItem(), "slices_from_crafting"));
         });
     }
 

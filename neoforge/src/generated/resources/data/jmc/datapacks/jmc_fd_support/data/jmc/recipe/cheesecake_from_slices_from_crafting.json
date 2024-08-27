@@ -1,16 +1,29 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "group": "cakes_from_slices",
-  "key": {
-    "#": {
+  "ingredients": [
+    {
+      "item": "jmc:cheesecake_slice"
+    },
+    {
+      "item": "jmc:cheesecake_slice"
+    },
+    {
+      "item": "jmc:cheesecake_slice"
+    },
+    {
+      "item": "jmc:cheesecake_slice"
+    },
+    {
+      "item": "jmc:cheesecake_slice"
+    },
+    {
+      "item": "jmc:cheesecake_slice"
+    },
+    {
       "item": "jmc:cheesecake_slice"
     }
-  },
-  "pattern": [
-    "###",
-    "###",
-    "###"
   ],
   "result": {
     "count": 1,
