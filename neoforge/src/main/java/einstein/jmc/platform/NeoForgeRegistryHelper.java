@@ -1,7 +1,7 @@
 package einstein.jmc.platform;
 
-import einstein.jmc.block.entity.CakeOvenBlockEntity;
-import einstein.jmc.block.entity.CeramicBowlBlockEntity;
+import com.mojang.serialization.MapCodec;
+import einstein.jmc.loot.FeatureEnabledLootCondition;
 import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.util.BlockEntitySupplier;
 import einstein.jmc.util.MenuTypeSupplier;
@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -46,6 +47,7 @@ public class NeoForgeRegistryHelper implements RegistryHelper {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
     public static final DeferredRegister<GameEvent> GAME_EVENTS = DeferredRegister.create(BuiltInRegistries.GAME_EVENT, MOD_ID);
     public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES = DeferredRegister.create(BuiltInRegistries.TRIGGER_TYPES, MOD_ID);
+    public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES = DeferredRegister.create(BuiltInRegistries.LOOT_CONDITION_TYPE, MOD_ID);
 
     @Override
     public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type) {
@@ -125,5 +127,10 @@ public class NeoForgeRegistryHelper implements RegistryHelper {
     @Override
     public <T extends CriterionTrigger<?>> Supplier<T> registerTriggerType(String name, Supplier<T> type) {
         return TRIGGER_TYPES.register(name, type);
+    }
+
+    @Override
+    public Supplier<LootItemConditionType> registerLootConditionType(String name, MapCodec<FeatureEnabledLootCondition> codec) {
+        return LOOT_CONDITION_TYPES.register(name, () -> new LootItemConditionType(codec));
     }
 }

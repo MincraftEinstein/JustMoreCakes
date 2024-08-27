@@ -28,6 +28,30 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "jmc:feature_enabled",
+              "features": [
+                "jmc:fd_support"
+              ]
+            },
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "items": "#farmersdelight:tools/knives"
+              }
+            }
+          ],
+          "name": "jmc:melon_cake_slice"
+        }
+      ],
+      "rolls": 7.0
     }
   ],
   "random_sequence": "jmc:blocks/black_candle_melon_cake"

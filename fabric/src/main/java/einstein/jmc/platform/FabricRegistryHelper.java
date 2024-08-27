@@ -1,11 +1,12 @@
 package einstein.jmc.platform;
 
+import com.mojang.serialization.MapCodec;
+import einstein.jmc.loot.FeatureEnabledLootCondition;
 import einstein.jmc.platform.services.RegistryHelper;
 import einstein.jmc.util.BlockEntitySupplier;
 import einstein.jmc.util.MenuTypeSupplier;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -13,7 +14,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -124,5 +125,11 @@ public class FabricRegistryHelper implements RegistryHelper {
     public <T extends CriterionTrigger<?>> Supplier<T> registerTriggerType(String name, Supplier<T> type) {
         T trigger = Registry.register(BuiltInRegistries.TRIGGER_TYPES, loc(name), type.get());
         return () -> trigger;
+    }
+
+    @Override
+    public Supplier<LootItemConditionType> registerLootConditionType(String name, MapCodec<FeatureEnabledLootCondition> codec) {
+        LootItemConditionType conditionType = Registry.register(BuiltInRegistries.LOOT_CONDITION_TYPE, name, new LootItemConditionType(codec));
+        return () -> conditionType;
     }
 }

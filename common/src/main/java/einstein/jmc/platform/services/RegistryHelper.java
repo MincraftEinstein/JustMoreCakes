@@ -1,5 +1,7 @@
 package einstein.jmc.platform.services;
 
+import com.mojang.serialization.MapCodec;
+import einstein.jmc.loot.FeatureEnabledLootCondition;
 import einstein.jmc.util.BlockEntitySupplier;
 import einstein.jmc.util.MenuTypeSupplier;
 import net.minecraft.advancements.CriterionTrigger;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,4 +67,6 @@ public interface RegistryHelper {
     Supplier<Holder<GameEvent>> registerGameEvent(String name, Supplier<GameEvent> type);
 
     <T extends CriterionTrigger<?>> Supplier<T> registerTriggerType(String name, Supplier<T> type);
+
+    Supplier<LootItemConditionType> registerLootConditionType(String name, MapCodec<FeatureEnabledLootCondition> codec);
 }

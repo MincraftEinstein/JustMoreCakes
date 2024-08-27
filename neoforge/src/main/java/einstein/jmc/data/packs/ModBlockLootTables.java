@@ -7,6 +7,7 @@ import einstein.jmc.util.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
+import static einstein.jmc.util.Util.addDropWhenKnifePool;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
 
@@ -36,39 +38,56 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         CakeVariant.VARIANT_BY_CAKE.forEach((cake, variant) -> {
             BaseCakeBlock cakeBlock = cake.get();
             CakeVariant.Type variantType = variant.getType();
+            Item sliceItem = cakeBlock.getVariant().getSliceItem().get();
 
             KNOWN_BLOCKS.add(cakeBlock);
             switch (variantType) {
                 case BASE -> {
-                    add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), cakeBlock));
+                    add(cakeBlock, addDropWhenKnifePool(
+                            addDropWhenCakeSpatulaPool(LootTable.lootTable(), cakeBlock),
+                            sliceItem, 7
+                    ));
 
                     variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                        add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), cakeBlock));
+                        add(candleCake.get(), block -> addDropWhenKnifePool(
+                                addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), cakeBlock),
+                                sliceItem, 7
+                        ));
                         KNOWN_BLOCKS.add(candleCake.get());
                     });
                 }
                 case TWO_TIERED -> {
                     Block baseCake = variant.getFamily().getBaseCake().get();
-                    add(cakeBlock, addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 2));
+                    add(cakeBlock, addDropWhenKnifePool(
+                            addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 2),
+                            sliceItem, 11
+                    ));
 
                     variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                         add(candleCake.get(), block ->
-                                addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), baseCake, 2));
+                                addDropWhenKnifePool(
+                                        addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), baseCake, 2),
+                                        sliceItem, 11
+                                ));
                         KNOWN_BLOCKS.add(candleCake.get());
                     });
                 }
                 case THREE_TIERED -> {
                     Block baseCake = variant.getFamily().getBaseCake().get();
-                    add(cakeBlock, block ->
-                            addDropWhenCakeSpatulaPool(LootTable.lootTable(), block, baseCake, 3, true));
+                    add(cakeBlock, block -> addDropWhenKnifePool(
+                            addDropWhenCakeSpatulaPool(LootTable.lootTable(), block, baseCake, 3, true),
+                            sliceItem, 16
+                    ));
 
                     variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
-                        add(candleCake.get(), block -> addDropWhenCakeSpatulaPool(
-                                LootTable.lootTable().withPool(
-                                        Util.addHalfConditionToPool(LootPool.lootPool()
-                                                .setRolls(ConstantValue.exactly(1))
-                                                .add(LootItem.lootTableItem(candle)), block)
-                                ), block, baseCake, 3, true
+                        add(candleCake.get(), block -> addDropWhenKnifePool(
+                                addDropWhenCakeSpatulaPool(
+                                        LootTable.lootTable().withPool(
+                                                Util.addHalfConditionToPool(LootPool.lootPool()
+                                                        .setRolls(ConstantValue.exactly(1))
+                                                        .add(LootItem.lootTableItem(candle)), block)
+                                        ), block, baseCake, 3, true
+                                ), sliceItem, 16
                         ));
                         KNOWN_BLOCKS.add(candleCake.get());
                     });

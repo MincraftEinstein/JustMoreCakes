@@ -70,6 +70,7 @@ public class JustMoreCakesNeoForge {
         NeoForgeRegistryHelper.CREATIVE_MODE_TABS.register(modEventBus);
         NeoForgeRegistryHelper.GAME_EVENTS.register(modEventBus);
         NeoForgeRegistryHelper.TRIGGER_TYPES.register(modEventBus);
+        NeoForgeRegistryHelper.LOOT_CONDITION_TYPES.register(modEventBus);
         ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         NeoForge.EVENT_BUS.addListener(this::onEntityJump);
         NeoForge.EVENT_BUS.addListener(this::onEntityTick);

@@ -9,6 +9,9 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
+import einstein.jmc.loot.FeatureEnabledLootCondition;
+import einstein.jmc.data.packs.ModItemTags;
+import einstein.jmc.init.ModFeatureFlags;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.mixin.RecipeManagerAccessor;
 import einstein.jmc.mixin.StructureTemplatePoolAccessor;
@@ -30,10 +33,12 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -44,6 +49,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
@@ -62,6 +70,7 @@ public class Util {
     public static final Gson GSON = new GsonBuilder().create();
     public static final Random RANDOM = new Random();
     public static final Supplier<LootItemCondition.Builder> HAS_CAKE_SPATULA = () -> MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModItems.CAKE_SPATULA.get()));
+    public static final Supplier<LootItemCondition.Builder> HAS_KNIFE = () -> MatchTool.toolMatches(ItemPredicate.Builder.item().of(ModItemTags.FD_KNIVES));
 
     public static <T extends Item> ResourceLocation getItemId(T item) {
         return BuiltInRegistries.ITEM.getKey(item);
@@ -156,18 +165,44 @@ public class Util {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 
-    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, Block dropped) {
+    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, ItemLike dropped) {
         return addDropWhenCakeSpatulaPool(builder, dropped, 1);
     }
 
-    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, Block dropped, int count) {
+    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, ItemLike dropped, int count) {
         return addDropWhenCakeSpatulaPool(builder, null, dropped, count, false);
     }
 
-    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, @Nullable Block block, Block dropped, int count, boolean addHalfCondition) {
+    public static LootTable.Builder addDropWhenCakeSpatulaPool(LootTable.Builder builder, @Nullable Block block,
+                                                               ItemLike dropped, int count, boolean addHalfCondition) {
+        return addDropWhenItemPool(builder, HAS_CAKE_SPATULA.get(), block, dropped, count, addHalfCondition);
+    }
+
+    public static LootTable.Builder addDropWhenKnifePool(LootTable.Builder builder, ItemLike dropped, int count) {
+        return addDropWhenKnifePool(builder, null, dropped, count, false);
+    }
+
+    public static LootTable.Builder addDropWhenKnifePool(LootTable.Builder builder, @Nullable Block block, ItemLike dropped,
+                                                         int count, boolean addHalfCondition) {
+        return addDropWhenItemPool(builder, HAS_KNIFE.get(), block, LootItem.lootTableItem(dropped)
+                .when(FeatureEnabledLootCondition.create(FeatureFlagSet.of(ModFeatureFlags.FD_SUPPORT))), count, addHalfCondition);
+    }
+
+    public static LootTable.Builder addDropWhenItemPool(LootTable.Builder builder, LootItemCondition.Builder itemCondition,
+                                                        @Nullable Block block, ItemLike dropped, int count, boolean addHalfCondition) {
+        return addDropWhenItemPool(builder, itemCondition, block, LootItem.lootTableItem(dropped), count, addHalfCondition);
+    }
+
+    public static LootTable.Builder addDropWhenItemPool(LootTable.Builder builder, LootItemCondition.Builder itemCondition,
+                                                        @Nullable Block block, LootPoolSingletonContainer.Builder<?> entryBuilder,
+                                                        int count, boolean addHalfCondition) {
         LootPool.Builder pool = LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(count))
-                .add(LootItem.lootTableItem(dropped).when(HAS_CAKE_SPATULA.get()));
+                .setRolls(ConstantValue.exactly(1))
+                .add(entryBuilder.when(itemCondition));
+
+        if (count > 1) {
+            entryBuilder.apply(SetItemCountFunction.setCount(ConstantValue.exactly(count)));
+        }
 
         if (addHalfCondition) {
             pool = addHalfConditionToPool(pool, block);

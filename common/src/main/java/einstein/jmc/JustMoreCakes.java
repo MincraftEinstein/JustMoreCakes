@@ -88,6 +88,7 @@ public class JustMoreCakes {
         ModGameEvents.init();
         ModPackets.init();
         ModTriggerTypes.init();
+        ModLootConditionTypes.init();
     }
 
     public static void commonSetup() {

@@ -28,6 +28,30 @@
         }
       ],
       "rolls": 2.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "jmc:feature_enabled",
+              "features": [
+                "jmc:fd_support"
+              ]
+            },
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "items": "#farmersdelight:tools/knives"
+              }
+            }
+          ],
+          "name": "jmc:golden_apple_cake_slice"
+        }
+      ],
+      "rolls": 11.0
     }
   ],
   "random_sequence": "jmc:blocks/purple_candle_two_tiered_golden_apple_cake"

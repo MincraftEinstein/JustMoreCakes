@@ -27,6 +27,30 @@
         }
       ],
       "rolls": 3.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "jmc:feature_enabled",
+              "features": [
+                "jmc:fd_support"
+              ]
+            },
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "items": "#farmersdelight:tools/knives"
+              }
+            }
+          ],
+          "name": "jmc:apple_cake_slice"
+        }
+      ],
+      "rolls": 16.0
     }
   ],
   "random_sequence": "jmc:blocks/three_tiered_apple_cake"
