@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static einstein.jmc.JustMoreCakes.*;
+import static einstein.jmc.JustMoreCakes.LOGGER;
 import static einstein.jmc.platform.Services.PLATFORM;
 
 @Mixin(ServerPacksSource.class)
@@ -26,6 +26,11 @@ public class ServerPacksSourceMixin {
             "createVanillaTrustedRepository"
     }, at = @At(value = "INVOKE", target = "Lnet/minecraft/server/packs/repository/PackRepository;<init>([Lnet/minecraft/server/packs/repository/RepositorySource;)V"))
     private static RepositorySource[] createPackRepo(RepositorySource[] sources) {
+        if (!FarmersDelightCompat.IS_ENABLED.get()) {
+            LOGGER.info("Ignoring datapack for Farmers Delight support");
+            return sources;
+        }
+
         List<RepositorySource> repositorySources = new ArrayList<>(List.of(sources));
         Path path = PLATFORM.getRootPath();
         String version = PLATFORM.getVersion();
@@ -36,11 +41,12 @@ public class ServerPacksSourceMixin {
                         new KnownPack(PLATFORM.getPlatformName(), FarmersDelightCompat.FD_SUPPORT_ID, version)
                 )),
                 new PathPackResources.PathResourcesSupplier(path.resolve("data/jmc/datapacks/" + FarmersDelightCompat.FD_SUPPORT_ID)), PackType.SERVER_DATA,
-                new PackSelectionConfig(FarmersDelightCompat.IS_ENABLED.get(), Pack.Position.TOP, false)
+                new PackSelectionConfig(true, Pack.Position.TOP, false)
         );
 
         if (pack != null) {
             repositorySources.add(consumer -> consumer.accept(pack));
+            LOGGER.info("Loading datapack for Farmers Delight support");
         }
         else {
             LOGGER.error("Failed to load datapack for Farmers Delight support");

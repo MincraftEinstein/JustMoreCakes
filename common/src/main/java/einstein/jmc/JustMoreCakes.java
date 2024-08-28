@@ -23,7 +23,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -89,14 +88,6 @@ public class JustMoreCakes {
     }
 
     public static void onServerStarting(MinecraftServer server) {
-        if (FarmersDelightCompat.IS_ENABLED.get()) {
-            LOGGER.info("Enabling datapack for Farmers Delight support");
-            PackRepository repository = server.getPackRepository();
-            List<String> selectedIds = new ArrayList<>(repository.getSelectedIds());
-            selectedIds.add(FarmersDelightCompat.FD_SUPPORT_ID);
-            repository.setSelected(selectedIds);
-        }
-
         registerVillageBuilding(server, "plains", "bakery_1", CAKE_BAKERY_GENERATION_WEIGHT.get());
         registerVillageBuilding(server, "plains", "bakery_2", CAKE_BAKERY_GENERATION_WEIGHT.get());
         registerVillageBuilding(server, "desert", "bakery_1", CAKE_BAKERY_GENERATION_WEIGHT.get());
