@@ -9,6 +9,7 @@
   "item.jmc.cupcake_dough": "Cupcake Dough",
   "item.jmc.cake_frosting": "Cake Frosting",
   "item.jmc.cupcake_frosting": "Cupcake Frosting",
+  "item.jmc.fd_support.cake_slice.info": "Please install Farmers Delight to enable this item",
 
   "_comment": "Blocks",
   "block.jmc.chocolate_cake": "Chocolate Cake",
