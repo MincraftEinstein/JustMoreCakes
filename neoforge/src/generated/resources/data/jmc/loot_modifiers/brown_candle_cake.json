@@ -12,5 +12,8 @@
       }
     }
   ],
-  "item": "minecraft:cake"
+  "item": {
+    "count": 1,
+    "id": "minecraft:cake"
+  }
 }

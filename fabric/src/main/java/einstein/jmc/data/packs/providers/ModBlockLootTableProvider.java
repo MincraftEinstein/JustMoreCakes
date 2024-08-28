@@ -40,13 +40,13 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                 case BASE -> {
                     add(cakeBlock, addDropWhenKnifePool(
                             addDropWhenCakeSpatulaPool(LootTable.lootTable(), cakeBlock),
-                            sliceItem, 7
+                            sliceItem, 7, false
                     ));
 
                     variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                         add(candleCake.get(), block -> addDropWhenKnifePool(
                                 addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), cakeBlock),
-                                sliceItem, 7
+                                sliceItem, 7, false
                         ));
                     });
                 }
@@ -54,14 +54,14 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                     Block baseCake = variant.getFamily().getBaseCake().get();
                     add(cakeBlock, addDropWhenKnifePool(
                             addDropWhenCakeSpatulaPool(LootTable.lootTable(), baseCake, 2),
-                            sliceItem, 11
+                            sliceItem, 11, false
                     ));
 
                     variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
                         add(candleCake.get(), block ->
                                 addDropWhenKnifePool(
                                         addDropWhenCakeSpatulaPool(createCandleCakeDrops(candle), baseCake, 2),
-                                        sliceItem, 11
+                                        sliceItem, 11, false
                                 ));
                     });
                 }
@@ -70,7 +70,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                     add(cakeBlock, block ->
                             addDropWhenKnifePool(
                                     addDropWhenCakeSpatulaPool(LootTable.lootTable(), block, baseCake, 3, true),
-                                    sliceItem, 16
+                                    sliceItem, 16, false
                             ));
 
                     variant.getCandleCakeByCandle().forEach((candle, candleCake) -> {
@@ -80,7 +80,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
                                                         .setRolls(ConstantValue.exactly(1))
                                                         .add(LootItem.lootTableItem(candle)), block)
                                         ), block, baseCake, 3, true
-                                ), sliceItem, 16
+                                ), sliceItem, 16, false
                         ));
                     });
                 }

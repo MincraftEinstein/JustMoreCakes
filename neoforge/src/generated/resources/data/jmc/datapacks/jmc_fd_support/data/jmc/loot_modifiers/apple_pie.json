@@ -12,5 +12,8 @@
       }
     }
   ],
-  "item": "farmersdelight:apple_pie"
+  "item": {
+    "count": 1,
+    "id": "farmersdelight:apple_pie"
+  }
 }

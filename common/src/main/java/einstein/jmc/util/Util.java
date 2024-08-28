@@ -9,10 +9,10 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import einstein.jmc.block.cake.BaseThreeTieredCakeBlock;
-import einstein.jmc.loot.FeatureEnabledLootCondition;
 import einstein.jmc.data.packs.ModItemTags;
 import einstein.jmc.init.ModFeatureFlags;
 import einstein.jmc.init.ModItems;
+import einstein.jmc.loot.FeatureEnabledLootCondition;
 import einstein.jmc.mixin.RecipeManagerAccessor;
 import einstein.jmc.mixin.StructureTemplatePoolAccessor;
 import einstein.jmc.platform.Services;
@@ -35,6 +35,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -49,7 +50,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
@@ -178,12 +178,17 @@ public class Util {
         return addDropWhenItemPool(builder, HAS_CAKE_SPATULA.get(), block, dropped, count, addHalfCondition);
     }
 
-    public static LootTable.Builder addDropWhenKnifePool(LootTable.Builder builder, ItemLike dropped, int count) {
-        return addDropWhenKnifePool(builder, null, dropped, count, false);
+    public static LootTable.Builder addDropWhenKnifePool(LootTable.Builder builder, ItemLike dropped, int count,
+                                                         boolean ignoreCakeSlice) {
+        return addDropWhenKnifePool(builder, null, dropped, count, false, ignoreCakeSlice);
     }
 
     public static LootTable.Builder addDropWhenKnifePool(LootTable.Builder builder, @Nullable Block block, ItemLike dropped,
-                                                         int count, boolean addHalfCondition) {
+                                                         int count, boolean addHalfCondition, boolean ignoreCakeSlice) {
+        if (dropped.asItem().equals(Items.AIR) || (!ignoreCakeSlice && dropped.asItem().equals(ModItems.CAKE_SLICE.get()))) {
+            return builder;
+        }
+
         return addDropWhenItemPool(builder, HAS_KNIFE.get(), block, LootItem.lootTableItem(dropped)
                 .when(FeatureEnabledLootCondition.create(FeatureFlagSet.of(ModFeatureFlags.FD_SUPPORT))), count, addHalfCondition);
     }

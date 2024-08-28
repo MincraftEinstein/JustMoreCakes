@@ -12,5 +12,8 @@
       }
     }
   ],
-  "item": "farmersdelight:chocolate_pie"
+  "item": {
+    "count": 1,
+    "id": "farmersdelight:chocolate_pie"
+  }
 }

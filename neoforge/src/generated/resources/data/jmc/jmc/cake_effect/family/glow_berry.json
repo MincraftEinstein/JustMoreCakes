@@ -4,8 +4,8 @@
       "duration": 1200,
       "id": "minecraft:night_vision",
       "neoforge:cures": [
-        "milk",
-        "protected_by_totem"
+        "protected_by_totem",
+        "milk"
       ],
       "show_icon": true
     },
@@ -13,8 +13,8 @@
       "duration": 1800,
       "id": "minecraft:glowing",
       "neoforge:cures": [
-        "milk",
-        "protected_by_totem"
+        "protected_by_totem",
+        "milk"
       ],
       "show_icon": true
     }

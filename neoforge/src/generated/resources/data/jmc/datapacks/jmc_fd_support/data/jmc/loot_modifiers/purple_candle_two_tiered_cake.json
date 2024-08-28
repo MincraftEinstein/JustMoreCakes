@@ -1,0 +1,19 @@
+{
+  "type": "jmc:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "jmc:blocks/purple_candle_two_tiered_cake"
+    },
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "items": "#farmersdelight:tools/knives"
+      }
+    }
+  ],
+  "item": {
+    "count": 11,
+    "id": "farmersdelight:cake_slice"
+  }
+}

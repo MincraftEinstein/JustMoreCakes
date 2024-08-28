@@ -1,5 +1,6 @@
 package einstein.jmc;
 
+import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
 import einstein.jmc.client.renderers.blockentities.CeramicBowlRenderer;
@@ -7,6 +8,8 @@ import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.FabricCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
 import einstein.jmc.init.*;
+import einstein.jmc.platform.Services;
+import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.registration.family.CakeFamily;
 import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -39,6 +42,7 @@ import java.util.concurrent.CompletableFuture;
 import static einstein.jmc.JustMoreCakes.*;
 import static einstein.jmc.util.CakeUtil.getVanillaCandleCakes;
 import static einstein.jmc.util.Util.addDropWhenCakeSpatulaPool;
+import static einstein.jmc.util.Util.addDropWhenKnifePool;
 
 public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer, DataGeneratorEntrypoint {
 
@@ -127,21 +131,46 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         LootTableEvents.MODIFY.register((key, builder, source, provider) -> {
             if (Blocks.CAKE.getLootTable().equals(key) && source.isBuiltin()) {
                 addDropWhenCakeSpatulaPool(builder, Blocks.CAKE);
-                return;
             }
-
-            for (Block candleCake : getVanillaCandleCakes()) {
-                if (candleCake.getLootTable().equals(key) && source.isBuiltin()) {
-                    addDropWhenCakeSpatulaPool(builder, Blocks.CAKE);
-                    return;
+            else {
+                for (Block candleCake : getVanillaCandleCakes()) {
+                    if (candleCake.getLootTable().equals(key) && source.isBuiltin()) {
+                        addDropWhenCakeSpatulaPool(builder, Blocks.CAKE);
+                        return;
+                    }
                 }
-            }
 
-            for (String name : new String[] {"sweet_berry_cheesecake", "apple_pie", "chocolate_pie"}) {
-                Block block = BuiltInRegistries.BLOCK.get(fdLoc(name));
-                if (block.getLootTable().equals(key)) {
-                    addDropWhenCakeSpatulaPool(builder, block);
-                    return;
+                if (Services.PLATFORM.isModLoaded(FARMERS_DELIGHT_MOD_ID)) {
+                    if (ModBlocks.CUPCAKE_VARIANT.getCake().get().getLootTable().equals(key) && source.isBuiltin()) {
+                        addDropWhenKnifePool(builder, ModItems.CAKE_SLICE.get(), 2, true);
+                    }
+                    else {
+                        ModBlocks.VANILLA_CAKE_FAMILY.forEach(supplier -> {
+                            if (supplier != null) {
+                                BaseCakeBlock cakeBlock = supplier.get();
+                                CakeVariant variant = cakeBlock.getVariant();
+                                int count = cakeBlock.getSlices() + 1;
+
+                                if (cakeBlock.getLootTable().equals(key) && source.isBuiltin()) {
+                                    addDropWhenKnifePool(builder, ModItems.CAKE_SLICE.get(), count, true);
+                                }
+
+                                variant.getCandleCakeByCandle().forEach((candleBlock, candleCakeBlock) -> {
+                                    if (candleCakeBlock.get().getLootTable().equals(key) && source.isBuiltin()) {
+                                        addDropWhenKnifePool(builder, ModItems.CAKE_SLICE.get(), count, true);
+                                    }
+                                });
+                            }
+                        });
+
+                        for (String name : new String[] {"sweet_berry_cheesecake", "apple_pie", "chocolate_pie"}) {
+                            Block block = BuiltInRegistries.BLOCK.get(fdLoc(name));
+                            if (block.getLootTable().equals(key)) {
+                                addDropWhenCakeSpatulaPool(builder, block);
+                                return;
+                            }
+                        }
+                    }
                 }
             }
         });
