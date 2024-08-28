@@ -1,7 +1,7 @@
 package einstein.jmc.item;
 
-import einstein.jmc.JustMoreCakes;
 import einstein.jmc.block.cake.BaseCakeBlock;
+import einstein.jmc.compat.FarmersDelightCompat;
 import einstein.jmc.data.effects.CakeEffects;
 import einstein.jmc.platform.Services;
 import einstein.jmc.registration.family.CakeFamily;
@@ -30,7 +30,7 @@ public class CakeSliceItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
-        if (!Services.PLATFORM.isModLoaded(JustMoreCakes.FARMERS_DELIGHT_MOD_ID)) {
+        if (!FarmersDelightCompat.IS_ENABLED.get()) {
             tooltip.add(Component.translatable("item.jmc.fd_support.cake_slice.info").withStyle(ChatFormatting.RED));
         }
     }

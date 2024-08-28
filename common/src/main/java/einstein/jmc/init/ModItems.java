@@ -1,7 +1,7 @@
 package einstein.jmc.init;
 
 import com.google.common.base.Suppliers;
-import einstein.jmc.JustMoreCakes;
+import einstein.jmc.compat.FarmersDelightCompat;
 import einstein.jmc.item.CakeSpatulaItem;
 import einstein.jmc.item.CupcakeItem;
 import einstein.jmc.platform.Services;
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 public class ModItems {
 
-    public static final Supplier<Item> CAKE_SLICE = Suppliers.memoize(() -> BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(JustMoreCakes.FARMERS_DELIGHT_MOD_ID, "cake_slice")));
+    public static final Supplier<Item> CAKE_SLICE = Suppliers.memoize(() -> BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(FarmersDelightCompat.FARMERS_DELIGHT_MOD_ID, "cake_slice")));
 
     public static final Supplier<Item> CREAM_CHEESE = Services.REGISTRY.registerItem("cream_cheese", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationModifier(0.6F).build()).stacksTo(16)));
     public static final Supplier<Item> CUPCAKE = Services.REGISTRY.registerItem("cupcake", () -> new CupcakeItem(ModBlocks.CUPCAKE_VARIANT.getCake().get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.3F).build())));

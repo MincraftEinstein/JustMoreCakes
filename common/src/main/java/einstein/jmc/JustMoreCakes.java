@@ -1,13 +1,12 @@
 package einstein.jmc;
 
 import einstein.jmc.compat.AmendmentsCompat;
+import einstein.jmc.compat.FarmersDelightCompat;
 import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.effects.CakeEffectsManager;
-import einstein.jmc.data.packs.providers.farmersdelight.FDSupportRecipeProvider;
 import einstein.jmc.init.*;
 import einstein.jmc.mixin.AdvancementAccessor;
 import einstein.jmc.mixin.AdvancementRequirementsAccessor;
-import einstein.jmc.mixin.PackGeneratorAccessor;
 import einstein.jmc.platform.Services;
 import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.registration.family.CakeFamily;
@@ -18,13 +17,8 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.metadata.PackMetadataGenerator;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -40,7 +34,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -53,12 +46,10 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 import static einstein.jmc.init.ModCommonConfigs.CAKE_BAKERY_GENERATION_WEIGHT;
 import static einstein.jmc.util.Util.registerVillageBuilding;
@@ -69,12 +60,7 @@ public class JustMoreCakes {
     public static final String MOD_NAME = "Just More Cakes!";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
     public static final ResourceKey<LootTable> CAKE_BAKER_GIFT = ResourceKey.create(Registries.LOOT_TABLE, loc("gameplay/hero_of_the_village/cake_baker_gift"));
-    public static final ResourceKey<DamageType> OBSIDIAN_CAKE_DAMAGE_TYPE = ResourceKey.create(Registries.DAMAGE_TYPE, JustMoreCakes.loc("obsidian_cake"));
-    public static final String AMENDMENTS_MOD_ID = "amendments";
-    public static final String FARMERS_DELIGHT_MOD_ID = "farmersdelight";
-    public static final String FD_SUPPORT_ID = "jmc_fd_support";
-    public static final Component FD_SUPPORT_NAME = Component.translatable("datapack.jmc.fd_support.name");
-    public static final Component FD_SUPPORT_DESCRIPTION = Component.translatable("datapack.jmc.fd_support.description");
+    public static final ResourceKey<DamageType> OBSIDIAN_CAKE_DAMAGE_TYPE = ResourceKey.create(Registries.DAMAGE_TYPE, loc("obsidian_cake"));
 
     public static void init() {
         ModItems.init();
@@ -103,11 +89,11 @@ public class JustMoreCakes {
     }
 
     public static void onServerStarting(MinecraftServer server) {
-        if (Services.PLATFORM.isModLoaded(FARMERS_DELIGHT_MOD_ID)) {
+        if (FarmersDelightCompat.IS_ENABLED.get()) {
             LOGGER.info("Enabling datapack for Farmers Delight support");
             PackRepository repository = server.getPackRepository();
             List<String> selectedIds = new ArrayList<>(repository.getSelectedIds());
-            selectedIds.add(FD_SUPPORT_ID);
+            selectedIds.add(FarmersDelightCompat.FD_SUPPORT_ID);
             repository.setSelected(selectedIds);
         }
 
@@ -135,8 +121,8 @@ public class JustMoreCakes {
             RecipeManager recipeManager = server.getRecipeManager();
             Util.removeRecipe(recipeManager, mcLoc("cake"), RecipeType.CRAFTING);
 
-            if (Services.PLATFORM.isModLoaded(FARMERS_DELIGHT_MOD_ID)) {
-                Util.removeRecipe(recipeManager, fdLoc("cake_from_milk_bottle"), RecipeType.CRAFTING);
+            if (FarmersDelightCompat.IS_ENABLED.get()) {
+                Util.removeRecipe(recipeManager, FarmersDelightCompat.fdLoc("cake_from_milk_bottle"), RecipeType.CRAFTING);
             }
         }
 
@@ -179,7 +165,7 @@ public class JustMoreCakes {
         boolean canUse = !player.isSecondaryUseActive() || (player.getMainHandItem().isEmpty() && player.getOffhandItem().isEmpty());
 
         if (stack.is(Blocks.CAKE.asItem()) && canUse) {
-            if (Services.PLATFORM.isModLoaded(AMENDMENTS_MOD_ID)) {
+            if (AmendmentsCompat.IS_ENABLED.get()) {
                 return AmendmentsCompat.cakeUsedOnBlock(player, level, hand, hitResult);
             }
         }
@@ -220,24 +206,11 @@ public class JustMoreCakes {
         }
     }
 
-    public static void createFDSupportPack(DataGenerator generator, CompletableFuture<HolderLookup.Provider> lookupProvider, DataGenerator.PackGenerator pack) {
-        Path path = generator.vanillaPackOutput.getOutputFolder(PackOutput.Target.DATA_PACK).resolve(MOD_ID).resolve("datapacks").resolve(FD_SUPPORT_ID);
-        PackGeneratorAccessor accessor = (PackGeneratorAccessor) pack;
-        accessor.setProviderPrefix(FD_SUPPORT_ID);
-        accessor.setOutput(new PackOutput(path));
-        pack.addProvider(packOutput -> new FDSupportRecipeProvider(packOutput, lookupProvider));
-        pack.addProvider(packOutput -> PackMetadataGenerator.forFeaturePack(packOutput, FD_SUPPORT_DESCRIPTION, FeatureFlagSet.of(ModFeatureFlags.FD_SUPPORT)));
-    }
-
     public static ResourceLocation loc(String string) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, string);
     }
 
     public static ResourceLocation mcLoc(String string) {
         return ResourceLocation.withDefaultNamespace(string);
-    }
-
-    public static ResourceLocation fdLoc(String string) {
-        return ResourceLocation.fromNamespaceAndPath(FARMERS_DELIGHT_MOD_ID, string);
     }
 }

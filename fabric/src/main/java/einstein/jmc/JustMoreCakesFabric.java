@@ -4,6 +4,7 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
 import einstein.jmc.client.renderers.blockentities.CeramicBowlRenderer;
+import einstein.jmc.compat.FarmersDelightCompat;
 import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.FabricCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
@@ -81,7 +82,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
         pack.addProvider(ModModelProvider::new);
         pack.addProvider(ModBlockLootTableProvider::new);
         pack.addProvider(ModCakeEffectsProvider::new);
-        createFDSupportPack(generator, lookupProvider, generator.createPack());
+        FarmersDelightCompat.createFDSupportPack(generator, lookupProvider, generator.createPack());
     }
 
     @Override
@@ -140,7 +141,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
                     }
                 }
 
-                if (Services.PLATFORM.isModLoaded(FARMERS_DELIGHT_MOD_ID)) {
+                if (FarmersDelightCompat.IS_ENABLED.get()) {
                     if (ModBlocks.CUPCAKE_VARIANT.getCake().get().getLootTable().equals(key) && source.isBuiltin()) {
                         addDropWhenKnifePool(builder, ModItems.CAKE_SLICE.get(), 2, true);
                     }
@@ -164,7 +165,7 @@ public class JustMoreCakesFabric implements ModInitializer, ClientModInitializer
                         });
 
                         for (String name : new String[] {"sweet_berry_cheesecake", "apple_pie", "chocolate_pie"}) {
-                            Block block = BuiltInRegistries.BLOCK.get(fdLoc(name));
+                            Block block = BuiltInRegistries.BLOCK.get(FarmersDelightCompat.fdLoc(name));
                             if (block.getLootTable().equals(key)) {
                                 addDropWhenCakeSpatulaPool(builder, block);
                                 return;

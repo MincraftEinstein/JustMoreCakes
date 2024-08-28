@@ -15,9 +15,9 @@ import java.util.concurrent.CompletableFuture;
 import static einstein.jmc.data.packs.providers.ModLootModifiersProvider.addCakeSpatulaDropModifier;
 import static einstein.jmc.data.packs.providers.ModLootModifiersProvider.addKnifeDropModifier;
 
-public class FDSupportLootModifiers extends GlobalLootModifierProvider {
+public class FDSupportLootModifiersProvider extends GlobalLootModifierProvider {
 
-    public FDSupportLootModifiers(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+    public FDSupportLootModifiersProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, lookupProvider, JustMoreCakes.MOD_ID);
     }
 

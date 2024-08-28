@@ -3,10 +3,11 @@ package einstein.jmc;
 import einstein.jmc.client.gui.screens.inventory.CakeOvenScreen;
 import einstein.jmc.client.renderers.blockentities.CakeStandRenderer;
 import einstein.jmc.client.renderers.blockentities.CeramicBowlRenderer;
+import einstein.jmc.compat.FarmersDelightCompat;
 import einstein.jmc.data.BowlContents;
 import einstein.jmc.data.NeoForgeCakeEffectsReloadListener;
 import einstein.jmc.data.packs.providers.*;
-import einstein.jmc.data.packs.providers.farmersdelight.FDSupportLootModifiers;
+import einstein.jmc.data.packs.providers.farmersdelight.FDSupportLootModifiersProvider;
 import einstein.jmc.init.*;
 import einstein.jmc.platform.NeoForgeRegistryHelper;
 import einstein.jmc.util.CakeUtil;
@@ -108,8 +109,8 @@ public class JustMoreCakesNeoForge {
 
         // FD Support data pack
         DataGenerator.PackGenerator pack = generator.getBuiltinDatapack(true, "");
-        createFDSupportPack(generator, lookupProvider, pack);
-        pack.addProvider(packOutput -> new FDSupportLootModifiers(packOutput, lookupProvider));
+        FarmersDelightCompat.createFDSupportPack(generator, lookupProvider, pack);
+        pack.addProvider(packOutput -> new FDSupportLootModifiersProvider(packOutput, lookupProvider));
 
         // Client providers
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, fileHelper));

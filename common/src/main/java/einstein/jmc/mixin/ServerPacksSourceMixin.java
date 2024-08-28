@@ -1,5 +1,6 @@
 package einstein.jmc.mixin;
 
+import einstein.jmc.compat.FarmersDelightCompat;
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
@@ -30,12 +31,12 @@ public class ServerPacksSourceMixin {
         String version = PLATFORM.getVersion();
 
         Pack pack = Pack.readMetaAndCreate(
-                new PackLocationInfo(FD_SUPPORT_ID, FD_SUPPORT_NAME,
+                new PackLocationInfo(FarmersDelightCompat.FD_SUPPORT_ID, FarmersDelightCompat.FD_SUPPORT_NAME,
                         PackSource.FEATURE, Optional.of(
-                        new KnownPack(PLATFORM.getPlatformName(), FD_SUPPORT_ID, version)
+                        new KnownPack(PLATFORM.getPlatformName(), FarmersDelightCompat.FD_SUPPORT_ID, version)
                 )),
-                new PathPackResources.PathResourcesSupplier(path.resolve("data/jmc/datapacks/" + FD_SUPPORT_ID)), PackType.SERVER_DATA,
-                new PackSelectionConfig(PLATFORM.isModLoaded(FARMERS_DELIGHT_MOD_ID), Pack.Position.TOP, false)
+                new PathPackResources.PathResourcesSupplier(path.resolve("data/jmc/datapacks/" + FarmersDelightCompat.FD_SUPPORT_ID)), PackType.SERVER_DATA,
+                new PackSelectionConfig(FarmersDelightCompat.IS_ENABLED.get(), Pack.Position.TOP, false)
         );
 
         if (pack != null) {

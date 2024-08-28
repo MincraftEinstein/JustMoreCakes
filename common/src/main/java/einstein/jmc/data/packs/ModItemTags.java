@@ -1,6 +1,7 @@
 package einstein.jmc.data.packs;
 
 import einstein.jmc.JustMoreCakes;
+import einstein.jmc.compat.FarmersDelightCompat;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -19,7 +20,7 @@ public class ModItemTags {
     public static final TagKey<Item> SLIME_BALLS = createC("slime_balls");
     public static final TagKey<Item> CAKES = create("cakes");
     public static final TagKey<Item> C_CAKES = createC("cakes");
-    public static final TagKey<Item> FD_KNIVES = create(JustMoreCakes.fdLoc("tools/knives"));
+    public static final TagKey<Item> FD_KNIVES = create(FarmersDelightCompat.fdLoc("tools/knives"));
     public static final TagKey<Item> C_FOODS_MILK = createC("foods/milk");
     public static final TagKey<Item> C_MILKS = createC("milks");
 

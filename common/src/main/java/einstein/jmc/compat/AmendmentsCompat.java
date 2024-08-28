@@ -1,6 +1,8 @@
 package einstein.jmc.compat;
 
+import com.google.common.base.Suppliers;
 import einstein.jmc.init.ModBlocks;
+import einstein.jmc.platform.Services;
 import einstein.jmc.util.CakeUtil;
 import net.mehvahdjukaar.amendments.common.CakeRegistry;
 import net.mehvahdjukaar.amendments.common.block.DirectionalCakeBlock;
@@ -15,7 +17,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
+import java.util.function.Supplier;
+
 public class AmendmentsCompat {
+
+    public static final String AMENDMENTS_MOD_ID = "amendments";
+    public static final Supplier<Boolean> IS_ENABLED = Suppliers.memoize(() -> Services.PLATFORM.isModLoaded(AMENDMENTS_MOD_ID));
 
     public static InteractionResult cakeUsedOnBlock(Player player, Level level, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack stack = player.getItemInHand(hand);
