@@ -1,4 +1,4 @@
-// 1.21	2024-08-28T14:12:10.580615	jmc_fd_support/Recipes
+// 1.21	2024-09-05T17:22:54.2226127	jmc_fd_support/Recipes
 aa4d334566622917e3f79bebbea6020d5da33f42 data\jmc\datapacks\jmc_fd_support\data\jmc\recipe\cutting\slime_cake_slice_from_cutting.json
 94df8005d64ffa41d4716a0ae35253be13c5dfd8 data\jmc\datapacks\jmc_fd_support\data\jmc\recipe\cutting\ender_cake_slice_from_cutting.json
 91fa5dc7f4f33b6576fea992014ad8150de41628 data\jmc\datapacks\jmc_fd_support\data\jmc\advancement\recipes\food\glowstone_cake_from_slices_from_crafting.json
@@ -61,7 +61,7 @@ c6a86918209e820433f960d4cc855ac56c101896 data\jmc\datapacks\jmc_fd_support\data\
 a3013ada1aa1ae6f1708a3b7d615eafeb81a4de9 data\jmc\datapacks\jmc_fd_support\data\jmc\recipe\slime_cake_from_slices_from_crafting.json
 e92f5900fb70d2171d95461cb296598ebec08086 data\jmc\datapacks\jmc_fd_support\data\jmc\recipe\cutting\crimson_fungus_cake_slice_from_cutting.json
 30851a00750556a8e6aada33cf7a65b702b8d5a3 data\jmc\datapacks\jmc_fd_support\data\jmc\recipe\cookie_cake_from_slices_from_crafting.json
-6c97be02d79769f3a8b2179cb306365813168c4e data\jmc\datapacks\jmc_fd_support\data\jmc\recipe\cutting\obsidian_cake_slice_from_cutting.json
+81ce4f92ed44c502a69dbb09f7797180aa613dbe data\jmc\datapacks\jmc_fd_support\data\jmc\recipe\cutting\obsidian_cake_slice_from_cutting.json
 c690fe20aa76b8795d6fef38cedf2f5a063ed126 data\jmc\datapacks\jmc_fd_support\data\jmc\advancement\recipes\food\creeper_cake_from_slices_from_crafting.json
 25d6d0997137a7ee6f5c5b0d7a452f19bc287a06 data\jmc\datapacks\jmc_fd_support\data\jmc\recipe\cutting\red_velvet_cake_slice_from_cutting.json
 262269787c8475664d1f5d58c136453f04b17c3e data\jmc\datapacks\jmc_fd_support\data\jmc\recipe\cutting\brown_mushroom_cake_slice_from_cutting.json

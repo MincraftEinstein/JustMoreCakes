@@ -1,4 +1,4 @@
-// 1.21	2024-08-28T14:12:10.5106152	Just More Cakes!/Tags for minecraft:block
+// 1.21	2024-09-05T17:22:54.1505087	Just More Cakes!/Tags for minecraft:block
 b4be3c7a06d856dd45105a17f2dd01b2ff5ec34e data\jmc\tags\block\base_candle_cakes.json
 94f7ed9be8766f5ae51f2eab9b6ed6c56a3e7074 data\jmc\tags\block\candle_cakes.json
 e8985a6517daf2402801f4db32f0ab9f3420d808 data\jmc\tags\block\cake_spatula_usable.json
@@ -12,5 +12,6 @@ f414ec37b8f056b4b449fdf02fbf22231b3d0f00 data\jmc\tags\block\base_cakes.json
 38280c0507ba04c7869040e3b33fb24d4e4b5063 data\jmc\tags\block\cakes.json
 87a997ec2b5c5c3490824176451b6968ce4e9691 data\jmc\tags\block\three_tiered_candle_cakes.json
 44242fca707a4d8f57063f3bdfba203190505c75 data\minecraft\tags\block\mineable\pickaxe.json
+15ffb66ccef99999999f97ba4460b6d70c9450da data\minecraft\tags\block\needs_diamond_tool.json
 ac48ef4af1ed09717e8dd7e433a9606f46d7933d data\c\tags\block\cakes.json
 60159f46388bd24c24742e997fbdacd3c60b3d39 data\jmc\tags\block\two_tiered_candle_cakes.json

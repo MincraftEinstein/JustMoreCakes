@@ -13,7 +13,12 @@
       }
     }
   ],
-  "tool": {
-    "tag": "farmersdelight:tools/knives"
-  }
+  "tool": [
+    {
+      "item": "farmersdelight:diamond_knife"
+    },
+    {
+      "item": "farmersdelight:netherite_knife"
+    }
+  ]
 }

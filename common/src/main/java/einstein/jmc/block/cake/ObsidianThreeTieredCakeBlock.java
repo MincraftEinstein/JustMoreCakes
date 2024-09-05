@@ -1,11 +1,13 @@
 package einstein.jmc.block.cake;
 
+import einstein.jmc.compat.FarmersDelightCompat;
 import einstein.jmc.init.ModTriggerTypes;
 import einstein.jmc.registration.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -23,11 +25,6 @@ public class ObsidianThreeTieredCakeBlock extends BaseThreeTieredCakeBlock {
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-        return state.getValue(HALF) == DoubleBlockHalf.LOWER ? SHAPE_BY_BITE_LOWER[5] : SHAPE_BY_BITE_UPPER[0];
-    }
-
-    @Override
     public InteractionResult eat(Level level, BlockPos pos, BlockState state, Player player) {
         ObsidianCakeBlock.damage(level, player);
         level.setBlockAndUpdate(pos, state);
@@ -40,22 +37,15 @@ public class ObsidianThreeTieredCakeBlock extends BaseThreeTieredCakeBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HALF);
+    public boolean cutSlice(Level level, BlockPos pos, BlockState state, Player player, ItemStack stack) {
+        if (stack.isCorrectToolForDrops(state)) {
+            return super.cutSlice(level, pos, state, player, stack);
+        }
+        return false;
     }
 
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         return 16;
-    }
-
-    @Override
-    public IntegerProperty getBites() {
-        return null;
-    }
-
-    @Override
-    public int getSlices() {
-        return 0;
     }
 }

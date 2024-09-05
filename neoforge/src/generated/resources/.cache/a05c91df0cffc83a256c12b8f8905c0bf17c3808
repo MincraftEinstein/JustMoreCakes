@@ -1,4 +1,4 @@
-// 1.21	2024-08-27T16:54:22.3041861	jmc_fd_support/Recipes
+// 1.21	2024-09-05T16:29:00.4571527	jmc_fd_support/Recipes
 35a5e94f023702b278a1fb073b5901f8ae65a590 data/jmc/datapacks/jmc_fd_support/data/jmc/advancement/recipes/food/apple_cake_from_slices_from_crafting.json
 f151cfdbf0e6a510bf4093d94c125c03e2f0bf71 data/jmc/datapacks/jmc_fd_support/data/jmc/advancement/recipes/food/beetroot_cake_from_slices_from_crafting.json
 c3cfcfdbaa54a319c211d6e2b0132c6a5b156d43 data/jmc/datapacks/jmc_fd_support/data/jmc/advancement/recipes/food/brown_mushroom_cake_from_slices_from_crafting.json
@@ -61,7 +61,7 @@ dca7e741257379eb44ccbf33869d12020b9f13e2 data/jmc/datapacks/jmc_fd_support/data/
 01b7ce908957bb49199436b5fbb9348ee41b6470 data/jmc/datapacks/jmc_fd_support/data/jmc/recipe/cutting/ice_cake_slice_from_cutting.json
 c6a86918209e820433f960d4cc855ac56c101896 data/jmc/datapacks/jmc_fd_support/data/jmc/recipe/cutting/lava_cake_slice_from_cutting.json
 367652480eee638e1b32c7b122ba22fab4c5ea89 data/jmc/datapacks/jmc_fd_support/data/jmc/recipe/cutting/melon_cake_slice_from_cutting.json
-6c97be02d79769f3a8b2179cb306365813168c4e data/jmc/datapacks/jmc_fd_support/data/jmc/recipe/cutting/obsidian_cake_slice_from_cutting.json
+81ce4f92ed44c502a69dbb09f7797180aa613dbe data/jmc/datapacks/jmc_fd_support/data/jmc/recipe/cutting/obsidian_cake_slice_from_cutting.json
 6aa19289d1cef291176b2325150570f27a591325 data/jmc/datapacks/jmc_fd_support/data/jmc/recipe/cutting/pumpkin_cake_slice_from_cutting.json
 5d2c1e8b4a1c8798c2271009f02ff61107f45af8 data/jmc/datapacks/jmc_fd_support/data/jmc/recipe/cutting/redstone_cake_slice_from_cutting.json
 0a34e946065e098c42612e0924813691a45e931e data/jmc/datapacks/jmc_fd_support/data/jmc/recipe/cutting/red_mushroom_cake_slice_from_cutting.json

@@ -1,4 +1,4 @@
-// 1.21	2024-08-28T14:12:32.4860378	jmc_fd_support/Global Loot Modifiers : jmc
+// 1.21	2024-09-05T17:23:11.1715096	jmc_fd_support/Global Loot Modifiers : jmc
 45afaa650b0784659a1c8d0f5b30b2bd6863602d data/jmc/datapacks/jmc_fd_support/data/jmc/loot_modifiers/apple_pie.json
 7a6532486ad2066a0d6d28fb723acbf3671d4680 data/jmc/datapacks/jmc_fd_support/data/jmc/loot_modifiers/black_candle_three_tiered_cake.json
 16454bd3febb44ec2f51053ac3d60c0494ebe959 data/jmc/datapacks/jmc_fd_support/data/jmc/loot_modifiers/black_candle_two_tiered_cake.json
@@ -39,4 +39,4 @@ b1b13b394d8fc5627dcb5347150cbb1ca3c42564 data/jmc/datapacks/jmc_fd_support/data/
 2f55dd5c4ed06f96d13aff11106524e9f7d056b2 data/jmc/datapacks/jmc_fd_support/data/jmc/loot_modifiers/white_candle_two_tiered_cake.json
 6ac14a1ea44709632fa73f1b233d0bd7f07ee6ae data/jmc/datapacks/jmc_fd_support/data/jmc/loot_modifiers/yellow_candle_three_tiered_cake.json
 adebcab4536fb32ff9cd9452b4621291d8387442 data/jmc/datapacks/jmc_fd_support/data/jmc/loot_modifiers/yellow_candle_two_tiered_cake.json
-ff75dc3b697706befdf3ea07d68c8e337b721f7f data/jmc/datapacks/jmc_fd_support/data/neoforge/loot_modifiers/global_loot_modifiers.json
+d106075e7aa7bd945eaf24c7d9231f50ce966234 data/jmc/datapacks/jmc_fd_support/data/neoforge/loot_modifiers/global_loot_modifiers.json

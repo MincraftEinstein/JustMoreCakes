@@ -4,7 +4,6 @@ import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.block.cake.candle.BaseCandleCakeBlock;
 import einstein.jmc.data.packs.ModBlockTags;
 import einstein.jmc.init.ModBlocks;
-import einstein.jmc.util.CakeUtil;
 import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.util.Util;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -28,7 +27,10 @@ public class ModBlockTagsProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.CAKE_OVEN.get(), ModBlocks.CAKE_STAND.get(), ModBlocks.CERAMIC_BOWL.get());
-        ModBlocks.OBSIDIAN_CAKE_FAMILY.forEach(cake -> getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(cake.get()));
+        ModBlocks.OBSIDIAN_CAKE_FAMILY.forEach(cake -> {
+            getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(cake.get());
+            getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL).add(cake.get());
+        });
 
         getOrCreateTagBuilder(BlockTags.ICE).add(ModBlocks.ENCASING_ICE.get());
 

@@ -125,8 +125,10 @@ public class BaseCakeBlock extends Block implements CakeEffectsHolder {
             }
         }
 
-        if (cutSlice(level, pos, state, player, stack)) {
-            return ItemInteractionResult.SUCCESS;
+        if (!level.isClientSide) {
+            if (cutSlice(level, pos, state, player, stack)) {
+                return ItemInteractionResult.SUCCESS;
+            }
         }
 
         if (family != null && isBaseVariant()) {

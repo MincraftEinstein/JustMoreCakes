@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static einstein.jmc.JustMoreCakes.loc;
@@ -39,6 +40,7 @@ public class DefaultCakeFamily extends CakeFamily {
 
         private BlockBehaviour.Properties cakeProperties;
         private BlockBehaviour.Properties candleCakeProperties;
+        private Function<FoodProperties.Builder, Item> sliceItem = builder -> new CakeSliceItem(new Item.Properties().food(builder.build()).requiredFeatures(ModFeatureFlags.FD_SUPPORT), family);
 
         private Builder(String flavorName, boolean noSuffix) {
             super(new DefaultCakeFamily(flavorName, noSuffix));
@@ -94,6 +96,11 @@ public class DefaultCakeFamily extends CakeFamily {
             return this;
         }
 
+        public Builder sliceItem(Function<FoodProperties.Builder, Item> function) {
+            sliceItem = function;
+            return this;
+        }
+
         @Override
         public DefaultCakeFamily build() {
             FoodProperties.Builder builder = new FoodProperties.Builder()
@@ -108,7 +115,7 @@ public class DefaultCakeFamily extends CakeFamily {
             }
 
             family.sliceItem = Services.REGISTRY.registerItem(family.getBaseCakeName() + "_slice",
-                    () -> new CakeSliceItem(new Item.Properties().food(builder.build()).requiredFeatures(ModFeatureFlags.FD_SUPPORT), family));
+                    () -> sliceItem.apply(builder));
             family.baseVariant = baseVariantBuilder
                     .cakeProperties(cakeProperties)
                     .candleCakeProperties(candleCakeProperties)

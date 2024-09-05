@@ -3,7 +3,6 @@ package einstein.jmc.item;
 import einstein.jmc.block.cake.BaseCakeBlock;
 import einstein.jmc.compat.FarmersDelightCompat;
 import einstein.jmc.data.effects.CakeEffects;
-import einstein.jmc.platform.Services;
 import einstein.jmc.registration.family.CakeFamily;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

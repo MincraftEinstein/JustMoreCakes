@@ -56,7 +56,7 @@ dependencies {
     }
     // Temporary implementation of FD neoforge so fabric will compile
     // TODO remove when FD refabricated has added data gen
-    modCompileOnly("curse.maven:farmers-delight-398521:${neoforge_farmers_delight_version}")
+    modImplementation("curse.maven:farmers-delight-398521:${neoforge_farmers_delight_version}")
     modImplementation("mysticdrew:common-networking-fabric:${networking_version}-${minecraft_version}")
 
     for (String module in porting_lib_modules.split(",")) {

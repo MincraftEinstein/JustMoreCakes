@@ -7,25 +7,17 @@ import einstein.jmc.registration.CakeVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ObsidianCakeBlock extends BaseCakeBlock {
 
     public ObsidianCakeBlock(CakeVariant builder) {
-        super(builder, 0);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-        return SHAPE_BY_BITE[0];
+        super(builder);
     }
 
     @Override
@@ -40,16 +32,15 @@ public class ObsidianCakeBlock extends BaseCakeBlock {
         return InteractionResult.SUCCESS;
     }
 
-    public static void damage(Level level, Player player) {
-        player.hurt(new BlockDamageSource(level.registryAccess(), level.getRandom().nextBoolean() ? ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get() : null), 2);
+    @Override
+    public boolean cutSlice(Level level, BlockPos pos, BlockState state, Player player, ItemStack stack) {
+        if (stack.isCorrectToolForDrops(state)) {
+            return super.cutSlice(level, pos, state, player, stack);
+        }
+        return false;
     }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-    }
-
-    @Override
-    public IntegerProperty getBites() {
-        return null;
+    public static void damage(Level level, LivingEntity entity) {
+        entity.hurt(new BlockDamageSource(level.registryAccess(), level.getRandom().nextBoolean() ? ModBlocks.OBSIDIAN_CAKE_FAMILY.getBaseCake().get() : null), 2);
     }
 }

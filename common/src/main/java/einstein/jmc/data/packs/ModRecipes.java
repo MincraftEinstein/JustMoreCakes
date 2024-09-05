@@ -4,6 +4,7 @@ import einstein.jmc.JustMoreCakes;
 import einstein.jmc.init.ModBlocks;
 import einstein.jmc.init.ModItems;
 import einstein.jmc.registration.family.CakeFamily;
+import einstein.jmc.util.CakeUtil;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
@@ -266,8 +267,13 @@ public class ModRecipes {
 
             Supplier<Item> sliceItem = family.getSliceItem();
             Supplier<? extends Block> cakeBlock = family.getBaseCake();
+            Ingredient tool = !CakeUtil.inFamily(family.getBaseCake().get(), ModBlocks.OBSIDIAN_CAKE_FAMILY)
+                    ? Ingredient.of(ModItemTags.FD_KNIVES)
+                    : Ingredient.of(
+                    vectorwing.farmersdelight.common.registry.ModItems.DIAMOND_KNIFE.get(),
+                    vectorwing.farmersdelight.common.registry.ModItems.NETHERITE_KNIFE.get());
 
-            CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(cakeBlock.get()), Ingredient.of(ModItemTags.FD_KNIVES), sliceItem.get(), 7)
+            CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(cakeBlock.get()), tool, sliceItem.get(), 7)
                     .group("cake_slices")
                     .unlockedBy(HAS, has(cakeBlock.get()))
                     .save(output, cuttingLoc(sliceItem));

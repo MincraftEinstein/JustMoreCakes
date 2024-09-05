@@ -78,9 +78,11 @@ public class BaseCandleCakeBlock extends AbstractCandleBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (parentCake.cutSlice(level, pos, parentCake.defaultBlockState(), player, stack)) {
-            dropResources(state, level, pos);
-            return ItemInteractionResult.SUCCESS;
+        if (!level.isClientSide) {
+            if (parentCake.cutSlice(level, pos, parentCake.defaultBlockState(), player, stack)) {
+                dropResources(state, level, pos);
+                return ItemInteractionResult.SUCCESS;
+            }
         }
 
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);

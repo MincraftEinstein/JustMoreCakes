@@ -79,7 +79,10 @@ public class CakeUtil {
     });
 
     public static boolean inFamily(BlockState state, CakeFamily family) {
-        Block block = state.getBlock();
+        return inFamily(state.getBlock(), family);
+    }
+
+    public static boolean inFamily(Block block, CakeFamily family) {
         return block.equals(family.getBaseCake().get()) || block.equals(family.getTwoTieredCake().get()) || block.equals(family.getThreeTieredCake().get());
     }
 

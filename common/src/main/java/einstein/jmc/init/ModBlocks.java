@@ -7,11 +7,13 @@ import einstein.jmc.block.CeramicBowlBlock;
 import einstein.jmc.block.EncasingIceBlock;
 import einstein.jmc.block.cake.*;
 import einstein.jmc.block.cake.candle.*;
+import einstein.jmc.item.ObsidianCakeSliceItem;
 import einstein.jmc.platform.Services;
 import einstein.jmc.data.CakeModel;
 import einstein.jmc.registration.CakeVariant;
 import einstein.jmc.registration.family.DefaultCakeFamily;
 import einstein.jmc.registration.family.VanillaCakeFamily;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkSensorBlock;
@@ -139,8 +141,9 @@ public class ModBlocks {
             .modifyBaseBuilder(builder -> builder.cakeSupplier(ObsidianCakeBlock::new))
             .modifyTwoTieredBuilder(builder -> builder.cakeSupplier(ObsidianTwoTieredCakeBlock::new))
             .modifyThreeTieredBuilder(builder -> builder.cakeSupplier(ObsidianThreeTieredCakeBlock::new))
-            .cakeProperties(cakeProperties().sound(SoundType.STONE).strength(12.5F, 300).pushReaction(PushReaction.BLOCK))
-            .candleCakeProperties(candleCakeProperties().sound(SoundType.STONE).strength(12.5F, 300).pushReaction(PushReaction.BLOCK))
+            .sliceItem(builder -> new ObsidianCakeSliceItem(new Item.Properties().food(builder.build()).requiredFeatures(ModFeatureFlags.FD_SUPPORT)))
+            .cakeProperties(cakeProperties().sound(SoundType.STONE).strength(12.5F, 300).pushReaction(PushReaction.BLOCK).requiresCorrectToolForDrops())
+            .candleCakeProperties(candleCakeProperties().sound(SoundType.STONE).strength(12.5F, 300).pushReaction(PushReaction.BLOCK).requiresCorrectToolForDrops())
             .nutrition(0)
             .saturationModifier(0)
             .alwaysEat()
